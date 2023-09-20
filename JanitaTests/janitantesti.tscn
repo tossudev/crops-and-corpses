@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuauhextsblcv"]
+
+[ext_resource type="Script" path="res://JanitaTests/janitatesti.cs" id="1_21nay"]
+[ext_resource type="Texture2D" uid="uid://g4q3dxtyxv6s" path="res://JanitaTests/sushi-removebg-preview.png" id="2_m8mmw"]
+[ext_resource type="Shape2D" uid="uid://bj27khyj32b6y" path="res://JanitaTests/new_capsule_shape_2d.tres" id="3_o3prq"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(0, 1)
+script = ExtResource("1_21nay")
+
+[node name="Sushi-removebg-preview" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(1, -1)
+texture = ExtResource("2_m8mmw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -1)
+shape = ExtResource("3_o3prq")

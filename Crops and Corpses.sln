@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crops and Corpses", "Crops and Corpses.csproj", "{BFBEBF06-19E0-4930-B88B-1C63A815E82D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFBEBF06-19E0-4930-B88B-1C63A815E82D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFBEBF06-19E0-4930-B88B-1C63A815E82D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFBEBF06-19E0-4930-B88B-1C63A815E82D}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{BFBEBF06-19E0-4930-B88B-1C63A815E82D}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{BFBEBF06-19E0-4930-B88B-1C63A815E82D}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{BFBEBF06-19E0-4930-B88B-1C63A815E82D}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal

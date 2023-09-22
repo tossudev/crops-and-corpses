@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://brn2x32vd0alm"]
+
+[ext_resource type="Script" path="res://TinoTests/SuperAwesomeScript.cs" id="1_78hhm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l6ta4"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+scale = Vector2(1, 2)
+shape = SubResource("CapsuleShape2D_l6ta4")
+script = ExtResource("1_78hhm")

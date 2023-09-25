@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c8bx46w1qix2q"]
 
-[ext_resource type="Script" path="res://TinoTests/Scripts/player_controller.cs" id="1_e881g"]
+[ext_resource type="Script" path="res://TinoTests/Scripts/PlayerController.cs" id="1_y7bta"]
 [ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="2_jvd4n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_blfda"]
@@ -8,8 +8,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_4wa3u"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-script = ExtResource("1_e881g")
-_speed = 125
+script = ExtResource("1_y7bta")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

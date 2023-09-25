@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class player_controller : CharacterBody2D
+public partial class PlayerController : CharacterBody2D
 {
 	[Export]
 	private int _speed = 100;

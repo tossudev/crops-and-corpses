@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://qbyj0kje84my"]
 
-[ext_resource type="Script" path="res://TinoTests/Scripts/interaction_area.cs" id="1_0dsng"]
+[ext_resource type="Script" path="res://TinoTests/Scripts/InteractionArea.cs" id="1_0dsng"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ymv4j"]
 

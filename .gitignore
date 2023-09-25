@@ -15,8 +15,9 @@ data_*/
 mono_crash.*.json
 .idea/
 
-# VS Code
+# VS/ Code
 .vscode/
+.vs/
 
 # OS generated
 .DS_Store
@@ -24,6 +25,9 @@ mono_crash.*.json
 ._*
 .Spotlight-V100
 .Trashes
-Icon?
 ehthumbs.db
 Thumbs.db
+# ignore OSX folder icon files
+Icon[
+]
+#

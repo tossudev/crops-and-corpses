@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgyv0c8xt1fd4"]
+
+[ext_resource type="Texture2D" uid="uid://wwuloa5jv6f" path="res://assets/placeholder/quick_grid.png" id="1_0cqac"]
+
+[node name="Town" type="Node2D"]
+
+[node name="MainCamera" type="Camera2D" parent="."]
+
+[node name="PlaceholderGrid" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.313726)
+texture_filter = 1
+texture_repeat = 2
+scale = Vector2(4, 4)
+texture = ExtResource("1_0cqac")
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 512)
+
+[node name="Objects" type="Node2D" parent="."]

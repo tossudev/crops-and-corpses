@@ -4,7 +4,7 @@ using System;
 public partial class janitatesti : CharacterBody2D
 {
  [Export]
-	public int Speed { get; set; } = 200;
+	public int Speed { get; set; } = 400;
 
 	private Vector2 _target;
 
@@ -13,7 +13,7 @@ public partial class janitatesti : CharacterBody2D
 		if (@event.IsActionPressed("Click"))
 		{
 			_target = GetGlobalMousePosition();
-			
+		
 		}
 	}
 
@@ -24,6 +24,7 @@ public partial class janitatesti : CharacterBody2D
 		if (Position.DistanceTo(_target) > 10)
 		{
 			MoveAndSlide();
+			
 		}
 	}
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g4q3dxtyxv6s"
-path="res://.godot/imported/sushi-removebg-preview.png-86878bfd7760b4c46913118841d2d86d.ctex"
+uid="uid://b3613kdoh5xwm"
+path="res://.godot/imported/test_grid.png-7d87859c78b2392de32bbc07d56b4d9d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://JanitaTests/sushi-removebg-preview.png"
-dest_files=["res://.godot/imported/sushi-removebg-preview.png-86878bfd7760b4c46913118841d2d86d.ctex"]
+source_file="res://TinoTests/Sprites/test_grid.png"
+dest_files=["res://.godot/imported/test_grid.png-7d87859c78b2392de32bbc07d56b4d9d.ctex"]
 
 [params]
 

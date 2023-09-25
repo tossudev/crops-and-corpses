@@ -13,3 +13,21 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+.idea/
+
+# VS/ Code
+.vscode/
+.vs/
+
+# OS generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+# ignore OSX folder icon files
+Icon[
+]
+#

@@ -1,19 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://cuauhextsblcv"]
+[gd_scene load_steps=5 format=3 uid="uid://dh33spyf2qp6v"]
 
-[ext_resource type="Script" path="res://JanitaTests/janitatesti.cs" id="1_21nay"]
-[ext_resource type="Texture2D" uid="uid://g4q3dxtyxv6s" path="res://JanitaTests/sushi-removebg-preview.png" id="2_m8mmw"]
+[ext_resource type="Script" path="res://JanitaTests/Scripts/FarmManager.cs" id="1_gh7xg"]
+[ext_resource type="Texture2D" uid="uid://g4q3dxtyxv6s" path="res://JanitaTests/Images/sushi-removebg-preview.png" id="2_gqmng"]
 [ext_resource type="Shape2D" uid="uid://bj27khyj32b6y" path="res://JanitaTests/new_capsule_shape_2d.tres" id="3_o3prq"]
+[ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://JanitaTests/Images/field.tscn" id="4_unbba"]
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(595, 310)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(0, 1)
-script = ExtResource("1_21nay")
+position = Vector2(5, 4)
+script = ExtResource("1_gh7xg")
 
 [node name="Sushi-removebg-preview" type="Sprite2D" parent="CharacterBody2D"]
 position = Vector2(1, -1)
-texture = ExtResource("2_m8mmw")
+texture = ExtResource("2_gqmng")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, -1)
 shape = ExtResource("3_o3prq")
+
+[node name="Field" parent="." instance=ExtResource("4_unbba")]

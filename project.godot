@@ -60,7 +60,9 @@ right={
 [layer_names]
 
 2d_physics/layer_2="player"
-2d_physics/layer_3="intercations"
+2d_physics/layer_3="enemy"
+2d_physics/layer_4="interactable"
+2d_physics/layer_5="object"
 
 [rendering]
 

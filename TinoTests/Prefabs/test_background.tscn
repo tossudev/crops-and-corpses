@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c11t6t2lyjvre"]
 
-[ext_resource type="Texture2D" uid="uid://b3613kdoh5xwm" path="res://TinoTests/Sprites/Grid.png" id="1_peqjw"]
+[ext_resource type="Texture2D" uid="uid://b3613kdoh5xwm" path="res://TinoTests/Sprites/test_grid.png" id="1_kmuep"]
 
 [node name="TestBackground" type="ParallaxBackground"]
 
@@ -8,6 +8,6 @@
 motion_mirroring = Vector2(1000, 1000)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
-texture = ExtResource("1_peqjw")
+texture = ExtResource("1_kmuep")
 centered = false
 offset = Vector2(2.08165e-12, 2.08165e-12)

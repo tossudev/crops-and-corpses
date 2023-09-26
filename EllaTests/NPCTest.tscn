@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjpi4pijejvpg"]
+
+[ext_resource type="Script" path="res://EllaTests/PlayerTest.cs" id="1_scxrq"]
+[ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="2_meta7"]
+[ext_resource type="Script" path="res://EllaTests/NPC.cs" id="3_esb8y"]
+[ext_resource type="Texture2D" uid="uid://wwuloa5jv6f" path="res://assets/placeholder/quick_grid.png" id="3_o8i03"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emc3u"]
+size = Vector2(42, 44)
+
+[node name="NPCTest" type="Node2D"]
+
+[node name="CharacterPlayer" type="CharacterBody2D" parent="."]
+position = Vector2(130, 30)
+script = ExtResource("1_scxrq")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterPlayer"]
+scale = Vector2(0.453125, 0.453125)
+texture = ExtResource("2_meta7")
+
+[node name="CharacterNPC" type="CharacterBody2D" parent="."]
+position = Vector2(200, 200)
+script = ExtResource("3_esb8y")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterNPC"]
+modulate = Color(0.894118, 0.498039, 1, 1)
+scale = Vector2(0.382813, 0.382813)
+texture = ExtResource("2_meta7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterNPC"]
+shape = SubResource("RectangleShape2D_emc3u")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="PlaceholderGrid" type="Sprite2D" parent="ParallaxBackground"]
+self_modulate = Color(1, 1, 1, 0.313726)
+texture_filter = 1
+texture_repeat = 2
+scale = Vector2(4, 4)
+texture = ExtResource("3_o8i03")
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 512)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogueControl" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_top = 0.701
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.279968
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Popup" type="Popup" parent="CanvasLayer/DialogueControl"]
+position = Vector2i(0, 505)
+size = Vector2i(1280, 215)
+visible = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/DialogueControl/Popup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.819608, 0.407843, 0.509804, 1)

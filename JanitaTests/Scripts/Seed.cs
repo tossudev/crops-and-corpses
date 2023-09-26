@@ -21,6 +21,7 @@ public class Seed
 		SeedTexture = seedTexture;
 		SproutTexture = sproutTexture;
 		PlantTexture = plantTexture;
+		
 
 	}
 
@@ -30,5 +31,4 @@ public class Seed
 
 }
 
-public enum PlantType{Potato, Cabbage, Tomato}
 

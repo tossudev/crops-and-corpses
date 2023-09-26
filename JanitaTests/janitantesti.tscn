@@ -1,23 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://dh33spyf2qp6v"]
+[gd_scene load_steps=7 format=3 uid="uid://dh33spyf2qp6v"]
 
 [ext_resource type="Script" path="res://JanitaTests/Scripts/FarmManager.cs" id="1_gh7xg"]
-[ext_resource type="Texture2D" uid="uid://g4q3dxtyxv6s" path="res://JanitaTests/Images/sushi-removebg-preview.png" id="2_gqmng"]
-[ext_resource type="Shape2D" uid="uid://bj27khyj32b6y" path="res://JanitaTests/new_capsule_shape_2d.tres" id="3_o3prq"]
+[ext_resource type="PackedScene" uid="uid://b4fyxjshjenvv" path="res://JanitaTests/PlantPrefabs/Potato_Prefab.tscn" id="2_xesfc"]
+[ext_resource type="PackedScene" uid="uid://luqdfx7qh2jl" path="res://JanitaTests/PlantPrefabs/Cabbage_Prefab.tscn" id="3_tidto"]
 [ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://JanitaTests/Images/field.tscn" id="4_unbba"]
+[ext_resource type="PackedScene" uid="uid://bljea7oopk7tf" path="res://JanitaTests/PlantPrefabs/Tomato_Prefab.tscn" id="6_5jl72"]
+[ext_resource type="Script" path="res://JanitaTests/Scripts/PlantOptionButton.cs" id="6_ot58k"]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(595, 310)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(5, 4)
-script = ExtResource("1_gh7xg")
-
-[node name="Sushi-removebg-preview" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(1, -1)
-texture = ExtResource("2_gqmng")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(0, -1)
-shape = ExtResource("3_o3prq")
-
 [node name="Field" parent="." instance=ExtResource("4_unbba")]
+
+[node name="FarmManager" type="Node" parent="."]
+script = ExtResource("1_gh7xg")
+_plantPrefabs = Array[PackedScene]([ExtResource("6_5jl72"), ExtResource("2_xesfc"), ExtResource("3_tidto")])
+
+[node name="OptionButton" type="OptionButton" parent="." node_paths=PackedStringArray("_fh")]
+offset_left = 70.0
+offset_right = 127.0
+offset_bottom = 66.0
+item_count = 3
+popup/item_0/text = "Potato"
+popup/item_0/id = 0
+popup/item_1/text = "Tomato"
+popup/item_1/id = 1
+popup/item_2/text = "Cabbage"
+popup/item_2/id = 2
+script = ExtResource("6_ot58k")
+_fh = NodePath("../Field")
+
+[connection signal="item_selected" from="OptionButton" to="OptionButton" method="_on_OptionButton_item_selected"]

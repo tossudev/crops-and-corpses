@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0ha6xj7g0h1b"]
+
+[ext_resource type="Script" path="res://DaniTests/Scripts/SpawnScriptTest.cs" id="1_l0mb1"]
+[ext_resource type="PackedScene" uid="uid://drg4d5ht6elpd" path="res://DaniTests/Scenes/PrefabTest.tscn" id="2_r1okf"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_l0mb1")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_r1okf")]
+position = Vector2(-139, 10)
+collision_layer = 0

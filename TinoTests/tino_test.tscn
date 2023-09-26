@@ -1,10 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://brn2x32vd0alm"]
+[gd_scene load_steps=5 format=3 uid="uid://brn2x32vd0alm"]
 
 [ext_resource type="PackedScene" uid="uid://c11t6t2lyjvre" path="res://TinoTests/Prefabs/test_background.tscn" id="1_jagwy"]
-[ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://TinoTests/Prefabs/Player Components/player.tscn" id="2_wnkdn"]
+[ext_resource type="PackedScene" uid="uid://ifpjqfki22bh" path="res://TinoTests/Prefabs/enemy_dummy.tscn" id="2_t1hbh"]
+[ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://TinoTests/Prefabs/player.tscn" id="2_wnkdn"]
+[ext_resource type="PackedScene" uid="uid://cll2v07cnnrhr" path="res://TinoTests/Prefabs/ineractabe_dummy.tscn" id="3_63xgx"]
 
 [node name="World" type="Node2D"]
 
 [node name="TestBackground" parent="." instance=ExtResource("1_jagwy")]
 
 [node name="Player" parent="." instance=ExtResource("2_wnkdn")]
+
+[node name="IneractabeDummy" parent="." instance=ExtResource("3_63xgx")]
+position = Vector2(151, 100)
+
+[node name="EnemyDummy" parent="." instance=ExtResource("2_t1hbh")]
+position = Vector2(2.08165e-12, 100)

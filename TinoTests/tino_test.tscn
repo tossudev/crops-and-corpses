@@ -10,6 +10,7 @@
 [node name="TestBackground" parent="." instance=ExtResource("1_jagwy")]
 
 [node name="Player" parent="." instance=ExtResource("2_wnkdn")]
+_swingCD = 0.5
 
 [node name="IneractabeDummy" parent="." instance=ExtResource("3_63xgx")]
 position = Vector2(151, 100)

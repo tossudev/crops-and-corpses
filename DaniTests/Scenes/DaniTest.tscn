@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0ha6xj7g0h1b"]
+
+[ext_resource type="Script" path="res://DaniTests/Scripts/SpawnScriptTest.cs" id="1_l0mb1"]
+[ext_resource type="PackedScene" uid="uid://drg4d5ht6elpd" path="res://DaniTests/Scenes/PrefabTest.tscn" id="2_r1okf"]
+[ext_resource type="Script" path="res://DaniTests/Scripts/TimeManager.cs" id="3_iehvf"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(847, 599)
+script = ExtResource("1_l0mb1")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("3_iehvf")
+
+[node name="CharacterBody2D" parent="Node" instance=ExtResource("2_r1okf")]
+position = Vector2(772, 613)
+collision_layer = 0
+
+[node name="Sunlight" type="DirectionalLight2D" parent="Node"]
+position = Vector2(879, 661)

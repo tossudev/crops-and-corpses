@@ -37,14 +37,18 @@ public partial class ZombieIdle : States
 		{
 			zombie.Velocity = move_direction * move_speed;
 		}
-
-		Vector2 direction = player.GlobalPosition - zombie.GlobalPosition;
-
-		if(direction.Length() < 30)
+		
+		if(player != null)
 		{
-			GD.Print("CHASETAAN");
-			EmitSignal("Transitioned", "chase");			
+			Vector2 direction = player.GlobalPosition - zombie.GlobalPosition;
+
+			if(direction.Length() < 30 )
+			{
+				GD.Print("CHASETAAN");
+				EmitSignal("Transitioned", "chase");			
+			}
 		}
+		
     }
 
 	private void RandomizeRoam()

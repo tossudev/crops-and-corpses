@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dug8ysxwugiwo"]
+[gd_scene load_steps=2 format=3 uid="uid://dug8ysxwugiwo"]
 
 [ext_resource type="PackedScene" uid="uid://c6kw7kvyr5phr" path="res://LilianTests/Prefabs/roaming_zombie.tscn" id="3_0y4l0"]
-[ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://TinoTests/Prefabs/player.tscn" id="4_82iln"]
 
 [node name="lilianTestScene" type="Node2D"]
 
@@ -14,5 +13,4 @@ position = Vector2(-295, 72)
 [node name="CharacterBody2D3" parent="." instance=ExtResource("3_0y4l0")]
 position = Vector2(-450, -114)
 
-[node name="Player2" parent="." instance=ExtResource("4_82iln")]
-position = Vector2(-124, -64)
+[node name="Camera2D" type="Camera2D" parent="."]

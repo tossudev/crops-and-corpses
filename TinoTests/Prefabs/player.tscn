@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8bx46w1qix2q"]
+
+[ext_resource type="Script" path="res://TinoTests/Scripts/PlayerController.cs" id="1_y7bta"]
+[ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="2_jvd4n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ae35p"]
+radius = 1.60312
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_knab4"]
+radius = 16.4924
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sov7g"]
+size = Vector2(32, 19.5)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_hrkfv"]
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_y7bta")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 0
+visibility_layer = 0
+scale = Vector2(10, 10)
+shape = SubResource("CircleShape2D_ae35p")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_knab4")
+debug_color = Color(0.933333, 0, 0, 0.12549)
+
+[node name="Weapons" type="Node2D" parent="."]
+
+[node name="SwingCooldown" type="Timer" parent="Weapons"]
+one_shot = true
+
+[node name="Sword" type="Node2D" parent="Weapons"]
+
+[node name="SwingArea" type="Area2D" parent="Weapons/Sword"]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapons/Sword/SwingArea"]
+position = Vector2(0, 9.75)
+shape = SubResource("RectangleShape2D_sov7g")
+debug_color = Color(0, 0.529412, 0.992157, 0.25098)
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapons/Sword"]
+modulate = Color(1, 0, 0, 0.498039)
+position = Vector2(2.07825e-12, 9.75)
+scale = Vector2(32.2, 19.556)
+texture = SubResource("CanvasTexture_hrkfv")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("2_jvd4n")
+
+[connection signal="area_entered" from="Hitbox" to="." method="OnHitboxEntered"]
+[connection signal="area_exited" from="Hitbox" to="." method="OnHitboxExited"]

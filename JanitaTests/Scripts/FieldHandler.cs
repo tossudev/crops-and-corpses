@@ -5,35 +5,33 @@ using System.Collections.Generic;
 
 public partial class FieldHandler : Node
 {
-	[Export] CollisionObject2D MyCollider;
-	Seed seed= new Seed();
-	List<Seed> seeds = new List<Seed>();
+	[Export] CollisionObject2D _col;
 
-	int seedSlotsCount=0;
-	int maxSeedSlots=3;
+	int _currentPlants=0;
+	int _maxPlantSlots=3;
 
+	Plant _plant = null;
+	List<Plant> _plants = new List<Plant>();
 
-	private Timer [] plantTimers = new Timer[3];
-	[Export] NodePath [] nodePath = new NodePath[3];
+	[Export] NodePath [] _nodePath = new NodePath[3];
 
 	public override void _Ready() {
+		_col.InputEvent +=InteractWithField;
+	}
 
-		for(int i=0; i<3; i++){
-			plantTimers[i] = new Timer();
-			AddChild(plantTimers[i]);
-		}
-
-		MyCollider.InputEvent +=InteractWithField;
-		seed = FarmManager.instance.GetSeed(PlantType.Potato);
+	public void SetPlant(string newPlant){
+		_plant = FarmManager.instance.GetPlant(newPlant);
+		GD.Print("Chose plant: "+_plant.plantName);
+		
 	}
 
 	void InteractWithField(Node viewport, InputEvent @event, long shapeIdx)
 	{
 		if(@event is InputEventMouseButton button)
 		{
-			
-			if(button.IsPressed() && seedSlotsCount< maxSeedSlots){
-				GD.Print("Planted a "+seed.Name);
+			if(_plant.seedName!=null && button.IsPressed() && _currentPlants < _maxPlantSlots){
+				GD.Print("Planted a "+_plant.seedName);
+				GD.Print(_plant.sproutTexture);
 				PlantPlant();
 			}
 		}
@@ -42,34 +40,33 @@ public partial class FieldHandler : Node
 	}
 
 	void PlantPlant(){
-		if (seed!= null)
+		if (_plant!= null)
         {
-			int index = seedSlotsCount;
-			plantTimers[seedSlotsCount].Timeout += () => EvolvePlant(index);
-			seeds.Add(seed);
-			TextureButton plantButton =  GetNode<TextureButton>(nodePath[seedSlotsCount]);
-            plantButton.TextureNormal = seed.SproutTexture;
-			plantButton.Visible=true;
-			WaitGrowth();
-			seedSlotsCount++;
+			int _index = FirstAvailableCropSlot();
+			_plants.Add(_plant);
+			TextureRect plantTexture =  GetNode<TextureRect>(_nodePath[_index]);
+			plantTexture.AddChild(_plant);
+			_plant.myField = this;
+			_plant.myFieldIndex = _index;
+			plantTexture.Visible=true;
+			_currentPlants++;
         }
+		string _plantinfo = _plant.plantName.ToString();
+		_plant = FarmManager.instance.GetPlant(_plantinfo);
+	}
+	
+	int FirstAvailableCropSlot(){
+
+		for(int i=0; i<_nodePath.Length; i++){
+			if(GetNode<TextureRect>(_nodePath[i]).GetChildCount()==0){
+				return i;
+			}
+		}
+		return -1;
 	}
 
-	void WaitGrowth(){
-
-		 GD.Print("Growing stage started for "+seed.PlantType);
-        // Set the timer's wait time (in seconds)
-        plantTimers[seedSlotsCount].WaitTime = seed.GrowthTime;
-        plantTimers[seedSlotsCount].Start();
+	public void RemovePlant(){
+		_currentPlants--;
 	}
-
-	void EvolvePlant(int index){
- 		
- 		GD.Print("Plant evolved at crop index: "+index);
-		plantTimers[index].Stop();
-		TextureButton plantButton =  GetNode<TextureButton>(nodePath[index]);
-        plantButton.TextureNormal = seed.PlantTexture;
-	}
-
 	
 }

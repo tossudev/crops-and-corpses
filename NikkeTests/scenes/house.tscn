@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://3ct83j0jgteb"]
+
+[ext_resource type="Texture2D" uid="uid://dskeqa44gjbje" path="res://NikkeTests/images/house.png" id="1_gvs6m"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="House" type="Sprite2D" parent="."]
+position = Vector2(-64, -64)
+texture = ExtResource("1_gvs6m")

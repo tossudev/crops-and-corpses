@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyk44y2mntxd0"]
+
+[ext_resource type="Texture2D" uid="uid://dpen3guunbkyn" path="res://NikkeTests/images/town_hall.png" id="1_2vw6x"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TownHall" type="Sprite2D" parent="."]
+position = Vector2(-96, -96)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_2vw6x")

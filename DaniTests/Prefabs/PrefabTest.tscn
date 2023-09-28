@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://drg4d5ht6elpd"]
 
-[ext_resource type="Texture2D" uid="uid://g4q3dxtyxv6s" path="res://JanitaTests/Images/sushi-removebg-preview.png" id="1_71qy3"]
+[ext_resource type="Texture2D" uid="uid://g4q3dxtyxv6s" path="res://JanitaTests/Images/sushi-removebg-preview.png" id="1_gqklc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uich2"]
 size = Vector2(793, 424)
@@ -9,11 +9,11 @@ size = Vector2(793, 424)
 position = Vector2(198, 128)
 
 [node name="Sushi-removebg-preview" type="Sprite2D" parent="."]
-texture = ExtResource("1_71qy3")
+texture = ExtResource("1_gqklc")
 
 [node name="Sushi-removebg-preview2" type="Sprite2D" parent="Sushi-removebg-preview"]
 position = Vector2(246, 35)
-texture = ExtResource("1_71qy3")
+texture = ExtResource("1_gqklc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(142, 16)

@@ -8,7 +8,7 @@ public partial class SpawnScriptTest : Node2D
 
 	public override void _Ready()
 	{
-		packedScene = (PackedScene)GD.Load("res://DaniTests/Scenes/PrefabTest.tscn");
+		packedScene = (PackedScene)GD.Load("res://DaniTests/Prefabs/PrefabTest.tscn");
 	}
     public override void _UnhandledInput(InputEvent @event)
     {

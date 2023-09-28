@@ -34,7 +34,17 @@ public partial class ItemData : Node {
     }
 
 
-    // private void _SortItemsUsingID() {
+    private void _SortItemsUsingID() {
     //     Item item = Items[0];
-    // }
+        // Items = Items.Sort();
+
+        // IEnumerable<Item> query = Items.OrderBy(ID => item.ID);
+
+        // foreach (ItemData item in query) {
+        //     GD.Print("{0}", item.ID);
+        // }
+    
+    }
+
+
 }

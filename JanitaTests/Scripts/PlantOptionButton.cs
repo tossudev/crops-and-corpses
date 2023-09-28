@@ -5,8 +5,13 @@ public partial class PlantOptionButton : OptionButton
 {
 	[Export] FieldHandler _fh;
 
+	string seed;
 	private void _on_OptionButton_item_selected(int index)
 	{
-    	_fh.SetPlant(GetItemText(index));
+    	seed = GetItemText(index);
+	}
+
+	public string GetSeedFromOption(){
+		return seed;
 	}
 }

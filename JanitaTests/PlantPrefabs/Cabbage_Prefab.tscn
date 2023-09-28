@@ -7,6 +7,7 @@
 [ext_resource type="Shape2D" uid="uid://c1m7w77dq4xvv" path="res://JanitaTests/PlantShape.tres" id="5_itpmi"]
 
 [node name="CabbagePrefab" type="Node2D" node_paths=PackedStringArray("_col")]
+scale = Vector2(2, 2)
 script = ExtResource("2_ryv6k")
 _plantType = 1
 _seedName = "cabbage seed"

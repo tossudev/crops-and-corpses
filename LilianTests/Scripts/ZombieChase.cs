@@ -31,9 +31,9 @@ public partial class ZombieChase : States
 				zombie.Velocity = Vector2.Zero;
 			}
 
-			if (direction.Length() > 50)
+			if (direction.Length() > 200)
 			{
-				GD.Print("IDLATAAN");
+				// GD.Print("IDLATAAN");
 				EmitSignal("Transitioned", "idle");			
 			}
 		}

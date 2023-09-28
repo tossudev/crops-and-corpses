@@ -10,7 +10,8 @@
 [node name="Node2D" type="Node2D"]
 position = Vector2(595, 310)
 
-[node name="Field" parent="." instance=ExtResource("4_unbba")]
+[node name="Field" parent="." node_paths=PackedStringArray("oBTest") instance=ExtResource("4_unbba")]
+oBTest = NodePath("../OptionButton")
 
 [node name="FarmManager" type="Node" parent="."]
 script = ExtResource("1_gh7xg")
@@ -29,5 +30,9 @@ popup/item_2/text = "Cabbage"
 popup/item_2/id = 2
 script = ExtResource("6_ot58k")
 _fh = NodePath("../Field")
+
+[node name="Field2" parent="." node_paths=PackedStringArray("oBTest") instance=ExtResource("4_unbba")]
+position = Vector2(-17, 249)
+oBTest = NodePath("../OptionButton")
 
 [connection signal="item_selected" from="OptionButton" to="OptionButton" method="_on_OptionButton_item_selected"]

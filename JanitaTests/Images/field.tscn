@@ -6,51 +6,28 @@
 
 [node name="Field" type="Sprite2D" node_paths=PackedStringArray("_col")]
 position = Vector2(221, 156)
-scale = Vector2(0.376031, 0.122792)
+scale = Vector2(0.107437, 0.138234)
 texture = ExtResource("1_kume5")
 script = ExtResource("2_11v4x")
 _col = NodePath("Area2D")
-_nodePath = [NodePath("HBoxContainer/CropSlot1"), NodePath("HBoxContainer/CropSlot2"), NodePath("HBoxContainer/CropSlot3")]
+_nodePath = NodePath("CropSlot1")
 
 [node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(0.946813, 0.828462)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-2.65936, 8.14392)
+position = Vector2(-2.65936, 8.14404)
 shape = ExtResource("3_gxfol")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(200, 200)
-layout_direction = 2
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -759.5
-offset_top = -535.0
-offset_right = 4.5
-offset_bottom = -335.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.880372, 2.22627)
+[node name="CropSlot1" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(500, 0)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -924.5
+offset_top = -283.0
+offset_right = -424.5
+offset_bottom = -283.0
+grow_horizontal = 0
 
-[node name="CropSlot1" type="TextureRect" parent="HBoxContainer"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-expand_mode = 2
-stretch_mode = 3
-
-[node name="CropSlot2" type="TextureRect" parent="HBoxContainer"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-expand_mode = 2
-stretch_mode = 3
-
-[node name="CropSlot3" type="TextureRect" parent="HBoxContainer"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-expand_mode = 2
-stretch_mode = 3
+[connection signal="input_event" from="Area2D" to="." method="InteractWithField"]

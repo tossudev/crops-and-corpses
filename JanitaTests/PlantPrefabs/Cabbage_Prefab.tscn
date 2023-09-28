@@ -11,13 +11,14 @@ script = ExtResource("2_ryv6k")
 _plantType = 1
 _seedName = "cabbage seed"
 _description = "Yuck!"
-_growthTime = 4.0
+_growthTime = 20.0
 _seedTexture = ExtResource("3_2mxt2")
 _sproutTexture = ExtResource("4_bpyy1")
 _plantTexture = ExtResource("1_2dct8")
 _col = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("5_itpmi")

@@ -7,8 +7,8 @@
 position = Vector2(-162, -8)
 script = ExtResource("1_l0mb1")
 
-[node name="Node" type="Node" parent="."]
+[node name="SunlightContainer" type="Node" parent="."]
 script = ExtResource("3_iehvf")
 
-[node name="Sunlight" type="DirectionalLight2D" parent="Node"]
+[node name="Sunlight" type="DirectionalLight2D" parent="SunlightContainer"]
 position = Vector2(0, 1)

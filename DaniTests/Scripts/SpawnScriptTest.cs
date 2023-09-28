@@ -5,10 +5,13 @@ public partial class SpawnScriptTest : Node2D
 {
 
 	PackedScene packedScene;
+	TimeManager dayTimeCheck;
+	bool isNightOrDay;
 
 	public override void _Ready()
 	{
 		packedScene = (PackedScene)GD.Load("res://DaniTests/Prefabs/PrefabTest.tscn");
+		dayTimeCheck = GetNode<TimeManager>("SunlightContainer");
 	}
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -17,6 +20,10 @@ public partial class SpawnScriptTest : Node2D
 			CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
 			prefab.Position = mouseEvent.Position;
 			this.AddChild(prefab);
+			
+			isNightOrDay = dayTimeCheck.returnTimeOfDay(isNightOrDay);
+			GD.Print(isNightOrDay ? "DayTime" : "NighTime");
+			
 		}
     }
 }

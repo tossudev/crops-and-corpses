@@ -18,7 +18,7 @@ public partial class PlayerInventoryController : Control {
 			var itemSlotNode = GD.Load<PackedScene>(slotNodePath);
 			var itemSlot = itemSlotNode.Instantiate<Control>();
 
-			GD.Print(itemResource);
+			// GD.Print(itemResource);
 
 			// var slot = ResourceLoader.Load<PackedScene>(slotNodePath).Instantiate();
 			// GetNode<GridContainer>("InventoryGrid").AddChild(slot);

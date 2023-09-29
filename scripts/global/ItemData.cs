@@ -8,7 +8,6 @@ public partial class ItemData : Node {
 
     public override void _Ready() {
         _LoadItemsFromPath();
-        GD.Print(Items);
         // _SortItemsUsingID();
         // GD.Print(Items);
     }

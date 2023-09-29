@@ -57,3 +57,15 @@ public enum PlantType
 	Cabbage, 
 	Tomato
 }
+
+public enum GrowthState{
+
+	WaitWatering,
+	StartGrowth,
+	ContinueGrowth,
+	IsWilting,
+	IsInfested,
+	IsHarvestable,
+	IsDead
+
+}

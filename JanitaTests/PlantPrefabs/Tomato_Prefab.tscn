@@ -7,11 +7,12 @@
 [ext_resource type="Shape2D" uid="uid://c1m7w77dq4xvv" path="res://JanitaTests/PlantShape.tres" id="5_csqlw"]
 
 [node name="TomatoPrefab" type="Node2D" node_paths=PackedStringArray("_col")]
+scale = Vector2(2, 2)
 script = ExtResource("2_p60vi")
 _plantType = 2
 _seedName = "tomato seed"
 _description = "Yum"
-_growthTime = 6.0
+_growthTime = 10.0
 _seedTexture = ExtResource("3_hagpe")
 _sproutTexture = ExtResource("4_k2ltx")
 _plantTexture = ExtResource("1_64bvn")

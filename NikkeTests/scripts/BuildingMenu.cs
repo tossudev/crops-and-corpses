@@ -4,145 +4,98 @@ using System.Diagnostics;
 
 public partial class BuildingMenu : ScrollContainer
 {
-	Building _townHall, _farmPlot, _house;
-
+	Building _farmPlot, _house;
 	Building _currentBuilding;
-	Node2D _buildingScene;
 
-	bool _isPlacingBuilding;
+    Node2D _ghostBuilding;
+	Node2D _buildings;
+
+    Button _buildButton;
 
 	int _resources;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-		Hide();
+		_farmPlot = new Building(ResourceLoader.Load<PackedScene>("res://NikkeTests/scenes/farm_plot.tscn"), ResourceLoader.Load<PackedScene>("res://NikkeTests/scenes/farm_plot_build_mode.tscn"), 10);
+		_house = new Building(ResourceLoader.Load<PackedScene>("res://NikkeTests/scenes/house.tscn"), ResourceLoader.Load<PackedScene>("res://NikkeTests/scenes/house_build_mode.tscn"),  40);
 
-		_townHall = new Building(ResourceLoader.Load<PackedScene>("res://NikkeTests/scenes/town_hall.tscn"), 100);
-		_farmPlot = new Building(ResourceLoader.Load<PackedScene>("res://NikkeTests/scenes/farm_plot.tscn"), 10);
-		_house = new Building(ResourceLoader.Load<PackedScene>("res://NikkeTests/scenes/house.tscn"), 40);
+        _buildings = GetNode("../buildings") as Node2D;
+        _buildButton = GetNode("../build_button") as Button;
 
-		_resources = 200;
+        _resources = 500;
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if(_isPlacingBuilding) 
-		{
-            SnapBuildingToGrid();
-
-			if (Input.IsActionPressed("Click"))
-			{
-				_isPlacingBuilding = false;
-                _buildingScene.Modulate = new Color(1, 1, 1, 1);
-
-				_resources -= _currentBuilding.price;
-
-				if(_currentBuilding == _townHall) 
-				{
-                    Button _townHallButton;
-                    _townHallButton = GetNode("Control/VBoxContainer/town_hall") as Button;
-					_townHallButton.Disabled = true;
-                }
-			}
-			else if (Input.IsActionPressed("ui_cancel"))
-			{
-                _isPlacingBuilding = false;
-                _buildingScene.QueueFree();
-            }
-        }
-	}
-
-	private void SnapBuildingToGrid()
-	{
-        Vector2 _mousePosition = GetGlobalMousePosition();
-
-        float _snapX = _mousePosition.X % 64;
-        float _snapY = _mousePosition.Y % 64;
-
-        if (_snapX >= 32)
+        if (Input.IsActionPressed("ui_cancel"))
         {
-            _snapX = -(64 - _snapX);
+            Hide();
+            _buildButton.ReleaseFocus();
+            _buildButton.ButtonPressed = false;
         }
-        else if (_snapX <= -32)
-        {
-            _snapX = 64 + _snapX;
-        }
-
-        if (_snapY >= 32)
-        {
-            _snapY = -(64 - _snapY);
-        }
-        else if (_snapY <= -32)
-        {
-            _snapY = 64 + _snapY;
-        }
-
-        Vector2 _snapLocation = new Vector2(_mousePosition.X - _snapX, _mousePosition.Y - _snapY);
-
-        _buildingScene.GlobalPosition = _snapLocation;
     }
 
-	public override void _Input(InputEvent @event)
-	{
-		if (@event is InputEventMouseButton eventMouseButton && eventMouseButton.ButtonIndex == 0 && _isPlacingBuilding)
-		{
-			
-		}
-	}
+    public void Build()
+    {
+        if (_resources < _currentBuilding.price)
+        {
+            Debug.WriteLine("You don't have enough resources");
+            return;
+        }
+
+        Node2D _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;
+        _buildings.AddChild(_buildingScene as Node2D);
+        _buildingScene.Position = _ghostBuilding.Position;
+
+        _resources -= _currentBuilding.price;
+    }
 
 	private void _on_build_button_toggled(bool isToggledOn)
 	{
-		if (isToggledOn)
+        if (isToggledOn)
 		{
 			Show();
 		}
 		else 
 		{
 			Hide();
-            Button _buildButton = GetNode("../build_button") as Button;
 			_buildButton.ReleaseFocus();
         }
-	}
-
-	private void _on_town_hall_pressed()
-	{
-		_currentBuilding = _townHall;
-        InstantiateBuilding();
 	}
 
 	private void _on_farm_pressed()
 	{
         _currentBuilding = _farmPlot;
-        InstantiateBuilding();
+        BuildingMode();
 	}
 
 
 	private void _on_house_pressed()
 	{
         _currentBuilding = _house;
-        InstantiateBuilding();
+        BuildingMode();
 	}
 
-	private void InstantiateBuilding()
+    public void EnableBuildButton()
+    {
+        _buildButton.Disabled = false;
+    }
+
+    private void BuildingMode()
 	{
-        if (_resources < _currentBuilding.price)
-        {
-			Debug.WriteLine("You don't have enough resources");
-			return;
-        }
+        _buildButton.Disabled = true;
+        _buildButton.ButtonPressed = false;
 
-        _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;
+        Input.MouseMode = Input.MouseModeEnum.Hidden;
 
-		Node2D _buildings = GetNode("../buildings") as Node2D;
-		_buildings.AddChild(_buildingScene);
+        _ghostBuilding = _currentBuilding.buildingModeScene.Instantiate() as Node2D;
 
-        _buildingScene.Modulate = new Color(1, 1, 1, 0.3f);
+        BuildingMode _buildingMode;
+        _buildingMode = _ghostBuilding as BuildingMode;
+        _buildingMode.buildingMenu = this;
 
-		Button _buildButton = GetNode("../build_button") as Button;
-		_buildButton.ButtonPressed = false;
-
-		_isPlacingBuilding = true;
+        _buildings.AddChild(_ghostBuilding);
 	}
 }

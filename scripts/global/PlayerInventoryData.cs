@@ -9,7 +9,6 @@ public partial class PlayerInventoryData : Node {
     
 
     public override void _Ready() { 
-
         // Test adding items to the inventory
         var emptyItem = new Godot.Collections.Dictionary<string, Variant>();
         emptyItem.Add("ID", -1);
@@ -26,6 +25,8 @@ public partial class PlayerInventoryData : Node {
         for (int i = 0; i < 20; i++) {
             PlayerInventory.Add(emptyItem);
         }
+
+        // GD.Print(PlayerInventory);
     }
 
 }

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyk44y2mntxd0"]
+
+[ext_resource type="Texture2D" uid="uid://dpen3guunbkyn" path="res://NikkeTests/images/town_hall.png" id="1_2vw6x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4d4i"]
+size = Vector2(192, 192)
+
+[node name="TownHall" type="Node2D"]
+
+[node name="TownHall" type="Sprite2D" parent="."]
+position = Vector2(-96, -96)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_2vw6x")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-96, -96)
+rotation = -3.14159
+shape = SubResource("RectangleShape2D_r4d4i")

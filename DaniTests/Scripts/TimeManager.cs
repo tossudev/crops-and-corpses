@@ -6,11 +6,11 @@ public partial class TimeManager : Node
 {
     private float currentTime = 0f;
     public float timeSpeed = 1f;
-    private float nightTimeEnergy = 0f;  // Set your desired nighttime energy value
-    private float dayTimeEnergy = 1f; // Set your desired daytime energy value
-    private float transitionDuration = 1f; // Set the duration of the transition
-    private float dayTimeLenght = 60f; // 10 min duration for day
-    private float nightTimeLeght = 30f; // 5 min duration for night
+    [Export]private float nightTimeEnergy = 0f;  // Set your desired nighttime energy value
+    [Export]private float dayTimeEnergy = 1f; // Set your desired daytime energy value
+    [Export]private float transitionDuration = 1f; // Set the duration of the transition
+    [Export]private float dayTimeLenght = 60f; // 10 min duration for day
+    [Export]private float nightTimeLeght = 30f; // 5 min duration for night
     private bool isDayTime = true;
 
     private DirectionalLight2D sunlight;

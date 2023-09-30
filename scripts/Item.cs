@@ -9,7 +9,7 @@ public partial class Item : Resource {
     [Export] public Texture2D IconTexture { get; set; }
     [Export] public int StackSize { get; set; }
 
-    public void _Ready() {
-        ID = 0;
-    }
+    // public void _Ready() {
+    //     ID = 0;
+    // }
 }

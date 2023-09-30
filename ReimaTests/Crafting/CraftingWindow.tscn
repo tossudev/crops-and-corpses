@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba8jl34px0fpl"]
+
+[ext_resource type="PackedScene" uid="uid://dqyv3rj8otsnr" path="res://ReimaTests/Crafting/InventoryDisplayItem.tscn" id="1_ujqb6"]
+[ext_resource type="PackedScene" uid="uid://cwkfv4af2ta2g" path="res://ReimaTests/Crafting/item_grid_slot.tscn" id="1_v8dal"]
+
+[node name="CraftingWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackGround" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GridContainer" type="GridContainer" parent="BackGround"]
+layout_mode = 2
+offset_right = 1028.0
+offset_bottom = 736.0
+columns = 3
+
+[node name="ItemGridSlot" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+layout_mode = 2
+
+[node name="InventoryDisplayItem" parent="BackGround/GridContainer/ItemGridSlot" instance=ExtResource("1_ujqb6")]
+layout_mode = 1
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+
+[node name="ItemGridSlot2" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+layout_mode = 2
+
+[node name="ItemGridSlot3" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+layout_mode = 2
+
+[node name="ItemGridSlot4" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+layout_mode = 2
+
+[node name="ItemGridSlot5" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+layout_mode = 2
+
+[node name="ItemGridSlot6" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+layout_mode = 2
+
+[node name="ItemGridSlot7" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+layout_mode = 2
+
+[node name="ItemGridSlot8" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+layout_mode = 2
+
+[node name="ItemGridSlot9" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+layout_mode = 2

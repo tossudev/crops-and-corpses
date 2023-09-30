@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bxuhj4o74mkp6"]
 
-[ext_resource type="Script" path="res://ReimaTests/TestScript4sprite.cs" id="1_05iis"]
+[ext_resource type="Script" path="res://ReimaTests/temporaryTrash/TestScript4sprite.cs" id="1_2nois"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_shb3e"]
 
@@ -9,4 +9,4 @@
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_shb3e")
 position = Vector2(88, -29)
-script = ExtResource("1_05iis")
+script = ExtResource("1_2nois")

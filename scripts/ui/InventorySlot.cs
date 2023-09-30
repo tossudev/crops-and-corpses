@@ -7,10 +7,12 @@ public partial class InventorySlot : Control {
 	public Label QuantityLabel;
 
 	// TODO: Convert Variants to int in PlayerInventoryController.cs
-	public Variant ItemID = -1;
-	public Variant Quantity = 0;
-	public int Index = -1;
+	// ^ Not necessary, can be converted with cast "(int)"
+	public int ItemID;
+	public int Quantity;
+	public int Index;
 
+	[Export] public Texture2D emptySlotTexture;
 
 	public override void _Ready() {
 		Icon = GetNode("Icon") as TextureRect;
@@ -19,14 +21,24 @@ public partial class InventorySlot : Control {
 
 
 	public void UpdateSlot(Variant itemID, Variant itemQuantity, int itemIndex) {
-		ItemID = itemID;
-		Quantity = itemQuantity;
+		ItemID = (int)itemID;
 		Index = itemIndex;
 
-		// var itemResource = ItemData<ItemData>.Items[ItemID];
-		var itemResource = ItemData.Items[0] as Item;
+		if (ItemID == -1)
+		{
+			// Slot is empty
+			Icon.Texture = emptySlotTexture;
+			QuantityLabel.Text = "";
+			return;
+		}
+		
+		Quantity = (int)itemQuantity;
+
+		var itemResource = ItemData.Items[ItemID];
 
 		Texture2D iconTexture = itemResource.IconTexture;
 		Icon.Texture = iconTexture;
+
+		QuantityLabel.Text = Quantity.ToString();
 	}
 }

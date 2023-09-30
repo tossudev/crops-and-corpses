@@ -18,12 +18,12 @@ public partial class PlayerInventoryData : Node {
         dummyItem.Add("ID", 0);
         dummyItem.Add("Quantity", 5);
 
-
-        for (int i = 0; i < 10; i++) {
-            PlayerInventory.Add(dummyItem);
-        }
+        
         for (int i = 0; i < 20; i++) {
             PlayerInventory.Add(emptyItem);
+        }
+        for (int i = 0; i < 10; i++) {
+            PlayerInventory.Add(dummyItem);
         }
 
         // GD.Print(PlayerInventory);

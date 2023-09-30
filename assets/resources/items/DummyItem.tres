@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dmm0h1ba6feb7"]
+
+[ext_resource type="Script" path="res://scripts/Item.cs" id="1_4p4aj"]
+[ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="1_sk4na"]
+
+[resource]
+script = ExtResource("1_4p4aj")
+ID = 0
+Name = "Dummy Item"
+IconTexture = ExtResource("1_sk4na")
+StackSize = 10

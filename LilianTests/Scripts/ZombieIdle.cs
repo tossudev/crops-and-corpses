@@ -42,9 +42,9 @@ public partial class ZombieIdle : States
 		{
 			Vector2 direction = player.GlobalPosition - zombie.GlobalPosition;
 
-			if(direction.Length() < 30 )
+			if(direction.Length() < 70 )
 			{
-				GD.Print("CHASETAAN");
+				// GD.Print("CHASETAAN");
 				EmitSignal("Transitioned", "chase");			
 			}
 		}

@@ -39,7 +39,7 @@ public partial class SpawnScriptTest : Node2D
 				prefab.Position = mouseEvent.Position;
 				this.AddChild(prefab);
 				
-				isNightOrDay = dayTimeCheck.returnTimeOfDay(isNightOrDay);
+				isNightOrDay = dayTimeCheck.dayTime;
 				isNightOrDayString = isNightOrDay ? "DayTime" : "NighTime";
 				if(isNightOrDayString == "DayTime")
 				{
@@ -54,8 +54,8 @@ public partial class SpawnScriptTest : Node2D
     }
 	  public override void _Process(double delta)
     {
-        isNightOrDay = dayTimeCheck.returnTimeOfDay(isNightOrDay);
-
+       // isNightOrDay = dayTimeCheck.returnTimeOfDay(isNightOrDay);
+	   isNightOrDay = dayTimeCheck.dayTime;
         
         if (!spawnDelay.IsStopped() && isNightOrDay)
         {

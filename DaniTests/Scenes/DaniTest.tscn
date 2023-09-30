@@ -4,23 +4,23 @@
 [ext_resource type="Script" path="res://DaniTests/Scripts/TimeManager.cs" id="3_iehvf"]
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(259, 149)
+position = Vector2(-71, -4)
 script = ExtResource("1_l0mb1")
 
 [node name="SunlightContainer" type="Node" parent="."]
 script = ExtResource("3_iehvf")
 
-[node name="Sunlight" type="DirectionalLight2D" parent="SunlightContainer"]
-position = Vector2(0, 1)
+[node name="Sunlight" type="CanvasModulate" parent="SunlightContainer"]
+position = Vector2(-71, -4)
 
 [node name="SpawnPoint1" type="Node2D" parent="."]
-position = Vector2(691, 725)
+position = Vector2(642, 455)
 
 [node name="SpawnPoint0" type="Node2D" parent="."]
-position = Vector2(406, -33)
+position = Vector2(1570, 689)
 
 [node name="SpawnPoint2" type="Node2D" parent="."]
-position = Vector2(1216, -3)
+position = Vector2(985, 181)
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

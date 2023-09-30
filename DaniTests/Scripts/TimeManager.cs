@@ -1,70 +1,69 @@
 using Godot;
 using System;
-using System.Diagnostics;
 
 public partial class TimeManager : Node
 {
     private float currentTime = 0f;
     public float timeSpeed = 1f;
-    [Export]private float nightTimeEnergy = 0f;  // Set your desired nighttime energy value
-    [Export]private float dayTimeEnergy = 1f; // Set your desired daytime energy value
-    [Export]private float transitionDuration = 1f; // Set the duration of the transition
-    [Export]private float dayTimeLenght = 10f; // 10 min duration for day
-    [Export]private float nightTimeLeght = 10f; // 5 min duration for night
-    private bool isDayTime = true;
+    [Export] private Color nightTimeColor = new Color((float)0.5,(float) 0.5, (float)0.5);  // Set your desired nighttime color
+    [Export] private Color dayTimeColor = new Color(1, 1, 1);    // Set your desired daytime color
+    [Export] private float transitionDuration = 1f; // Set the duration of the transition
+    [Export] private float dayTimeLength = 10f;    // 10 min duration for day
+    [Export] private float nightTimeLength = 10f;  // 10 min duration for night
 
-    private DirectionalLight2D sunlight;
+    private bool isDayTime = true;
+    public bool dayTime { get { return isDayTime; } set { isDayTime = value; } }
+
+    private CanvasModulate sunlight;
 
     public override void _Ready()
     {
-        sunlight = GetNode<DirectionalLight2D>("Sunlight");
-        
+        sunlight = GetNode<CanvasModulate>("Sunlight");
+
         if (sunlight != null)
         {
-            sunlight.Energy = dayTimeEnergy;
+            sunlight.Color = dayTimeColor;
         }
         else
         {
             GD.Print("Sunlight not found in the scene.");
         }
-        
+
         currentTime = 0f;
     }
+
     public override void _Process(double delta)
     {
         currentTime += (float)delta * timeSpeed;
-        float timeOfDay = currentTime % (dayTimeLenght + nightTimeLeght);
+        float timeOfDay = currentTime % (dayTimeLength + nightTimeLength);
 
-        if(timeOfDay <= dayTimeLenght)
+        if (timeOfDay <= dayTimeLength)
         {
-            if(sunlight.Energy < 0.99)
+            if (sunlight.Color != dayTimeColor)
             {
                 // Transition back to daytime
-                sunlight.Energy = Mathf.Lerp(sunlight.Energy,dayTimeEnergy, (float) delta / transitionDuration);
-                //GD.Print(sunlight.Energy + " Day time");
-            }
-            else
-            {
-                isDayTime = true;
+                sunlight.Color = LerpColor(sunlight.Color, dayTimeColor,(float) delta / transitionDuration);
             }
         }
-        else 
+        else
         {
-            if(sunlight.Energy > 0.01)
+            if (sunlight.Color != nightTimeColor)
             {
                 // Transition to nighttime
-                sunlight.Energy = Mathf.Lerp(sunlight.Energy, nightTimeEnergy, (float) delta / transitionDuration);
-               // GD.Print(sunlight.Energy + " Night time");
-            }
-            else
-            {
-                isDayTime = false;
+                sunlight.Color = LerpColor(sunlight.Color, nightTimeColor,(float) delta / transitionDuration);
             }
         }
+
+        isDayTime = timeOfDay <= dayTimeLength;
     }
-    public bool returnTimeOfDay(bool time)
+
+    // Custom function to interpolate between two colors
+    private Color LerpColor(Color from, Color to, float t)
     {
-        time = isDayTime;
-        return time;
+        return new Color(
+            Mathf.Lerp(from.R, to.R, t),
+            Mathf.Lerp(from.G, to.G, t),
+            Mathf.Lerp(from.B, to.B, t)
+        );
     }
 }

@@ -12,3 +12,14 @@ script = ExtResource("3_iehvf")
 
 [node name="Sunlight" type="DirectionalLight2D" parent="SunlightContainer"]
 position = Vector2(0, 1)
+
+[node name="SpawnPoint1" type="Node2D" parent="."]
+position = Vector2(-1, 0)
+
+[node name="SpawnPoint0" type="Node2D" parent="."]
+position = Vector2(1, 0)
+
+[node name="SpawnPoint2" type="Node2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

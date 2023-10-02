@@ -10,12 +10,15 @@ public partial class FarmManager : Node
 
 	List<Plant> _plants = new List<Plant>();
 
+
+	bool _isWaterCanEquipped, _isBugSprayEquipped;
+
 	public override void _Ready()
 	{
 
 		if(instance==null)instance=this;else QueueFree();
 		InitializePlants();
-
+		_isWaterCanEquipped = _isBugSprayEquipped=true;
 
 	}
 
@@ -48,6 +51,20 @@ public partial class FarmManager : Node
 		}
 
 		return null;
+	}
+
+
+	public void EquipWaterCan(bool isEquipped){
+		_isWaterCanEquipped = isEquipped;
+	}
+	public bool IsWaterCanEquipped(){
+		return _isWaterCanEquipped;
+	}
+	public void EquipBugSpray(bool isEquipped){	
+		_isBugSprayEquipped = isEquipped;
+	}
+	public bool IsBugSprayEquipped(){
+		return _isBugSprayEquipped;
 	}
 	
 }

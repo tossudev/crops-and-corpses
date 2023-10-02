@@ -2,21 +2,33 @@ using Godot;
 using System;
 using System.Runtime.CompilerServices;
 
-public partial class Weapon : Node2D
+public partial class WeaponController : Node2D
 {
+    [Export] private Resource _weapon;
     [Export] private Area2D _hitbox;
     [Export] private AnimationPlayer _animationPlayer;
-
     [Export] private Timer _cooldownTimer;
-    private float _cooldown = 0.5f;
+    [Export] private PackedScene _projectilePrefab;
 
-    [Export] PackedScene _projectilePrefab;
-    bool _ranged = true;
-    float _speed = 150f;
+    private Attack _attack;
+    private float _damage;
+    private float _knockback;
+    private float _cooldown;
+    private float _reach;
+    private float _speed;
+    private bool _ranged;
 
-    Attack _attack;
-    float _damage = 10f;
-    float _knockback = 0f;
+    public override void _Ready()
+    {
+        _damage = (float)_weapon.Get("damage");
+        _knockback = (float)_weapon.Get("knockback");
+        _cooldown = (float)_weapon.Get("cooldown");
+        _reach = (float)_weapon.Get("reach");
+        _speed = (float)_weapon.Get("speed");
+        _ranged = (bool)_weapon.Get("ranged");
+
+        this.Scale = Vector2.One * _reach;
+    }
 
     public void Use(Vector2 direction)
     {
@@ -42,24 +54,31 @@ public partial class Weapon : Node2D
             Shoot();
         else
             Melee();
-
-        _cooldownTimer.Start(_cooldown);
     }
 
     private void Melee()
     {
         _animationPlayer.SpeedScale = 1 / _cooldown;
         _animationPlayer.Play("swing");
+        _cooldownTimer.Start(_cooldown);
     }
 
     private void Shoot()
     {
-        Projectile projectile = (Projectile)_projectilePrefab.Instantiate();
+        // Temp Quick Fix
+        if (Input.IsActionPressed("left_click"))
+        {
+            return;
+        }
+
+        ProjectileController projectile = (ProjectileController)_projectilePrefab.Instantiate();
         projectile._attack = _attack;
         projectile._speed = _speed;
         GetParent().AddChild(projectile);
 
         projectile.GlobalPosition = this.GlobalPosition + _attack.direction * 10;
+
+        _cooldownTimer.Start(_cooldown);
     }
 
     private void OnHitboxEntered(Area2D body)

@@ -1,46 +1,18 @@
 [gd_scene load_steps=8 format=3 uid="uid://dnjrwx23lwt2g"]
 
-[ext_resource type="Script" path="res://TinoTests/Scripts/Weapon.cs" id="1_be43h"]
+[ext_resource type="Script" path="res://TinoTests/Scripts/WeaponController.cs" id="1_qc71s"]
+[ext_resource type="Resource" uid="uid://dsa6q3jkek4am" path="res://TinoTests/Scripts/Weapons/Bow1.tres" id="2_hj05y"]
 [ext_resource type="PackedScene" uid="uid://dqmfwe15dtgat" path="res://TinoTests/Prefabs/projectile.tscn" id="2_pb3lv"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sov7g"]
-size = Vector2(32, 19.5)
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_23xj8"]
+[ext_resource type="Texture2D" uid="uid://8h4nv7s06ft5" path="res://TinoTests/Sprites/Swingbox.png" id="4_pvefc"]
 
 [sub_resource type="Animation" id="Animation_wryer"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 0, 0, 0)]
-}
 
-[sub_resource type="Animation" id="Animation_jsdfj"]
+[sub_resource type="Animation" id="Animation_hjerq"]
 resource_name = "swing"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Hitbox/CollisionPolygon2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -65,11 +37,12 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_83chl"]
 _data = {
 "RESET": SubResource("Animation_wryer"),
-"swing": SubResource("Animation_jsdfj")
+"swing": SubResource("Animation_hjerq")
 }
 
 [node name="Weapon" type="Node2D" node_paths=PackedStringArray("_hitbox", "_animationPlayer", "_cooldownTimer")]
-script = ExtResource("1_be43h")
+script = ExtResource("1_qc71s")
+_weapon = ExtResource("2_hj05y")
 _hitbox = NodePath("Hitbox")
 _animationPlayer = NodePath("AnimationPlayer")
 _cooldownTimer = NodePath("Cooldown")
@@ -83,17 +56,19 @@ one_shot = true
 collision_layer = 32
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, 9.75)
-shape = SubResource("RectangleShape2D_sov7g")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+position = Vector2(2.08165e-12, 8)
+rotation = 3.14159
+scale = Vector2(0.125738, 0.125743)
+polygon = PackedVector2Array(65, -48, 94, -26, 116, 6, 126, 35, 126, 44, 0.0569153, 64, -126, 44, -126, 35, -116, 6, -94, -26, -65, -48, -32, -62, 0, -65, 33, -62)
 disabled = true
-debug_color = Color(0, 0.529412, 0.992157, 0.25098)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 0)
-position = Vector2(0, 9.75)
-scale = Vector2(32, 19.5)
-texture = SubResource("CanvasTexture_23xj8")
+modulate = Color(1, 1, 1, 0)
+position = Vector2(2.08165e-12, 8)
+rotation = 3.14159
+scale = Vector2(0.125, 0.124647)
+texture = ExtResource("4_pvefc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -88,7 +88,7 @@ public partial class BuildingMenu : ScrollContainer
         _buildButton.Disabled = true;
         _buildButton.ButtonPressed = false;
 
-        Input.MouseMode = Input.MouseModeEnum.Hidden;
+        //Input.MouseMode = Input.MouseModeEnum.Hidden;      
 
         _ghostBuilding = _currentBuilding.buildingModeScene.Instantiate() as Node2D;
 

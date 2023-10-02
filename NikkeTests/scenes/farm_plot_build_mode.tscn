@@ -7,6 +7,7 @@
 size = Vector2(62, 62)
 
 [node name="FarmPlot" type="Node2D"]
+top_level = true
 script = ExtResource("1_cdgj4")
 
 [node name="FarmPlot" type="Sprite2D" parent="."]

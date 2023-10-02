@@ -4,11 +4,10 @@ using System;
 public partial class ItemData : Node {
 
     [Export] public string ItemsDirectory = "res://assets/resources/items/";
-    public Godot.Collections.Array<Item> Items = new Godot.Collections.Array<Item>();
+    public static Godot.Collections.Array<Item> Items = new Godot.Collections.Array<Item>();
 
     public override void _Ready() {
         _LoadItemsFromPath();
-        GD.Print(Items);
         // _SortItemsUsingID();
         // GD.Print(Items);
     }

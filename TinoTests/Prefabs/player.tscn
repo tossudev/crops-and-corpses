@@ -1,67 +1,40 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8bx46w1qix2q"]
+[gd_scene load_steps=8 format=3 uid="uid://c8bx46w1qix2q"]
 
 [ext_resource type="Script" path="res://TinoTests/Scripts/PlayerController.cs" id="1_y7bta"]
+[ext_resource type="PackedScene" uid="uid://dnjrwx23lwt2g" path="res://TinoTests/Components/weapon.tscn" id="2_00eh7"]
 [ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="2_jvd4n"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://TinoTests/Components/health_component.tscn" id="3_wuvdk"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://TinoTests/Components/hitbox_component.tscn" id="4_sa7m5"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ae35p"]
-radius = 1.60312
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xqb0"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_knab4"]
-radius = 16.4924
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xe3lj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sov7g"]
-size = Vector2(32, 19.5)
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_hrkfv"]
-
-[node name="Player" type="CharacterBody2D"]
-collision_layer = 0
-collision_mask = 0
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_weapon") groups=["player"]]
 script = ExtResource("1_y7bta")
+_weapon = NodePath("Weapon")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-light_mask = 0
-visibility_layer = 0
-scale = Vector2(10, 10)
-shape = SubResource("CircleShape2D_ae35p")
+shape = SubResource("RectangleShape2D_2xqb0")
+debug_color = Color(0, 0.6, 0.701961, 0.12549)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
-[node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 12
+[node name="Weapon" parent="." instance=ExtResource("2_00eh7")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("CircleShape2D_knab4")
-debug_color = Color(0.933333, 0, 0, 0.12549)
+[node name="HealthComponent" parent="." instance=ExtResource("3_wuvdk")]
 
-[node name="Weapons" type="Node2D" parent="."]
-
-[node name="SwingCooldown" type="Timer" parent="Weapons"]
-one_shot = true
-
-[node name="Sword" type="Node2D" parent="Weapons"]
-
-[node name="SwingArea" type="Area2D" parent="Weapons/Sword"]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_sa7m5")]
 collision_layer = 2
 collision_mask = 4
+_healthComponent = NodePath("../HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapons/Sword/SwingArea"]
-position = Vector2(0, 9.75)
-shape = SubResource("RectangleShape2D_sov7g")
-debug_color = Color(0, 0.529412, 0.992157, 0.25098)
-
-[node name="Sprite2D" type="Sprite2D" parent="Weapons/Sword"]
-modulate = Color(1, 0, 0, 0.498039)
-position = Vector2(2.07825e-12, 9.75)
-scale = Vector2(32.2, 19.556)
-texture = SubResource("CanvasTexture_hrkfv")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_xe3lj")
+debug_color = Color(1, 0, 0, 0.12549)
 
 [node name="Icon" type="Sprite2D" parent="."]
 scale = Vector2(0.15625, 0.15625)
 texture = ExtResource("2_jvd4n")
-
-[connection signal="area_entered" from="Hitbox" to="." method="OnHitboxEntered"]
-[connection signal="area_exited" from="Hitbox" to="." method="OnHitboxExited"]

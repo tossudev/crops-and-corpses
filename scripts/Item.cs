@@ -11,6 +11,5 @@ public partial class Item : Resource {
 
     public void _Ready() {
         ID = 0;
-        GD.Print(ID);
     }
 }

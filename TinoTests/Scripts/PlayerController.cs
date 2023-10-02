@@ -7,38 +7,27 @@ public partial class PlayerController : CharacterBody2D
 	private int _speed = 100;
 
 	private bool _canMelee = false;
-	private float _health = 100f;
 	private bool _isDead = false;
 
-	Node2D _weapons;
-
-	[Export(PropertyHint.Range, "0,5,")]
-	private float _swingCD; //temp
-
-	private Timer _attackCooldownTimer;
+	[Export]
+	Weapon _weapon;
 
 	public override void _Ready()
 	{
-		_weapons = GetNode<Node2D>("Weapons");
-		_attackCooldownTimer = _weapons.GetNode<Timer>("SwingCooldown");
+
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		Movement();
 
-		if (_attackCooldownTimer.IsStopped() == true)
+		if (Input.IsActionJustPressed("left_click"))
 		{
-			_weapons.GetNode<Node2D>("Sword/Sprite2D").Modulate = new Color(1, 0, 0, 0.5f);
-		}
-
-		if (Input.IsActionJustPressed("left_click") && _attackCooldownTimer.IsStopped())
-		{
-			MeleeStrike();
+			UseWeapon();
 		}
 	}
 
-	private Vector2 GetInputVector()
+	private Vector2 GetMovementInputVector()
 	{
 		Vector2 inputVector = Vector2.Zero;
 
@@ -51,11 +40,38 @@ public partial class PlayerController : CharacterBody2D
 
 	private void Movement()
 	{
-		Vector2 inputVector = GetInputVector();
-		Velocity = inputVector * _speed;
+		Vector2 movementVector = GetMovementInputVector();
+		Velocity = movementVector * _speed;
 
 		MoveAndSlide();
 	}
+
+	private Vector2 GetCursorVector()
+	{
+		Vector2 cursorPosition = GetGlobalMousePosition();
+		Vector2 playerPosition = GlobalPosition;
+		Vector2 cursorVector = cursorPosition - playerPosition;
+		cursorVector = cursorVector.Normalized();
+
+		return cursorVector;
+	}
+
+	// Vector2 cursorVector = GetCursorVector();
+	// float angle = cursorVector.Angle() * 180 / Mathf.Pi;
+	// angle = Mathf.Round(angle / 45) * 45;
+	// angle -= 90;
+
+	private void UseWeapon()
+	{
+		// Vector2 cursorVector = GetCursorVector();
+		// float angle = cursorVector.Angle() * 180 / Mathf.Pi;
+		// angle -= 90;
+
+
+		_weapon.Use(GetCursorVector());
+	}
+
+
 
 	int enemyLayer = 3;
 	int interactableLayer = 4;
@@ -83,33 +99,5 @@ public partial class PlayerController : CharacterBody2D
 		{
 			GD.Print("Player: I'm not interacting anymore!");
 		}
-	}
-
-	private Vector2 GetCursorVector()
-	{
-		Vector2 cursorPosition = GetGlobalMousePosition();
-		Vector2 playerPosition = GlobalPosition;
-		Vector2 cursorVector = cursorPosition - playerPosition;
-		cursorVector = cursorVector.Normalized();
-
-		return cursorVector;
-	}
-
-	private void MeleeStrike()
-	{
-		if (_canMelee != true)
-			return;
-
-		_attackCooldownTimer.Start(_swingCD);
-
-		Vector2 cursorVector = GetCursorVector();
-		float angle = cursorVector.Angle() * 180 / Mathf.Pi;
-		angle = Mathf.Round(angle / 45) * 45;
-		angle -= 90;
-
-		GD.Print(angle);
-
-		_weapons.GetNode<Node2D>("Sword/Sprite2D").Modulate = new Color(1, 0, 0, 0.25f);
-		_weapons.GetNode<Node2D>("Sword").RotationDegrees = angle;
 	}
 }

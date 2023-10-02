@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdg0mgh0rgkvq"]
+[gd_scene load_steps=3 format=3 uid="uid://bdg0mgh0rgkvq"]
 
 [ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="1_nyjms"]
+[ext_resource type="Script" path="res://scripts/ui/InventorySlot.cs" id="1_uxrvb"]
 
 [node name="InventorySlot" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 64.0
 offset_bottom = 64.0
+script = ExtResource("1_uxrvb")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0

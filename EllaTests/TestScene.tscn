@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfu78odug3mtx"]
+
+[ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="1_yxnfs"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6hlrx"]
+vertices = PackedVector2Array(171, 70, 995, 70, 995, 463, 172, 463)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(171, 70, 995, 70, 995, 463, 172, 463)])
+
+[node name="Node2D" type="Node2D"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_6hlrx")
+
+[node name="Waypoint1" type="Marker2D" parent="." groups=["WaypointFarm"]]
+position = Vector2(217, 421)
+
+[node name="Waypoint2" type="Marker2D" parent="." groups=["WaypointFarm"]]
+position = Vector2(931, 402)
+
+[node name="Waypoint3" type="Marker2D" parent="." groups=["WaypointFarm"]]
+position = Vector2(915, 103)
+
+[node name="Waypoint4" type="Marker2D" parent="." groups=["WaypointFarm"]]
+position = Vector2(211, 100)
+
+[node name="NPC" parent="." instance=ExtResource("1_yxnfs")]
+position = Vector2(585, 251)

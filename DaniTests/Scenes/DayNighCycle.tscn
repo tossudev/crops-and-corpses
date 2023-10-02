@@ -1,28 +1,37 @@
 [gd_scene load_steps=3 format=3 uid="uid://b0ha6xj7g0h1b"]
 
-[ext_resource type="Script" path="res://DaniTests/Scripts/SpawnScriptTest.cs" id="1_l0mb1"]
-[ext_resource type="Script" path="res://DaniTests/Scripts/TimeManager.cs" id="3_iehvf"]
+[ext_resource type="Script" path="res://DaniTests/Scripts/SpawnScriptTest.cs" id="1_bvvh7"]
+[ext_resource type="Script" path="res://DaniTests/Scripts/TimeManager.cs" id="2_x2b2h"]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(-71, -4)
-script = ExtResource("1_l0mb1")
+script = ExtResource("1_bvvh7")
 
 [node name="SunlightContainer" type="Node" parent="."]
-script = ExtResource("3_iehvf")
+script = ExtResource("2_x2b2h")
 
 [node name="Sunlight" type="CanvasModulate" parent="SunlightContainer"]
 position = Vector2(-71, -4)
 
 [node name="SpawnPoint1" type="Node2D" parent="."]
-position = Vector2(642, 455)
+position = Vector2(384, 874)
 
 [node name="SpawnPoint0" type="Node2D" parent="."]
-position = Vector2(1570, 689)
+position = Vector2(1698, 820)
 
 [node name="SpawnPoint2" type="Node2D" parent="."]
-position = Vector2(985, 181)
+position = Vector2(1114, 86)
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_left = 71.0
+offset_top = 4.0
+offset_right = 1991.0
+offset_bottom = 1084.0
+mouse_filter = 1
+color = Color(0.184314, 0.501961, 0.188235, 1)
 
 [connection signal="timeout" from="Timer" to="." method="ZombieSpawn"]

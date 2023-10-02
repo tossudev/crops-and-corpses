@@ -25,4 +25,13 @@ position = Vector2(985, 181)
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_left = 71.0
+offset_top = 4.0
+offset_right = 1991.0
+offset_bottom = 1084.0
+mouse_filter = 1
+color = Color(0.168627, 0.486275, 0.180392, 1)
+
 [connection signal="timeout" from="Timer" to="." method="ZombieSpawn"]

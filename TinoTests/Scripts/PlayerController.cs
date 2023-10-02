@@ -3,14 +3,11 @@ using System;
 
 public partial class PlayerController : CharacterBody2D
 {
-	[Export]
-	private int _speed = 100;
+	[Export] private WeaponController _weapon;
+	[Export] private int _speed = 100;
 
 	private bool _canMelee = false;
 	private bool _isDead = false;
-
-	[Export]
-	Weapon _weapon;
 
 	public override void _Ready()
 	{
@@ -21,7 +18,7 @@ public partial class PlayerController : CharacterBody2D
 	{
 		Movement();
 
-		if (Input.IsActionJustPressed("left_click"))
+		if (Input.IsActionJustPressed("left_click") || Input.IsActionJustReleased("left_click"))
 		{
 			UseWeapon();
 		}

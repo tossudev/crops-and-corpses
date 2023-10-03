@@ -79,7 +79,7 @@ public partial class WeaponController : Node2D
 
         this.RotationDegrees = angle;
 
-        _animationPlayer.SpeedScale = 1 * _cooldown;
+        _animationPlayer.SpeedScale = 1 / _cooldown;
         _animationPlayer.Play("swing");
         _timer.Start(_cooldown);
     }

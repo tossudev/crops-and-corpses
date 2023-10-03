@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Crops and Corpses"
-run/main_scene="res://scenes/ui/player_inventory.tscn"
+run/main_scene="res://ReimaTests/Crafting/craftable_item.tscn"
 config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 PlayerInventoryData="*res://scripts/global/PlayerInventoryData.cs"
 ItemData="*res://scripts/global/ItemData.cs"
+SaveHandler="*res://scripts/utilities/SaveHandler.cs"
 
 [display]
 

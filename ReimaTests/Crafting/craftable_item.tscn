@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dqyv3rj8otsnr"]
 
 [ext_resource type="Texture2D" uid="uid://cp7b2wy8o2pqk" path="res://ReimaTests/Crafting/MockupSprites/pepper.png" id="1_uh1bj"]
-[ext_resource type="LabelSettings" uid="uid://bbixx2rjsddy7" path="res://ReimaTests/Crafting/crafting_resource_label_settings.tres" id="2_k1db5"]
-[ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory_slot.tscn" id="2_ybe1e"]
+[ext_resource type="Script" path="res://ReimaTests/Crafting/Scripts/CraftableItem.cs" id="2_v4b2t"]
+[ext_resource type="Resource" uid="uid://dmm0h1ba6feb7" path="res://assets/resources/items/DummyItem.tres" id="3_qpiv4"]
 
 [node name="CraftableItem" type="TextureRect"]
 custom_minimum_size = Vector2(50, 50)
@@ -21,86 +21,5 @@ grow_vertical = 2
 pivot_offset = Vector2(25, 25)
 texture = ExtResource("1_uh1bj")
 expand_mode = 1
-
-[node name="Panel" type="Panel" parent="."]
-top_level = true
-custom_minimum_size = Vector2(400, 200)
-layout_mode = 0
-offset_left = 48.0
-offset_right = 298.0
-offset_bottom = 100.0
-
-[node name="FlowContainer" type="FlowContainer" parent="Panel"]
-custom_minimum_size = Vector2(400, 200)
-layout_mode = 0
-offset_right = 250.0
-offset_bottom = 104.0
-
-[node name="Label" type="Label" parent="Panel/FlowContainer"]
-custom_minimum_size = Vector2(400, 30)
-layout_mode = 2
-text = "Required Resources:"
-label_settings = ExtResource("2_k1db5")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Spacer" type="Container" parent="Panel/FlowContainer"]
-custom_minimum_size = Vector2(400, 24)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/FlowContainer"]
-custom_minimum_size = Vector2(400, 64)
-layout_mode = 2
-alignment = 1
-
-[node name="InventorySlot" parent="Panel/FlowContainer/HBoxContainer" instance=ExtResource("2_ybe1e")]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="InventorySlot2" parent="Panel/FlowContainer/HBoxContainer" instance=ExtResource("2_ybe1e")]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="InventorySlot3" parent="Panel/FlowContainer/HBoxContainer" instance=ExtResource("2_ybe1e")]
-visible = false
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="InventorySlot4" parent="Panel/FlowContainer/HBoxContainer" instance=ExtResource("2_ybe1e")]
-visible = false
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="InventorySlot5" parent="Panel/FlowContainer/HBoxContainer" instance=ExtResource("2_ybe1e")]
-visible = false
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="InventorySlot6" parent="Panel/FlowContainer/HBoxContainer" instance=ExtResource("2_ybe1e")]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Spacer2" type="Container" parent="Panel/FlowContainer"]
-custom_minimum_size = Vector2(400, 24)
-layout_mode = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/FlowContainer"]
-custom_minimum_size = Vector2(400, 40)
-layout_mode = 2
-alignment = 1
-
-[node name="AmountToCraft" type="TextEdit" parent="Panel/FlowContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-placeholder_text = "1"
-caret_blink = true
-
-[node name="CraftButton" type="Button" parent="Panel/FlowContainer/HBoxContainer2"]
-layout_mode = 2
-text = "Craft"
+script = ExtResource("2_v4b2t")
+itemRes = ExtResource("3_qpiv4")

@@ -12,3 +12,7 @@ offset_right = 125.0
 offset_bottom = 300.0
 
 [node name="CraftingWindow" parent="." instance=ExtResource("2_ove8c")]
+offset_left = -240.0
+offset_top = 8.0
+offset_right = -240.0
+offset_bottom = 8.0

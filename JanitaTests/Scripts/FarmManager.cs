@@ -6,43 +6,83 @@ public partial class FarmManager : Node
 {
 	public static FarmManager instance;
 
-	private Texture2D seedTexture, sproutTexture, plantTexture;
+	[Export] PackedScene [] _plantPrefabs;
 
-	private List<Seed> seeds = new List<Seed>();
+	List<Plant> _plants = new List<Plant>();
+
+
+	bool _isWaterCanEquipped, _isBugSprayEquipped;
+
 	public override void _Ready()
 	{
+
 		if(instance==null)instance=this;else QueueFree();
-		InitializeAllSeeds();
+		InitializePlants();
+		_isWaterCanEquipped = _isBugSprayEquipped=true;
+
 	}
 
-	void InitializeAllSeeds(){
+	void InitializePlants()
+	{
+		for(int i=0; i<_plantPrefabs.Length;i++){
 
-		seedTexture = (Texture2D)ResourceLoader.Load("res://JanitaTests/Images/sprouttemp.png");
-		sproutTexture = (Texture2D)ResourceLoader.Load("res://JanitaTests/Images/sprouttemp.png");
-		plantTexture = (Texture2D)ResourceLoader.Load("res://JanitaTests/Images/wheattemp.png");
-		seeds.Add(new Seed(PlantType.Potato, "Potato Seed", "Potatoes for food", 4, seedTexture, sproutTexture, plantTexture));
-
-		seedTexture = (Texture2D)ResourceLoader.Load("res://JanitaTests/Images/sprouttemp.png");
-		sproutTexture = (Texture2D)ResourceLoader.Load("res://JanitaTests/Images/sprouttemp.png");
-		plantTexture = (Texture2D)ResourceLoader.Load("res://JanitaTests/Images/wheattemp.png");
-		seeds.Add(new Seed(PlantType.Cabbage, "Cabbage Seed", "Cabbages for food", 5, seedTexture, sproutTexture, plantTexture));
-
-
-		for(int i=0; i<seeds.Count;i++){
-			GD.Print(seeds[i].PlantType);
+			var scene = ResourceLoader.Load<PackedScene>(_plantPrefabs[i].ResourcePath).Instantiate();
+     	  	Plant _newPlant = scene as Plant;   
+        	if (_newPlant != null)
+        	{
+            	_plants.Add(_newPlant);
+            	GD.Print(_newPlant.plantName);
+        	}
+        	else
+        	{
+            	GD.Print("Failed to cast to Plant: " + _plantPrefabs[i].ResourceName);
+        	}
 		}
-		
 	}
 
-	public Seed GetSeed(PlantType plantType){
+	public Plant GetPlant(string plantName){
 
-		for(int i=0; i< seeds.Count; i++){
-			if(seeds[i].PlantType == plantType){
-				return seeds[i];
+		foreach(Plant _plant in _plants){
+			if(_plant.plantName.ToString() == plantName)
+			{
+				Plant _newPlant = _plant.Duplicate() as Plant;
+				return _newPlant;
 			}
-		}	
-		
+		}
+
 		return null;
 	}
+
+
+	public void EquipWaterCan(bool isEquipped){
+		_isWaterCanEquipped = isEquipped;
+	}
+	public bool IsWaterCanEquipped(){
+		return _isWaterCanEquipped;
+	}
+	public void EquipBugSpray(bool isEquipped){	
+		_isBugSprayEquipped = isEquipped;
+	}
+	public bool IsBugSprayEquipped(){
+		return _isBugSprayEquipped;
+	}
+	
+}
+public enum PlantType
+{	
+	Potato, 
+	Cabbage, 
+	Tomato
+}
+
+public enum GrowthState{
+
+	WaitWatering,
+	StartGrowth,
+	ContinueGrowth,
+	IsWilting,
+	IsInfested,
+	IsHarvestable,
+	IsDead
 
 }

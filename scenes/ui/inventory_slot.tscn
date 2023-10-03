@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdg0mgh0rgkvq"]
+
+[ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="1_nyjms"]
+[ext_resource type="Script" path="res://scripts/ui/InventorySlot.cs" id="1_uxrvb"]
+
+[node name="InventorySlot" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_uxrvb")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 56.0
+mouse_filter = 2
+texture = ExtResource("1_nyjms")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Quantity" type="Label" parent="."]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 2

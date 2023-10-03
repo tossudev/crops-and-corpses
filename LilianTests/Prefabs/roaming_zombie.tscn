@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6kw7kvyr5phr"]
+
+[ext_resource type="Script" path="res://LilianTests/Scripts/RoamingZombie.cs" id="1_p1qih"]
+[ext_resource type="Texture2D" uid="uid://c1sm88vok0oma" path="res://LilianTests/Sprites/zombie_placeholder.png" id="2_blfwo"]
+[ext_resource type="Script" path="res://LilianTests/Scripts/StateMachine.cs" id="3_y8em4"]
+[ext_resource type="Script" path="res://LilianTests/Scripts/ZombieIdle.cs" id="4_dffrj"]
+[ext_resource type="Script" path="res://LilianTests/Scripts/ZombieChase.cs" id="5_gf85f"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hv102"]
+radius = 13.0
+height = 48.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+z_index = 2
+script = ExtResource("1_p1qih")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_blfwo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_hv102")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_y8em4")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("zombie")]
+script = ExtResource("4_dffrj")
+zombie = NodePath("../..")
+move_speed = 30.0
+
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("zombie")]
+script = ExtResource("5_gf85f")
+zombie = NodePath("../..")

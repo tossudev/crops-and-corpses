@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqmfwe15dtgat"]
+
+[ext_resource type="Script" path="res://TinoTests/Scripts/ProjectileController.cs" id="1_tcvia"]
+[ext_resource type="Resource" uid="uid://cuipddm160c01" path="res://TinoTests/Scripts/Projectiles/Arrow1.tres" id="2_yhw6b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_upju1"]
+radius = 2.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_nk13s"]
+
+[node name="Projectile" type="Node2D" node_paths=PackedStringArray("_lifetimeTimer")]
+script = ExtResource("1_tcvia")
+_projectile = ExtResource("2_yhw6b")
+_lifetimeTimer = NodePath("Lifetime")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_upju1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.19209e-07, 5.96046e-08)
+scale = Vector2(4, 4)
+texture = SubResource("CanvasTexture_nk13s")
+
+[node name="Lifetime" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="OnHitboxEntered"]

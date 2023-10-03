@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://ceal2xj0w1t17"]
+
+[ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMode.cs" id="1_s0glh"]
+[ext_resource type="Texture2D" uid="uid://dskeqa44gjbje" path="res://NikkeTests/images/house.png" id="1_t2ex3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gcdqn"]
+size = Vector2(126, 126)
+
+[node name="House" type="Node2D"]
+top_level = true
+script = ExtResource("1_s0glh")
+
+[node name="House" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+position = Vector2(-64, -64)
+texture = ExtResource("1_t2ex3")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-64, -64)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_gcdqn")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

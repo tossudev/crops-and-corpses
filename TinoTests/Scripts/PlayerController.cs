@@ -3,20 +3,29 @@ using System;
 
 public partial class PlayerController : CharacterBody2D
 {
-	[Export]
-	private int _speed = 100;
+	[Export] private WeaponController _weapon;
+	[Export] private int _speed = 100;
 
-	public override void _Ready()
-	{
-
-	}
+	private bool _canMelee = true;
+	private bool _isDead = false;
 
 	public override void _PhysicsProcess(double delta)
 	{
 		Movement();
+
+		if (Input.IsActionPressed("left_click"))
+		{
+			_weapon.Use(_canMelee);
+			_canMelee = false;
+		}
+		else if (Input.IsActionJustReleased("left_click"))
+		{
+			_weapon.ReleaseDraw();
+			_canMelee = true;
+		}
 	}
 
-	private Vector2 GetInputVector()
+	private Vector2 GetMovementInputVector()
 	{
 		Vector2 inputVector = Vector2.Zero;
 
@@ -29,8 +38,8 @@ public partial class PlayerController : CharacterBody2D
 
 	private void Movement()
 	{
-		Vector2 inputVector = GetInputVector();
-		Velocity = inputVector * _speed;
+		Vector2 movementVector = GetMovementInputVector();
+		Velocity = movementVector * _speed;
 
 		MoveAndSlide();
 	}

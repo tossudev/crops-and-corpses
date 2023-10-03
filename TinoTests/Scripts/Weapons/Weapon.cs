@@ -10,9 +10,10 @@ public partial class Weapon : Item
     [Export] public float cooldown { get; set; }
 
     [ExportCategory("Melee")]
-    [Export] public float reach { get; set; }
+    [Export] public float reach { get; set; } = 1;
 
     [ExportCategory("Ranged")]
-    [Export] public float speed { get; set; }
     [Export] public bool ranged { get; set; }
+    [Export] public float speed { get; set; }
+    [Export] public float drawTime { get; set; }
 }

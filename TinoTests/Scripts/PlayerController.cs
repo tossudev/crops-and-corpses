@@ -6,21 +6,22 @@ public partial class PlayerController : CharacterBody2D
 	[Export] private WeaponController _weapon;
 	[Export] private int _speed = 100;
 
-	private bool _canMelee = false;
+	private bool _canMelee = true;
 	private bool _isDead = false;
-
-	public override void _Ready()
-	{
-
-	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		Movement();
 
-		if (Input.IsActionJustPressed("left_click") || Input.IsActionJustReleased("left_click"))
+		if (Input.IsActionPressed("left_click"))
 		{
-			UseWeapon();
+			_weapon.Use(_canMelee);
+			_canMelee = false;
+		}
+		else if (Input.IsActionJustReleased("left_click"))
+		{
+			_weapon.ReleaseDraw();
+			_canMelee = true;
 		}
 	}
 
@@ -41,60 +42,5 @@ public partial class PlayerController : CharacterBody2D
 		Velocity = movementVector * _speed;
 
 		MoveAndSlide();
-	}
-
-	private Vector2 GetCursorVector()
-	{
-		Vector2 cursorPosition = GetGlobalMousePosition();
-		Vector2 playerPosition = GlobalPosition;
-		Vector2 cursorVector = cursorPosition - playerPosition;
-		cursorVector = cursorVector.Normalized();
-
-		return cursorVector;
-	}
-
-	// Vector2 cursorVector = GetCursorVector();
-	// float angle = cursorVector.Angle() * 180 / Mathf.Pi;
-	// angle = Mathf.Round(angle / 45) * 45;
-	// angle -= 90;
-
-	private void UseWeapon()
-	{
-		// Vector2 cursorVector = GetCursorVector();
-		// float angle = cursorVector.Angle() * 180 / Mathf.Pi;
-		// angle -= 90;
-
-
-		_weapon.Use(GetCursorVector());
-	}
-
-
-
-	int enemyLayer = 3;
-	int interactableLayer = 4;
-	private void OnHitboxEntered(Area2D body)
-	{
-		if (body.GetCollisionLayerValue(enemyLayer) == true)
-		{
-			_canMelee = true;
-			GD.Print("Player: ouuch!");
-		}
-		else if (body.GetCollisionLayerValue(interactableLayer) == true)
-		{
-			GD.Print("Player: I'm interacting!");
-		}
-	}
-
-	private void OnHitboxExited(Area2D body)
-	{
-		if (body.GetCollisionLayerValue(enemyLayer) == true)
-		{
-			_canMelee = false;
-			GD.Print("Player: Whew");
-		}
-		else if (body.GetCollisionLayerValue(interactableLayer) == true)
-		{
-			GD.Print("Player: I'm not interacting anymore!");
-		}
 	}
 }

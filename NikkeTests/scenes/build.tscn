@@ -1,17 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://f5m7wypxd5t7"]
+[gd_scene load_steps=5 format=3 uid="uid://f5m7wypxd5t7"]
 
 [ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMenu.cs" id="1_7c7gm"]
 [ext_resource type="PackedScene" uid="uid://bgyv0c8xt1fd4" path="res://scenes/town.tscn" id="2_k6mk0"]
-[ext_resource type="PackedScene" uid="uid://cyk44y2mntxd0" path="res://NikkeTests/scenes/town_hall.tscn" id="2_qhuxj"]
 [ext_resource type="Texture2D" uid="uid://gx3rxc18ic1u" path="res://NikkeTests/images/farm_plot.jpg" id="3_4ha78"]
 [ext_resource type="Texture2D" uid="uid://dskeqa44gjbje" path="res://NikkeTests/images/house.png" id="4_lb8gx"]
 
 [node name="Node_2D" type="Node2D"]
 
 [node name="Town" parent="." instance=ExtResource("2_k6mk0")]
-
-[node name="TownHall" parent="Town" instance=ExtResource("2_qhuxj")]
-position = Vector2(-196, -128)
 
 [node name="Buildings" type="Node2D" parent="."]
 

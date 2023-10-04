@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://gx3rxc18ic1u" path="res://NikkeTests/images/farm_plot.jpg" id="1_wh2sg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3rtac"]
-size = Vector2(62, 62)
+size = Vector2(64, 64)
 
 [node name="FarmPlot" type="Node2D"]
 

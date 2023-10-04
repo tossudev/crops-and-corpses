@@ -83,4 +83,14 @@ public partial class BuildingMode : Node2D
     {
         collisions--;
     }
+
+    private void _on_area_2d_body_entered(Node2D body)
+    {
+        collisions++;
+    }
+
+    private void _on_area_2d_body_exited(Node2D body)
+    {
+        collisions--;
+    }
 }

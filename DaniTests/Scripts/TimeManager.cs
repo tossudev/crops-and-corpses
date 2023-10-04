@@ -7,12 +7,12 @@ public partial class TimeManager : Node
     public float timeSpeed = 1f;
     [Export] private Color nightTimeColor = new Color((float)0.5,(float) 0.5, (float)0.5);  // Set your desired nighttime color
     [Export] private Color dayTimeColor = new Color(1, 1, 1);    // Set your desired daytime color
-    [Export] private float transitionDuration = 1f; // Set the duration of the transition
-    [Export] private float dayTimeLength = 10f;    // 10 min duration for day
-    [Export] private float nightTimeLength = 10f;  // 10 min duration for night
+    [Export] private float transitionDuration = 3f; // Set the duration of the transition
+    [Export] private float dayTimeLength = 60f;    // 10 min duration for day
+    [Export] private float nightTimeLength = 30f;  // 10 min duration for night
 
     private bool isDayTime = true;
-    public bool dayTime { get { return isDayTime; } set { isDayTime = value; } }
+    public bool dayTime { get { return isDayTime; } set { dayTime= value; } }
 
     private CanvasModulate sunlight;
 
@@ -52,9 +52,9 @@ public partial class TimeManager : Node
                 // Transition to nighttime
                 sunlight.Color = LerpColor(sunlight.Color, nightTimeColor,(float) delta / transitionDuration);
             }
+            
         }
-
-        isDayTime = timeOfDay <= dayTimeLength;
+        isDayTime = timeOfDay <= dayTimeLength + 10f; // 10s for delaying zombievawes
     }
 
     // Custom function to interpolate between two colors

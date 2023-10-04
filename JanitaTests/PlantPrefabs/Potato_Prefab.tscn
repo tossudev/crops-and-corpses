@@ -16,6 +16,7 @@ _seedTexture = ExtResource("3_ix84e")
 _sproutTexture = ExtResource("4_lwy1c")
 _plantTexture = ExtResource("1_0l8f4")
 _col = NodePath("Area2D")
+_maxCycles = 5
 
 [node name="Area2D" type="Area2D" parent="."]
 

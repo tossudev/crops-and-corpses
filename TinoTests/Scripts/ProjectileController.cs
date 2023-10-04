@@ -1,16 +1,19 @@
 using Godot;
 using System;
 
-public partial class Projectile : Node2D
+public partial class ProjectileController : Node2D
 {
+    [Export] public Resource _projectile;  // temp export
+    [Export] private Timer _lifetimeTimer;
+
     public Attack _attack;
     public float _speed;
-    [Export] Timer _lifetimeTimer;
-    float _lifetime = 5f;
+    private float _lifetime;
 
     public override void _Ready()
     {
-        TopLevel = true;
+        _lifetime = (float)_projectile.Get("lifetime");
+        this.TopLevel = true;
         _lifetimeTimer.Start(_lifetime);
     }
 
@@ -19,7 +22,7 @@ public partial class Projectile : Node2D
         if (_lifetimeTimer.TimeLeft <= 0)
             QueueFree();
 
-        Position += _attack.direction * (float)delta * _speed;
+        this.Position += _attack.direction * (float)delta * _speed;
     }
 
     private void OnHitboxEntered(Area2D body)

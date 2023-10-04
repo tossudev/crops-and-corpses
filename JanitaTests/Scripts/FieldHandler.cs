@@ -45,10 +45,12 @@ public partial class FieldHandler : Node
         }
 		string _plantinfo = _plant.plantName.ToString();
 		_plant = FarmManager.instance.GetPlant(_plantinfo);
+		FarmManager.instance.AddPlantedPlant(_plant);
 	}
 	
 	public void RemovePlant(){
 		_currentPlants--;
+		FarmManager.instance.RemovePlantedPlant(_plant);
 	}
 	
 }

@@ -10,7 +10,7 @@ public partial class FarmManager : Node
 
 	List<Plant> _plants = new List<Plant>();
 
-
+	List <Plant> _allPlantedPlants = new List<Plant>();
 	bool _isWaterCanEquipped, _isBugSprayEquipped;
 
 	public override void _Ready()
@@ -53,7 +53,17 @@ public partial class FarmManager : Node
 		return null;
 	}
 
-
+	public List<Plant> GetPlantedPlants(){
+		return _allPlantedPlants;
+	}
+	public void AddPlantedPlant(Plant plant){
+		_allPlantedPlants.Add(plant);
+		GD.Print(_allPlantedPlants.Count);
+	}
+	public void RemovePlantedPlant(Plant plant){
+		_allPlantedPlants.Remove(plant);
+		GD.Print(_allPlantedPlants.Count);
+	}
 	public void EquipWaterCan(bool isEquipped){
 		_isWaterCanEquipped = isEquipped;
 	}

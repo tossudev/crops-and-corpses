@@ -1,0 +1,10 @@
+[gd_scene load_steps=5 format=3 uid="uid://cic35vewp7pln"]
+
+[ext_resource type="Script" path="res://JanitaTests/Scripts/FarmManager.cs" id="1_7w5ix"]
+[ext_resource type="PackedScene" uid="uid://bljea7oopk7tf" path="res://JanitaTests/PlantPrefabs/plant_tomato.tscn" id="2_26sw3"]
+[ext_resource type="PackedScene" uid="uid://b4fyxjshjenvv" path="res://JanitaTests/PlantPrefabs/plant_potato.tscn" id="3_5el2c"]
+[ext_resource type="PackedScene" uid="uid://luqdfx7qh2jl" path="res://JanitaTests/PlantPrefabs/plant_cabbage.tscn" id="4_ckkrt"]
+
+[node name="farm_manager" type="Node"]
+script = ExtResource("1_7w5ix")
+_plantPrefabs = Array[PackedScene]([ExtResource("2_26sw3"), ExtResource("3_5el2c"), ExtResource("4_ckkrt")])

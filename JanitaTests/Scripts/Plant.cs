@@ -138,17 +138,17 @@ public partial class Plant : Node2D
 		{
 			// Plant is planted, wait for water so it can start to grow
 			if(button.IsPressed() && _state == GrowthState.WaitWatering && FarmManager.instance.IsWaterCanEquipped()){
-				GiveWater();
+				WaterPlant();
 			}
 
 			// Plant is wilted, water it
 			if(button.IsPressed() && _state == GrowthState.IsWilting && FarmManager.instance.IsWaterCanEquipped()){
-				GiveWater();
+				WaterPlant();
 			}
 
 			// Plant is infested, bug spray it
 			if(button.IsPressed() && _state == GrowthState.IsInfested && FarmManager.instance.IsBugSprayEquipped()){
-				SprayCure();
+				CurePlant();
 			}
 
 			// Plant is ready for harvest or it is dead
@@ -212,7 +212,7 @@ public partial class Plant : Node2D
 			_warningSign.Texture = _bugSignTexture;
 		}
 	}
-	void GiveWater(){
+	public void WaterPlant(){
 		GD.Print("Watered: "+plantName);
 		_warningSign.Texture = null;
 		if(_state == GrowthState.WaitWatering)
@@ -221,7 +221,7 @@ public partial class Plant : Node2D
 			_state = GrowthState.ContinueGrowth;
 		PlantState();	
 	}
-	void SprayCure(){
+	public void CurePlant(){
 		GD.Print("Cured: "+plantName);
 		_warningSign.Texture =null;
 		_state = GrowthState.ContinueGrowth;

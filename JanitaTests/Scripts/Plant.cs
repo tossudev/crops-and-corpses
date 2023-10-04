@@ -8,7 +8,8 @@ public partial class Plant : Node2D
 	[Export] PlantType _plantType;
 	[Export] string _seedName;
 	[Export] string _description;
-	[Export] float _growthTime{ get; set; }
+	[Export] float _growthCycleLength = 5f;
+	[Export] int _maxCycles;
 
 	[Export] Texture2D _seedTexture;
 	[Export] Texture2D _sproutTexture;
@@ -28,11 +29,6 @@ public partial class Plant : Node2D
 	public string description{
 		get  { return _description; }
 		set {_description = value;}	
-	}
-
-	public float growthTime{
-		get { return _growthTime;}
-		set { _growthTime = value;}
 	}
 
 	public Texture2D seedTexture{
@@ -56,9 +52,7 @@ public partial class Plant : Node2D
 	
 	#region variables for growing
 	Timer _growthTimer = new Timer();
-	
-	[Export] float _growthCycleLength = 5f;
-	[Export] int _maxCycles;
+
 	int _currentCycle= 0;
 	double _growthCycleTimer = 0f;
 	FieldHandler _myField  {get; set;}
@@ -132,6 +126,9 @@ public partial class Plant : Node2D
 		}
 	}
 
+	public GrowthState GetGrowthState(){
+		return _state;
+	}
 	void InteractWithPlant(Node viewport, InputEvent @event, long shapeIdx)
 	{
 		if(@event is InputEventMouseButton button)

@@ -5,11 +5,12 @@ public partial class InventorySlot : Control {
 	
 	public TextureRect icon;
 	public Label quantityLabel;
-	private PlayerInventoryController _inv;
 
 	public int itemID = -1;
 	public int quantity = 0;
 	public int index = -1;
+	private PlayerInventoryController _inv;
+	private bool hasItem = false;
 
 
 	public override void _Ready() {
@@ -20,29 +21,63 @@ public partial class InventorySlot : Control {
 
 
 	private void OnButtonGuiInput(InputEvent @event) {
-		if (@event is InputEventMouseButton keyEvent && keyEvent.Pressed) {
-			if (keyEvent.ButtonIndex == MouseButton.Left) {
-				_inv.SelectItem((int)itemID);
+		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed) {
+			if (mouseEvent.ButtonIndex == MouseButton.Left) {
+				ClickLeft();
 			}
 		}
 	}
 
 
-	public void UpdateSlot(Variant _receivedItemID, Variant _itemQuantity, int _itemIndex) {
-		itemID = (int)_receivedItemID;
-		quantity = (int)_itemQuantity;
+	private void ClickLeft() {
+		// Player deselected item from hand
+		if (_inv.isItemSelected && !hasItem) {
+			_inv.AddItem(index);
+		}
+
+		// Player selects new item
+		else if (!_inv.isItemSelected && hasItem) {
+			_inv.SelectItem(itemID, quantity);
+			_inv.RemoveAtIndex(index);
+		}
+
+		// Player has item and presses new item
+		else if (_inv.isItemSelected && hasItem) {
+			if (DoItemsMatch()) {
+				_inv.AddItem(index);
+			}
+		}
+	}
+
+	private bool DoItemsMatch() {
+		if (itemID == _inv.selectedItemID) {
+			return true;
+		}
+		
+		return false;
+	}
+
+
+	public void UpdateSlot(int _receivedItemID, int _itemQuantity, int _itemIndex) {
+		itemID = _receivedItemID;
+		quantity = _itemQuantity;
 		index = _itemIndex;
 
-		GD.Print(itemID);
+		// GD.Print(itemID);
 
 		if (itemID == -1) {
+			hasItem = false;
+
 			icon.Texture = null;
+			quantityLabel.Text = "";
 			return;
 		}
 
+		hasItem = true;
 		var itemResource = ItemData.items[itemID] as Item;
 
 		Texture2D iconTexture = itemResource.IconTexture;
 		icon.Texture = iconTexture;
+		quantityLabel.Text = quantity.ToString();
 	}
 }

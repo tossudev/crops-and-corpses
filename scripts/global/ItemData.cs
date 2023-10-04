@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class ItemData : Node {
 
@@ -8,14 +9,11 @@ public partial class ItemData : Node {
 
     public override void _Ready() {
         _LoadItemsFromPath();
-        // _SortItemsUsingID();
-        // GD.Print(Items);
     }
 
-    private void _LoadItemsFromPath() {
+    void _LoadItemsFromPath() {
 
         using var dir = DirAccess.Open(ItemsDirectory);
-
         // Open item directory
         if (dir != null) {
             dir.ListDirBegin();
@@ -32,18 +30,8 @@ public partial class ItemData : Node {
         }
     }
 
-
-    private void _SortItemsUsingID() {
-    //     Item item = Items[0];
-        // Items = Items.Sort();
-
-        // IEnumerable<Item> query = Items.OrderBy(ID => item.ID);
-
-        // foreach (ItemData item in query) {
-        //     GD.Print("{0}", item.ID);
-        // }
-    
+    public static Item GetItemById(int id)
+    {
+        return Items.First(item => item.ID == id);
     }
-
-
 }

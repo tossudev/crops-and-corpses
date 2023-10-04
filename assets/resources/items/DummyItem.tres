@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dmm0h1ba6feb7"]
 
-[ext_resource type="Script" path="res://scripts/Item.cs" id="1_4p4aj"]
-[ext_resource type="Texture2D" uid="uid://c33dhuxrk17ie" path="res://ReimaTests/Crafting/MockupSprites/log.png" id="1_d0sgv"]
+[ext_resource type="Texture2D" uid="uid://cyipyi3gny7vw" path="res://ReimaTests/Crafting/MockupSprites/iron.png" id="1_f6bkc"]
+[ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="2_dsjmc"]
 
 [resource]
-script = ExtResource("1_4p4aj")
+script = ExtResource("2_dsjmc")
 ID = 0
 Name = "Dummy Item"
-IconTexture = ExtResource("1_d0sgv")
+IconTexture = ExtResource("1_f6bkc")
 StackSize = 10

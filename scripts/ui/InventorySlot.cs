@@ -5,9 +5,7 @@ public partial class InventorySlot : Control {
 	
 	public TextureRect Icon;
 	public Label QuantityLabel;
-
-	// TODO: Convert Variants to int in PlayerInventoryController.cs
-	// ^ Not necessary, can be converted with cast "(int)"
+    
 	public int ItemID;
 	public int Quantity;
 	public int Index;

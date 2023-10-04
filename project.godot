@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 PlayerInventoryData="*res://scripts/global/PlayerInventoryData.cs"
 ItemData="*res://scripts/global/ItemData.cs"
-SaveHandler="*res://scripts/utilities/SaveHandler.cs"
+SaveData="*res://scripts/global/SaveData.cs"
 
 [display]
 

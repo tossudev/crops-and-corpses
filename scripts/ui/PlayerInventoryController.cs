@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public partial class PlayerInventoryController : Control {
 
-	private string slotNodePath = "res://scenes/ui/inventory_slot.tscn";
+    string slotNodePath = "res://scenes/ui/inventory_slot.tscn";
 	public override void _Ready() {
 		_InitInventory();
 	}

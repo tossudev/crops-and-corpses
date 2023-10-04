@@ -8,14 +8,14 @@ public partial class CraftableItem : TextureRect
 
     public override void _Ready()
     {
-        try
-        {
-            Item item = (Item)itemRes;
-            Texture = item.IconTexture;
-        }
-        catch (Exception e)
-        {
-            Debug.Fail(e.Message);
-        } 
+        // try
+        // {
+        //     Item item = (Item)itemRes;
+        //     Texture = item.IconTexture;
+        // }
+        // catch (Exception e)
+        // {
+        //     Debug.Fail(e.Message);
+        // } 
     }
 }

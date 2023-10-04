@@ -11,7 +11,7 @@ public partial class PlayerInventoryData : Node {
     public override void _Ready() { 
         // Test adding items to the inventory
         var emptyItem = new Godot.Collections.Dictionary<string, Variant>();
-        emptyItem.Add("ID", -1);
+        emptyItem.Add("ID", 1);
         emptyItem.Add("Quantity", 0);
 
         var dummyItem = new Godot.Collections.Dictionary<string, Variant>();

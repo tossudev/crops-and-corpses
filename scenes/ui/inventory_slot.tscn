@@ -33,3 +33,5 @@ offset_bottom = 64.0
 text = "0"
 horizontal_alignment = 2
 vertical_alignment = 2
+
+[connection signal="gui_input" from="Button" to="." method="OnButtonGuiInput"]

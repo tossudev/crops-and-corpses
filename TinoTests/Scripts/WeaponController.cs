@@ -54,9 +54,13 @@ public partial class WeaponController : Node2D
         };
 
         if (_ranged && !_isDrawing)
+        {
             StartDraw();
+        }
         else if (canMelee)
+        {
             UseMelee();
+        }
     }
 
     private Vector2 GetCursorVector()
@@ -89,7 +93,7 @@ public partial class WeaponController : Node2D
         if (!_isDrawing)
             _isDrawing = true;
 
-        _animationPlayer.SpeedScale = 1 * _drawTime;
+        _animationPlayer.SpeedScale = 1 / _drawTime;
         _animationPlayer.Play("draw");
         _timer.Start(_drawTime);
     }
@@ -104,11 +108,11 @@ public partial class WeaponController : Node2D
         float elapsed = (float)_timer.TimeLeft;
         _timer.Stop();
 
-        float drawPercentage = (_drawTime - elapsed) / _drawTime;
+        float power = 0.4f + (_drawTime - elapsed) / _drawTime * 0.6f;
 
         _attack.direction = GlobalPosition.DirectionTo(GetGlobalMousePosition());
 
-        Shoot(1);
+        Shoot(power);
 
         _animationPlayer.SpeedScale = 1 / _cooldown;
         _animationPlayer.Play("swing");
@@ -118,11 +122,17 @@ public partial class WeaponController : Node2D
     private void Shoot(float power)
     {
         ProjectileController projectile = (ProjectileController)_projectilePrefab.Instantiate();
-        projectile._attack = _attack;
-        projectile._speed = _speed;
         GetParent().AddChild(projectile);
 
-        projectile.GlobalPosition = this.GlobalPosition + _attack.direction * 10; // TODO: chnage this to be based on weapon reach or something
+        _attack.damage *= power;
+        projectile.attack = _attack;
+        projectile.speed = _speed * power;
+        projectile.power = power;
+
+        projectile.Init();
+
+        // TODO: change this to be based on weapon reach or something
+        projectile.GlobalPosition = this.GlobalPosition + _attack.direction * 10;
         projectile.GlobalRotation = _attack.direction.Angle();
 
         _timer.Start(_cooldown);

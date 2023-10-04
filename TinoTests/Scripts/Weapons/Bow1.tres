@@ -6,11 +6,11 @@
 script = ExtResource("1_n12g1")
 damage = 10.0
 knockback = 5.0
-cooldown = 1.0
+cooldown = 0.5
 reach = 1.0
 ranged = true
-speed = 200.0
-drawTime = 2.0
+speed = 250.0
+drawTime = 1.0
 ID = 0
 Name = ""
 StackSize = 1

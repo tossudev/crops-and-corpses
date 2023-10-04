@@ -3,37 +3,37 @@ using System;
 
 public partial class ItemData : Node {
 
-    [Export] public string ItemsDirectory = "res://assets/resources/items/";
-    public static Godot.Collections.Array<Item> Items = new Godot.Collections.Array<Item>();
+    [Export] public string itemsDirectory = "res://assets/resources/items/";
+    public static Godot.Collections.Array<Item> items = new Godot.Collections.Array<Item>();
 
     public override void _Ready() {
-        _LoadItemsFromPath();
-        // _SortItemsUsingID();
+        LoadItemsFromPath();
+        // SortItemsUsingID();
         // GD.Print(Items);
     }
 
-    private void _LoadItemsFromPath() {
+    private void LoadItemsFromPath() {
 
-        using var dir = DirAccess.Open(ItemsDirectory);
+        using var dir = DirAccess.Open(itemsDirectory);
 
         // Open item directory
         if (dir != null) {
             dir.ListDirBegin();
-            string fileName = dir.GetNext();
+            string _fileName = dir.GetNext();
 
             // Add all items from directory to resource array
-            while (fileName != "") {
-                string filePath = ItemsDirectory + fileName;
-                var resource = (Item)GD.Load(filePath);
-                Items.Add(resource as Item);
+            while (_fileName != "") {
+                string _filePath = itemsDirectory + _fileName;
+                var _resource = (Item)GD.Load(_filePath);
+                items.Add(_resource as Item);
 
-                fileName = dir.GetNext();
+                _fileName = dir.GetNext();
             }
         }
     }
 
 
-    private void _SortItemsUsingID() {
+    private void SortItemsUsingID() {
     //     Item item = Items[0];
         // Items = Items.Sort();
 

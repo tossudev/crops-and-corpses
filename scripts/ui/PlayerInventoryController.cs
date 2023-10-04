@@ -27,19 +27,23 @@ public partial class PlayerInventoryController : Control {
 
 
 	private void _UpdateSelectedItem() {
-		Vector2 _MousePosition = GetGlobalMousePosition();
-		_MousePosition.X -= SELECTED_ITEM_OFFSET;
-		_MousePosition.Y -= SELECTED_ITEM_OFFSET;
+		Vector2 _mousePosition = GetGlobalMousePosition();
+		_mousePosition.X -= SELECTED_ITEM_OFFSET;
+		_mousePosition.Y -= SELECTED_ITEM_OFFSET;
 
-		_selectedItemNode.GlobalPosition = _MousePosition;
+		_selectedItemNode.GlobalPosition = _mousePosition;
 		_selectedItemNode.Visible = isItemSelected;
 	}
 
 
 	public void SelectItem(int ItemID) {
+		if (ItemID == -1) {
+			return;
+		}
+
 		isItemSelected = true;
 
-		var _itemResource = ItemData.Items[ItemID] as Item;
+		var _itemResource = ItemData.items[ItemID] as Item;
 
 		Texture2D _iconTexture = _itemResource.IconTexture;
 		selectedIcon.Texture = _iconTexture;

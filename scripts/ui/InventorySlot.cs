@@ -3,48 +3,46 @@ using System;
 
 public partial class InventorySlot : Control {
 	
-	public TextureRect Icon;
-	public Label QuantityLabel;
-	private PlayerInventoryController _Inv;
+	public TextureRect icon;
+	public Label quantityLabel;
+	private PlayerInventoryController _inv;
 
-	// TODO: Convert Variants to int in PlayerInventoryController.cs
-	public int ItemID = -1;
-	public Variant Quantity = 0;
-	public int Index = -1;
+	public int itemID = -1;
+	public int quantity = 0;
+	public int index = -1;
 
 
 	public override void _Ready() {
-		_Inv = GetNode<PlayerInventoryController>("../..") as PlayerInventoryController;
-		Icon = GetNode("Icon") as TextureRect;
-		QuantityLabel = GetNode("Quantity") as Label;
+		_inv = GetNode<PlayerInventoryController>("../..") as PlayerInventoryController;
+		icon = GetNode("Icon") as TextureRect;
+		quantityLabel = GetNode("Quantity") as Label;
 	}
 
 
 	private void OnButtonGuiInput(InputEvent @event) {
 		if (@event is InputEventMouseButton keyEvent && keyEvent.Pressed) {
 			if (keyEvent.ButtonIndex == MouseButton.Left) {
-				_Inv.SelectItem((int)ItemID);
+				_inv.SelectItem((int)itemID);
 			}
 		}
 	}
 
 
-	public void UpdateSlot(Variant itemID, Variant itemQuantity, int itemIndex) {
-		ItemID = (int)itemID;
-		Quantity = itemQuantity;
-		Index = itemIndex;
+	public void UpdateSlot(Variant _receivedItemID, Variant _itemQuantity, int _itemIndex) {
+		itemID = (int)_receivedItemID;
+		quantity = (int)_itemQuantity;
+		index = _itemIndex;
 
-		GD.Print(ItemID);
+		GD.Print(itemID);
 
-		// If there is no item, clear texture
-		if (ItemID == -1) {
-			Icon.Texture = null;
+		if (itemID == -1) {
+			icon.Texture = null;
 			return;
 		}
 
-		var itemResource = ItemData.Items[ItemID] as Item;
+		var itemResource = ItemData.items[itemID] as Item;
 
 		Texture2D iconTexture = itemResource.IconTexture;
-		Icon.Texture = iconTexture;
+		icon.Texture = iconTexture;
 	}
 }

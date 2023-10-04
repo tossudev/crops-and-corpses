@@ -8,24 +8,29 @@ public partial class BuildingMode : Node2D
 
     public BuildingMenu buildingMenu;
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         SnapBuildingToGrid();
+    }
 
+    public override async void _Process(double delta)
+    {
         if (Input.IsActionJustPressed("Click"))
         {
+            await ToSignal(GetTree(), "physics_frame");
+
             if (collisions > 0)
             {
                 Debug.WriteLine("Someting is colliding with the building");
                 return;
             }
-
+            
             buildingMenu.Build();
         }
         else if (Input.IsActionPressed("ui_cancel"))
         {
             QueueFree();
-            Input.MouseMode = Input.MouseModeEnum.Visible;
+            //Input.MouseMode = Input.MouseModeEnum.Visible;
             buildingMenu.EnableBuildButton();
         }
 
@@ -75,6 +80,16 @@ public partial class BuildingMode : Node2D
     }
 
     private void _on_area_2d_area_exited(Area2D area)
+    {
+        collisions--;
+    }
+
+    private void _on_area_2d_body_entered(Node2D body)
+    {
+        collisions++;
+    }
+
+    private void _on_area_2d_body_exited(Node2D body)
     {
         collisions--;
     }

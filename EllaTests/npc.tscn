@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba8mb2whyo4dy"]
+
+[ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="1_3math"]
+[ext_resource type="Script" path="res://EllaTests/Scripts/npcControl.cs" id="1_koefy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0pyaw"]
+size = Vector2(111, 114)
+
+[node name="NPC" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_koefy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_0pyaw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3math")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

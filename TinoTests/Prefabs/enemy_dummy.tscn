@@ -8,7 +8,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o21vo"]
 
-[node name="EnemyDummy" type="StaticBody2D"]
+[node name="EnemyDummy" type="CharacterBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ljyvj")
@@ -20,6 +20,7 @@ debug_color = Color(0, 0.6, 0.701961, 0.12549)
 collision_layer = 4
 collision_mask = 32
 _healthComponent = NodePath("../HealthComponent")
+_knockback = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_o21vo")

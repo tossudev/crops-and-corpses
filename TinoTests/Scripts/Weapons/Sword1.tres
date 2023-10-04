@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://b6a2oqc16p5rs"]
+
+[ext_resource type="Script" path="res://TinoTests/Scripts/Weapons/Weapon.cs" id="1_f8oqu"]
+
+[resource]
+script = ExtResource("1_f8oqu")
+damage = 15.0
+knockback = 10.0
+cooldown = 0.5
+reach = 1.5
+speed = 0.0
+ranged = false
+ID = 0
+Name = ""
+StackSize = 1

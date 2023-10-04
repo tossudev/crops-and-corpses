@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://JanitaTests/Scripts/FieldHandler.cs" id="2_11v4x"]
 [ext_resource type="Shape2D" uid="uid://bpljkejss7d5s" path="res://JanitaTests/FieldShape.tres" id="3_gxfol"]
 
-[node name="Field" type="Sprite2D" node_paths=PackedStringArray("_col")]
+[node name="field" type="Sprite2D" node_paths=PackedStringArray("_col")]
 position = Vector2(221, 156)
 scale = Vector2(0.107437, 0.138234)
 texture = ExtResource("1_kume5")

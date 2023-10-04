@@ -3,40 +3,81 @@ using System;
 
 public partial class InventorySlot : Control {
 	
-	public TextureRect Icon;
-	public Label QuantityLabel;
-    
-	public int ItemID;
-	public int Quantity;
-	public int Index;
+	public TextureRect icon;
+	public Label quantityLabel;
 
-	[Export] public Texture2D emptySlotTexture;
+	public int itemID = -1;
+	public int quantity = 0;
+	public int index = -1;
+	private PlayerInventoryController _inv;
+	private bool hasItem = false;
+
 
 	public override void _Ready() {
-		Icon = GetNode("Icon") as TextureRect;
-		QuantityLabel = GetNode("Quantity") as Label;
+		_inv = GetNode<PlayerInventoryController>("../..") as PlayerInventoryController;
+		icon = GetNode("Icon") as TextureRect;
+		quantityLabel = GetNode("Quantity") as Label;
 	}
 
 
-	public void UpdateSlot(Variant itemID, Variant itemQuantity, int itemIndex) {
-		ItemID = (int)itemID;
-		Index = itemIndex;
+	private void OnButtonGuiInput(InputEvent @event) {
+		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed) {
+			if (mouseEvent.ButtonIndex == MouseButton.Left) {
+				ClickLeft();
+			}
+		}
+	}
 
-		if (ItemID == -1)
-		{
-			// Slot is empty
-			Icon.Texture = emptySlotTexture;
-			QuantityLabel.Text = "";
-			return;
+
+	private void ClickLeft() {
+		// Player deselected item from hand
+		if (_inv.isItemSelected && !hasItem) {
+			_inv.AddItem(index);
+		}
+
+		// Player selects new item
+		else if (!_inv.isItemSelected && hasItem) {
+			_inv.SelectItem(itemID, quantity);
+			_inv.RemoveAtIndex(index);
+		}
+
+		// Player has item and presses new item
+		else if (_inv.isItemSelected && hasItem) {
+			if (DoItemsMatch()) {
+				_inv.AddItem(index);
+			}
+		}
+	}
+
+	private bool DoItemsMatch() {
+		if (itemID == _inv.selectedItemID) {
+			return true;
 		}
 		
-		Quantity = (int)itemQuantity;
+		return false;
+	}
 
-		var itemResource = ItemData.Items[ItemID];
+
+	public void UpdateSlot(int _receivedItemID, int _itemQuantity, int _itemIndex) {
+		itemID = _receivedItemID;
+		quantity = _itemQuantity;
+		index = _itemIndex;
+
+		// GD.Print(itemID);
+
+		if (itemID == -1) {
+			hasItem = false;
+
+			icon.Texture = null;
+			quantityLabel.Text = "";
+			return;
+		}
+
+		hasItem = true;
+		var itemResource = ItemData.items[itemID] as Item;
 
 		Texture2D iconTexture = itemResource.IconTexture;
-		Icon.Texture = iconTexture;
-
-		QuantityLabel.Text = Quantity.ToString();
+		icon.Texture = iconTexture;
+		quantityLabel.Text = quantity.ToString();
 	}
 }

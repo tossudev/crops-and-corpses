@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsb8od2mcpg2x"]
+[gd_scene load_steps=3 format=3 uid="uid://bsb8od2mcpg2x"]
 
 [ext_resource type="Script" path="res://scripts/ui/PlayerInventoryController.cs" id="1_kcr62"]
+[ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="2_pvric"]
 
 [node name="PlayerInventory" type="Control"]
 layout_mode = 3
@@ -20,3 +21,30 @@ offset_bottom = 1024.0
 theme_override_constants/h_separation = 72
 theme_override_constants/v_separation = 72
 columns = 10
+
+[node name="SelectedItem" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="SelectedItem"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 56.0
+mouse_filter = 2
+texture = ExtResource("2_pvric")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Quantity" type="Label" parent="SelectedItem"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 2

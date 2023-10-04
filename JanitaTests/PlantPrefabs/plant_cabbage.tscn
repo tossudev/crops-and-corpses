@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://luqdfx7qh2jl"]
+
+[ext_resource type="Script" path="res://JanitaTests/Scripts/Plant.cs" id="1_pql4g"]
+[ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://JanitaTests/Images/dirttemp.jpg" id="2_60e82"]
+[ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://JanitaTests/Images/sprouttemp.png" id="3_nmumy"]
+[ext_resource type="Texture2D" uid="uid://dvhrkxcw50l7s" path="res://JanitaTests/Images/wheattemp.png" id="4_m3rrw"]
+[ext_resource type="Shape2D" uid="uid://c1m7w77dq4xvv" path="res://JanitaTests/PlantShape.tres" id="5_4dpox"]
+
+[node name="plant_cabbage" type="Node2D" node_paths=PackedStringArray("_col")]
+scale = Vector2(2, 2)
+script = ExtResource("1_pql4g")
+_plantType = 1
+_seedName = "cabbage seed"
+_description = "Yuck!"
+_growthTime = 20.0
+_seedTexture = ExtResource("2_60e82")
+_sproutTexture = ExtResource("3_nmumy")
+_plantTexture = ExtResource("4_m3rrw")
+_col = NodePath("Area2D")
+_maxCycles = 3
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = ExtResource("5_4dpox")
+
+[connection signal="input_event" from="Area2D" to="." method="InteractWithPlant"]

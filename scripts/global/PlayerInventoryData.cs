@@ -20,12 +20,19 @@ public partial class PlayerInventoryData : Node {
         dummyItem.Add("ID", 0);
         dummyItem.Add("Quantity", 5);
 
-        
-        for (int i = 0; i < 20; i++) {
-            PlayerInventory.Add(emptyItem);
-        }
+        var dummyItem2 = new Godot.Collections.Dictionary<string, Variant>();
+        dummyItem2.Add("ID", 1);
+        dummyItem2.Add("Quantity", 5);
+
+
         for (int i = 0; i < 10; i++) {
             PlayerInventory.Add(dummyItem);
+        }
+        for (int i = 0; i < 5; i++) {
+            PlayerInventory.Add(dummyItem2);
+        }
+        for (int i = 0; i < 15; i++) {
+            PlayerInventory.Add(emptyItem);
         }
 
         // GD.Print(PlayerInventory);

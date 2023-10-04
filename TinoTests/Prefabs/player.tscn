@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://TinoTests/Scripts/PlayerController.cs" id="1_y7bta"]
 [ext_resource type="PackedScene" uid="uid://dnjrwx23lwt2g" path="res://TinoTests/Components/weapon.tscn" id="2_00eh7"]
 [ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="2_jvd4n"]
-[ext_resource type="Resource" uid="uid://dsa6q3jkek4am" path="res://TinoTests/Scripts/Weapons/Bow1.tres" id="3_cxbqb"]
+[ext_resource type="Resource" uid="uid://b6a2oqc16p5rs" path="res://TinoTests/Scripts/Weapons/Sword1.tres" id="3_mn40s"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://TinoTests/Components/health_component.tscn" id="3_wuvdk"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://TinoTests/Components/hitbox_component.tscn" id="4_sa7m5"]
 
@@ -24,7 +24,7 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="Weapon" parent="." instance=ExtResource("2_00eh7")]
-_weapon = ExtResource("3_cxbqb")
+_weapon = ExtResource("3_mn40s")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_wuvdk")]
 

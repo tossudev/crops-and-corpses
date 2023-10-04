@@ -22,7 +22,7 @@ shape = SubResource("CircleShape2D_upju1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.19209e-07, 5.96046e-08)
-scale = Vector2(4, 4)
+scale = Vector2(10, 1)
 texture = SubResource("CanvasTexture_nk13s")
 
 [node name="Lifetime" type="Timer" parent="."]

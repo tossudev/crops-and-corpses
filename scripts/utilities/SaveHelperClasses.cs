@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 
 [System.Serializable]
 public partial class RawInventoryItem : GodotObject
@@ -7,32 +8,31 @@ public partial class RawInventoryItem : GodotObject
     public string name;
     public int id;
     public int quantity;
-
-    public Godot.Collections.Dictionary GetFullDictionary()
-    {
-        Godot.Collections.Dictionary fullDictionary = new ()
-        {
-            {nameof(name), name},
-            {nameof(quantity), quantity}
-        };
-
-        return fullDictionary;
-    }
 }
 
 [System.Serializable]
 public partial class RawSaveData : GodotObject
 {
+    public const string ITEM_NAME_KEY = "name";
+    public const string ITEM_QUANTITY_KEY = "quantity";
+    
     public List<RawInventoryItem> inventoryItems = new ();
     
-    public Godot.Collections.Dictionary GetFullDictionary()
+    public Dictionary GetFullDataDictionary()
     {
-        Godot.Collections.Dictionary fullDictionary = new();
+        Dictionary fullDictionary = new();
 
+        Dictionary inventoryItemsDict = new();
         inventoryItems.ForEach(item =>
         {
-            fullDictionary.Add(item.id, item.quantity);
+            inventoryItemsDict.Add(item.id, new Dictionary()
+            {
+                { ITEM_NAME_KEY, item.name },
+                { ITEM_QUANTITY_KEY, item.quantity },
+            });
         });
+        
+        fullDictionary.Add(SaveData.INVENTORY_ITEMS_KEY,inventoryItemsDict);
 
         return fullDictionary;
     }

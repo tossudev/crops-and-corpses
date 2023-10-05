@@ -1,14 +1,20 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using FileAccess = Godot.FileAccess;
+using Dictionary = Godot.Collections.Dictionary;
+using Array = Godot.Collections.Array;
 
 [GlobalClass]
 public partial class SaveData : Node
 {
-    const string SAVEFOLDERPATH = "user://saves";
+    const string SAVEFOLDERNAME = "saves";
     const string SAVEFILENAME = "PlayerData.txt";
+    static string directoryPath = "";
+    static string fullPath = "";
+    
+    public const string INVENTORY_ITEMS_KEY = "inventoryItems";
     
     //---------Modifiable at runtime----------------------
 
@@ -16,23 +22,89 @@ public partial class SaveData : Node
     
     //---------/Modifiable at runtime----------------------
 
+    public override void _Ready()
+    {
+        base._Ready();
+        directoryPath = ProjectSettings.GlobalizePath($"user://{SAVEFOLDERNAME}");
+        fullPath = directoryPath.PathJoin(SAVEFILENAME);
+        Load();
+    }
+
     public static void Save()
     {
-        DirAccess.MakeDirAbsolute(SAVEFOLDERPATH);
+        if (string.IsNullOrEmpty(directoryPath))
+        {
+            GD.PrintErr("Save path not set, can't save game!");
+            return;
+        }
+
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
         
         var rawSaveData = new RawSaveData()
         {
             inventoryItems = currentInventoryItems
         };
-
         
-        Godot.Collections.Dictionary saveDictionary = rawSaveData.GetFullDictionary();
+        Dictionary saveDictionary = rawSaveData.GetFullDataDictionary();
         
         string json = Json.Stringify(saveDictionary, "\t");
 
         
-        using var saveFile = FileAccess.Open($"{SAVEFOLDERPATH}/{SAVEFILENAME}", FileAccess.ModeFlags.Write);
+        try
+        {
+            File.WriteAllText(fullPath, json);
+        }
+        catch (Exception e)
+        {
+            GD.PrintErr(e.Message);
+        }
+    }
+    
+    public static void Load()
+    {
+        if (!File.Exists(fullPath)) return;
+
+        string data = "";
         
-        saveFile.StoreString(json);
+        try
+        {
+            data = File.ReadAllText(fullPath);
+        }
+        catch (Exception e)
+        {
+            GD.PrintErr(e.Message);
+        }
+
+        Json loadedJson = new();
+        
+        Error error = loadedJson.Parse(data);
+
+        if (error != Error.Ok)
+        {
+            GD.PrintErr(error);
+            
+            return;
+        }
+
+        Dictionary loadedData = (Dictionary) loadedJson.Data;
+
+        currentInventoryItems.Clear();
+
+        var inventoryItemsRaw = (Dictionary)loadedData[INVENTORY_ITEMS_KEY];
+        
+        foreach (var rawitem in inventoryItemsRaw)
+        {
+            Dictionary itemValue = (Dictionary)rawitem.Value;
+            
+            currentInventoryItems.Add(new RawInventoryItem()
+            {
+                id = (int)rawitem.Key,
+                name = (string) itemValue[RawSaveData.ITEM_NAME_KEY],
+                quantity = (int) itemValue[RawSaveData.ITEM_QUANTITY_KEY]
+            });
+        }
     }
 }

@@ -61,6 +61,8 @@ public partial class PlayerInventoryData : Node {
         // Obsolete until fixed?
         Item itemToAdd = ItemData.GetItemById(itemId);
         
+        if (itemToAdd == null) return false;
+        
         if (SaveData.currentInventoryItems.Exists(rawItem => rawItem.id == itemId))
         {
             SaveData.currentInventoryItems.Find(rawItem => rawItem.id == itemId)

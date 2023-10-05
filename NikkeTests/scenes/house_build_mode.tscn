@@ -8,6 +8,7 @@ size = Vector2(126, 126)
 
 [node name="House" type="Node2D"]
 top_level = true
+scale = Vector2(2, 2)
 script = ExtResource("1_s0glh")
 
 [node name="House" type="Sprite2D" parent="."]

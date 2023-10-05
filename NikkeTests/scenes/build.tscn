@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://f5m7wypxd5t7"]
+[gd_scene load_steps=9 format=3 uid="uid://f5m7wypxd5t7"]
 
 [ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMenu.cs" id="1_7c7gm"]
 [ext_resource type="PackedScene" uid="uid://bgyv0c8xt1fd4" path="res://scenes/town.tscn" id="2_k6mk0"]
 [ext_resource type="Texture2D" uid="uid://gx3rxc18ic1u" path="res://NikkeTests/images/farm_plot.jpg" id="3_4ha78"]
+[ext_resource type="PackedScene" uid="uid://c6him5i1nm12j" path="res://NikkeTests/scenes/farm_plot.tscn" id="3_poxnh"]
 [ext_resource type="Texture2D" uid="uid://dskeqa44gjbje" path="res://NikkeTests/images/house.png" id="4_lb8gx"]
+[ext_resource type="PackedScene" uid="uid://c5f1jy5vlj4sd" path="res://NikkeTests/scenes/farm_plot_build_mode.tscn" id="4_y5rv6"]
+[ext_resource type="PackedScene" uid="uid://3ct83j0jgteb" path="res://NikkeTests/scenes/house.tscn" id="5_iefcv"]
+[ext_resource type="PackedScene" uid="uid://ceal2xj0w1t17" path="res://NikkeTests/scenes/house_build_mode.tscn" id="6_d0ywf"]
 
 [node name="Node_2D" type="Node2D"]
 
@@ -11,7 +15,7 @@
 
 [node name="Buildings" type="Node2D" parent="."]
 
-[node name="BuildingMenu" type="ScrollContainer" parent="."]
+[node name="BuildingMenu" type="ScrollContainer" parent="." node_paths=PackedStringArray("_buildings", "_buildButton")]
 visible = false
 custom_minimum_size = Vector2(300, 250)
 anchors_preset = 8
@@ -27,6 +31,14 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 script = ExtResource("1_7c7gm")
+_buildings = NodePath("../Buildings")
+_buildButton = NodePath("../BuildButton")
+_farmPlotScene = ExtResource("3_poxnh")
+_farmPlotGhostScene = ExtResource("4_y5rv6")
+_houseScene = ExtResource("5_iefcv")
+_houseGhostScene = ExtResource("6_d0ywf")
+_farmPlotIcon = ExtResource("3_4ha78")
+_houseIcon = ExtResource("4_lb8gx")
 
 [node name="Control" type="Control" parent="BuildingMenu"]
 visible = false

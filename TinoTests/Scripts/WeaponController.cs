@@ -14,6 +14,7 @@ public partial class WeaponController : Node2D
     private float _damage;
     private float _knockback;
     private float _cooldown;
+    private EffectType _effect;
     private float _reach;
     private bool _ranged;
     private float _speed;
@@ -26,6 +27,7 @@ public partial class WeaponController : Node2D
         _damage = (float)_weapon.Get("damage");
         _knockback = (float)_weapon.Get("knockback");
         _cooldown = (float)_weapon.Get("cooldown");
+        _effect = (EffectType)(int)_weapon.Get("effect");
         _reach = (float)_weapon.Get("reach");
         _speed = (float)_weapon.Get("speed");
         _ranged = (bool)_weapon.Get("ranged");
@@ -50,7 +52,8 @@ public partial class WeaponController : Node2D
         _attack = new Attack
         {
             damage = _damage,
-            knockback = _knockback
+            knockback = _knockback,
+            effect = _effect
         };
 
         if (_ranged && !_isDrawing)

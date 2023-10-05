@@ -29,7 +29,7 @@ public partial class SpawnScriptTest : Node2D
 		dayTimeCheck = GetNode<TimeManager>("SunlightContainer");
 		spawnDelay.Start();
 	}
-    public override void _UnhandledInput(InputEvent @event)
+   /*  public override void _UnhandledInput(InputEvent @event)
     {
         if(@event is InputEventMouseButton mouseEvent)
 		{
@@ -38,7 +38,6 @@ public partial class SpawnScriptTest : Node2D
 				CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
 				prefab.Position = mouseEvent.Position;
 				this.AddChild(prefab);
-				
 				isNightOrDay = dayTimeCheck.dayTime;
 				isNightOrDayString = isNightOrDay ? "DayTime" : "NighTime";
 				if(isNightOrDayString == "DayTime")
@@ -51,7 +50,7 @@ public partial class SpawnScriptTest : Node2D
 				}
 			}
 		}
-    }
+    } */
 	  public override void _Process(double delta)
     {
        // isNightOrDay = dayTimeCheck.returnTimeOfDay(isNightOrDay);

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dc4ej25ib11kd"]
+
+[ext_resource type="Texture2D" uid="uid://c33dhuxrk17ie" path="res://ReimaTests/Crafting/MockupSprites/log.png" id="1_36yrn"]
+[ext_resource type="Script" path="res://scripts/Item.cs" id="1_74lfy"]
+
+[resource]
+script = ExtResource("1_74lfy")
+ID = 3
+Name = "Log"
+IconTexture = ExtResource("1_36yrn")
+StackSize = 5

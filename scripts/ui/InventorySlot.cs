@@ -25,6 +25,9 @@ public partial class InventorySlot : Control {
 			if (mouseEvent.ButtonIndex == MouseButton.Left) {
 				ClickLeft();
 			}
+			else if (mouseEvent.ButtonIndex == MouseButton.Right) {
+				ClickRight();
+			}
 		}
 	}
 
@@ -46,8 +49,21 @@ public partial class InventorySlot : Control {
 			if (DoItemsMatch()) {
 				_inv.AddItem(index);
 			}
+
+			else {
+				_inv.SwapItems(index, itemID, quantity);
+			}
 		}
 	}
+
+
+	private void ClickRight() {
+		// Player takes one item from stack
+		if (!_inv.isItemSelected && hasItem) {
+			_inv.SelectSingleItem(index, itemID, quantity);
+		}
+	}
+
 
 	private bool DoItemsMatch() {
 		if (itemID == _inv.selectedItemID) {

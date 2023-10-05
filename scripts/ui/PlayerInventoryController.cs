@@ -10,10 +10,11 @@ public partial class PlayerInventoryController : Control {
 	public bool isItemSelected = false;
 	public int selectedItemID = -1;
 	public int selectedItemQuantity = 0;
+	public bool isOpen = false;
 
 	private string slotNodePath = "res://scenes/ui/inventory_slot.tscn";
 	private Control _selectedItemNode;
-	private const int SELECTED_ITEM_OFFSET = 32;
+	private const int SELECTED_ITEM_OFFSET = 64;
 
 
 	public override void _Ready() {
@@ -27,6 +28,15 @@ public partial class PlayerInventoryController : Control {
     public override void _Process(double delta) {
         _UpdateSelectedItem();
     }
+
+
+	public override void _Input(InputEvent @event) {
+		if (@event.IsActionPressed("toggle_inventory")) {
+			isOpen = !isOpen;
+			Visible = isOpen;
+		}
+	}
+
 
     private void _InitInventory() {
 
@@ -110,6 +120,30 @@ public partial class PlayerInventoryController : Control {
 		PlayerInventoryData.PlayerInventory[_index] = _emptyItem;
 		Control slotToRemove = GetNode<Control>("InventoryGrid").GetChild<Control>(_index);
 		((InventorySlot)slotToRemove).UpdateSlot(-1, 0, _index);
+	}
+
+
+	public void SelectSingleItem(int index, int itemID, int quantity) {
+		int _remainingQuantity = quantity - 1;
+
+		if (_remainingQuantity >= 1) {
+			SelectItem(itemID, _remainingQuantity);
+			RemoveAtIndex(index);
+			AddItem(index);
+		}
+		else {
+			RemoveAtIndex(index);
+		}
+
+		SelectItem(itemID, 1);
+	}
+
+
+	public void SwapItems(int index, int itemID, int quantity) {
+		SelectItem(selectedItemID, selectedItemQuantity);
+		RemoveAtIndex(index);
+		AddItem(index);
+		SelectItem(itemID, quantity);
 	}
 
 

@@ -4,4 +4,7 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>CropsandCorpses</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="scripts\ui\crafting\" />
+  </ItemGroup>
 </Project>

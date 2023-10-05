@@ -1,11 +1,17 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://wwrmxi0srnix"]
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://wwrmxi0srnix"]
 
-[ext_resource type="Texture2D" uid="uid://wwuloa5jv6f" path="res://assets/placeholder/quick_grid.png" id="1_7le44"]
-[ext_resource type="Script" path="res://scripts/Item.cs" id="2_icnyi"]
+[ext_resource type="Texture2D" uid="uid://ca775acsl4hmt" path="res://ReimaTests/Crafting/MockupSprites/sword.png" id="1_1a0mk"]
+[ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="2_jbvld"]
+[ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_1n6e3"]
+
+[sub_resource type="Resource" id="Resource_ppcw7"]
+script = ExtResource("3_1n6e3")
+quantity = 2
 
 [resource]
-script = ExtResource("2_icnyi")
-ID = 1
-Name = "Dummy Item 2"
-IconTexture = ExtResource("1_7le44")
-StackSize = 10
+script = ExtResource("2_jbvld")
+ID = 0
+Name = "DummyItem2"
+IconTexture = ExtResource("1_1a0mk")
+StackSize = 8
+craftingRequirements = Array[Object]([SubResource("Resource_ppcw7")])

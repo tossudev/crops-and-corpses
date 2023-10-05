@@ -1,49 +1,37 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class ItemData : Node {
 
-    [Export] public string itemsDirectory = "res://assets/resources/items/";
+    [Export] public string ItemsDirectory = "res://assets/resources/items/";
     public static Godot.Collections.Array<Item> items = new Godot.Collections.Array<Item>();
 
     public override void _Ready() {
-        LoadItemsFromPath();
-        // SortItemsUsingID();
-        // GD.Print(Items);
+        _LoadItemsFromPath();
     }
 
-    private void LoadItemsFromPath() {
+    void _LoadItemsFromPath() {
 
-        using var dir = DirAccess.Open(itemsDirectory);
-
+        using var dir = DirAccess.Open(ItemsDirectory);
         // Open item directory
         if (dir != null) {
             dir.ListDirBegin();
-            string _fileName = dir.GetNext();
+            string fileName = dir.GetNext();
 
             // Add all items from directory to resource array
-            while (_fileName != "") {
-                string _filePath = itemsDirectory + _fileName;
-                var _resource = (Item)GD.Load(_filePath);
-                items.Add(_resource as Item);
+            while (fileName != "") {
+                string filePath = ItemsDirectory + fileName;
+                var resource = (Item)GD.Load(filePath);
+                items.Add(resource as Item);
 
-                _fileName = dir.GetNext();
+                fileName = dir.GetNext();
             }
         }
     }
 
-
-    private void SortItemsUsingID() {
-    //     Item item = Items[0];
-        // Items = Items.Sort();
-
-        // IEnumerable<Item> query = Items.OrderBy(ID => item.ID);
-
-        // foreach (ItemData item in query) {
-        //     GD.Print("{0}", item.ID);
-        // }
-    
+    public static Item GetItemById(int id)
+    {
+        return items.First(item => item.ID == id);
     }
-
-
 }

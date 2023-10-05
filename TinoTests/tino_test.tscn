@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c11t6t2lyjvre" path="res://TinoTests/Prefabs/test_background.tscn" id="1_jagwy"]
 [ext_resource type="PackedScene" uid="uid://cywktxf8v0kje" path="res://TinoTests/Prefabs/enemy_dummy.tscn" id="2_t1hbh"]
-[ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://TinoTests/Prefabs/player.tscn" id="2_wnkdn"]
+[ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_wnkdn"]
 
 [node name="World" type="Node2D"]
 

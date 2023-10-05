@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=3 format=3 uid="uid://bgyv0c8xt1fd4"]
 
 [ext_resource type="Texture2D" uid="uid://wwuloa5jv6f" path="res://assets/placeholder/quick_grid.png" id="1_0cqac"]
+[ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_nnncm"]
 
 [node name="Town" type="Node2D"]
 
@@ -10,9 +11,12 @@
 self_modulate = Color(1, 1, 1, 0.313726)
 texture_filter = 1
 texture_repeat = 2
-scale = Vector2(4, 4)
+scale = Vector2(8, 8)
 texture = ExtResource("1_0cqac")
 region_enabled = true
 region_rect = Rect2(0, 0, 512, 512)
 
 [node name="Objects" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("2_nnncm")]
+_speed = 300

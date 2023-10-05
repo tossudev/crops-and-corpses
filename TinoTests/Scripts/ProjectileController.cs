@@ -10,15 +10,15 @@ public partial class ProjectileController : Node2D
     public Attack attack;
     public float speed;
     public float power;
-    private float _lifetime;
+    private float _airtime;
     private float _despawnTime;
 
     public void Init()
     {
-        _lifetime = (float)_projectile.Get("lifetime");
-        _despawnTime = (float)_projectile.Get("_despawnTime");
+        _airtime = (float)_projectile.Get("airtime");
+        _despawnTime = (float)_projectile.Get("despawnTime");
         this.TopLevel = true;
-        _lifetimeTimer.Start(_lifetime);
+        _lifetimeTimer.Start(_airtime);
     }
 
     public override void _PhysicsProcess(double delta)

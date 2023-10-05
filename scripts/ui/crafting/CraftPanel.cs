@@ -2,14 +2,14 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-public partial class CraftPanel : Node
+public partial class CraftPanel : Control
 {
 	[Export] public Label itemLabel;
 	[Export] public TextureRect itemImage;
     
 	[Export] public InventorySlot[] requiredResSlots;
 	
-	[Export] public TextEdit amountToCraft;
+	[Export] public TextEdit AmountToCraftTextEdit;
 	[Export] public Button craftButton;
 
 	public Item currentItemToBeCrafted;
@@ -18,21 +18,25 @@ public partial class CraftPanel : Node
 	
 	
 	// Called when the node enters the scene tree for the first time.
-    public static CraftPanel instance;
+    public const string GROUP_NAME = "CraftPanel";
     public override void _Ready()
 	{
-		instance = this;
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		base._UnhandledInput(@event);
-		//ClosePanel();
+
+		if (@event is InputEventMouseButton or InputEventKey
+			&& @event.IsPressed())
+		{
+			ClosePanel();
+		}
 	}
 
 	public void OpenPanel(Item craftItem)
 	{
-		//Visible = true;
+		Visible = true;
 		currentItemToBeCrafted = craftItem;
 
 		itemLabel.Text = currentItemToBeCrafted.Name.ToUpper();
@@ -59,10 +63,26 @@ public partial class CraftPanel : Node
 
 	public void ClosePanel()
 	{
-		//Visible = false;
+		Visible = false;
 	}
-	
-    bool TryCraft(int amount)
+
+	public void _on_craft_button_pressed()
+	{
+		int amountToCraft = 0;
+		
+		try
+		{
+			amountToCraft = int.Parse(AmountToCraftTextEdit.Text);
+		}
+		catch (Exception e)
+		{
+			GD.PrintErr("Not a valid number of items to craft");
+		}
+		
+		TryCraft(Mathf.Max(1, amountToCraft));
+	}
+
+	bool TryCraft(int amount)
 	{
 		try
 		{

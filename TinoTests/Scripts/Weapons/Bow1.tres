@@ -14,3 +14,4 @@ drawTime = 1.0
 ID = 0
 Name = ""
 StackSize = 1
+craftingRequirements = null

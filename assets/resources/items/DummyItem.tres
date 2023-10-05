@@ -9,4 +9,4 @@ ID = 1
 Name = "Dummy Item"
 IconTexture = ExtResource("1_f6bkc")
 StackSize = 10
-craftingRequirements = null
+craftingRequirements = Array[Object]([])

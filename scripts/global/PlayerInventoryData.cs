@@ -38,7 +38,7 @@ public partial class PlayerInventoryData : Node {
         // GD.Print(PlayerInventory);
 
         //TestAsyncAdd(new CancellationTokenSource());
-        TestAsyncRemove(new CancellationTokenSource());
+        //TestAsyncRemove(new CancellationTokenSource());
 
     }
 

@@ -14,7 +14,15 @@ public partial class InventorySlot : Control {
 
 
 	public override void _Ready() {
-		_inv = GetNode<PlayerInventoryController>("../..") as PlayerInventoryController;
+		try
+		{
+			_inv = GetNode<PlayerInventoryController>("../..") as PlayerInventoryController;
+		}
+		catch (Exception e)
+		{
+			GD.Print("No inventory controller for InventorySlot");
+		}
+		
 		icon = GetNode("Icon") as TextureRect;
 		quantityLabel = GetNode("Quantity") as Label;
 	}

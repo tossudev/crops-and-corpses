@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cp7b2wy8o2pqk" path="res://ReimaTests/Crafting/MockupSprites/pepper.png" id="2_eq3wm"]
 [ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory_slot.tscn" id="3_ifnhu"]
 
-[node name="Panel" type="Panel" node_paths=PackedStringArray("itemLabel", "itemImage", "requiredResSlots", "amountToCraft", "craftButton")]
+[node name="Panel" type="Panel" node_paths=PackedStringArray("itemLabel", "itemImage", "requiredResSlots", "craftButton")]
 top_level = true
 offset_right = 400.0
 offset_bottom = 400.0
@@ -14,7 +14,6 @@ script = ExtResource("1_iablg")
 itemLabel = NodePath("FlowContainer/Label")
 itemImage = NodePath("FlowContainer/HBoxContainer3/TextureRect")
 requiredResSlots = [NodePath("FlowContainer/HBoxContainer/InventorySlot"), NodePath("FlowContainer/HBoxContainer/InventorySlot2"), NodePath("FlowContainer/HBoxContainer/InventorySlot3"), NodePath("FlowContainer/HBoxContainer/InventorySlot4"), NodePath("FlowContainer/HBoxContainer/InventorySlot5"), NodePath("FlowContainer/HBoxContainer/InventorySlot6")]
-amountToCraft = NodePath("FlowContainer/HBoxContainer2/AmountToCraft")
 craftButton = NodePath("FlowContainer/HBoxContainer2/CraftButton")
 
 [node name="FlowContainer" type="FlowContainer" parent="."]
@@ -61,11 +60,13 @@ layout_mode = 2
 alignment = 1
 
 [node name="InventorySlot" parent="FlowContainer/HBoxContainer" instance=ExtResource("3_ifnhu")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 2
 
 [node name="InventorySlot2" parent="FlowContainer/HBoxContainer" instance=ExtResource("3_ifnhu")]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 2
@@ -107,7 +108,10 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 placeholder_text = "1"
 caret_blink = true
+caret_blink_interval = 0.7
 
 [node name="CraftButton" type="Button" parent="FlowContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Craft"
+
+[connection signal="pressed" from="FlowContainer/HBoxContainer2/CraftButton" to="." method="_on_craft_button_pressed"]

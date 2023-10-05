@@ -5,7 +5,7 @@ using System.Reflection;
 public partial class ZombieChase : States
 {
 	[Export] public CharacterBody2D zombie;
-	[Export] public float move_speed = 50.0f;
+	[Export] public float move_speed = 150.0f;
 
 	// private Attack attack;
 	private CharacterBody2D player;

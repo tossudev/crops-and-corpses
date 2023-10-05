@@ -4,7 +4,7 @@ using System;
 public partial class ZombieIdle : States
 {
 	[Export] public CharacterBody2D zombie;
-	[Export] public float move_speed = 10.0f;
+	[Export] public float move_speed = 100.0f;
 
 	private Vector2 move_direction = Vector2.Zero;
 	private double roam_time;

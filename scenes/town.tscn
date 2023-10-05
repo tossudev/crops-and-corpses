@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=6 format=3 uid="uid://bgyv0c8xt1fd4"]
 
 [ext_resource type="Texture2D" uid="uid://wwuloa5jv6f" path="res://assets/placeholder/quick_grid.png" id="1_0cqac"]
 [ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://NikkeTests/scenes/building_menu.tscn" id="1_w3klu"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_nnncm"]
 [ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/player_inventory.tscn" id="3_tp6xx"]
+[ext_resource type="PackedScene" uid="uid://c6kw7kvyr5phr" path="res://LilianTests/Prefabs/roaming_zombie.tscn" id="5_02ui3"]
 
 [node name="Town" type="Node2D"]
 
@@ -20,7 +21,6 @@ region_rect = Rect2(0, 0, 512, 512)
 
 [node name="Buildings" type="Node2D" parent="."]
 position = Vector2(6.10352e-05, 6.10352e-05)
-scale = Vector2(1, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_nnncm")]
 
@@ -42,6 +42,16 @@ offset_bottom = 100.0
 theme_override_font_sizes/font_size = 32
 text = "Press 'E' to toggle inventory"
 
-[node name="BuildingMenu" parent="Overlay" node_paths=PackedStringArray("_buildings") instance=ExtResource("1_w3klu")]
-scale = Vector2(1, 1)
-_buildings = NodePath("../../Buildings")
+[node name="BuildingMenu" parent="Overlay" instance=ExtResource("1_w3klu")]
+_farmPlotScene = null
+_farmPlotGhostScene = null
+_houseScene = null
+_houseGhostScene = null
+_farmPlotIcon = null
+_houseIcon = null
+
+[node name="Zombie1" parent="." instance=ExtResource("5_02ui3")]
+position = Vector2(-773, 439)
+
+[node name="Zombie2" parent="." instance=ExtResource("5_02ui3")]
+position = Vector2(-730, -633)

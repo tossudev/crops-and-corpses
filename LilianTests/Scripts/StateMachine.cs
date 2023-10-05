@@ -60,6 +60,6 @@ public partial class StateMachine : Node
         newState.Enter();
         current_state = newState;
 
-        GD.Print("Current state: " + current_state.Name);
+        //GD.Print("Current state: " + current_state.Name);
     }
 }

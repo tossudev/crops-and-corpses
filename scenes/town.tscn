@@ -9,6 +9,8 @@
 
 [node name="Town" type="Node2D"]
 
+[node name="DayNightCycle" parent="." instance=ExtResource("6_e6ek5")]
+
 [node name="PlaceholderGrid" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.313726)
 texture_filter = 1
@@ -56,5 +58,3 @@ position = Vector2(-773, 439)
 
 [node name="Zombie2" parent="." instance=ExtResource("5_02ui3")]
 position = Vector2(-730, -633)
-
-[node name="Node2D" parent="." instance=ExtResource("6_e6ek5")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8bx46w1qix2q"]
+[gd_scene load_steps=10 format=3 uid="uid://c8bx46w1qix2q"]
 
 [ext_resource type="Script" path="res://TinoTests/Scripts/PlayerController.cs" id="1_y7bta"]
 [ext_resource type="PackedScene" uid="uid://dnjrwx23lwt2g" path="res://TinoTests/Components/weapon.tscn" id="2_00eh7"]
@@ -11,10 +11,14 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xqb0"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_efott"]
+radius = 117.527
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_weapon") groups=["player"]]
 scale = Vector2(3.2, 3.2)
 script = ExtResource("1_y7bta")
 _weapon = NodePath("Weapon")
+_speed = 300
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -41,3 +45,10 @@ texture = ExtResource("2_jvd4n")
 scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_2xqb0")
 debug_color = Color(0, 0.6, 0.701961, 0.12549)
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_efott")

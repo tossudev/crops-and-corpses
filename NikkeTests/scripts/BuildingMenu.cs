@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.IO;
 
-public partial class BuildingMenu : ScrollContainer
+public partial class BuildingMenu : Control
 {
 	Building _farmPlot, _house;
 	Building _currentBuilding;
@@ -15,13 +15,24 @@ public partial class BuildingMenu : ScrollContainer
     List<Building> _buildingPrefabs;
 
     Node2D _ghostBuilding;
-	Node2D _buildings;
 
+    [Export]
+	Node2D _buildings;
+    [Export]
     Button _buildButton;
+    [Export]
+    ScrollContainer _buildMenu;
+    [Export]
+    Control _buildMenuControl;
+    [Export]
+    VBoxContainer _vBoxContainer;
+
+    [Export]
+    PackedScene _farmPlotScene, _farmPlotGhostScene, _houseScene, _houseGhostScene;
+    [Export]
+    Texture2D _farmPlotIcon, _houseIcon;
 
 	int _resources;
-
-    JsonArray _savedBuildings;
     string _savePath, _fileName;
 
     // Called when the node enters the scene tree for the first time.
@@ -30,22 +41,17 @@ public partial class BuildingMenu : ScrollContainer
         _savePath = ProjectSettings.GlobalizePath("user://saves/");
         _fileName = "buildings";
 
-        _savedBuildings = new JsonArray();
-
         _buildingPrefabs = new List<Building>();
 
-        _farmPlot = new Building(ResourceLoader.Load<PackedScene>("res://NikkeTests/scenes/farm_plot.tscn"), ResourceLoader.Load<PackedScene>("res://NikkeTests/scenes/farm_plot_build_mode.tscn"), 10, "Farm Plot", ResourceLoader.Load("res://NikkeTests/images/farm_plot.jpg") as Texture2D);
+        _farmPlot = new Building(_farmPlotScene, _farmPlotGhostScene, 10, "Farm Plot", _farmPlotIcon);
         _buildingPrefabs.Add(_farmPlot);
 
-        _house = new Building(ResourceLoader.Load<PackedScene>("res://NikkeTests/scenes/house.tscn"), ResourceLoader.Load<PackedScene>("res://NikkeTests/scenes/house_build_mode.tscn"), 40, "House", ResourceLoader.Load("res://NikkeTests/images/house.png") as Texture2D);
+        _house = new Building(_houseScene, _houseGhostScene, 40, "House", _houseIcon);
         _buildingPrefabs.Add(_house);
-
-        _buildings = GetNode("../Buildings") as Node2D;
-        _buildButton = GetNode("../BuildButton") as Button;
 
         _resources = 500;
 
-        CreateBuildMenu(); 
+        CreateBuildMenu();
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -53,7 +59,7 @@ public partial class BuildingMenu : ScrollContainer
 	{
         if (Input.IsActionJustPressed("ui_cancel"))
         {
-            Hide();
+            _buildMenu.Hide();
             _buildButton.ReleaseFocus();
             _buildButton.ButtonPressed = false;
         }
@@ -61,12 +67,12 @@ public partial class BuildingMenu : ScrollContainer
 
     private void CreateBuildMenu()
     {
-        Control _control = new Control();
-        AddChild(_control);
-        _control.CustomMinimumSize = new Vector2(300, 200);
+        //Control _control = new Control();
+        //_buildMenu.AddChild(_control);
+        _buildMenuControl.CustomMinimumSize = new Vector2(300, 200);
 
-        VBoxContainer _vBoxContainer = new VBoxContainer();
-        _control.AddChild(_vBoxContainer);
+        //VBoxContainer _vBoxContainer = new VBoxContainer();
+        //_control.AddChild(_vBoxContainer);
         _vBoxContainer.CustomMinimumSize = new Vector2(300, 400);
 
         foreach (Building _building in _buildingPrefabs)
@@ -105,11 +111,30 @@ public partial class BuildingMenu : ScrollContainer
         _loadButton.AddThemeFontSizeOverride("font_size", 40);
         _loadButton.ButtonUp += () => LoadBuildings(_savePath, _fileName);
 
-        _control.CustomMinimumSize = new Vector2(300, _vBoxContainer.GetMinimumSize().Y);
+        _buildMenuControl.CustomMinimumSize = new Vector2(300, _vBoxContainer.GetMinimumSize().Y + 20);
+    }
+
+    public JsonArray GetBuildings()
+    {
+        JsonArray _savedBuildings = new JsonArray();
+
+        foreach (Node2D node in _buildings.GetChildren())
+        {
+            JsonObject jsonObj = new JsonObject
+        {
+            { "name", node.GetChild(0).Name.ToString() },
+            { "x", node.Position.X },
+            { "y", node.Position.Y }
+        };
+
+            _savedBuildings.Add(jsonObj);
+        }
+
+        return _savedBuildings;
     }
 
     private void SaveBuildings(string path, string fileName)
-    {   
+    {
         try
         {
             if (!Directory.Exists(path))
@@ -117,24 +142,10 @@ public partial class BuildingMenu : ScrollContainer
                 Directory.CreateDirectory(path);
             }
 
-            _savedBuildings.Clear();
-
-            foreach (Node2D node in _buildings.GetChildren())
-            {
-                JsonObject jsonObj = new JsonObject
-            {
-                { "name", node.GetChild(0).Name.ToString() },
-                { "x", node.Position.X },
-                { "y", node.Position.Y }
-            };
-
-                _savedBuildings.Add(jsonObj);
-            }
-
             path = Path.Join(path, fileName);
-            File.WriteAllText(path, _savedBuildings.ToString());
+            File.WriteAllText(path, GetBuildings().ToString());
         }
-        catch(Exception ex) 
+        catch (Exception ex)
         {
             Debug.WriteLine(ex);
         }
@@ -152,34 +163,38 @@ public partial class BuildingMenu : ScrollContainer
         try
         {
             JsonArray _loadedBuildings = (JsonArray)JsonArray.Parse(File.ReadAllText(path));
-
-            foreach (Node2D node in _buildings.GetChildren())
-            {
-                node.QueueFree();
-            }
-
-            foreach (JsonObject jsonObject in _loadedBuildings)
-            {
-                if (jsonObject["name"].ToString() == "House")
-                {
-                    _currentBuilding = _house;
-                }
-                else if (jsonObject["name"].ToString() == "FarmPlot")
-                {
-                    _currentBuilding = _farmPlot;
-                }
-
-                int x = Int32.Parse(jsonObject["x"].ToString());
-                int y = Int32.Parse(jsonObject["y"].ToString());
-
-                Node2D _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;
-                _buildings.AddChild(_buildingScene);
-                _buildingScene.Position = new Vector2(x, y);
-            }
+            InstantiateBuildings(_loadedBuildings);
         }
         catch (Exception ex) 
         {
             Debug.WriteLine(ex);
+        }
+    }
+
+    public void InstantiateBuildings(JsonArray loadedBuildings)
+    {
+        foreach (Node2D node in _buildings.GetChildren())
+        {
+            node.QueueFree();
+        }
+
+        foreach (JsonObject jsonObject in loadedBuildings)
+        {
+            if (jsonObject["name"].ToString() == "House")
+            {
+                _currentBuilding = _house;
+            }
+            else if (jsonObject["name"].ToString() == "FarmPlot")
+            {
+                _currentBuilding = _farmPlot;
+            }
+
+            int x = Int32.Parse(jsonObject["x"].ToString());
+            int y = Int32.Parse(jsonObject["y"].ToString());
+
+            Node2D _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;
+            _buildings.AddChild(_buildingScene);
+            _buildingScene.Position = new Vector2(x, y);
         }
     }
 
@@ -208,11 +223,11 @@ public partial class BuildingMenu : ScrollContainer
 	{
         if (isToggledOn)
 		{
-			Show();
+			_buildMenu.Show();
 		}
 		else 
 		{
-			Hide();
+			_buildMenu.Hide();
 			_buildButton.ReleaseFocus();
         }
 	}

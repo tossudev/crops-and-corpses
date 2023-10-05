@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=5 format=3 uid="uid://bgyv0c8xt1fd4"]
 
 [ext_resource type="Texture2D" uid="uid://wwuloa5jv6f" path="res://assets/placeholder/quick_grid.png" id="1_0cqac"]
+[ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://NikkeTests/scenes/building_menu.tscn" id="1_w3klu"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_nnncm"]
 [ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/player_inventory.tscn" id="3_tp6xx"]
 
@@ -17,8 +18,11 @@ region_rect = Rect2(0, 0, 512, 512)
 
 [node name="Objects" type="Node2D" parent="."]
 
+[node name="Buildings" type="Node2D" parent="."]
+position = Vector2(6.10352e-05, 6.10352e-05)
+scale = Vector2(1, 1)
+
 [node name="Player" parent="." instance=ExtResource("2_nnncm")]
-_speed = 300
 
 [node name="MainCamera" type="Camera2D" parent="Player"]
 scale = Vector2(0.3125, 0.3125)
@@ -37,3 +41,7 @@ offset_right = 960.0
 offset_bottom = 100.0
 theme_override_font_sizes/font_size = 32
 text = "Press 'E' to toggle inventory"
+
+[node name="BuildingMenu" parent="Overlay" node_paths=PackedStringArray("_buildings") instance=ExtResource("1_w3klu")]
+scale = Vector2(1, 1)
+_buildings = NodePath("../../Buildings")

@@ -6,6 +6,7 @@
 size = Vector2(128, 128)
 
 [node name="House" type="Node2D"]
+scale = Vector2(2, 2)
 
 [node name="House" type="Sprite2D" parent="."]
 position = Vector2(-64, -64)

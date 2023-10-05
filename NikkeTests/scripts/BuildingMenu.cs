@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.IO;
 
-public partial class BuildingMenu : ScrollContainer
+public partial class BuildingMenu : Control
 {
 	Building _farmPlot, _house;
 	Building _currentBuilding;
@@ -20,6 +20,12 @@ public partial class BuildingMenu : ScrollContainer
 	Node2D _buildings;
     [Export]
     Button _buildButton;
+    [Export]
+    ScrollContainer _buildMenu;
+    [Export]
+    Control _buildMenuControl;
+    [Export]
+    VBoxContainer _vBoxContainer;
 
     [Export]
     PackedScene _farmPlotScene, _farmPlotGhostScene, _houseScene, _houseGhostScene;
@@ -45,7 +51,7 @@ public partial class BuildingMenu : ScrollContainer
 
         _resources = 500;
 
-        CreateBuildMenu(); 
+        CreateBuildMenu();
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -53,7 +59,7 @@ public partial class BuildingMenu : ScrollContainer
 	{
         if (Input.IsActionJustPressed("ui_cancel"))
         {
-            Hide();
+            _buildMenu.Hide();
             _buildButton.ReleaseFocus();
             _buildButton.ButtonPressed = false;
         }
@@ -61,12 +67,12 @@ public partial class BuildingMenu : ScrollContainer
 
     private void CreateBuildMenu()
     {
-        Control _control = new Control();
-        AddChild(_control);
-        _control.CustomMinimumSize = new Vector2(300, 200);
+        //Control _control = new Control();
+        //_buildMenu.AddChild(_control);
+        _buildMenuControl.CustomMinimumSize = new Vector2(300, 200);
 
-        VBoxContainer _vBoxContainer = new VBoxContainer();
-        _control.AddChild(_vBoxContainer);
+        //VBoxContainer _vBoxContainer = new VBoxContainer();
+        //_control.AddChild(_vBoxContainer);
         _vBoxContainer.CustomMinimumSize = new Vector2(300, 400);
 
         foreach (Building _building in _buildingPrefabs)
@@ -105,7 +111,7 @@ public partial class BuildingMenu : ScrollContainer
         _loadButton.AddThemeFontSizeOverride("font_size", 40);
         _loadButton.ButtonUp += () => LoadBuildings(_savePath, _fileName);
 
-        _control.CustomMinimumSize = new Vector2(300, _vBoxContainer.GetMinimumSize().Y);
+        _buildMenuControl.CustomMinimumSize = new Vector2(300, _vBoxContainer.GetMinimumSize().Y + 20);
     }
 
     public JsonArray GetBuildings()
@@ -217,11 +223,11 @@ public partial class BuildingMenu : ScrollContainer
 	{
         if (isToggledOn)
 		{
-			Show();
+			_buildMenu.Show();
 		}
 		else 
 		{
-			Hide();
+			_buildMenu.Hide();
 			_buildButton.ReleaseFocus();
         }
 	}

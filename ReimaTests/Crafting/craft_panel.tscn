@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b01xhkvdrkq54"]
 
 [ext_resource type="LabelSettings" uid="uid://bbixx2rjsddy7" path="res://ReimaTests/Crafting/crafting_resource_label_settings.tres" id="1_g70o1"]
-[ext_resource type="Script" path="res://ReimaTests/Crafting/Scripts/CraftPanel.cs" id="1_wi07c"]
+[ext_resource type="Script" path="res://scripts/ui/crafting/CraftPanel.cs" id="1_iablg"]
 [ext_resource type="LabelSettings" uid="uid://dv17cjn3uthox" path="res://ReimaTests/Crafting/crafting_panel_item_label_settings.tres" id="2_bewmg"]
 [ext_resource type="Texture2D" uid="uid://cp7b2wy8o2pqk" path="res://ReimaTests/Crafting/MockupSprites/pepper.png" id="2_eq3wm"]
 [ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory_slot.tscn" id="3_ifnhu"]
@@ -10,7 +10,7 @@
 top_level = true
 offset_right = 400.0
 offset_bottom = 400.0
-script = ExtResource("1_wi07c")
+script = ExtResource("1_iablg")
 itemLabel = NodePath("FlowContainer/Label")
 itemImage = NodePath("FlowContainer/HBoxContainer3/TextureRect")
 requiredResSlots = [NodePath("FlowContainer/HBoxContainer/InventorySlot"), NodePath("FlowContainer/HBoxContainer/InventorySlot2"), NodePath("FlowContainer/HBoxContainer/InventorySlot3"), NodePath("FlowContainer/HBoxContainer/InventorySlot4"), NodePath("FlowContainer/HBoxContainer/InventorySlot5"), NodePath("FlowContainer/HBoxContainer/InventorySlot6")]

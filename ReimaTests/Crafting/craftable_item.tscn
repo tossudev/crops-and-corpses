@@ -1,10 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqyv3rj8otsnr"]
+[gd_scene load_steps=3 format=3 uid="uid://dqyv3rj8otsnr"]
 
-[ext_resource type="Texture2D" uid="uid://dimmd0t6iyqa1" path="res://ReimaTests/Crafting/MockupSprites/crafting_menu_grid_background.png" id="1_3far1"]
-[ext_resource type="Script" path="res://ReimaTests/Crafting/Scripts/CraftableItem.cs" id="2_v4b2t"]
+[ext_resource type="Script" path="res://scripts/ui/crafting/CraftableItem.cs" id="1_yu6kt"]
 [ext_resource type="Resource" uid="uid://dmm0h1ba6feb7" path="res://assets/resources/items/DummyItem.tres" id="3_qpiv4"]
 
-[node name="CraftableItem" type="TextureRect"]
+[node name="CraftableItem" type="Button" node_paths=PackedStringArray("smallIcon")]
 custom_minimum_size = Vector2(50, 50)
 layout_direction = 1
 anchors_preset = 8
@@ -19,7 +18,13 @@ offset_bottom = -490.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(25, 25)
-texture = ExtResource("1_3far1")
-expand_mode = 1
-script = ExtResource("2_v4b2t")
+script = ExtResource("1_yu6kt")
 itemRes = ExtResource("3_qpiv4")
+smallIcon = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+expand_mode = 1

@@ -5,7 +5,8 @@
 
 [resource]
 script = ExtResource("2_dsjmc")
-ID = 0
+ID = 1
 Name = "Dummy Item"
 IconTexture = ExtResource("1_f6bkc")
 StackSize = 10
+craftingRequirements = null

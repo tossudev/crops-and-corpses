@@ -37,12 +37,13 @@ public partial class PlayerInventoryData : Node {
 
         // GD.Print(PlayerInventory);
 
-        TestAsync(new CancellationTokenSource());
+        //TestAsyncAdd(new CancellationTokenSource());
+        TestAsyncRemove(new CancellationTokenSource());
 
     }
 
     
-    async Task TestAsync(CancellationTokenSource tokenSrc)
+    async Task TestAsyncAdd(CancellationTokenSource tokenSrc)
     {
         CancellationToken token = tokenSrc.Token;
 
@@ -55,10 +56,20 @@ public partial class PlayerInventoryData : Node {
         
         tokenSrc.Dispose();
     }
-
-    public bool AddItemToInventory(int itemId, int amount)
+    
+    async Task TestAsyncRemove(CancellationTokenSource tokenSrc)
     {
-        // Obsolete until fixed?
+        CancellationToken token = tokenSrc.Token;
+
+        await Task.Delay(250, token);
+        RemoveItemFromInventory(1, 2);
+        RemoveItemFromInventory(1, 3);
+        
+        tokenSrc.Dispose();
+    }
+
+    public static bool AddItemToInventory(int itemId, int amount)
+    {
         Item itemToAdd = ItemData.GetItemById(itemId);
         
         if (itemToAdd == null) return false;
@@ -84,7 +95,7 @@ public partial class PlayerInventoryData : Node {
         return true;
     }
     
-    public bool RemoveItemFromInventory(int itemId, int amount)
+    public static bool RemoveItemFromInventory(int itemId, int amount)
     {
         if (!SaveData.currentInventoryItems.Exists(rawItem => rawItem.id == itemId)) return false;
         
@@ -93,5 +104,10 @@ public partial class PlayerInventoryData : Node {
 
         SaveData.Save();
         return true;
+    }
+
+    public static bool ExistsInInventory(int itemId, int amount)
+    {
+        return SaveData.currentInventoryItems.Exists(item => item.id == itemId && item.quantity >= amount);
     }
 }

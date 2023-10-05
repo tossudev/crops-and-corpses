@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 public partial class StateMachine : Node
 {
-	[Export]
-    public States initial_state;
+	[Export] public States initial_state;
 
     private States current_state;
     private Dictionary<string, States> states = new Dictionary<string, States>();

@@ -6,20 +6,20 @@
 [ext_resource type="Script" path="res://LilianTests/Scripts/ZombieIdle.cs" id="4_dffrj"]
 [ext_resource type="Script" path="res://LilianTests/Scripts/ZombieChase.cs" id="5_gf85f"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hv102"]
-radius = 13.0
-height = 48.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4m8t4"]
+radius = 27.5
+height = 92.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-z_index = 2
 script = ExtResource("1_p1qih")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_blfwo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_hv102")
+position = Vector2(-0.5, 1)
+shape = SubResource("CapsuleShape2D_4m8t4")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_y8em4")

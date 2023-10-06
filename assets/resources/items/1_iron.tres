@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dmm0h1ba6feb7"]
+
+[ext_resource type="Texture2D" uid="uid://cyipyi3gny7vw" path="res://ReimaTests/Crafting/MockupSprites/iron.png" id="1_sh0jo"]
+[ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="2_4vxdo"]
+
+[resource]
+script = ExtResource("2_4vxdo")
+ID = 1
+Name = "Iron"
+IconTexture = ExtResource("1_sh0jo")
+StackSize = 8
+craftingRequirements = Array[Object]([])

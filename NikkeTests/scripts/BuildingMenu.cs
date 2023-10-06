@@ -192,9 +192,9 @@ public partial class BuildingMenu : Control
             int x = Int32.Parse(jsonObject["x"].ToString());
             int y = Int32.Parse(jsonObject["y"].ToString());
 
-            Node2D _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;
-            _buildings.AddChild(_buildingScene);
+            Node2D _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;           
             _buildingScene.Position = new Vector2(x, y);
+            _buildings.AddChild(_buildingScene);
         }
     }
 
@@ -213,8 +213,8 @@ public partial class BuildingMenu : Control
         }
 
         Node2D _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;
-        _buildings.AddChild(_buildingScene);
         _buildingScene.Position = _ghostBuilding.Position;
+        _buildings.AddChild(_buildingScene);
 
         _resources -= _currentBuilding.price;
     }

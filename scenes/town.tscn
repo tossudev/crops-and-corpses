@@ -42,8 +42,9 @@ offset_bottom = 100.0
 theme_override_font_sizes/font_size = 32
 text = "Press 'E' to toggle inventory"
 
-[node name="BuildingMenu" parent="Overlay" node_paths=PackedStringArray("_buildings") instance=ExtResource("1_w3klu")]
+[node name="BuildingMenu" parent="Overlay" node_paths=PackedStringArray("_buildings", "_player") instance=ExtResource("1_w3klu")]
 _buildings = NodePath("../../Buildings")
+_player = NodePath("../../Player")
 
 [node name="Zombie1" parent="." instance=ExtResource("5_02ui3")]
 position = Vector2(-773, 439)

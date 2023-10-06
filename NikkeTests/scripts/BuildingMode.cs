@@ -8,6 +8,13 @@ public partial class BuildingMode : Node2D
 
     public BuildingMenu buildingMenu;
 
+    int _tileSize;
+
+    public override void _Ready()
+    {
+        _tileSize = 128;
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         SnapBuildingToGrid();
@@ -48,25 +55,25 @@ public partial class BuildingMode : Node2D
     {
         Vector2 _mousePosition = GetGlobalMousePosition();
 
-        float _snapX = _mousePosition.X % 64;
-        float _snapY = _mousePosition.Y % 64;
+        float _snapX = _mousePosition.X % _tileSize;
+        float _snapY = _mousePosition.Y % _tileSize;
 
-        if (_snapX >= 32)
+        if (_snapX >= _tileSize/2)
         {
-            _snapX = -(64 - _snapX);
+            _snapX = -(_tileSize - _snapX);
         }
-        else if (_snapX <= -32)
+        else if (_snapX <= -_tileSize / 2)
         {
-            _snapX = 64 + _snapX;
+            _snapX = _tileSize + _snapX;
         }
 
-        if (_snapY >= 32)
+        if (_snapY >= _tileSize / 2)
         {
-            _snapY = -(64 - _snapY);
+            _snapY = -(_tileSize - _snapY);
         }
-        else if (_snapY <= -32)
+        else if (_snapY <= -_tileSize / 2)
         {
-            _snapY = 64 + _snapY;
+            _snapY = _tileSize + _snapY;
         }
 
         Vector2 _snapLocation = new Vector2(_mousePosition.X - _snapX, _mousePosition.Y - _snapY);

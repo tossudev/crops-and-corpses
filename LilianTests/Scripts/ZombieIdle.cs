@@ -3,11 +3,8 @@ using System;
 
 public partial class ZombieIdle : States
 {
-	[Export]
-	public CharacterBody2D zombie;
-
-	[Export]
-	public float move_speed = 10.0f;
+	[Export] public CharacterBody2D zombie;
+	[Export] public float move_speed = 100.0f;
 
 	private Vector2 move_direction = Vector2.Zero;
 	private double roam_time;
@@ -42,13 +39,11 @@ public partial class ZombieIdle : States
 		{
 			Vector2 direction = player.GlobalPosition - zombie.GlobalPosition;
 
-			if(direction.Length() < 70 )
+			if(direction.Length() < 300 )
 			{
-				// GD.Print("CHASETAAN");
 				EmitSignal("Transitioned", "chase");			
 			}
-		}
-		
+		}		
     }
 
 	private void RandomizeRoam()

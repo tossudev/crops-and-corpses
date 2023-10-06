@@ -14,26 +14,27 @@ script = ExtResource("1_kcr62")
 
 [node name="InventoryGrid" type="GridContainer" parent="."]
 layout_mode = 0
-offset_left = 64.0
+offset_left = 192.0
 offset_top = 64.0
-offset_right = 1664.0
+offset_right = 1792.0
 offset_bottom = 1024.0
-theme_override_constants/h_separation = 72
-theme_override_constants/v_separation = 72
+theme_override_constants/h_separation = 144
+theme_override_constants/v_separation = 144
 columns = 10
 
 [node name="SelectedItem" type="Control" parent="."]
+visible = false
 anchors_preset = 0
-offset_right = 64.0
-offset_bottom = 64.0
+offset_right = 128.0
+offset_bottom = 128.0
 mouse_filter = 2
 
 [node name="Icon" type="TextureRect" parent="SelectedItem"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 56.0
-offset_bottom = 56.0
+offset_right = 120.0
+offset_bottom = 120.0
 mouse_filter = 2
 texture = ExtResource("2_pvric")
 expand_mode = 1
@@ -41,10 +42,11 @@ stretch_mode = 4
 
 [node name="Quantity" type="Label" parent="SelectedItem"]
 layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
+offset_right = 128.0
+offset_bottom = 128.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 2
 vertical_alignment = 2

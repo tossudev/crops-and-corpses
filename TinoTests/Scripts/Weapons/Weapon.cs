@@ -8,6 +8,7 @@ public partial class Weapon : Item
     [Export] public float damage { get; set; }
     [Export] public float knockback { get; set; }
     [Export] public float cooldown { get; set; }
+    [Export] public EffectType effect { get; set; }
 
     [ExportCategory("Melee")]
     [Export] public float reach { get; set; } = 1;

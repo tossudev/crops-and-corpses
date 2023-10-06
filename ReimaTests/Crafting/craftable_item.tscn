@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqyv3rj8otsnr"]
+[gd_scene load_steps=4 format=3 uid="uid://dqyv3rj8otsnr"]
 
 [ext_resource type="Script" path="res://scripts/ui/crafting/CraftableItem.cs" id="1_yu6kt"]
-[ext_resource type="Resource" uid="uid://dmm0h1ba6feb7" path="res://assets/resources/items/DummyItem.tres" id="3_qpiv4"]
+[ext_resource type="Resource" uid="uid://dmm0h1ba6feb7" path="res://assets/resources/items/1_iron.tres" id="2_2acv1"]
+[ext_resource type="Texture2D" uid="uid://cp7b2wy8o2pqk" path="res://ReimaTests/Crafting/MockupSprites/pepper.png" id="3_1y3n0"]
 
-[node name="CraftableItem" type="Button" node_paths=PackedStringArray("smallIcon")]
-custom_minimum_size = Vector2(50, 50)
+[node name="CraftableItem" type="Button"]
+custom_minimum_size = Vector2(56, 56)
 layout_direction = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -13,18 +14,18 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -960.0
 offset_top = -540.0
-offset_right = -910.0
-offset_bottom = -490.0
+offset_right = -904.0
+offset_bottom = -484.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(25, 25)
 script = ExtResource("1_yu6kt")
-itemRes = ExtResource("3_qpiv4")
-smallIcon = NodePath("TextureRect")
+itemRes = ExtResource("2_2acv1")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(56, 56)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+texture = ExtResource("3_1y3n0")
 expand_mode = 1

@@ -9,18 +9,34 @@ public partial class InventorySlot : Control {
 	public int itemID = -1;
 	public int quantity = 0;
 	public int index = -1;
-	private PlayerInventoryController _inv;
-	private bool hasItem = false;
+	
+    PlayerInventoryController _inv;
+    [Export] public bool isCraftingSlot;
+    bool hasItem;
 
 
 	public override void _Ready() {
-		_inv = GetNode<PlayerInventoryController>("../..") as PlayerInventoryController;
+		try
+		{
+			if (!isCraftingSlot)
+			{
+				_inv = GetNode<PlayerInventoryController>("../..");
+			}
+		}
+		catch (Exception e)
+		{
+			GD.Print("No inventory controller for InventorySlot");
+		}
+		
 		icon = GetNode("Icon") as TextureRect;
 		quantityLabel = GetNode("Quantity") as Label;
 	}
 
 
-	private void OnButtonGuiInput(InputEvent @event) {
+	private void OnButtonGuiInput(InputEvent @event)
+	{
+		if (isCraftingSlot) return;
+		
 		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed) {
 			if (mouseEvent.ButtonIndex == MouseButton.Left) {
 				ClickLeft();

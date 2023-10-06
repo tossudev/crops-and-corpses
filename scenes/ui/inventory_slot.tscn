@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scripts/ui/InventorySlot.cs" id="1_uxrvb"]
 
 [node name="InventorySlot" type="Control"]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 64.0

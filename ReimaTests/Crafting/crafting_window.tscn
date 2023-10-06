@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://ba8jl34px0fpl"]
+[gd_scene load_steps=9 format=3 uid="uid://ba8jl34px0fpl"]
 
 [ext_resource type="PackedScene" uid="uid://dqyv3rj8otsnr" path="res://ReimaTests/Crafting/craftable_item.tscn" id="1_ujqb6"]
 [ext_resource type="PackedScene" uid="uid://cwkfv4af2ta2g" path="res://ReimaTests/Crafting/item_grid_slot.tscn" id="1_v8dal"]
+[ext_resource type="Script" path="res://scripts/ui/crafting/CraftingWindow.cs" id="1_y62uc"]
+[ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="2_fukah"]
 [ext_resource type="PackedScene" uid="uid://b01xhkvdrkq54" path="res://ReimaTests/Crafting/craft_panel.tscn" id="3_g8br2"]
-[ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/items/DummyItem2.tres" id="4_3xed0"]
+[ext_resource type="Resource" uid="uid://cj0seqylk2aaa" path="res://assets/resources/items/3_axe.tres" id="4_8rlx4"]
+[ext_resource type="Resource" uid="uid://di3mqk8b3d2ke" path="res://assets/resources/items/2_sword.tres" id="4_ahu4m"]
+[ext_resource type="Resource" uid="uid://cqnav3flekvvt" path="res://assets/resources/items/4_Bucket.tres" id="4_ct5sc"]
 
 [node name="CraftingWindow" type="Control"]
 layout_mode = 3
@@ -11,66 +15,102 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_y62uc")
 
 [node name="Panel" parent="." groups=["CraftPanel"] instance=ExtResource("3_g8br2")]
 layout_mode = 0
-offset_left = 400.0
-offset_right = 800.0
+offset_left = 300.0
+offset_right = 700.0
 pivot_offset = Vector2(400, 0)
 
-[node name="BackGround" type="TextureRect" parent="."]
+[node name="ItemArea" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(300, 300)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+texture = ExtResource("2_fukah")
 
-[node name="GridContainer" type="GridContainer" parent="BackGround"]
+[node name="GridContainer" type="GridContainer" parent="ItemArea"]
 layout_mode = 2
-offset_left = 100.0
-offset_top = 50.0
-offset_right = 850.0
-offset_bottom = 550.0
+offset_left = 33.0
+offset_top = 33.0
+offset_right = 266.0
+offset_bottom = 266.0
 columns = 3
 
-[node name="ItemGridSlot" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
-layout_direction = 0
+[node name="ItemGridSlot" parent="ItemArea/GridContainer" instance=ExtResource("1_v8dal")]
 layout_mode = 2
 
-[node name="ItemGridSlot2" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+[node name="ItemGridSlot2" parent="ItemArea/GridContainer" instance=ExtResource("1_v8dal")]
 layout_mode = 2
 
-[node name="ItemGridSlot3" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+[node name="ItemGridSlot3" parent="ItemArea/GridContainer" instance=ExtResource("1_v8dal")]
 layout_mode = 2
 
-[node name="ItemGridSlot4" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+[node name="ItemGridSlot4" parent="ItemArea/GridContainer" instance=ExtResource("1_v8dal")]
 layout_mode = 2
 
-[node name="ItemGridSlot5" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+[node name="ItemGridSlot5" parent="ItemArea/GridContainer" instance=ExtResource("1_v8dal")]
 layout_mode = 2
 
-[node name="ItemGridSlot6" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+[node name="ItemGridSlot6" parent="ItemArea/GridContainer" instance=ExtResource("1_v8dal")]
 layout_mode = 2
 
-[node name="CraftableItem" parent="BackGround/GridContainer/ItemGridSlot6" instance=ExtResource("1_ujqb6")]
+[node name="ItemGridSlot7" parent="ItemArea/GridContainer" instance=ExtResource("1_v8dal")]
 layout_mode = 2
+
+[node name="CraftableItem" parent="ItemArea/GridContainer/ItemGridSlot7" instance=ExtResource("1_ujqb6")]
+layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 11.0
-offset_top = 11.0
-offset_right = 61.0
-offset_bottom = 61.0
-pivot_offset = Vector2(0, 0)
-itemRes = ExtResource("4_3xed0")
+offset_left = 9.765
+offset_top = 9.78
+offset_right = 65.765
+offset_bottom = 65.78
+grow_horizontal = 1
+grow_vertical = 1
+pivot_offset = Vector2(28, 28)
+itemRes = ExtResource("4_ct5sc")
 
-[node name="ItemGridSlot7" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+[node name="ItemGridSlot8" parent="ItemArea/GridContainer" instance=ExtResource("1_v8dal")]
 layout_mode = 2
 
-[node name="ItemGridSlot8" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
+[node name="CraftableItem" parent="ItemArea/GridContainer/ItemGridSlot8" instance=ExtResource("1_ujqb6")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 9.765
+offset_top = 9.78
+offset_right = 65.765
+offset_bottom = 65.78
+grow_horizontal = 1
+grow_vertical = 1
+pivot_offset = Vector2(28, 28)
+itemRes = ExtResource("4_8rlx4")
+
+[node name="ItemGridSlot9" parent="ItemArea/GridContainer" instance=ExtResource("1_v8dal")]
 layout_mode = 2
 
-[node name="ItemGridSlot9" parent="BackGround/GridContainer" instance=ExtResource("1_v8dal")]
-layout_mode = 2
+[node name="CraftableItem" parent="ItemArea/GridContainer/ItemGridSlot9" instance=ExtResource("1_ujqb6")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 9.765
+offset_top = 9.78
+offset_right = 65.765
+offset_bottom = 65.78
+grow_horizontal = 1
+grow_vertical = 1
+pivot_offset = Vector2(28, 28)
+itemRes = ExtResource("4_ahu4m")
 
-[editable path="BackGround/GridContainer/ItemGridSlot6/CraftableItem"]
+[editable path="ItemArea/GridContainer/ItemGridSlot7/CraftableItem"]

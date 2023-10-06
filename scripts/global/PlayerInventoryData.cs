@@ -48,10 +48,8 @@ public partial class PlayerInventoryData : Node {
         CancellationToken token = tokenSrc.Token;
 
         await Task.Delay(250, token);
-        AddItemToInventory(1, 20);
-        AddItemToInventory(0, 10);
-        AddItemToInventory(1, 2);
-        AddItemToInventory(0, 5);
+        AddItemToInventory(0, 100);
+        AddItemToInventory(1, 100);
 
         
         tokenSrc.Dispose();

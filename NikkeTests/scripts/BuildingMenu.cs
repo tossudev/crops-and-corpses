@@ -32,6 +32,9 @@ public partial class BuildingMenu : Control
     [Export]
     Texture2D _farmPlotIcon, _houseIcon;
 
+    [Export]
+    CharacterBody2D _player;
+
 	int _resources;
     string _savePath, _fileName;
 
@@ -59,20 +62,16 @@ public partial class BuildingMenu : Control
 	{
         if (Input.IsActionJustPressed("ui_cancel"))
         {
-            _buildMenu.Hide();
-            _buildButton.ReleaseFocus();
+            //_player.SetPhysicsProcess(true);
+            //_buildMenu.Hide();
+            //_buildButton.ReleaseFocus();
             _buildButton.ButtonPressed = false;
         }
     }
 
     private void CreateBuildMenu()
     {
-        //Control _control = new Control();
-        //_buildMenu.AddChild(_control);
         _buildMenuControl.CustomMinimumSize = new Vector2(300, 200);
-
-        //VBoxContainer _vBoxContainer = new VBoxContainer();
-        //_control.AddChild(_vBoxContainer);
         _vBoxContainer.CustomMinimumSize = new Vector2(300, 400);
 
         foreach (Building _building in _buildingPrefabs)
@@ -223,11 +222,13 @@ public partial class BuildingMenu : Control
 	{
         if (isToggledOn)
 		{
+            _player.SetPhysicsProcess(false);
 			_buildMenu.Show();
 		}
 		else 
 		{
-			_buildMenu.Hide();
+            _player.SetPhysicsProcess(true);
+            _buildMenu.Hide();
 			_buildButton.ReleaseFocus();
         }
 	}
@@ -240,7 +241,9 @@ public partial class BuildingMenu : Control
     private void BuildingMode()
 	{
         _buildButton.Disabled = true;
-        _buildButton.ButtonPressed = false;
+        _buildMenu.Hide();
+        //_buildButton.ButtonPressed = false;
+        //_player.SetPhysicsProcess(false);
 
         //Input.MouseMode = Input.MouseModeEnum.Hidden;      
 

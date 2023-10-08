@@ -17,7 +17,7 @@ radius = 27.0
 height = 90.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mytwi"]
-radius = 59.0339
+radius = 77.0
 
 [node name="zombie" type="CharacterBody2D"]
 collision_layer = 2
@@ -30,10 +30,9 @@ debug_color = Color(0, 0.6, 0.701961, 0.12549)
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_46tua")]
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("2_lvwfs")]
+[node name="HitboxComponent" parent="." instance=ExtResource("2_lvwfs")]
 collision_layer = 4
 collision_mask = 32
-_healthComponent = NodePath("../HealthComponent")
 _knockback = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
@@ -44,14 +43,14 @@ debug_color = Color(0, 0.6, 0.701961, 0.12549)
 script = ExtResource("4_cvt2q")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("zombie")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie")]
 script = ExtResource("5_nv7uk")
-zombie = NodePath("../..")
-move_speed = 30.0
+_zombie = NodePath("../..")
 
-[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("zombie")]
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie")]
 script = ExtResource("6_a8per")
-zombie = NodePath("../..")
+_zombie = NodePath("../..")
+_move_speed = 200.0
 
 [node name="AttackBox" type="Area2D" parent="."]
 

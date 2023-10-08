@@ -3,9 +3,10 @@ using System;
 
 public partial class RoamingZombie : CharacterBody2D
 {
+	[Export] private float _damage;
 	private Sprite2D sprite;
-
-	private Attack attack;
+	private CharacterBody2D player;
+	private Attack _attack;
 
     public override void _Ready()
     {
@@ -27,12 +28,15 @@ public partial class RoamingZombie : CharacterBody2D
     	}
     }
 
-	private void OnHitboxEntered(Area2D body)
+	private void OnAttackBoxEntered(Node2D body)
 	{
-		GD.Print("HIT");
-		if (body is HitboxComponent hitbox)
-        {
-            hitbox.Damage(attack);
-        }		
+		if(body.IsInGroup("player"))
+		{
+			player = (CharacterBody2D)body;
+			HitboxComponent hitbox = player.GetNode<HitboxComponent>("HitboxComponent");
+
+			//GD.Print("hB: " + hitbox.Name);
+			//hitbox.Damage(_attack);
+		}
 	}
 }

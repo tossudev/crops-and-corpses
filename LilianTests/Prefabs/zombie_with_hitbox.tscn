@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://ducfl7udsw3bj"]
+
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://TinoTests/Components/health_component.tscn" id="1_46tua"]
+[ext_resource type="Script" path="res://LilianTests/Scripts/RoamingZombie.cs" id="1_jjfrv"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://TinoTests/Components/hitbox_component.tscn" id="2_lvwfs"]
+[ext_resource type="Texture2D" uid="uid://c1sm88vok0oma" path="res://LilianTests/Sprites/zombie_placeholder.png" id="4_c41wj"]
+[ext_resource type="Script" path="res://LilianTests/Scripts/StateMachine.cs" id="4_cvt2q"]
+[ext_resource type="Script" path="res://LilianTests/Scripts/ZombieIdle.cs" id="5_nv7uk"]
+[ext_resource type="Script" path="res://LilianTests/Scripts/ZombieChase.cs" id="6_a8per"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5h8wa"]
+radius = 27.0
+height = 90.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_64jqc"]
+radius = 27.0
+height = 90.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mytwi"]
+radius = 59.0339
+
+[node name="zombie" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_jjfrv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_5h8wa")
+debug_color = Color(0, 0.6, 0.701961, 0.12549)
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_46tua")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("2_lvwfs")]
+collision_layer = 4
+collision_mask = 32
+_healthComponent = NodePath("../HealthComponent")
+_knockback = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CapsuleShape2D_64jqc")
+debug_color = Color(0, 0.6, 0.701961, 0.12549)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_cvt2q")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("zombie")]
+script = ExtResource("5_nv7uk")
+zombie = NodePath("../..")
+move_speed = 30.0
+
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("zombie")]
+script = ExtResource("6_a8per")
+zombie = NodePath("../..")
+
+[node name="AttackBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+shape = SubResource("CircleShape2D_mytwi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.90735e-06, -1.90735e-06)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_c41wj")
+offset = Vector2(0, -20)
+
+[connection signal="body_entered" from="AttackBox" to="." method="OnAttackBoxEntered"]

@@ -3,14 +3,17 @@ using System;
 
 public partial class RoamingZombie : CharacterBody2D
 {
-	private Sprite2D sprite;
-
-	private Attack attack;
+	[Export] private float _damage;
+	private Sprite2D _sprite;
+	private CharacterBody2D _player;
+	private Attack _attack;
+	private HealthComponent _healthComponent;
 
     public override void _Ready()
     {
 		//attack.damage = 10.0f;
-        sprite = GetNode<Sprite2D>("Sprite2D");
+        _sprite = GetNode<Sprite2D>("Sprite2D");
+		//_healthComponent = GetNode<HealthComponent>("HealthComponent");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -19,20 +22,37 @@ public partial class RoamingZombie : CharacterBody2D
 		
 		if (Velocity.X > 0)
     	{
-    		sprite.FlipH = false;
+    		_sprite.FlipH = false;
     	}
     	else
     	{
-    		sprite.FlipH = true;
+    		_sprite.FlipH = true;
     	}
     }
 
-	private void OnHitboxEntered(Area2D body)
+	private void OnAttackBoxEntered(Node2D body)
 	{
-		GD.Print("HIT");
-		if (body is HitboxComponent hitbox)
-        {
-            hitbox.Damage(attack);
-        }		
+		if(body.IsInGroup("player"))
+		{
+			_player = (CharacterBody2D)body;
+			HitboxComponent _hitbox = _player.GetNodeOrNull<HitboxComponent>("HitboxComponent");
+
+			if (_hitbox != null)
+			{
+                Attack _attack = new Attack
+                {
+                    damage = _damage
+                };
+
+                _hitbox.Damage(_attack);
+			}
+			else 
+			{
+				GD.Print("No hitbox found on player");
+			}
+
+			//GD.Print("hB: " + hitbox.Name);
+			//hitbox.Damage(_attack);
+		}
 	}
 }

@@ -1,27 +1,29 @@
 using Godot;
-using Godot.Collections;
-using Godot.NativeInterop;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public partial class PlayerInventoryController : Control {
 
-	public TextureRect selectedIcon;
-	public Label selectedQuantityLabel;
-	public bool isItemSelected = false;
-	public int selectedItemID = -1;
-	public int selectedItemQuantity = 0;
-	public bool isOpen = false;
+	public static TextureRect selectedIcon;
+	public static Label selectedQuantityLabel;
 
-	private string slotNodePath = "res://scenes/ui/inventory_slot.tscn";
-	private Control _selectedItemNode;
-	private const int SELECTED_ITEM_OFFSET = 64;
+	static Control _inventoryGrid;
+	
+	public static bool isItemSelected = false;
+	public static RawInventoryItem selectedItem;
+	
+	public bool isOpen = false;
+    string slotNodePath = "res://scenes/ui/inventory_slot.tscn";
+    Control _selectedItemNode;
+	public const string PIC_NODE_GROUP = "PlayerInventoryController";
+	const int SELECTED_ITEM_OFFSET = 64;
 
 
 	public override void _Ready() {
+		_inventoryGrid = GetNode<Control>("InventoryGrid");
+		_selectedItemNode = GetNode<Control>("SelectedItem");
+		selectedIcon = GetNode<TextureRect>("SelectedItem/Icon");
+		selectedQuantityLabel = GetNode<Label>("SelectedItem/Quantity");
 		_InitInventory();
-		_selectedItemNode = GetNode("SelectedItem") as Control;
-		selectedIcon = GetNode("SelectedItem/Icon") as TextureRect;
-		selectedQuantityLabel = GetNode("SelectedItem/Quantity") as Label;
 	}
 
 
@@ -38,118 +40,248 @@ public partial class PlayerInventoryController : Control {
 	}
 
 
-    private void _InitInventory() {
+	async Task _InitInventory() {
+		SaveData.organizedPlayerInventory.Clear();
 
-		int _itemIndex = 0;
-		foreach (Dictionary itemResource in PlayerInventoryData.PlayerInventory) {
+		// Init all slots with null items
+		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++) {
+			
 			var itemSlotNode = GD.Load<PackedScene>(slotNodePath);
 			var itemSlot = itemSlotNode.Instantiate<Control>();
 
-			// GD.Print(itemResource);
-
-			// var slot = ResourceLoader.Load<PackedScene>(slotNodePath).Instantiate();
-			// GetNode<GridContainer>("InventoryGrid").AddChild(slot);
-
-			GetNode<GridContainer>("InventoryGrid").AddChild(itemSlot);
-			
-			int _itemID = (int)itemResource.GetValueOrDefault("ID");
-			int _itemQuantity = (int)itemResource.GetValueOrDefault("Quantity");
-
-			// int newItemID = VariantUtils.ConvertTo<int>(itemID);
-			// int newItemID = VariantUtils.ConvertTo<int>(itemID);
-			// int newnewItemID = itemID;
-
-			((InventorySlot)itemSlot).UpdateSlot(_itemID, _itemQuantity, _itemIndex);
-
-			_itemIndex ++;
+			_inventoryGrid.AddChild(itemSlot);
+            
+			((InventorySlot)itemSlot).UpdateSlot(null, i);
 		}
+		
+		await PlayerInventoryData.ReadInventoryDataFromFile(SaveData.LoadData());
+        
+		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++) {
+			_inventoryGrid.GetChild<InventorySlot>(i)
+				.UpdateSlot(SaveData.organizedPlayerInventory[i], i);
+        }
 	}
 
 
-	private void _UpdateSelectedItem() {
-		Vector2 _mousePosition = GetGlobalMousePosition();
-		_mousePosition.X -= SELECTED_ITEM_OFFSET;
-		_mousePosition.Y -= SELECTED_ITEM_OFFSET;
+    void _UpdateSelectedItem() {
+		Vector2 mousePosition = GetGlobalMousePosition();
+		mousePosition.X -= SELECTED_ITEM_OFFSET;
+		mousePosition.Y -= SELECTED_ITEM_OFFSET;
 
-		_selectedItemNode.GlobalPosition = _mousePosition;
+		_selectedItemNode.GlobalPosition = mousePosition;
 		_selectedItemNode.Visible = isItemSelected;
 	}
 
 
-	public void SelectItem(int _itemID, int _itemQuantity) {
-		if (_itemID == -1) {
+	public static void SelectItem(RawInventoryItem rawItem) {
+		
+		if (rawItem == null) {
+			GD.Print("Null item selected");
 			return;
 		}
 
 		isItemSelected = true;
-		selectedItemID = _itemID;
-		selectedItemQuantity = _itemQuantity;
+		selectedItem = rawItem;
 
-		var _itemResource = ItemData.items[_itemID] as Item;
+		
+		Item itemResource = ItemData.GetItemById(selectedItem.id);
 
-		Texture2D _iconTexture = _itemResource.IconTexture;
-		selectedIcon.Texture = _iconTexture;
-		selectedQuantityLabel.Text = selectedItemQuantity.ToString();
+		Texture2D iconTexture = itemResource.IconTexture;
+		selectedIcon.Texture = iconTexture;
+		selectedQuantityLabel.Text = selectedItem.quantity.ToString();
 	}
 
 
-	public void AddItem(int _index) {
-		Dictionary _previousItem = (Dictionary)PlayerInventoryData.PlayerInventory[_index];
-		int _previousItemQuantity = (int)_previousItem["Quantity"];
+	/// <summary> Main inventory additive operation </summary>
+	/// <param name="rawItem"> Includes id, name and quantity to add </param>
+	/// <param name="index"> optional: desired index in the organized player inventory array </param>
+	///
+	///	<returns> how many items could *NOT* be added </returns>
+	public static int AddItem(RawInventoryItem rawItem, int index = -1)
+	{
 
-		int _newQuantity = _previousItemQuantity + selectedItemQuantity;
+		if (rawItem == null)
+		{
+			GD.PrintErr("Tried to add a null item to inventory @PlayerInventoryController.AddItem!");
+			return -1;
+		}
 
+		
+		rawItem.quantity = index == -1 
+			? AddToInventoryUntilFull(rawItem) // index not specified
+			: AddToSlotUntilFull(rawItem, index); // index given
 
-		var _newItem = new Godot.Collections.Dictionary<string, Variant>();
-        _newItem.Add("ID", selectedItemID);
-        _newItem.Add("Quantity", _newQuantity);
+		
+        SaveData.SyncInventory();
+		
 
-		PlayerInventoryData.PlayerInventory[_index] = _newItem;
-		Control slotToAdd = GetNode<Control>("InventoryGrid").GetChild<Control>(_index);
-		((InventorySlot)slotToAdd).UpdateSlot(selectedItemID, _newQuantity, _index);
+		if (rawItem.quantity == 0)
+		{
+			DeselectItem();
+			return 0;
+		}
+        
+		if (isItemSelected)
+		{
+			SelectItem(rawItem);
+		}
+		
+		return rawItem.quantity;
+	}
+
+	static int AddToInventoryUntilFull(RawInventoryItem itemToAdd)
+	{
+		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++)
+		{
+			RawInventoryItem rawItem = null;
+			
+			if (SaveData.organizedPlayerInventory.Count > i)
+			{
+				rawItem = SaveData.organizedPlayerInventory[i];
+			}
+
+			if (rawItem == null || itemToAdd.id == rawItem.id)
+			{
+				itemToAdd.quantity = AddToSlotUntilFull(itemToAdd, i);
+			}
+			
+			if (itemToAdd.quantity == 0) break;
+		}
+		
+		return itemToAdd.quantity;
+	}
 	
-		DeselectItem();
+	static int AddToSlotUntilFull(RawInventoryItem itemToAdd, int index)
+	{
+        
+		RawInventoryItem itemInSlot = (SaveData.organizedPlayerInventory.Count > index)
+			? SaveData.organizedPlayerInventory[index]
+			: null;
+
+		int spaceRemainingAtIndex = itemInSlot != null
+			? itemInSlot.SpaceRemainingInStack
+			: itemToAdd.stackSize;
+		
+		int amountToAdd = itemToAdd.quantity;
+
+		int howManyWereAdded = (spaceRemainingAtIndex - amountToAdd < 0)
+			? spaceRemainingAtIndex
+			: amountToAdd;
+
+		if (howManyWereAdded > 0)
+		{
+			RawInventoryItem addedItem = new RawInventoryItem(
+				itemToAdd.id,
+				itemToAdd.name,
+				itemToAdd.stackSize - spaceRemainingAtIndex + howManyWereAdded,
+				itemToAdd.stackSize);
+			
+            UpdateInventorySlot(addedItem, index);
+
+			itemToAdd.quantity -= howManyWereAdded;
+		}
+        
+		return itemToAdd.quantity;
+	}
+	
+
+	/// <summary> Main inventory item removal method </summary>
+	/// 
+	/// <param name="rawItem"> Includes id, name and quantity to remove </param>
+	///	<returns> Whether the add operation was successful or not </returns>
+	/// <remarks> Automatically detects correct slots to remove items from </remarks>
+	public static bool RemoveItemFromInventory(RawInventoryItem rawItem)
+	{
+		if (!PlayerInventoryData.ExistsInInventory(rawItem.id, rawItem.quantity))
+			return false;
+
+		int amountToRemove = rawItem.quantity;
+		
+		for (int i = PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - 1; i >= 0; i--)
+		{
+			if (SaveData.organizedPlayerInventory[i] == null) continue;
+			
+			if (SaveData.organizedPlayerInventory[i].id == rawItem.id)
+			{
+				int itemQuantityInSlot = SaveData.organizedPlayerInventory[i].quantity;
+				
+				int amountRemoved = (itemQuantityInSlot - amountToRemove > 0)
+					? amountToRemove
+					: itemQuantityInSlot;
+
+				amountToRemove -= amountRemoved;
+				
+				if (amountRemoved < itemQuantityInSlot)
+				{
+					SaveData.organizedPlayerInventory[i].quantity -= amountRemoved;
+					UpdateInventorySlot(SaveData.organizedPlayerInventory[i], i);
+				}
+				else
+				{
+					NullifyInventoryItemAtIndex(i);
+				}
+			}
+
+			
+		}
+
+		switch (amountToRemove)
+		{
+			case 0:
+				SaveData.SyncInventory();
+				return true;
+				
+			case > 0:
+				GD.PrintErr("Didn't remove enough items from inventory! @PlayerInventoryController.cs");
+				return false;
+				
+			case < 0:
+				GD.PrintErr("Removed too many items from inventory! @PlayerInventoryController.cs");
+				return false;
+		}
+	}
+	
+	
+	public static void NullifyInventoryItemAtIndex(int index)
+	{
+		UpdateInventorySlot(null, index);
 	}
 
 
-	public void RemoveAtIndex(int _index) {
-		var _emptyItem = new Godot.Collections.Dictionary<string, Variant>();
-        _emptyItem.Add("ID", -1);
-        _emptyItem.Add("Quantity", 0);
+	public static void SelectSingleItem(RawInventoryItem item, int index)
+	{
+		item.quantity -= 1;
 
-		PlayerInventoryData.PlayerInventory[_index] = _emptyItem;
-		Control slotToRemove = GetNode<Control>("InventoryGrid").GetChild<Control>(_index);
-		((InventorySlot)slotToRemove).UpdateSlot(-1, 0, _index);
-	}
-
-
-	public void SelectSingleItem(int index, int itemID, int quantity) {
-		int _remainingQuantity = quantity - 1;
-
-		if (_remainingQuantity >= 1) {
-			SelectItem(itemID, _remainingQuantity);
-			RemoveAtIndex(index);
-			AddItem(index);
+		if (item.quantity >= 1) {
+			UpdateInventorySlot(item, index);
 		}
 		else {
-			RemoveAtIndex(index);
+			NullifyInventoryItemAtIndex(index);
 		}
 
-		SelectItem(itemID, 1);
+		
+		SelectItem(new RawInventoryItem(item.id, item.name, 1, item.stackSize));
 	}
 
 
-	public void SwapItems(int index, int itemID, int quantity) {
-		SelectItem(selectedItemID, selectedItemQuantity);
-		RemoveAtIndex(index);
-		AddItem(index);
-		SelectItem(itemID, quantity);
+	public static void SwapItems(RawInventoryItem itemToSwap, int index)
+	{
+		RawInventoryItem tempSwapItem = new(
+			itemToSwap.id, itemToSwap.name, itemToSwap.quantity, itemToSwap.stackSize);
+		
+		UpdateInventorySlot(selectedItem, index);
+		SelectItem(tempSwapItem);
 	}
 
-
-	public void DeselectItem() {
-		selectedItemID = -1;
-		selectedItemQuantity = 0;
+	static void UpdateInventorySlot(RawInventoryItem item, int index)
+	{
+		InventorySlot slotToUpdate = _inventoryGrid.GetChild<InventorySlot>(index);
+		slotToUpdate.UpdateSlot(item, index);
+	}
+	
+	public static void DeselectItem()
+	{
+		selectedItem = null;
 		isItemSelected = false;
 	}
 }

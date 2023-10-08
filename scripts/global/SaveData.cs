@@ -1,10 +1,10 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
+using Godot.Collections;
 using Dictionary = Godot.Collections.Dictionary;
-using Array = Godot.Collections.Array;
 
 [GlobalClass]
 public partial class SaveData : Node
@@ -15,11 +15,14 @@ public partial class SaveData : Node
     static string fullPath = "";
     
     public const string INVENTORY_ITEMS_KEY = "inventoryItems";
+    public const string ORGANIZED_INVENTORY_ITEMS_KEY = "organizedInventoryItems";
     
     //---------Modifiable at runtime----------------------
-
-    public static List<RawInventoryItem> currentInventoryItems = new List<RawInventoryItem>();
     
+    public static Array<RawInventoryItem> organizedPlayerInventory = new ();
+    public static List<RawInventoryItem> totalInventoryItems = new ();
+
+    public static bool savingInProgress = false;
     //---------/Modifiable at runtime----------------------
 
     public override void _Ready()
@@ -27,15 +30,16 @@ public partial class SaveData : Node
         base._Ready();
         directoryPath = ProjectSettings.GlobalizePath($"user://{SAVEFOLDERNAME}");
         fullPath = directoryPath.PathJoin(SAVEFILENAME);
-        Load();
     }
-
-    public static void Save()
+    
+    static Task Save()
     {
+        savingInProgress = true;
         if (string.IsNullOrEmpty(directoryPath))
         {
             GD.PrintErr("Save path not set, can't save game!");
-            return;
+            savingInProgress = false;
+            return null;
         }
 
         if (!Directory.Exists(directoryPath))
@@ -45,7 +49,8 @@ public partial class SaveData : Node
         
         var rawSaveData = new RawSaveData()
         {
-            inventoryItems = currentInventoryItems
+            inventoryItems = totalInventoryItems,
+            organizedInventoryItems = organizedPlayerInventory
         };
         
         Dictionary saveDictionary = rawSaveData.GetFullDataDictionary();
@@ -61,11 +66,14 @@ public partial class SaveData : Node
         {
             GD.PrintErr(e.Message);
         }
+
+        savingInProgress = false;
+        return null;
     }
     
-    public static void Load()
+    public static Dictionary LoadData()
     {
-        if (!File.Exists(fullPath)) return;
+        if (!File.Exists(fullPath)) return null;
 
         string data = "";
         
@@ -86,25 +94,60 @@ public partial class SaveData : Node
         {
             GD.PrintErr(error);
             
-            return;
+            return null;
         }
 
-        Dictionary loadedData = (Dictionary) loadedJson.Data;
+        return (Dictionary) loadedJson.Data;
+    }
+    
+    public static void SyncInventory()
+    {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+        UpdateTotalItemsAndSave();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+    }
 
-        currentInventoryItems.Clear();
+    static async Task UpdateTotalItemsAndSave()
+    {
+        totalInventoryItems.Clear();
 
-        var inventoryItemsRaw = (Dictionary)loadedData[INVENTORY_ITEMS_KEY];
-        
-        foreach (var rawitem in inventoryItemsRaw)
+        try
         {
-            Dictionary itemValue = (Dictionary)rawitem.Value;
-            
-            currentInventoryItems.Add(new RawInventoryItem()
+            foreach (RawInventoryItem item in organizedPlayerInventory)
             {
-                id = (int)rawitem.Key,
-                name = (string) itemValue[RawSaveData.ITEM_NAME_KEY],
-                quantity = (int) itemValue[RawSaveData.ITEM_QUANTITY_KEY]
-            });
+                if (item == null) continue; //Empty inv slot
+            
+                PlayerInventoryData.AddItemToTotalItems(item.id, item.quantity);
+            }
+        }
+        catch (Exception e)
+        {
+            GD.PrintErr(e.Message);
+        }
+
+
+        if (!savingInProgress)
+        {
+            await Save();
+        }
+        else {
+            GD.Print("Saving was queued");
+            int savingQueueTime_Ms = 0;
+
+            while (savingQueueTime_Ms < 5000)
+            {
+                int timeout_Ms = (GD.Randi() % 2 == 0) ? 100 : 250;
+                
+                savingQueueTime_Ms += timeout_Ms;
+                
+                await Task.Delay(timeout_Ms);
+
+                if (savingInProgress) continue;
+                
+                await Save();
+                break;
+            }
+            GD.Print($"Total Queue Time: {savingQueueTime_Ms}ms");
         }
     }
 }

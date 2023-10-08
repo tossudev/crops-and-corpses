@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cp7b2wy8o2pqk" path="res://ReimaTests/Crafting/MockupSprites/pepper.png" id="2_eq3wm"]
 [ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory_slot.tscn" id="3_ifnhu"]
 
-[node name="CraftPanel" type="Panel" node_paths=PackedStringArray("itemLabel", "itemImage", "requiredResSlots", "AmountToCraftTextEdit", "craftButton")]
+[node name="CraftPanel" type="Panel" node_paths=PackedStringArray("itemLabel", "itemImage", "requiredResSlots", "ErrorMsgLabel", "AmountToCraftTextEdit", "craftButton")]
 top_level = true
 offset_right = 400.0
 offset_bottom = 450.0
@@ -14,6 +14,7 @@ script = ExtResource("1_iablg")
 itemLabel = NodePath("FlowContainer/Label")
 itemImage = NodePath("FlowContainer/HBoxContainer3/TextureRect")
 requiredResSlots = [NodePath("FlowContainer/HBoxContainer/InventorySlot"), NodePath("FlowContainer/HBoxContainer/InventorySlot2"), NodePath("FlowContainer/HBoxContainer/InventorySlot3"), NodePath("FlowContainer/HBoxContainer/InventorySlot4"), NodePath("FlowContainer/HBoxContainer/InventorySlot5")]
+ErrorMsgLabel = NodePath("FlowContainer/ErrorMsg")
 AmountToCraftTextEdit = NodePath("FlowContainer/HBoxContainer2/AmountToCraft")
 craftButton = NodePath("FlowContainer/HBoxContainer2/CraftButton")
 

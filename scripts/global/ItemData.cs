@@ -5,7 +5,7 @@ using System.Linq;
 public partial class ItemData : Node {
 
     [Export] public string ItemsDirectory = "res://assets/resources/items/";
-    public static Godot.Collections.Array<Item> items = new Godot.Collections.Array<Item>();
+    public static Godot.Collections.Dictionary items = new ();
 
     public override void _Ready() {
         _LoadItemsFromPath();
@@ -23,7 +23,7 @@ public partial class ItemData : Node {
             while (fileName != "") {
                 string filePath = ItemsDirectory + fileName;
                 var resource = (Item)GD.Load(filePath);
-                items.Add(resource as Item);
+                items.Add(resource.ID, resource);
 
                 fileName = dir.GetNext();
             }
@@ -32,6 +32,11 @@ public partial class ItemData : Node {
 
     public static Item GetItemById(int id)
     {
-        return items.First(item => item.ID == id);
+        if (items.TryGetValue(id, out var item))
+        {
+            return (Item)item;
+        }
+        
+        return null;
     }
 }

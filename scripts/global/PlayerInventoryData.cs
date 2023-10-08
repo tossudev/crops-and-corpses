@@ -1,111 +1,98 @@
+using System;
 using Godot;
 using System.Threading;
 using System.Threading.Tasks;
+using Godot.Collections;
+using Array = Godot.Collections.Array;
 
 [GlobalClass]
-public partial class PlayerInventoryData : Node {
+public partial class PlayerInventoryData : Node
+{
+    public const int PLAYER_INVENTORY_MAX_SIZE = 32;
 
-    private const int PlayerInventorySize = 30;
-
-    public static Godot.Collections.Array PlayerInventory = new Godot.Collections.Array();
-    
-
-    public override void _Ready() { 
-        // Test adding items to the inventory
-        var emptyItem = new Godot.Collections.Dictionary<string, Variant>();
-        emptyItem.Add("ID", -1);
-        emptyItem.Add("Quantity", 0);
-
-        var dummyItem = new Godot.Collections.Dictionary<string, Variant>();
-        dummyItem.Add("ID", 0);
-        dummyItem.Add("Quantity", 5);
-
-        var dummyItem2 = new Godot.Collections.Dictionary<string, Variant>();
-        dummyItem2.Add("ID", 1);
-        dummyItem2.Add("Quantity", 5);
-
-
-        for (int i = 0; i < 10; i++) {
-            PlayerInventory.Add(dummyItem);
-        }
-        for (int i = 0; i < 5; i++) {
-            PlayerInventory.Add(dummyItem2);
-        }
-        for (int i = 0; i < 15; i++) {
-            PlayerInventory.Add(emptyItem);
-        }
-
-        // GD.Print(PlayerInventory);
-
-        //TestAsyncAdd(new CancellationTokenSource());
-        //TestAsyncRemove(new CancellationTokenSource());
-
+    public override void _Ready()
+    {
+        TestAsyncAdd(new CancellationTokenSource());
     }
 
+    /// <summary>
+    /// Reads inventory data from save data
+    /// </summary>
+    /// <param name="saveData"></param>
+    /// <remarks> INVENTORY MUST BE INITIALIZED BEFORE CALLING </remarks>
+    public static async Task ReadInventoryDataFromFile(Dictionary saveData)
+    {
+        if (SaveData.organizedPlayerInventory.Count == 0)
+        {
+            GD.PrintErr("Inventory was not initialized with null values");
+            return;
+        }
+
+        if (saveData == null) return;
+        
+        Array organizedInventoryItemData = (Array) saveData[SaveData.ORGANIZED_INVENTORY_ITEMS_KEY];
+        await Task.Run(() =>
+        {
+            int index = 0;
+            foreach (var rawItemVariant in organizedInventoryItemData)
+            {
+                Dictionary itemDataDict = (Dictionary)rawItemVariant; 
+                
+                RawInventoryItem convertedRawItem = new RawInventoryItem(
+                    (int) itemDataDict[RawSaveData.ITEM_ID_KEY],
+                    (string) itemDataDict[RawSaveData.ITEM_NAME_KEY],
+                    (int) itemDataDict[RawSaveData.ITEM_QUANTITY_KEY],
+                    (int) itemDataDict[RawSaveData.ITEM_STACKSIZE_KEY]);
+                
+                SaveData.organizedPlayerInventory[index] = convertedRawItem;
+                index++;
+            }
+
+            SaveData.SyncInventory();
+        });
+    }
     
     async Task TestAsyncAdd(CancellationTokenSource tokenSrc)
     {
         CancellationToken token = tokenSrc.Token;
 
-        await Task.Delay(250, token);
-        AddItemToInventory(0, 100);
-        AddItemToInventory(1, 100);
-
+        await Task.Delay(1000, token);
+        
+        if (SaveData.totalInventoryItems.Count > 0) return;
+        
+        Item log = ItemData.GetItemById(0);
+        PlayerInventoryController.AddItem(
+            new RawInventoryItem(log.ID, log.Name, 20, log.StackSize));
+        
+        
+        Item iron = ItemData.GetItemById(1);
+        PlayerInventoryController.AddItem(
+            new RawInventoryItem(iron.ID, iron.Name, 20, iron.StackSize));
         
         tokenSrc.Dispose();
     }
-    
-    async Task TestAsyncRemove(CancellationTokenSource tokenSrc)
-    {
-        CancellationToken token = tokenSrc.Token;
 
-        await Task.Delay(250, token);
-        RemoveItemFromInventory(1, 2);
-        RemoveItemFromInventory(1, 3);
-        
-        tokenSrc.Dispose();
-    }
-
-    public static bool AddItemToInventory(int itemId, int amount)
+    public static bool AddItemToTotalItems(int itemId, int amount)
     {
         Item itemToAdd = ItemData.GetItemById(itemId);
         
         if (itemToAdd == null) return false;
         
-        if (SaveData.currentInventoryItems.Exists(rawItem => rawItem.id == itemId))
+        if (SaveData.totalInventoryItems.Exists(rawItem => rawItem.id == itemId))
         {
-            SaveData.currentInventoryItems.Find(rawItem => rawItem.id == itemId)
+            SaveData.totalInventoryItems.Find(rawItem => rawItem.id == itemId)
                 .quantity += amount;
         }
         else
         {
-            RawInventoryItem newRawItem = new RawInventoryItem()
-            {
-                name = itemToAdd.Name,
-                id = itemId,
-                quantity = amount
-            };
-            
-            SaveData.currentInventoryItems.Add(newRawItem);
+            SaveData.totalInventoryItems.Add(
+                new RawInventoryItem(itemId, itemToAdd.Name, amount, itemToAdd.StackSize));
         }
-
-        SaveData.Save();
-        return true;
-    }
-    
-    public static bool RemoveItemFromInventory(int itemId, int amount)
-    {
-        if (!SaveData.currentInventoryItems.Exists(rawItem => rawItem.id == itemId)) return false;
-        
-        SaveData.currentInventoryItems.Find(rawItem => rawItem.id == itemId)
-            .quantity -= amount;
-
-        SaveData.Save();
         return true;
     }
 
     public static bool ExistsInInventory(int itemId, int amount)
     {
-        return SaveData.currentInventoryItems.Exists(item => item.id == itemId && item.quantity >= amount);
+        return SaveData.totalInventoryItems.Exists(item => item.id == itemId && item.quantity >= amount);
     }
 }

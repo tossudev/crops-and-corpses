@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ba8jl34px0fpl"]
+[gd_scene load_steps=10 format=3 uid="uid://ba8jl34px0fpl"]
 
 [ext_resource type="PackedScene" uid="uid://dqyv3rj8otsnr" path="res://ReimaTests/Crafting/craftable_item.tscn" id="1_ujqb6"]
 [ext_resource type="PackedScene" uid="uid://cwkfv4af2ta2g" path="res://ReimaTests/Crafting/item_grid_slot.tscn" id="1_v8dal"]
@@ -9,13 +9,27 @@
 [ext_resource type="Resource" uid="uid://di3mqk8b3d2ke" path="res://assets/resources/items/2_sword.tres" id="4_ahu4m"]
 [ext_resource type="Resource" uid="uid://cqnav3flekvvt" path="res://assets/resources/items/4_Bucket.tres" id="4_ct5sc"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_ppdoo"]
+font_size = 24
+
 [node name="CraftingWindow" type="Control"]
 layout_mode = 3
 anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_y62uc")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+offset_top = 120.0
+offset_right = 243.0
+offset_bottom = 157.0
+text = "Press \"Q\" for crafting"
+label_settings = SubResource("LabelSettings_ppdoo")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Panel" parent="." groups=["CraftPanel"] instance=ExtResource("3_g8br2")]
 layout_mode = 0

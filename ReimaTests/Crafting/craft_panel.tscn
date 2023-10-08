@@ -10,6 +10,7 @@
 top_level = true
 offset_right = 400.0
 offset_bottom = 450.0
+mouse_filter = 2
 script = ExtResource("1_iablg")
 itemLabel = NodePath("FlowContainer/Label")
 itemImage = NodePath("FlowContainer/HBoxContainer3/TextureRect")
@@ -23,6 +24,7 @@ custom_minimum_size = Vector2(400, 200)
 layout_mode = 0
 offset_right = 250.0
 offset_bottom = 104.0
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="FlowContainer"]
 custom_minimum_size = Vector2(400, 30)
@@ -39,6 +41,7 @@ layout_mode = 2
 [node name="HBoxContainer3" type="HBoxContainer" parent="FlowContainer"]
 custom_minimum_size = Vector2(400, 144.73)
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="FlowContainer/HBoxContainer3"]
@@ -63,6 +66,7 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="FlowContainer"]
 custom_minimum_size = Vector2(400, 72)
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="InventorySlot" parent="FlowContainer/HBoxContainer" instance=ExtResource("3_ifnhu")]
@@ -194,6 +198,7 @@ vertical_alignment = 1
 [node name="HBoxContainer2" type="HBoxContainer" parent="FlowContainer"]
 custom_minimum_size = Vector2(400, 40)
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="AmountToCraft" type="TextEdit" parent="FlowContainer/HBoxContainer2"]

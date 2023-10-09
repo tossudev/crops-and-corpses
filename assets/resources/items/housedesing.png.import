@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqah3wgx4il3q"
-path="res://.godot/imported/sprite_tree1.png-00cbdd95b7647d2191816b733a29caa7.ctex"
+uid="uid://dbx7qsqbkgp03"
+path="res://.godot/imported/housedesing.png-959e1bf2bfb8d2903434afacc65b06b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Town/sprite_tree1.png"
-dest_files=["res://.godot/imported/sprite_tree1.png-00cbdd95b7647d2191816b733a29caa7.ctex"]
+source_file="res://assets/resources/items/housedesing.png"
+dest_files=["res://.godot/imported/housedesing.png-959e1bf2bfb8d2903434afacc65b06b5.ctex"]
 
 [params]
 

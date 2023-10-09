@@ -14,9 +14,10 @@ radius = 117.527
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xqb0"]
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_handheld") groups=["player"]]
 scale = Vector2(3.2, 3.2)
 script = ExtResource("1_y7bta")
+_handheld = NodePath("Handheld")
 _speed = 300
 
 [node name="Handheld" parent="." instance=ExtResource("2_00eh7")]

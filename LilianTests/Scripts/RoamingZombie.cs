@@ -14,7 +14,7 @@ public partial class RoamingZombie : CharacterBody2D
 
     public override void _Ready()
     {
-		packedScene = (PackedScene)GD.Load("res://EllaTests/npc.tscn");
+		packedScene = (PackedScene)GD.Load("res://LilianTests/Prefabs/zombie_with_hitbox.tscn");
 
 		_thisZombie = GetNodeOrNull<CharacterBody2D>(_characterNodePath);
 		//attack.damage = 10.0f;
@@ -55,21 +55,16 @@ public partial class RoamingZombie : CharacterBody2D
 				switch(_attack.effect)
 				{
 					case EffectType.Cure:
-
+					
 						Transform2D zombiePos = _thisZombie.Transform;
-						_thisZombie.SetProcess(false);
+						_thisZombie.QueueFree();
 						CharacterBody2D spawnNPC = (CharacterBody2D)packedScene.Instantiate();
 						spawnNPC.Transform = zombiePos;
 						AddChild(spawnNPC);
-						_thisZombie.QueueFree();
 						break;
 					default:
 					break;
 
-				}
-				if(_attack.effect == EffectType.Cure)
-				{
-					
 				}
                	 
 			}

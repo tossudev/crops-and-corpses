@@ -15,21 +15,11 @@ public partial class HealthComponent : Node2D
 	{
 		_health -= attack.damage;
 
-		GD.Print("Health: " + _health);
+		GD.Print(GetParent().Name + " health: " + _health);
 
 		if (_health <= 0)
 		{
 			GetParent().QueueFree();
-		}
-	}
-
-	public void Heal(Attack attack)
-	{
-		_health += attack.damage;
-
-		if (_health > _maxHealth)
-		{
-			_health = _maxHealth;
 		}
 	}
 }

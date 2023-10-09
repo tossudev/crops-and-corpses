@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://c8bx46w1qix2q"]
 
 [ext_resource type="Script" path="res://TinoTests/Scripts/PlayerController.cs" id="1_y7bta"]
-[ext_resource type="PackedScene" uid="uid://dnjrwx23lwt2g" path="res://TinoTests/Components/weapon.tscn" id="2_00eh7"]
+[ext_resource type="PackedScene" uid="uid://3hlx66fdaruu" path="res://TinoTests/Components/handheld.tscn" id="2_00eh7"]
 [ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="2_jvd4n"]
-[ext_resource type="Resource" uid="uid://domi3h5sb0i6n" path="res://TinoTests/Scripts/Weapons/Throwable.tres" id="3_1so7r"]
+[ext_resource type="Resource" uid="uid://b6a2oqc16p5rs" path="res://TinoTests/Scripts/Weapons/Sword1.tres" id="3_6md08"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://TinoTests/Components/health_component.tscn" id="3_wuvdk"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://TinoTests/Components/hitbox_component.tscn" id="4_sa7m5"]
 
@@ -17,14 +17,14 @@ radius = 117.527
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_weapon") groups=["player"]]
 scale = Vector2(3.2, 3.2)
 script = ExtResource("1_y7bta")
-_weapon = NodePath("Weapon")
+_weapon = NodePath("Handheld")
 _speed = 300
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 
-[node name="Weapon" parent="." instance=ExtResource("2_00eh7")]
-_weapon = ExtResource("3_1so7r")
+[node name="Handheld" parent="." instance=ExtResource("2_00eh7")]
+_weapon = ExtResource("3_6md08")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_wuvdk")]
 
@@ -42,7 +42,6 @@ scale = Vector2(0.15625, 0.15625)
 texture = ExtResource("2_jvd4n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_2xqb0")
 debug_color = Color(0, 0.6, 0.701961, 0.12549)
 

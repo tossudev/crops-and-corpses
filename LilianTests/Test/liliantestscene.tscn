@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://dug8ysxwugiwo"]
+[gd_scene load_steps=2 format=3 uid="uid://dug8ysxwugiwo"]
 
-[ext_resource type="PackedScene" uid="uid://ducfl7udsw3bj" path="res://LilianTests/Prefabs/zombie_with_hitbox.tscn" id="2_8bcnt"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_42isq"]
 
 [node name="lilianTestScene" type="Node2D"]
@@ -10,12 +9,3 @@ visible = false
 
 [node name="Player" parent="." instance=ExtResource("2_42isq")]
 position = Vector2(0, -1)
-
-[node name="z1" parent="." instance=ExtResource("2_8bcnt")]
-position = Vector2(-534, -195)
-
-[node name="z2" parent="." instance=ExtResource("2_8bcnt")]
-position = Vector2(-651, 5)
-
-[node name="z3" parent="." instance=ExtResource("2_8bcnt")]
-position = Vector2(-15, -245)

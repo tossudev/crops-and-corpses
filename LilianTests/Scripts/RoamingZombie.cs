@@ -1,12 +1,16 @@
 using Godot;
 using System;
+using System.Diagnostics.Tracing;
 
 public partial class RoamingZombie : CharacterBody2D
 {
 	[Export] private float _damage;
 	private Sprite2D _sprite;
 	private CharacterBody2D _player;
+	private HitboxComponent _hitbox;
 	private Attack _attack;
+	private Timer _timer;
+	private bool _playerInAttackRange;
 	private HealthComponent _healthComponent;
 	[Export] private NodePath _characterNodePath = null;
 	private CharacterBody2D _thisZombie;
@@ -17,19 +21,30 @@ public partial class RoamingZombie : CharacterBody2D
 		packedScene = (PackedScene)GD.Load("res://LilianTests/Prefabs/zombie_with_hitbox.tscn");
 
 		_thisZombie = GetNodeOrNull<CharacterBody2D>(_characterNodePath);
-		//attack.damage = 10.0f;
+		_damage = 10.0f;
+		_playerInAttackRange = false;
         _sprite = GetNode<Sprite2D>("Sprite2D");
 		//_healthComponent = GetNode<HealthComponent>("HealthComponent");
 
 		_attack = new Attack
 		{
-			damage = _damage
+			damage = _damage,
 		};
     }
 
     public override void _PhysicsProcess(double delta)
     {
         MoveAndSlide();
+
+		// if (_playerInAttackRange)
+		// {
+		// 	//AttackPlayer(_hitbox);
+		// 	_timer.Start();
+		// }
+		// else
+		// {
+		// 	_timer.Stop();
+		// }
 		
 		if (Velocity.X > 0)
     	{
@@ -46,11 +61,13 @@ public partial class RoamingZombie : CharacterBody2D
 		if(body.IsInGroup("player"))
 		{
 			_player = (CharacterBody2D)body;
-			HitboxComponent _hitbox = _player.GetNodeOrNull<HitboxComponent>("HitboxComponent");
+			_hitbox = _player.GetNodeOrNull<HitboxComponent>("HitboxComponent");
 
 			if (_hitbox != null)
 			{
 				_hitbox.ApplyAttack(_attack);
+				// _playerInAttackRange = true;
+				// //AttackPlayer(_hitbox);
 
 				switch(_attack.effect)
 				{
@@ -62,11 +79,9 @@ public partial class RoamingZombie : CharacterBody2D
 						spawnNPC.Transform = zombiePos;
 						AddChild(spawnNPC);
 						break;
-					default:
+					default:						
 					break;
-
-				}
-               	 
+				}               	 
 			}
 			else 
 			{
@@ -74,4 +89,19 @@ public partial class RoamingZombie : CharacterBody2D
 			}
 		}
 	}
+
+	// private void OnAttackBoxExited(Node2D body)
+	// {
+	// 	_playerInAttackRange = false;
+	// }
+
+	// private void OnTimerTimeout()
+	// {
+	// 	GD.Print("attack player");
+	// 	if(_hitbox != null)
+	// 	{
+	// 		_hitbox.ApplyAttack(_attack);
+	// 	}
+		
+	// }
 }

@@ -9,6 +9,7 @@ knockback = 0.0
 cooldown = 0.5
 effect = 0
 reach = 2.0
+holdAction = true
 ranged = false
 speed = 0.0
 drawTime = 0.0

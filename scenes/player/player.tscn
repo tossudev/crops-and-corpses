@@ -9,22 +9,24 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xe3lj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xqb0"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_efott"]
 radius = 117.527
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_weapon") groups=["player"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xqb0"]
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_handheld", "_camera") groups=["player"]]
 scale = Vector2(3.2, 3.2)
 script = ExtResource("1_y7bta")
-_weapon = NodePath("Handheld")
+_handheld = NodePath("Handheld")
+_camera = NodePath("")
 _speed = 300
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true
 
 [node name="Handheld" parent="." instance=ExtResource("2_00eh7")]
 _weapon = ExtResource("3_6md08")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("2_jvd4n")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_wuvdk")]
 
@@ -35,19 +37,16 @@ _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_xe3lj")
-debug_color = Color(1, 0, 0, 0.12549)
-
-[node name="Icon" type="Sprite2D" parent="."]
-scale = Vector2(0.15625, 0.15625)
-texture = ExtResource("2_jvd4n")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_2xqb0")
-debug_color = Color(0, 0.6, 0.701961, 0.12549)
 
 [node name="InteractionArea" type="Area2D" parent="."]
+scale = Vector2(1, 1)
 collision_layer = 2
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("CircleShape2D_efott")
+debug_color = Color(0, 0.647059, 0.243137, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_2xqb0")

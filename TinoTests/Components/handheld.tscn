@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://3hlx66fdaruu"]
 
-[ext_resource type="Script" path="res://TinoTests/Scripts/WeaponController.cs" id="1_gwltb"]
-[ext_resource type="Resource" uid="uid://be8oyimariure" path="res://TinoTests/Scripts/Weapons/Hand.tres" id="2_2eact"]
+[ext_resource type="Script" path="res://TinoTests/Scripts/HandheldController.cs" id="1_gwltb"]
 [ext_resource type="PackedScene" uid="uid://dqmfwe15dtgat" path="res://TinoTests/Prefabs/projectile.tscn" id="2_agrd3"]
+[ext_resource type="Resource" uid="uid://dsa6q3jkek4am" path="res://TinoTests/Scripts/Weapons/Bow1.tres" id="2_c7wu3"]
 [ext_resource type="Texture2D" uid="uid://8h4nv7s06ft5" path="res://TinoTests/Sprites/Swingbox.png" id="3_ha3no"]
 [ext_resource type="Resource" uid="uid://cuipddm160c01" path="res://TinoTests/Scripts/Projectiles/Arrow1.tres" id="3_i4pel"]
 
@@ -71,7 +71,7 @@ _data = {
 
 [node name="HandHeld" type="Node2D" node_paths=PackedStringArray("_hitbox", "_animationPlayer", "_timer")]
 script = ExtResource("1_gwltb")
-_weapon = ExtResource("2_2eact")
+_weapon = ExtResource("2_c7wu3")
 _projectile = ExtResource("3_i4pel")
 _hitbox = NodePath("Hitbox")
 _animationPlayer = NodePath("AnimationPlayer")
@@ -90,7 +90,7 @@ collision_mask = 20
 position = Vector2(2.08165e-12, 8)
 rotation = 3.14159
 scale = Vector2(0.125738, 0.125743)
-polygon = PackedVector2Array(65, -48, 94, -26, 116, 6, 126, 35, 126, 44, 0.0569153, 64, -126, 44, -126, 35, -116, 6, -94, -26, -65, -48, -32, -62, 0, -65, 33, -62)
+polygon = PackedVector2Array(65, -48, 94, -26, 116, 6, 126, 43, 2.08165e-12, 64, -126, 43, -116, 6, -94, -26, -65, -48, -32, -62, 2.08165e-12, -66, 32, -62)
 disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -8,7 +8,7 @@
 radius = 0.125
 
 [node name="Projectile" type="Node2D" node_paths=PackedStringArray("_lifetimeTimer")]
-scale = Vector2(32, 32)
+scale = Vector2(64, 64)
 script = ExtResource("1_tcvia")
 _lifetimeTimer = NodePath("Lifetime")
 

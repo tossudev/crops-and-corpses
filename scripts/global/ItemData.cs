@@ -4,7 +4,7 @@ using System.Linq;
 
 public partial class ItemData : Node {
 
-    [Export] public string ItemsDirectory = "res://assets/resources/items/";
+    [Export] public string ItemsDirectory = "res://assets/resources/game_items/";
     public static Godot.Collections.Dictionary items = new ();
 
     public override void _Ready() {

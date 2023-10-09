@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://puijuu7kafkp"]
+
+[ext_resource type="Texture2D" uid="uid://cu1cpya3xfmje" path="res://LilianTests/Sprites/seeds_placeholder.png" id="1_txs13"]
+[ext_resource type="Script" path="res://LilianTests/Scripts/Collectables.cs" id="1_vbtqi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4c3pd"]
+radius = 150.0
+
+[node name="collectable_seed" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_vbtqi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_txs13")
+
+[node name="pickArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pickArea"]
+shape = SubResource("CircleShape2D_4c3pd")
+
+[connection signal="body_entered" from="pickArea" to="." method="OnPickAreaEntered"]
+[connection signal="body_exited" from="pickArea" to="." method="OnPickAreaExited"]

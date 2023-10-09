@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7gaylfefpows"]
+
+[ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="1_nlc5d"]
+[ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://scenes/farm/farm_plot.tscn" id="2_nbnc0"]
+[ext_resource type="Script" path="res://JanitaTests/Scripts/PlantOptionButton.cs" id="3_tkndw"]
+
+[node name="JanitaTest" type="Node2D"]
+
+[node name="farm_manager" parent="." instance=ExtResource("1_nlc5d")]
+
+[node name="OptionButton" type="OptionButton" parent="."]
+offset_left = 523.0
+offset_top = 168.0
+offset_right = 633.0
+offset_bottom = 199.0
+item_count = 3
+popup/item_0/text = "Potato"
+popup/item_0/id = 0
+popup/item_1/text = "Tomato"
+popup/item_1/id = 1
+popup/item_2/text = "Cabbage"
+popup/item_2/id = 2
+script = ExtResource("3_tkndw")
+
+[node name="farm_plot" parent="." node_paths=PackedStringArray("oBTest") instance=ExtResource("2_nbnc0")]
+position = Vector2(491, 388)
+oBTest = NodePath("../OptionButton")
+
+[node name="farm_plot2" parent="." node_paths=PackedStringArray("oBTest") instance=ExtResource("2_nbnc0")]
+position = Vector2(673, 388)
+oBTest = NodePath("../OptionButton")
+
+[connection signal="item_selected" from="OptionButton" to="OptionButton" method="_on_OptionButton_item_selected"]

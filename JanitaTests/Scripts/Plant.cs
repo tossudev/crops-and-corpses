@@ -75,6 +75,7 @@ public partial class Plant : Node2D
 
 	void InitializePlant(){
 
+		Position = new Vector2(0, -35);
 		_state = GrowthState.WaitWatering;
 		_col.InputEvent +=InteractWithPlant;
 		trect.ExpandMode=TextureRect.ExpandModeEnum.FitWidth;
@@ -89,8 +90,8 @@ public partial class Plant : Node2D
 		_growthTimer.Timeout += GrowthCycle;	
 		trect.Texture = _sproutTexture;
 
-		_warningSign.Position = new Vector2(-2, -422);
-		_warningSign.Scale = new Vector2(3,3);
+		_warningSign.Scale = new Vector2(0.75f,0.75f);
+		_warningSign.Position = new Vector2(0, -115);
 		AddChild(_warningSign);
 
 		_bugSignTexture = ResourceLoader.Load("res://JanitaTests/Images/bugsign.png") as Texture2D;

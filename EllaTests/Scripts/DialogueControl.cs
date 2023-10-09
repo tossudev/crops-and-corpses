@@ -5,6 +5,7 @@ public partial class DialogueControl : Control
 {
 	Button _buttonOpt1;
 	Button _buttonOpt2;
+	Button _buttonOpt3;
 	[Export]
 	npcControl NPC;
 
@@ -13,6 +14,7 @@ public partial class DialogueControl : Control
 	ColorRect _backgroundColor;
 	public bool farmingTaskStarted = false;
 	public bool exitDialogue = false;
+	public bool attackZombies = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -20,6 +22,7 @@ public partial class DialogueControl : Control
 
 		_buttonOpt1 = GetNode<Button>("ColorRect/Button1");
 		_buttonOpt2 = GetNode<Button>("ColorRect/Button2");
+		_buttonOpt3 = GetNode<Button>("ColorRect/Button3");
 
 		_nameText = GetNode<RichTextLabel>("ColorRect/Name");
 		_text = GetNode<RichTextLabel>("ColorRect/Text");
@@ -28,6 +31,7 @@ public partial class DialogueControl : Control
 		_text.Text = "Hello, do you need help?";
 		_buttonOpt1.Text = "Yes, I need help with farm";
 		_buttonOpt2.Text = "Nevermind";
+		_buttonOpt3.Text = "Attack zombies";
 
 		Visible = false;
 
@@ -54,6 +58,12 @@ public partial class DialogueControl : Control
 		Visible = false;
 	}
 
+	public void _on_button_3_button_up()
+	{
+		attackZombies = true;
+		Visible = false;
+	}
+
 	private void DialogueWindowVisible()
 	{
 		GD.Print("Dialogue window opened");
@@ -65,6 +75,7 @@ public partial class DialogueControl : Control
 			_text.Text = "Hello, do you need help?";
 			_buttonOpt1.Text = "Yes, I need help with farm";
 			_buttonOpt2.Text = "Nevermind";
+			_buttonOpt3.Text = "Attack zombies";
 
 			_buttonOpt1.Visible = true;
 		}
@@ -82,10 +93,9 @@ public partial class DialogueControl : Control
 			_text.Text = "I did my job, do you need help with something else?";
 			_buttonOpt1.Text = "Yes, I need help with farm";
 			_buttonOpt2.Text = "Nevermind";
+			_buttonOpt3.Text = "Attack zombies";
 
 			_buttonOpt1.Visible = true;
 		}
 	}
-
-
 }

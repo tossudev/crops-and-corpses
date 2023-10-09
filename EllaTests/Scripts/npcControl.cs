@@ -7,6 +7,7 @@ public partial class npcControl : CharacterBody2D
 	{
 		Patrol,
 		TaskFarming,
+		TaskDefend,
 		TaskCompleted,
 		FollowPlayer
 
@@ -14,7 +15,6 @@ public partial class npcControl : CharacterBody2D
 	public States CurrentState;
 	public bool dialogueWindow = false;
 	bool _taskCompleted;
-	int _waypointIndex;
 	float _speed = 50;
 	Timer _taskTimer;
 	Vector2 _targetPosition;
@@ -61,6 +61,12 @@ public partial class npcControl : CharacterBody2D
 					_taskTimer.Start();
 				}
 
+				if(dialogueControl.attackZombies == true)
+				{
+					GD.Print("Looking for zombies");
+					CurrentState = States.TaskDefend;
+				}
+
 				break;
 
 			case States.TaskFarming:
@@ -80,6 +86,13 @@ public partial class npcControl : CharacterBody2D
 				{
 					dialogueControl.exitDialogue = false;
 				}
+
+				break;
+			
+			case States.TaskDefend:
+				TargetPosition();
+				Movement(_targetPosition);
+				dialogueControl.attackZombies = false;
 
 				break;
 
@@ -124,6 +137,12 @@ public partial class npcControl : CharacterBody2D
 			// Move to a position where farming plots are, needs thinking
 
 		}
+		if (CurrentState == States.TaskDefend)
+		{
+			_targetPosition = GetParent().GetNode<CharacterBody2D>("zombie").GlobalPosition;
+			// Move to a position where farming plots are, needs thinking
+
+		}
 		if(CurrentState == States.TaskCompleted)
 		{
 			_targetPosition = GetParent().GetNode<Marker2D>("TaskCompleted").GlobalPosition;
@@ -140,6 +159,11 @@ public partial class npcControl : CharacterBody2D
 		Vector2 _direction = (target - GlobalPosition).Normalized();
 		Velocity = _direction * _speed;
 		MoveAndSlide();
+	}
+
+	private void Attack()
+	{
+		// Make damage to zombies
 	}
 
 	public void _on_button_button_up()

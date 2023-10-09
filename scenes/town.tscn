@@ -25,7 +25,8 @@ region_rect = Rect2(0, 0, 512, 512)
 [node name="Buildings" type="Node2D" parent="."]
 position = Vector2(6.10352e-05, 6.10352e-05)
 
-[node name="Player" parent="." instance=ExtResource("2_nnncm")]
+[node name="Player" parent="." node_paths=PackedStringArray("_camera") instance=ExtResource("2_nnncm")]
+_camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true

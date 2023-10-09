@@ -9,7 +9,6 @@ radius = 150.0
 [node name="collectable_seed" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_vbtqi")
-name = "seeds"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.8, 0.8)

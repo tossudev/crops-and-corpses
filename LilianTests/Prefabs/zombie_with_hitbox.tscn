@@ -30,9 +30,10 @@ debug_color = Color(0, 0.6, 0.701961, 0.12549)
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_46tua")]
 
-[node name="HitboxComponent" parent="." instance=ExtResource("2_lvwfs")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("2_lvwfs")]
 collision_layer = 4
 collision_mask = 32
+_healthComponent = NodePath("../HealthComponent")
 _knockback = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
@@ -50,7 +51,6 @@ _zombie = NodePath("../..")
 [node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie")]
 script = ExtResource("6_a8per")
 _zombie = NodePath("../..")
-_move_speed = 200.0
 
 [node name="AttackBox" type="Area2D" parent="."]
 

@@ -14,6 +14,11 @@ public partial class RoamingZombie : CharacterBody2D
 		//attack.damage = 10.0f;
         _sprite = GetNode<Sprite2D>("Sprite2D");
 		//_healthComponent = GetNode<HealthComponent>("HealthComponent");
+
+		_attack = new Attack
+		{
+			damage = _damage
+		};
     }
 
     public override void _PhysicsProcess(double delta)
@@ -39,20 +44,12 @@ public partial class RoamingZombie : CharacterBody2D
 
 			if (_hitbox != null)
 			{
-                Attack _attack = new Attack
-                {
-                    damage = _damage
-                };
-
                 _hitbox.Damage(_attack);
 			}
 			else 
 			{
 				GD.Print("No hitbox found on player");
 			}
-
-			//GD.Print("hB: " + hitbox.Name);
-			//hitbox.Damage(_attack);
 		}
 	}
 }

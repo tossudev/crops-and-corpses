@@ -4,7 +4,7 @@ using System.Reflection.Metadata.Ecma335;
 
 public partial class Collectables : Node
 {
-	[Export] private string _name;
+	private string _name;
 	private bool _playerInArea;
 	private int _amount;
 
@@ -12,12 +12,13 @@ public partial class Collectables : Node
 	{		
 		_playerInArea = false;
 		_amount = 0;
+		_name = Name;
 	}
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		if (_playerInArea)
 		{
-			if(Input.IsActionPressed("interact"))
+			if(Input.IsActionJustPressed("interact"))
 			{
 				CollectAmount();				
 				QueueFree();
@@ -45,12 +46,12 @@ public partial class Collectables : Node
 	private void CollectAmount()
 	{
 		Random random_amount = new Random();
-		if(_name == "seeds")
+		if(_name == "collectable_seed")
 		{
 			_amount = random_amount.Next(1, 4);
 			//PlayerInventoryData.AddItemToInventory(0, amount);
 		}
-		if(_name == "somethingElse")
+		if(_name == "collectable_something")
 		{
 			_amount = 10;
 		}

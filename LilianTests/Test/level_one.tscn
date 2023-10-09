@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bknhuvnuqhkcl"]
+[gd_scene load_steps=9 format=3 uid="uid://bknhuvnuqhkcl"]
 
 [ext_resource type="Texture2D" uid="uid://wwuloa5jv6f" path="res://assets/placeholder/quick_grid.png" id="1_3drb6"]
 [ext_resource type="Texture2D" uid="uid://btvrgdl7ajiub" path="res://LilianTests/Sprites/grass_tiles_placeholder.png" id="2_rjwr2"]
 [ext_resource type="PackedScene" uid="uid://puijuu7kafkp" path="res://LilianTests/Test/collectable_seed.tscn" id="5_1bqsq"]
-[ext_resource type="PackedScene" uid="uid://ducfl7udsw3bj" path="res://LilianTests/Prefabs/zombie_with_hitbox.tscn" id="6_o1oam"]
+[ext_resource type="Script" path="res://LilianTests/Test/ChangeScene.cs" id="6_kt6fs"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="7_p5m6p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o2vk1"]
@@ -17,6 +17,9 @@ texture_region_size = Vector2i(128, 128)
 [sub_resource type="TileSet" id="TileSet_1q6td"]
 tile_size = Vector2i(128, 128)
 sources/4 = SubResource("TileSetAtlasSource_o2vk1")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l6e1f"]
+size = Vector2(177.5, 273)
 
 [node name="level_one" type="Node2D"]
 
@@ -41,8 +44,16 @@ layer_0/tile_data = PackedInt32Array(-786448, 65540, 1, -720912, 65540, 1, -6553
 [node name="collectable_seed" parent="." instance=ExtResource("5_1bqsq")]
 position = Vector2(-160, 504)
 
-[node name="zombie" parent="." instance=ExtResource("6_o1oam")]
-position = Vector2(-654, -145)
-
 [node name="Player" parent="." instance=ExtResource("7_p5m6p")]
 position = Vector2(0, 14)
+
+[node name="LevelOneToTown" type="Area2D" parent="."]
+position = Vector2(-1959, -2)
+script = ExtResource("6_kt6fs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelOneToTown"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_l6e1f")
+
+[connection signal="body_entered" from="LevelOneToTown" to="LevelOneToTown" method="OnBodyEntered"]
+[connection signal="body_exited" from="LevelOneToTown" to="LevelOneToTown" method="OnBodyExited"]

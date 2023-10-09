@@ -1,8 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
 
 public partial class npcControl : CharacterBody2D
 {
@@ -10,14 +7,19 @@ public partial class npcControl : CharacterBody2D
 	{
 		Patrol,
 		Task,
-		Dialogue,
+		TaskCompleted,
 		FollowPlayer
 
 	}
 	public States CurrentState;
+	public bool dialogueWindow = false;
+	bool _taskCompleted;
 	int _waypointIndex;
+	float _speed = 50;
 	Timer _taskTimer;
 	Vector2 _targetPosition;
+	[Export]
+	DialogueControl dialogueControl;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -25,16 +27,11 @@ public partial class npcControl : CharacterBody2D
 		// Setting up the timer
 		_taskTimer = new Timer
 		{
-			WaitTime = 20f,
+			WaitTime = 30f,
 			OneShot = true
 		};
 
 		AddChild(_taskTimer);
-
-		/*Access to group DO NOT DELETE 
-		_waypointsFarm = GetTree().GetNodesInGroup("WaypointFarm").Select(saar => saar as Marker2D).ToList();
-		//List<Marker2D> _waypointTaskCompleted = new List<Marker2D>();
-		*/
 
 		// If npc in outside world 
 		// CurrentState = States.FollowPlayer;
@@ -57,9 +54,9 @@ public partial class npcControl : CharacterBody2D
 				}
 				Movement(_targetPosition);
 
-				if (Input.IsActionJustPressed("Click"))
+				if (dialogueControl.farmingTaskStarted == true)
 				{
-					GD.Print("Task1 started");
+					GD.Print("Farming task started");
 					CurrentState = States.Task;
 					_taskTimer.Start();
 				}
@@ -70,22 +67,40 @@ public partial class npcControl : CharacterBody2D
 
 				TargetPosition();
 				Movement(_targetPosition);
-
-
-				if (_targetPosition == GetParent().GetNode<Marker2D>("TaskCompleted").GlobalPosition)
+				dialogueControl.farmingTaskStarted = false;
+				if(_taskTimer.IsStopped()){
+					_taskCompleted = true;
+	
+				}
+				if(_taskCompleted == true)
 				{
-					if (Input.IsActionJustPressed("Click"))
-					{
-						GD.Print("Task1 Completed");
-						CurrentState = States.Patrol;
-					}
+					CurrentState = States.TaskCompleted;
+				}
+				if(dialogueControl.exitDialogue == true)
+				{
+					dialogueControl.exitDialogue = false;
 				}
 
 				break;
 
-			case States.Dialogue:
-				// Adding dialogue window where player can choose which task is being done
-				// After that goes to task state
+			case States.TaskCompleted:
+				//_speed = 0;
+				_taskCompleted = false;
+				//Add resources to player inventory or something
+				TargetPosition();
+				Movement(_targetPosition);
+				if (dialogueControl.farmingTaskStarted == true)
+				{
+					GD.Print("Farming task started");
+					CurrentState = States.Task;
+					_taskTimer.Start();
+					dialogueControl.farmingTaskStarted = false;
+				} 
+				if(dialogueControl.exitDialogue == true)
+				{
+					CurrentState = States.Patrol;
+					dialogueControl.exitDialogue = false;
+				}
 				break;
 
 			case States.FollowPlayer:
@@ -101,18 +116,16 @@ public partial class npcControl : CharacterBody2D
 		if (CurrentState == States.Patrol)
 		{
 			float range = 100;
-			_targetPosition = GlobalPosition + new Vector2
-			(GD.Randf() * range * 2 - range, GD.Randf() * range * 2 - range);
+			_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
 		}
 		if (CurrentState == States.Task)
 		{
-			//_targetPosition = _waypointsTask[0].GlobalPosition;
 			_targetPosition = GetParent().GetNode<Marker2D>("TaskPoint").GlobalPosition;
 
-			if (_taskTimer.IsStopped())
-			{
-				_targetPosition = GetParent().GetNode<Marker2D>("TaskCompleted").GlobalPosition;
-			}
+		}
+		if(CurrentState == States.TaskCompleted)
+		{
+			_targetPosition = GetParent().GetNode<Marker2D>("TaskCompleted").GlobalPosition;
 		}
 		if (CurrentState == States.FollowPlayer)
 		{
@@ -122,9 +135,21 @@ public partial class npcControl : CharacterBody2D
 
 	private void Movement(Vector2 target)
 	{
-		float _speed = 50;
+		_speed = 50;
 		Vector2 _direction = (target - GlobalPosition).Normalized();
 		Velocity = _direction * _speed;
 		MoveAndSlide();
+	}
+
+	public void _on_button_button_up()
+	{
+		dialogueWindow = true;
+
+		if (_targetPosition == GetParent().GetNode<Marker2D>("TaskCompleted").GlobalPosition)
+		{
+				dialogueControl.farmingTaskStarted = false;
+				GD.Print("Task1 Completed");
+				CurrentState = States.TaskCompleted;
+		}
 	}
 }

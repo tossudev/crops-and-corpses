@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://wis4r15rhkuo"
-path="res://.godot/imported/sprite_rock.png-2ec4f90c69565c040b77144f1d60f3ef.ctex"
+path="res://.godot/imported/sprite_rock.png-2b677d103192d254a1f8177bda5adabb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Town/sprite_rock.png"
-dest_files=["res://.godot/imported/sprite_rock.png-2ec4f90c69565c040b77144f1d60f3ef.ctex"]
+source_file="res://assets/resources/sprites/foliage/sprite_rock.png"
+dest_files=["res://.godot/imported/sprite_rock.png-2b677d103192d254a1f8177bda5adabb.ctex"]
 
 [params]
 

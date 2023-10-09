@@ -11,6 +11,7 @@ _col = NodePath("Area2D")
 _nodePath = NodePath("plant_slot")
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-32, -32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("3_d37t8")
@@ -20,11 +21,15 @@ custom_minimum_size = Vector2(500, 0)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_right = 500.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 468.0
+offset_bottom = -32.0
 grow_horizontal = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-32, -32)
 texture = ExtResource("1_hsnly")
 
 [connection signal="input_event" from="Area2D" to="." method="InteractWithField"]

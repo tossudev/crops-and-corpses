@@ -3,7 +3,10 @@ using System;
 
 public partial class PlayerController : CharacterBody2D
 {
-	[Export] private WeaponController _weapon;
+	[Export] private HandheldController _handheld;
+	[Export] private Camera2D _camera;
+	[Export] private float maxZoom = 2f;
+	[Export] private float minZoom = 1f;
 	[Export] private int _speed = 100;
 
 	private bool _canMelee = true;
@@ -15,14 +18,33 @@ public partial class PlayerController : CharacterBody2D
 
 		if (Input.IsActionPressed("left_click"))
 		{
-			_weapon.Use(_canMelee);
+			_handheld.Use(_canMelee);
 			_canMelee = false;
 		}
 		else if (Input.IsActionJustReleased("left_click"))
 		{
-			_weapon.ReleaseDraw();
+			_handheld.Release();
 			_canMelee = true;
 		}
+
+		else if (Input.IsActionJustPressed("wheel_up"))
+		{
+			if (_camera.Zoom.X < maxZoom)
+				CameraZoom(0.1f);
+		}
+		else if (Input.IsActionJustPressed("wheel_down"))
+		{
+			if (_camera.Zoom.X > minZoom)
+				CameraZoom(-0.1f);
+		}
+	}
+
+	private void CameraZoom(float zoomDelta)
+	{
+		Vector2 newZoom = _camera.Zoom += new Vector2(zoomDelta, zoomDelta);
+		_camera.Zoom = newZoom;
+
+		GD.Print(_camera.Zoom);
 	}
 
 	private Vector2 GetMovementInputVector()

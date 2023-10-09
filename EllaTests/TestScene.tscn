@@ -1,36 +1,27 @@
 [gd_scene load_steps=3 format=3 uid="uid://bfu78odug3mtx"]
 
-[ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="1_yxnfs"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_6hlrx"]
-vertices = PackedVector2Array(141, 22, 1070, 19, 1071, 489, 145, 487)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(141, 22, 1070, 19, 1071, 489, 145, 487)])
+[ext_resource type="Script" path="res://EllaTests/TestScene.cs" id="1_k7nd1"]
+[ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_h8sub"]
 
 [node name="Node2D" type="Node2D"]
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_6hlrx")
+script = ExtResource("1_k7nd1")
 
 [node name="Waypoint1" type="Marker2D" parent="." groups=["WaypointFarm"]]
 position = Vector2(180, 468)
 
-[node name="Waypoint2" type="Marker2D" parent="." groups=["WaypointFarm"]]
-position = Vector2(974, 471)
+[node name="Waypoint2" type="Marker2D" parent="Waypoint1" groups=["WaypointFarm"]]
+position = Vector2(794, 3)
 
-[node name="Waypoint3" type="Marker2D" parent="." groups=["WaypointFarm"]]
-position = Vector2(966, 59)
+[node name="Waypoint3" type="Marker2D" parent="Waypoint1" groups=["WaypointFarm"]]
+position = Vector2(786, -409)
 
-[node name="Waypoint4" type="Marker2D" parent="." groups=["WaypointFarm"]]
-position = Vector2(197, 51)
+[node name="Waypoint4" type="Marker2D" parent="Waypoint1" groups=["WaypointFarm"]]
+position = Vector2(17, -417)
 
-[node name="NPC" parent="." instance=ExtResource("1_yxnfs")]
-position = Vector2(561, 347)
-
-[node name="Taskpoint1" type="Marker2D" parent="." groups=["Taskpoint"]]
+[node name="TaskPoint" type="Marker2D" parent="." groups=["Taskpoint"]]
 position = Vector2(744, 253)
 
-[node name="ColorRect" type="ColorRect" parent="Taskpoint1"]
+[node name="ColorRect" type="ColorRect" parent="TaskPoint"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -44,14 +35,17 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.968627, 0.262745, 0.462745, 0.427451)
 
-[node name="Taskpoint2" type="Marker2D" parent="." groups=["Taskpoint"]]
-position = Vector2(743, 162)
+[node name="Taskpoint2" type="Marker2D" parent="TaskPoint" groups=["Taskpoint"]]
+visible = false
+position = Vector2(-1, -91)
 
-[node name="Taskpoint3" type="Marker2D" parent="." groups=["Taskpoint"]]
-position = Vector2(667, 162)
+[node name="Taskpoint3" type="Marker2D" parent="TaskPoint" groups=["Taskpoint"]]
+visible = false
+position = Vector2(-77, -91)
 
-[node name="Taskpoint4" type="Marker2D" parent="." groups=["Taskpoint"]]
-position = Vector2(665, 254)
+[node name="Taskpoint4" type="Marker2D" parent="TaskPoint" groups=["Taskpoint"]]
+visible = false
+position = Vector2(-79, 1)
 
 [node name="TaskCompleted" type="Marker2D" parent="." groups=["TaskCompleted"]]
 position = Vector2(426, 352)
@@ -70,3 +64,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.94902, 0.941176, 0, 0.427451)
 metadata/_edit_use_anchors_ = true
+
+[node name="Player" parent="." instance=ExtResource("2_h8sub")]
+position = Vector2(1214, 274)

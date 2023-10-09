@@ -12,6 +12,7 @@ public partial class Weapon : Item
 
     [ExportCategory("Melee")]
     [Export] public float reach { get; set; } = 1;
+    [Export] public bool holdAction { get; set; }
 
     [ExportCategory("Ranged")]
     [Export] public bool ranged { get; set; }

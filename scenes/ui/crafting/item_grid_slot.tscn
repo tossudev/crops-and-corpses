@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwkfv4af2ta2g"]
+
+[ext_resource type="Texture2D" uid="uid://dimmd0t6iyqa1" path="res://assets/placeholder/R_mockupSprites/crafting_menu_grid_background.png" id="1_mpok7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lvwuh"]
+texture = ExtResource("1_mpok7")
+
+[node name="ItemGridSlot" type="Panel"]
+light_mask = 16
+visibility_layer = 16
+custom_minimum_size = Vector2(75, 75)
+layout_direction = 1
+pivot_offset = Vector2(37.5, 37.5)
+theme_override_styles/panel = SubResource("StyleBoxTexture_lvwuh")

@@ -88,6 +88,8 @@ public partial class PlayerInventoryController : Control {
 
 		Texture2D iconTexture = itemResource.IconTexture;
 		selectedIcon.Texture = iconTexture;
+
+		selectedQuantityLabel.Visible = selectedItem.quantity > 1;
 		selectedQuantityLabel.Text = selectedItem.quantity.ToString();
 	}
 

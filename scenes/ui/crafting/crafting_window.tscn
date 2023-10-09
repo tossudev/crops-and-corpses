@@ -1,0 +1,162 @@
+[gd_scene load_steps=12 format=3 uid="uid://ba8jl34px0fpl"]
+
+[ext_resource type="Script" path="res://scripts/ui/crafting/CraftingWindow.cs" id="1_glv8t"]
+[ext_resource type="PackedScene" uid="uid://b01xhkvdrkq54" path="res://scenes/ui/crafting/craft_panel.tscn" id="2_lljeh"]
+[ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="3_w1e0q"]
+[ext_resource type="PackedScene" uid="uid://cwkfv4af2ta2g" path="res://scenes/ui/crafting/item_grid_slot.tscn" id="4_h3ga6"]
+[ext_resource type="PackedScene" uid="uid://dqyv3rj8otsnr" path="res://scenes/ui/crafting/craftable_item.tscn" id="5_8tf6t"]
+[ext_resource type="Resource" uid="uid://c3e5qdsie8n0l" path="res://assets/resources/game_items/6_arrow.tres" id="6_wjko8"]
+[ext_resource type="Resource" uid="uid://c5sh8gg8de5a2" path="res://assets/resources/game_items/5_bow.tres" id="7_g4egb"]
+[ext_resource type="Resource" uid="uid://cqnav3flekvvt" path="res://assets/resources/game_items/4_bucket.tres" id="8_badks"]
+[ext_resource type="Resource" uid="uid://cj0seqylk2aaa" path="res://assets/resources/game_items/3_axe.tres" id="11_et5q1"]
+[ext_resource type="Resource" uid="uid://di3mqk8b3d2ke" path="res://assets/resources/game_items/2_sword.tres" id="12_t03sw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ppdoo"]
+font_size = 24
+
+[node name="CraftingWindow" type="Control"]
+layout_mode = 3
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_glv8t")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+offset_top = 120.0
+offset_right = 243.0
+offset_bottom = 157.0
+text = "Press \"Q\" for crafting"
+label_settings = SubResource("LabelSettings_ppdoo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" parent="." groups=["CraftPanel"] instance=ExtResource("2_lljeh")]
+layout_mode = 0
+offset_left = 300.0
+offset_right = 700.0
+pivot_offset = Vector2(400, 0)
+
+[node name="ItemArea" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_w1e0q")
+
+[node name="GridContainer" type="GridContainer" parent="ItemArea"]
+layout_mode = 2
+offset_left = 33.0
+offset_top = 33.0
+offset_right = 266.0
+offset_bottom = 266.0
+columns = 3
+
+[node name="ItemGridSlot" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
+layout_mode = 2
+
+[node name="ItemGridSlot2" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
+layout_mode = 2
+
+[node name="ItemGridSlot3" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
+layout_mode = 2
+
+[node name="CraftableItemArrow" parent="ItemArea/GridContainer/ItemGridSlot3" instance=ExtResource("5_8tf6t")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 9.765
+offset_top = 9.78
+offset_right = 65.765
+offset_bottom = 65.78
+grow_horizontal = 1
+grow_vertical = 1
+pivot_offset = Vector2(28, 28)
+itemRes = ExtResource("6_wjko8")
+
+[node name="ItemGridSlot4" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
+layout_mode = 2
+
+[node name="ItemGridSlot5" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
+layout_mode = 2
+
+[node name="ItemGridSlot6" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
+layout_mode = 2
+
+[node name="CraftableItemBow" parent="ItemArea/GridContainer/ItemGridSlot6" instance=ExtResource("5_8tf6t")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 9.765
+offset_top = 9.78
+offset_right = 65.765
+offset_bottom = 65.78
+grow_horizontal = 1
+grow_vertical = 1
+pivot_offset = Vector2(28, 28)
+itemRes = ExtResource("7_g4egb")
+
+[node name="ItemGridSlot7" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
+layout_mode = 2
+
+[node name="CraftableItemBucket" parent="ItemArea/GridContainer/ItemGridSlot7" instance=ExtResource("5_8tf6t")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 9.765
+offset_top = 9.78
+offset_right = 65.765
+offset_bottom = 65.78
+grow_horizontal = 1
+grow_vertical = 1
+pivot_offset = Vector2(28, 28)
+itemRes = ExtResource("8_badks")
+
+[node name="ItemGridSlot8" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
+layout_mode = 2
+
+[node name="CraftableItemAxe" parent="ItemArea/GridContainer/ItemGridSlot8" instance=ExtResource("5_8tf6t")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 9.765
+offset_top = 9.78
+offset_right = 65.765
+offset_bottom = 65.78
+grow_horizontal = 1
+grow_vertical = 1
+pivot_offset = Vector2(28, 28)
+itemRes = ExtResource("11_et5q1")
+
+[node name="ItemGridSlot9" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
+layout_mode = 2
+
+[node name="CraftableItemSword" parent="ItemArea/GridContainer/ItemGridSlot9" instance=ExtResource("5_8tf6t")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 9.765
+offset_top = 9.78
+offset_right = 65.765
+offset_bottom = 65.78
+grow_horizontal = 1
+grow_vertical = 1
+pivot_offset = Vector2(28, 28)
+itemRes = ExtResource("12_t03sw")

@@ -4,7 +4,6 @@
 
 [resource]
 script = ExtResource("1_f8oqu")
-targetType = 1
 damage = 15.0
 knockback = 10.0
 cooldown = 0.5

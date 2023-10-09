@@ -4,7 +4,6 @@
 
 [resource]
 script = ExtResource("1_tcevj")
-targetType = 2
 damage = 25.0
 knockback = 0.0
 cooldown = 0.5

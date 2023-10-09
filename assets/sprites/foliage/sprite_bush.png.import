@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g0b72r3myf3c"
-path="res://.godot/imported/item_arrow.png-dd12370ad7a3fb47b5a4fe89f0c4b3f7.ctex"
+uid="uid://bp0rwsioa22xs"
+path="res://.godot/imported/sprite_bush.png-e5f57b2b92fb45979844dcac215e1266.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/resources/sprites/items/item_arrow.png"
-dest_files=["res://.godot/imported/item_arrow.png-dd12370ad7a3fb47b5a4fe89f0c4b3f7.ctex"]
+source_file="res://assets/sprites/foliage/sprite_bush.png"
+dest_files=["res://.godot/imported/sprite_bush.png-e5f57b2b92fb45979844dcac215e1266.ctex"]
 
 [params]
 

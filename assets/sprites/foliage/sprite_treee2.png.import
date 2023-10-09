@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p106vjb26wkd"
-path="res://.godot/imported/item_log.png-36797f2c2b348f1e9b7668d967552246.ctex"
+uid="uid://bhxs2ilevutl6"
+path="res://.godot/imported/sprite_treee2.png-cb2ba14ecbc337c85a99392d629d379a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/resources/sprites/items/item_log.png"
-dest_files=["res://.godot/imported/item_log.png-36797f2c2b348f1e9b7668d967552246.ctex"]
+source_file="res://assets/sprites/foliage/sprite_treee2.png"
+dest_files=["res://.godot/imported/sprite_treee2.png-cb2ba14ecbc337c85a99392d629d379a.ctex"]
 
 [params]
 

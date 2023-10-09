@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5w4ofxa2ivwg"
-path="res://.godot/imported/item_axe.png-89601bcfbd64a93f083531faaef7aa32.ctex"
+uid="uid://bqah3wgx4il3q"
+path="res://.godot/imported/sprite_tree1.png-76249fbba47286a7a2d6ed829db3fc08.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/resources/sprites/items/item_axe.png"
-dest_files=["res://.godot/imported/item_axe.png-89601bcfbd64a93f083531faaef7aa32.ctex"]
+source_file="res://assets/sprites/foliage/sprite_tree1.png"
+dest_files=["res://.godot/imported/sprite_tree1.png-76249fbba47286a7a2d6ed829db3fc08.ctex"]
 
 [params]
 

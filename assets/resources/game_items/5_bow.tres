@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=6 format=3 uid="uid://c5sh8gg8de5a2"]
 
-[ext_resource type="Texture2D" uid="uid://ds4d0bkp8w0vx" path="res://assets/resources/sprites/items/item_bow.png" id="1_7byhh"]
+[ext_resource type="Texture2D" uid="uid://ds4d0bkp8w0vx" path="res://assets/sprites/items/item_bow.png" id="1_demst"]
 [ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/0_log.tres" id="2_8l3qb"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_g4uxj"]
 [ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="4_fridg"]
@@ -14,6 +14,6 @@ quantity = 4
 script = ExtResource("4_fridg")
 ID = 5
 Name = "Bow"
-IconTexture = ExtResource("1_7byhh")
+IconTexture = ExtResource("1_demst")
 StackSize = 1
 craftingRequirements = Array[Object]([SubResource("Resource_4fvd4")])

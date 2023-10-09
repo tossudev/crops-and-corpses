@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtpyfgowkxn8s"
-path="res://.godot/imported/item_bowandarrow.png-248b61b685692c2d95a8b14bb2195596.ctex"
+uid="uid://cu64ds6x5cram"
+path="res://.godot/imported/item_sword.png-b21c5b28abe5680f131997234119d744.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/resources/sprites/items/item_bowandarrow.png"
-dest_files=["res://.godot/imported/item_bowandarrow.png-248b61b685692c2d95a8b14bb2195596.ctex"]
+source_file="res://assets/sprites/items/item_sword.png"
+dest_files=["res://.godot/imported/item_sword.png-b21c5b28abe5680f131997234119d744.ctex"]
 
 [params]
 

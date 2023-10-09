@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 public partial class CraftPanel : Control
 {
@@ -13,9 +14,8 @@ public partial class CraftPanel : Control
 	[Export] public TextEdit AmountToCraftTextEdit;
 	[Export] public Button craftButton;
 
-	public Item currentItemToBeCrafted;
-	
-	
+	public Item craftedItem;
+	public RawInventoryItem currentItemAsRaw;
 	
 	
 	// Called when the node enters the scene tree for the first time.
@@ -41,14 +41,15 @@ public partial class CraftPanel : Control
 		ErrorMsgLabel.Visible = false;
 		
 		Visible = true;
-		currentItemToBeCrafted = craftItem;
+		craftedItem = craftItem;
+		currentItemAsRaw = new RawInventoryItem(craftItem.ID, craftItem.Name, 0, craftItem.StackSize);
 
-		itemLabel.Text = currentItemToBeCrafted.Name.ToUpper();
-		itemImage.Texture = currentItemToBeCrafted.IconTexture;
+		itemLabel.Text = craftedItem.Name.ToUpper();
+		itemImage.Texture = craftedItem.IconTexture;
 
 		for (int i = 0; i < requiredResSlots.Length; i++)
 		{
-			if (i > currentItemToBeCrafted.craftingRequirements.Length - 1)
+			if (i > craftedItem.craftingRequirements.Length - 1)
 			{
 				requiredResSlots[i].Visible = false;
 				continue;
@@ -56,12 +57,16 @@ public partial class CraftPanel : Control
 			
 			requiredResSlots[i].Visible = true;
 
-			var requiredItem = currentItemToBeCrafted.craftingRequirements[i];
+			CraftingRequirement requirement = craftedItem.craftingRequirements[i];
+
+
+
+			RawInventoryItem requiredAsRaw = new RawInventoryItem(
+				requirement.item.ID, requirement.item.Name, requirement.quantity, requirement.item.StackSize);
 			
-			requiredResSlots[i].icon.Texture = requiredItem.item.IconTexture;
-			requiredResSlots[i].itemID = requiredItem.item.ID;
-			requiredResSlots[i].quantity = requiredItem.quantity;
-			requiredResSlots[i].quantityLabel.Text = requiredItem.quantity.ToString();
+			requiredResSlots[i].icon.Texture = requirement.item.IconTexture;
+			requiredResSlots[i].slotItem = requiredAsRaw;
+			requiredResSlots[i].quantityLabel.Text = requirement.quantity.ToString();
 		}
 	}
 
@@ -80,7 +85,10 @@ public partial class CraftPanel : Control
 		}
 		catch (Exception e)
 		{
-			GD.PrintErr("Not a valid number of items to craft");
+			GD.PrintErr("Not a valid number of items to craft", e.Message);
+			
+			ErrorMsgLabel.Visible = true;
+			ErrorMsgLabel.Text = "Enter a valid number";
 		}
 
 		if (!TryCraft(Mathf.Max(1, amountToCraft)))
@@ -88,37 +96,42 @@ public partial class CraftPanel : Control
 			ErrorMsgLabel.Visible = true;
 			ErrorMsgLabel.Text = "Not enough resources";
 		}
+		else
+		{
+			ErrorMsgLabel.Visible = false;
+		}
 	}
 
-	bool TryCraft(int amount)
+	bool TryCraft(int amountToCraft)
 	{
 		try
 		{
-			// Checking that all requirements are met
-			for (int i = 0; i < requiredResSlots.Length; i++)
+			if (craftedItem.craftingRequirements.Any(
+				    craftingRequirement => !PlayerInventoryData.ExistsInInventory(
+				    craftingRequirement.item.ID,craftingRequirement.quantity * amountToCraft)))
 			{
-				if (!requiredResSlots[i].Visible) continue;
-				
-				if (!PlayerInventoryData.ExistsInInventory(requiredResSlots[i].itemID, requiredResSlots[i].quantity * amount))
+				return false;
+			}
+			
+			foreach (var craftingRequirement in craftedItem.craftingRequirements)
+			{
+				craftingRequirement.quantity *= amountToCraft;
+
+
+				if (!PlayerInventoryController.RemoveItemFromInventory(craftingRequirement.RequirementAsRaw()))
 				{
 					return false;
 				}
 			}
+
+			PlayerInventoryController.AddItem(
+				new RawInventoryItem(craftedItem.ID, craftedItem.Name, amountToCraft, craftedItem.StackSize));
 			
-			for (int i = 0; i < requiredResSlots.Length; i++)
-			{
-				if (!requiredResSlots[i].Visible) continue;
-
-				PlayerInventoryData.RemoveItemFromInventory(requiredResSlots[i].itemID, requiredResSlots[i].quantity * amount);
-			}
-
-			PlayerInventoryData.AddItemToInventory(currentItemToBeCrafted.ID, amount);
 			return true;
 		}
 		catch (Exception e)
 		{
-			Debug.Fail(e.Message);
-
+			GD.PrintErr(e.Message);
 			return false;
 		}
 	}

@@ -12,7 +12,6 @@ height = 92.0
 
 [node name="zombie" type="CharacterBody2D"]
 script = ExtResource("1_p1qih")
-_characterNodePath = NodePath(".")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
@@ -33,3 +32,4 @@ _zombie = NodePath("../..")
 [node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie")]
 script = ExtResource("5_gf85f")
 _zombie = NodePath("../..")
+_move_speed = 200.0

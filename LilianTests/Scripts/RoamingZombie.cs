@@ -8,15 +8,9 @@ public partial class RoamingZombie : CharacterBody2D
 	private CharacterBody2D _player;
 	private Attack _attack;
 	private HealthComponent _healthComponent;
-	[Export] private NodePath _characterNodePath = null;
-	private CharacterBody2D _thisZombie;
-	PackedScene packedScene;
 
     public override void _Ready()
     {
-		packedScene = (PackedScene)GD.Load("res://EllaTests/npc.tscn");
-
-		_thisZombie = GetNodeOrNull<CharacterBody2D>(_characterNodePath);
 		//attack.damage = 10.0f;
         _sprite = GetNode<Sprite2D>("Sprite2D");
 		//_healthComponent = GetNode<HealthComponent>("HealthComponent");
@@ -50,28 +44,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 			if (_hitbox != null)
 			{
-				_hitbox.ApplyAttack(_attack);
-
-				switch(_attack.effect)
-				{
-					case EffectType.Cure:
-
-						Transform2D zombiePos = _thisZombie.Transform;
-						_thisZombie.SetProcess(false);
-						CharacterBody2D spawnNPC = (CharacterBody2D)packedScene.Instantiate();
-						spawnNPC.Transform = zombiePos;
-						AddChild(spawnNPC);
-						_thisZombie.QueueFree();
-						break;
-					default:
-					break;
-
-				}
-				if(_attack.effect == EffectType.Cure)
-				{
-					
-				}
-               	 
+                _hitbox.ApplyAttack(_attack);
 			}
 			else 
 			{

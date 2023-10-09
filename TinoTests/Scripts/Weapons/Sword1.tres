@@ -4,12 +4,16 @@
 
 [resource]
 script = ExtResource("1_f8oqu")
+targetType = 1
 damage = 15.0
 knockback = 10.0
 cooldown = 0.5
+effect = 0
 reach = 1.5
-speed = 0.0
 ranged = false
+speed = 0.0
+drawTime = 0.0
 ID = 0
 Name = ""
 StackSize = 1
+craftingRequirements = null

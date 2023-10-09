@@ -4,19 +4,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 public partial class ProjectileController : Node2D
 {
-    [Export] private Resource _projectile;  // temp export
     [Export] private Timer _lifetimeTimer;
 
     public Attack attack;
+    public Resource projectile;
     public float speed;
-    public float power;
     private float _airtime;
     private float _despawnTime;
 
     public void Init()
     {
-        _airtime = (float)_projectile.Get("airtime");
-        _despawnTime = (float)_projectile.Get("despawnTime");
+        _airtime = (float)projectile.Get("airtime");
+        _despawnTime = (float)projectile.Get("despawnTime");
         this.TopLevel = true;
         _lifetimeTimer.Start(_airtime);
     }
@@ -41,7 +40,7 @@ public partial class ProjectileController : Node2D
     {
         if (body is HitboxComponent hitbox)
         {
-            hitbox.Damage(attack);
+            hitbox.ApplyAttack(attack);
         }
 
         QueueFree();

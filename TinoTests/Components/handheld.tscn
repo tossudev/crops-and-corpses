@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnjrwx23lwt2g"]
+[gd_scene load_steps=10 format=3 uid="uid://3hlx66fdaruu"]
 
-[ext_resource type="Script" path="res://TinoTests/Scripts/WeaponController.cs" id="1_qc71s"]
-[ext_resource type="PackedScene" uid="uid://dqmfwe15dtgat" path="res://TinoTests/Prefabs/projectile.tscn" id="2_pb3lv"]
-[ext_resource type="Texture2D" uid="uid://8h4nv7s06ft5" path="res://TinoTests/Sprites/Swingbox.png" id="4_pvefc"]
+[ext_resource type="Script" path="res://TinoTests/Scripts/WeaponController.cs" id="1_gwltb"]
+[ext_resource type="Resource" uid="uid://be8oyimariure" path="res://TinoTests/Scripts/Weapons/Hand.tres" id="2_2eact"]
+[ext_resource type="PackedScene" uid="uid://dqmfwe15dtgat" path="res://TinoTests/Prefabs/projectile.tscn" id="2_agrd3"]
+[ext_resource type="Texture2D" uid="uid://8h4nv7s06ft5" path="res://TinoTests/Sprites/Swingbox.png" id="3_ha3no"]
+[ext_resource type="Resource" uid="uid://cuipddm160c01" path="res://TinoTests/Scripts/Projectiles/Arrow1.tres" id="3_i4pel"]
 
 [sub_resource type="Animation" id="Animation_wryer"]
 tracks/0/type = "value"
@@ -67,12 +69,14 @@ _data = {
 "swing": SubResource("Animation_hjerq")
 }
 
-[node name="Weapon" type="Node2D" node_paths=PackedStringArray("_hitbox", "_animationPlayer", "_timer")]
-script = ExtResource("1_qc71s")
+[node name="HandHeld" type="Node2D" node_paths=PackedStringArray("_hitbox", "_animationPlayer", "_timer")]
+script = ExtResource("1_gwltb")
+_weapon = ExtResource("2_2eact")
+_projectile = ExtResource("3_i4pel")
 _hitbox = NodePath("Hitbox")
 _animationPlayer = NodePath("AnimationPlayer")
 _timer = NodePath("Timer")
-_projectilePrefab = ExtResource("2_pb3lv")
+_projectilePrefab = ExtResource("2_agrd3")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -80,20 +84,21 @@ one_shot = true
 [node name="Hitbox" type="Area2D" parent="."]
 rotation = 4.71239
 collision_layer = 32
-collision_mask = 4
+collision_mask = 20
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
 position = Vector2(2.08165e-12, 8)
 rotation = 3.14159
 scale = Vector2(0.125738, 0.125743)
 polygon = PackedVector2Array(65, -48, 94, -26, 116, 6, 126, 35, 126, 44, 0.0569153, 64, -126, 44, -126, 35, -116, 6, -94, -26, -65, -48, -32, -62, 0, -65, 33, -62)
+disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 0)
 position = Vector2(8, 2.08165e-12)
 rotation = 1.5708
 scale = Vector2(0.125, 0.124647)
-texture = ExtResource("4_pvefc")
+texture = ExtResource("3_ha3no")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

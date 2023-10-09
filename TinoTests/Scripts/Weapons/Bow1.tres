@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_n12g1")
+targetType = 1
 damage = 10.0
 knockback = 5.0
 cooldown = 0.5

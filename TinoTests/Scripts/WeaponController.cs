@@ -5,6 +5,7 @@ using System.Collections;
 public partial class WeaponController : Node2D
 {
     [Export] private Resource _weapon;
+    [Export] private Resource _projectile;
     [Export] private Area2D _hitbox;
     [Export] private AnimationPlayer _animationPlayer;
     [Export] private Timer _timer;
@@ -44,9 +45,15 @@ public partial class WeaponController : Node2D
         }
     }
 
+    public void SetUpHandheld(Resource weapon, Resource projectile = null)
+    {
+        _weapon = weapon;
+        _projectile = projectile;
+    }
+
     public void Use(bool canMelee)
     {
-        if (_timer.TimeLeft > 0)
+        if (_timer.TimeLeft > 0 || _weapon == null)
             return;
 
         _attack = new Attack
@@ -130,7 +137,7 @@ public partial class WeaponController : Node2D
         _attack.damage *= power;
         projectile.attack = _attack;
         projectile.speed = _speed * power;
-        projectile.power = power;
+        projectile.projectile = _projectile;
 
         projectile.Init();
 
@@ -145,7 +152,7 @@ public partial class WeaponController : Node2D
     {
         if (body is HitboxComponent hitbox)
         {
-            hitbox.Damage(_attack);
+            hitbox.ApplyAttack(_attack);
         }
     }
 }

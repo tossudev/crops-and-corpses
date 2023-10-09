@@ -44,7 +44,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 			if (_hitbox != null)
 			{
-                _hitbox.Damage(_attack);
+                _hitbox.ApplyAttack(_attack);
 			}
 			else 
 			{

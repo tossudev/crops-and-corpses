@@ -4,13 +4,14 @@
 
 [resource]
 script = ExtResource("1_c4sse")
+targetType = 1
 damage = 0.0
 knockback = 0.0
-cooldown = 1.0
+cooldown = 0.5
 effect = 1
 reach = 1.0
 ranged = true
-speed = 800.0
+speed = 700.0
 drawTime = 0.01
 ID = 0
 Name = ""

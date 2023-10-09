@@ -18,3 +18,11 @@ shape = SubResource("RectangleShape2D_0pyaw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3math")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 58.0
+offset_bottom = 58.0
+
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

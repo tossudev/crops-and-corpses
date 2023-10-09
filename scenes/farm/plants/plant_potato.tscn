@@ -4,23 +4,26 @@
 [ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://JanitaTests/Images/dirttemp.jpg" id="2_6ejys"]
 [ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://JanitaTests/Images/sprouttemp.png" id="3_bau8t"]
 [ext_resource type="Texture2D" uid="uid://dvhrkxcw50l7s" path="res://JanitaTests/Images/wheattemp.png" id="4_ypiri"]
-[ext_resource type="Shape2D" uid="uid://c1m7w77dq4xvv" path="res://JanitaTests/PlantShape.tres" id="5_g6n53"]
+[ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="5_2rkl1"]
 
 [node name="plant_potato" type="Node2D" node_paths=PackedStringArray("_col")]
-scale = Vector2(2, 2)
+z_index = 2
 script = ExtResource("1_4njma")
 _seedName = "potato seed"
 _description = "Pototoes"
-_growthTime = 15.0
+_maxCycles = 5
 _seedTexture = ExtResource("2_6ejys")
 _sproutTexture = ExtResource("3_bau8t")
 _plantTexture = ExtResource("4_ypiri")
 _col = NodePath("Area2D")
-_maxCycles = 5
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = ExtResource("5_g6n53")
+shape = ExtResource("5_2rkl1")
 
+[connection signal="area_entered" from="Area2D" to="." method="OnInteractable"]
+[connection signal="area_exited" from="Area2D" to="." method="OnNonInteractable"]
 [connection signal="input_event" from="Area2D" to="." method="InteractWithPlant"]

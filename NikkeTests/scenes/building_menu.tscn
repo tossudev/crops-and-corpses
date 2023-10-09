@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://f5m7wypxd5t7"]
 
 [ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMenu.cs" id="1_1usej"]
-[ext_resource type="PackedScene" uid="uid://c6him5i1nm12j" path="res://NikkeTests/scenes/farm_plot.tscn" id="2_tcmeg"]
+[ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://scenes/farm/farm_plot.tscn" id="2_6b0va"]
 [ext_resource type="PackedScene" uid="uid://c5f1jy5vlj4sd" path="res://NikkeTests/scenes/farm_plot_build_mode.tscn" id="3_1aur2"]
 [ext_resource type="PackedScene" uid="uid://3ct83j0jgteb" path="res://NikkeTests/scenes/house.tscn" id="4_yfwft"]
 [ext_resource type="PackedScene" uid="uid://ceal2xj0w1t17" path="res://NikkeTests/scenes/house_build_mode.tscn" id="5_egf03"]
@@ -26,7 +26,7 @@ _buildButton = NodePath("BuildingMenu/BuildButton")
 _buildMenu = NodePath("BuildingMenu/BuildingMenu")
 _buildMenuControl = NodePath("BuildingMenu/BuildingMenu/Control")
 _vBoxContainer = NodePath("BuildingMenu/BuildingMenu/Control/VBoxContainer")
-_farmPlotScene = ExtResource("2_tcmeg")
+_farmPlotScene = ExtResource("2_6b0va")
 _farmPlotGhostScene = ExtResource("3_1aur2")
 _houseScene = ExtResource("4_yfwft")
 _houseGhostScene = ExtResource("5_egf03")

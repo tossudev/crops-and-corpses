@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://510sd2fl5tn2"]
+
+[ext_resource type="Texture2D" uid="uid://gx3rxc18ic1u" path="res://NikkeTests/images/farm_plot.jpg" id="1_hsnly"]
+[ext_resource type="Script" path="res://JanitaTests/Scripts/FieldHandler.cs" id="2_kisi8"]
+[ext_resource type="Shape2D" uid="uid://be1ka8r6xc5x1" path="res://JanitaTests/FieldShape.tres" id="3_d37t8"]
+
+[node name="farm_plot" type="Node2D" node_paths=PackedStringArray("_col")]
+scale = Vector2(2, 2)
+script = ExtResource("2_kisi8")
+_col = NodePath("Area2D")
+_nodePath = NodePath("plant_slot")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-32, -32)
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = ExtResource("3_d37t8")
+
+[node name="plant_slot" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(500, 0)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 468.0
+offset_bottom = -32.0
+grow_horizontal = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-32, -32)
+texture = ExtResource("1_hsnly")
+
+[connection signal="area_entered" from="Area2D" to="." method="OnInteractable"]
+[connection signal="area_exited" from="Area2D" to="." method="OnNonInteractable"]
+[connection signal="input_event" from="Area2D" to="." method="InteractWithField"]

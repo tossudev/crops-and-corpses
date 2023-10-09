@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bknhuvnuqhkcl"]
+[gd_scene load_steps=10 format=3 uid="uid://bknhuvnuqhkcl"]
 
 [ext_resource type="Texture2D" uid="uid://wwuloa5jv6f" path="res://assets/placeholder/quick_grid.png" id="1_3drb6"]
 [ext_resource type="Texture2D" uid="uid://btvrgdl7ajiub" path="res://LilianTests/Sprites/grass_tiles_placeholder.png" id="2_rjwr2"]
+[ext_resource type="PackedScene" uid="uid://cbw337f1bnsor" path="res://LilianTests/Prefabs/zombie_with_hitbox.tscn" id="4_pi12t"]
 [ext_resource type="PackedScene" uid="uid://puijuu7kafkp" path="res://LilianTests/Test/collectable_seed.tscn" id="5_1bqsq"]
 [ext_resource type="Script" path="res://LilianTests/Test/ChangeScene.cs" id="6_kt6fs"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="7_p5m6p"]
@@ -54,6 +55,15 @@ script = ExtResource("6_kt6fs")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelOneToTown"]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_l6e1f")
+
+[node name="zombie" parent="." instance=ExtResource("4_pi12t")]
+position = Vector2(-443, 157)
+
+[node name="zombie2" parent="." instance=ExtResource("4_pi12t")]
+position = Vector2(-330, 311)
+
+[node name="zombie3" parent="." instance=ExtResource("4_pi12t")]
+position = Vector2(-639, 22)
 
 [connection signal="body_entered" from="LevelOneToTown" to="LevelOneToTown" method="OnBodyEntered"]
 [connection signal="body_exited" from="LevelOneToTown" to="LevelOneToTown" method="OnBodyExited"]

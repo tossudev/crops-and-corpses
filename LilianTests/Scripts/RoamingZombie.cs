@@ -11,7 +11,7 @@ public partial class RoamingZombie : CharacterBody2D
 
     public override void _Ready()
     {
-		//attack.damage = 10.0f;
+		_damage = 10.0f;
         _sprite = GetNode<Sprite2D>("Sprite2D");
 		//_healthComponent = GetNode<HealthComponent>("HealthComponent");
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ducfl7udsw3bj"]
+[gd_scene load_steps=11 format=3 uid="uid://cbw337f1bnsor"]
 
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://TinoTests/Components/health_component.tscn" id="1_46tua"]
 [ext_resource type="Script" path="res://LilianTests/Scripts/RoamingZombie.cs" id="1_jjfrv"]
@@ -20,8 +20,8 @@ height = 90.0
 radius = 77.0
 
 [node name="zombie" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 5
+collision_mask = 6
 script = ExtResource("1_jjfrv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -38,7 +38,7 @@ _knockback = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CapsuleShape2D_64jqc")
-debug_color = Color(0, 0.6, 0.701961, 0.12549)
+debug_color = Color(0.647059, 0.521569, 0, 1)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_cvt2q")
@@ -56,6 +56,7 @@ _zombie = NodePath("../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
 shape = SubResource("CircleShape2D_mytwi")
+debug_color = Color(0.92549, 0, 0.682353, 0.419608)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1.90735e-06, -1.90735e-06)

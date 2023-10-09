@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dug8ysxwugiwo"]
 
-[ext_resource type="PackedScene" uid="uid://ducfl7udsw3bj" path="res://LilianTests/Prefabs/zombie_with_hitbox.tscn" id="2_8bcnt"]
+[ext_resource type="PackedScene" uid="uid://cbw337f1bnsor" path="res://LilianTests/Prefabs/zombie_with_hitbox.tscn" id="2_8bcnt"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_42isq"]
 
 [node name="lilianTestScene" type="Node2D"]

@@ -36,6 +36,10 @@ public partial class npcControl : CharacterBody2D
 		//List<Marker2D> _waypointTaskCompleted = new List<Marker2D>();
 		*/
 
+		// If npc in outside world 
+		// CurrentState = States.FollowPlayer;
+
+		//Else:
 		CurrentState = States.Patrol;
 
 	}

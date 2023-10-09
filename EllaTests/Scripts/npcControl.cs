@@ -6,7 +6,7 @@ public partial class npcControl : CharacterBody2D
 	public enum States
 	{
 		Patrol,
-		Task,
+		TaskFarming,
 		TaskCompleted,
 		FollowPlayer
 
@@ -57,13 +57,13 @@ public partial class npcControl : CharacterBody2D
 				if (dialogueControl.farmingTaskStarted == true)
 				{
 					GD.Print("Farming task started");
-					CurrentState = States.Task;
+					CurrentState = States.TaskFarming;
 					_taskTimer.Start();
 				}
 
 				break;
 
-			case States.Task:
+			case States.TaskFarming:
 
 				TargetPosition();
 				Movement(_targetPosition);
@@ -84,15 +84,15 @@ public partial class npcControl : CharacterBody2D
 				break;
 
 			case States.TaskCompleted:
-				//_speed = 0;
+			// Add here farming resourches
 				_taskCompleted = false;
-				//Add resources to player inventory or something
 				TargetPosition();
 				Movement(_targetPosition);
+
 				if (dialogueControl.farmingTaskStarted == true)
 				{
 					GD.Print("Farming task started");
-					CurrentState = States.Task;
+					CurrentState = States.TaskFarming;
 					_taskTimer.Start();
 					dialogueControl.farmingTaskStarted = false;
 				} 
@@ -118,9 +118,10 @@ public partial class npcControl : CharacterBody2D
 			float range = 100;
 			_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
 		}
-		if (CurrentState == States.Task)
+		if (CurrentState == States.TaskFarming)
 		{
 			_targetPosition = GetParent().GetNode<Marker2D>("TaskPoint").GlobalPosition;
+			// Move to a position where farming plots are, needs thinking
 
 		}
 		if(CurrentState == States.TaskCompleted)

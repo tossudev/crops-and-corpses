@@ -26,7 +26,7 @@ public partial class DialogueControl : Control
 
 		_nameText.Text = "Name";
 		_text.Text = "Hello, do you need help?";
-		_buttonOpt1.Text = "Yes, I need help";
+		_buttonOpt1.Text = "Yes, I need help with farm";
 		_buttonOpt2.Text = "Nevermind";
 
 		Visible = false;
@@ -63,13 +63,13 @@ public partial class DialogueControl : Control
 		if (NPC.CurrentState == npcControl.States.Patrol)
 		{
 			_text.Text = "Hello, do you need help?";
-			_buttonOpt1.Text = "Yes, I need help";
+			_buttonOpt1.Text = "Yes, I need help with farm";
 			_buttonOpt2.Text = "Nevermind";
 
 			_buttonOpt1.Visible = true;
 		}
 
-		if (NPC.CurrentState == npcControl.States.Task)
+		if (NPC.CurrentState == npcControl.States.TaskFarming)
 		{
 			_text.Text = "I'm busy";
 			_buttonOpt2.Text = "Nevermind";
@@ -80,7 +80,7 @@ public partial class DialogueControl : Control
 		if (NPC.CurrentState == npcControl.States.TaskCompleted)
 		{
 			_text.Text = "I did my job, do you need help with something else?";
-			_buttonOpt1.Text = "Yes, I need help";
+			_buttonOpt1.Text = "Yes, I need help with farm";
 			_buttonOpt2.Text = "Nevermind";
 
 			_buttonOpt1.Visible = true;

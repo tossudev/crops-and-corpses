@@ -14,11 +14,10 @@ radius = 117.527
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xqb0"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_handheld", "_camera") groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_handheld") groups=["player"]]
 scale = Vector2(3.2, 3.2)
 script = ExtResource("1_y7bta")
 _handheld = NodePath("Handheld")
-_camera = NodePath("")
 _speed = 300
 
 [node name="Handheld" parent="." instance=ExtResource("2_00eh7")]
@@ -39,7 +38,6 @@ _healthComponent = NodePath("../HealthComponent")
 shape = SubResource("RectangleShape2D_xe3lj")
 
 [node name="InteractionArea" type="Area2D" parent="."]
-scale = Vector2(1, 1)
 collision_layer = 2
 collision_mask = 8
 
@@ -48,5 +46,4 @@ shape = SubResource("CircleShape2D_efott")
 debug_color = Color(0, 0.647059, 0.243137, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_2xqb0")

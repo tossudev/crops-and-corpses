@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dtgjvhh8ydu7e"
-path="res://.godot/imported/music_night_loop.wav-5c2c3a0016bf735c6e9e7dfaa363024c.sample"
+path="res://.godot/imported/music_night_loop.wav-865606bb887eb03b97529ae5d4e3a9b5.sample"
 
 [deps]
 
-source_file="res://assets/sounds/music/music_night_loop.wav"
-dest_files=["res://.godot/imported/music_night_loop.wav-5c2c3a0016bf735c6e9e7dfaa363024c.sample"]
+source_file="res://assets/Sounds/music/music_night_loop.wav"
+dest_files=["res://.godot/imported/music_night_loop.wav-865606bb887eb03b97529ae5d4e3a9b5.sample"]
 
 [params]
 

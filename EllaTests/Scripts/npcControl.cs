@@ -15,7 +15,7 @@ public partial class npcControl : CharacterBody2D
 	public bool dialogueWindow = false;
 	bool _taskCompleted;
 	int _waypointIndex;
-	float _speed = 150;
+	float _speed = 50;
 	Timer _taskTimer;
 	Vector2 _targetPosition;
 	[Export]
@@ -27,7 +27,7 @@ public partial class npcControl : CharacterBody2D
 		// Setting up the timer
 		_taskTimer = new Timer
 		{
-			WaitTime = 10f,
+			WaitTime = 30f,
 			OneShot = true
 		};
 
@@ -116,7 +116,7 @@ public partial class npcControl : CharacterBody2D
 		if (CurrentState == States.Patrol)
 		{
 			float range = 100;
-			_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 2 - range, GD.Randf() * range * 2 - range);
+			_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
 		}
 		if (CurrentState == States.Task)
 		{
@@ -135,7 +135,7 @@ public partial class npcControl : CharacterBody2D
 
 	private void Movement(Vector2 target)
 	{
-		_speed = 150;
+		_speed = 50;
 		Vector2 _direction = (target - GlobalPosition).Normalized();
 		Velocity = _direction * _speed;
 		MoveAndSlide();

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 
-public partial class FieldHandler : Node
+public partial class FieldHandler : Node2D
 {
 	[Export] PlantOptionButton oBTest;
 
@@ -26,7 +26,7 @@ public partial class FieldHandler : Node
 	{
 		if(@event is InputEventMouseButton button)
 		{	
-			if(_plant==null) SetPlant(oBTest.GetSeedFromOption());
+			if(_plant==null) SetPlant("Potato");
 			if(_plant!=null && button.IsPressed() && _currentPlants < _maxPlantSlots){
 				GD.Print("Planted a "+_plant.seedName);
 				PlantPlant();

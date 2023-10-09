@@ -30,4 +30,6 @@ oBTest = NodePath("../OptionButton")
 position = Vector2(673, 388)
 oBTest = NodePath("../OptionButton")
 
+[node name="farm_plot3" parent="." instance=ExtResource("2_nbnc0")]
+
 [connection signal="item_selected" from="OptionButton" to="OptionButton" method="_on_OptionButton_item_selected"]

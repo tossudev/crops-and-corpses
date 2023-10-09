@@ -66,6 +66,8 @@ public partial class Plant : Node2D
 
 	Texture2D _bugSignTexture, _waterSignTexture;
 	Sprite2D _warningSign = new Sprite2D();
+
+	bool _isPlayerNearby=false;
  	#endregion
 	
 	public override void _Ready()
@@ -132,7 +134,7 @@ public partial class Plant : Node2D
 	}
 	void InteractWithPlant(Node viewport, InputEvent @event, long shapeIdx)
 	{
-		if(@event is InputEventMouseButton button)
+		if(@event is InputEventMouseButton button && _isPlayerNearby)
 		{
 			// Plant is planted, wait for water so it can start to grow
 			if(button.IsPressed() && _state == GrowthState.WaitWatering && FarmManager.instance.IsWaterCanEquipped()){
@@ -250,5 +252,15 @@ public partial class Plant : Node2D
 		_warningSign.Texture = null;
 		trect.Modulate = new Color(0,0,0);
 		_growthTimer.Stop();
+	}
+
+	private void OnInteractable(Area2D body)
+	{
+		_isPlayerNearby=true;
+	}
+
+	private void OnNonInteractable(Area2D body)
+	{
+		_isPlayerNearby=false;
 	}
 }

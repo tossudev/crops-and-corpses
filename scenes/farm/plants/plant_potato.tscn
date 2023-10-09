@@ -18,8 +18,12 @@ _plantTexture = ExtResource("4_ypiri")
 _col = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("5_2rkl1")
 
+[connection signal="area_entered" from="Area2D" to="." method="OnInteractable"]
+[connection signal="area_exited" from="Area2D" to="." method="OnNonInteractable"]
 [connection signal="input_event" from="Area2D" to="." method="InteractWithPlant"]

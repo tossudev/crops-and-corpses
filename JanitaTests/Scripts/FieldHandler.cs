@@ -13,6 +13,8 @@ public partial class FieldHandler : Node2D
 	Plant _plant = null;
 	[Export] NodePath  _nodePath;
 
+
+	bool _isPlayerNearby=false;
 	public override void _Ready() {
 		_col.InputEvent +=InteractWithField;
 	}
@@ -24,7 +26,7 @@ public partial class FieldHandler : Node2D
 
 	void InteractWithField(Node viewport, InputEvent @event, long shapeIdx)
 	{
-		if(@event is InputEventMouseButton button)
+		if(@event is InputEventMouseButton button && _isPlayerNearby)
 		{	
 			if(_plant==null) SetPlant("Potato");
 			if(_plant!=null && button.IsPressed() && _currentPlants < _maxPlantSlots){
@@ -51,6 +53,16 @@ public partial class FieldHandler : Node2D
 	public void RemovePlant(){
 		_currentPlants--;
 		FarmManager.instance.RemovePlantedPlant(_plant);
+	}
+
+	private void OnInteractable(Area2D body)
+	{
+		_isPlayerNearby=true;
+	}
+
+	private void OnNonInteractable(Area2D body)
+	{
+		_isPlayerNearby=false;
 	}
 	
 }

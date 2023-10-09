@@ -10,9 +10,8 @@
 
 [node name="TestBackground" parent="." instance=ExtResource("1_jagwy")]
 
-[node name="Player" parent="." node_paths=PackedStringArray("_camera") instance=ExtResource("2_wnkdn")]
+[node name="Player" parent="." instance=ExtResource("2_wnkdn")]
 position = Vector2(0, -1)
-_camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Player"]
 position = Vector2(2.08165e-12, 2.08165e-12)

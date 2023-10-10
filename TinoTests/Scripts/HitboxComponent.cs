@@ -14,6 +14,9 @@ public partial class HitboxComponent : Area2D
 
 			if (_knockback)
 				ApplyKnockback(attack);
+
+			if (this.GetParent().HasMethod("AttackReceived"))
+				this.GetParent().Call("AttackReceived", attack);
 		}
 		else
 		{

@@ -1,17 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://brn2x32vd0alm"]
+[gd_scene load_steps=7 format=3 uid="uid://brn2x32vd0alm"]
 
 [ext_resource type="PackedScene" uid="uid://c11t6t2lyjvre" path="res://TinoTests/Prefabs/test_background.tscn" id="1_jagwy"]
 [ext_resource type="PackedScene" uid="uid://cywktxf8v0kje" path="res://TinoTests/Prefabs/enemy_dummy.tscn" id="2_t1hbh"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_wnkdn"]
 [ext_resource type="PackedScene" uid="uid://bk760q1fegx3m" path="res://TinoTests/Prefabs/interaction_dummy.tscn" id="4_kg1sv"]
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://TinoTests/Prefabs/tree.tscn" id="5_dkmtc"]
+[ext_resource type="PackedScene" uid="uid://ducfl7udsw3bj" path="res://LilianTests/Prefabs/zombie_with_hitbox.tscn" id="6_rmic7"]
 
 [node name="World" type="Node2D"]
 
 [node name="TestBackground" parent="." instance=ExtResource("1_jagwy")]
 
 [node name="Player" parent="." node_paths=PackedStringArray("_camera") instance=ExtResource("2_wnkdn")]
-position = Vector2(0, -1)
+position = Vector2(-1, -1)
 _camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Player"]
@@ -26,3 +27,6 @@ scale = Vector2(3.2, 3.2)
 [node name="InteractionDummy" parent="." instance=ExtResource("4_kg1sv")]
 
 [node name="Tree" parent="." instance=ExtResource("5_dkmtc")]
+
+[node name="Zombie" parent="." instance=ExtResource("6_rmic7")]
+position = Vector2(350, 2.08165e-12)

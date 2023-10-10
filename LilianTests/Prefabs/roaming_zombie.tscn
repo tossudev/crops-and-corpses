@@ -32,4 +32,3 @@ _zombie = NodePath("../..")
 [node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie")]
 script = ExtResource("5_gf85f")
 _zombie = NodePath("../..")
-_move_speed = 200.0

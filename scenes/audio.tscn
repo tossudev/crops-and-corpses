@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqexw511p4weo"]
+
+[ext_resource type="Script" path="res://scripts/global/AudioController.cs" id="1_uvkjy"]
+
+[node name="Audio" type="Node"]
+script = ExtResource("1_uvkjy")
+
+[node name="GeneralSFX" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+bus = &"Ambience"

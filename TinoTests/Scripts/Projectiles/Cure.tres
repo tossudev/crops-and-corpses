@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="Projectile" load_steps=2 format=3 uid="uid://vus4coe8p4nv"]
 
-[ext_resource type="Script" path="res://TinoTests/Scripts/Projectiles/Projectile.cs" id="1_wnn4l"]
+[ext_resource type="Script" path="res://TinoTests/Scripts/Projectiles/Projectile.cs" id="1_13k4s"]
 
 [resource]
-script = ExtResource("1_wnn4l")
+script = ExtResource("1_13k4s")
 airtime = 1.0
 despawnTime = 2.08165e-12
+effect = 1
 ID = 0
 Name = ""
 StackSize = 0

@@ -16,6 +16,7 @@ _camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Player"]
 position = Vector2(2.08165e-12, 2.08165e-12)
+zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 
 [node name="EnemyDummy" parent="." instance=ExtResource("2_t1hbh")]

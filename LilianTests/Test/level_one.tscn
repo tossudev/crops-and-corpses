@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bknhuvnuqhkcl"]
+[gd_scene load_steps=12 format=3 uid="uid://bknhuvnuqhkcl"]
 
 [ext_resource type="Texture2D" uid="uid://wwuloa5jv6f" path="res://assets/placeholder/quick_grid.png" id="1_3drb6"]
 [ext_resource type="Texture2D" uid="uid://btvrgdl7ajiub" path="res://LilianTests/Sprites/grass_tiles_placeholder.png" id="2_rjwr2"]
 [ext_resource type="PackedScene" uid="uid://ducfl7udsw3bj" path="res://LilianTests/Prefabs/zombie_with_hitbox.tscn" id="4_hgt3f"]
 [ext_resource type="PackedScene" uid="uid://puijuu7kafkp" path="res://LilianTests/Test/collectable_seed.tscn" id="5_1bqsq"]
+[ext_resource type="Resource" uid="uid://b6a2oqc16p5rs" path="res://TinoTests/Scripts/Weapons/Sword1.tres" id="5_woral"]
 [ext_resource type="Script" path="res://LilianTests/Test/ChangeScene.cs" id="6_kt6fs"]
+[ext_resource type="Resource" uid="uid://cuipddm160c01" path="res://TinoTests/Scripts/Projectiles/Arrow1.tres" id="6_lh4xn"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="7_p5m6p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o2vk1"]
@@ -49,6 +51,10 @@ position = Vector2(-160, 504)
 position = Vector2(0, 14)
 _camera = NodePath("Camera2D")
 
+[node name="Handheld" parent="Player" index="0"]
+_weapon = ExtResource("5_woral")
+_projectile = ExtResource("6_lh4xn")
+
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -4.375)
 scale = Vector2(0.3125, 0.3125)
@@ -75,3 +81,5 @@ position = Vector2(-748, 427)
 
 [connection signal="body_entered" from="LevelOneToTown" to="LevelOneToTown" method="OnBodyEntered"]
 [connection signal="body_exited" from="LevelOneToTown" to="LevelOneToTown" method="OnBodyExited"]
+
+[editable path="Player"]

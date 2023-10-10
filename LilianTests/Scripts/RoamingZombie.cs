@@ -10,43 +10,34 @@ public partial class RoamingZombie : CharacterBody2D
 	private HitboxComponent _hitbox;
 	private Attack _attack;
 	private Timer _timer;
-	private bool _playerInAttackRange;
+	private ProgressBar _healthBar;
 	private HealthComponent _healthComponent;
 	private NodePath _rootNodePath;
 	private Node2D rootNode;
 	PackedScene instantiatedNPC;
 
 	public override void _Ready()
-	{
-		
-		
+	{		
 		instantiatedNPC = (PackedScene)GD.Load("res://DaniTests/Scenes/dummyScene.tscn");
 		_rootNodePath = GetParent<Node2D>().GetPath();
-		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);
-		_damage = 10.0f;
-		_playerInAttackRange = false;
+		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);		
+		_damage = 5.0f;
 		_sprite = GetNode<Sprite2D>("Sprite2D");
-		//_healthComponent = GetNode<HealthComponent>("HealthComponent");
+		_timer = GetNode<Timer>("AttackTimer");
+		_healthBar = GetNode<ProgressBar>("HealthBar");
+		_healthComponent = GetNode<HealthComponent>("HealthComponent");
 
 		_attack = new Attack
 		{
 			damage = _damage,
+			knockback = 100f
 		};
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		MoveAndSlide();
-
-		// if (_playerInAttackRange)
-		// {
-		// 	//AttackPlayer(_hitbox);
-		// 	_timer.Start();
-		// }
-		// else
-		// {
-		// 	_timer.Stop();
-		// }
+		UpdateHealth();
 
 		if (Velocity.X > 0)
 		{
@@ -79,7 +70,6 @@ public partial class RoamingZombie : CharacterBody2D
 
 	private void OnAttackBoxEntered(Node2D body)
 	{
-		GD.Print("!!!!!!!!!");
 		if (body.IsInGroup("player"))
 		{
 			_player = (CharacterBody2D)body;
@@ -87,11 +77,8 @@ public partial class RoamingZombie : CharacterBody2D
 
 			if (_hitbox != null)
 			{
-				_hitbox.ApplyAttack(_attack);
-				// _playerInAttackRange = true;
-				// //AttackPlayer(_hitbox);
-
-				
+				//_hitbox.ApplyAttack(_attack);
+				_timer.Start();
 			}
 			else
 			{
@@ -100,18 +87,32 @@ public partial class RoamingZombie : CharacterBody2D
 		}
 	}
 
-	// private void OnAttackBoxExited(Node2D body)
-	// {
-	// 	_playerInAttackRange = false;
-	// }
+	private void UpdateHealth()
+	{
+		// update health bar when player damages zombie
+		_healthBar.Value = _healthComponent._health;
 
-	// private void OnTimerTimeout()
-	// {
-	// 	GD.Print("attack player");
-	// 	if(_hitbox != null)
-	// 	{
-	// 		_hitbox.ApplyAttack(_attack);
-	// 	}
+		if (_healthComponent._health >= 100)
+		{
+			_healthBar.Visible = false;
+		}
+		else 
+		{
+			_healthBar.Visible = true;
+		}
+	}
 
-	// }
+	private void OnAttackBoxExited(Node2D body)
+	{
+		_timer.Stop();
+	}
+
+	private void OnTimerTimeout()
+	{
+		//GD.Print("attack player");
+		if(_hitbox != null)
+		{
+			_hitbox.ApplyAttack(_attack);
+		}
+	}
 }

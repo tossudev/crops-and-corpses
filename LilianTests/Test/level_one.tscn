@@ -24,8 +24,6 @@ size = Vector2(177.5, 273)
 
 [node name="level_one" type="Node2D"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="PlaceholderGrid" type="Sprite2D" parent="."]
 visible = false
 self_modulate = Color(1, 1, 1, 0.313726)
@@ -49,7 +47,11 @@ position = Vector2(-160, 504)
 
 [node name="Player" parent="." node_paths=PackedStringArray("_camera") instance=ExtResource("7_p5m6p")]
 position = Vector2(0, 14)
-_camera = NodePath("../Camera2D")
+_camera = NodePath("Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -4.375)
+scale = Vector2(0.3125, 0.3125)
 
 [node name="Zombie" parent="." instance=ExtResource("4_hgt3f")]
 position = Vector2(-645, 133)

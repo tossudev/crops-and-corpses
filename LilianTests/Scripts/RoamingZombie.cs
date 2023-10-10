@@ -58,6 +58,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 	private void OnAttackBoxEntered(Node2D body)
 	{
+		GD.Print("!!!!!!!!!");
 		if(body.IsInGroup("player"))
 		{
 			_player = (CharacterBody2D)body;

@@ -25,7 +25,7 @@ public partial class SpawnScriptTest : Node2D
 			GD.Print(spawnPoints[i]);
 		}
 		
-		packedScene = (PackedScene)GD.Load("res://LilianTests/Prefabs/roaming_zombie.tscn");
+		packedScene = (PackedScene)GD.Load("res://LilianTests/Prefabs/zombie_with_hitbox.tscn");
 		dayTimeCheck = GetNode<TimeManager>("SunlightContainer");
 		spawnDelay.Start();
 	}

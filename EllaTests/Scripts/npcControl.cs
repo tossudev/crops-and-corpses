@@ -1,8 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
 
 public partial class npcControl : CharacterBody2D
 {
@@ -10,38 +7,36 @@ public partial class npcControl : CharacterBody2D
 	{
 		Patrol,
 		Task,
-		Dialogue
-
+		TaskCompleted,
+		FollowPlayer
 
 	}
 	public States CurrentState;
-	public NavigationAgent2D navigationAgent;
-	public float speed = 90;
-	List<Marker2D> _waypointsFarm = new List<Marker2D>();
-	List<Marker2D> _waypointsTask = new List<Marker2D>();
-	List<Marker2D> _waypointTaskCompleted = new List<Marker2D>();
+	public bool dialogueWindow = false;
+	bool _taskCompleted;
 	int _waypointIndex;
-	Vector2 _targetPos;
-	Vector2 _direction;
+	float _speed = 50;
 	Timer _taskTimer;
+	Vector2 _targetPosition;
+	[Export]
+	DialogueControl dialogueControl;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		// Setting up the timer
 		_taskTimer = new Timer
 		{
-			WaitTime = 20f,
+			WaitTime = 30f,
 			OneShot = true
 		};
+
 		AddChild(_taskTimer);
 
-		navigationAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
+		// If npc in outside world 
+		// CurrentState = States.FollowPlayer;
 
-		// Access to group
-		_waypointsFarm = GetTree().GetNodesInGroup("WaypointFarm").Select(saar => saar as Marker2D).ToList();
-		_waypointsTask = GetTree().GetNodesInGroup("Taskpoint").Select(saar => saar as Marker2D).ToList();
-		_waypointTaskCompleted = GetTree().GetNodesInGroup("TaskCompleted").Select(saar => saar as Marker2D).ToList();
-
+		//Else:
 		CurrentState = States.Patrol;
 
 	}
@@ -52,91 +47,109 @@ public partial class npcControl : CharacterBody2D
 		switch (CurrentState)
 		{
 			case States.Patrol:
-				speed = 90;
 
-				_direction = GlobalPosition.DirectionTo(_targetPos);
-				_targetPos = navigationAgent.TargetPosition;
-				Velocity = _direction * speed;
-				MoveAndSlide();
-
-				if (Input.IsActionJustPressed("Click"))
+				if (Position.DistanceTo(_targetPosition) < 10)
 				{
-					GD.Print("Task1 started");
+					TargetPosition();
+				}
+				Movement(_targetPosition);
+
+				if (dialogueControl.farmingTaskStarted == true)
+				{
+					GD.Print("Farming task started");
 					CurrentState = States.Task;
 					_taskTimer.Start();
-				}
-
-				if (navigationAgent.IsNavigationFinished())
-				{
-					MoveToWaypoints();
-					return;
 				}
 
 				break;
 
 			case States.Task:
 
-				_direction = GlobalPosition.DirectionTo(_targetPos);
-				_targetPos = navigationAgent.TargetPosition;
-				Velocity = _direction * speed;
-				MoveAndSlide();
-
-				if (navigationAgent.IsNavigationFinished() && !_taskTimer.IsStopped())
+				TargetPosition();
+				Movement(_targetPosition);
+				dialogueControl.farmingTaskStarted = false;
+				if(_taskTimer.IsStopped()){
+					_taskCompleted = true;
+	
+				}
+				if(_taskCompleted == true)
 				{
-					MoveToWaypoints();
-					return;
+					CurrentState = States.TaskCompleted;
+				}
+				if(dialogueControl.exitDialogue == true)
+				{
+					dialogueControl.exitDialogue = false;
 				}
 
-				if (_taskTimer.IsStopped())
-				{
-					TaskCompleted();
-					if (Input.IsActionJustPressed("Click"))
-					{
-						GD.Print("Task1 Completed");
-						CurrentState = States.Patrol;
-					}
+				break;
 
+			case States.TaskCompleted:
+				//_speed = 0;
+				_taskCompleted = false;
+				//Add resources to player inventory or something
+				TargetPosition();
+				Movement(_targetPosition);
+				if (dialogueControl.farmingTaskStarted == true)
+				{
+					GD.Print("Farming task started");
+					CurrentState = States.Task;
+					_taskTimer.Start();
+					dialogueControl.farmingTaskStarted = false;
+				} 
+				if(dialogueControl.exitDialogue == true)
+				{
+					CurrentState = States.Patrol;
+					dialogueControl.exitDialogue = false;
 				}
 				break;
 
-			case States.Dialogue:
-				// Adding dialogue window where player can choose which task is being done
-				// After that goes to task state
+			case States.FollowPlayer:
+				TargetPosition();
+				Movement(_targetPosition);
+
 				break;
 		}
 	}
 
-	private void MoveToWaypoints()
+	private void TargetPosition()
 	{
 		if (CurrentState == States.Patrol)
 		{
-			GD.Print(_waypointIndex);
-			_waypointIndex += 1;
-			if (_waypointIndex > _waypointsFarm.Count - 1)
-			{
-				_waypointIndex = 0;
-			}
-			navigationAgent.TargetPosition = _waypointsFarm[_waypointIndex].GlobalPosition;
+			float range = 100;
+			_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
 		}
-
 		if (CurrentState == States.Task)
 		{
-			GD.Print(_waypointIndex);
-			_waypointIndex += 1;
-			if (_waypointIndex > _waypointsTask.Count - 1)
-			{
-				_waypointIndex = 0;
-			}
-			navigationAgent.TargetPosition = _waypointsTask[_waypointIndex].GlobalPosition;
+			_targetPosition = GetParent().GetNode<Marker2D>("TaskPoint").GlobalPosition;
+
+		}
+		if(CurrentState == States.TaskCompleted)
+		{
+			_targetPosition = GetParent().GetNode<Marker2D>("TaskCompleted").GlobalPosition;
+		}
+		if (CurrentState == States.FollowPlayer)
+		{
+			//_targetPosition = GetParent().GetNode<CharacterBody2D>("Player").GlobalPosition;
 		}
 	}
 
-	private void TaskCompleted()
+	private void Movement(Vector2 target)
 	{
-		navigationAgent.TargetPosition = _waypointTaskCompleted[0].GlobalPosition;
-		if (GlobalPosition.DistanceTo(_waypointTaskCompleted[0].GlobalPosition) < 1.0)
+		_speed = 50;
+		Vector2 _direction = (target - GlobalPosition).Normalized();
+		Velocity = _direction * _speed;
+		MoveAndSlide();
+	}
+
+	public void _on_button_button_up()
+	{
+		dialogueWindow = true;
+
+		if (_targetPosition == GetParent().GetNode<Marker2D>("TaskCompleted").GlobalPosition)
 		{
-			speed = 0;
+				dialogueControl.farmingTaskStarted = false;
+				GD.Print("Task1 Completed");
+				CurrentState = States.TaskCompleted;
 		}
 	}
 }

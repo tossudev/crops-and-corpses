@@ -6,11 +6,12 @@ public partial class HitboxComponent : Area2D
 	[Export] private HealthComponent _healthComponent;
 	[Export] private bool _knockback = false;
 
-	public void Damage(Attack attack)
+	public void ApplyAttack(Attack attack)
 	{
 		if (_healthComponent != null)
 		{
 			_healthComponent.TakeDamage(attack);
+
 			if (_knockback)
 				ApplyKnockback(attack);
 		}

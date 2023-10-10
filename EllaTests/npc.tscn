@@ -4,17 +4,25 @@
 [ext_resource type="Script" path="res://EllaTests/Scripts/npcControl.cs" id="1_koefy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0pyaw"]
-size = Vector2(111, 114)
+size = Vector2(198, 176)
 
 [node name="NPC" type="CharacterBody2D"]
 scale = Vector2(0.5, 0.5)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_koefy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -1)
+position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_0pyaw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3math")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="Button" type="Button" parent="."]
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 58.0
+offset_bottom = 58.0
+
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

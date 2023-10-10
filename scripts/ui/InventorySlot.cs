@@ -101,6 +101,8 @@ public partial class InventorySlot : Control {
 
 		Texture2D iconTexture = itemResource.IconTexture;
 		icon.Texture = iconTexture;
+
+		quantityLabel.Visible = itemResource.StackSize > 1;
 		quantityLabel.Text = rawItem.quantity.ToString();
 	}
 }

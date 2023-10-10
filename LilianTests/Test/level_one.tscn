@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bknhuvnuqhkcl"]
+[gd_scene load_steps=10 format=3 uid="uid://bknhuvnuqhkcl"]
 
 [ext_resource type="Texture2D" uid="uid://wwuloa5jv6f" path="res://assets/placeholder/quick_grid.png" id="1_3drb6"]
 [ext_resource type="Texture2D" uid="uid://btvrgdl7ajiub" path="res://LilianTests/Sprites/grass_tiles_placeholder.png" id="2_rjwr2"]
+[ext_resource type="PackedScene" uid="uid://ducfl7udsw3bj" path="res://LilianTests/Prefabs/zombie_with_hitbox.tscn" id="4_hgt3f"]
 [ext_resource type="PackedScene" uid="uid://puijuu7kafkp" path="res://LilianTests/Test/collectable_seed.tscn" id="5_1bqsq"]
 [ext_resource type="Script" path="res://LilianTests/Test/ChangeScene.cs" id="6_kt6fs"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="7_p5m6p"]
@@ -44,8 +45,16 @@ layer_0/tile_data = PackedInt32Array(-786448, 65540, 1, -720912, 65540, 1, -6553
 [node name="collectable_seed" parent="." instance=ExtResource("5_1bqsq")]
 position = Vector2(-160, 504)
 
-[node name="Player" parent="." instance=ExtResource("7_p5m6p")]
+[node name="Player" parent="." node_paths=PackedStringArray("_camera") instance=ExtResource("7_p5m6p")]
 position = Vector2(0, 14)
+_camera = NodePath("Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -4.375)
+scale = Vector2(0.3125, 0.3125)
+
+[node name="Zombie" parent="." instance=ExtResource("4_hgt3f")]
+position = Vector2(-645, 133)
 
 [node name="LevelOneToTown" type="Area2D" parent="."]
 position = Vector2(-1959, -2)
@@ -54,6 +63,15 @@ script = ExtResource("6_kt6fs")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelOneToTown"]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_l6e1f")
+
+[node name="Zombie2" parent="." instance=ExtResource("4_hgt3f")]
+position = Vector2(-534, 470)
+
+[node name="Zombie3" parent="." instance=ExtResource("4_hgt3f")]
+position = Vector2(-566, -115)
+
+[node name="Zombie4" parent="." instance=ExtResource("4_hgt3f")]
+position = Vector2(-748, 427)
 
 [connection signal="body_entered" from="LevelOneToTown" to="LevelOneToTown" method="OnBodyEntered"]
 [connection signal="body_exited" from="LevelOneToTown" to="LevelOneToTown" method="OnBodyExited"]

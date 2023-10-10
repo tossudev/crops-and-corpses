@@ -7,6 +7,7 @@ public partial class PlayerInventoryController : Control {
 	public static Label selectedQuantityLabel;
 
 	static Control _inventoryGrid;
+	static Control _hotbarGrid;
 	
 	public static bool isItemSelected = false;
 	public static RawInventoryItem selectedItem;
@@ -16,10 +17,13 @@ public partial class PlayerInventoryController : Control {
     Control _selectedItemNode;
 	public const string PIC_NODE_GROUP = "PlayerInventoryController";
 	const int SELECTED_ITEM_OFFSET = 64;
+	const int HOTBAR_SIZE = 8;
+	static int _hotbarStartIndex = 24;
 
 
 	public override void _Ready() {
 		_inventoryGrid = GetNode<Control>("InventoryGrid");
+		_hotbarGrid = GetNode<Control>("HotbarGrid");
 		_selectedItemNode = GetNode<Control>("SelectedItem");
 		selectedIcon = GetNode<TextureRect>("SelectedItem/Icon");
 		selectedQuantityLabel = GetNode<Label>("SelectedItem/Quantity");
@@ -35,7 +39,7 @@ public partial class PlayerInventoryController : Control {
 	public override void _Input(InputEvent @event) {
 		if (@event.IsActionPressed("toggle_inventory")) {
 			isOpen = !isOpen;
-			Visible = isOpen;
+			_inventoryGrid.Visible = isOpen;
 		}
 	}
 
@@ -43,13 +47,21 @@ public partial class PlayerInventoryController : Control {
 	async Task _InitInventory() {
 		SaveData.organizedPlayerInventory.Clear();
 
+		_hotbarStartIndex = PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - HOTBAR_SIZE;
+
 		// Init all slots with null items
 		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++) {
 			
 			var itemSlotNode = GD.Load<PackedScene>(slotNodePath);
 			var itemSlot = itemSlotNode.Instantiate<Control>();
 
-			_inventoryGrid.AddChild(itemSlot);
+			// This should probably be done better, works for now
+			if (IsSlotInHotbar(i)) {
+				_hotbarGrid.AddChild(itemSlot);
+			}
+			else {
+				_inventoryGrid.AddChild(itemSlot);
+			}
             
 			((InventorySlot)itemSlot).UpdateSlot(null, i);
 		}
@@ -57,9 +69,21 @@ public partial class PlayerInventoryController : Control {
 		await PlayerInventoryData.ReadInventoryDataFromFile(SaveData.LoadData());
         
 		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++) {
-			_inventoryGrid.GetChild<InventorySlot>(i)
-				.UpdateSlot(SaveData.organizedPlayerInventory[i], i);
+			
+			if (IsSlotInHotbar(i)) {
+				_hotbarGrid.GetChild<InventorySlot>(i - _hotbarStartIndex)
+					.UpdateSlot(SaveData.organizedPlayerInventory[i], i);
+			}
+			else {
+				_inventoryGrid.GetChild<InventorySlot>(i)
+					.UpdateSlot(SaveData.organizedPlayerInventory[i], i);
+			}
         }
+	}
+
+
+	static bool IsSlotInHotbar(int index) {
+		return index >= _hotbarStartIndex;
 	}
 
 
@@ -88,6 +112,8 @@ public partial class PlayerInventoryController : Control {
 
 		Texture2D iconTexture = itemResource.IconTexture;
 		selectedIcon.Texture = iconTexture;
+
+		selectedQuantityLabel.Visible = selectedItem.quantity > 1;
 		selectedQuantityLabel.Text = selectedItem.quantity.ToString();
 	}
 
@@ -275,7 +301,14 @@ public partial class PlayerInventoryController : Control {
 
 	static void UpdateInventorySlot(RawInventoryItem item, int index)
 	{
-		InventorySlot slotToUpdate = _inventoryGrid.GetChild<InventorySlot>(index);
+		InventorySlot slotToUpdate;
+		if (IsSlotInHotbar(index)) {
+			slotToUpdate = _hotbarGrid.GetChild<InventorySlot>(index - _hotbarStartIndex);
+		}
+		else {
+			slotToUpdate = _inventoryGrid.GetChild<InventorySlot>(index);
+		}
+
 		slotToUpdate.UpdateSlot(item, index);
 	}
 	

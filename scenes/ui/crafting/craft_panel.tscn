@@ -1,0 +1,223 @@
+[gd_scene load_steps=6 format=3 uid="uid://b01xhkvdrkq54"]
+
+[ext_resource type="Script" path="res://scripts/ui/crafting/CraftPanel.cs" id="1_si3is"]
+[ext_resource type="LabelSettings" uid="uid://dv17cjn3uthox" path="res://assets/labelsettings/crafting_panel_item_label_settings.tres" id="2_0kkn8"]
+[ext_resource type="Texture2D" uid="uid://cp7b2wy8o2pqk" path="res://assets/placeholder/R_mockupSprites/pepper.png" id="3_tmrg1"]
+[ext_resource type="LabelSettings" uid="uid://bbixx2rjsddy7" path="res://assets/labelsettings/crafting_resource_label_settings.tres" id="4_ffhxh"]
+[ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory_slot.tscn" id="5_ys1bm"]
+
+
+[node name="CraftPanel" type="Panel" node_paths=PackedStringArray("itemLabel", "itemImage", "requiredResSlots", "ErrorMsgLabel", "AmountToCraftTextEdit", "craftButton")]
+top_level = true
+offset_right = 400.0
+offset_bottom = 450.0
+mouse_filter = 2
+script = ExtResource("1_si3is")
+itemLabel = NodePath("FlowContainer/Label")
+itemImage = NodePath("FlowContainer/HBoxContainer3/TextureRect")
+requiredResSlots = [NodePath("FlowContainer/HBoxContainer/InventorySlot"), NodePath("FlowContainer/HBoxContainer/InventorySlot2"), NodePath("FlowContainer/HBoxContainer/InventorySlot3"), NodePath("FlowContainer/HBoxContainer/InventorySlot4"), NodePath("FlowContainer/HBoxContainer/InventorySlot5")]
+ErrorMsgLabel = NodePath("FlowContainer/ErrorMsg")
+AmountToCraftTextEdit = NodePath("FlowContainer/HBoxContainer2/AmountToCraft")
+craftButton = NodePath("FlowContainer/HBoxContainer2/CraftButton")
+
+[node name="FlowContainer" type="FlowContainer" parent="."]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 104.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="FlowContainer"]
+custom_minimum_size = Vector2(400, 30)
+layout_mode = 2
+text = "BUCKET"
+label_settings = ExtResource("2_0kkn8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Container" parent="FlowContainer"]
+custom_minimum_size = Vector2(400, 16)
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="FlowContainer"]
+custom_minimum_size = Vector2(400, 144.73)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="FlowContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+texture = ExtResource("3_tmrg1")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label2" type="Label" parent="FlowContainer"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+text = "Required Resources:"
+label_settings = ExtResource("4_ffhxh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer3" type="Container" parent="FlowContainer"]
+custom_minimum_size = Vector2(400, 16)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FlowContainer"]
+custom_minimum_size = Vector2(400, 72)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="InventorySlot" parent="FlowContainer/HBoxContainer" instance=ExtResource("5_ys1bm")]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+mouse_filter = 2
+isCraftingSlot = true
+
+[node name="Button" parent="FlowContainer/HBoxContainer/InventorySlot" index="0"]
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Icon" parent="FlowContainer/HBoxContainer/InventorySlot" index="1"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Quantity" parent="FlowContainer/HBoxContainer/InventorySlot" index="2"]
+offset_left = 9.895
+offset_top = 15.94
+offset_right = 73.8948
+offset_bottom = 79.94
+scale = Vector2(0.85, 0.85)
+
+[node name="InventorySlot2" parent="FlowContainer/HBoxContainer" instance=ExtResource("5_ys1bm")]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+mouse_filter = 2
+isCraftingSlot = true
+
+[node name="Button" parent="FlowContainer/HBoxContainer/InventorySlot2" index="0"]
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Icon" parent="FlowContainer/HBoxContainer/InventorySlot2" index="1"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Quantity" parent="FlowContainer/HBoxContainer/InventorySlot2" index="2"]
+offset_left = 9.895
+offset_top = 15.94
+offset_right = 73.8948
+offset_bottom = 79.94
+scale = Vector2(0.85, 0.85)
+
+[node name="InventorySlot3" parent="FlowContainer/HBoxContainer" instance=ExtResource("5_ys1bm")]
+visible = false
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+mouse_filter = 2
+isCraftingSlot = true
+
+[node name="Button" parent="FlowContainer/HBoxContainer/InventorySlot3" index="0"]
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Icon" parent="FlowContainer/HBoxContainer/InventorySlot3" index="1"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Quantity" parent="FlowContainer/HBoxContainer/InventorySlot3" index="2"]
+offset_left = 9.895
+offset_top = 15.94
+offset_right = 73.8948
+offset_bottom = 79.94
+scale = Vector2(0.85, 0.85)
+
+[node name="InventorySlot4" parent="FlowContainer/HBoxContainer" instance=ExtResource("5_ys1bm")]
+visible = false
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+mouse_filter = 2
+isCraftingSlot = true
+
+[node name="Button" parent="FlowContainer/HBoxContainer/InventorySlot4" index="0"]
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Icon" parent="FlowContainer/HBoxContainer/InventorySlot4" index="1"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Quantity" parent="FlowContainer/HBoxContainer/InventorySlot4" index="2"]
+offset_left = 9.895
+offset_top = 15.94
+offset_right = 73.8948
+offset_bottom = 79.94
+scale = Vector2(0.85, 0.85)
+
+[node name="InventorySlot5" parent="FlowContainer/HBoxContainer" instance=ExtResource("5_ys1bm")]
+visible = false
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+mouse_filter = 2
+isCraftingSlot = true
+
+[node name="Button" parent="FlowContainer/HBoxContainer/InventorySlot5" index="0"]
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Icon" parent="FlowContainer/HBoxContainer/InventorySlot5" index="1"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Quantity" parent="FlowContainer/HBoxContainer/InventorySlot5" index="2"]
+offset_left = 9.895
+offset_top = 15.94
+offset_right = 73.8948
+offset_bottom = 79.94
+scale = Vector2(0.85, 0.85)
+
+[node name="ErrorMsg" type="Label" parent="FlowContainer"]
+visible = false
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+text = "--------------------"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="FlowContainer"]
+custom_minimum_size = Vector2(400, 40)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="AmountToCraft" type="TextEdit" parent="FlowContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "1"
+placeholder_text = "1"
+caret_blink = true
+caret_blink_interval = 0.7
+
+[node name="CraftButton" type="Button" parent="FlowContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Craft"
+
+[connection signal="pressed" from="FlowContainer/HBoxContainer2/CraftButton" to="." method="_on_craft_button_pressed"]
+
+[editable path="FlowContainer/HBoxContainer/InventorySlot"]
+[editable path="FlowContainer/HBoxContainer/InventorySlot2"]
+[editable path="FlowContainer/HBoxContainer/InventorySlot3"]
+[editable path="FlowContainer/HBoxContainer/InventorySlot4"]
+[editable path="FlowContainer/HBoxContainer/InventorySlot5"]

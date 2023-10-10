@@ -15,11 +15,14 @@ public partial class npcControl : CharacterBody2D
 	public States CurrentState;
 	public bool dialogueWindow = false;
 	bool _taskCompleted;
-	float _speed = 50;
+	float _speed = 100;
 	Timer _taskTimer;
 	Vector2 _targetPosition;
 	[Export]
 	DialogueControl dialogueControl;
+
+	Plant _currentPlant;
+	int _plantIndex = 0;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -27,12 +30,13 @@ public partial class npcControl : CharacterBody2D
 		// Setting up the timer
 		_taskTimer = new Timer
 		{
-			WaitTime = 30f,
-			OneShot = true
+			WaitTime = 5f,
+
 		};
+		_taskTimer.Timeout += NpcStates;
 
 		AddChild(_taskTimer);
-
+		_taskTimer.Start();
 		// If npc in outside world 
 		// CurrentState = States.FollowPlayer;
 
@@ -44,27 +48,43 @@ public partial class npcControl : CharacterBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
+		
+		if (GlobalPosition.DistanceTo(_targetPosition) > 5 && !dialogueControl.Visible)
+		{
+			Movement(_targetPosition);
+		}
+		if(CurrentState == States.TaskFarming && GlobalPosition.DistanceTo(_targetPosition) < 5)
+		{
+			NpcStates();
+		}
+
+	}
+
+	void NpcStates()
+	{
+		GD.Print(CurrentState);
 		switch (CurrentState)
 		{
 			case States.Patrol:
-
-				if (Position.DistanceTo(_targetPosition) < 10)
-				{
-					TargetPosition();
-				}
-				Movement(_targetPosition);
 
 				if (dialogueControl.farmingTaskStarted == true)
 				{
 					GD.Print("Farming task started");
 					CurrentState = States.TaskFarming;
-					_taskTimer.Start();
+					NpcStates();
+					//_taskTimer.Start();
+					break;
 				}
-
-				if(dialogueControl.attackZombies == true)
+				
+				if (dialogueControl.attackZombies == true)
 				{
 					GD.Print("Looking for zombies");
 					CurrentState = States.TaskDefend;
+				}
+				if (GlobalPosition.DistanceTo(_targetPosition) < 10)
+				{
+					TargetPosition();
+					break;
 				}
 
 				break;
@@ -72,35 +92,55 @@ public partial class npcControl : CharacterBody2D
 			case States.TaskFarming:
 
 				TargetPosition();
-				Movement(_targetPosition);
 				dialogueControl.farmingTaskStarted = false;
-				if(_taskTimer.IsStopped()){
-					_taskCompleted = true;
-	
+
+				if (GlobalPosition.DistanceTo(_currentPlant.GlobalPosition) < 5)
+				{
+					GD.Print("I am at the plant yay");
+					if (_currentPlant.GetGrowthState() == GrowthState.IsWilting || _currentPlant.GetGrowthState() == GrowthState.WaitWatering)
+					{
+						_currentPlant.WaterPlant();
+
+					}
+					if (_currentPlant.GetGrowthState() == GrowthState.IsInfested)
+					{
+						_currentPlant.CurePlant();
+					}
+
+					if (_currentPlant.GetGrowthState() != GrowthState.IsWilting && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
+					 _currentPlant.GetGrowthState() != GrowthState.WaitWatering && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
+					_currentPlant.GetGrowthState() != GrowthState.IsInfested && _plantIndex < FarmManager.instance.GetPlantedPlants().Count)
+					{
+						_plantIndex++;
+						//_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
+
+					}
+					if (_plantIndex == FarmManager.instance.GetPlantedPlants().Count)
+					{
+						_plantIndex = 0;
+					}
 				}
-				if(_taskCompleted == true)
+				if (_taskCompleted == true)
 				{
 					CurrentState = States.TaskCompleted;
 				}
-				if(dialogueControl.exitDialogue == true)
+				if (dialogueControl.exitDialogue == true)
 				{
 					dialogueControl.exitDialogue = false;
 				}
 
 				break;
-			
+
 			case States.TaskDefend:
 				TargetPosition();
-				Movement(_targetPosition);
 				dialogueControl.attackZombies = false;
 
 				break;
 
 			case States.TaskCompleted:
-			// Add here farming resourches
+				// Add here farming resourches
 				_taskCompleted = false;
 				TargetPosition();
-				Movement(_targetPosition);
 
 				if (dialogueControl.farmingTaskStarted == true)
 				{
@@ -108,8 +148,8 @@ public partial class npcControl : CharacterBody2D
 					CurrentState = States.TaskFarming;
 					_taskTimer.Start();
 					dialogueControl.farmingTaskStarted = false;
-				} 
-				if(dialogueControl.exitDialogue == true)
+				}
+				if (dialogueControl.exitDialogue == true)
 				{
 					CurrentState = States.Patrol;
 					dialogueControl.exitDialogue = false;
@@ -118,11 +158,12 @@ public partial class npcControl : CharacterBody2D
 
 			case States.FollowPlayer:
 				TargetPosition();
-				Movement(_targetPosition);
 
 				break;
 		}
 	}
+
+
 
 	private void TargetPosition()
 	{
@@ -133,17 +174,17 @@ public partial class npcControl : CharacterBody2D
 		}
 		if (CurrentState == States.TaskFarming)
 		{
-			_targetPosition = GetParent().GetNode<Marker2D>("TaskPoint").GlobalPosition;
+			//_targetPosition = GetParent().GetNode<Marker2D>("TaskPoint").GlobalPosition;
+			_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
+			_targetPosition = _currentPlant.GlobalPosition;
 			// Move to a position where farming plots are, needs thinking
 
 		}
 		if (CurrentState == States.TaskDefend)
 		{
 			_targetPosition = GetParent().GetNode<CharacterBody2D>("zombie").GlobalPosition;
-			// Move to a position where farming plots are, needs thinking
-
 		}
-		if(CurrentState == States.TaskCompleted)
+		if (CurrentState == States.TaskCompleted)
 		{
 			_targetPosition = GetParent().GetNode<Marker2D>("TaskCompleted").GlobalPosition;
 		}
@@ -155,7 +196,7 @@ public partial class npcControl : CharacterBody2D
 
 	private void Movement(Vector2 target)
 	{
-		_speed = 50;
+		_speed = 100;
 		Vector2 _direction = (target - GlobalPosition).Normalized();
 		Velocity = _direction * _speed;
 		MoveAndSlide();
@@ -172,9 +213,9 @@ public partial class npcControl : CharacterBody2D
 
 		if (_targetPosition == GetParent().GetNode<Marker2D>("TaskCompleted").GlobalPosition)
 		{
-				dialogueControl.farmingTaskStarted = false;
-				GD.Print("Task1 Completed");
-				CurrentState = States.TaskCompleted;
+			dialogueControl.farmingTaskStarted = false;
+			GD.Print("Task1 Completed");
+			CurrentState = States.TaskCompleted;
 		}
 	}
 }

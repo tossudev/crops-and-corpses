@@ -37,18 +37,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.968627, 0.262745, 0.462745, 0.427451)
 
-[node name="Taskpoint2" type="Marker2D" parent="TaskPoint" groups=["Taskpoint"]]
-visible = false
-position = Vector2(-1, -91)
-
-[node name="Taskpoint3" type="Marker2D" parent="TaskPoint" groups=["Taskpoint"]]
-visible = false
-position = Vector2(-77, -91)
-
-[node name="Taskpoint4" type="Marker2D" parent="TaskPoint" groups=["Taskpoint"]]
-visible = false
-position = Vector2(-79, 1)
-
 [node name="TaskCompleted" type="Marker2D" parent="." groups=["TaskCompleted"]]
 position = Vector2(426, 352)
 

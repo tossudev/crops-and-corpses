@@ -70,7 +70,7 @@ public partial class npcControl : CharacterBody2D
 		switch (CurrentState)
 		{
 			case States.Patrol:
-
+				TargetPosition();
 				if (dialogueControl.farmingTaskStarted == true)
 				{
 					GD.Print("Farming task started");

@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://d1qh4w0x3wl3l"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://d1qh4w0x3wl3l"]
 
 [ext_resource type="Script" path="res://TinoTests/Scripts/Weapons/Weapon.cs" id="1_tcevj"]
+[ext_resource type="Resource" uid="uid://cj0seqylk2aaa" path="res://assets/resources/game_items/3_axe.tres" id="1_y55yt"]
 
 [resource]
 script = ExtResource("1_tcevj")
+item = ExtResource("1_y55yt")
 damage = 25.0
 knockback = 0.0
 cooldown = 0.5
@@ -14,7 +16,3 @@ holdAction = true
 ranged = false
 speed = 0.0
 drawTime = 0.0
-ID = 0
-Name = ""
-StackSize = 0
-craftingRequirements = null

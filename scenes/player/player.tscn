@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c8bx46w1qix2q"]
+[gd_scene load_steps=10 format=3 uid="uid://c8bx46w1qix2q"]
 
 [ext_resource type="Script" path="res://TinoTests/Scripts/PlayerController.cs" id="1_y7bta"]
 [ext_resource type="PackedScene" uid="uid://3hlx66fdaruu" path="res://TinoTests/Components/handheld.tscn" id="2_00eh7"]
 [ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="2_jvd4n"]
-[ext_resource type="Resource" uid="uid://domi3h5sb0i6n" path="res://TinoTests/Scripts/Weapons/TrowablePotion.tres" id="3_whjcs"]
+[ext_resource type="Resource" uid="uid://domi3h5sb0i6n" path="res://assets/resources/game_weapons/CurePotion.tres" id="3_kdpso"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://TinoTests/Components/health_component.tscn" id="3_wuvdk"]
-[ext_resource type="Resource" uid="uid://vus4coe8p4nv" path="res://TinoTests/Scripts/Projectiles/Cure.tres" id="4_h2u13"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://TinoTests/Components/hitbox_component.tscn" id="4_sa7m5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xe3lj"]
@@ -21,9 +20,9 @@ script = ExtResource("1_y7bta")
 _handheld = NodePath("Handheld")
 _speed = 300
 
-[node name="Handheld" parent="." instance=ExtResource("2_00eh7")]
-_weapon = ExtResource("3_whjcs")
-_projectile = ExtResource("4_h2u13")
+[node name="Handheld" parent="." node_paths=PackedStringArray("_tempWeaponSprite") instance=ExtResource("2_00eh7")]
+_weapon = ExtResource("3_kdpso")
+_tempWeaponSprite = NodePath("../TempWeaponSprite")
 
 [node name="Icon" type="Sprite2D" parent="."]
 scale = Vector2(0.15625, 0.15625)
@@ -49,3 +48,7 @@ debug_color = Color(0, 0.647059, 0.243137, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2xqb0")
+
+[node name="TempWeaponSprite" type="Sprite2D" parent="."]
+position = Vector2(5, 5)
+scale = Vector2(0.0859375, 0.0859375)

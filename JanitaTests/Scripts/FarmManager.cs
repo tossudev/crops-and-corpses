@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public partial class FarmManager : Node
 {
+	List<RawInventoryItem> items = new List<RawInventoryItem>();
 	public static FarmManager instance;
 
 	[Export] PackedScene [] _plantPrefabs;
@@ -19,6 +20,22 @@ public partial class FarmManager : Node
 		if(instance==null)instance=this;else QueueFree();
 		InitializePlants();
 		_isWaterCanEquipped = _isBugSprayEquipped=true;
+		 
+
+		/*Item asd = ResourceLoader.Load("res://assets/resources/game_items/7_tomato_seed.tres") as Item;
+		Item asd1 = ResourceLoader.Load("res://assets/resources/game_items/8_potato_seed.tres") as Item;
+		Item asd2 = ResourceLoader.Load("res://assets/resources/game_items/9_cabbage_seed.tres") as Item;
+
+		RawInventoryItem asd3 = new RawInventoryItem(asd.ID, asd.Name, 10, asd.StackSize);
+		RawInventoryItem asd4 = new RawInventoryItem(asd1.ID, asd1.Name, 10, asd1.StackSize);
+		RawInventoryItem asd5 = new RawInventoryItem(asd2.ID, asd2.Name, 10, asd2.StackSize);
+		items.Add(asd3);
+		items.Add(asd4);
+		items.Add(asd5);
+		for(int i=0; i<items.Count; i++){
+			PlayerInventoryController.AddItem(items[i]);
+		}*/
+		
 
 	}
 
@@ -40,10 +57,9 @@ public partial class FarmManager : Node
 		}
 	}
 
-	public Plant GetPlant(string plantName){
-
+	public Plant GetPlant(string seedName){
 		foreach(Plant _plant in _plants){
-			if(_plant.plantName.ToString() == plantName)
+			if(_plant.seedName.ToLower() == seedName.ToLower())
 			{
 				Plant _newPlant = _plant.Duplicate() as Plant;
 				return _newPlant;

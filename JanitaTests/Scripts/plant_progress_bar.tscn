@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvvkhl8v6hvpb"]
+
+[ext_resource type="Texture2D" uid="uid://dimmd0t6iyqa1" path="res://assets/placeholder/R_mockupSprites/crafting_menu_grid_background.png" id="1_v26c6"]
+
+[node name="PlantTextureProgressBar" type="TextureProgressBar"]
+offset_left = -25.0
+offset_top = 54.0
+offset_right = 487.0
+offset_bottom = 566.0
+scale = Vector2(0.1, 0.015)
+texture_under = ExtResource("1_v26c6")
+texture_over = ExtResource("1_v26c6")
+texture_progress = ExtResource("1_v26c6")
+tint_over = Color(0.988235, 0.309804, 0.615686, 1)
+tint_progress = Color(0.270588, 0.658824, 0.137255, 1)

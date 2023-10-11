@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMenu.cs" id="1_1usej"]
 [ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://scenes/farm/farm_plot.tscn" id="2_6b0va"]
-[ext_resource type="PackedScene" uid="uid://c5f1jy5vlj4sd" path="res://NikkeTests/scenes/farm_plot_build_mode.tscn" id="3_1aur2"]
-[ext_resource type="PackedScene" uid="uid://3ct83j0jgteb" path="res://NikkeTests/scenes/house.tscn" id="4_yfwft"]
-[ext_resource type="PackedScene" uid="uid://ceal2xj0w1t17" path="res://NikkeTests/scenes/house_build_mode.tscn" id="5_egf03"]
+[ext_resource type="PackedScene" uid="uid://c5f1jy5vlj4sd" path="res://NikkeTests/scenes/building_scenes/farm_plot_build_mode.tscn" id="3_o47i0"]
+[ext_resource type="PackedScene" uid="uid://3ct83j0jgteb" path="res://NikkeTests/scenes/building_scenes/house.tscn" id="4_lft42"]
+[ext_resource type="PackedScene" uid="uid://ceal2xj0w1t17" path="res://NikkeTests/scenes/building_scenes/house_build_mode.tscn" id="5_cdtxw"]
 [ext_resource type="Texture2D" uid="uid://gx3rxc18ic1u" path="res://NikkeTests/images/farm_plot.jpg" id="6_jayxu"]
 [ext_resource type="Texture2D" uid="uid://dskeqa44gjbje" path="res://NikkeTests/images/house.png" id="7_ftrid"]
 
@@ -27,9 +27,9 @@ _buildMenu = NodePath("BuildingMenu/BuildingMenu")
 _buildMenuControl = NodePath("BuildingMenu/BuildingMenu/Control")
 _vBoxContainer = NodePath("BuildingMenu/BuildingMenu/Control/VBoxContainer")
 _farmPlotScene = ExtResource("2_6b0va")
-_farmPlotGhostScene = ExtResource("3_1aur2")
-_houseScene = ExtResource("4_yfwft")
-_houseGhostScene = ExtResource("5_egf03")
+_farmPlotGhostScene = ExtResource("3_o47i0")
+_houseScene = ExtResource("4_lft42")
+_houseGhostScene = ExtResource("5_cdtxw")
 _farmPlotIcon = ExtResource("6_jayxu")
 _houseIcon = ExtResource("7_ftrid")
 

@@ -18,7 +18,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 	public override void _Ready()
 	{		
-		instantiatedNPC = (PackedScene)GD.Load("res://DaniTests/Scenes/dummyScene.tscn");
+		instantiatedNPC = (PackedScene)GD.Load("res://EllaTests/npc.tscn");
 		_rootNodePath = GetParent<Node2D>().GetPath();
 		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);		
 		_damage = 5.0f;

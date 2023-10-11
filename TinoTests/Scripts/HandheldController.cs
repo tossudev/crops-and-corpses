@@ -197,7 +197,7 @@ public partial class HandheldController : Node2D
         _attack.damage *= power;
         projectile.attack = _attack;
         projectile.speed = _speed * power;
-        projectile.projectile = _projectile;
+        projectile.projectile = _weapon.projectile;
         projectile.targetGroup = _targetGroup;
 
         projectile.Init();

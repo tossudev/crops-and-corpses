@@ -16,6 +16,7 @@ public partial class HandheldController : Node2D
     private float _knockback;
     private float _cooldown;
     private EffectType _effect;
+    private TargetType _targetType;
     private float _reach;
     private bool _holdAction;
     private bool _ranged;
@@ -23,10 +24,11 @@ public partial class HandheldController : Node2D
     private float _drawTime;
 
     private bool _isDrawing;
+    private string _targetGroup;
 
     public override void _Ready()
     {
-        Init(); //temp
+        Init();
     }
 
     private void Init()
@@ -35,6 +37,7 @@ public partial class HandheldController : Node2D
         _knockback = (float)_weapon.Get("knockback");
         _cooldown = (float)_weapon.Get("cooldown");
         _effect = (EffectType)(int)_weapon.Get("effect");
+        _targetType = (TargetType)(int)_weapon.Get("targetType");
         _reach = (float)_weapon.Get("reach");
         _holdAction = (bool)_weapon.Get("holdAction");
         _speed = (float)_weapon.Get("speed");
@@ -44,6 +47,26 @@ public partial class HandheldController : Node2D
         this.Scale = Vector2.One * _reach;
 
         _isDrawing = false;
+
+        _attack = new Attack
+        {
+            damage = _damage,
+            knockback = _knockback,
+            effect = _effect
+        };
+
+        switch (_targetType)
+        {
+            case TargetType.Enemy:
+                _targetGroup = "enemy";
+                break;
+            case TargetType.Tree:
+                _targetGroup = "tree";
+                break;
+            default:
+                GD.Print("No target group set for weapon");
+                break;
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -56,6 +79,12 @@ public partial class HandheldController : Node2D
 
     public void SetUpHandheld(Resource weapon, Resource projectile = null)
     {
+        if ((bool)weapon.Get("ranged") && projectile == null)
+        {
+            GD.Print("No projectile set for ranged weapon");
+            return;
+        }
+
         _weapon = weapon;
         _projectile = projectile;
 
@@ -66,13 +95,6 @@ public partial class HandheldController : Node2D
     {
         if (_timer.TimeLeft > 0 || _isDrawing)
             return;
-
-        _attack = new Attack
-        {
-            damage = _damage,
-            knockback = _knockback,
-            effect = _effect
-        };
 
         if (_ranged)
         {
@@ -157,6 +179,7 @@ public partial class HandheldController : Node2D
         projectile.attack = _attack;
         projectile.speed = _speed * power;
         projectile.projectile = _projectile;
+        projectile.targetGroup = _targetGroup;
 
         projectile.Init();
 
@@ -171,7 +194,8 @@ public partial class HandheldController : Node2D
     {
         if (body is HitboxComponent hitbox)
         {
-            hitbox.ApplyAttack(_attack);
+            if (hitbox.IsInGroup(_targetGroup))
+                hitbox.ApplyAttack(_attack);
         }
     }
 }

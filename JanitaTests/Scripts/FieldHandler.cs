@@ -47,7 +47,6 @@ public partial class FieldHandler : Node2D
         }
 		string _plantinfo = _plant.plantName.ToString();
 		_plant = FarmManager.instance.GetPlant(_plantinfo);
-		FarmManager.instance.AddPlantedPlant(_plant);
 	}
 	
 	public void RemovePlant(){

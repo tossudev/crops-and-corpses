@@ -9,6 +9,7 @@ public partial class Weapon : Item
     [Export] public float knockback { get; set; }
     [Export] public float cooldown { get; set; }
     [Export] public EffectType effect { get; set; }
+    [Export] public TargetType targetType { get; set; }
 
     [ExportCategory("Melee")]
     [Export] public float reach { get; set; } = 1;
@@ -18,4 +19,11 @@ public partial class Weapon : Item
     [Export] public bool ranged { get; set; }
     [Export] public float speed { get; set; }
     [Export] public float drawTime { get; set; }
+}
+
+public enum TargetType
+{
+    None,
+    Enemy,
+    Tree,
 }

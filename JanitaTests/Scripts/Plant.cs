@@ -73,6 +73,7 @@ public partial class Plant : Node2D
 	public override void _Ready()
 	{
 		InitializePlant();
+		FarmManager.instance.AddPlantedPlant(this);
 	}
 
 	void InitializePlant(){

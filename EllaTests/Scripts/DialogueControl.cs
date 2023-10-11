@@ -1,13 +1,15 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
-public partial class DialogueControl : Control
+public  partial class DialogueControl : Control
 {
 	Button _buttonOpt1;
 	Button _buttonOpt2;
 	Button _buttonOpt3;
-	[Export]
-	npcControl NPC;
+	
+	 List<npcControl> NPCs = new List<npcControl>();
 
 	RichTextLabel _nameText;
 	RichTextLabel _text;
@@ -18,6 +20,7 @@ public partial class DialogueControl : Control
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		
 		_backgroundColor = GetNode<ColorRect>("ColorRect");
 
 		_buttonOpt1 = GetNode<Button>("ColorRect/Button1");
@@ -36,14 +39,25 @@ public partial class DialogueControl : Control
 		Visible = false;
 
 	}
+	public void AddNPC(npcControl newNpc)
+	{
+		GD.Print("is this added?");
+		NPCs.Add(newNpc);
+		GD.Print(NPCs.Count);
+	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (NPC.dialogueWindow == true)
+		//GD.Print(NPCs.Count);
+		foreach(var NPC in NPCs)
 		{
-			DialogueWindowVisible();
+			if (NPC.dialogueWindow == true)
+			{
+				DialogueWindowVisible();
+			}
 		}
+		
 	}
 
 	public void _on_button_1_button_up()
@@ -68,7 +82,9 @@ public partial class DialogueControl : Control
 	{
 		GD.Print("Dialogue window opened");
 		Visible = true;
-		NPC.dialogueWindow = false;
+		foreach(var NPC in NPCs)
+		{
+			NPC.dialogueWindow = false;
 
 		if (NPC.CurrentState == npcControl.States.Patrol)
 		{
@@ -97,5 +113,7 @@ public partial class DialogueControl : Control
 
 			_buttonOpt1.Visible = true;
 		}
+		}
+		
 	}
 }

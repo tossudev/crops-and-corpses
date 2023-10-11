@@ -55,7 +55,7 @@ text = "Press 'E' to toggle inventory"
 _buildings = NodePath("../../Buildings")
 _player = NodePath("../../Player")
 
-[node name="Control" type="Control" parent="Overlay" node_paths=PackedStringArray("NPC")]
+[node name="Control" type="Control" parent="Overlay"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -69,7 +69,6 @@ offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("9_pstmt")
-NPC = NodePath("../../NPC")
 
 [node name="ColorRect" type="ColorRect" parent="Overlay/Control"]
 layout_mode = 1
@@ -161,7 +160,10 @@ position = Vector2(679, -5)
 
 [node name="farm_manager" parent="." instance=ExtResource("8_v8hay")]
 
-[node name="NPC" parent="." node_paths=PackedStringArray("dialogueControl") instance=ExtResource("10_g8lte")]
+[node name="NPC2" parent="." node_paths=PackedStringArray("dialogueControl") instance=ExtResource("10_g8lte")]
+dialogueControl = NodePath("../Overlay/Control")
+
+[node name="NPC1" parent="." node_paths=PackedStringArray("dialogueControl") instance=ExtResource("10_g8lte")]
 position = Vector2(-160, 100)
 dialogueControl = NodePath("../Overlay/Control")
 

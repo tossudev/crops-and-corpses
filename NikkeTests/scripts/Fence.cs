@@ -18,10 +18,10 @@ public partial class Fence : Node2D
 	{
         _fences = GetNode("Fences") as Node2D;
 
-		_fenceNorth = ResourceLoader.Load<PackedScene>("res://NikkeTests/scenes/fence_scenes/fence_north.tscn");
-        _fenceSouth = ResourceLoader.Load<PackedScene>("res://NikkeTests/scenes/fence_scenes/fence_south.tscn");
-        _fenceWest = ResourceLoader.Load<PackedScene>("res://NikkeTests/scenes/fence_scenes/fence_west.tscn");
-        _fenceEast = ResourceLoader.Load<PackedScene>("res://NikkeTests/scenes/fence_scenes/fence_east.tscn");
+		_fenceNorth = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_north.tscn");
+        _fenceSouth = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_south.tscn");
+        _fenceWest = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_west.tscn");
+        _fenceEast = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_east.tscn");
 
 		InstantiateFences();
     }

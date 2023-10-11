@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://e58507ft315b"]
 
-[ext_resource type="Texture2D" uid="uid://dbfcw01ignddj" path="res://NikkeTests/images/fence_n.png" id="1_fskue"]
+[ext_resource type="Texture2D" uid="uid://dbfcw01ignddj" path="res://NikkeTests/images/fence_n.png" id="1_g7i1y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_asoab"]
 size = Vector2(126, 62)
@@ -10,7 +10,7 @@ size = Vector2(126, 62)
 [node name="FenceHighN" type="Sprite2D" parent="."]
 position = Vector2(-64, -128)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_fskue")
+texture = ExtResource("1_g7i1y")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-64, -64)

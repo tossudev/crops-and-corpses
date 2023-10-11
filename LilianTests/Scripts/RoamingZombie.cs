@@ -21,8 +21,7 @@ public partial class RoamingZombie : CharacterBody2D
 	public override void _Ready()
 	{		
 		instantiatedNPC = (PackedScene)GD.Load("res://EllaTests/npc.tscn");
-		// DANIEL: changed _rootNodePath = GetParent<Node2D>().GetPath(); into the following since this returned a 'Godot.Window' idk it gave me an error
-		_rootNodePath = GetPath();
+		_rootNodePath =  GetParent<Node2D>().GetPath();
 		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);		
 		_damage = 5.0f;
 		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");

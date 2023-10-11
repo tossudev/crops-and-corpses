@@ -6,4 +6,5 @@ public partial class Projectile : Item
 {
     [Export] public float airtime { get; set; } = 2;
     [Export] public float despawnTime { get; set; } = 0.5f;
+    [Export] public EffectType effect { get; set; } = 0;
 }

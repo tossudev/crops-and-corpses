@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0ha6xj7g0h1b"]
+[gd_scene load_steps=5 format=3 uid="uid://b0ha6xj7g0h1b"]
 
 [ext_resource type="Script" path="res://DaniTests/Scripts/SpawnScriptTest.cs" id="1_l0mb1"]
 [ext_resource type="Script" path="res://DaniTests/Scripts/TimeManager.cs" id="3_iehvf"]
+[ext_resource type="PackedScene" uid="uid://cr6efhy85nwwj" path="res://DaniTests/Prefabs/playerTest.tscn" id="3_syd6a"]
+[ext_resource type="PackedScene" uid="uid://ducfl7udsw3bj" path="res://LilianTests/Prefabs/zombie_with_hitbox.tscn" id="4_7ygsj"]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(-71, -4)
@@ -14,18 +16,19 @@ script = ExtResource("3_iehvf")
 position = Vector2(-71, -4)
 
 [node name="SpawnPoint1" type="Node2D" parent="."]
-position = Vector2(642, 455)
+position = Vector2(167, 180)
 
 [node name="SpawnPoint0" type="Node2D" parent="."]
-position = Vector2(1570, 689)
+position = Vector2(263, -140)
 
 [node name="SpawnPoint2" type="Node2D" parent="."]
-position = Vector2(985, 181)
+position = Vector2(-209, -164)
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 z_index = -1
 offset_left = 71.0
 offset_top = 4.0
@@ -33,5 +36,13 @@ offset_right = 1991.0
 offset_bottom = 1084.0
 mouse_filter = 1
 color = Color(0.168627, 0.486275, 0.180392, 1)
+
+[node name="Player" parent="." node_paths=PackedStringArray("_camera") instance=ExtResource("3_syd6a")]
+_camera = NodePath("Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Zombie" parent="." instance=ExtResource("4_7ygsj")]
+position = Vector2(495, 0)
 
 [connection signal="timeout" from="Timer" to="." method="ZombieSpawn"]

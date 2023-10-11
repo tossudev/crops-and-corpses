@@ -10,98 +10,109 @@ public partial class RoamingZombie : CharacterBody2D
 	private HitboxComponent _hitbox;
 	private Attack _attack;
 	private Timer _timer;
-	private bool _playerInAttackRange;
+	private ProgressBar _healthBar;
 	private HealthComponent _healthComponent;
-	[Export] private NodePath _characterNodePath = null;
-	private CharacterBody2D _thisZombie;
-	PackedScene packedScene;
+	private NodePath _rootNodePath;
+	private Node2D rootNode;
+	PackedScene instantiatedNPC;
 
-    public override void _Ready()
-    {
-		packedScene = (PackedScene)GD.Load("res://LilianTests/Prefabs/zombie_with_hitbox.tscn");
-
-		_thisZombie = GetNodeOrNull<CharacterBody2D>(_characterNodePath);
-		_damage = 10.0f;
-		_playerInAttackRange = false;
-        _sprite = GetNode<Sprite2D>("Sprite2D");
-		//_healthComponent = GetNode<HealthComponent>("HealthComponent");
+	public override void _Ready()
+	{		
+		instantiatedNPC = (PackedScene)GD.Load("res://DaniTests/Scenes/dummyScene.tscn");
+		_rootNodePath = GetParent<Node2D>().GetPath();
+		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);		
+		_damage = 5.0f;
+		_sprite = GetNode<Sprite2D>("Sprite2D");
+		_timer = GetNode<Timer>("AttackTimer");
+		_healthBar = GetNode<ProgressBar>("HealthBar");
+		_healthComponent = GetNode<HealthComponent>("HealthComponent");
 
 		_attack = new Attack
 		{
 			damage = _damage,
+			knockback = 100f
 		};
-    }
+	}
 
-    public override void _PhysicsProcess(double delta)
-    {
-        MoveAndSlide();
+	public override void _PhysicsProcess(double delta)
+	{
+		MoveAndSlide();
+		UpdateHealth();
 
-		// if (_playerInAttackRange)
-		// {
-		// 	//AttackPlayer(_hitbox);
-		// 	_timer.Start();
-		// }
-		// else
-		// {
-		// 	_timer.Stop();
-		// }
-		
 		if (Velocity.X > 0)
-    	{
-    		_sprite.FlipH = false;
-    	}
-    	else
-    	{
-    		_sprite.FlipH = true;
-    	}
-    }
+		{
+			_sprite.FlipH = false;
+		}
+		else
+		{
+			_sprite.FlipH = true;
+		}
+	}
+
+	private void AttackReceived(Attack attack)
+	{
+		/* GD.Print("2");
+		GD.Print(attack.effect); */
+		switch (attack.effect)
+				{
+				case EffectType.Cure:
+
+					Transform2D zombiePos = this.Transform;
+					CharacterBody2D spawnNPC = (CharacterBody2D)instantiatedNPC.Instantiate();
+					spawnNPC.Transform = zombiePos;
+					rootNode.AddChild(spawnNPC);
+					this.QueueFree();
+					break;
+				default:
+					break;
+				}
+	}
 
 	private void OnAttackBoxEntered(Node2D body)
 	{
-		if(body.IsInGroup("player"))
+		if (body.IsInGroup("player"))
 		{
 			_player = (CharacterBody2D)body;
 			_hitbox = _player.GetNodeOrNull<HitboxComponent>("HitboxComponent");
 
 			if (_hitbox != null)
 			{
-				_hitbox.ApplyAttack(_attack);
-				// _playerInAttackRange = true;
-				// //AttackPlayer(_hitbox);
-
-				switch(_attack.effect)
-				{
-					case EffectType.Cure:
-					
-						Transform2D zombiePos = _thisZombie.Transform;
-						_thisZombie.QueueFree();
-						CharacterBody2D spawnNPC = (CharacterBody2D)packedScene.Instantiate();
-						spawnNPC.Transform = zombiePos;
-						AddChild(spawnNPC);
-						break;
-					default:						
-					break;
-				}               	 
+				//_hitbox.ApplyAttack(_attack);
+				_timer.Start();
 			}
-			else 
+			else
 			{
 				GD.Print("No hitbox found on player");
 			}
 		}
 	}
 
-	// private void OnAttackBoxExited(Node2D body)
-	// {
-	// 	_playerInAttackRange = false;
-	// }
+	private void UpdateHealth()
+	{
+		// update health bar when player damages zombie
+		_healthBar.Value = _healthComponent._health;
 
-	// private void OnTimerTimeout()
-	// {
-	// 	GD.Print("attack player");
-	// 	if(_hitbox != null)
-	// 	{
-	// 		_hitbox.ApplyAttack(_attack);
-	// 	}
-		
-	// }
+		if (_healthComponent._health >= 100)
+		{
+			_healthBar.Visible = false;
+		}
+		else 
+		{
+			_healthBar.Visible = true;
+		}
+	}
+
+	private void OnAttackBoxExited(Node2D body)
+	{
+		_timer.Stop();
+	}
+
+	private void OnTimerTimeout()
+	{
+		//GD.Print("attack player");
+		if(_hitbox != null)
+		{
+			_hitbox.ApplyAttack(_attack);
+		}
+	}
 }

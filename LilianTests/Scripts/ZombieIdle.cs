@@ -35,7 +35,7 @@ public partial class ZombieIdle : States
 			_zombie.Velocity = _moveDirection * _moveSpeed;
 		}
 		
-		if(_player != null)
+		if(_player != null && RoamingZombie.playerAlive != false)
 		{
 			Vector2 direction = _player.GlobalPosition - _zombie.GlobalPosition;
 

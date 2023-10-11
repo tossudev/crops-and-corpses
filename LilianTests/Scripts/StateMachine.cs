@@ -33,13 +33,21 @@ public partial class StateMachine : Node
         {
             _current_state.Update(delta);
         }
+        else 
+        {
+            _current_state = initial_state;
+        }
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        if (_current_state != null)
+        if (_current_state != null && RoamingZombie.playerAlive != false)
         {
             _current_state.Physics_Update(delta);
+        }
+        else 
+        {
+            _current_state = initial_state;
         }
     }
 

@@ -35,14 +35,16 @@ public partial class HandheldController : Node2D
 
     private void Init()
     {
-        _weapon = WeaponData.GetWeaponByItem(PlayerInventoryController.selectedItem.id);
-
-        if (_weapon == null)
+        if (PlayerInventoryController.selectedItem != null)
+            _weapon = WeaponData.GetWeaponByItem(PlayerInventoryController.selectedItem.id);
+        else
         {
+            _weapon = null;
             return;
         }
 
         _tempWeaponSprite.Texture = _weapon.item.IconTexture;
+        _tempWeaponSprite.Visible = true;
 
         _damage = _weapon.damage;
         _knockback = _weapon.knockback;
@@ -86,6 +88,9 @@ public partial class HandheldController : Node2D
         {
             LookAt(GetGlobalMousePosition());
         }
+
+        if (_weapon == null)
+            _tempWeaponSprite.Visible = false;
     }
 
     // TODO: this is a temporary solution

@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://b6a2oqc16p5rs"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://b6a2oqc16p5rs"]
 
 [ext_resource type="Script" path="res://TinoTests/Scripts/Weapons/Weapon.cs" id="1_f8oqu"]
+[ext_resource type="Resource" uid="uid://di3mqk8b3d2ke" path="res://assets/resources/game_items/2_sword.tres" id="1_rgt5x"]
 
 [resource]
 script = ExtResource("1_f8oqu")
+item = ExtResource("1_rgt5x")
 damage = 15.0
 knockback = 10.0
 cooldown = 0.5
@@ -14,7 +16,3 @@ holdAction = false
 ranged = false
 speed = 0.0
 drawTime = 0.0
-ID = 0
-Name = ""
-StackSize = 1
-craftingRequirements = null

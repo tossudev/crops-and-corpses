@@ -7,7 +7,7 @@ public partial class ProjectileController : Node2D
     [Export] private Timer _lifetimeTimer;
 
     public Attack attack;
-    public Resource projectile;
+    public Projectile projectile;
     public string targetGroup;
     public float speed;
     private float _airtime;
@@ -16,9 +16,9 @@ public partial class ProjectileController : Node2D
 
     public void Init()
     {
-        _airtime = (float)projectile.Get("airtime");
-        _despawnTime = (float)projectile.Get("despawnTime");
-        _effectType = (EffectType)(int)projectile.Get("effect");
+        _airtime = projectile.airtime;
+        _despawnTime = projectile.despawnTime;
+        _effectType = projectile.effect;
 
         attack.effect = _effectType;
 

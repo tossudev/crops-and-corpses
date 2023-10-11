@@ -4,12 +4,14 @@ using System.Collections;
 
 public partial class HandheldController : Node2D
 {
-    [Export] private Resource _weapon;
-    [Export] private Resource _projectile;
+    [Export] private Weapon _weapon;
+    [Export] private Weapon _hand;
+    [Export] private Projectile _projectile;
     [Export] private Area2D _hitbox;
     [Export] private AnimationPlayer _animationPlayer;
     [Export] private Timer _timer;
     [Export] private PackedScene _projectilePrefab;
+    [Export] private Sprite2D _tempWeaponSprite;
 
     private Attack _attack;
     private float _damage;
@@ -28,23 +30,30 @@ public partial class HandheldController : Node2D
 
     public override void _Ready()
     {
-        Init();
+        // Init();
     }
 
     private void Init()
     {
-        _damage = (float)_weapon.Get("damage");
-        _knockback = (float)_weapon.Get("knockback");
-        _cooldown = (float)_weapon.Get("cooldown");
-        _effect = (EffectType)(int)_weapon.Get("effect");
-        _targetType = (TargetType)(int)_weapon.Get("targetType");
-        _reach = (float)_weapon.Get("reach");
-        _holdAction = (bool)_weapon.Get("holdAction");
-        _speed = (float)_weapon.Get("speed");
-        _ranged = (bool)_weapon.Get("ranged");
-        _drawTime = (float)_weapon.Get("drawTime");
+        _weapon = WeaponData.GetWeaponByItem(PlayerInventoryController.selectedItem.id);
 
-        this.Scale = Vector2.One * _reach;
+        if (_weapon == null)
+        {
+            return;
+        }
+
+        _tempWeaponSprite.Texture = _weapon.item.IconTexture;
+
+        _damage = _weapon.damage;
+        _knockback = _weapon.knockback;
+        _cooldown = _weapon.cooldown;
+        _effect = _weapon.effect;
+        _targetType = _weapon.targetType;
+        _reach = _weapon.reach;
+        _holdAction = _weapon.holdAction;
+        _speed = _weapon.speed;
+        _ranged = _weapon.ranged;
+        _drawTime = _weapon.drawTime;
 
         _isDrawing = false;
 
@@ -67,6 +76,8 @@ public partial class HandheldController : Node2D
                 GD.Print("No target group set for weapon");
                 break;
         }
+
+        this.Scale = Vector2.One * _reach;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -77,7 +88,8 @@ public partial class HandheldController : Node2D
         }
     }
 
-    public void SetUpHandheld(Resource weapon, Resource projectile = null)
+    // TODO: this is a temporary solution
+    public void SetUpHandheld(Weapon weapon, Projectile projectile = null)
     {
         if ((bool)weapon.Get("ranged") && projectile == null)
         {
@@ -93,7 +105,9 @@ public partial class HandheldController : Node2D
 
     public void Use(bool canMelee)
     {
-        if (_timer.TimeLeft > 0 || _isDrawing)
+        Init();
+
+        if (_timer.TimeLeft > 0 || _isDrawing || _weapon == null)
             return;
 
         if (_ranged)

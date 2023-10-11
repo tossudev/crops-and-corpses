@@ -8,8 +8,8 @@ public  partial class DialogueControl : Control
 	Button _buttonOpt1;
 	Button _buttonOpt2;
 	Button _buttonOpt3;
-	
-	 List<npcControl> NPCs = new List<npcControl>();
+	[Export]
+	 npcControl NPC;
 
 	RichTextLabel _nameText;
 	RichTextLabel _text;
@@ -39,25 +39,26 @@ public  partial class DialogueControl : Control
 		Visible = false;
 
 	}
-	public void AddNPC(npcControl newNpc)
-	{
+	/* public void AddNPC(npcControl newNpc)
+	{	
+		
 		GD.Print("is this added?");
 		NPCs.Add(newNpc);
 		GD.Print(NPCs.Count);
-	}
+	} */
+	/* public int GetCountNPC(int count)
+	{
+		return count = NPCs.Count();
+	} */
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		//GD.Print(NPCs.Count);
-		foreach(var NPC in NPCs)
-		{
-			if (NPC.dialogueWindow == true)
+		if (NPC.dialogueWindow == true)
 			{
 				DialogueWindowVisible();
 			}
-		}
-		
 	}
 
 	public void _on_button_1_button_up()
@@ -82,9 +83,7 @@ public  partial class DialogueControl : Control
 	{
 		GD.Print("Dialogue window opened");
 		Visible = true;
-		foreach(var NPC in NPCs)
-		{
-			NPC.dialogueWindow = false;
+		NPC.dialogueWindow = false;
 
 		if (NPC.CurrentState == npcControl.States.Patrol)
 		{
@@ -113,7 +112,9 @@ public  partial class DialogueControl : Control
 
 			_buttonOpt1.Visible = true;
 		}
-		}
+		
+			
+		
 		
 	}
 }

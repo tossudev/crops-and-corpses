@@ -29,7 +29,7 @@ public partial class npcControl : CharacterBody2D
 	{
 		GD.Print("im ready");
 		
-		dialogueControl.AddNPC(this);
+		
 		// Setting up the timer
 		_taskTimer = new Timer
 		{

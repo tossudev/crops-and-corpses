@@ -40,7 +40,6 @@ position_smoothing_speed = 20.0
 [node name="Overlay" type="CanvasLayer" parent="."]
 
 [node name="PlayerInventory" parent="Overlay" instance=ExtResource("3_tp6xx")]
-visible = false
 
 [node name="CraftingWindow" parent="Overlay" instance=ExtResource("5_d3kp8")]
 

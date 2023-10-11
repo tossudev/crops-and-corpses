@@ -43,6 +43,8 @@ public partial class PlayerInventoryController : Control {
 		_selectedItemNode = GetNode<Control>("SelectedItem");
 		selectedIcon = GetNode<TextureRect>("SelectedItem/Icon");
 		selectedQuantityLabel = GetNode<Label>("SelectedItem/Quantity");
+
+		_inventoryPanel.Visible = false;
 		_InitInventory();
 	}
 

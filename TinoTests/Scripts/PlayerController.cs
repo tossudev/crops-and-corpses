@@ -8,6 +8,7 @@ public partial class PlayerController : CharacterBody2D
 	[Export] private Camera2D _camera;
 	[Export] private Sprite2D _sprite;
 	[Export] private Area2D _pickupArea;
+	[Export] private PlayerSpriteController _rig;
 
 	[ExportCategory("Settings")]
 	[Export] private float maxZoom = 2f;
@@ -77,6 +78,8 @@ public partial class PlayerController : CharacterBody2D
 	{
 		var movement = GetMovementInputVector() * _speed;
 		Velocity = movement + _knockback;
+
+		_rig.UpdateSprite(movement);
 
 		MoveAndSlide();
 	}

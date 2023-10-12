@@ -6,7 +6,9 @@ public partial class PlayerInventoryController : Control {
 	public static TextureRect selectedIcon;
 	public static Label selectedQuantityLabel;
 
+	static Control _inventoryPanel;
 	static Control _inventoryGrid;
+	static Control _hotbarPanel;
 	static Control _hotbarGrid;
 	
 	public static bool isItemSelected = false;
@@ -15,18 +17,34 @@ public partial class PlayerInventoryController : Control {
 	public bool isOpen = false;
     string slotNodePath = "res://scenes/ui/inventory_slot.tscn";
     Control _selectedItemNode;
-	public const string PIC_NODE_GROUP = "PlayerInventoryController";
+    const string INVENTORY_GRID_GROUP = "InventoryGrid";
+	const string INVENTORY_PANEL_GROUP = "InventoryPanel";
+	
+    const string HOTBAR_PANEL_GROUP = "HotbarPanel";
+	const string HOTBAR_GRID_GROUP = "HotbarGrid";
+
+	
+	
 	const int SELECTED_ITEM_OFFSET = 64;
 	const int HOTBAR_SIZE = 8;
 	static int _hotbarStartIndex = 24;
 
 
-	public override void _Ready() {
-		_inventoryGrid = GetNode<Control>("InventoryGrid");
-		_hotbarGrid = GetNode<Control>("HotbarGrid");
+	public override void _Ready()
+	{
+		var tree = GetTree();
+		
+		_inventoryPanel = (Control) tree.GetFirstNodeInGroup(INVENTORY_PANEL_GROUP);
+		_inventoryGrid = (Control) tree.GetFirstNodeInGroup(INVENTORY_GRID_GROUP);
+		
+		_hotbarPanel = (Control) tree.GetFirstNodeInGroup(HOTBAR_PANEL_GROUP);
+		_hotbarGrid = (Control) tree.GetFirstNodeInGroup(HOTBAR_GRID_GROUP);
+		
 		_selectedItemNode = GetNode<Control>("SelectedItem");
 		selectedIcon = GetNode<TextureRect>("SelectedItem/Icon");
 		selectedQuantityLabel = GetNode<Label>("SelectedItem/Quantity");
+
+		_inventoryPanel.Visible = false;
 		_InitInventory();
 	}
 
@@ -39,13 +57,23 @@ public partial class PlayerInventoryController : Control {
 	public override void _Input(InputEvent @event) {
 		if (@event.IsActionPressed("toggle_inventory")) {
 			isOpen = !isOpen;
-			_inventoryGrid.Visible = isOpen;
+			_inventoryPanel.Visible = isOpen;
 		}
 	}
 
 
 	async Task _InitInventory() {
 		SaveData.organizedPlayerInventory.Clear();
+
+		foreach (var node in _inventoryGrid.GetChildren())
+		{
+			node.QueueFree();
+		}
+		
+		foreach (var node in _hotbarGrid.GetChildren())
+		{
+			node.QueueFree();
+		}
 
 		_hotbarStartIndex = PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - HOTBAR_SIZE;
 

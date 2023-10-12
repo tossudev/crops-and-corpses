@@ -2,9 +2,10 @@ using Godot;
 using System;
 
 [GlobalClass, Icon("res://icon.svg")]
-public partial class Weapon : Item
+public partial class Weapon : Resource
 {
     [ExportCategory("Global")]
+    [Export] public Item item { get; set; }
     [Export] public float damage { get; set; }
     [Export] public float knockback { get; set; }
     [Export] public float cooldown { get; set; }
@@ -19,6 +20,7 @@ public partial class Weapon : Item
     [Export] public bool ranged { get; set; }
     [Export] public float speed { get; set; }
     [Export] public float drawTime { get; set; }
+    [Export] public Projectile projectile { get; set; }
 }
 
 public enum TargetType

@@ -2,13 +2,22 @@
 
 [ext_resource type="Texture2D" uid="uid://dimmd0t6iyqa1" path="res://assets/placeholder/R_mockupSprites/crafting_menu_grid_background.png" id="1_mpok7"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lvwuh"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_etjiy"]
 texture = ExtResource("1_mpok7")
 
-[node name="ItemGridSlot" type="Panel"]
+[node name="ItemGridSlot" type="Control"]
 light_mask = 16
 visibility_layer = 16
-custom_minimum_size = Vector2(75, 75)
-layout_direction = 1
+custom_minimum_size = Vector2(73, 73)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 72.0
+offset_bottom = 72.0
 pivot_offset = Vector2(37.5, 37.5)
-theme_override_styles/panel = SubResource("StyleBoxTexture_lvwuh")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_etjiy")

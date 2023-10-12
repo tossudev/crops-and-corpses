@@ -27,6 +27,9 @@ public partial class npcControl : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		GD.Print("im ready");
+		
+		
 		// Setting up the timer
 		_taskTimer = new Timer
 		{
@@ -49,6 +52,7 @@ public partial class npcControl : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		
+		
 		if (GlobalPosition.DistanceTo(_targetPosition) > 5 && !dialogueControl.Visible)
 		{
 			Movement(_targetPosition);
@@ -66,7 +70,7 @@ public partial class npcControl : CharacterBody2D
 		switch (CurrentState)
 		{
 			case States.Patrol:
-
+				TargetPosition();
 				if (dialogueControl.farmingTaskStarted == true)
 				{
 					GD.Print("Farming task started");

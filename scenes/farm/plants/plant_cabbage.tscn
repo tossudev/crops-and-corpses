@@ -28,3 +28,5 @@ shape = ExtResource("5_qj5k4")
 [connection signal="area_entered" from="Area2D" to="." method="OnInteractable"]
 [connection signal="area_exited" from="Area2D" to="." method="OnNonInteractable"]
 [connection signal="input_event" from="Area2D" to="." method="InteractWithPlant"]
+[connection signal="mouse_entered" from="Area2D" to="." method="ShowProgress"]
+[connection signal="mouse_exited" from="Area2D" to="." method="HideProgress"]

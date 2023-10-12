@@ -3,13 +3,13 @@ using System;
 
 public partial class CraftingWindow : Control
 {
-	TextureRect _itemArea; 
+	Panel _itemArea; 
 	bool _isOpen;
 
 	
 	public override void _Ready()
 	{
-		_itemArea = GetNode<TextureRect>("ItemArea");
+		_itemArea = GetNode<Panel>("ItemArea");
 		
 		_itemArea.Visible = false;
 		_isOpen = false;

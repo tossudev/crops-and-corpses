@@ -73,7 +73,7 @@ public partial class InventorySlot : Control {
 	public void UpdateSlot(RawInventoryItem rawItem, int itemIndex)
 	{
 		slotItem = (rawItem != null) 
-			? new RawInventoryItem(rawItem.id, rawItem.name, rawItem.quantity, rawItem.stackSize) 
+			? new RawInventoryItem(rawItem.id, rawItem.name, rawItem.quantity, rawItem.stackSize, itemIndex) 
 			: null;
 		
 		index = itemIndex;

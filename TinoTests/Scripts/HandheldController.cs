@@ -79,6 +79,8 @@ public partial class HandheldController : Node2D
         _drawTime = _weapon.drawTime;
         _projectile = _weapon.projectile;
 
+        GD.Print(_projectile.item.Name);
+
         _isDrawing = false;
 
         _attack = new Attack

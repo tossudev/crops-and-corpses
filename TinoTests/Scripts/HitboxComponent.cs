@@ -12,7 +12,7 @@ public partial class HitboxComponent : Area2D
 			_healthComponent.TakeDamage(attack);
 
 			if (this.GetParent().HasMethod("AttackReceived"))
-				this.GetParent().Call("AttackReceived", attack);
+				this.GetParent().CallDeferred("AttackReceived", attack);
 		}
 		else
 		{

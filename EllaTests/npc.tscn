@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="1_3math"]
 [ext_resource type="Script" path="res://EllaTests/Scripts/npcControl.cs" id="1_koefy"]
-[ext_resource type="PackedScene" path="res://DaniTests/Prefabs/NPCcontrol.tscn" id="3_myiva"]
+[ext_resource type="Script" path="res://EllaTests/Scripts/DialogueControl.cs" id="3_w0yh6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0pyaw"]
 size = Vector2(198, 176)
@@ -27,11 +27,104 @@ offset_top = -60.0
 offset_right = 58.0
 offset_bottom = 58.0
 
-[node name="Control" parent="." node_paths=PackedStringArray("NPC") instance=ExtResource("3_myiva")]
-offset_left = -922.0
-offset_top = -386.0
-offset_right = 1000.0
-offset_bottom = -159.0
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("NPC")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1792.0
+offset_top = -656.0
+offset_right = 130.0
+offset_bottom = -429.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+script = ExtResource("3_w0yh6")
 NPC = NodePath("..")
 
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.188
+anchor_right = 0.793
+anchor_bottom = 1.0
+offset_left = -57.336
+offset_top = 16.0
+offset_right = -58.146
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.603922, 0.545098, 0.8, 1)
+
+[node name="Name" type="RichTextLabel" parent="Control/ColorRect"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_right = 0.406
+anchor_bottom = 0.141
+offset_left = 0.399998
+offset_top = 10.0
+offset_right = 0.399963
+offset_bottom = 9.945
+grow_horizontal = 2
+text = "name here"
+
+[node name="Text" type="RichTextLabel" parent="Control/ColorRect"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_top = 0.141
+anchor_right = 0.719
+anchor_bottom = 0.535
+offset_left = 0.399998
+offset_top = 17.711
+offset_right = -0.400024
+offset_bottom = 17.841
+grow_horizontal = 2
+grow_vertical = 2
+text = "text here"
+
+[node name="Button1" type="Button" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_top = 0.845
+anchor_right = 0.187
+anchor_bottom = 0.978
+offset_left = 63.978
+offset_top = -2.505
+offset_right = 64.378
+offset_bottom = 1.03598
+
+[node name="Button2" type="Button" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.219
+anchor_top = 0.845
+anchor_right = 0.375
+anchor_bottom = 0.972
+offset_left = 95.522
+offset_top = -2.505
+offset_right = 95.922
+offset_bottom = 2.40997
+
+[node name="Button3" type="Button" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.423
+anchor_top = 0.83
+anchor_right = 0.552
+anchor_bottom = 0.996
+offset_left = 92.474
+offset_top = 1.93001
+offset_right = 124.248
+offset_bottom = -2.08603
+
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
+[connection signal="button_up" from="Control/ColorRect/Button1" to="Control" method="_on_button_1_button_up" flags=18]
+[connection signal="button_up" from="Control/ColorRect/Button2" to="Control" method="_on_button_2_button_up" flags=18]
+[connection signal="button_up" from="Control/ColorRect/Button3" to="Control" method="_on_button_3_button_up" flags=18]

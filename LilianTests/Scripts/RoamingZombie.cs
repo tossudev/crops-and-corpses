@@ -66,6 +66,7 @@ public partial class RoamingZombie : CharacterBody2D
 					CharacterBody2D spawnNPC = (CharacterBody2D)instantiatedNPC.Instantiate();
 					spawnNPC.Transform = zombiePos;
 					rootNode.AddChild(spawnNPC);
+					spawnNPC.Scale = new Vector2(0.5f,0.5f);
 					this.QueueFree();
 					break;
 				default:

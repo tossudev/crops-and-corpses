@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c8bx46w1qix2q"]
+[gd_scene load_steps=26 format=3 uid="uid://c8bx46w1qix2q"]
 
 [ext_resource type="Script" path="res://TinoTests/Scripts/PlayerController.cs" id="1_y7bta"]
 [ext_resource type="PackedScene" uid="uid://3hlx66fdaruu" path="res://TinoTests/Components/handheld.tscn" id="2_00eh7"]
@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://be8oyimariure" path="res://TinoTests/Scripts/Weapons/Hand.tres" id="4_q7kfq"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://TinoTests/Components/hitbox_component.tscn" id="4_sa7m5"]
 [ext_resource type="Script" path="res://scripts/player/PlayerSpriteController.cs" id="5_xyhkk"]
-[ext_resource type="Shader" path="res://RigTestCropsAndCorpses/characterskeleton/test.gdshader" id="7_4yese"]
 [ext_resource type="Texture2D" uid="uid://dx6s3y4sg7ffp" path="res://assets/placeholder/test_character/Torso.png" id="8_f81gn"]
 [ext_resource type="Texture2D" uid="uid://gk00ff0ho1k7" path="res://assets/placeholder/test_character/head.png" id="9_igyft"]
 [ext_resource type="Texture2D" uid="uid://dc7yljnfkph5n" path="res://assets/placeholder/test_character/ArmL.png" id="10_6b7e2"]
@@ -22,16 +21,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_2u2al"]
 radius = 8.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdgay"]
-render_priority = 0
-shader = ExtResource("7_4yese")
-
 [sub_resource type="Animation" id="Animation_vd6ii"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Skeleton2D/TorsoBone/HeadBone:rotation")
+tracks/0/path = NodePath("../Skeleton2D/TorsoBone/HeadBone:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -43,7 +38,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Skeleton2D/TorsoBone/ArmLBone:rotation")
+tracks/1/path = NodePath("../Skeleton2D/TorsoBone/ArmLBone:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -55,7 +50,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Skeleton2D/TorsoBone/ArmRBone:rotation")
+tracks/2/path = NodePath("../Skeleton2D/TorsoBone/ArmRBone:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -67,7 +62,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Skeleton2D/TorsoBone/LegLBone:rotation")
+tracks/3/path = NodePath("../Skeleton2D/TorsoBone/LegLBone:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -79,7 +74,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Skeleton2D/TorsoBone/LegRBone:rotation")
+tracks/4/path = NodePath("../Skeleton2D/TorsoBone/LegRBone:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -96,7 +91,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Skeleton2D/TorsoBone/HeadBone:rotation")
+tracks/0/path = NodePath("../Skeleton2D/TorsoBone/HeadBone:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -108,7 +103,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Skeleton2D/TorsoBone/ArmLBone:rotation")
+tracks/1/path = NodePath("../Skeleton2D/TorsoBone/ArmLBone:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -120,7 +115,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Skeleton2D/TorsoBone/ArmRBone:rotation")
+tracks/2/path = NodePath("../Skeleton2D/TorsoBone/ArmRBone:rotation")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -132,7 +127,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Skeleton2D/TorsoBone/LegLBone:rotation")
+tracks/3/path = NodePath("../Skeleton2D/TorsoBone/LegLBone:rotation")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -144,7 +139,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Skeleton2D/TorsoBone/LegRBone:rotation")
+tracks/4/path = NodePath("../Skeleton2D/TorsoBone/LegRBone:rotation")
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -156,10 +151,11 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_e3but"]
 resource_name = "idle"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Skeleton2D/TorsoBone/HeadBone:rotation")
+tracks/0/path = NodePath("../Skeleton2D/TorsoBone/HeadBone:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -171,7 +167,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Skeleton2D/TorsoBone/ArmLBone:rotation")
+tracks/1/path = NodePath("../Skeleton2D/TorsoBone/ArmLBone:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -183,7 +179,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Skeleton2D/TorsoBone/ArmRBone:rotation")
+tracks/2/path = NodePath("../Skeleton2D/TorsoBone/ArmRBone:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -195,7 +191,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Skeleton2D/TorsoBone/LegLBone:rotation")
+tracks/3/path = NodePath("../Skeleton2D/TorsoBone/LegLBone:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -207,7 +203,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Skeleton2D/TorsoBone/LegRBone:rotation")
+tracks/4/path = NodePath("../Skeleton2D/TorsoBone/LegRBone:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -249,7 +245,6 @@ _hand = ExtResource("4_q7kfq")
 _tempWeaponSprite = NodePath("../TempWeaponSprite")
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
-material = SubResource("ShaderMaterial_hdgay")
 position = Vector2(0, -7.5)
 scale = Vector2(0.15, 0.15)
 script = ExtResource("5_xyhkk")
@@ -265,6 +260,7 @@ texture = ExtResource("8_f81gn")
 [node name="HeadBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
 position = Vector2(-1, -78)
 rotation = -0.133036
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -1, -78)
 
 [node name="Head" type="Sprite2D" parent="Skeleton2D/TorsoBone/HeadBone"]
@@ -283,6 +279,7 @@ rest = Transform2D(0.985399, -0.170258, 0.170258, 0.985399, 26.32, -45.85)
 z_index = -1
 position = Vector2(4.06, 13.3)
 rotation = -0.0131563
+scale = Vector2(1, 1)
 texture = ExtResource("10_6b7e2")
 
 [node name="HandLBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
@@ -321,6 +318,7 @@ texture = ExtResource("13_644b2")
 z_index = -2
 position = Vector2(12.39, -0.8)
 rotation = 0.308657
+scale = Vector2(1, 1)
 rest = Transform2D(0.999992, 0.00400215, -0.00400215, 0.999992, 12.39, -0.8)
 
 [node name="LegL" type="Sprite2D" parent="Skeleton2D/TorsoBone/LegLBone"]
@@ -358,7 +356,6 @@ position = Vector2(3.04, 44.37)
 texture = ExtResource("17_uhi4p")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Skeleton2D"]
-root_node = NodePath("../..")
 autoplay = "walk"
 libraries = {
 "": SubResource("AnimationLibrary_uvgsj")

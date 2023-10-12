@@ -15,8 +15,8 @@ public partial class AudioController : Node {
         musicPlayer = GetNode<AudioStreamPlayer>("Music");
         ambiencePlayer = GetNode<AudioStreamPlayer>("Ambience");
 
-        // PlayMusic("music/music_day.ogg");
-        // PlayAmbience("ambiences/ambience_day.ogg");
+        PlayMusic("music/music_day.ogg");
+        PlayAmbience("ambiences/ambience_day.ogg");
     }
 
 

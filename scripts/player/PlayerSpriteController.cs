@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Reflection.Metadata.Ecma335;
 
 public partial class PlayerSpriteController : Skeleton2D {
 	
@@ -10,6 +11,7 @@ public partial class PlayerSpriteController : Skeleton2D {
 	float scaleForwards = 0.15f;
 	float scaleBackwards = -0.15f;
 
+	[Export] bool isNpc;
 
     public override void _Ready() {
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");

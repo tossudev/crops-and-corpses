@@ -1,6 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://bgyv0c8xt1fd4"]
 
 [ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="1_2cwk5"]
+[ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_vjhkw"]
 [ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://NikkeTests/scenes/building_menu.tscn" id="1_w3klu"]
 [ext_resource type="Texture2D" uid="uid://btvrgdl7ajiub" path="res://LilianTests/Sprites/grass_tiles_placeholder.png" id="2_6gv5a"]
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="2_mph18"]
@@ -11,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="5_d3kp8"]
 [ext_resource type="Texture2D" uid="uid://wis4r15rhkuo" path="res://assets/sprites/foliage/sprite_rock.png" id="5_fu2m3"]
 [ext_resource type="Texture2D" uid="uid://bp0rwsioa22xs" path="res://assets/sprites/foliage/sprite_bush.png" id="6_nyoyv"]
-[ext_resource type="PackedScene" uid="uid://ducfl7udsw3bj" path="res://LilianTests/Prefabs/zombie_with_hitbox.tscn" id="7_8jdni"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
 [ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="10_g8lte"]
 
@@ -29,10 +29,10 @@ sources/0 = SubResource("TileSetAtlasSource_2ovt6")
 
 [node name="Town" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_vjhkw")
 
 [node name="GroundTiles" type="TileMap" parent="."]
 z_index = -10
-y_sort_enabled = true
 tile_set = SubResource("TileSet_tu15i")
 format = 2
 layer_0/name = "ground"
@@ -54,18 +54,22 @@ y_sort_enabled = true
 [node name="Tree" type="Sprite2D" parent="Objects/Deco"]
 position = Vector2(-640, -184)
 texture = ExtResource("3_joubg")
+offset = Vector2(0, -128)
 
 [node name="Tree2" type="Sprite2D" parent="Objects/Deco"]
 position = Vector2(608, -472)
 texture = ExtResource("3_joubg")
+offset = Vector2(0, -128)
 
 [node name="Tree3" type="Sprite2D" parent="Objects/Deco"]
 position = Vector2(736, 312)
 texture = ExtResource("3_joubg")
+offset = Vector2(0, -128)
 
 [node name="Tree4" type="Sprite2D" parent="Objects/Deco"]
 position = Vector2(-968, 560)
 texture = ExtResource("4_qt1gm")
+offset = Vector2(0, -128)
 
 [node name="Tree5" type="Sprite2D" parent="Objects/Deco"]
 position = Vector2(-216, -720)
@@ -87,15 +91,13 @@ texture = ExtResource("6_nyoyv")
 y_sort_enabled = true
 
 [node name="Buildings" type="Node2D" parent="."]
+z_index = -5
 y_sort_enabled = true
 position = Vector2(6.10352e-05, 6.10352e-05)
 
 [node name="Enemies" type="Node2D" parent="."]
 y_sort_enabled = true
 position = Vector2(6.10352e-05, 6.10352e-05)
-
-[node name="Zombie2" parent="Enemies" instance=ExtResource("7_8jdni")]
-position = Vector2(225, 461)
 
 [node name="NPC3" parent="Enemies" instance=ExtResource("10_g8lte")]
 position = Vector2(1104, -80.0001)
@@ -108,9 +110,6 @@ position = Vector2(-640, 384)
 
 [node name="NPC" parent="Enemies" instance=ExtResource("10_g8lte")]
 position = Vector2(-840, -200)
-
-[node name="Zombie1" parent="Enemies" instance=ExtResource("7_8jdni")]
-position = Vector2(679, -5.00006)
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 

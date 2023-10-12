@@ -6,8 +6,6 @@ public partial class ZombieChase : States
 {
 	[Export] private CharacterBody2D _zombie;
 	[Export] private float _moveSpeed = 150.0f;
-
-	// private Attack _attack;
 	private CharacterBody2D _player;
 
     public override void Enter()
@@ -17,6 +15,8 @@ public partial class ZombieChase : States
 
     public override void Physics_Update(double delta)
     {
+		CheckIfPlayerAlive();
+
 		if(_player != null)
 		{
 			Vector2 direction = _player.GlobalPosition - _zombie.GlobalPosition;
@@ -35,5 +35,22 @@ public partial class ZombieChase : States
 				EmitSignal("Transitioned", "idle");			
 			}
 		}
+		else 
+		{
+			EmitSignal("Transitioned", "idle");
+		}
     }
+
+	private void CheckIfPlayerAlive()
+	{
+		if (RoamingZombie.playerAlive)
+		{
+			_player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
+			if(_player == null)
+			{
+				RoamingZombie.playerAlive = false;
+				EmitSignal("Transitioned", "idle");	
+			}
+		}
+	}
 }

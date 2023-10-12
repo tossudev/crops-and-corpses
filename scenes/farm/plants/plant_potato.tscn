@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://JanitaTests/Images/dirttemp.jpg" id="2_6ejys"]
 [ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://JanitaTests/Images/sprouttemp.png" id="3_bau8t"]
 [ext_resource type="Texture2D" uid="uid://dvhrkxcw50l7s" path="res://JanitaTests/Images/wheattemp.png" id="4_ypiri"]
-[ext_resource type="Shape2D" path="res://JanitaTests/Scripts/plant_shape.tres" id="5_2rkl1"]
+[ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="5_2rkl1"]
 
 [node name="plant_potato" type="Node2D" node_paths=PackedStringArray("_col")]
 z_index = 2
@@ -28,3 +28,5 @@ shape = ExtResource("5_2rkl1")
 [connection signal="area_entered" from="Area2D" to="." method="OnInteractable"]
 [connection signal="area_exited" from="Area2D" to="." method="OnNonInteractable"]
 [connection signal="input_event" from="Area2D" to="." method="InteractWithPlant"]
+[connection signal="mouse_entered" from="Area2D" to="." method="ShowProgress"]
+[connection signal="mouse_exited" from="Area2D" to="." method="HideProgress"]

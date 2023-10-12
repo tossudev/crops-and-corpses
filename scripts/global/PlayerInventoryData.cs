@@ -33,7 +33,6 @@ public partial class PlayerInventoryData : Node
         Array organizedInventoryItemData = (Array) saveData[SaveData.ORGANIZED_INVENTORY_ITEMS_KEY];
         await Task.Run(() =>
         {
-            int index = 0;
             foreach (var rawItemVariant in organizedInventoryItemData)
             {
                 Dictionary itemDataDict = (Dictionary)rawItemVariant; 
@@ -42,10 +41,10 @@ public partial class PlayerInventoryData : Node
                     (int) itemDataDict[RawSaveData.ITEM_ID_KEY],
                     (string) itemDataDict[RawSaveData.ITEM_NAME_KEY],
                     (int) itemDataDict[RawSaveData.ITEM_QUANTITY_KEY],
-                    (int) itemDataDict[RawSaveData.ITEM_STACKSIZE_KEY]);
+                    (int) itemDataDict[RawSaveData.ITEM_STACKSIZE_KEY],
+                    (int) itemDataDict[RawSaveData.ITEM_ORGANIZED_INDEX_KEY]);
                 
-                SaveData.organizedPlayerInventory[index] = convertedRawItem;
-                index++;
+                SaveData.organizedPlayerInventory[convertedRawItem.indexInOrganizedInventory] = convertedRawItem;
             }
 
             SaveData.SyncInventory();
@@ -68,6 +67,10 @@ public partial class PlayerInventoryData : Node
         Item iron = ItemData.GetItemById(1);
         PlayerInventoryController.AddItem(
             new RawInventoryItem(iron.ID, iron.Name, 20, iron.StackSize));
+        
+        Item curePotion = ItemData.GetItemById(10);
+        PlayerInventoryController.AddItem(
+            new RawInventoryItem(curePotion.ID, curePotion.Name, 15, curePotion.StackSize));
         
         tokenSrc.Dispose();
     }

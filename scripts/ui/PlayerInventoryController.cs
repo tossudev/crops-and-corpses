@@ -96,15 +96,22 @@ public partial class PlayerInventoryController : Control {
 		
 		await PlayerInventoryData.ReadInventoryDataFromFile(SaveData.LoadData());
         
-		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++) {
+		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++)
+		{
+
+			int slotIdx = (SaveData.organizedPlayerInventory[i] != null)
+				? SaveData.organizedPlayerInventory[i].indexInOrganizedInventory
+				: -1;
+
+			if (slotIdx < 0 || slotIdx > PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - 1) slotIdx = i;
 			
 			if (IsSlotInHotbar(i)) {
 				_hotbarGrid.GetChild<InventorySlot>(i - _hotbarStartIndex)
-					.UpdateSlot(SaveData.organizedPlayerInventory[i], i);
+					.UpdateSlot(SaveData.organizedPlayerInventory[i], slotIdx);
 			}
 			else {
 				_inventoryGrid.GetChild<InventorySlot>(i)
-					.UpdateSlot(SaveData.organizedPlayerInventory[i], i);
+					.UpdateSlot(SaveData.organizedPlayerInventory[i], slotIdx);
 			}
         }
 	}
@@ -257,18 +264,18 @@ public partial class PlayerInventoryController : Control {
 			
 			if (SaveData.organizedPlayerInventory[i].id == rawItem.id)
 			{
-				int itemQuantityInSlot = SaveData.organizedPlayerInventory[i].quantity;
+				RawInventoryItem itemInSlot = SaveData.organizedPlayerInventory[i];
 				
-				int amountRemoved = (itemQuantityInSlot - amountToRemove > 0)
+				int amountRemoved = (itemInSlot.quantity - amountToRemove > 0)
 					? amountToRemove
-					: itemQuantityInSlot;
+					: itemInSlot.quantity;
 
 				amountToRemove -= amountRemoved;
+				itemInSlot.quantity -= amountRemoved;
 				
-				if (amountRemoved < itemQuantityInSlot)
+				if (itemInSlot.quantity > 0)
 				{
-					SaveData.organizedPlayerInventory[i].quantity -= amountRemoved;
-					UpdateInventorySlot(SaveData.organizedPlayerInventory[i], i);
+					UpdateInventorySlot(itemInSlot, i);
 				}
 				else
 				{

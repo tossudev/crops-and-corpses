@@ -67,6 +67,9 @@ public partial class Plant : Node2D
 	Texture2D _bugSignTexture, _waterSignTexture;
 	Sprite2D _warningSign = new Sprite2D();
 
+	TextureProgressBar _progress = new TextureProgressBar();
+
+	int _progressValue=0;
 	bool _isPlayerNearby=false;
  	#endregion
 	
@@ -74,6 +77,7 @@ public partial class Plant : Node2D
 	{
 		InitializePlant();
 		FarmManager.instance.AddPlantedPlant(this);
+		
 	}
 
 	void InitializePlant(){
@@ -90,6 +94,7 @@ public partial class Plant : Node2D
 
 		AddChild(trect);
 		AddChild(_growthTimer);
+		
 		_growthTimer.Timeout += GrowthCycle;	
 		trect.Texture = _sproutTexture;
 
@@ -99,10 +104,24 @@ public partial class Plant : Node2D
 
 		_bugSignTexture = ResourceLoader.Load("res://JanitaTests/Images/bugsign.png") as Texture2D;
 		_waterSignTexture = ResourceLoader.Load("res://JanitaTests/Images/watersign.png") as Texture2D;
-		
+
+		var scene = ResourceLoader.Load<PackedScene>("res://JanitaTests/Scripts/plant_progress_bar.tscn").Instantiate();
+     	_progress = scene as TextureProgressBar;   
+		AddChild(_progress);
+		_progress.MaxValue = _growthCycleLength * _maxCycles;
+		OnProgressUpdate(0);
+		_progress.Hide();
 		PlantState();
 		
 	}
+
+    public override void _PhysicsProcess(double delta)
+    {
+        
+    }
+    void OnProgressUpdate(float newProgress){
+		_progress.Value += newProgress;
+ 	}
 
     void PlantState(){
 		switch(_state){
@@ -159,7 +178,6 @@ public partial class Plant : Node2D
 
 		}
 		
-
 	}
 	void GrowthCycle(){
 
@@ -263,5 +281,13 @@ public partial class Plant : Node2D
 	private void OnNonInteractable(Area2D body)
 	{
 		_isPlayerNearby=false;
+	}
+
+	void ShowProgress(){
+		if(!_progress.Visible) _progress.Show();
+	}
+
+	void HideProgress(){
+		if(_progress.Visible) _progress.Hide();
 	}
 }

@@ -14,18 +14,20 @@ public partial class RoamingZombie : CharacterBody2D
 	private HealthComponent _healthComponent;
 	private NodePath _rootNodePath;
 	private Node2D rootNode;
+
+	public static bool playerAlive = true; // this is not the best way for handling the player death but it'll do the job for now i guess
 	PackedScene instantiatedNPC;
 
 	public override void _Ready()
 	{		
-		instantiatedNPC = (PackedScene)GD.Load("res://DaniTests/Scenes/dummyScene.tscn");
-		_rootNodePath = GetParent<Node2D>().GetPath();
+		instantiatedNPC = (PackedScene)GD.Load("res://EllaTests/npc.tscn");
+		_rootNodePath =  GetParent<Node2D>().GetPath();
 		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);		
 		_damage = 5.0f;
-		_sprite = GetNode<Sprite2D>("Sprite2D");
-		_timer = GetNode<Timer>("AttackTimer");
-		_healthBar = GetNode<ProgressBar>("HealthBar");
-		_healthComponent = GetNode<HealthComponent>("HealthComponent");
+		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
+		_timer = GetNodeOrNull<Timer>("AttackTimer");
+		_healthBar = GetNodeOrNull<ProgressBar>("HealthBar");
+		_healthComponent = GetNodeOrNull<HealthComponent>("HealthComponent");
 
 		_attack = new Attack
 		{
@@ -39,13 +41,16 @@ public partial class RoamingZombie : CharacterBody2D
 		MoveAndSlide();
 		UpdateHealth();
 
-		if (Velocity.X > 0)
+		if (_sprite != null)
 		{
-			_sprite.FlipH = false;
-		}
-		else
-		{
-			_sprite.FlipH = true;
+			if (Velocity.X > 0)
+			{
+				_sprite.FlipH = false;
+			}
+			else
+			{
+				_sprite.FlipH = true;
+			}
 		}
 	}
 
@@ -95,15 +100,18 @@ public partial class RoamingZombie : CharacterBody2D
 	private void UpdateHealth()
 	{
 		// update health bar when player damages zombie
-		_healthBar.Value = _healthComponent._health;
+		if (_healthComponent != null)
+		{
+			_healthBar.Value = _healthComponent._health;
 
-		if (_healthComponent._health >= 100)
-		{
-			_healthBar.Visible = false;
-		}
-		else 
-		{
-			_healthBar.Visible = true;
+			if (_healthComponent._health >= 100)
+			{
+				_healthBar.Visible = false;
+			}
+			else 
+			{
+				_healthBar.Visible = true;
+			}
 		}
 	}
 
@@ -115,7 +123,7 @@ public partial class RoamingZombie : CharacterBody2D
 	private void OnTimerTimeout()
 	{
 		//GD.Print("attack player");
-		if(_hitbox != null)
+		if(_hitbox != null && playerAlive != false)
 		{
 			_hitbox.ApplyAttack(_attack);
 		}

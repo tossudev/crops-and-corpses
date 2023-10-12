@@ -1,12 +1,12 @@
 using Godot;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public partial class HandheldController : Node2D
 {
     [Export] private Weapon _weapon;
     [Export] private Weapon _hand;
-    [Export] private Projectile _projectile;
     [Export] private Area2D _hitbox;
     [Export] private AnimationPlayer _animationPlayer;
     [Export] private Timer _timer;
@@ -24,13 +24,34 @@ public partial class HandheldController : Node2D
     private bool _ranged;
     private float _speed;
     private float _drawTime;
+    private Projectile _projectile;
 
     private bool _isDrawing;
     private string _targetGroup;
 
     public override void _Ready()
     {
-        // Init();
+        // List<RawInventoryItem> items = new List<RawInventoryItem>();
+
+        // Item arrow = ResourceLoader.Load("res://assets/resources/game_items/6_arrow.tres") as Item;
+        // Item curePotion = ResourceLoader.Load("res://assets/resources/game_items/7_cure_potion.tres") as Item;
+        // Item bow = ResourceLoader.Load("res://assets/resources/game_items/5_bow.tres") as Item;
+        // Item axe = ResourceLoader.Load("res://assets/resources/game_items/3_axe.tres") as Item;
+
+        // RawInventoryItem rawArrow = new RawInventoryItem(arrow.ID, arrow.Name, 20, arrow.StackSize);
+        // RawInventoryItem rawCurePotion = new RawInventoryItem(curePotion.ID, curePotion.Name, 1, curePotion.StackSize);
+        // RawInventoryItem rawBow = new RawInventoryItem(bow.ID, bow.Name, 1, bow.StackSize);
+        // RawInventoryItem rawAxe = new RawInventoryItem(axe.ID, axe.Name, 1, axe.StackSize);
+
+        // items.Add(rawArrow);
+        // items.Add(rawCurePotion);
+        // items.Add(rawBow);
+        // items.Add(rawAxe);
+
+        // foreach (RawInventoryItem item in items)
+        // {
+        //     PlayerInventoryController.AddItem(item);
+        // }
     }
 
     private void Init()
@@ -38,10 +59,10 @@ public partial class HandheldController : Node2D
         if (PlayerInventoryController.selectedItem != null)
             _weapon = WeaponData.GetWeaponByItem(PlayerInventoryController.selectedItem.id);
         else
-        {
-            _weapon = null;
+            _weapon = _hand;
+
+        if (_weapon == null)
             return;
-        }
 
         _tempWeaponSprite.Texture = _weapon.item.IconTexture;
         _tempWeaponSprite.Visible = true;
@@ -56,6 +77,7 @@ public partial class HandheldController : Node2D
         _speed = _weapon.speed;
         _ranged = _weapon.ranged;
         _drawTime = _weapon.drawTime;
+        _projectile = _weapon.projectile;
 
         _isDrawing = false;
 
@@ -191,16 +213,19 @@ public partial class HandheldController : Node2D
 
     private void Shoot(float power)
     {
+        // RawInventoryItem projectile = PlayerInventoryController.
         ProjectileController projectile = (ProjectileController)_projectilePrefab.Instantiate();
         GetParent().AddChild(projectile);
 
         _attack.damage *= power;
         projectile.attack = _attack;
         projectile.speed = _speed * power;
-        projectile.projectile = _weapon.projectile;
+        projectile.projectile = _projectile;
         projectile.targetGroup = _targetGroup;
 
         projectile.Init();
+
+        // remove projectile from inventory
 
         // TODO: change this to be based on weapon reach or something
         projectile.GlobalPosition = this.GlobalPosition + _attack.direction * 10;

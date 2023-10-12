@@ -21,7 +21,7 @@ public partial class PlayerController : CharacterBody2D
 	{
 		Movement();
 
-		if (Input.IsActionPressed("left_click"))
+		if (Input.IsActionJustPressed("left_click"))
 		{
 			_handheld.Use(_canMelee);
 			_canMelee = false;

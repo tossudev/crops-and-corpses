@@ -12,15 +12,11 @@ public partial class ProjectileController : Node2D
     public float speed;
     private float _airtime;
     private float _despawnTime;
-    private EffectType _effectType;
 
     public void Init()
     {
         _airtime = projectile.airtime;
         _despawnTime = projectile.despawnTime;
-        _effectType = projectile.effect;
-
-        attack.effect = _effectType;
 
         this.TopLevel = true;
         _lifetimeTimer.Start(_airtime);

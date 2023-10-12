@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Projectile" load_steps=3 format=3 uid="uid://vus4coe8p4nv"]
 
-[ext_resource type="Resource" uid="uid://c5xluv5j2cu8v" path="res://assets/resources/game_items/7_cure_potion.tres" id="1_oaddr"]
+[ext_resource type="Resource" uid="uid://b32dnrkgcjwvj" path="res://assets/resources/game_items/10_cure_potion.tres" id="1_pasn7"]
 [ext_resource type="Script" path="res://TinoTests/Scripts/Projectiles/Projectile.cs" id="1_v3ox2"]
 
 [resource]
 script = ExtResource("1_v3ox2")
-item = ExtResource("1_oaddr")
+item = ExtResource("1_pasn7")
 airtime = 1.0
 despawnTime = 2.08165e-12
 effect = 0

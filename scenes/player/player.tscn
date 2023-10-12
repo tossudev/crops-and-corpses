@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8bx46w1qix2q"]
+[gd_scene load_steps=11 format=3 uid="uid://c8bx46w1qix2q"]
 
 [ext_resource type="Script" path="res://TinoTests/Scripts/PlayerController.cs" id="1_y7bta"]
 [ext_resource type="PackedScene" uid="uid://3hlx66fdaruu" path="res://TinoTests/Components/handheld.tscn" id="2_00eh7"]
@@ -7,19 +7,27 @@
 [ext_resource type="Resource" uid="uid://be8oyimariure" path="res://TinoTests/Scripts/Weapons/Hand.tres" id="4_q7kfq"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://TinoTests/Components/hitbox_component.tscn" id="4_sa7m5"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xqb0"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xe3lj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_efott"]
 radius = 117.527
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xqb0"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_st5mf"]
+radius = 30.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_handheld", "_sprite") groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_handheld", "_sprite", "_pickupArea") groups=["player"]]
 scale = Vector2(3.2, 3.2)
 script = ExtResource("1_y7bta")
 _handheld = NodePath("Handheld")
 _sprite = NodePath("Icon")
+_pickupArea = NodePath("SmallInteractionArea")
 _speed = 300
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_2xqb0")
 
 [node name="Handheld" parent="." node_paths=PackedStringArray("_tempWeaponSprite") instance=ExtResource("2_00eh7")]
 _hand = ExtResource("4_q7kfq")
@@ -47,8 +55,13 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_efott")
 debug_color = Color(0, 0.647059, 0.243137, 0.419608)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_2xqb0")
+[node name="SmallInteractionArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallInteractionArea"]
+shape = SubResource("CircleShape2D_st5mf")
+disabled = true
 
 [node name="TempWeaponSprite" type="Sprite2D" parent="."]
 position = Vector2(5, 5)

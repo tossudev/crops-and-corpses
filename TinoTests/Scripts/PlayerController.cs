@@ -7,6 +7,7 @@ public partial class PlayerController : CharacterBody2D
 	[Export] private HandheldController _handheld;
 	[Export] private Camera2D _camera;
 	[Export] private Sprite2D _sprite;
+	[Export] private Area2D _pickupArea;
 
 	[ExportCategory("Settings")]
 	[Export] private float maxZoom = 2f;
@@ -41,6 +42,15 @@ public partial class PlayerController : CharacterBody2D
 		{
 			if (_camera.Zoom.X > minZoom)
 				CameraZoom(-0.1f);
+		}
+
+		else if(Input.IsActionJustPressed("pickup"))
+		{
+			_pickupArea.GetChild<CollisionShape2D>(0).Disabled = false;
+		}
+		else if(Input.IsActionJustReleased("pickup"))
+		{
+			_pickupArea.GetChild<CollisionShape2D>(0).Disabled = true;
 		}
 	}
 

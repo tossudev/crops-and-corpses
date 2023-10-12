@@ -20,6 +20,7 @@ position = Vector2(61, -12)
 shape = SubResource("RectangleShape2D_10v6f")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 255
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-3, -75)

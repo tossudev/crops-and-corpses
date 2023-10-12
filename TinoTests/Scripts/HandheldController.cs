@@ -31,27 +31,6 @@ public partial class HandheldController : Node2D
 
     public override void _Ready()
     {
-        // List<RawInventoryItem> items = new List<RawInventoryItem>();
-
-        // Item arrow = ResourceLoader.Load("res://assets/resources/game_items/6_arrow.tres") as Item;
-        // Item curePotion = ResourceLoader.Load("res://assets/resources/game_items/7_cure_potion.tres") as Item;
-        // Item bow = ResourceLoader.Load("res://assets/resources/game_items/5_bow.tres") as Item;
-        // Item axe = ResourceLoader.Load("res://assets/resources/game_items/3_axe.tres") as Item;
-
-        // RawInventoryItem rawArrow = new RawInventoryItem(arrow.ID, arrow.Name, 20, arrow.StackSize);
-        // RawInventoryItem rawCurePotion = new RawInventoryItem(curePotion.ID, curePotion.Name, 1, curePotion.StackSize);
-        // RawInventoryItem rawBow = new RawInventoryItem(bow.ID, bow.Name, 1, bow.StackSize);
-        // RawInventoryItem rawAxe = new RawInventoryItem(axe.ID, axe.Name, 1, axe.StackSize);
-
-        // items.Add(rawArrow);
-        // items.Add(rawCurePotion);
-        // items.Add(rawBow);
-        // items.Add(rawAxe);
-
-        // foreach (RawInventoryItem item in items)
-        // {
-        //     PlayerInventoryController.AddItem(item);
-        // }
     }
 
     private void Init()
@@ -59,7 +38,7 @@ public partial class HandheldController : Node2D
         if (PlayerInventoryController.selectedItem != null)
             _weapon = WeaponData.GetWeaponByItem(PlayerInventoryController.selectedItem.id);
         else
-            _weapon = _hand;
+            _weapon = null;
 
         if (_weapon == null)
             return;
@@ -78,8 +57,6 @@ public partial class HandheldController : Node2D
         _ranged = _weapon.ranged;
         _drawTime = _weapon.drawTime;
         _projectile = _weapon.projectile;
-
-        GD.Print(_projectile.item.Name);
 
         _isDrawing = false;
 

@@ -70,7 +70,7 @@ public partial class SpawnScriptTest : Node2D
 		
 		CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
 		prefab.Position = spawnPoints[counter].Position;
-		AddChild(prefab);
+		GetNode<Node2D>("/root/Town").AddChild(prefab);
 		counter ++;
 		if(counter == 3)
 		{

@@ -20,7 +20,7 @@ public partial class PlayerController : CharacterBody2D
 	private Vector2 _knockback = Vector2.Zero;
 
 	// to disable the player input, use:
-	// PlayerController.SetProcessUnhandledInput(true/false);
+	// player.SetProcessUnhandledInput(true/false);
     public override void _UnhandledInput(InputEvent @event)
 	{
 		if (@event.IsActionPressed("left_click"))
@@ -55,6 +55,8 @@ public partial class PlayerController : CharacterBody2D
 		}
 	}
 
+	// to disable the player input, use:
+	// player.SetPhysicsProcess(true/false);
     public override void _PhysicsProcess(double delta)
 	{
 		Movement();

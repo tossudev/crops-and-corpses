@@ -19,40 +19,45 @@ public partial class PlayerController : CharacterBody2D
 	private bool _isDead = false;
 	private Vector2 _knockback = Vector2.Zero;
 
-	public override void _PhysicsProcess(double delta)
+	// to disable the player input, use:
+	// PlayerController.SetProcessUnhandledInput(true/false);
+    public override void _UnhandledInput(InputEvent @event)
 	{
-		Movement();
-
-		if (Input.IsActionJustPressed("left_click"))
+		if (@event.IsActionPressed("left_click"))
 		{
 			_handheld.Use(_canMelee);
 			_canMelee = false;
 		}
-		else if (Input.IsActionJustReleased("left_click"))
+		else if (@event.IsActionReleased("left_click"))
 		{
 			_handheld.Release();
 			_canMelee = true;
 		}
 
-		else if (Input.IsActionJustPressed("wheel_up"))
+		else if (@event.IsActionPressed("wheel_up"))
 		{
 			if (_camera.Zoom.X < maxZoom)
 				CameraZoom(0.1f);
 		}
-		else if (Input.IsActionJustPressed("wheel_down"))
+		else if (@event.IsActionPressed("wheel_down"))
 		{
 			if (_camera.Zoom.X > minZoom)
 				CameraZoom(-0.1f);
 		}
 
-		else if(Input.IsActionJustPressed("pickup"))
+		else if(@event.IsActionPressed("pickup"))
 		{
 			_pickupArea.GetChild<CollisionShape2D>(0).Disabled = false;
 		}
-		else if(Input.IsActionJustReleased("pickup"))
+		else if(@event.IsActionReleased("pickup"))
 		{
 			_pickupArea.GetChild<CollisionShape2D>(0).Disabled = true;
 		}
+	}
+
+    public override void _PhysicsProcess(double delta)
+	{
+		Movement();
 	}
 
 	private void CameraZoom(float zoomDelta)

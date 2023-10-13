@@ -176,6 +176,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="CraftableItemTomatoSeed" parent="ItemArea/GridContainer/ItemGridSlot11" instance=ExtResource("5_8tf6t")]
+layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
 anchor_top = 0.0
@@ -194,6 +195,7 @@ itemRes = ExtResource("11_t1vup")
 layout_mode = 2
 
 [node name="CraftableItemPotatoSeed" parent="ItemArea/GridContainer/ItemGridSlot12" instance=ExtResource("5_8tf6t")]
+layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
 anchor_top = 0.0
@@ -212,6 +214,7 @@ itemRes = ExtResource("12_a2u8s")
 layout_mode = 2
 
 [node name="CraftableItemCabbageSeed" parent="ItemArea/GridContainer/ItemGridSlot13" instance=ExtResource("5_8tf6t")]
+layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
 anchor_top = 0.0

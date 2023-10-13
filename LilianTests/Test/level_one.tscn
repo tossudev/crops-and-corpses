@@ -50,8 +50,23 @@ position = Vector2(-160, 504)
 position = Vector2(0, 14)
 _camera = NodePath("Camera2D")
 
-[node name="Handheld" parent="Player" index="0"]
+[node name="Handheld" parent="Player" index="1"]
 _weapon = ExtResource("5_woral")
+
+[node name="HeadBone" parent="Player/Skeleton2D/TorsoBone" index="1"]
+scale = Vector2(1, 1)
+
+[node name="ArmLBone" parent="Player/Skeleton2D/TorsoBone" index="2"]
+scale = Vector2(0.999999, 0.999999)
+
+[node name="ArmL" parent="Player/Skeleton2D/TorsoBone/ArmLBone" index="0"]
+position = Vector2(4.06, 13.3)
+
+[node name="ArmRBone" parent="Player/Skeleton2D/TorsoBone" index="3"]
+scale = Vector2(1, 1)
+
+[node name="LegLBone" parent="Player/Skeleton2D/TorsoBone" index="4"]
+scale = Vector2(1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -4.375)

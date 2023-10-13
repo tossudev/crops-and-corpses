@@ -30,20 +30,18 @@ public partial class ZombieIdle : States
 
     public override void Physics_Update(double delta)
     {
-        if(_zombie != null)
-		{
-			_zombie.Velocity = _moveDirection * _moveSpeed;
-		}
-		
-		if(_player != null && RoamingZombie.playerAlive != false)
-		{
-			Vector2 direction = _player.GlobalPosition - _zombie.GlobalPosition;
+	    if (_zombie == null) return;
+	    
+	    _zombie.Velocity = _moveDirection * _moveSpeed;
 
-			if(direction.Length() < 300 )
-			{
-				EmitSignal("Transitioned", "chase");			
-			}
-		}		
+	    if (_player == null || !RoamingZombie.playerAlive) return;
+	    
+	    Vector2 direction = _player.GlobalPosition - _zombie.GlobalPosition;
+
+		if(direction.Length() < 300 )
+		{
+			EmitSignal("Transitioned", "chase");			
+		}
     }
 
 	private void RandomizeRoam()

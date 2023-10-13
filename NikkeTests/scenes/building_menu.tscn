@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://3ct83j0jgteb" path="res://NikkeTests/scenes/building_scenes/house.tscn" id="4_lft42"]
 [ext_resource type="PackedScene" uid="uid://ceal2xj0w1t17" path="res://NikkeTests/scenes/building_scenes/house_build_mode.tscn" id="5_cdtxw"]
 [ext_resource type="Texture2D" uid="uid://gx3rxc18ic1u" path="res://NikkeTests/images/farm_plot.jpg" id="6_jayxu"]
-[ext_resource type="Texture2D" uid="uid://dskeqa44gjbje" path="res://NikkeTests/images/house.png" id="7_ftrid"]
+[ext_resource type="Texture2D" uid="uid://b5cv2b6w6tvm0" path="res://assets/sprites/buildings/housedesing2.png" id="7_fhaoc"]
 
 [node name="Control" type="Control" node_paths=PackedStringArray("_buildButton", "_buildMenu", "_buildMenuControl", "_vBoxContainer")]
 layout_mode = 3
@@ -31,7 +31,7 @@ _farmPlotGhostScene = ExtResource("3_o47i0")
 _houseScene = ExtResource("4_lft42")
 _houseGhostScene = ExtResource("5_cdtxw")
 _farmPlotIcon = ExtResource("6_jayxu")
-_houseIcon = ExtResource("7_ftrid")
+_houseIcon = ExtResource("7_fhaoc")
 
 [node name="BuildingMenu" type="Node2D" parent="."]
 

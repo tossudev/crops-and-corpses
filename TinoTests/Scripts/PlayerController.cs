@@ -21,7 +21,7 @@ public partial class PlayerController : CharacterBody2D
 
 	// to disable the player input, use:
 	// player.SetProcessUnhandledInput(true/false);
-    public override void _UnhandledInput(InputEvent @event)
+	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (@event.IsActionPressed("left_click"))
 		{
@@ -34,7 +34,7 @@ public partial class PlayerController : CharacterBody2D
 			_canMelee = true;
 		}
 
-		else if (@event.IsActionPressed("wheel_up"))
+		if (@event.IsActionPressed("wheel_up"))
 		{
 			if (_camera.Zoom.X < maxZoom)
 				CameraZoom(0.1f);
@@ -45,11 +45,11 @@ public partial class PlayerController : CharacterBody2D
 				CameraZoom(-0.1f);
 		}
 
-		else if(@event.IsActionPressed("pickup"))
+		if (@event.IsActionPressed("pickup"))
 		{
 			_pickupArea.GetChild<CollisionShape2D>(0).Disabled = false;
 		}
-		else if(@event.IsActionReleased("pickup"))
+		else if (@event.IsActionReleased("pickup"))
 		{
 			_pickupArea.GetChild<CollisionShape2D>(0).Disabled = true;
 		}
@@ -57,7 +57,7 @@ public partial class PlayerController : CharacterBody2D
 
 	// to disable the player input, use:
 	// player.SetPhysicsProcess(true/false);
-    public override void _PhysicsProcess(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		Movement();
 	}

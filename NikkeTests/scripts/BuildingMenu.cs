@@ -223,11 +223,13 @@ public partial class BuildingMenu : Control
         if (isToggledOn)
 		{
             _player.SetPhysicsProcess(false);
+            _player.SetProcessUnhandledInput(false);
 			_buildMenu.Show();
 		}
 		else 
 		{
             _player.SetPhysicsProcess(true);
+            _player.SetProcessUnhandledInput(true);
             _buildMenu.Hide();
 			_buildButton.ReleaseFocus();
         }

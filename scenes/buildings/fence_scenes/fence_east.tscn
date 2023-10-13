@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_638cj"]
 size = Vector2(2.625, 150)
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 
 [node name="FenceHighE" type="Sprite2D" parent="."]
 position = Vector2(-64, -128)
@@ -20,6 +20,7 @@ position = Vector2(-61.5, -12)
 shape = SubResource("RectangleShape2D_638cj")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 255
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-125, -75)

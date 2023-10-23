@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c8bx46w1qix2q"]
+[gd_scene load_steps=28 format=3 uid="uid://c8bx46w1qix2q"]
 
 [ext_resource type="Script" path="res://TinoTests/Scripts/PlayerController.cs" id="1_y7bta"]
 [ext_resource type="PackedScene" uid="uid://3hlx66fdaruu" path="res://TinoTests/Components/handheld.tscn" id="2_00eh7"]
@@ -17,6 +17,17 @@
 [ext_resource type="Texture2D" uid="uid://dm80cnvcf6m5q" path="res://assets/placeholder/test_character/FootL.png" id="15_m13sc"]
 [ext_resource type="Texture2D" uid="uid://dtxvt7hf4w3m1" path="res://assets/placeholder/test_character/LegR.png" id="16_3ecwo"]
 [ext_resource type="Texture2D" uid="uid://c2jmj7mhvoytp" path="res://assets/placeholder/test_character/FootR.png" id="17_uhi4p"]
+
+[sub_resource type="Gradient" id="Gradient_8f478"]
+offsets = PackedFloat32Array(0, 0.528169)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g3fju"]
+gradient = SubResource("Gradient_8f478")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yn8u1"]
 radius = 7.5
@@ -221,7 +232,6 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rv7w6"]
-radius = 10.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_efott"]
 radius = 117.527
@@ -238,6 +248,12 @@ _pickupArea = NodePath("SmallInteractionArea")
 _rig = NodePath("Skeleton2D")
 _speed = 300
 
+[node name="Light" type="PointLight2D" parent="."]
+scale = Vector2(1, 1)
+color = Color(1, 0.921569, 0.631373, 1)
+energy = 0.8
+texture = SubResource("GradientTexture2D_g3fju")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.08165e-12, -5)
 shape = SubResource("CircleShape2D_yn8u1")
@@ -249,6 +265,7 @@ _hand = ExtResource("4_q7kfq")
 _tempWeaponSprite = NodePath("../TempWeaponSprite")
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
+z_index = 1
 position = Vector2(0, -7.5)
 scale = Vector2(0.15, 0.15)
 script = ExtResource("5_xyhkk")
@@ -264,7 +281,7 @@ texture = ExtResource("8_f81gn")
 [node name="HeadBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
 position = Vector2(-1, -78)
 rotation = -0.133036
-scale = Vector2(0.999999, 0.999999)
+scale = Vector2(0.999998, 0.999998)
 rest = Transform2D(1, 0, 0, 1, -1, -78)
 
 [node name="Head" type="Sprite2D" parent="Skeleton2D/TorsoBone/HeadBone"]
@@ -283,7 +300,6 @@ rest = Transform2D(0.985399, -0.170258, 0.170258, 0.985399, 26.32, -45.85)
 z_index = -1
 position = Vector2(4.06, 13.3)
 rotation = -0.0131563
-scale = Vector2(1, 1)
 texture = ExtResource("10_6b7e2")
 
 [node name="HandLBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmLBone"]

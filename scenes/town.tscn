@@ -130,7 +130,8 @@ text = "Press 'E' to toggle inventory"
 _buildings = NodePath("../../Buildings")
 _player = NodePath("../../Objects/Player")
 
-[node name="NightDayCycleAndZombieSpawn" parent="." instance=ExtResource("1_2cwk5")]
+[node name="NightDayCycleAndZombieSpawn" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_2cwk5")]
+player = NodePath("../Objects/Player")
 
 [node name="farm_manager" parent="." instance=ExtResource("8_v8hay")]
 

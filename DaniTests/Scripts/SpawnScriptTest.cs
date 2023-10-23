@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 public partial class SpawnScriptTest : Node2D
@@ -9,13 +10,19 @@ public partial class SpawnScriptTest : Node2D
 	Timer spawnDelay;
 	PackedScene packedScene;
 	TimeManager dayTimeCheck;
+	NodePath rootPath;
+	Node2D rootNode;
 	bool isNightOrDay;
 	string isNightOrDayString;
 	private int counter;
+	[Export]private float maxDistance=1500f;
+	[Export] public CharacterBody2D player;
+	private List<CharacterBody2D> zombieList = new List<CharacterBody2D>();
 	public override void _Ready()
 	{
+		
 		counter = 0;
-		spawnPoints = new Node2D[3];
+		spawnPoints = new Node2D[4];
 		spawnDelay =GetNode<Timer>("Timer");
 		
 		
@@ -55,6 +62,7 @@ public partial class SpawnScriptTest : Node2D
     {
        // isNightOrDay = dayTimeCheck.returnTimeOfDay(isNightOrDay);
 	   isNightOrDay = dayTimeCheck.dayTime;
+	   
         
         if (!spawnDelay.IsStopped() && isNightOrDay)
         {
@@ -64,15 +72,39 @@ public partial class SpawnScriptTest : Node2D
         {
             spawnDelay.Stop();
         }
+		if(zombieList != null)
+		{
+			Vector2 playerPos = player.Position;
+			for(int i = zombieList.Count-1;i>=0;i--)
+			{
+				Vector2 zombiePos = zombieList[i].Position;
+
+				float distance = zombiePos.DistanceTo(playerPos);
+				GD.Print("Distance to player" + distance+ " MaxDistance "+maxDistance);
+				if(distance > maxDistance)
+				{
+					zombieList[i].QueueFree();
+					zombieList.RemoveAt(i);
+					
+				}
+
+
+
+			}
+		}
     }
 	private void ZombieSpawn()
 	{
-		
+
+		rootPath =  GetParent<Node2D>().GetPath();
+		rootNode = GetNodeOrNull<Node2D>(rootPath);
 		CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
 		prefab.Position = spawnPoints[counter].Position;
-		GetNode<Node2D>("/root/Town").AddChild(prefab);
+		rootNode.AddChild(prefab);
+		zombieList.Add(prefab);
+		//GetNode<Node2D>("/root/Town").AddChild(prefab);
 		counter ++;
-		if(counter == 3)
+		if(counter == spawnPoints.Length)
 		{
 			counter = 0;
 		}

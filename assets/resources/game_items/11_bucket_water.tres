@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://bfbq2rwvxjb23"]
+
+[ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="1_3jf3w"]
+
+[resource]
+script = ExtResource("1_3jf3w")
+ID = 0
+Name = ""
+StackSize = 0
+craftingRequirements = null

@@ -192,7 +192,9 @@ public partial class PlayerInventoryController : Control {
 
 	static int AddToInventoryUntilFull(RawInventoryItem itemToAdd)
 	{
-		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++)
+		int index = PlayerInventoryData.GetFirstStackIndexOfItem(itemToAdd.id, true);
+		
+		for (int i = index; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++)
 		{
 			RawInventoryItem rawItem = null;
 			
@@ -282,8 +284,15 @@ public partial class PlayerInventoryController : Control {
 				else
 				{
 					NullifyInventoryItemAtIndex(i);
-					
-					if (isItemSelected && !PlayerInventoryData.ExistsInInventory(selectedItem.id, 1))
+				}
+				
+				if (isItemSelected)
+				{
+					if (PlayerInventoryData.ExistsInInventory(selectedItem.id, 1))
+					{
+						SelectItemAtSlot(PlayerInventoryData.GetFirstStackIndexOfItem(selectedItem.id));
+					}
+					else
 					{
 						DeselectItem();
 					}

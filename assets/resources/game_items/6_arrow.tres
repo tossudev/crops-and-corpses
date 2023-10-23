@@ -21,5 +21,5 @@ script = ExtResource("1_rchqo")
 ID = 6
 Name = "Arrow"
 IconTexture = ExtResource("1_sxagt")
-StackSize = 32
+StackSize = 16
 craftingRequirements = Array[Object]([SubResource("Resource_rhach"), SubResource("Resource_b8sxc")])

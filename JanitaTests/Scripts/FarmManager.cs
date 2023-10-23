@@ -80,7 +80,7 @@ public partial class FarmManager : Node
 		GD.Print(_allPlantedPlants.Count);
 	}
 
-	public bool IsWaterCanEquipped(){
+	public bool IsWaterBucketEquipped(){
 		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bucket of Water")
 		return true;
 		else return false;
@@ -95,10 +95,8 @@ public partial class FarmManager : Node
 		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bucket of Water"){
 			Item emptyB = ResourceLoader.Load("res://assets/resources/game_items/4_bucket.tres") as Item;
 			RawInventoryItem bucket = new RawInventoryItem(emptyB.ID, emptyB.Name, 1, emptyB.StackSize);	
-			PlayerInventoryController.AddItem(bucket);
-
 			PlayerInventoryController.RemoveItemFromInventory(PlayerInventoryController.selectedItem);
-			PlayerInventoryController.selectedItem = bucket;
+			PlayerInventoryController.SelectItem(bucket);
 		}else{
 			GD.Print("Water bucket not selected");
 		}
@@ -107,9 +105,8 @@ public partial class FarmManager : Node
 		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bucket"){
 			Item waterB = ResourceLoader.Load("res://assets/resources/game_items/11_bucket_water.tres") as Item;
 			RawInventoryItem waterBucket = new RawInventoryItem(waterB.ID, waterB.Name, 1, waterB.StackSize);	
-			PlayerInventoryController.AddItem(waterBucket);
 			PlayerInventoryController.RemoveItemFromInventory(PlayerInventoryController.selectedItem);
-			PlayerInventoryController.selectedItem = waterBucket;
+			PlayerInventoryController.SelectItem(waterBucket);
 		}else{
 			GD.Print("Empty bucket not selected"+PlayerInventoryController.selectedItem.name);
 		}

@@ -34,7 +34,12 @@ public partial class FieldHandler : Node2D
 	}
 	void PlantPlant(){
 		
-		PlayerInventoryController.RemoveItemFromInventory(PlayerInventoryController.selectedItem);
+		PlayerInventoryController.RemoveItemFromInventory(new RawInventoryItem(
+			PlayerInventoryController.selectedItem.id,
+			PlayerInventoryController.selectedItem.name,
+			1,
+			PlayerInventoryController.selectedItem.stackSize));
+		
 		TextureRect plantTexture =  GetNode<TextureRect>(_nodePath);
 		plantTexture.AddChild(_plant);
 		_plant.myField = this;

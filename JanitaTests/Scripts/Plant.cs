@@ -253,6 +253,7 @@ public partial class Plant : Node2D
 		}
 	}
 	public void WaterPlant(){
+		FarmManager.instance.EmptyWaterBucket();
 		GD.Print("Watered: "+plantName);
 		_warningSign.Texture = null;
 		if(_state == GrowthState.WaitWatering)

@@ -85,7 +85,7 @@ collision_layer = 32
 collision_mask = 20
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
-position = Vector2(2.08165e-12, 8)
+position = Vector2(2.08165e-12, 10)
 rotation = 3.14159
 scale = Vector2(0.125738, 0.125743)
 polygon = PackedVector2Array(65, -48, 94, -26, 116, 6, 126, 43, 2.08165e-12, 64, -126, 43, -116, 6, -94, -26, -65, -48, -32, -62, 2.08165e-12, -66, 32, -62)
@@ -93,7 +93,7 @@ disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 0)
-position = Vector2(8, 2.08165e-12)
+position = Vector2(10, 9.65599e-06)
 rotation = 1.5708
 scale = Vector2(0.125, 0.124647)
 texture = ExtResource("3_ha3no")

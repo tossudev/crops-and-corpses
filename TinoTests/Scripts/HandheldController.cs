@@ -153,6 +153,14 @@ public partial class HandheldController : Node2D
 
     private void StartDraw()
     {
+        RawInventoryItem projectile = new RawInventoryItem(_projectile.item.ID, _projectile.item.Name, 1, _projectile.item.StackSize);
+
+        if (PlayerInventoryController.RemoveItemFromInventory(projectile) == false)
+        {
+            GD.Print("Out of ammo");
+            return;
+        }
+
         if (!_isDrawing)
             _isDrawing = true;
 

@@ -5,6 +5,7 @@ public partial class PlayerInventoryController : Control {
 
 	public static TextureRect selectedIcon;
 	public static Label selectedQuantityLabel;
+	public static Sprite2D heldItemIndicator;
 
 	static Control _inventoryPanel;
 	static Control _inventoryGrid;
@@ -13,6 +14,7 @@ public partial class PlayerInventoryController : Control {
 	
 	public static bool isItemSelected = false;
 	public static RawInventoryItem selectedItem;
+	public static RawInventoryItem heldItem;
 	
 	public bool isOpen = false;
     string slotNodePath = "res://scenes/ui/inventory_slot.tscn";
@@ -44,6 +46,8 @@ public partial class PlayerInventoryController : Control {
 		selectedIcon = GetNode<TextureRect>("SelectedItem/Icon");
 		selectedQuantityLabel = GetNode<Label>("SelectedItem/Quantity");
 
+		heldItemIndicator = GetNode<Sprite2D>("HeldItemIndicator");
+
 		_inventoryPanel.Visible = false;
 		_InitInventory();
 	}
@@ -59,6 +63,27 @@ public partial class PlayerInventoryController : Control {
 			isOpen = !isOpen;
 			_inventoryPanel.Visible = isOpen;
 		}
+
+		for (int hotbarKey = 0; hotbarKey < 8; hotbarKey ++) {
+			int actualKeyNumber = hotbarKey + 1;
+			if (@event.IsActionPressed("hotbar_" + actualKeyNumber.ToString())) {
+				UpdateHeldItem(hotbarKey);
+				return;
+			}
+		}
+
+	}
+
+
+	void UpdateHeldItem(int hotbarIndex) {
+		int itemInventoryIndex =_hotbarStartIndex + hotbarIndex;
+		heldItem = SaveData.organizedPlayerInventory[itemInventoryIndex];
+
+		Vector2 heldItemPos = _hotbarGrid.GetChild<Control>(hotbarIndex).GlobalPosition;
+		heldItemPos.X += SELECTED_ITEM_OFFSET / 2;
+		heldItemPos.Y += SELECTED_ITEM_OFFSET / 2;
+
+		heldItemIndicator.GlobalPosition = heldItemPos;
 	}
 
 
@@ -115,6 +140,7 @@ public partial class PlayerInventoryController : Control {
 			}
         }
 		
+		UpdateHeldItem(0);
 		SaveData.SyncInventory();
 	}
 

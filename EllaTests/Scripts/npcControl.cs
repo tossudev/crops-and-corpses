@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections;
+using System.Diagnostics;
 
 public partial class npcControl : CharacterBody2D
 {
@@ -8,6 +10,7 @@ public partial class npcControl : CharacterBody2D
 		Patrol,
 		TaskFarming,
 		TaskDefend,
+		TaskGather,
 		TaskCompleted,
 		FollowPlayer
 
@@ -28,8 +31,8 @@ public partial class npcControl : CharacterBody2D
 	public override void _Ready()
 	{
 		GD.Print("im ready");
-		
-		
+
+
 		// Setting up the timer
 		_taskTimer = new Timer
 		{
@@ -51,13 +54,13 @@ public partial class npcControl : CharacterBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		
-		
+
+
 		if (GlobalPosition.DistanceTo(_targetPosition) > 5 && !dialogueControl.Visible)
 		{
 			Movement(_targetPosition);
 		}
-		if(CurrentState == States.TaskFarming && GlobalPosition.DistanceTo(_targetPosition) < 5)
+		if (CurrentState == States.TaskFarming && GlobalPosition.DistanceTo(_targetPosition) < 5)
 		{
 			NpcStates();
 		}
@@ -79,7 +82,7 @@ public partial class npcControl : CharacterBody2D
 					//_taskTimer.Start();
 					break;
 				}
-				
+
 				if (dialogueControl.attackZombies == true)
 				{
 					GD.Print("Looking for zombies");
@@ -97,33 +100,34 @@ public partial class npcControl : CharacterBody2D
 
 				TargetPosition();
 				dialogueControl.farmingTaskStarted = false;
+				CheckPlant();
 
-				if (GlobalPosition.DistanceTo(_currentPlant.GlobalPosition) < 5)
-				{
-					GD.Print("I am at the plant yay");
-					if (_currentPlant.GetGrowthState() == GrowthState.IsWilting || _currentPlant.GetGrowthState() == GrowthState.WaitWatering)
-					{
-						_currentPlant.WaterPlant();
+				/* 				if (GlobalPosition.DistanceTo(_currentPlant.GlobalPosition) < 5)
+								{
+									GD.Print("I am at the plant yay");
+									if (_currentPlant.GetGrowthState() == GrowthState.IsWilting || _currentPlant.GetGrowthState() == GrowthState.WaitWatering)
+									{
+										_currentPlant.WaterPlant();
 
-					}
-					if (_currentPlant.GetGrowthState() == GrowthState.IsInfested)
-					{
-						_currentPlant.CurePlant();
-					}
+									}
+									if (_currentPlant.GetGrowthState() == GrowthState.IsInfested)
+									{
+										_currentPlant.CurePlant();
+									}
 
-					if (_currentPlant.GetGrowthState() != GrowthState.IsWilting && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
-					 _currentPlant.GetGrowthState() != GrowthState.WaitWatering && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
-					_currentPlant.GetGrowthState() != GrowthState.IsInfested && _plantIndex < FarmManager.instance.GetPlantedPlants().Count)
-					{
-						_plantIndex++;
-						//_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
+									if (_currentPlant.GetGrowthState() != GrowthState.IsWilting && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
+									 _currentPlant.GetGrowthState() != GrowthState.WaitWatering && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
+									_currentPlant.GetGrowthState() != GrowthState.IsInfested && _plantIndex < FarmManager.instance.GetPlantedPlants().Count)
+									{
+										_plantIndex++;
+										//_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
 
-					}
-					if (_plantIndex == FarmManager.instance.GetPlantedPlants().Count)
-					{
-						_plantIndex = 0;
-					}
-				}
+									}
+									if (_plantIndex == FarmManager.instance.GetPlantedPlants().Count)
+									{
+										_plantIndex = 0;
+									}
+								} */
 				if (_taskCompleted == true)
 				{
 					CurrentState = States.TaskCompleted;
@@ -171,31 +175,50 @@ public partial class npcControl : CharacterBody2D
 
 	private void TargetPosition()
 	{
-		if (CurrentState == States.Patrol)
+		switch (CurrentState)
 		{
-			float range = 100;
-			_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
+			case States.Patrol:
+				float range = 100;
+				_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
+				break;
+			case States.TaskFarming:
+				_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
+				_targetPosition = _currentPlant.GlobalPosition;
+				break;
+			case States.TaskDefend:
+				_targetPosition = GetParent().GetNode<CharacterBody2D>("zombie").GlobalPosition;
+				break;
+			case States.TaskGather:
+				break;
+			case States.FollowPlayer:
+				_targetPosition = GetParent().GetNode<CharacterBody2D>("Player").GlobalPosition;
+				break;
 		}
-		if (CurrentState == States.TaskFarming)
-		{
-			//_targetPosition = GetParent().GetNode<Marker2D>("TaskPoint").GlobalPosition;
-			_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
-			_targetPosition = _currentPlant.GlobalPosition;
-			// Move to a position where farming plots are, needs thinking
+		/* 		if (CurrentState == States.Patrol)
+				{
+					float range = 100;
+					_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
+				}
+				if (CurrentState == States.TaskFarming)
+				{
+					//_targetPosition = GetParent().GetNode<Marker2D>("TaskPoint").GlobalPosition;
+					_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
+					_targetPosition = _currentPlant.GlobalPosition;
+					// Move to a position where farming plots are, needs thinking
 
-		}
-		if (CurrentState == States.TaskDefend)
-		{
-			_targetPosition = GetParent().GetNode<CharacterBody2D>("zombie").GlobalPosition;
-		}
-		if (CurrentState == States.TaskCompleted)
-		{
-			_targetPosition = GetParent().GetNode<Marker2D>("TaskCompleted").GlobalPosition;
-		}
-		if (CurrentState == States.FollowPlayer)
-		{
-			//_targetPosition = GetParent().GetNode<CharacterBody2D>("Player").GlobalPosition;
-		}
+				}
+				if (CurrentState == States.TaskDefend)
+				{
+					_targetPosition = GetParent().GetNode<CharacterBody2D>("zombie").GlobalPosition;
+				}
+				if (CurrentState == States.TaskCompleted)
+				{
+					_targetPosition = GetParent().GetNode<Marker2D>("TaskCompleted").GlobalPosition;
+				}
+				if (CurrentState == States.FollowPlayer)
+				{
+					//_targetPosition = GetParent().GetNode<CharacterBody2D>("Player").GlobalPosition;
+				} */
 	}
 
 	private void Movement(Vector2 target)
@@ -205,12 +228,6 @@ public partial class npcControl : CharacterBody2D
 		Velocity = _direction * _speed;
 		MoveAndSlide();
 	}
-
-	private void Attack()
-	{
-		// Make damage to zombies
-	}
-
 	public void _on_button_button_up()
 	{
 		dialogueWindow = true;
@@ -220,6 +237,36 @@ public partial class npcControl : CharacterBody2D
 			dialogueControl.farmingTaskStarted = false;
 			GD.Print("Task1 Completed");
 			CurrentState = States.TaskCompleted;
+		}
+	}
+
+	private void CheckPlant()
+	{
+		if (GlobalPosition.DistanceTo(_currentPlant.GlobalPosition) < 5)
+		{
+			GD.Print("I am at the plant yay");
+			if (_currentPlant.GetGrowthState() == GrowthState.IsWilting || _currentPlant.GetGrowthState() == GrowthState.WaitWatering)
+			{
+				_currentPlant.WaterPlant();
+
+			}
+			if (_currentPlant.GetGrowthState() == GrowthState.IsInfested)
+			{
+				_currentPlant.CurePlant();
+			}
+
+			if (_currentPlant.GetGrowthState() != GrowthState.IsWilting && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
+			 _currentPlant.GetGrowthState() != GrowthState.WaitWatering && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
+			_currentPlant.GetGrowthState() != GrowthState.IsInfested && _plantIndex < FarmManager.instance.GetPlantedPlants().Count)
+			{
+				_plantIndex++;
+				//_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
+
+			}
+			if (_plantIndex == FarmManager.instance.GetPlantedPlants().Count)
+			{
+				_plantIndex = 0;
+			}
 		}
 	}
 }

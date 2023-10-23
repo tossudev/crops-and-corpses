@@ -188,6 +188,10 @@ public partial class npcControl : CharacterBody2D
 			{
 				_currentPlant.CurePlant();
 			}
+/* 			if(_currentPlant.GetGrowthState() == GrowthState.IsDead)
+			{
+				_currentPlant.myField.RemovePlant();
+			} */
 
 			if (_currentPlant.GetGrowthState() != GrowthState.IsWilting && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
 			 _currentPlant.GetGrowthState() != GrowthState.WaitWatering && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
@@ -203,7 +207,11 @@ public partial class npcControl : CharacterBody2D
 			}
 			if (_currentPlant.GetGrowthState() == GrowthState.IsHarvestable)
 			{
-				CurrentState = States.Patrol;
+				_plantIndex++;
+				if(_plantIndex == FarmManager.instance.GetPlantedPlants().Count)
+				{
+					CurrentState = States.Patrol;
+				}	
 			}
 		}
 	}

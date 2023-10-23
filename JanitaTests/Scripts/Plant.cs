@@ -178,12 +178,12 @@ public partial class Plant : Node2D
 		if(@event is InputEventMouseButton button && _isPlayerNearby)
 		{
 			// Plant is planted, wait for water so it can start to grow
-			if(button.IsPressed() && _state == GrowthState.WaitWatering && FarmManager.instance.IsWaterCanEquipped()){
+			if(button.IsPressed() && _state == GrowthState.WaitWatering && FarmManager.instance.IsWaterBucketEquipped()){
 				WaterPlant();
 			}
 
 			// Plant is wilted, water it
-			if(button.IsPressed() && _state == GrowthState.IsWilting && FarmManager.instance.IsWaterCanEquipped()){
+			if(button.IsPressed() && _state == GrowthState.IsWilting && FarmManager.instance.IsWaterBucketEquipped()){
 				WaterPlant();
 			}
 

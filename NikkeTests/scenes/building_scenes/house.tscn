@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://3ct83j0jgteb"]
 
-[ext_resource type="Texture2D" uid="uid://dskeqa44gjbje" path="res://NikkeTests/images/house.png" id="1_gvs6m"]
+[ext_resource type="Texture2D" uid="uid://b5cv2b6w6tvm0" path="res://assets/sprites/buildings/housedesing2.png" id="1_soon6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kphka"]
 size = Vector2(128, 128)
@@ -9,8 +9,9 @@ size = Vector2(128, 128)
 scale = Vector2(2, 2)
 
 [node name="House" type="Sprite2D" parent="."]
-position = Vector2(-64, -64)
-texture = ExtResource("1_gvs6m")
+position = Vector2(-64, -80)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("1_soon6")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-64, -64)
@@ -19,6 +20,8 @@ position = Vector2(-64, -64)
 shape = SubResource("RectangleShape2D_kphka")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-64, -64)

@@ -7,6 +7,8 @@ public partial class PlayerController : CharacterBody2D
 	[Export] private HandheldController _handheld;
 	[Export] private Camera2D _camera;
 	[Export] private Sprite2D _sprite;
+	[Export] private Area2D _pickupArea;
+	[Export] private PlayerSpriteController _rig;
 
 	[ExportCategory("Settings")]
 	[Export] private float maxZoom = 2f;
@@ -17,31 +19,47 @@ public partial class PlayerController : CharacterBody2D
 	private bool _isDead = false;
 	private Vector2 _knockback = Vector2.Zero;
 
-	public override void _PhysicsProcess(double delta)
+	// to disable the player input, use:
+	// player.SetProcessUnhandledInput(true/false);
+	public override void _UnhandledInput(InputEvent @event)
 	{
-		Movement();
-
-		if (Input.IsActionJustPressed("left_click"))
+		if (@event.IsActionPressed("left_click"))
 		{
 			_handheld.Use(_canMelee);
 			_canMelee = false;
 		}
-		else if (Input.IsActionJustReleased("left_click"))
+		else if (@event.IsActionReleased("left_click"))
 		{
 			_handheld.Release();
 			_canMelee = true;
 		}
 
-		else if (Input.IsActionJustPressed("wheel_up"))
+		if (@event.IsActionPressed("wheel_up"))
 		{
 			if (_camera.Zoom.X < maxZoom)
 				CameraZoom(0.1f);
 		}
-		else if (Input.IsActionJustPressed("wheel_down"))
+		else if (@event.IsActionPressed("wheel_down"))
 		{
 			if (_camera.Zoom.X > minZoom)
 				CameraZoom(-0.1f);
 		}
+
+		if (@event.IsActionPressed("pickup"))
+		{
+			_pickupArea.GetChild<CollisionShape2D>(0).Disabled = false;
+		}
+		else if (@event.IsActionReleased("pickup"))
+		{
+			_pickupArea.GetChild<CollisionShape2D>(0).Disabled = true;
+		}
+	}
+
+	// to disable the player input, use:
+	// player.SetPhysicsProcess(true/false);
+	public override void _PhysicsProcess(double delta)
+	{
+		Movement();
 	}
 
 	private void CameraZoom(float zoomDelta)
@@ -67,6 +85,8 @@ public partial class PlayerController : CharacterBody2D
 	{
 		var movement = GetMovementInputVector() * _speed;
 		Velocity = movement + _knockback;
+
+		_rig.UpdateSprite(movement);
 
 		MoveAndSlide();
 	}

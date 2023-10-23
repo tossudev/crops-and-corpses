@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="Projectile" load_steps=3 format=3 uid="uid://ce2eq2q0gowgi"]
+[gd_resource type="Resource" script_class="Projectile" load_steps=3 format=3 uid="uid://vus4coe8p4nv"]
 
-[ext_resource type="Resource" uid="uid://c5xluv5j2cu8v" path="res://assets/resources/game_items/10_cure_potion.tres" id="1_pasn7"]
+[ext_resource type="Resource" uid="uid://b32dnrkgcjwvj" path="res://assets/resources/game_items/10_cure_potion.tres" id="1_pasn7"]
 [ext_resource type="Script" path="res://TinoTests/Scripts/Projectiles/Projectile.cs" id="1_v3ox2"]
 
 [resource]

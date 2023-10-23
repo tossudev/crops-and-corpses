@@ -43,10 +43,7 @@ public partial class npcControl : CharacterBody2D
 
 		AddChild(_taskTimer);
 		_taskTimer.Start();
-		// If npc in outside world 
-		// CurrentState = States.FollowPlayer;
 
-		//Else:
 		CurrentState = States.Patrol;
 
 	}
@@ -54,8 +51,6 @@ public partial class npcControl : CharacterBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-
-
 		if (GlobalPosition.DistanceTo(_targetPosition) > 5 && !dialogueControl.Visible)
 		{
 			Movement(_targetPosition);
@@ -64,7 +59,6 @@ public partial class npcControl : CharacterBody2D
 		{
 			NpcStates();
 		}
-
 	}
 
 	void NpcStates()
@@ -79,15 +73,9 @@ public partial class npcControl : CharacterBody2D
 					GD.Print("Farming task started");
 					CurrentState = States.TaskFarming;
 					NpcStates();
-					//_taskTimer.Start();
 					break;
 				}
 
-				if (dialogueControl.attackZombies == true)
-				{
-					GD.Print("Looking for zombies");
-					CurrentState = States.TaskDefend;
-				}
 				if (GlobalPosition.DistanceTo(_targetPosition) < 10)
 				{
 					TargetPosition();
@@ -102,32 +90,6 @@ public partial class npcControl : CharacterBody2D
 				dialogueControl.farmingTaskStarted = false;
 				CheckPlant();
 
-				/* 				if (GlobalPosition.DistanceTo(_currentPlant.GlobalPosition) < 5)
-								{
-									GD.Print("I am at the plant yay");
-									if (_currentPlant.GetGrowthState() == GrowthState.IsWilting || _currentPlant.GetGrowthState() == GrowthState.WaitWatering)
-									{
-										_currentPlant.WaterPlant();
-
-									}
-									if (_currentPlant.GetGrowthState() == GrowthState.IsInfested)
-									{
-										_currentPlant.CurePlant();
-									}
-
-									if (_currentPlant.GetGrowthState() != GrowthState.IsWilting && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
-									 _currentPlant.GetGrowthState() != GrowthState.WaitWatering && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
-									_currentPlant.GetGrowthState() != GrowthState.IsInfested && _plantIndex < FarmManager.instance.GetPlantedPlants().Count)
-									{
-										_plantIndex++;
-										//_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
-
-									}
-									if (_plantIndex == FarmManager.instance.GetPlantedPlants().Count)
-									{
-										_plantIndex = 0;
-									}
-								} */
 				if (_taskCompleted == true)
 				{
 					CurrentState = States.TaskCompleted;
@@ -170,9 +132,6 @@ public partial class npcControl : CharacterBody2D
 				break;
 		}
 	}
-
-
-
 	private void TargetPosition()
 	{
 		switch (CurrentState)
@@ -194,31 +153,6 @@ public partial class npcControl : CharacterBody2D
 				_targetPosition = GetParent().GetNode<CharacterBody2D>("Player").GlobalPosition;
 				break;
 		}
-		/* 		if (CurrentState == States.Patrol)
-				{
-					float range = 100;
-					_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
-				}
-				if (CurrentState == States.TaskFarming)
-				{
-					//_targetPosition = GetParent().GetNode<Marker2D>("TaskPoint").GlobalPosition;
-					_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
-					_targetPosition = _currentPlant.GlobalPosition;
-					// Move to a position where farming plots are, needs thinking
-
-				}
-				if (CurrentState == States.TaskDefend)
-				{
-					_targetPosition = GetParent().GetNode<CharacterBody2D>("zombie").GlobalPosition;
-				}
-				if (CurrentState == States.TaskCompleted)
-				{
-					_targetPosition = GetParent().GetNode<Marker2D>("TaskCompleted").GlobalPosition;
-				}
-				if (CurrentState == States.FollowPlayer)
-				{
-					//_targetPosition = GetParent().GetNode<CharacterBody2D>("Player").GlobalPosition;
-				} */
 	}
 
 	private void Movement(Vector2 target)
@@ -266,6 +200,10 @@ public partial class npcControl : CharacterBody2D
 			if (_plantIndex == FarmManager.instance.GetPlantedPlants().Count)
 			{
 				_plantIndex = 0;
+			}
+			if (_currentPlant.GetGrowthState() == GrowthState.IsHarvestable)
+			{
+				CurrentState = States.Patrol;
 			}
 		}
 	}

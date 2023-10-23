@@ -116,6 +116,7 @@ offset_right = 95.922
 offset_bottom = 2.40997
 
 [node name="Button3" type="Button" parent="Control/ColorRect"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.423

@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 public partial class SpawnScriptTest : Node2D
@@ -15,6 +16,8 @@ public partial class SpawnScriptTest : Node2D
 	bool isNightOrDay;
 	string isNightOrDayString;
 	private int counter;
+
+	private bool zombieDelayBool=false;
 	[Export]private float maxDistance=1500f;
 	[Export] public CharacterBody2D player;
 	private List<CharacterBody2D> zombieList = new List<CharacterBody2D>();
@@ -78,13 +81,17 @@ public partial class SpawnScriptTest : Node2D
 			for(int i = zombieList.Count-1;i>=0;i--)
 			{
 				Vector2 zombiePos = zombieList[i].Position;
-
 				float distance = zombiePos.DistanceTo(playerPos);
 				//GD.Print("Distance to player" + distance+ " MaxDistance "+maxDistance);
 				if(distance > maxDistance)
 				{
-					zombieList[i].QueueFree();
-					zombieList.RemoveAt(i);
+
+					if(zombieDelayBool == true)
+					{
+						zombieList[i].QueueFree();
+						zombieList.RemoveAt(i);
+						zombieDelayBool = false;
+					};
 					
 				}
 
@@ -93,6 +100,10 @@ public partial class SpawnScriptTest : Node2D
 			}
 		}
     }
+	private void DeleteZombieDelay()
+	{
+		zombieDelayBool = true;
+	}
 	private void ZombieSpawn()
 	{
 

@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
 [ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="10_g8lte"]
 [ext_resource type="Texture2D" uid="uid://dr0bvibnh6lfq" path="res://assets/placeholder/tile_grass_concept.png" id="15_8a66b"]
-[ext_resource type="PackedScene" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
+[ext_resource type="PackedScene" uid="uid://c04vbrhqy3k4y" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2ovt6"]
 texture = ExtResource("2_6gv5a")

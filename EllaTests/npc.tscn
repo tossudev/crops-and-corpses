@@ -1,18 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://ba8mb2whyo4dy"]
 
-[ext_resource type="Script" path="res://EllaTests/Scripts/npcControl.cs" id="1_koefy"]
+[ext_resource type="Script" path="res://EllaTests/Villager.cs" id="1_u0uyb"]
 [ext_resource type="Texture2D" uid="uid://bbei648d3eovx" path="res://assets/placeholder/test_character/character.png" id="2_n3vwh"]
 [ext_resource type="Script" path="res://EllaTests/Scripts/DialogueControl.cs" id="3_w0yh6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lwgin"]
 radius = 60.0
 
-[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("dialogueControl")]
+[node name="NPC" type="CharacterBody2D"]
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("1_koefy")
-dialogueControl = NodePath("Control")
+script = ExtResource("1_u0uyb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
@@ -116,7 +115,6 @@ offset_right = 95.922
 offset_bottom = 2.40997
 
 [node name="Button3" type="Button" parent="Control/ColorRect"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.423

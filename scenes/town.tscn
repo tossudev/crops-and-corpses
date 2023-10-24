@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=23 format=3 uid="uid://bgyv0c8xt1fd4"]
 
 [ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="1_2cwk5"]
 [ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_vjhkw"]
@@ -15,7 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
 [ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="10_g8lte"]
 [ext_resource type="Texture2D" uid="uid://dr0bvibnh6lfq" path="res://assets/placeholder/tile_grass_concept.png" id="15_8a66b"]
-[ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
+[ext_resource type="PackedScene" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
+[ext_resource type="Script" path="res://EllaTests/Scripts/VillagerManager.cs" id="17_uq00s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2ovt6"]
 texture = ExtResource("2_6gv5a")
@@ -255,3 +256,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="well" parent="." instance=ExtResource("15_y8o5s")]
 position = Vector2(328, -287)
+
+[node name="npc_manager" type="Node" parent="."]
+script = ExtResource("17_uq00s")

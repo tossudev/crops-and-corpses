@@ -132,6 +132,10 @@ public partial class BuildingMenu : Control
             else if (node.IsInGroup("FarmPlot"))
             {
                 name = "FarmPlot";
+            } 
+            else if (node.IsInGroup("ArcherTower"))
+            {
+                name = "ArcherTower";
             }
 
             JsonObject jsonObj = new JsonObject

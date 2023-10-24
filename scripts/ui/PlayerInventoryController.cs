@@ -5,6 +5,7 @@ public partial class PlayerInventoryController : Control {
 
 	public static TextureRect selectedIcon;
 	public static Label selectedQuantityLabel;
+	public static Sprite2D heldItemIndicator;
 
 	static Control _inventoryPanel;
 	static Control _inventoryGrid;
@@ -13,6 +14,7 @@ public partial class PlayerInventoryController : Control {
 	
 	public static bool isItemSelected = false;
 	public static RawInventoryItem selectedItem;
+	public static RawInventoryItem heldItem;
 	
 	public bool isOpen = false;
     string slotNodePath = "res://scenes/ui/inventory_slot.tscn";
@@ -44,6 +46,8 @@ public partial class PlayerInventoryController : Control {
 		selectedIcon = GetNode<TextureRect>("SelectedItem/Icon");
 		selectedQuantityLabel = GetNode<Label>("SelectedItem/Quantity");
 
+		heldItemIndicator = GetNode<Sprite2D>("HeldItemIndicator");
+
 		_inventoryPanel.Visible = false;
 		_InitInventory();
 	}
@@ -59,6 +63,27 @@ public partial class PlayerInventoryController : Control {
 			isOpen = !isOpen;
 			_inventoryPanel.Visible = isOpen;
 		}
+
+		for (int hotbarKey = 0; hotbarKey < 8; hotbarKey ++) {
+			int actualKeyNumber = hotbarKey + 1;
+			if (@event.IsActionPressed("hotbar_" + actualKeyNumber.ToString())) {
+				UpdateHeldItem(hotbarKey);
+				return;
+			}
+		}
+
+	}
+
+
+	void UpdateHeldItem(int hotbarIndex) {
+		int itemInventoryIndex =_hotbarStartIndex + hotbarIndex;
+		heldItem = SaveData.organizedPlayerInventory[itemInventoryIndex];
+
+		Vector2 heldItemPos = _hotbarGrid.GetChild<Control>(hotbarIndex).GlobalPosition;
+		heldItemPos.X += SELECTED_ITEM_OFFSET / 2;
+		heldItemPos.Y += SELECTED_ITEM_OFFSET / 2;
+
+		heldItemIndicator.GlobalPosition = heldItemPos;
 	}
 
 
@@ -91,22 +116,32 @@ public partial class PlayerInventoryController : Control {
 				_inventoryGrid.AddChild(itemSlot);
 			}
             
-			((InventorySlot)itemSlot).UpdateSlot(null, i);
+			((InventorySlot)itemSlot).UpdateSlot(null, i, false);
 		}
 		
 		await PlayerInventoryData.ReadInventoryDataFromFile(SaveData.LoadData());
         
-		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++) {
+		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++)
+		{
+
+			int slotIdx = (SaveData.organizedPlayerInventory[i] != null)
+				? SaveData.organizedPlayerInventory[i].indexInOrganizedInventory
+				: -1;
+
+			if (slotIdx < 0 || slotIdx > PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - 1) slotIdx = i;
 			
 			if (IsSlotInHotbar(i)) {
 				_hotbarGrid.GetChild<InventorySlot>(i - _hotbarStartIndex)
-					.UpdateSlot(SaveData.organizedPlayerInventory[i], i);
+					.UpdateSlot(SaveData.organizedPlayerInventory[i], slotIdx, false);
 			}
 			else {
 				_inventoryGrid.GetChild<InventorySlot>(i)
-					.UpdateSlot(SaveData.organizedPlayerInventory[i], i);
+					.UpdateSlot(SaveData.organizedPlayerInventory[i], slotIdx, false);
 			}
         }
+		
+		UpdateHeldItem(0);
+		SaveData.SyncInventory();
 	}
 
 
@@ -149,9 +184,10 @@ public partial class PlayerInventoryController : Control {
 	/// <summary> Main inventory additive operation </summary>
 	/// <param name="rawItem"> Includes id, name and quantity to add </param>
 	/// <param name="index"> optional: desired index in the organized player inventory array </param>
-	///
+	/// <param name="deselectOnAllAdded"> optional : deselect current item if all items were added </param>
+	/// 
 	///	<returns> how many items could *NOT* be added </returns>
-	public static int AddItem(RawInventoryItem rawItem, int index = -1)
+	public static int AddItem(RawInventoryItem rawItem, int index = -1, bool deselectOnAllAdded = true)
 	{
 
 		if (rawItem == null)
@@ -159,7 +195,6 @@ public partial class PlayerInventoryController : Control {
 			GD.PrintErr("Tried to add a null item to inventory @PlayerInventoryController.AddItem!");
 			return -1;
 		}
-
 		
 		rawItem.quantity = index == -1 
 			? AddToInventoryUntilFull(rawItem) // index not specified
@@ -167,25 +202,25 @@ public partial class PlayerInventoryController : Control {
 
 		
         SaveData.SyncInventory();
-		
 
-		if (rawItem.quantity == 0)
-		{
-			DeselectItem();
-			return 0;
-		}
+        if (rawItem.quantity == 0)
+        {
+	        if (isItemSelected && selectedItem.id == rawItem.id && selectedItem.isValidIndex)
+	        {
+		        NullifyInventoryItemAtIndex(selectedItem.indexInOrganizedInventory);
+	        }
+				    
+	        if (deselectOnAllAdded) DeselectItem();
+        }
         
-		if (isItemSelected)
-		{
-			SelectItem(rawItem);
-		}
-		
-		return rawItem.quantity;
+        return rawItem.quantity;
 	}
 
 	static int AddToInventoryUntilFull(RawInventoryItem itemToAdd)
 	{
-		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++)
+		int index = PlayerInventoryData.GetFirstStackIndexOfItem(itemToAdd.id, true);
+		
+		for (int i = index; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++)
 		{
 			RawInventoryItem rawItem = null;
 			
@@ -247,7 +282,9 @@ public partial class PlayerInventoryController : Control {
 	public static bool RemoveItemFromInventory(RawInventoryItem rawItem)
 	{
 		if (!PlayerInventoryData.ExistsInInventory(rawItem.id, rawItem.quantity))
+		{
 			return false;
+		}
 
 		int amountToRemove = rawItem.quantity;
 		
@@ -257,22 +294,34 @@ public partial class PlayerInventoryController : Control {
 			
 			if (SaveData.organizedPlayerInventory[i].id == rawItem.id)
 			{
-				int itemQuantityInSlot = SaveData.organizedPlayerInventory[i].quantity;
+				RawInventoryItem itemInSlot = SaveData.organizedPlayerInventory[i];
 				
-				int amountRemoved = (itemQuantityInSlot - amountToRemove > 0)
+				int amountRemoved = (itemInSlot.quantity - amountToRemove > 0)
 					? amountToRemove
-					: itemQuantityInSlot;
+					: itemInSlot.quantity;
 
 				amountToRemove -= amountRemoved;
+				itemInSlot.quantity -= amountRemoved;
 				
-				if (amountRemoved < itemQuantityInSlot)
+				if (itemInSlot.quantity > 0)
 				{
-					SaveData.organizedPlayerInventory[i].quantity -= amountRemoved;
-					UpdateInventorySlot(SaveData.organizedPlayerInventory[i], i);
+					UpdateInventorySlot(itemInSlot, i);
 				}
 				else
 				{
 					NullifyInventoryItemAtIndex(i);
+				}
+				
+				if (isItemSelected)
+				{
+					if (PlayerInventoryData.ExistsInInventory(selectedItem.id, 1))
+					{
+						SelectItemAtSlot(PlayerInventoryData.GetFirstStackIndexOfItem(selectedItem.id));
+					}
+					else
+					{
+						DeselectItem();
+					}
 				}
 			}
 
@@ -296,7 +345,7 @@ public partial class PlayerInventoryController : Control {
 	}
 	
 	
-	public static void NullifyInventoryItemAtIndex(int index)
+    static void NullifyInventoryItemAtIndex(int index)
 	{
 		UpdateInventorySlot(null, index);
 	}
@@ -317,14 +366,26 @@ public partial class PlayerInventoryController : Control {
 		SelectItem(new RawInventoryItem(item.id, item.name, 1, item.stackSize));
 	}
 
+    static void SelectItemAtSlot(int index)
+	{
+		InventorySlot slot = IsSlotInHotbar(index) 
+			? _hotbarGrid.GetChild<InventorySlot>(index - _hotbarStartIndex)
+			: _inventoryGrid.GetChild<InventorySlot>(index);
+		
+		SelectItem(slot.slotItem);
+		slot.ToggleVisuals(false);
+	}
 
-	public static void SwapItems(RawInventoryItem itemToSwap, int index)
+	public static void SwapItems(RawInventoryItem slotItem, int index)
 	{
 		RawInventoryItem tempSwapItem = new(
-			itemToSwap.id, itemToSwap.name, itemToSwap.quantity, itemToSwap.stackSize);
-		
+			slotItem.id, slotItem.name, slotItem.quantity, slotItem.stackSize);
+        
 		UpdateInventorySlot(selectedItem, index);
-		SelectItem(tempSwapItem);
+
+		UpdateInventorySlot(tempSwapItem, selectedItem.indexInOrganizedInventory);
+		
+		SelectItemAtSlot(selectedItem.indexInOrganizedInventory);
 	}
 
 	static void UpdateInventorySlot(RawInventoryItem item, int index)

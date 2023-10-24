@@ -32,7 +32,7 @@ public partial class RoamingZombie : CharacterBody2D
 		_attack = new Attack
 		{
 			damage = _damage,
-			knockback = 100f
+			knockback = 500f
 		};
 	}
 
@@ -66,6 +66,7 @@ public partial class RoamingZombie : CharacterBody2D
 					CharacterBody2D spawnNPC = (CharacterBody2D)instantiatedNPC.Instantiate();
 					spawnNPC.Transform = zombiePos;
 					rootNode.AddChild(spawnNPC);
+					spawnNPC.Scale = new Vector2(0.5f,0.5f);
 					this.QueueFree();
 					break;
 				default:
@@ -78,6 +79,11 @@ public partial class RoamingZombie : CharacterBody2D
 		if (body.IsInGroup("player"))
 		{
 			_player = (CharacterBody2D)body;
+
+			// direction from zombie to player
+			Vector2 _direction = (_player.GlobalPosition - this.GlobalPosition).Normalized();
+			_attack.direction = _direction;
+
 			_hitbox = _player.GetNodeOrNull<HitboxComponent>("HitboxComponent");
 
 			if (_hitbox != null)

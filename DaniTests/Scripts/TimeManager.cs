@@ -54,7 +54,7 @@ public partial class TimeManager : Node
             }
             
         }
-        isDayTime = timeOfDay <= dayTimeLength + 10f; // 10s for delaying zombievawes
+        isDayTime = timeOfDay <= dayTimeLength + 1f; // 10s for delaying zombievawes
     }
 
     // Custom function to interpolate between two colors

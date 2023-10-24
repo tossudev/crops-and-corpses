@@ -1,8 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dqmfwe15dtgat"]
 
 [ext_resource type="Script" path="res://TinoTests/Scripts/ProjectileController.cs" id="1_tcvia"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_nk13s"]
+[ext_resource type="Texture2D" uid="uid://g0b72r3myf3c" path="res://assets/sprites/items/item_arrow.png" id="2_b1tpj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_upju1"]
 radius = 0.125
@@ -13,8 +12,10 @@ script = ExtResource("1_tcvia")
 _lifetimeTimer = NodePath("Lifetime")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1.19209e-07, 5.96046e-08)
-texture = SubResource("CanvasTexture_nk13s")
+position = Vector2(2.08165e-12, 2.08165e-12)
+rotation = 0.855211
+scale = Vector2(0.00487634, 0.00487864)
+texture = ExtResource("2_b1tpj")
 
 [node name="Lifetime" type="Timer" parent="."]
 one_shot = true

@@ -4,7 +4,6 @@ using System;
 public partial class HitboxComponent : Area2D
 {
 	[Export] private HealthComponent _healthComponent;
-	[Export] private bool _knockback = false;
 
 	public void ApplyAttack(Attack attack)
 	{
@@ -12,11 +11,8 @@ public partial class HitboxComponent : Area2D
 		{
 			_healthComponent.TakeDamage(attack);
 
-			if (_knockback)
-				ApplyKnockback(attack);
-
 			if (this.GetParent().HasMethod("AttackReceived"))
-				this.GetParent().Call("AttackReceived", attack);
+				this.GetParent().CallDeferred("AttackReceived", attack);
 		}
 		else
 		{
@@ -24,13 +20,13 @@ public partial class HitboxComponent : Area2D
 		}
 	}
 
-	private void ApplyKnockback(Attack attack)
-	{
-		var direction = attack.direction;
-		var knockback = attack.knockback;
-		var velocity = direction * knockback;
+	// private void ApplyKnockback(Attack attack)
+	// {
+	// 	var direction = attack.direction;
+	// 	var knockback = attack.knockback;
+	// 	var velocity = direction * knockback;
 
-		CharacterBody2D parent = this.GetParent() as CharacterBody2D;
-		// give knockback to parent
-	}
+	// 	CharacterBody2D parent = this.GetParent() as CharacterBody2D;
+	// 	// give knockback to parent
+	// }
 }

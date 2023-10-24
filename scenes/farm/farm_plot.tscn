@@ -7,15 +7,15 @@
 [node name="farm_plot" type="Node2D" node_paths=PackedStringArray("_col")]
 scale = Vector2(2, 2)
 script = ExtResource("2_kisi8")
-_col = NodePath("Area2D")
+_col = NodePath("FarmPlot")
 _nodePath = NodePath("plant_slot")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="FarmPlot" type="Area2D" parent="."]
 position = Vector2(-32, -32)
 collision_layer = 8
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FarmPlot"]
 shape = ExtResource("3_d37t8")
 
 [node name="plant_slot" type="TextureRect" parent="."]
@@ -34,6 +34,6 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(-32, -32)
 texture = ExtResource("1_hsnly")
 
-[connection signal="area_entered" from="Area2D" to="." method="OnInteractable"]
-[connection signal="area_exited" from="Area2D" to="." method="OnNonInteractable"]
-[connection signal="input_event" from="Area2D" to="." method="InteractWithField"]
+[connection signal="area_entered" from="FarmPlot" to="." method="OnInteractable"]
+[connection signal="area_exited" from="FarmPlot" to="." method="OnNonInteractable"]
+[connection signal="input_event" from="FarmPlot" to="." method="InteractWithField"]

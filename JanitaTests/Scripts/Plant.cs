@@ -54,7 +54,7 @@ public partial class Plant : Node2D
 	Timer _growthTimer = new Timer();
 
 	int _currentCycle= 0;
-	double _growthCycleTimer = 0f;
+	
 	FieldHandler _myField  {get; set;}
 	public FieldHandler myField{
 		get { return _myField;}
@@ -68,9 +68,13 @@ public partial class Plant : Node2D
 	Sprite2D _warningSign = new Sprite2D();
 
 	TextureProgressBar _progress = new TextureProgressBar();
+	ProgressBar _pb = new ProgressBar();
 
 	int _progressValue=0;
 	bool _isPlayerNearby=false;
+
+	double _progressTimer;
+	int index=0;
  	#endregion
 	
 	public override void _Ready()
@@ -109,19 +113,36 @@ public partial class Plant : Node2D
      	_progress = scene as TextureProgressBar;   
 		AddChild(_progress);
 		_progress.MaxValue = _growthCycleLength * _maxCycles;
-		OnProgressUpdate(0);
+		_progress.Value= 4;
 		_progress.Hide();
+
+
+		var scene2 = ResourceLoader.Load<PackedScene>("res://JanitaTests/plant_bar.tscn").Instantiate();
+     	_pb = scene2 as ProgressBar;   
+		AddChild(_pb);
+		_pb.MaxValue = _growthCycleLength * _maxCycles;
+		_pb.Value= 0;
+		_pb.Hide();
 		PlantState();
 		
 	}
 
     public override void _PhysicsProcess(double delta)
     {
-        
+		if(_state == GrowthState.IsWilting || _state == GrowthState.IsInfested || _state == GrowthState.IsDead || _state == GrowthState.IsHarvestable) return;
+		if(_growthStarted)
+		{
+			_progressTimer += delta;
+			if(_progressTimer>= 1)
+			{
+			_progress.Value += 1;
+			_pb.Value += 1;
+			_progressTimer=0;
+			}
+		}
+		
+       
     }
-    void OnProgressUpdate(float newProgress){
-		_progress.Value += newProgress;
- 	}
 
     void PlantState(){
 		switch(_state){
@@ -157,12 +178,12 @@ public partial class Plant : Node2D
 		if(@event is InputEventMouseButton button && _isPlayerNearby)
 		{
 			// Plant is planted, wait for water so it can start to grow
-			if(button.IsPressed() && _state == GrowthState.WaitWatering && FarmManager.instance.IsWaterCanEquipped()){
+			if(button.IsPressed() && _state == GrowthState.WaitWatering && FarmManager.instance.IsWaterBucketEquipped()){
 				WaterPlant();
 			}
 
 			// Plant is wilted, water it
-			if(button.IsPressed() && _state == GrowthState.IsWilting && FarmManager.instance.IsWaterCanEquipped()){
+			if(button.IsPressed() && _state == GrowthState.IsWilting && FarmManager.instance.IsWaterBucketEquipped()){
 				WaterPlant();
 			}
 
@@ -198,8 +219,6 @@ public partial class Plant : Node2D
 		}
 
 		// Else continue growth cycle, do lottery for random event
-		_growthCycleTimer = 0;
-
         Random random = new Random();
         int randomNumber = random.Next(1, 5);
 
@@ -221,6 +240,8 @@ public partial class Plant : Node2D
 	}
 	void ContinueGrowth(){
 		 GD.Print(plantName+" is healthy again.");
+		 _growthTimer.Stop();
+		 _growthTimer.Start();
 	}
 	void StartDying(){
 		if(_state == GrowthState.IsWilting){
@@ -232,12 +253,15 @@ public partial class Plant : Node2D
 		}
 	}
 	public void WaterPlant(){
+		FarmManager.instance.EmptyWaterBucket();
 		GD.Print("Watered: "+plantName);
 		_warningSign.Texture = null;
 		if(_state == GrowthState.WaitWatering)
 			_state = GrowthState.StartGrowth;
 		else if(_state == GrowthState.IsWilting)
 			_state = GrowthState.ContinueGrowth;
+		
+			
 		PlantState();	
 	}
 	public void CurePlant(){
@@ -285,9 +309,11 @@ public partial class Plant : Node2D
 
 	void ShowProgress(){
 		if(!_progress.Visible) _progress.Show();
+		if(!_pb.Visible) _pb.Show();
 	}
 
 	void HideProgress(){
 		if(_progress.Visible) _progress.Hide();
+		if(_pb.Visible) _pb.Hide();
 	}
 }

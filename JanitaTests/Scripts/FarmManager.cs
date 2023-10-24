@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public partial class FarmManager : Node
 {
@@ -12,16 +13,14 @@ public partial class FarmManager : Node
 	List<Plant> _plants = new List<Plant>();
 
 	List <Plant> _allPlantedPlants = new List<Plant>();
-	bool _isWaterCanEquipped, _isBugSprayEquipped;
-
+	
 	public override void _Ready()
 	{
 
 		if(instance==null)instance=this;else QueueFree();
 		InitializePlants();
-		_isWaterCanEquipped = _isBugSprayEquipped=true;
-		 
-
+		
+		
 		/*Item asd = ResourceLoader.Load("res://assets/resources/game_items/7_tomato_seed.tres") as Item;
 		Item asd1 = ResourceLoader.Load("res://assets/resources/game_items/8_potato_seed.tres") as Item;
 		Item asd2 = ResourceLoader.Load("res://assets/resources/game_items/9_cabbage_seed.tres") as Item;
@@ -80,19 +79,39 @@ public partial class FarmManager : Node
 		_allPlantedPlants.Remove(plant);
 		GD.Print(_allPlantedPlants.Count);
 	}
-	public void EquipWaterCan(bool isEquipped){
-		_isWaterCanEquipped = isEquipped;
-	}
-	public bool IsWaterCanEquipped(){
-		return _isWaterCanEquipped;
-	}
-	public void EquipBugSpray(bool isEquipped){	
-		_isBugSprayEquipped = isEquipped;
+
+	public bool IsWaterBucketEquipped(){
+		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bucket of Water")
+		return true;
+		else return false;
 	}
 	public bool IsBugSprayEquipped(){
-		return _isBugSprayEquipped;
+		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bugspray")
+		return true;
+		else return false;
 	}
 	
+	public void EmptyWaterBucket(){
+		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bucket of Water"){
+			Item emptyB = ResourceLoader.Load("res://assets/resources/game_items/4_bucket.tres") as Item;
+			RawInventoryItem bucket = new RawInventoryItem(emptyB.ID, emptyB.Name, 1, emptyB.StackSize);	
+			PlayerInventoryController.RemoveItemFromInventory(PlayerInventoryController.selectedItem);
+			PlayerInventoryController.SelectItem(bucket);
+		}else{
+			GD.Print("Water bucket not selected");
+		}
+	}
+	public void FillWaterBucket(){
+		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bucket"){
+			Item waterB = ResourceLoader.Load("res://assets/resources/game_items/11_bucket_water.tres") as Item;
+			RawInventoryItem waterBucket = new RawInventoryItem(waterB.ID, waterB.Name, 1, waterB.StackSize);	
+			PlayerInventoryController.RemoveItemFromInventory(PlayerInventoryController.selectedItem);
+			PlayerInventoryController.SelectItem(waterBucket);
+		}else{
+			GD.Print("Empty bucket not selected"+PlayerInventoryController.selectedItem.name);
+		}
+
+	}
 }
 public enum PlantType
 {	

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c6u1c2pj6w6kl"]
+
+[node name="ProgressBar" type="ProgressBar"]
+offset_left = -26.0
+offset_top = 50.0
+offset_right = 114.0
+offset_bottom = 77.0
+scale = Vector2(0.4, 0.4)

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Godot;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,7 +34,6 @@ public partial class PlayerInventoryData : Node
         Array organizedInventoryItemData = (Array) saveData[SaveData.ORGANIZED_INVENTORY_ITEMS_KEY];
         await Task.Run(() =>
         {
-            int index = 0;
             foreach (var rawItemVariant in organizedInventoryItemData)
             {
                 Dictionary itemDataDict = (Dictionary)rawItemVariant; 
@@ -42,10 +42,10 @@ public partial class PlayerInventoryData : Node
                     (int) itemDataDict[RawSaveData.ITEM_ID_KEY],
                     (string) itemDataDict[RawSaveData.ITEM_NAME_KEY],
                     (int) itemDataDict[RawSaveData.ITEM_QUANTITY_KEY],
-                    (int) itemDataDict[RawSaveData.ITEM_STACKSIZE_KEY]);
+                    (int) itemDataDict[RawSaveData.ITEM_STACKSIZE_KEY],
+                    (int) itemDataDict[RawSaveData.ITEM_ORGANIZED_INDEX_KEY]);
                 
-                SaveData.organizedPlayerInventory[index] = convertedRawItem;
-                index++;
+                SaveData.organizedPlayerInventory[convertedRawItem.indexInOrganizedInventory] = convertedRawItem;
             }
 
             SaveData.SyncInventory();
@@ -68,6 +68,10 @@ public partial class PlayerInventoryData : Node
         Item iron = ItemData.GetItemById(1);
         PlayerInventoryController.AddItem(
             new RawInventoryItem(iron.ID, iron.Name, 20, iron.StackSize));
+        
+        Item curePotion = ItemData.GetItemById(10);
+        PlayerInventoryController.AddItem(
+            new RawInventoryItem(curePotion.ID, curePotion.Name, 15, curePotion.StackSize));
         
         tokenSrc.Dispose();
     }
@@ -94,5 +98,31 @@ public partial class PlayerInventoryData : Node
     public static bool ExistsInInventory(int itemId, int amount)
     {
         return SaveData.totalInventoryItems.Exists(item => item.id == itemId && item.quantity >= amount);
+    }
+    
+    /// <param name="itemId"> ID of item to search for </param>
+    /// <param name="mustNotBeFull"> (optional) Item stack must contain space for at least 1 more item </param>
+    /// <returns> index of first item in organized player inventory that matches the conditions OR 0 </returns>
+    public static int GetFirstStackIndexOfItem(int itemId, bool mustNotBeFull = false)
+    {
+        int indexToReturn = 0;
+        
+        foreach (var rawInventoryItem in SaveData.organizedPlayerInventory)
+        {
+            if (rawInventoryItem == null) continue;
+
+            if (rawInventoryItem.id != itemId) continue;
+
+            if (mustNotBeFull && rawInventoryItem.quantity >= rawInventoryItem.stackSize) continue;
+            
+            
+            indexToReturn = rawInventoryItem.indexInOrganizedInventory;
+            break;
+        }
+        
+        if (indexToReturn == 0) 
+            GD.Print("Item with specified criteria didn't exist in inventory, returning 0");
+        
+        return indexToReturn;
     }
 }

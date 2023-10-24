@@ -1,12 +1,12 @@
 using Godot;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public partial class HandheldController : Node2D
 {
     [Export] private Weapon _weapon;
     [Export] private Weapon _hand;
-    [Export] private Projectile _projectile;
     [Export] private Area2D _hitbox;
     [Export] private AnimationPlayer _animationPlayer;
     [Export] private Timer _timer;
@@ -24,13 +24,13 @@ public partial class HandheldController : Node2D
     private bool _ranged;
     private float _speed;
     private float _drawTime;
+    private Projectile _projectile;
 
     private bool _isDrawing;
     private string _targetGroup;
 
     public override void _Ready()
     {
-        // Init();
     }
 
     private void Init()
@@ -38,10 +38,10 @@ public partial class HandheldController : Node2D
         if (PlayerInventoryController.selectedItem != null)
             _weapon = WeaponData.GetWeaponByItem(PlayerInventoryController.selectedItem.id);
         else
-        {
             _weapon = null;
+
+        if (_weapon == null)
             return;
-        }
 
         _tempWeaponSprite.Texture = _weapon.item.IconTexture;
         _tempWeaponSprite.Visible = true;
@@ -56,6 +56,7 @@ public partial class HandheldController : Node2D
         _speed = _weapon.speed;
         _ranged = _weapon.ranged;
         _drawTime = _weapon.drawTime;
+        _projectile = _weapon.projectile;
 
         _isDrawing = false;
 
@@ -152,6 +153,14 @@ public partial class HandheldController : Node2D
 
     private void StartDraw()
     {
+        RawInventoryItem projectile = new RawInventoryItem(_projectile.item.ID, _projectile.item.Name, 1, _projectile.item.StackSize);
+
+        if (PlayerInventoryController.RemoveItemFromInventory(projectile) == false)
+        {
+            GD.Print("Out of ammo");
+            return;
+        }
+
         if (!_isDrawing)
             _isDrawing = true;
 
@@ -191,16 +200,19 @@ public partial class HandheldController : Node2D
 
     private void Shoot(float power)
     {
+        // RawInventoryItem projectile = PlayerInventoryController.
         ProjectileController projectile = (ProjectileController)_projectilePrefab.Instantiate();
         GetParent().AddChild(projectile);
 
         _attack.damage *= power;
         projectile.attack = _attack;
         projectile.speed = _speed * power;
-        projectile.projectile = _weapon.projectile;
+        projectile.projectile = _projectile;
         projectile.targetGroup = _targetGroup;
 
         projectile.Init();
+
+        // remove projectile from inventory
 
         // TODO: change this to be based on weapon reach or something
         projectile.GlobalPosition = this.GlobalPosition + _attack.direction * 10;

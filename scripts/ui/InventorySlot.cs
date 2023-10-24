@@ -8,8 +8,8 @@ public partial class InventorySlot : Control {
 
 	public RawInventoryItem slotItem;
 	[Export] public bool isCraftingSlot;
-	bool hasItem;
-	public int index = -1;
+	bool slotHasItem;
+	public int slotIndex = -1;
 
 
 	public override void _Ready() {
@@ -33,69 +33,91 @@ public partial class InventorySlot : Control {
 	}
 
 
-    void ClickLeft() {
-		// Player deselected item from hand
-		if (PlayerInventoryController.isItemSelected && !hasItem) {
-			PlayerInventoryController.AddItem(PlayerInventoryController.selectedItem, index);
-		}
+    void ClickLeft()
+    {
+	    switch (PlayerInventoryController.isItemSelected)
+	    {
+		    // Player selects new item
+		    case false when slotHasItem:
+			    PlayerInventoryController.SelectItem(slotItem);
+			    ToggleVisuals(false);
+			    break;
+		    
+		    // Player deselected item from hand
+		    case true when !slotHasItem:
+                PlayerInventoryController.AddItem(PlayerInventoryController.selectedItem, slotIndex);
+				break;
+		    
+		    // Player has item a slot with item
+		    case true when slotHasItem:
+		    {
+			    if (PlayerInventoryController.selectedItem.isValidIndex &&
+			        slotIndex == PlayerInventoryController.selectedItem.indexInOrganizedInventory)
+			    {
+				    ToggleVisuals(true);
+				    PlayerInventoryController.DeselectItem();
+			    }
 
-		// Player selects new item
-		else if (!PlayerInventoryController.isItemSelected && hasItem)
-		{
-			PlayerInventoryController.SelectItem(new RawInventoryItem(
-				slotItem.id, slotItem.name, slotItem.quantity, slotItem.stackSize));
-			
-			PlayerInventoryController.NullifyInventoryItemAtIndex(index);
-		}
+			    else if (slotItem.id == PlayerInventoryController.selectedItem.id) {
+				    PlayerInventoryController.AddItem(PlayerInventoryController.selectedItem, slotIndex);
+			    }
 
-		// Player has item and presses new item
-		else if (PlayerInventoryController.isItemSelected && hasItem) {
-			if (slotItem.id == PlayerInventoryController.selectedItem.id) {
-				PlayerInventoryController.AddItem(PlayerInventoryController.selectedItem, index);
-			}
+			    else {
+				    PlayerInventoryController.SwapItems(slotItem, slotIndex);
+			    }
 
-			else {
-				PlayerInventoryController.SwapItems(slotItem, index);
-			}
-		}
-	}
+			    break;
+		    }
+	    }
+    }
 
 
     void ClickRight() {
 		// Player takes one item from stack
-		if (!PlayerInventoryController.isItemSelected && hasItem) {
-			PlayerInventoryController.SelectSingleItem(slotItem, index);
+		if (!PlayerInventoryController.isItemSelected && slotHasItem) {
+			PlayerInventoryController.SelectSingleItem(slotItem, slotIndex);
 		}
 	}
-    
 
 
-	public void UpdateSlot(RawInventoryItem rawItem, int itemIndex)
+    public void ToggleVisuals(bool isOn)
+    {
+	    icon.Visible = isOn;
+	    quantityLabel.Visible = isOn;
+    }
+
+	public void UpdateSlot(RawInventoryItem rawItem, int itemIndex, bool doSync = true)
 	{
+		ToggleVisuals(true);
 		slotItem = (rawItem != null) 
-			? new RawInventoryItem(rawItem.id, rawItem.name, rawItem.quantity, rawItem.stackSize) 
+			? new RawInventoryItem(rawItem.id, rawItem.name, rawItem.quantity, rawItem.stackSize, itemIndex) 
 			: null;
 		
-		index = itemIndex;
+		slotIndex = itemIndex;
         
-		if (SaveData.organizedPlayerInventory.Count > index)
+		if (SaveData.organizedPlayerInventory.Count > slotIndex)
 		{
-			SaveData.organizedPlayerInventory[index] = slotItem;
+			SaveData.organizedPlayerInventory[slotIndex] = slotItem;
 		}
 		else
 		{
 			SaveData.organizedPlayerInventory.Add(slotItem);
 		}
+
+		if (doSync)
+		{
+			SaveData.SyncInventory();
+		}
 		
 		if (rawItem == null) {
-			hasItem = false;
+			slotHasItem = false;
 
 			icon.Texture = null;
 			quantityLabel.Text = "";
 			return;
 		}
 
-		hasItem = true;
+		slotHasItem = true;
 		
 		Item itemResource = ItemData.GetItemById(rawItem.id);
 

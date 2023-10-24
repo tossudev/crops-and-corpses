@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=8 format=3 uid="uid://cqnav3flekvvt"]
 
-[ext_resource type="Texture2D" uid="uid://3olfauiyul7n" path="res://assets/item_bucket.png" id="1_t0mox"]
+[ext_resource type="Texture2D" uid="uid://57w7sytv331a" path="res://assets/sprites/items/item_bucket.png" id="1_44blj"]
 [ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/0_log.tres" id="2_l3dwd"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_cnglj"]
 [ext_resource type="Resource" uid="uid://dmm0h1ba6feb7" path="res://assets/resources/game_items/1_iron.tres" id="4_mw6u1"]
@@ -20,6 +20,6 @@ quantity = 1
 script = ExtResource("5_ynbq6")
 ID = 4
 Name = "Bucket"
-IconTexture = ExtResource("1_t0mox")
+IconTexture = ExtResource("1_44blj")
 StackSize = 1
 craftingRequirements = Array[Object]([SubResource("Resource_wfrk5"), SubResource("Resource_6tcfm")])

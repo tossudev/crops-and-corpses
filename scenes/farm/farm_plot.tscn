@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://JanitaTests/Scripts/FieldHandler.cs" id="2_kisi8"]
 [ext_resource type="Shape2D" uid="uid://be1ka8r6xc5x1" path="res://JanitaTests/FieldShape.tres" id="3_d37t8"]
 
-[node name="farm_plot" type="Node2D" node_paths=PackedStringArray("_col")]
+[node name="farm_plot" type="Node2D" node_paths=PackedStringArray("_col") groups=["FarmPlot"]]
 scale = Vector2(2, 2)
 script = ExtResource("2_kisi8")
 _col = NodePath("FarmPlot")

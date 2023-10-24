@@ -9,7 +9,7 @@ using System.IO;
 
 public partial class BuildingMenu : Control
 {
-	Building _farmPlot, _house;
+	Building _farmPlot, _house, _archerTower;
 	Building _currentBuilding;
 
     List<Building> _buildingPrefabs;
@@ -28,21 +28,22 @@ public partial class BuildingMenu : Control
     VBoxContainer _vBoxContainer;
 
     [Export]
-    PackedScene _farmPlotScene, _farmPlotGhostScene, _houseScene, _houseGhostScene;
+    PackedScene _farmPlotScene, _farmPlotGhostScene, _houseScene, _houseGhostScene, _archerTowerScene, _archerTowerGhostScene;
     [Export]
-    Texture2D _farmPlotIcon, _houseIcon;
+    Texture2D _farmPlotIcon, _houseIcon, _archerTowerIcon;
 
     [Export]
     CharacterBody2D _player;
 
 	int _resources;
+
     string _savePath, _fileName;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
         _savePath = ProjectSettings.GlobalizePath("user://saves/");
-        _fileName = "buildings";
+        _fileName = "buildings.txt";
 
         _buildingPrefabs = new List<Building>();
 
@@ -51,6 +52,9 @@ public partial class BuildingMenu : Control
 
         _house = new Building(_houseScene, _houseGhostScene, 40, "House", _houseIcon);
         _buildingPrefabs.Add(_house);
+
+        _archerTower = new Building(_archerTowerScene, _archerTowerGhostScene, 60, "Archer Tower", _archerTowerIcon);
+        _buildingPrefabs.Add(_archerTower);
 
         _resources = 500;
 
@@ -119,9 +123,20 @@ public partial class BuildingMenu : Control
 
         foreach (Node2D node in _buildings.GetChildren())
         {
+            string name = "null";
+
+            if (node.IsInGroup("House"))
+            {
+                name = "House";
+            }
+            else if (node.IsInGroup("FarmPlot"))
+            {
+                name = "FarmPlot";
+            }
+
             JsonObject jsonObj = new JsonObject
         {
-            { "name", node.GetChild(0).Name.ToString() },
+            { "name", name },
             { "x", node.Position.X },
             { "y", node.Position.Y }
         };
@@ -179,13 +194,17 @@ public partial class BuildingMenu : Control
 
         foreach (JsonObject jsonObject in loadedBuildings)
         {
-            if (jsonObject["name"].ToString() == "House")
+            if(jsonObject["name"].ToString() == "null")
             {
-                _currentBuilding = _house;
+                continue;
             }
-            else if (jsonObject["name"].ToString() == "FarmPlot")
+
+            foreach(Building building in _buildingPrefabs) 
             {
-                _currentBuilding = _farmPlot;
+                if (building.name.Replace(" ", "") == jsonObject["name"].ToString())
+                {
+                    _currentBuilding = building;
+                }
             }
 
             int x = Int32.Parse(jsonObject["x"].ToString());

@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kphka"]
 size = Vector2(128, 128)
 
-[node name="House" type="Node2D"]
+[node name="House" type="Node2D" groups=["House"]]
 scale = Vector2(2, 2)
 
 [node name="House" type="Sprite2D" parent="."]

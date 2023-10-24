@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://f5m7wypxd5t7"]
+[gd_scene load_steps=11 format=3 uid="uid://f5m7wypxd5t7"]
 
 [ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMenu.cs" id="1_1usej"]
 [ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://scenes/farm/farm_plot.tscn" id="2_6b0va"]
@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://3ct83j0jgteb" path="res://NikkeTests/scenes/building_scenes/house.tscn" id="4_lft42"]
 [ext_resource type="PackedScene" uid="uid://ceal2xj0w1t17" path="res://NikkeTests/scenes/building_scenes/house_build_mode.tscn" id="5_cdtxw"]
 [ext_resource type="Texture2D" uid="uid://gx3rxc18ic1u" path="res://NikkeTests/images/farm_plot.jpg" id="6_jayxu"]
+[ext_resource type="PackedScene" uid="uid://54li2rwv5ov5" path="res://NikkeTests/scenes/building_scenes/archer_tower.tscn" id="6_xt35f"]
 [ext_resource type="Texture2D" uid="uid://b5cv2b6w6tvm0" path="res://assets/sprites/buildings/housedesing2.png" id="7_fhaoc"]
+[ext_resource type="PackedScene" uid="uid://1y1xpa0ldkye" path="res://NikkeTests/scenes/building_scenes/archer_tower_build_mode.tscn" id="7_ry1qf"]
+[ext_resource type="Texture2D" uid="uid://cmyh3qeorleuc" path="res://NikkeTests/images/archer_tower_top.png" id="10_henx8"]
 
 [node name="Control" type="Control" node_paths=PackedStringArray("_buildButton", "_buildMenu", "_buildMenuControl", "_vBoxContainer")]
 layout_mode = 3
@@ -30,8 +33,11 @@ _farmPlotScene = ExtResource("2_6b0va")
 _farmPlotGhostScene = ExtResource("3_o47i0")
 _houseScene = ExtResource("4_lft42")
 _houseGhostScene = ExtResource("5_cdtxw")
+_archerTowerScene = ExtResource("6_xt35f")
+_archerTowerGhostScene = ExtResource("7_ry1qf")
 _farmPlotIcon = ExtResource("6_jayxu")
 _houseIcon = ExtResource("7_fhaoc")
+_archerTowerIcon = ExtResource("10_henx8")
 
 [node name="BuildingMenu" type="Node2D" parent="."]
 

@@ -15,6 +15,7 @@ public partial class PlayerInventoryController : Control {
 	public static bool isItemSelected = false;
 	public static RawInventoryItem selectedItem;
 	public static RawInventoryItem heldItem;
+	const string droppedItemNodePath = "res://scenes/world/dropped_item.tscn";
 	
 	public bool isOpen = false;
     string slotNodePath = "res://scenes/ui/inventory_slot.tscn";
@@ -399,6 +400,19 @@ public partial class PlayerInventoryController : Control {
 		}
 
 		slotToUpdate.UpdateSlot(item, index);
+	}
+
+	public static void DropSelectedItem(Vector2 position, Node parent)
+	{
+		var droppedItemNode = GD.Load<PackedScene>(droppedItemNodePath).Instantiate<Node2D>();
+
+		droppedItemNode.GlobalPosition = position;
+		parent.AddChild(droppedItemNode);
+		
+		DroppedItem script = droppedItemNode as DroppedItem;
+		
+		script?.SetItem(selectedItem);
+		RemoveItemFromInventory(selectedItem);
 	}
 	
 	public static void DeselectItem()

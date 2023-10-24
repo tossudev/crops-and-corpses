@@ -249,7 +249,6 @@ _rig = NodePath("Skeleton2D")
 _speed = 300
 
 [node name="Light" type="PointLight2D" parent="."]
-scale = Vector2(1, 1)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.8
 texture = SubResource("GradientTexture2D_g3fju")
@@ -418,3 +417,5 @@ position = Vector2(5, -10)
 scale = Vector2(0.0859375, 0.0859375)
 
 [node name="Sprite" type="Node2D" parent="."]
+
+[connection signal="area_entered" from="SmallInteractionArea" to="." method="OnPickupAreaEntered"]

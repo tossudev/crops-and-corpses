@@ -400,3 +400,5 @@ position = Vector2(5, -10)
 scale = Vector2(0.0859375, 0.0859375)
 
 [node name="Sprite" type="Node2D" parent="."]
+
+[connection signal="area_entered" from="SmallInteractionArea" to="." method="OnPickupAreaEntered"]

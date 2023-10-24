@@ -137,12 +137,12 @@ public partial class BuildingMenu : Control
             {
                 name = "ArcherTower";
             }
-
+            
             JsonObject jsonObj = new JsonObject
         {
             { "name", name },
-            { "x", node.Position.X },
-            { "y", node.Position.Y }
+            { "x", Mathf.RoundToInt(node.Position.X)},
+            { "y", Mathf.RoundToInt(node.Position.Y) }
         };
 
             _savedBuildings.Add(jsonObj);

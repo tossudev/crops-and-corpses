@@ -80,7 +80,7 @@ public partial class SpawnScriptTest : Node2D
 				Vector2 zombiePos = zombieList[i].Position;
 
 				float distance = zombiePos.DistanceTo(playerPos);
-				GD.Print("Distance to player" + distance+ " MaxDistance "+maxDistance);
+				//GD.Print("Distance to player" + distance+ " MaxDistance "+maxDistance);
 				if(distance > maxDistance)
 				{
 					zombieList[i].QueueFree();
@@ -108,5 +108,9 @@ public partial class SpawnScriptTest : Node2D
 		{
 			counter = 0;
 		}
+	}
+	public void RemoveZombieFromList(CharacterBody2D zombie)
+	{
+		zombieList.Remove(zombie);
 	}
 }

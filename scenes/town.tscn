@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
 [ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="10_g8lte"]
 [ext_resource type="Texture2D" uid="uid://dr0bvibnh6lfq" path="res://assets/placeholder/tile_grass_concept.png" id="15_8a66b"]
-[ext_resource type="PackedScene" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
+[ext_resource type="PackedScene" uid="uid://c04vbrhqy3k4y" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2ovt6"]
 texture = ExtResource("2_6gv5a")
@@ -111,7 +111,6 @@ texture = ExtResource("6_nyoyv")
 
 [node name="Light" type="PointLight2D" parent="Objects/Lights"]
 position = Vector2(-952, -512)
-scale = Vector2(1, 1)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -119,7 +118,6 @@ texture_scale = 4.0
 
 [node name="Light2" type="PointLight2D" parent="Objects/Lights"]
 position = Vector2(-704, 472)
-scale = Vector2(1, 1)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -127,7 +125,6 @@ texture_scale = 4.0
 
 [node name="Light3" type="PointLight2D" parent="Objects/Lights"]
 position = Vector2(248, 776)
-scale = Vector2(1, 1)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -135,7 +132,6 @@ texture_scale = 4.0
 
 [node name="Light4" type="PointLight2D" parent="Objects/Lights"]
 position = Vector2(1096, 40.0001)
-scale = Vector2(1, 1)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -143,7 +139,6 @@ texture_scale = 4.0
 
 [node name="Light5" type="PointLight2D" parent="Objects/Lights"]
 position = Vector2(256, -464)
-scale = Vector2(1, 1)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -151,7 +146,6 @@ texture_scale = 4.0
 
 [node name="Light6" type="PointLight2D" parent="Objects/Lights"]
 position = Vector2(-1456, 368)
-scale = Vector2(1, 1)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -159,7 +153,6 @@ texture_scale = 4.0
 
 [node name="Light7" type="PointLight2D" parent="Objects/Lights"]
 position = Vector2(-656, 1280)
-scale = Vector2(1, 1)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -167,14 +160,12 @@ texture_scale = 4.0
 
 [node name="Light8" type="PointLight2D" parent="Objects/Lights"]
 position = Vector2(1400, 1072)
-scale = Vector2(1, 1)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
 [node name="Light9" type="PointLight2D" parent="Objects/Lights"]
-scale = Vector2(1, 1)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -222,7 +213,8 @@ text = "Press 'E' to toggle inventory"
 _buildings = NodePath("../../Buildings")
 _player = NodePath("../../Objects/Player")
 
-[node name="NightDayCycleAndZombieSpawn" parent="." instance=ExtResource("1_2cwk5")]
+[node name="NightDayCycleAndZombieSpawn" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_2cwk5")]
+player = NodePath("../Objects/Player")
 
 [node name="farm_manager" parent="." instance=ExtResource("8_v8hay")]
 

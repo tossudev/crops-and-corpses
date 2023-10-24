@@ -19,6 +19,12 @@ public partial class HealthComponent : Node2D
 
 		if (_health <= 0)
 		{
+			if(GetParent().Name != "Player")
+			{
+				SpawnScript.RemoveZombieFromList(GetParent<CharacterBody2D>());
+				GD.Print("Check");
+			}
+			
 			GetParent().QueueFree();
 		}
 	}

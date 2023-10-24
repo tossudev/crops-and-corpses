@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://k1nr7tplu40i"]
 
-[ext_resource type="Script" path="res://DaniTests/Scripts/SpawnScriptTest.cs" id="1_w6rpt"]
+[ext_resource type="Script" path="res://DaniTests/Scripts/SpawnScript.cs" id="1_68m56"]
 [ext_resource type="Script" path="res://DaniTests/Scripts/TimeManager.cs" id="2_0e2ak"]
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_w6rpt")
+script = ExtResource("1_68m56")
 
 [node name="SunlightContainer" type="Node" parent="."]
 script = ExtResource("2_0e2ak")

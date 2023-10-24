@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://1y1xpa0ldkye"]
+
+[ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMode.cs" id="1_6tbwy"]
+[ext_resource type="Texture2D" uid="uid://cmyh3qeorleuc" path="res://NikkeTests/images/archer_tower_top.png" id="1_0827b"]
+[ext_resource type="Texture2D" uid="uid://bljqq2o52y2uy" path="res://NikkeTests/images/archer_tower_bot.png" id="2_x702e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jggck"]
+size = Vector2(128, 255.656)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_6tbwy")
+
+[node name="Node2D" type="Node2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="ArcherTowerTop" type="Sprite2D" parent="Node2D"]
+modulate = Color(1, 1, 1, 0.392157)
+position = Vector2(-32, -96)
+texture = ExtResource("1_0827b")
+
+[node name="ArcherTowerBot" type="Sprite2D" parent="Node2D"]
+modulate = Color(1, 1, 1, 0.392157)
+position = Vector2(-32, -32)
+texture = ExtResource("2_x702e")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-64, -128)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_jggck")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-64, -128)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+scale = Vector2(0.725, 0.725)
+shape = SubResource("RectangleShape2D_jggck")

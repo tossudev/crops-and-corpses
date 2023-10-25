@@ -1,21 +1,20 @@
-[gd_scene load_steps=22 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=21 format=3 uid="uid://bgyv0c8xt1fd4"]
 
-[ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="1_2cwk5"]
+[ext_resource type="PackedScene" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="1_2cwk5"]
 [ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_vjhkw"]
 [ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://NikkeTests/scenes/building_menu.tscn" id="1_w3klu"]
 [ext_resource type="Texture2D" uid="uid://btvrgdl7ajiub" path="res://LilianTests/Sprites/grass_tiles_placeholder.png" id="2_6gv5a"]
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="2_mph18"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_nnncm"]
-[ext_resource type="Texture2D" uid="uid://bqah3wgx4il3q" path="res://assets/sprites/foliage/sprite_tree1.png" id="3_joubg"]
 [ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/player_inventory.tscn" id="3_tp6xx"]
-[ext_resource type="Texture2D" uid="uid://bhxs2ilevutl6" path="res://assets/sprites/foliage/sprite_treee2.png" id="4_qt1gm"]
 [ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="5_d3kp8"]
 [ext_resource type="Texture2D" uid="uid://wis4r15rhkuo" path="res://assets/sprites/foliage/sprite_rock.png" id="5_fu2m3"]
+[ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://TinoTests/Prefabs/tree.tscn" id="5_tpvf0"]
 [ext_resource type="Texture2D" uid="uid://bp0rwsioa22xs" path="res://assets/sprites/foliage/sprite_bush.png" id="6_nyoyv"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
 [ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="10_g8lte"]
 [ext_resource type="Texture2D" uid="uid://dr0bvibnh6lfq" path="res://assets/placeholder/tile_grass_concept.png" id="15_8a66b"]
-[ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
+[ext_resource type="PackedScene" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2ovt6"]
 texture = ExtResource("2_6gv5a")
@@ -71,29 +70,20 @@ position_smoothing_speed = 20.0
 [node name="Deco" type="Node2D" parent="Objects"]
 y_sort_enabled = true
 
-[node name="Tree" type="Sprite2D" parent="Objects/Deco"]
+[node name="Tree" parent="Objects/Deco" instance=ExtResource("5_tpvf0")]
 position = Vector2(-640, -184)
-texture = ExtResource("3_joubg")
-offset = Vector2(0, -128)
 
-[node name="Tree2" type="Sprite2D" parent="Objects/Deco"]
+[node name="Tree2" parent="Objects/Deco" instance=ExtResource("5_tpvf0")]
 position = Vector2(608, -472)
-texture = ExtResource("3_joubg")
-offset = Vector2(0, -128)
 
-[node name="Tree3" type="Sprite2D" parent="Objects/Deco"]
+[node name="Tree3" parent="Objects/Deco" instance=ExtResource("5_tpvf0")]
 position = Vector2(736, 312)
-texture = ExtResource("3_joubg")
-offset = Vector2(0, -128)
 
-[node name="Tree4" type="Sprite2D" parent="Objects/Deco"]
+[node name="Tree4" parent="Objects/Deco" instance=ExtResource("5_tpvf0")]
 position = Vector2(-968, 560)
-texture = ExtResource("4_qt1gm")
-offset = Vector2(0, -128)
 
-[node name="Tree5" type="Sprite2D" parent="Objects/Deco"]
+[node name="Tree5" parent="Objects/Deco" instance=ExtResource("5_tpvf0")]
 position = Vector2(-216, -720)
-texture = ExtResource("4_qt1gm")
 
 [node name="Rock" type="Sprite2D" parent="Objects/Deco"]
 position = Vector2(-1224, -72)

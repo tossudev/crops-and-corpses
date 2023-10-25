@@ -153,7 +153,7 @@ public partial class HandheldController : Node2D
 
         if (PlayerInventoryController.RemoveItemFromInventory(projectile) == false)
         {
-            GD.Print("Out of ammo");
+            GD.Print("Handheld: out of ammo");
             return;
         }
 
@@ -198,7 +198,6 @@ public partial class HandheldController : Node2D
 
     private void Shoot(float power)
     {
-        // RawInventoryItem projectile = PlayerInventoryController.
         ProjectileController projectile = (ProjectileController)_projectilePrefab.Instantiate();
         GetParent().AddChild(projectile);
 
@@ -209,8 +208,6 @@ public partial class HandheldController : Node2D
         projectile.targetGroup = _targetGroup;
 
         projectile.Init();
-
-        // remove projectile from inventory
 
         // TODO: change this to be based on weapon reach or something
         projectile.GlobalPosition = this.GlobalPosition + _attack.direction * 10;

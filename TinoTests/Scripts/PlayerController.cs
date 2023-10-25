@@ -105,8 +105,8 @@ public partial class PlayerController : CharacterBody2D
 		var knockbackTween = GetTree().CreateTween();
 		knockbackTween.Parallel().TweenProperty(this, "_knockback", new Vector2(0, 0), duration);
 
-		_sprite.Modulate = new Color(1, 0, 0, 1);
-		knockbackTween.Parallel().TweenProperty(_sprite, "modulate", new Color(1, 1, 1, 1), duration);
+		// _sprite.Modulate = new Color(1, 0, 0, 1);
+		// knockbackTween.Parallel().TweenProperty(_sprite, "modulate", new Color(1, 1, 1, 1), duration);
 	}
 
 	private void OnHealth(float health)

@@ -263,7 +263,7 @@ texture = ExtResource("8_f81gn")
 [node name="HeadBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
 position = Vector2(-1, -78)
 rotation = -0.133036
-scale = Vector2(0.999998, 0.999998)
+scale = Vector2(0.999997, 0.999997)
 rest = Transform2D(1, 0, 0, 1, -1, -78)
 
 [node name="Head" type="Sprite2D" parent="Skeleton2D/TorsoBone/HeadBone"]

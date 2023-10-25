@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://431q3jian0r6"]
+
+[ext_resource type="Script" path="res://JanitaTests/Scripts/Well.cs" id="1_beqry"]
+[ext_resource type="Shape2D" uid="uid://cexw2rv4qd6l6" path="res://JanitaTests/WellShape.tres" id="2_dsq02"]
+[ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="3_7hhxw"]
+
+[node name="well" type="Node2D" groups=["Well"]]
+scale = Vector2(0.15, 0.15)
+script = ExtResource("1_beqry")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-426.667, -470)
+texture = ExtResource("3_7hhxw")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-32, -32)
+collision_layer = 9
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-394, -394)
+scale = Vector2(2, 2)
+shape = ExtResource("2_dsq02")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-426.667, -426.667)
+scale = Vector2(2, 2)
+shape = ExtResource("2_dsq02")
+
+[connection signal="area_entered" from="Area2D" to="." method="OnInteractable"]
+[connection signal="area_exited" from="Area2D" to="." method="OnNonInteractable"]
+[connection signal="input_event" from="Area2D" to="." method="InteractWithWell"]

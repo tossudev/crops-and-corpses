@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b5cv2b6w6tvm0" path="res://assets/sprites/buildings/housedesing2.png" id="1_soon6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kphka"]
-size = Vector2(128, 128)
+size = Vector2(126.5, 126.5)
 
 [node name="House" type="Node2D" groups=["House"]]
 scale = Vector2(2, 2)
@@ -17,6 +17,7 @@ texture = ExtResource("1_soon6")
 position = Vector2(-64, -64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.25, -0.75)
 shape = SubResource("RectangleShape2D_kphka")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

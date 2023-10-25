@@ -3,30 +3,31 @@ using System;
 
 public partial class HitboxComponent : Area2D
 {
+	[Export] private Node _parentScript;
 	[Export] private HealthComponent _healthComponent;
 
 	public void ApplyAttack(Attack attack)
 	{
-		if (_healthComponent != null)
+		if (_healthComponent == null)
 		{
-			_healthComponent.TakeDamage(attack);
+			GD.Print("HitboxComponent: No health component found");
+			return;
+		}
 
+		_healthComponent.TakeDamage(attack);
+
+		if (_parentScript == null || !_parentScript.HasMethod("AttackReceived"))
+		{
+			GD.Print("HitboxComponent: No method or parent script found");
+
+			// temp
 			if (this.GetParent().HasMethod("AttackReceived"))
 				this.GetParent().CallDeferred("AttackReceived", attack);
+			//
+
+			return;
 		}
-		else
-		{
-			GD.Print("No health component found");
-		}
+
+		_parentScript.CallDeferred("AttackReceived", attack);
 	}
-
-	// private void ApplyKnockback(Attack attack)
-	// {
-	// 	var direction = attack.direction;
-	// 	var knockback = attack.knockback;
-	// 	var velocity = direction * knockback;
-
-	// 	CharacterBody2D parent = this.GetParent() as CharacterBody2D;
-	// 	// give knockback to parent
-	// }
 }

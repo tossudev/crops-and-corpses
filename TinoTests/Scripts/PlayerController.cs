@@ -109,6 +109,14 @@ public partial class PlayerController : CharacterBody2D
 		knockbackTween.Parallel().TweenProperty(_sprite, "modulate", new Color(1, 1, 1, 1), duration);
 	}
 
+	private void OnHealth(float health)
+	{
+		if (health <= 0)
+		{
+			GD.Print("Stop! He's already dead!");
+		}
+	}
+
 	void OnPickupAreaEntered(Area2D body)
 	{
 		var parent = body.GetParent();

@@ -106,11 +106,11 @@ public partial class HandheldController : Node2D
     {
         Init();
 
-        if (_weapon.holdAction)
-            _actionHeld = true;
-
         if (_timer.TimeLeft > 0 || _isDrawing || _weapon == null)
             return;
+
+        if (_weapon.holdAction)
+            _actionHeld = true;
 
         if (_ranged)
         {

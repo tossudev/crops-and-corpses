@@ -22,12 +22,6 @@ public partial class VillagerManager : Node
 
 	}
 
-	public enum TaskType
-	{
-		FarmingTask,
-		FindResourchesTask
-	}
-
 	public enum VillagerStates
 	{
 		RoamAround,
@@ -36,6 +30,8 @@ public partial class VillagerManager : Node
 		FindArcherTower,
 		FindShelter,
 		GetHospitalized,
-		ChooseTask
+		ChooseTask,
+		FarmingTask,
+		FindResourchesTask
 	}
 }

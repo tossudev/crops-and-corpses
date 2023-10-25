@@ -1,14 +1,14 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 using static VillagerManager;
 
 public partial class Villager : CharacterBody2D
 {
 	VillagerStates _state;
-	TaskType _task;
 	Vector2 _targetPosition;
 	Timer _timer;
-	DialogueControl dialogueControl;
+	[Export] DialogueControl dialogueControl;
 	Plant _currentPlant;
 	int _plantIndex = 0;
 	float _speed = 0;
@@ -18,7 +18,7 @@ public partial class Villager : CharacterBody2D
 	{
 		_timer = new Timer
 		{
-			WaitTime = 5f,
+			WaitTime = 2f,
 		};
 		_timer.Timeout += State;
 		AddChild(_timer);
@@ -30,7 +30,10 @@ public partial class Villager : CharacterBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		Movement(_targetPosition);
+		if (!dialogueControl.Visible)
+		{
+			Movement(_targetPosition);
+		}
 	}
 
 	public VillagerStates GetVillagerStates()
@@ -53,6 +56,13 @@ public partial class Villager : CharacterBody2D
 				ChooseTask();
 				break;
 
+			case VillagerStates.FarmingTask:
+				CheckPlants();
+				break;
+
+			case VillagerStates.FindResourchesTask:
+				break;
+
 			case VillagerStates.GetHospitalized:
 				break;
 
@@ -66,22 +76,10 @@ public partial class Villager : CharacterBody2D
 				break;
 		}
 	}
+
 	public void _on_button_button_up()
 	{
 		dialogueWindow = true;
-	}
-
-	void Task()
-	{
-		switch (_task)
-		{
-			case TaskType.FarmingTask:
-				CheckPlants();
-				break;
-
-			case TaskType.FindResourchesTask:
-				break;
-		}
 	}
 
 	void Movement(Vector2 target)
@@ -97,22 +95,36 @@ public partial class Villager : CharacterBody2D
 		float range = 100;
 		_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
 		Movement(_targetPosition);
-		ChooseTask();
 
+		if (dialogueControl.Visible)
+		{
+			_state = VillagerStates.ChooseTask;
+			State();
+		}
 	}
 
 	void ChooseTask()
 	{
-		if (dialogueControl.farmingTaskStarted == true)
+		GD.Print("Choosing task");
+		if (dialogueControl.farmingTaskStarted)
 		{
 			GD.Print("Farming task started");
-			_task = TaskType.FarmingTask;
-			Task();
+			_state = VillagerStates.FarmingTask;
+			State();
+		}
+		if (dialogueControl.exitDialogue)
+		{
+			_state = VillagerStates.RoamAround;
+			State();
+			dialogueControl.exitDialogue = false;
 		}
 	}
 
 	void CheckPlants()
 	{
+		_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
+		_targetPosition = _currentPlant.GlobalPosition;
+
 		if (GlobalPosition.DistanceTo(_currentPlant.GlobalPosition) < 5)
 		{
 			GD.Print("I am at the plant yay");
@@ -125,10 +137,6 @@ public partial class Villager : CharacterBody2D
 			{
 				_currentPlant.CurePlant();
 			}
-			/* 			if(_currentPlant.GetGrowthState() == GrowthState.IsDead)
-						{
-							_currentPlant.myField.RemovePlant();
-						} */
 
 			if (_currentPlant.GetGrowthState() != GrowthState.IsWilting && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
 			 _currentPlant.GetGrowthState() != GrowthState.WaitWatering && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
@@ -142,7 +150,7 @@ public partial class Villager : CharacterBody2D
 			{
 				_plantIndex = 0;
 			}
-			if (_currentPlant.GetGrowthState() == GrowthState.IsHarvestable)
+			if (_currentPlant.GetGrowthState() == GrowthState.IsHarvestable || _currentPlant.GetGrowthState() == GrowthState.IsDead)
 			{
 				_plantIndex++;
 				if (_plantIndex == FarmManager.instance.GetPlantedPlants().Count)

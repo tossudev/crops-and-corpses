@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class ZombieIdle : States
+public partial class ZombieIdle : ZombieStates
 {
 	[Export] private CharacterBody2D _zombie;
 	[Export] private float _moveSpeed = 100.0f;
@@ -9,6 +9,8 @@ public partial class ZombieIdle : States
 	private Vector2 _moveDirection = Vector2.Zero;
 	private double _roamTime;
 	private CharacterBody2D _player;
+
+	private bool inTown = false;
 	
 	public override void Enter()
     {
@@ -43,6 +45,8 @@ public partial class ZombieIdle : States
 			EmitSignal("Transitioned", "chase");			
 		}
     }
+
+
 
 	private void RandomizeRoam()
 	{

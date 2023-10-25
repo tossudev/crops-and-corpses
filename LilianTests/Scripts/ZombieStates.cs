@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class States : Node
+public partial class ZombieStates : Node
 {
 	[Signal] public delegate void TransitionedEventHandler(string myString);
 	public virtual void Enter()

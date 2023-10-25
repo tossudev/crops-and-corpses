@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Reflection;
 
-public partial class ZombieChase : States
+public partial class ZombieChase : ZombieStates
 {
 	[Export] private CharacterBody2D _zombie;
 	[Export] private float _moveSpeed = 150.0f;

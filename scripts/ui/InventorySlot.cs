@@ -45,7 +45,8 @@ public partial class InventorySlot : Control {
 		    
 		    // Player deselected item from hand
 		    case true when !slotHasItem:
-                PlayerInventoryController.AddItem(PlayerInventoryController.selectedItem, slotIndex);
+                PlayerInventoryController.AddItem(PlayerInventoryController.selectedItem, slotIndex, true);
+                
 				break;
 		    
 		    // Player has item a slot with item
@@ -59,7 +60,7 @@ public partial class InventorySlot : Control {
 			    }
 
 			    else if (slotItem.id == PlayerInventoryController.selectedItem.id) {
-				    PlayerInventoryController.AddItem(PlayerInventoryController.selectedItem, slotIndex);
+				    PlayerInventoryController.AddItem(PlayerInventoryController.selectedItem, slotIndex, true);
 			    }
 
 			    else {

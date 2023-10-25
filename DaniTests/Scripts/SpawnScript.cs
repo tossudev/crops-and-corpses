@@ -2,12 +2,14 @@ using Godot;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
-public partial class SpawnScriptTest : Node2D
+public partial class SpawnScript : Node2D
 {
 	Node2D[] spawnPoints;
 	Timer spawnDelay;
+	Timer zombieDeleteDelay;
 	PackedScene packedScene;
 	TimeManager dayTimeCheck;
 	NodePath rootPath;
@@ -15,15 +17,18 @@ public partial class SpawnScriptTest : Node2D
 	bool isNightOrDay;
 	string isNightOrDayString;
 	private int counter;
+
+	private bool zombieDelayBool=false;
 	[Export]private float maxDistance=1500f;
 	[Export] public CharacterBody2D player;
-	private List<CharacterBody2D> zombieList = new List<CharacterBody2D>();
+	private static List<CharacterBody2D> zombieList = new List<CharacterBody2D>();
 	public override void _Ready()
 	{
 		
 		counter = 0;
 		spawnPoints = new Node2D[4];
 		spawnDelay =GetNode<Timer>("Timer");
+		zombieDeleteDelay = GetNode<Timer>("ZombieDeletionTimer");
 		
 		
 		for(int i = 0; i < spawnPoints.Length; i++)
@@ -60,7 +65,7 @@ public partial class SpawnScriptTest : Node2D
     } */
 	  public override void _Process(double delta)
     {
-       // isNightOrDay = dayTimeCheck.returnTimeOfDay(isNightOrDay);
+       
 	   isNightOrDay = dayTimeCheck.dayTime;
 	   
         
@@ -72,27 +77,35 @@ public partial class SpawnScriptTest : Node2D
         {
             spawnDelay.Stop();
         }
-		if(zombieList != null)
+		if(zombieList.Count > 0)
 		{
 			Vector2 playerPos = player.Position;
 			for(int i = zombieList.Count-1;i>=0;i--)
 			{
 				Vector2 zombiePos = zombieList[i].Position;
-
 				float distance = zombiePos.DistanceTo(playerPos);
-				GD.Print("Distance to player" + distance+ " MaxDistance "+maxDistance);
+				//GD.Print("Distance to player" + distance+ " MaxDistance "+maxDistance);
 				if(distance > maxDistance)
 				{
-					zombieList[i].QueueFree();
-					zombieList.RemoveAt(i);
+
+					if(zombieDelayBool == true)
+					{
+						GD.Print("Zombie Deleted");
+						zombieList[i].QueueFree();
+						zombieList.RemoveAt(i);
+						zombieDelayBool = false;
+					};
 					
 				}
-
-
 
 			}
 		}
     }
+	private void DeleteZombieDelay()
+	{
+		if(player.IsQueuedForDeletion()){zombieDeleteDelay.Stop();}
+		zombieDelayBool = true;
+	}
 	private void ZombieSpawn()
 	{
 
@@ -108,5 +121,9 @@ public partial class SpawnScriptTest : Node2D
 		{
 			counter = 0;
 		}
+	}
+	public static void RemoveZombieFromList(CharacterBody2D zombie)
+	{
+		zombieList.Remove(zombie);
 	}
 }

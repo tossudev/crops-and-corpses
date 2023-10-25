@@ -1,10 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://c8bx46w1qix2q"]
+[gd_scene load_steps=26 format=3 uid="uid://c8bx46w1qix2q"]
 
 [ext_resource type="Script" path="res://TinoTests/Scripts/PlayerController.cs" id="1_y7bta"]
 [ext_resource type="PackedScene" uid="uid://3hlx66fdaruu" path="res://TinoTests/Components/handheld.tscn" id="2_00eh7"]
 [ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="2_jvd4n"]
+[ext_resource type="Resource" uid="uid://be8oyimariure" path="res://TinoTests/Resources/Hand.tres" id="3_mnp0k"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://TinoTests/Components/health_component.tscn" id="3_wuvdk"]
-[ext_resource type="Resource" uid="uid://be8oyimariure" path="res://TinoTests/Scripts/Weapons/Hand.tres" id="4_q7kfq"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://TinoTests/Components/hitbox_component.tscn" id="4_sa7m5"]
 [ext_resource type="Script" path="res://scripts/player/PlayerSpriteController.cs" id="5_xyhkk"]
 [ext_resource type="Texture2D" uid="uid://dx6s3y4sg7ffp" path="res://assets/placeholder/test_character/Torso.png" id="8_f81gn"]
@@ -17,17 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://dm80cnvcf6m5q" path="res://assets/placeholder/test_character/FootL.png" id="15_m13sc"]
 [ext_resource type="Texture2D" uid="uid://dtxvt7hf4w3m1" path="res://assets/placeholder/test_character/LegR.png" id="16_3ecwo"]
 [ext_resource type="Texture2D" uid="uid://c2jmj7mhvoytp" path="res://assets/placeholder/test_character/FootR.png" id="17_uhi4p"]
-
-[sub_resource type="Gradient" id="Gradient_8f478"]
-offsets = PackedFloat32Array(0, 0.528169)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_g3fju"]
-gradient = SubResource("Gradient_8f478")
-width = 256
-height = 256
-fill = 1
-fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yn8u1"]
 radius = 7.5
@@ -248,12 +237,6 @@ _pickupArea = NodePath("SmallInteractionArea")
 _rig = NodePath("Skeleton2D")
 _speed = 300
 
-[node name="Light" type="PointLight2D" parent="."]
-scale = Vector2(1, 1)
-color = Color(1, 0.921569, 0.631373, 1)
-energy = 0.8
-texture = SubResource("GradientTexture2D_g3fju")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.08165e-12, -5)
 shape = SubResource("CircleShape2D_yn8u1")
@@ -261,11 +244,10 @@ debug_color = Color(0.0235294, 0.65098, 0, 1)
 
 [node name="Handheld" parent="." node_paths=PackedStringArray("_tempWeaponSprite") instance=ExtResource("2_00eh7")]
 position = Vector2(2.08165e-12, -5)
-_hand = ExtResource("4_q7kfq")
+_hand = ExtResource("3_mnp0k")
 _tempWeaponSprite = NodePath("../TempWeaponSprite")
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
-z_index = 1
 position = Vector2(0, -7.5)
 scale = Vector2(0.15, 0.15)
 script = ExtResource("5_xyhkk")
@@ -300,6 +282,7 @@ rest = Transform2D(0.985399, -0.170258, 0.170258, 0.985399, 26.32, -45.85)
 z_index = -1
 position = Vector2(4.06, 13.3)
 rotation = -0.0131563
+scale = Vector2(1, 1)
 texture = ExtResource("10_6b7e2")
 
 [node name="HandLBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
@@ -418,3 +401,5 @@ position = Vector2(5, -10)
 scale = Vector2(0.0859375, 0.0859375)
 
 [node name="Sprite" type="Node2D" parent="."]
+
+[connection signal="area_entered" from="SmallInteractionArea" to="." method="OnPickupAreaEntered"]

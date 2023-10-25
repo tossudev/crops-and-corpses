@@ -23,7 +23,7 @@ public partial class RawInventoryItem : GodotObject
 
     public int SpaceRemainingInStack => stackSize - quantity;
 
-    public bool isValidIndex => (indexInOrganizedInventory > 0 &&
+    public bool isValidIndex => (indexInOrganizedInventory >= 0 &&
                                  indexInOrganizedInventory < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE);
 }
 

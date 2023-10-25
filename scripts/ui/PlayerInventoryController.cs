@@ -440,7 +440,8 @@ public partial class PlayerInventoryController : Control {
 	/// <param name="item"></param>
 	/// <param name="atPosition"></param>
 	/// <param name="toParent"> Object for which the item will be parented to</param>
-	public static void CreateDroppedItem(RawInventoryItem item, Vector2 atPosition, Node toParent)
+	/// <returns> Reference to the created dropped item Node2D </returns>
+	public static Node2D CreateDroppedItem(RawInventoryItem item, Vector2 atPosition, Node toParent)
 	{
 		var droppedItemNode = GD.Load<PackedScene>(droppedItemNodePath).Instantiate<Node2D>();
 
@@ -450,6 +451,8 @@ public partial class PlayerInventoryController : Control {
 		DroppedItem script = droppedItemNode as DroppedItem;
 		
 		script?.SetItem(item);
+
+		return droppedItemNode;
 	}
 	
 	public static void DeselectItem()

@@ -211,6 +211,9 @@ text = "Press 'E' to toggle inventory"
 
 [node name="BuildingMenu" parent="Overlay" node_paths=PackedStringArray("_buildings", "_player") instance=ExtResource("1_w3klu")]
 _buildings = NodePath("../../Buildings")
+_wellScene = null
+_wellGhostScene = null
+_wellIcon = null
 _player = NodePath("../../Objects/Player")
 
 [node name="NightDayCycleAndZombieSpawn" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_2cwk5")]

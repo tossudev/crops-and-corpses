@@ -67,11 +67,21 @@ public partial class RoamingZombie : CharacterBody2D
 					spawnNPC.Transform = zombiePos;
 					rootNode.AddChild(spawnNPC);
 					spawnNPC.Scale = new Vector2(0.5f,0.5f);
-					this.QueueFree();
+					QueueFree();
 					break;
 				default:
 					break;
 				}
+	}
+	private void OnHealth(float _health)
+	{
+		 if(_health <= 0)
+		 {
+			SpawnScript.RemoveZombieFromList(this);
+			GD.Print("Check");
+			QueueFree();
+		 	
+		 }
 	}
 
 	private void OnAttackBoxEntered(Node2D body)

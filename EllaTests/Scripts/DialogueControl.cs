@@ -8,9 +8,7 @@ public  partial class DialogueControl : Control
 	Button _buttonOpt1;
 	Button _buttonOpt2;
 	Button _buttonOpt3;
-	[Export]
-	 npcControl NPC;
-
+	[Export] Villager _villager;
 	RichTextLabel _nameText;
 	RichTextLabel _text;
 	ColorRect _backgroundColor;
@@ -55,7 +53,7 @@ public  partial class DialogueControl : Control
 	public override void _Process(double delta)
 	{
 		//GD.Print(NPCs.Count);
-		if (NPC.dialogueWindow == true)
+		if (_villager.dialogueWindow == true)
 			{
 				DialogueWindowVisible();
 			}
@@ -83,24 +81,23 @@ public  partial class DialogueControl : Control
 	{
 		GD.Print("Dialogue window opened");
 		Visible = true;
-		NPC.dialogueWindow = false;
+		_villager.dialogueWindow = false;
 
-		if (NPC.CurrentState == npcControl.States.Patrol)
+		if (_villager.GetVillagerStates() == VillagerManager.VillagerStates.RoamAround)
 		{
 			_text.Text = "Hello, do you need help?";
 			_buttonOpt1.Text = "Yes, I need help with farm";
 			_buttonOpt2.Text = "Nevermind";
 			//_buttonOpt3.Text = "Attack zombies";
-
 			_buttonOpt1.Visible = true;
 		}
 
-		if (NPC.CurrentState == npcControl.States.TaskFarming)
+/* 		if (NPC.GetVillagerStates() == VillagerManager.VillagerStates.RoamAround)
 		{
 			_text.Text = "I'm busy";
 			_buttonOpt2.Text = "Nevermind";
 
 			_buttonOpt1.Visible = false;
-		}
+		} */
 	}
 }

@@ -1,6 +1,7 @@
 using Godot;
 using System;
-using System.Threading.Tasks;
+using System.Collections;
+using System.Diagnostics;
 using static VillagerManager;
 
 public partial class Villager : CharacterBody2D
@@ -18,7 +19,7 @@ public partial class Villager : CharacterBody2D
 	{
 		_timer = new Timer
 		{
-			WaitTime = 2f,
+			WaitTime = 1f,
 		};
 		_timer.Timeout += State;
 		AddChild(_timer);
@@ -30,10 +31,11 @@ public partial class Villager : CharacterBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (!dialogueControl.Visible)
+		if (!dialogueControl.Visible && GlobalPosition.DistanceTo(_targetPosition) > 5)
 		{
 			Movement(_targetPosition);
 		}
+
 	}
 
 	public VillagerStates GetVillagerStates()
@@ -50,6 +52,7 @@ public partial class Villager : CharacterBody2D
 				break;
 
 			case VillagerStates.FollowPlayer:
+				FollowPlayer();
 				break;
 
 			case VillagerStates.ChooseTask:
@@ -94,8 +97,6 @@ public partial class Villager : CharacterBody2D
 	{
 		float range = 100;
 		_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
-		Movement(_targetPosition);
-
 		if (dialogueControl.Visible)
 		{
 			_state = VillagerStates.ChooseTask;
@@ -123,15 +124,46 @@ public partial class Villager : CharacterBody2D
 	void CheckPlants()
 	{
 		_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
-		_targetPosition = _currentPlant.GlobalPosition;
 
+		if (_currentPlant.GetGrowthState() == GrowthState.IsWilting || _currentPlant.GetGrowthState() == GrowthState.WaitWatering ||
+			_currentPlant.GetGrowthState() == GrowthState.IsInfested)
+		{
+			_targetPosition = _currentPlant.GlobalPosition;
+		}
+		else
+		{
+			bool _allHarvestable = true;
+			
+			for (int i = 0; i < FarmManager.instance.GetPlantedPlants().Count; i++)
+			{	
+				if (FarmManager.instance.GetPlantedPlants()[i].GetGrowthState() != GrowthState.IsHarvestable &&
+					FarmManager.instance.GetPlantedPlants()[i].GetGrowthState() != GrowthState.IsDead)
+				{	
+					_allHarvestable = false;
+					break;
+				}
+			}
+			if (_allHarvestable == false)
+			{
+				_plantIndex++;
+				if (_plantIndex >= FarmManager.instance.GetPlantedPlants().Count)
+				{
+					_plantIndex = 0;
+				}
+				return;
+			}
+			else
+			{
+				_state = VillagerStates.RoamAround;
+				return;
+			}
+		}
 		if (GlobalPosition.DistanceTo(_currentPlant.GlobalPosition) < 5)
 		{
 			GD.Print("I am at the plant yay");
 			if (_currentPlant.GetGrowthState() == GrowthState.IsWilting || _currentPlant.GetGrowthState() == GrowthState.WaitWatering)
 			{
 				_currentPlant.WaterPlant();
-
 			}
 			if (_currentPlant.GetGrowthState() == GrowthState.IsInfested)
 			{
@@ -150,14 +182,11 @@ public partial class Villager : CharacterBody2D
 			{
 				_plantIndex = 0;
 			}
-			if (_currentPlant.GetGrowthState() == GrowthState.IsHarvestable || _currentPlant.GetGrowthState() == GrowthState.IsDead)
-			{
-				_plantIndex++;
-				if (_plantIndex == FarmManager.instance.GetPlantedPlants().Count)
-				{
-					_state = VillagerStates.RoamAround;
-				}
-			}
 		}
+	}
+
+	void FollowPlayer()
+	{
+		_targetPosition = GetParent().GetNode<CharacterBody2D>("Player").GlobalPosition;
 	}
 }

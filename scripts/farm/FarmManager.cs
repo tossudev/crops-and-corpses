@@ -86,7 +86,7 @@ public partial class FarmManager : Node
 		else return false;
 	}
 	public bool IsBugSprayEquipped(){
-		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bugspray")
+		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bug Spray")
 		return true;
 		else return false;
 	}
@@ -103,7 +103,7 @@ public partial class FarmManager : Node
 	}
 	public void FillWaterBucket(){
 		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bucket"){
-			Item waterB = ResourceLoader.Load("res://assets/resources/game_items/11_bucket_water.tres") as Item;
+			Item waterB = ResourceLoader.Load("res://assets/resources/game_items/7_bucket_water.tres") as Item;
 			RawInventoryItem waterBucket = new RawInventoryItem(waterB.ID, waterB.Name, 1, waterB.StackSize);	
 			PlayerInventoryController.RemoveItemFromInventory(PlayerInventoryController.selectedItem);
 			PlayerInventoryController.SelectItem(waterBucket);
@@ -116,8 +116,12 @@ public partial class FarmManager : Node
 public enum PlantType
 {	
 	Potato, 
-	Cabbage, 
-	Tomato
+	Pumpkin, 
+	Mushroom,
+	Wheat,
+	Maize,
+	Lupine,
+	Poppy
 }
 
 public enum GrowthState{

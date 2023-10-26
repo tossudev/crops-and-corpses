@@ -55,13 +55,11 @@ public partial class FieldHandler : Node2D
 	private void OnInteractable(Area2D body)
 	{
 		_isPlayerNearby=true;
-		GD.Print("lähel");
 	}
 
 	private void OnNonInteractable(Area2D body)
 	{
 		_isPlayerNearby=false;
-		GD.Print("kaukan");
 	}
 	
 }

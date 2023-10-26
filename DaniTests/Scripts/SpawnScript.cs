@@ -25,7 +25,7 @@ public partial class SpawnScript : Node2D
 	public override void _Ready()
 	{
 		
-		
+		zombieList.Clear();
 		counter = 0;
 		spawnPoints = new Node2D[4];
 		spawnDelay =GetNode<Timer>("Timer");
@@ -41,6 +41,7 @@ public partial class SpawnScript : Node2D
 		packedScene = (PackedScene)GD.Load("res://LilianTests/Prefabs/zombie_with_hitbox.tscn");
 		dayTimeCheck = GetNode<TimeManager>("SunlightContainer");
 		spawnDelay.Start();
+		GD.Print(zombieList.Count);
 	}
   
 	  public override void _Process(double delta)
@@ -77,13 +78,14 @@ public partial class SpawnScript : Node2D
     }
 	private void DeleteZombieDelay()
 	{
-		if(player.IsQueuedForDeletion()){zombieDeleteDelay.Stop();}
+		//if(player.IsQueuedForDeletion()){zombieDeleteDelay.Stop();}
 		zombieDelayBool = true;
 	}
 	private void ZombieSpawn()
 	{
 
 		rootPath =  GetParent<Node2D>().GetPath();
+		GD.Print(rootPath);
 		rootNode = GetNodeOrNull<Node2D>(rootPath);
 		CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
 		prefab.Position = spawnPoints[counter].Position;

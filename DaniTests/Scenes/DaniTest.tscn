@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b0ha6xj7g0h1b"]
 
 [ext_resource type="Script" path="res://DaniTests/Scripts/SpawnScript.cs" id="1_jofs2"]
-[ext_resource type="Script" path="res://DaniTests/Scripts/TimeManager.cs" id="3_iehvf"]
+[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://DaniTests/Scenes/sunlight_container.tscn" id="2_a0gn0"]
 [ext_resource type="PackedScene" uid="uid://cr6efhy85nwwj" path="res://DaniTests/Prefabs/playerTest.tscn" id="3_syd6a"]
 [ext_resource type="PackedScene" uid="uid://ducfl7udsw3bj" path="res://LilianTests/Prefabs/zombie_with_hitbox.tscn" id="4_7ygsj"]
 
@@ -9,11 +9,7 @@
 position = Vector2(-71, -4)
 script = ExtResource("1_jofs2")
 
-[node name="SunlightContainer" type="Node" parent="."]
-script = ExtResource("3_iehvf")
-
-[node name="Sunlight" type="CanvasModulate" parent="SunlightContainer"]
-position = Vector2(-71, -4)
+[node name="SunlightContainer" parent="." instance=ExtResource("2_a0gn0")]
 
 [node name="SpawnPoint1" type="Node2D" parent="."]
 position = Vector2(167, 180)

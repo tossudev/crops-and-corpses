@@ -25,7 +25,19 @@ public partial class Villager : CharacterBody2D
 		AddChild(_timer);
 		_timer.Start();
 
-		_state = VillagerStates.RoamAround;
+/* 		string _currentScene = GetTree().CurrentScene.Name;
+
+		if (_currentScene != null && _currentScene == "Forest")
+        {
+			GD.Print("Following player");
+            _state = VillagerStates.FollowPlayer;
+        }
+        else
+        {
+			GD.Print("Roaming around");
+            _state = VillagerStates.RoamAround;
+        } */
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -187,6 +199,7 @@ public partial class Villager : CharacterBody2D
 
 	void FollowPlayer()
 	{
-		_targetPosition = GetParent().GetNode<CharacterBody2D>("Player").GlobalPosition;
+		//not working
+		_targetPosition = GetParent().GetNode<CharacterBody2D>("Forest/Objects/Player").GlobalPosition;
 	}
 }

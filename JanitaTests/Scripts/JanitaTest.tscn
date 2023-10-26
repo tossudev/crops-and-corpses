@@ -22,13 +22,11 @@ popup/item_2/text = "Cabbage"
 popup/item_2/id = 2
 script = ExtResource("3_tkndw")
 
-[node name="farm_plot" parent="." node_paths=PackedStringArray("oBTest") instance=ExtResource("2_nbnc0")]
+[node name="farm_plot" parent="." instance=ExtResource("2_nbnc0")]
 position = Vector2(491, 388)
-oBTest = NodePath("../OptionButton")
 
-[node name="farm_plot2" parent="." node_paths=PackedStringArray("oBTest") instance=ExtResource("2_nbnc0")]
+[node name="farm_plot2" parent="." instance=ExtResource("2_nbnc0")]
 position = Vector2(673, 388)
-oBTest = NodePath("../OptionButton")
 
 [node name="farm_plot3" parent="." instance=ExtResource("2_nbnc0")]
 

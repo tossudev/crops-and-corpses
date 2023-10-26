@@ -4,33 +4,24 @@
 [ext_resource type="Texture2D" uid="uid://bbei648d3eovx" path="res://assets/placeholder/test_character/character.png" id="2_n3vwh"]
 [ext_resource type="Script" path="res://EllaTests/Scripts/DialogueControl.cs" id="3_w0yh6"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jcghh"]
-radius = 47.0106
+[sub_resource type="CircleShape2D" id="CircleShape2D_lwgin"]
+radius = 60.0
 
 [node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("dialogueControl")]
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 2
-<<<<<<< HEAD
-script = ExtResource("1_u0uyb")
-dialogueControl = NodePath("Control")
-=======
 script = ExtResource("1_koefy")
 dialogueControl = NodePath("Control")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_lwgin")
->>>>>>> parent of 833a102 (Npc stuff)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(1, 0.772549, 0, 1)
 position = Vector2(0, -112)
 texture = ExtResource("2_n3vwh")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5, -25)
-shape = SubResource("CircleShape2D_jcghh")
 
 [node name="Button" type="Button" parent="."]
 self_modulate = Color(1, 1, 1, 0)
@@ -40,7 +31,6 @@ offset_right = 58.0
 offset_bottom = 58.0
 
 [node name="Control" type="Control" parent="." node_paths=PackedStringArray("NPC")]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -126,7 +116,6 @@ offset_right = 95.922
 offset_bottom = 2.40997
 
 [node name="Button3" type="Button" parent="Control/ColorRect"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.423

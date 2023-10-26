@@ -8,7 +8,8 @@ public  partial class DialogueControl : Control
 	Button _buttonOpt1;
 	Button _buttonOpt2;
 	Button _buttonOpt3;
-	[Export] Villager NPC;
+	[Export]
+	 npcControl NPC;
 
 	RichTextLabel _nameText;
 	RichTextLabel _text;
@@ -84,21 +85,22 @@ public  partial class DialogueControl : Control
 		Visible = true;
 		NPC.dialogueWindow = false;
 
-		if (NPC.GetVillagerStates() == VillagerManager.VillagerStates.RoamAround)
+		if (NPC.CurrentState == npcControl.States.Patrol)
 		{
 			_text.Text = "Hello, do you need help?";
 			_buttonOpt1.Text = "Yes, I need help with farm";
 			_buttonOpt2.Text = "Nevermind";
 			//_buttonOpt3.Text = "Attack zombies";
+
 			_buttonOpt1.Visible = true;
 		}
 
-		/* if (NPC.GetVillagerStates() == VillagerManager.VillagerStates.RoamAround)
+		if (NPC.CurrentState == npcControl.States.TaskFarming)
 		{
 			_text.Text = "I'm busy";
 			_buttonOpt2.Text = "Nevermind";
 
 			_buttonOpt1.Visible = false;
-		} */
+		}
 	}
 }

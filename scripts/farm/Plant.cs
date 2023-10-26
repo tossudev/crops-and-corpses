@@ -68,8 +68,7 @@ public partial class Plant : Node2D
 	Sprite2D _warningSign = new Sprite2D();
 
 	TextureProgressBar _progress = new TextureProgressBar();
-	ProgressBar _pb = new ProgressBar();
-
+	
 	int _progressValue=0;
 	bool _isPlayerNearby=false;
 
@@ -113,16 +112,9 @@ public partial class Plant : Node2D
      	_progress = scene as TextureProgressBar;   
 		AddChild(_progress);
 		_progress.MaxValue = _growthCycleLength * _maxCycles;
-		_progress.Value= 4;
+		_progress.Value= 0;
 		_progress.Hide();
 
-
-		var scene2 = ResourceLoader.Load<PackedScene>("res://JanitaTests/plant_bar.tscn").Instantiate();
-     	_pb = scene2 as ProgressBar;   
-		AddChild(_pb);
-		_pb.MaxValue = _growthCycleLength * _maxCycles;
-		_pb.Value= 0;
-		_pb.Hide();
 		PlantState();
 		
 	}
@@ -136,7 +128,6 @@ public partial class Plant : Node2D
 			if(_progressTimer>= 1)
 			{
 			_progress.Value += 1;
-			_pb.Value += 1;
 			_progressTimer=0;
 			}
 		}
@@ -309,11 +300,9 @@ public partial class Plant : Node2D
 
 	void ShowProgress(){
 		if(!_progress.Visible) _progress.Show();
-		if(!_pb.Visible) _pb.Show();
 	}
 
 	void HideProgress(){
 		if(_progress.Visible) _progress.Hide();
-		if(_pb.Visible) _pb.Hide();
 	}
 }

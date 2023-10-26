@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://510sd2fl5tn2"]
 
+[ext_resource type="Script" path="res://scripts/farm/FieldHandler.cs" id="1_0dcsm"]
 [ext_resource type="Texture2D" uid="uid://gx3rxc18ic1u" path="res://NikkeTests/images/farm_plot.jpg" id="1_hsnly"]
-[ext_resource type="Script" path="res://JanitaTests/Scripts/FieldHandler.cs" id="2_kisi8"]
-[ext_resource type="Shape2D" uid="uid://be1ka8r6xc5x1" path="res://JanitaTests/FieldShape.tres" id="3_d37t8"]
+[ext_resource type="Shape2D" uid="uid://be1ka8r6xc5x1" path="res://JanitaTests/Scripts/dirt_shape.tres" id="2_6a1i3"]
 
 [node name="farm_plot" type="Node2D" node_paths=PackedStringArray("_col") groups=["FarmPlot"]]
 scale = Vector2(2, 2)
-script = ExtResource("2_kisi8")
+script = ExtResource("1_0dcsm")
 _col = NodePath("FarmPlot")
 _nodePath = NodePath("plant_slot")
 
@@ -16,7 +16,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FarmPlot"]
-shape = ExtResource("3_d37t8")
+shape = ExtResource("2_6a1i3")
 
 [node name="plant_slot" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(500, 0)

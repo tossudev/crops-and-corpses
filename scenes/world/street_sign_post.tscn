@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/World/PlayerTravel.cs" id="1_ffm7f"]
 [ext_resource type="Texture2D" uid="uid://3465re0y5s7f" path="res://assets/sprites/items/street_sign_post.png" id="1_rlsfp"]
-[ext_resource type="Shape2D" uid="uid://di7g70k760mp3" path="res://JanitaTests/road_sign_shape.tres" id="2_u4tuo"]
+[ext_resource type="Shape2D" uid="uid://di7g70k760mp3" path="res://JanitaTests/Scripts/road_sign_shape.tres" id="3_y35pe"]
 [ext_resource type="Texture2D" uid="uid://ds0ykpdv4ev7y" path="res://assets/sprites/items/post_ruins.png" id="4_7x21e"]
 [ext_resource type="Texture2D" uid="uid://bkhi7xspqtvt7" path="res://assets/sprites/items/post_town.png" id="5_80p6s"]
 [ext_resource type="Texture2D" uid="uid://c3tmforyijtta" path="res://assets/sprites/items/post_forest.png" id="6_s8p2d"]
@@ -20,7 +20,7 @@ position = Vector2(63.3333, -118.333)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ruins_sign"]
 position = Vector2(2.5, 0)
-shape = ExtResource("2_u4tuo")
+shape = ExtResource("3_y35pe")
 
 [node name="Sprite2D" type="Sprite2D" parent="ruins_sign"]
 texture = ExtResource("4_7x21e")
@@ -29,7 +29,7 @@ texture = ExtResource("4_7x21e")
 position = Vector2(66.6666, -165)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="town_sign"]
-shape = ExtResource("2_u4tuo")
+shape = ExtResource("3_y35pe")
 
 [node name="Sprite2D" type="Sprite2D" parent="town_sign"]
 texture = ExtResource("5_80p6s")
@@ -38,7 +38,7 @@ texture = ExtResource("5_80p6s")
 position = Vector2(-66.6667, -130)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="forest_sign"]
-shape = ExtResource("2_u4tuo")
+shape = ExtResource("3_y35pe")
 
 [node name="Sprite2D" type="Sprite2D" parent="forest_sign"]
 texture = ExtResource("6_s8p2d")
@@ -47,7 +47,7 @@ texture = ExtResource("6_s8p2d")
 position = Vector2(-66.6667, -103.333)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="riverside_sign"]
-shape = ExtResource("2_u4tuo")
+shape = ExtResource("3_y35pe")
 
 [node name="Sprite2D" type="Sprite2D" parent="riverside_sign"]
 texture = ExtResource("7_wv0yg")

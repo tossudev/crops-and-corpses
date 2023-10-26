@@ -1,10 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cic35vewp7pln"]
+[gd_scene load_steps=9 format=3 uid="uid://cic35vewp7pln"]
 
-[ext_resource type="Script" path="res://JanitaTests/Scripts/FarmManager.cs" id="1_7w5ix"]
-[ext_resource type="PackedScene" uid="uid://bljea7oopk7tf" path="res://scenes/farm/plants/plant_tomato.tscn" id="2_26sw3"]
+[ext_resource type="Script" path="res://scripts/farm/FarmManager.cs" id="1_l4nos"]
+[ext_resource type="PackedScene" uid="uid://bbia6yxwghu3o" path="res://scenes/farm/plants/plant_lupine.tscn" id="2_itcat"]
 [ext_resource type="PackedScene" uid="uid://b4fyxjshjenvv" path="res://scenes/farm/plants/plant_potato.tscn" id="3_5el2c"]
-[ext_resource type="PackedScene" uid="uid://luqdfx7qh2jl" path="res://scenes/farm/plants/plant_cabbage.tscn" id="4_ckkrt"]
+[ext_resource type="PackedScene" uid="uid://4awyyd7jsaqq" path="res://scenes/farm/plants/plant_maize.tscn" id="3_r6alg"]
+[ext_resource type="PackedScene" uid="uid://bljea7oopk7tf" path="res://scenes/farm/plants/plant_mushroom.tscn" id="4_koi82"]
+[ext_resource type="PackedScene" uid="uid://dt4impfdusiy" path="res://scenes/farm/plants/plant_poppy.tscn" id="5_p8n1q"]
+[ext_resource type="PackedScene" uid="uid://luqdfx7qh2jl" path="res://scenes/farm/plants/plant_pumpkin.tscn" id="7_w7syf"]
+[ext_resource type="PackedScene" uid="uid://cb3o7u5viapx8" path="res://scenes/farm/plants/plant_wheat.tscn" id="8_yuy8i"]
 
 [node name="farm_manager" type="Node"]
-script = ExtResource("1_7w5ix")
-_plantPrefabs = Array[PackedScene]([ExtResource("2_26sw3"), ExtResource("3_5el2c"), ExtResource("4_ckkrt")])
+script = ExtResource("1_l4nos")
+_plantPrefabs = Array[PackedScene]([ExtResource("2_itcat"), ExtResource("3_r6alg"), ExtResource("4_koi82"), ExtResource("5_p8n1q"), ExtResource("3_5el2c"), ExtResource("7_w7syf"), ExtResource("8_yuy8i")])

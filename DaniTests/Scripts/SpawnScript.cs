@@ -25,6 +25,7 @@ public partial class SpawnScript : Node2D
 	public override void _Ready()
 	{
 		
+		
 		counter = 0;
 		spawnPoints = new Node2D[4];
 		spawnDelay =GetNode<Timer>("Timer");
@@ -41,28 +42,7 @@ public partial class SpawnScript : Node2D
 		dayTimeCheck = GetNode<TimeManager>("SunlightContainer");
 		spawnDelay.Start();
 	}
-    /* public override void _UnhandledInput(InputEvent @event)
-    {
-        if(@event is InputEventMouseButton mouseEvent)
-		{
-			if(mouseEvent.IsActionPressed("left_click"))
-			{
-				CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
-				prefab.Position = mouseEvent.Position;
-				this.AddChild(prefab);
-				isNightOrDay = dayTimeCheck.dayTime;
-				isNightOrDayString = isNightOrDay ? "DayTime" : "NighTime";
-				if(isNightOrDayString == "DayTime")
-				{
-					GD.Print("It is Day!");
-				}
-				else
-				{
-					GD.Print("It is Night!");
-				}
-			}
-		}
-    } */
+  
 	  public override void _Process(double delta)
     {
        
@@ -77,9 +57,10 @@ public partial class SpawnScript : Node2D
         {
             spawnDelay.Stop();
         }
-		if(zombieList.Count > 0)
+		if(zombieList.Count > 0 && zombieDelayBool)
 		{
 			Vector2 playerPos = player.Position;
+			zombieDelayBool = false;
 			for(int i = zombieList.Count-1;i>=0;i--)
 			{
 				Vector2 zombiePos = zombieList[i].Position;
@@ -87,17 +68,10 @@ public partial class SpawnScript : Node2D
 				//GD.Print("Distance to player" + distance+ " MaxDistance "+maxDistance);
 				if(distance > maxDistance)
 				{
-
-					if(zombieDelayBool == true)
-					{
-						GD.Print("Zombie Deleted");
-						zombieList[i].QueueFree();
-						zombieList.RemoveAt(i);
-						zombieDelayBool = false;
-					};
-					
+					GD.Print("Zombie Deleted");
+					zombieList[i].QueueFree();
+					zombieList.RemoveAt(i);
 				}
-
 			}
 		}
     }

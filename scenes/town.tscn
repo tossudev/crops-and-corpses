@@ -1,6 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=22 format=3 uid="uid://bgyv0c8xt1fd4"]
 
-[ext_resource type="PackedScene" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="1_2cwk5"]
+[ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="1_2cwk5"]
 [ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_vjhkw"]
 [ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://NikkeTests/scenes/building_menu.tscn" id="1_w3klu"]
 [ext_resource type="Texture2D" uid="uid://btvrgdl7ajiub" path="res://LilianTests/Sprites/grass_tiles_placeholder.png" id="2_6gv5a"]
@@ -14,7 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
 [ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="10_g8lte"]
 [ext_resource type="Texture2D" uid="uid://dr0bvibnh6lfq" path="res://assets/placeholder/tile_grass_concept.png" id="15_8a66b"]
-[ext_resource type="PackedScene" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
+[ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
+[ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2ovt6"]
 texture = ExtResource("2_6gv5a")
@@ -201,8 +202,11 @@ text = "Press 'E' to toggle inventory"
 
 [node name="BuildingMenu" parent="Overlay" node_paths=PackedStringArray("_buildings", "_player") instance=ExtResource("1_w3klu")]
 _buildings = NodePath("../../Buildings")
+_archerTowerScene = null
+_archerTowerGhostScene = null
 _wellScene = null
 _wellGhostScene = null
+_archerTowerIcon = null
 _wellIcon = null
 _player = NodePath("../../Objects/Player")
 
@@ -248,3 +252,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="well" parent="." instance=ExtResource("15_y8o5s")]
 position = Vector2(328, -287)
+
+[node name="street_sign_post" parent="." instance=ExtResource("16_bojlm")]
+position = Vector2(320, 8)

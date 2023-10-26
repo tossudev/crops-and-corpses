@@ -3,34 +3,34 @@ using System;
 
 public partial class PlayerTravel : Node
 {
-	void TravelHome(Node viewport, InputEvent @event, long shapeIdx)
+	void TravelTown(Node viewport, InputEvent @event, long shapeIdx)
 	{
 		if(@event is InputEventMouseButton button && button.IsPressed())
 		{
 			GetTree().ChangeSceneToFile("res://scenes/town.tscn");
 		}
 	}
-	void TravelSwamp(Node viewport, InputEvent @event, long shapeIdx)
+	void TravelRiverside(Node viewport, InputEvent @event, long shapeIdx)
 	{
 		if(@event is InputEventMouseButton button && button.IsPressed())
 		{
-			GetTree().ChangeSceneToFile("res://scenes/world/street_sign_post.tscn");
+			GetTree().ChangeSceneToFile("res://scenes/riverside.tscn");
 		}
 	}
 
-	void TravelOakville(Node viewport, InputEvent @event, long shapeIdx)
+	void TravelRuins(Node viewport, InputEvent @event, long shapeIdx)
 	{
 		if(@event is InputEventMouseButton button && button.IsPressed())
 		{
-			GetTree().ChangeSceneToFile("res://scenes/world/street_sign_post.tscn");
+			GetTree().ChangeSceneToFile("res://scenes/ruins.tscn");
 		}
 	}
 
-	void TravelField(Node viewport, InputEvent @event, long shapeIdx)
+	void TravelForest(Node viewport, InputEvent @event, long shapeIdx)
 	{
 		if(@event is InputEventMouseButton button && button.IsPressed())
 		{
-			GetTree().ChangeSceneToFile("res://scenes/world/street_sign_post.tscn");
+			GetTree().ChangeSceneToFile("res://scenes/forest.tscn");
 		}
 	}
 }

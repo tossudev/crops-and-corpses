@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfa7c2hs7jxvf"]
+[gd_scene load_steps=8 format=3 uid="uid://cfa7c2hs7jxvf"]
 
 [ext_resource type="Script" path="res://scripts/World/PlayerTravel.cs" id="1_ffm7f"]
 [ext_resource type="Texture2D" uid="uid://3465re0y5s7f" path="res://assets/sprites/items/street_sign_post.png" id="1_rlsfp"]
 [ext_resource type="Shape2D" uid="uid://di7g70k760mp3" path="res://JanitaTests/road_sign_shape.tres" id="2_u4tuo"]
+[ext_resource type="Texture2D" uid="uid://ds0ykpdv4ev7y" path="res://assets/sprites/items/post_ruins.png" id="4_7x21e"]
+[ext_resource type="Texture2D" uid="uid://bkhi7xspqtvt7" path="res://assets/sprites/items/post_town.png" id="5_80p6s"]
+[ext_resource type="Texture2D" uid="uid://c3tmforyijtta" path="res://assets/sprites/items/post_forest.png" id="6_s8p2d"]
+[ext_resource type="Texture2D" uid="uid://orsdslvcbjiy" path="res://assets/sprites/items/post_riverside.png" id="7_wv0yg"]
 
 [node name="street_sign_post" type="Node2D"]
 scale = Vector2(0.6, 0.6)
@@ -11,12 +15,15 @@ script = ExtResource("1_ffm7f")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_rlsfp")
 
-[node name="Oakville_sign" type="Area2D" parent="."]
+[node name="ruins_sign" type="Area2D" parent="."]
 position = Vector2(63.3333, -118.333)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Oakville_sign"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ruins_sign"]
 position = Vector2(2.5, 0)
 shape = ExtResource("2_u4tuo")
+
+[node name="Sprite2D" type="Sprite2D" parent="ruins_sign"]
+texture = ExtResource("4_7x21e")
 
 [node name="town_sign" type="Area2D" parent="."]
 position = Vector2(66.6666, -165)
@@ -24,19 +31,28 @@ position = Vector2(66.6666, -165)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="town_sign"]
 shape = ExtResource("2_u4tuo")
 
-[node name="field_sign" type="Area2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="town_sign"]
+texture = ExtResource("5_80p6s")
+
+[node name="forest_sign" type="Area2D" parent="."]
 position = Vector2(-66.6667, -130)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="field_sign"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="forest_sign"]
 shape = ExtResource("2_u4tuo")
 
-[node name="swamp_sign" type="Area2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="forest_sign"]
+texture = ExtResource("6_s8p2d")
+
+[node name="riverside_sign" type="Area2D" parent="."]
 position = Vector2(-66.6667, -103.333)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="swamp_sign"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="riverside_sign"]
 shape = ExtResource("2_u4tuo")
 
-[connection signal="input_event" from="Oakville_sign" to="." method="TravelOakville"]
-[connection signal="input_event" from="town_sign" to="." method="TravelHome"]
-[connection signal="input_event" from="field_sign" to="." method="TravelField"]
-[connection signal="input_event" from="swamp_sign" to="." method="TravelSwamp"]
+[node name="Sprite2D" type="Sprite2D" parent="riverside_sign"]
+texture = ExtResource("7_wv0yg")
+
+[connection signal="input_event" from="ruins_sign" to="." method="TravelRuins"]
+[connection signal="input_event" from="town_sign" to="." method="TravelTown"]
+[connection signal="input_event" from="forest_sign" to="." method="TravelForest"]
+[connection signal="input_event" from="riverside_sign" to="." method="TravelRiverside"]

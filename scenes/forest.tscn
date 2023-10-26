@@ -1,41 +1,41 @@
-[gd_scene load_steps=26 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=26 format=3 uid="uid://bge6kx3om5vec"]
 
-[ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="1_2cwk5"]
-[ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_vjhkw"]
-[ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://NikkeTests/scenes/building_menu.tscn" id="1_w3klu"]
-[ext_resource type="Texture2D" uid="uid://bhslt6uqn5lpc" path="res://assets/sprites/tiles/tile_grass.png" id="2_m0rkr"]
-[ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="2_mph18"]
-[ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_nnncm"]
-[ext_resource type="Texture2D" uid="uid://n8iftcgk0ti0" path="res://assets/sprites/tiles/Sand_tile.png" id="3_1kyq2"]
-[ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/player_inventory.tscn" id="3_tp6xx"]
-[ext_resource type="Texture2D" uid="uid://dbgwlhprokvwi" path="res://assets/sprites/tiles/Dirt_tile.png" id="4_w0eh7"]
-[ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="5_d3kp8"]
-[ext_resource type="Texture2D" uid="uid://wis4r15rhkuo" path="res://assets/sprites/foliage/sprite_rock.png" id="5_fu2m3"]
-[ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_ho2sg"]
-[ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://TinoTests/Prefabs/tree.tscn" id="5_tpvf0"]
-[ext_resource type="Texture2D" uid="uid://bp0rwsioa22xs" path="res://assets/sprites/foliage/sprite_bush.png" id="6_nyoyv"]
-[ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
-[ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="10_g8lte"]
-[ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
-[ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
+[ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_2kn8p"]
+[ext_resource type="Texture2D" uid="uid://bhslt6uqn5lpc" path="res://assets/sprites/tiles/tile_grass.png" id="2_g8id8"]
+[ext_resource type="Texture2D" uid="uid://n8iftcgk0ti0" path="res://assets/sprites/tiles/Sand_tile.png" id="3_a7xy6"]
+[ext_resource type="Texture2D" uid="uid://dbgwlhprokvwi" path="res://assets/sprites/tiles/Dirt_tile.png" id="4_ahqt4"]
+[ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_5m7lu"]
+[ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="6_d65ob"]
+[ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://TinoTests/Prefabs/tree.tscn" id="7_jud20"]
+[ext_resource type="Texture2D" uid="uid://wis4r15rhkuo" path="res://assets/sprites/foliage/sprite_rock.png" id="8_enyil"]
+[ext_resource type="Texture2D" uid="uid://bp0rwsioa22xs" path="res://assets/sprites/foliage/sprite_bush.png" id="9_484hk"]
+[ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="10_gpcxf"]
+[ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="11_civu1"]
+[ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/player_inventory.tscn" id="12_0u7ds"]
+[ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="13_6xujt"]
+[ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://NikkeTests/scenes/building_menu.tscn" id="14_c1748"]
+[ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="15_grgq1"]
+[ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="16_rit5n"]
+[ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="17_ay1u5"]
+[ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_g46xp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgdku"]
-texture = ExtResource("2_m0rkr")
+texture = ExtResource("2_g8id8")
 texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_16rl1"]
-texture = ExtResource("3_1kyq2")
+texture = ExtResource("3_a7xy6")
 texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m772i"]
-texture = ExtResource("4_w0eh7")
+texture = ExtResource("4_ahqt4")
 texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6bpiy"]
-texture = ExtResource("5_ho2sg")
+texture = ExtResource("5_5m7lu")
 texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
 
@@ -57,9 +57,9 @@ height = 256
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="Town" type="Node2D"]
+[node name="Forest" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_vjhkw")
+script = ExtResource("1_2kn8p")
 
 [node name="GroundTiles" type="TileMap" parent="."]
 z_index = -10
@@ -71,7 +71,7 @@ layer_0/tile_data = PackedInt32Array(-327688, 3, 0, -262152, 1, 0, -196616, 1, 0
 [node name="Objects" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Player" parent="Objects" node_paths=PackedStringArray("_camera") instance=ExtResource("2_nnncm")]
+[node name="Player" parent="Objects" node_paths=PackedStringArray("_camera") instance=ExtResource("6_d65ob")]
 _camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
@@ -81,32 +81,32 @@ position_smoothing_speed = 20.0
 [node name="Deco" type="Node2D" parent="Objects"]
 y_sort_enabled = true
 
-[node name="Tree" parent="Objects/Deco" instance=ExtResource("5_tpvf0")]
+[node name="Tree" parent="Objects/Deco" instance=ExtResource("7_jud20")]
 position = Vector2(-640, -184)
 
-[node name="Tree2" parent="Objects/Deco" instance=ExtResource("5_tpvf0")]
+[node name="Tree2" parent="Objects/Deco" instance=ExtResource("7_jud20")]
 position = Vector2(608, -472)
 
-[node name="Tree3" parent="Objects/Deco" instance=ExtResource("5_tpvf0")]
+[node name="Tree3" parent="Objects/Deco" instance=ExtResource("7_jud20")]
 position = Vector2(736, 312)
 
-[node name="Tree4" parent="Objects/Deco" instance=ExtResource("5_tpvf0")]
+[node name="Tree4" parent="Objects/Deco" instance=ExtResource("7_jud20")]
 position = Vector2(-968, 560)
 
-[node name="Tree5" parent="Objects/Deco" instance=ExtResource("5_tpvf0")]
+[node name="Tree5" parent="Objects/Deco" instance=ExtResource("7_jud20")]
 position = Vector2(-216, -720)
 
 [node name="Rock" type="Sprite2D" parent="Objects/Deco"]
 position = Vector2(-1224, -72)
-texture = ExtResource("5_fu2m3")
+texture = ExtResource("8_enyil")
 
 [node name="Bush" type="Sprite2D" parent="Objects/Deco"]
 position = Vector2(656, 784)
-texture = ExtResource("6_nyoyv")
+texture = ExtResource("9_484hk")
 
 [node name="Bush2" type="Sprite2D" parent="Objects/Deco"]
 position = Vector2(1240, -32)
-texture = ExtResource("6_nyoyv")
+texture = ExtResource("9_484hk")
 
 [node name="Lights" type="Node2D" parent="Objects"]
 
@@ -172,7 +172,7 @@ energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
-[node name="Fences" parent="." instance=ExtResource("2_mph18")]
+[node name="Fences" parent="." instance=ExtResource("10_gpcxf")]
 y_sort_enabled = true
 
 [node name="Buildings" type="Node2D" parent="."]
@@ -184,23 +184,23 @@ position = Vector2(6.10352e-05, 6.10352e-05)
 y_sort_enabled = true
 position = Vector2(6.10352e-05, 6.10352e-05)
 
-[node name="NPC3" parent="Enemies" instance=ExtResource("10_g8lte")]
+[node name="NPC3" parent="Enemies" instance=ExtResource("11_civu1")]
 position = Vector2(1104, -80.0001)
 
-[node name="NPC2" parent="Enemies" instance=ExtResource("10_g8lte")]
+[node name="NPC2" parent="Enemies" instance=ExtResource("11_civu1")]
 position = Vector2(-208, 896)
 
-[node name="NPC1" parent="Enemies" instance=ExtResource("10_g8lte")]
+[node name="NPC1" parent="Enemies" instance=ExtResource("11_civu1")]
 position = Vector2(-640, 384)
 
-[node name="NPC" parent="Enemies" instance=ExtResource("10_g8lte")]
+[node name="NPC" parent="Enemies" instance=ExtResource("11_civu1")]
 position = Vector2(-840, -200)
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 
-[node name="PlayerInventory" parent="Overlay" instance=ExtResource("3_tp6xx")]
+[node name="PlayerInventory" parent="Overlay" instance=ExtResource("12_0u7ds")]
 
-[node name="CraftingWindow" parent="Overlay" instance=ExtResource("5_d3kp8")]
+[node name="CraftingWindow" parent="Overlay" instance=ExtResource("13_6xujt")]
 
 [node name="TestInfo" type="Label" parent="Overlay"]
 offset_left = 8.0
@@ -210,7 +210,7 @@ offset_bottom = 100.0
 theme_override_font_sizes/font_size = 32
 text = "Press 'E' to toggle inventory"
 
-[node name="BuildingMenu" parent="Overlay" node_paths=PackedStringArray("_buildings", "_player") instance=ExtResource("1_w3klu")]
+[node name="BuildingMenu" parent="Overlay" node_paths=PackedStringArray("_buildings", "_player") instance=ExtResource("14_c1748")]
 _buildings = NodePath("../../Buildings")
 _archerTowerScene = null
 _archerTowerGhostScene = null
@@ -220,10 +220,10 @@ _archerTowerIcon = null
 _wellIcon = null
 _player = NodePath("../../Objects/Player")
 
-[node name="NightDayCycleAndZombieSpawn" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_2cwk5")]
+[node name="NightDayCycleAndZombieSpawn" parent="." node_paths=PackedStringArray("player") instance=ExtResource("15_grgq1")]
 player = NodePath("../Objects/Player")
 
-[node name="farm_manager" parent="." instance=ExtResource("8_v8hay")]
+[node name="farm_manager" parent="." instance=ExtResource("16_rit5n")]
 
 [node name="TaskPoint" type="Marker2D" parent="." groups=["Taskpoint"]]
 position = Vector2(575, -449)
@@ -260,13 +260,13 @@ grow_vertical = 2
 color = Color(0.94902, 0.941176, 0, 0.427451)
 metadata/_edit_use_anchors_ = true
 
-[node name="well" parent="." instance=ExtResource("15_y8o5s")]
+[node name="well" parent="." instance=ExtResource("17_ay1u5")]
 position = Vector2(328, -287)
 
-[node name="street_sign_post" parent="." instance=ExtResource("16_bojlm")]
+[node name="street_sign_post" parent="." instance=ExtResource("18_g46xp")]
 position = Vector2(320, 8)
 
-[node name="town_sign" parent="street_sign_post" index="2"]
+[node name="forest_sign" parent="street_sign_post" index="3"]
 visible = false
 
 [editable path="street_sign_post"]

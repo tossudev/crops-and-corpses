@@ -14,15 +14,14 @@ public partial class RoamingZombie : CharacterBody2D
 	private HealthComponent _healthComponent;
 	private NodePath _rootNodePath;
 	private Node2D rootNode;
-
 	public static bool playerAlive = true; // this is not the best way for handling the player death but it'll do the job for now i guess
 	PackedScene instantiatedNPC;
 
 	public override void _Ready()
-	{		
+	{
 		instantiatedNPC = (PackedScene)GD.Load("res://EllaTests/npc.tscn");
 		_rootNodePath =  GetParent<Node2D>().GetPath();
-		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);		
+		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);	
 		_damage = 5.0f;
 		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
 		_timer = GetNodeOrNull<Timer>("AttackTimer");
@@ -61,17 +60,28 @@ public partial class RoamingZombie : CharacterBody2D
 		switch (attack.effect)
 				{
 				case EffectType.Cure:
-
+					
+					SpawnScript.RemoveZombieFromList(this);
 					Transform2D zombiePos = this.Transform;
 					CharacterBody2D spawnNPC = (CharacterBody2D)instantiatedNPC.Instantiate();
 					spawnNPC.Transform = zombiePos;
 					rootNode.AddChild(spawnNPC);
 					spawnNPC.Scale = new Vector2(0.5f,0.5f);
-					this.QueueFree();
+					QueueFree();
 					break;
 				default:
 					break;
 				}
+	}
+	private void OnHealth(float _health)
+	{
+		 if(_health <= 0)
+		 {
+			SpawnScript.RemoveZombieFromList(this);
+			GD.Print("Check");
+			QueueFree();
+		 	
+		 }
 	}
 
 	private void OnAttackBoxEntered(Node2D body)

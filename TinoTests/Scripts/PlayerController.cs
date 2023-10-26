@@ -25,13 +25,11 @@ public partial class PlayerController : CharacterBody2D
 	{
 		if (@event.IsActionPressed("left_click"))
 		{
-			_handheld.Use(_canMelee);
-			_canMelee = false;
+			_handheld.Use();
 		}
 		else if (@event.IsActionReleased("left_click"))
 		{
 			_handheld.Release();
-			_canMelee = true;
 		}
 
 		if (@event.IsActionPressed("wheel_up"))
@@ -53,7 +51,7 @@ public partial class PlayerController : CharacterBody2D
 		{
 			_pickupArea.GetChild<CollisionShape2D>(0).Disabled = true;
 		}
-		
+
 		if (@event.IsActionPressed("drop_item"))
 		{
 			if (PlayerInventoryController.isItemSelected)
@@ -107,16 +105,24 @@ public partial class PlayerController : CharacterBody2D
 		var knockbackTween = GetTree().CreateTween();
 		knockbackTween.Parallel().TweenProperty(this, "_knockback", new Vector2(0, 0), duration);
 
-		_sprite.Modulate = new Color(1, 0, 0, 1);
-		knockbackTween.Parallel().TweenProperty(_sprite, "modulate", new Color(1, 1, 1, 1), duration);
+		// _sprite.Modulate = new Color(1, 0, 0, 1);
+		// knockbackTween.Parallel().TweenProperty(_sprite, "modulate", new Color(1, 1, 1, 1), duration);
 	}
-	
+
+	private void OnHealth(float health)
+	{
+		if (health <= 0)
+		{
+			GD.Print("Stop! He's already dead!");
+		}
+	}
+
 	void OnPickupAreaEntered(Area2D body)
 	{
 		var parent = body.GetParent();
 
 		if (parent == null) return;
-        
+
 		DroppedItem itemScript = parent as DroppedItem;
 
 		itemScript?.Pickup();

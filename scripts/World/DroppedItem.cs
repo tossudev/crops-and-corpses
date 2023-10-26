@@ -17,7 +17,10 @@ public partial class DroppedItem : Node2D
 
 	public void Pickup()
 	{
-		PlayerInventoryController.AddItem(_containedRawItem);
+		int addedItems = PlayerInventoryController.AddItem(_containedRawItem, -1, true, false);
+
+		if (addedItems > 0) return;
+		
 		QueueFree();
 	}
 }

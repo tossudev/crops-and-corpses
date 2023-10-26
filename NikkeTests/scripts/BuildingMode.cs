@@ -10,9 +10,14 @@ public partial class BuildingMode : Node2D
 
     int _tileSize;
 
+    Fence _fence;
+
     public override void _Ready()
     {
         _tileSize = 128;
+
+        Node2D fences = GetNode("/root/Town/Fences") as Node2D;
+        _fence = fences as Fence;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -22,32 +27,29 @@ public partial class BuildingMode : Node2D
 
     public override async void _Process(double delta)
     {
-        if (Input.IsActionJustPressed("Click"))
-        {
-            await ToSignal(GetTree(), "physics_frame");
-
-            if (collisions > 0)
-            {
-                Debug.WriteLine("Someting is colliding with the building");
-                return;
-            }
-            
-            buildingMenu.Build();
-        }
-        else if (Input.IsActionPressed("ui_cancel"))
+        if (Input.IsActionPressed("ui_cancel"))
         {
             QueueFree();
             //Input.MouseMode = Input.MouseModeEnum.Visible;
             buildingMenu.EnableBuildButton();
         }
 
-        if (collisions > 0)
+
+        if (collisions > 0 || (Position.X > _fence.fenceLengthX * 64 || Position.X < -_fence.fenceLengthX * 64 || Position.Y > _fence.fenceLengthY * 64 || Position.Y < -_fence.fenceLengthY * 64))
         {
             Modulate = new Color(3, 1, 1, 1);
+            return;
         }
         else
         {
             Modulate = new Color(1, 1, 1, 1);
+        }
+
+        if (Input.IsActionJustPressed("Click"))
+        {
+            await ToSignal(GetTree(), "physics_frame");
+            
+            buildingMenu.Build();
         }
     }
 

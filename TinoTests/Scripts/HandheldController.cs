@@ -27,6 +27,7 @@ public partial class HandheldController : Node2D
     private Projectile _projectile;
 
     private bool _isDrawing;
+    private bool _actionHeld;
     private string _targetGroup;
 
     public override void _Ready()
@@ -36,9 +37,13 @@ public partial class HandheldController : Node2D
     private void Init()
     {
         if (PlayerInventoryController.selectedItem != null)
+        {
             _weapon = WeaponData.GetWeaponByItem(PlayerInventoryController.selectedItem.id);
+        }
         else
+        {
             _weapon = null;
+        }
 
         if (_weapon == null)
             return;
@@ -92,35 +97,26 @@ public partial class HandheldController : Node2D
 
         if (_weapon == null)
             _tempWeaponSprite.Visible = false;
+
+        if (_actionHeld)
+            Use();
     }
 
-    // TODO: this is a temporary solution
-    public void SetUpHandheld(Weapon weapon, Projectile projectile = null)
-    {
-        if ((bool)weapon.Get("ranged") && projectile == null)
-        {
-            GD.Print("No projectile set for ranged weapon");
-            return;
-        }
-
-        _weapon = weapon;
-        _projectile = projectile;
-
-        Init();
-    }
-
-    public void Use(bool canMelee)
+    public void Use()
     {
         Init();
 
         if (_timer.TimeLeft > 0 || _isDrawing || _weapon == null)
             return;
 
+        if (_weapon.holdAction)
+            _actionHeld = true;
+
         if (_ranged)
         {
             StartDraw();
         }
-        else if (canMelee || _holdAction)
+        else
         {
             UseMelee();
         }
@@ -157,7 +153,7 @@ public partial class HandheldController : Node2D
 
         if (PlayerInventoryController.RemoveItemFromInventory(projectile) == false)
         {
-            GD.Print("Out of ammo");
+            GD.Print("Handheld: out of ammo");
             return;
         }
 
@@ -171,6 +167,8 @@ public partial class HandheldController : Node2D
 
     public void Release()
     {
+        _actionHeld = false;
+
         if (_ranged)
         {
             ReleaseDraw();
@@ -200,7 +198,6 @@ public partial class HandheldController : Node2D
 
     private void Shoot(float power)
     {
-        // RawInventoryItem projectile = PlayerInventoryController.
         ProjectileController projectile = (ProjectileController)_projectilePrefab.Instantiate();
         GetParent().AddChild(projectile);
 
@@ -211,8 +208,6 @@ public partial class HandheldController : Node2D
         projectile.targetGroup = _targetGroup;
 
         projectile.Init();
-
-        // remove projectile from inventory
 
         // TODO: change this to be based on weapon reach or something
         projectile.GlobalPosition = this.GlobalPosition + _attack.direction * 10;

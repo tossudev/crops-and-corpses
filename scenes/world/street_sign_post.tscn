@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfa7c2hs7jxvf"]
+
+[ext_resource type="Script" path="res://scripts/World/PlayerTravel.cs" id="1_ffm7f"]
+[ext_resource type="Texture2D" uid="uid://3465re0y5s7f" path="res://assets/sprites/items/street_sign_post.png" id="1_rlsfp"]
+[ext_resource type="Shape2D" uid="uid://di7g70k760mp3" path="res://JanitaTests/road_sign_shape.tres" id="2_u4tuo"]
+
+[node name="street_sign_post" type="Node2D"]
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_ffm7f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rlsfp")
+
+[node name="Oakville_sign" type="Area2D" parent="."]
+position = Vector2(63.3333, -118.333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Oakville_sign"]
+position = Vector2(2.5, 0)
+shape = ExtResource("2_u4tuo")
+
+[node name="town_sign" type="Area2D" parent="."]
+position = Vector2(66.6666, -165)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="town_sign"]
+shape = ExtResource("2_u4tuo")
+
+[node name="field_sign" type="Area2D" parent="."]
+position = Vector2(-66.6667, -130)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="field_sign"]
+shape = ExtResource("2_u4tuo")
+
+[node name="swamp_sign" type="Area2D" parent="."]
+position = Vector2(-66.6667, -103.333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="swamp_sign"]
+shape = ExtResource("2_u4tuo")
+
+[connection signal="input_event" from="Oakville_sign" to="." method="TravelOakville"]
+[connection signal="input_event" from="town_sign" to="." method="TravelHome"]
+[connection signal="input_event" from="field_sign" to="." method="TravelField"]
+[connection signal="input_event" from="swamp_sign" to="." method="TravelSwamp"]

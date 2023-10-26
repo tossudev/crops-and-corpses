@@ -9,7 +9,7 @@ using System.IO;
 
 public partial class BuildingMenu : Control
 {
-	Building _farmPlot, _house, _archerTower;
+	Building _farmPlot, _house, _archerTower, _well;
 	Building _currentBuilding;
 
     List<Building> _buildingPrefabs;
@@ -28,9 +28,9 @@ public partial class BuildingMenu : Control
     VBoxContainer _vBoxContainer;
 
     [Export]
-    PackedScene _farmPlotScene, _farmPlotGhostScene, _houseScene, _houseGhostScene, _archerTowerScene, _archerTowerGhostScene;
+    PackedScene _farmPlotScene, _farmPlotGhostScene, _houseScene, _houseGhostScene, _archerTowerScene, _archerTowerGhostScene, _wellScene, _wellGhostScene;
     [Export]
-    Texture2D _farmPlotIcon, _houseIcon, _archerTowerIcon;
+    Texture2D _farmPlotIcon, _houseIcon, _archerTowerIcon, _wellIcon;
 
     [Export]
     CharacterBody2D _player;
@@ -52,6 +52,9 @@ public partial class BuildingMenu : Control
 
         _house = new Building(_houseScene, _houseGhostScene, 40, "House", _houseIcon);
         _buildingPrefabs.Add(_house);
+
+        _well = new Building(_wellScene, _wellGhostScene, 20, "Well", _wellIcon);
+        _buildingPrefabs.Add(_well);
 
         _archerTower = new Building(_archerTowerScene, _archerTowerGhostScene, 60, "Archer Tower", _archerTowerIcon);
         _buildingPrefabs.Add(_archerTower);
@@ -136,6 +139,10 @@ public partial class BuildingMenu : Control
             else if (node.IsInGroup("ArcherTower"))
             {
                 name = "ArcherTower";
+            }
+            else if (node.IsInGroup("Well"))
+            {
+                name = "Well";
             }
             
             JsonObject jsonObj = new JsonObject

@@ -185,10 +185,11 @@ public partial class PlayerInventoryController : Control {
 	/// <summary> Main inventory additive operation </summary>
 	/// <param name="rawItem"> Includes id, name and quantity to add </param>
 	/// <param name="index"> optional: desired index in the organized player inventory array </param>
+	/// <param name="affectSelectedItem"> optional : affect the current selected item </param>
 	/// <param name="deselectOnAllAdded"> optional : deselect current item if all items were added </param>
 	/// 
 	///	<returns> how many items could *NOT* be added </returns>
-	public static int AddItem(RawInventoryItem rawItem, int index = -1, bool deselectOnAllAdded = true)
+	public static int AddItem(RawInventoryItem rawItem, int index = -1, bool affectSelectedItem = false, bool deselectOnAllAdded = true)
 	{
 
 		if (rawItem == null)
@@ -201,27 +202,31 @@ public partial class PlayerInventoryController : Control {
 			? AddToInventoryUntilFull(rawItem) // index not specified
 			: AddToSlotUntilFull(rawItem, index); // index given
 
+		if (rawItem.quantity == 0 && rawItem.isValidIndex)
+		{
+			NullifyInventoryItemAtIndex(rawItem.indexInOrganizedInventory);
+		}
 		
-        SaveData.SyncInventory();
-
-        if (rawItem.quantity == 0)
+        if (affectSelectedItem && isItemSelected)
         {
-	        if (isItemSelected && selectedItem.id == rawItem.id && selectedItem.isValidIndex)
+	        if (deselectOnAllAdded && rawItem.quantity == 0)
 	        {
-		        NullifyInventoryItemAtIndex(selectedItem.indexInOrganizedInventory);
+		        DeselectItem();
+	        }
+	        else if (selectedItem.id == rawItem.id && selectedItem.isValidIndex)
+	        {
+		        SelectItemAtSlot(selectedItem.indexInOrganizedInventory);
 	        }
 				    
-	        if (deselectOnAllAdded) DeselectItem();
         }
         
+        SaveData.SyncInventory();
         return rawItem.quantity;
 	}
 
 	static int AddToInventoryUntilFull(RawInventoryItem itemToAdd)
 	{
-		int index = PlayerInventoryData.GetFirstStackIndexOfItem(itemToAdd.id, true);
-		
-		for (int i = index; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++)
+		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++)
 		{
 			RawInventoryItem rawItem = null;
 			
@@ -234,7 +239,7 @@ public partial class PlayerInventoryController : Control {
 			{
 				itemToAdd.quantity = AddToSlotUntilFull(itemToAdd, i);
 			}
-			
+
 			if (itemToAdd.quantity == 0) break;
 		}
 		
@@ -312,12 +317,14 @@ public partial class PlayerInventoryController : Control {
 				{
 					NullifyInventoryItemAtIndex(i);
 				}
-				
-				if (isItemSelected)
+
+				if (isItemSelected && selectedItem.id == rawItem.id)
 				{
 					if (PlayerInventoryData.ExistsInInventory(selectedItem.id, 1))
 					{
-						SelectItemAtSlot(PlayerInventoryData.GetFirstStackIndexOfItem(selectedItem.id));
+						SelectItemAtSlot(itemInSlot.quantity > 0
+							? selectedItem.indexInOrganizedInventory
+							: PlayerInventoryData.GetFirstStackIndexOfItem(selectedItem.id));
 					}
 					else
 					{
@@ -325,9 +332,9 @@ public partial class PlayerInventoryController : Control {
 					}
 				}
 			}
-
 			
-		}
+			if (amountToRemove == 0) break;
+        }
 
 		switch (amountToRemove)
 		{
@@ -404,15 +411,48 @@ public partial class PlayerInventoryController : Control {
 
 	public static void DropSelectedItem(Vector2 position, Node parent)
 	{
+		RawInventoryItem temp = new RawInventoryItem(
+			selectedItem.id, selectedItem.name, selectedItem.quantity, selectedItem.stackSize);
+
+		CreateDroppedItem(temp, position, parent);
+		
+		if (selectedItem.isValidIndex)
+		{
+			NullifyInventoryItemAtIndex(selectedItem.indexInOrganizedInventory);
+		}
+		
+		DeselectItem();
+		
+		// Select a new item of the same type if exists
+		int index = PlayerInventoryData.GetFirstStackIndexOfItem(temp.id);
+		
+		if (index == 0)
+		{
+			if (!PlayerInventoryData.ExistsInInventory(temp.id, temp.quantity + 1)) return;
+		}
+		
+		SelectItemAtSlot(index);
+	}
+
+	/// <summary>
+	/// Creates a dropped item on the ground at the specified position
+	/// </summary>
+	/// <param name="item"></param>
+	/// <param name="atPosition"></param>
+	/// <param name="toParent"> Object for which the item will be parented to</param>
+	/// <returns> Reference to the created dropped item Node2D </returns>
+	public static Node2D CreateDroppedItem(RawInventoryItem item, Vector2 atPosition, Node toParent)
+	{
 		var droppedItemNode = GD.Load<PackedScene>(droppedItemNodePath).Instantiate<Node2D>();
 
-		droppedItemNode.GlobalPosition = position;
-		parent.AddChild(droppedItemNode);
+		droppedItemNode.GlobalPosition = atPosition;
+		toParent.AddChild(droppedItemNode);
 		
 		DroppedItem script = droppedItemNode as DroppedItem;
 		
-		script?.SetItem(selectedItem);
-		RemoveItemFromInventory(selectedItem);
+		script?.SetItem(item);
+
+		return droppedItemNode;
 	}
 	
 	public static void DeselectItem()

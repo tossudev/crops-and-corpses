@@ -45,10 +45,10 @@ public partial class ZombieIdle : ZombieStates
 		{
 			EmitSignal("Transitioned", "chase");			
 		}
-		else if (fenceDirection.Length() < 1000)
-		{
-			EmitSignal("Transitioned", "attackfence");
-		}
+		// else if (fenceDirection.Length() < 1000)
+		// {
+		// 	EmitSignal("Transitioned", "attackfence");
+		// }
     }
 
 
@@ -59,7 +59,7 @@ public partial class ZombieIdle : ZombieStates
 			(float)(GD.RandRange(0, 2001) - 1000) / 1000 // random range -1, 1
 		);
 
-		_roamTime = (float)(GD.RandRange(1000, 3001)) / 1000; // random range 1, 3
+		_roamTime = (float)(GD.RandRange(3000, 5001)) / 1000; // random range 3, 5
 
 		//GD.Print("MOVE_DIR: " + _moveDirection + "\nROAM_TIME: " + _roamTime);
 	}

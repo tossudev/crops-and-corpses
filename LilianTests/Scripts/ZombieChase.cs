@@ -34,14 +34,14 @@ public partial class ZombieChase : ZombieStates
 
 			if (playerDirection.Length() > 600)
 			{
-				if (fenceDirection.Length() < 1000)
-				{
-					EmitSignal("Transitioned", "attackfence");
-				}
-				else 
-				{
+				// if (fenceDirection.Length() < 1000)
+				// {
+				// 	EmitSignal("Transitioned", "attackfence");
+				// }
+				// else 
+				// {
 					EmitSignal("Transitioned", "idle");	
-				}						
+				// }						
 			}
 		} 
 		else 

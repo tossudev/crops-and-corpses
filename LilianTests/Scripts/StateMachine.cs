@@ -68,6 +68,6 @@ public partial class StateMachine : Node
         newState.Enter();
         _current_state = newState;
 
-        //GD.Print("Current state: " + _current_state.Name);
+        //GD.Print("Current ZOMBIE state: " + _current_state.Name);
     }
 }

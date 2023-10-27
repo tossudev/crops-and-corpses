@@ -9,12 +9,12 @@ public partial class ZombieIdle : ZombieStates
 	private Vector2 _moveDirection = Vector2.Zero;
 	private double _roamTime;
 	private CharacterBody2D _player;
-
-	private bool inTown = false;
+	private Node2D _fences;
 	
 	public override void Enter()
     {
         _player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
+		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
 		RandomizeRoam();
     }
 
@@ -38,14 +38,18 @@ public partial class ZombieIdle : ZombieStates
 
 	    if (_player == null || !RoamingZombie.playerAlive) return;
 	    
-	    Vector2 direction = _player.GlobalPosition - _zombie.GlobalPosition;
+	    Vector2 playerDirection = _player.GlobalPosition - _zombie.GlobalPosition;
+		Vector2 fenceDirection = _fences?.GlobalPosition - _zombie.GlobalPosition ?? Vector2.Zero;
 
-		if(direction.Length() < 300 )
+		if(playerDirection.Length() < 300 )
 		{
 			EmitSignal("Transitioned", "chase");			
 		}
+		else if (fenceDirection.Length() < 1000)
+		{
+			EmitSignal("Transitioned", "attackfence");
+		}
     }
-
 
 
 	private void RandomizeRoam()

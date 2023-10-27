@@ -11,7 +11,6 @@ public partial class HandheldController : Node2D
     [Export] private AnimationPlayer _animationPlayer;
     [Export] private Timer _timer;
     [Export] private PackedScene _projectilePrefab;
-    [Export] private Sprite2D _tempWeaponSprite;
 
     private Attack _attack;
     private float _damage;
@@ -36,9 +35,9 @@ public partial class HandheldController : Node2D
 
     private void Init()
     {
-        if (PlayerInventoryController.selectedItem != null)
+        if (PlayerInventoryController.heldItem != null)
         {
-            _weapon = WeaponData.GetWeaponByItem(PlayerInventoryController.selectedItem.id);
+            _weapon = WeaponData.GetWeaponByItem(PlayerInventoryController.heldItem.id);
         }
         else
         {
@@ -47,9 +46,6 @@ public partial class HandheldController : Node2D
 
         if (_weapon == null)
             return;
-
-        _tempWeaponSprite.Texture = _weapon.item.IconTexture;
-        _tempWeaponSprite.Visible = true;
 
         _damage = _weapon.damage;
         _knockback = _weapon.knockback;
@@ -94,9 +90,6 @@ public partial class HandheldController : Node2D
         {
             LookAt(GetGlobalMousePosition());
         }
-
-        if (_weapon == null)
-            _tempWeaponSprite.Visible = false;
 
         if (_actionHeld)
             Use();

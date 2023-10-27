@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://ducfl7udsw3bj"]
 
-[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://TinoTests/Components/health_component.tscn" id="1_46tua"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="1_46tua"]
 [ext_resource type="Script" path="res://LilianTests/Scripts/RoamingZombie.cs" id="1_jjfrv"]
-[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://TinoTests/Components/hitbox_component.tscn" id="2_lvwfs"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="2_lvwfs"]
 [ext_resource type="Texture2D" uid="uid://c1sm88vok0oma" path="res://LilianTests/Sprites/zombie_placeholder.png" id="4_c41wj"]
 [ext_resource type="Script" path="res://LilianTests/Scripts/StateMachine.cs" id="4_cvt2q"]
 [ext_resource type="Script" path="res://LilianTests/Scripts/ZombieIdle.cs" id="5_nv7uk"]

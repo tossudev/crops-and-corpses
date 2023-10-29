@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://b4fyxjshjenvv"]
 
-[ext_resource type="Script" path="res://JanitaTests/Scripts/Plant.cs" id="1_4njma"]
+[ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_1kfoc"]
 [ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://JanitaTests/Images/dirttemp.jpg" id="2_6ejys"]
 [ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://JanitaTests/Images/sprouttemp.png" id="3_bau8t"]
 [ext_resource type="Texture2D" uid="uid://dvhrkxcw50l7s" path="res://JanitaTests/Images/wheattemp.png" id="4_ypiri"]
-[ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="5_2rkl1"]
+[ext_resource type="Shape2D" path="res://JanitaTests/Scripts/plant_shape.tres" id="5_2rkl1"]
 
 [node name="plant_potato" type="Node2D" node_paths=PackedStringArray("_col")]
 z_index = 2
-script = ExtResource("1_4njma")
+script = ExtResource("1_1kfoc")
 _seedName = "potato seed"
 _description = "Pototoes"
 _growthCycleLength = 15.0

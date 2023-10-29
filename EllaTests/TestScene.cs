@@ -3,7 +3,6 @@ using System;
 
 public partial class TestScene : Node2D
 {
-	npcControl NPC;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

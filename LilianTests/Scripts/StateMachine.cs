@@ -4,16 +4,16 @@ using System.Collections.Generic;
 
 public partial class StateMachine : Node
 {
-	[Export] public States initial_state;
+	[Export] public ZombieStates initial_state;
 
-    private States _current_state;
-    private Dictionary<string, States> _states = new Dictionary<string, States>();
+    private ZombieStates _current_state;
+    private Dictionary<string, ZombieStates> _states = new Dictionary<string, ZombieStates>();
 
     public override void _Ready()
     {
         foreach (Node child in GetChildren())
         {
-            if (child is States state)
+            if (child is ZombieStates state)
             {
                 _states[state.Name.ToString().ToLower()] = state;
                 state.Transitioned += OnChildTransitioned;
@@ -59,7 +59,7 @@ public partial class StateMachine : Node
         }
 
         string newStateNameLower = newStateName.ToLower();
-        if (!_states.TryGetValue(newStateNameLower, out States newState))
+        if (!_states.TryGetValue(newStateNameLower, out ZombieStates newState))
         {
             return;
         }
@@ -68,6 +68,6 @@ public partial class StateMachine : Node
         newState.Enter();
         _current_state = newState;
 
-        //GD.Print("Current state: " + _current_state.Name);
+        //GD.Print("Current ZOMBIE state: " + _current_state.Name);
     }
 }

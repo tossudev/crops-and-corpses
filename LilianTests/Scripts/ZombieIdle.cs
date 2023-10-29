@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class ZombieIdle : States
+public partial class ZombieIdle : ZombieStates
 {
 	[Export] private CharacterBody2D _zombie;
 	[Export] private float _moveSpeed = 100.0f;
@@ -9,10 +9,12 @@ public partial class ZombieIdle : States
 	private Vector2 _moveDirection = Vector2.Zero;
 	private double _roamTime;
 	private CharacterBody2D _player;
+	private Node2D _fences;
 	
 	public override void Enter()
     {
         _player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
+		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
 		RandomizeRoam();
     }
 
@@ -36,13 +38,19 @@ public partial class ZombieIdle : States
 
 	    if (_player == null || !RoamingZombie.playerAlive) return;
 	    
-	    Vector2 direction = _player.GlobalPosition - _zombie.GlobalPosition;
+	    Vector2 playerDirection = _player.GlobalPosition - _zombie.GlobalPosition;
+		Vector2 fenceDirection = _fences?.GlobalPosition - _zombie.GlobalPosition ?? Vector2.Zero;
 
-		if(direction.Length() < 300 )
+		if(playerDirection.Length() < 300 )
 		{
 			EmitSignal("Transitioned", "chase");			
 		}
+		// else if (fenceDirection.Length() < 1000)
+		// {
+		// 	EmitSignal("Transitioned", "attackfence");
+		// }
     }
+
 
 	private void RandomizeRoam()
 	{
@@ -51,7 +59,7 @@ public partial class ZombieIdle : States
 			(float)(GD.RandRange(0, 2001) - 1000) / 1000 // random range -1, 1
 		);
 
-		_roamTime = (float)(GD.RandRange(1000, 3001)) / 1000; // random range 1, 3
+		_roamTime = (float)(GD.RandRange(3000, 5001)) / 1000; // random range 3, 5
 
 		//GD.Print("MOVE_DIR: " + _moveDirection + "\nROAM_TIME: " + _roamTime);
 	}

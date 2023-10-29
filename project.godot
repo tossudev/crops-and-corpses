@@ -22,6 +22,7 @@ ItemData="*res://scripts/global/ItemData.cs"
 SaveData="*res://scripts/global/SaveData.cs"
 Audio="*res://scenes/audio.tscn"
 WeaponData="*res://scripts/global/WeaponData.cs"
+GlobalTime="*res://DaniTests/Scripts/GlobalTime.cs"
 
 [display]
 

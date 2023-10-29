@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://b40hqfagems1h"]
 
-[ext_resource type="Script" path="res://JanitaTests/Scripts/Well.cs" id="1_cgcv3"]
-[ext_resource type="Shape2D" uid="uid://wx1ygbi6bga6" path="res://JanitaTests/WellShape.tres" id="2_s0j1d"]
-[ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="3_a8jms"]
+[ext_resource type="Script" path="res://scripts/farm/Well.cs" id="1_urfjr"]
+[ext_resource type="Shape2D" uid="uid://cexw2rv4qd6l6" path="res://JanitaTests/Scripts/well_shape.tres" id="2_g8j44"]
+[ext_resource type="Texture2D" uid="uid://d0iur8m4gr6bn" path="res://assets/sprites/buildings/welldesing.png" id="3_a8jms"]
 
 [node name="well" type="Node2D"]
 scale = Vector2(0.3, 0.3)
-script = ExtResource("1_cgcv3")
+script = ExtResource("1_urfjr")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-32, -32)
@@ -15,7 +15,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-2.99997, 157)
-shape = ExtResource("2_s0j1d")
+shape = ExtResource("2_g8j44")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-32, -32)

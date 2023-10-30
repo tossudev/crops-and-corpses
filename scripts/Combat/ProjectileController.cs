@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public partial class ProjectileController : Node2D
 {
     [Export] private Timer _lifetimeTimer;
+    [Export] private Sprite2D _sprite;
 
     public Attack attack;
     public Projectile projectile;
@@ -15,8 +16,12 @@ public partial class ProjectileController : Node2D
 
     public void Init()
     {
+        _sprite.Texture = projectile.item.IconTexture;
         _airtime = projectile.airtime;
         _despawnTime = projectile.despawnTime;
+
+        if (projectile.effect != EffectType.None)
+            attack.effect = projectile.effect;
 
         this.TopLevel = true;
         _lifetimeTimer.Start(_airtime);

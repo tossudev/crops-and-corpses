@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://bgyv0c8xt1fd4"]
 
-[ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="1_2cwk5"]
+[ext_resource type="PackedScene" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="1_2cwk5"]
 [ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_vjhkw"]
 [ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://NikkeTests/scenes/building_menu.tscn" id="1_w3klu"]
 [ext_resource type="Texture2D" uid="uid://bhslt6uqn5lpc" path="res://assets/sprites/tiles/tile_grass.png" id="2_m0rkr"]
@@ -10,14 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/player_inventory.tscn" id="3_tp6xx"]
 [ext_resource type="Texture2D" uid="uid://dbgwlhprokvwi" path="res://assets/sprites/tiles/Dirt_tile.png" id="4_w0eh7"]
 [ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="5_d3kp8"]
-[ext_resource type="Texture2D" uid="uid://wis4r15rhkuo" path="res://assets/sprites/foliage/sprite_rock.png" id="5_fu2m3"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_ho2sg"]
-[ext_resource type="PackedScene" path="res://scenes/world/tree.tscn" id="5_tpvf0"]
+[ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="5_tpvf0"]
 [ext_resource type="Texture2D" uid="uid://bp0rwsioa22xs" path="res://assets/sprites/foliage/sprite_bush.png" id="6_nyoyv"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
+[ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/iron_ore.tscn" id="10_4wegq"]
 [ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="10_g8lte"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
-[ext_resource type="PackedScene" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
+[ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgdku"]
 texture = ExtResource("2_m0rkr")
@@ -96,10 +96,6 @@ position = Vector2(-968, 560)
 [node name="Tree5" parent="Objects/Deco" instance=ExtResource("5_tpvf0")]
 position = Vector2(-216, -720)
 
-[node name="Rock" type="Sprite2D" parent="Objects/Deco"]
-position = Vector2(-1224, -72)
-texture = ExtResource("5_fu2m3")
-
 [node name="Bush" type="Sprite2D" parent="Objects/Deco"]
 position = Vector2(656, 784)
 texture = ExtResource("6_nyoyv")
@@ -107,6 +103,15 @@ texture = ExtResource("6_nyoyv")
 [node name="Bush2" type="Sprite2D" parent="Objects/Deco"]
 position = Vector2(1240, -32)
 texture = ExtResource("6_nyoyv")
+
+[node name="Iron Ore" parent="Objects/Deco" instance=ExtResource("10_4wegq")]
+position = Vector2(-1224, 16)
+
+[node name="Iron Ore2" parent="Objects/Deco" instance=ExtResource("10_4wegq")]
+position = Vector2(1176, -536)
+
+[node name="Iron Ore3" parent="Objects/Deco" instance=ExtResource("10_4wegq")]
+position = Vector2(936, 816)
 
 [node name="Lights" type="Node2D" parent="Objects"]
 

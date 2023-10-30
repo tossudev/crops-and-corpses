@@ -1,21 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqmfwe15dtgat"]
+[gd_scene load_steps=3 format=3 uid="uid://dqmfwe15dtgat"]
 
 [ext_resource type="Script" path="res://scripts/Combat/ProjectileController.cs" id="1_281ew"]
-[ext_resource type="Texture2D" uid="uid://g0b72r3myf3c" path="res://assets/sprites/items/item_arrow.png" id="2_1rke2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_upju1"]
 radius = 0.125
 
-[node name="Projectile" type="Node2D" node_paths=PackedStringArray("_lifetimeTimer")]
+[node name="Projectile" type="Node2D" node_paths=PackedStringArray("_lifetimeTimer", "_sprite")]
 scale = Vector2(64, 64)
 script = ExtResource("1_281ew")
 _lifetimeTimer = NodePath("Lifetime")
+_sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2.08165e-12, 2.08165e-12)
 rotation = 0.855211
 scale = Vector2(0.00487634, 0.00487864)
-texture = ExtResource("2_1rke2")
 
 [node name="Lifetime" type="Timer" parent="."]
 one_shot = true

@@ -12,10 +12,11 @@ radius = 112.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_xkdd2"]
 radius = 112.0
 
-[node name="Iron Ore" type="StaticBody2D"]
+[node name="Iron Ore" type="StaticBody2D" node_paths=PackedStringArray("_sprite")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_mb0q2")
 _gatheringObject = ExtResource("2_ftwmg")
+_sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-5, -90)

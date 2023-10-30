@@ -220,7 +220,6 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_12xgg"]
-radius = 10.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_efott"]
 radius = 117.527
@@ -228,11 +227,10 @@ radius = 117.527
 [sub_resource type="CircleShape2D" id="CircleShape2D_st5mf"]
 radius = 30.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_handheld", "_sprite", "_pickupArea", "_rig") groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_handheld", "_pickupArea", "_rig") groups=["player"]]
 scale = Vector2(3.2, 3.2)
 script = ExtResource("1_1gq73")
 _handheld = NodePath("Handheld")
-_sprite = NodePath("")
 _pickupArea = NodePath("SmallInteractionArea")
 _rig = NodePath("Skeleton2D")
 minZoom = 0.75

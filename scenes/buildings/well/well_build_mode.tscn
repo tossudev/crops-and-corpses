@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bt0w6up5wga7i"]
 
 [ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMode.cs" id="1_hi3rr"]
-[ext_resource type="Texture2D" uid="uid://d0iur8m4gr6bn" path="res://assets/sprites/buildings/welldesing.png" id="2_4qio6"]
-[ext_resource type="Shape2D" uid="uid://cexw2rv4qd6l6" path="res://JanitaTests/Scripts/well_shape.tres" id="3_4biyn"]
+[ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="2_4qio6"]
+[ext_resource type="Shape2D" path="res://JanitaTests/Scripts/well_shape.tres" id="3_4biyn"]
 
 [node name="well" type="Node2D"]
 scale = Vector2(0.15, 0.15)

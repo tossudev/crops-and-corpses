@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/farm/FieldHandler.cs" id="1_0dcsm"]
 [ext_resource type="Texture2D" uid="uid://gx3rxc18ic1u" path="res://NikkeTests/images/farm_plot.jpg" id="1_hsnly"]
-[ext_resource type="Shape2D" uid="uid://be1ka8r6xc5x1" path="res://JanitaTests/Scripts/dirt_shape.tres" id="2_6a1i3"]
+[ext_resource type="Shape2D" path="res://JanitaTests/Scripts/dirt_shape.tres" id="2_6a1i3"]
 
 [node name="farm_plot" type="Node2D" node_paths=PackedStringArray("_col") groups=["FarmPlot"]]
 scale = Vector2(2, 2)

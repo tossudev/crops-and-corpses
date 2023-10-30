@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://bgyv0c8xt1fd4"]
 
-[ext_resource type="PackedScene" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="1_2cwk5"]
+[ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="1_2cwk5"]
 [ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_vjhkw"]
 [ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://NikkeTests/scenes/building_menu.tscn" id="1_w3klu"]
 [ext_resource type="Texture2D" uid="uid://bhslt6uqn5lpc" path="res://assets/sprites/tiles/tile_grass.png" id="2_m0rkr"]
@@ -12,12 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="5_d3kp8"]
 [ext_resource type="Texture2D" uid="uid://wis4r15rhkuo" path="res://assets/sprites/foliage/sprite_rock.png" id="5_fu2m3"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_ho2sg"]
-[ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="5_tpvf0"]
+[ext_resource type="PackedScene" path="res://scenes/world/tree.tscn" id="5_tpvf0"]
 [ext_resource type="Texture2D" uid="uid://bp0rwsioa22xs" path="res://assets/sprites/foliage/sprite_bush.png" id="6_nyoyv"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
 [ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="10_g8lte"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
-[ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
+[ext_resource type="PackedScene" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgdku"]
 texture = ExtResource("2_m0rkr")
@@ -212,12 +212,6 @@ text = "Press 'E' to toggle inventory"
 
 [node name="BuildingMenu" parent="Overlay" node_paths=PackedStringArray("_buildings", "_player") instance=ExtResource("1_w3klu")]
 _buildings = NodePath("../../Buildings")
-_archerTowerScene = null
-_archerTowerGhostScene = null
-_wellScene = null
-_wellGhostScene = null
-_archerTowerIcon = null
-_wellIcon = null
 _player = NodePath("../../Objects/Player")
 
 [node name="NightDayCycleAndZombieSpawn" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_2cwk5")]

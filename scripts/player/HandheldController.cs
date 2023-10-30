@@ -203,7 +203,7 @@ public partial class HandheldController : Node2D
         projectile.Init();
 
         // TODO: change this to be based on weapon reach or something
-        projectile.GlobalPosition = this.GlobalPosition + _attack.direction * 10;
+        projectile.GlobalPosition = this.GlobalPosition;
         projectile.GlobalRotation = _attack.direction.Angle();
 
         _timer.Start(_cooldown);

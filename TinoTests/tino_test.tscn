@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cywktxf8v0kje" path="res://TinoTests/Prefabs/enemy_dummy.tscn" id="2_t1hbh"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_wnkdn"]
 [ext_resource type="PackedScene" uid="uid://bk760q1fegx3m" path="res://TinoTests/Prefabs/interaction_dummy.tscn" id="4_kg1sv"]
-[ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://TinoTests/Prefabs/tree.tscn" id="5_dkmtc"]
+[ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="5_dkmtc"]
 [ext_resource type="PackedScene" uid="uid://ducfl7udsw3bj" path="res://LilianTests/Prefabs/zombie_with_hitbox.tscn" id="6_rmic7"]
 
 [node name="World" type="Node2D"]

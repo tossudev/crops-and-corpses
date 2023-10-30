@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public partial class GatheringObjectController : StaticBody2D
 {
 	[Export] private GatheringObject _gatheringObject;
+	[Export] private Sprite2D _sprite;
 
 	private int _maxDrop;
 	private List<Item> _items;
@@ -29,7 +30,8 @@ public partial class GatheringObjectController : StaticBody2D
 
 	private void DropItems()
 	{
-		int dropAmount = (int)GD.RandRange(1, _gatheringObject.maxDrop);
+		int weight = 3;
+		int dropAmount = GD.RandRange(0, weight) == 0 ? GD.RandRange(1, _maxDrop) : 1;
 
 		for (int i = 0; i < dropAmount; i++)
 		{

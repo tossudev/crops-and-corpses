@@ -13,5 +13,4 @@ public enum EffectType
 {
 	None,
 	Cure,
-	Rock,
 }

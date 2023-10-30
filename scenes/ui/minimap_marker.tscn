@@ -5,3 +5,4 @@
 [node name="MinimapMarker" type="Sprite2D"]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_3x5qy")
+offset = Vector2(0, -128)

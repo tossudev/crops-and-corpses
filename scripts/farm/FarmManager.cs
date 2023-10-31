@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 public partial class FarmManager : Node
 {
-	List<RawInventoryItem> items = new List<RawInventoryItem>();
 	public static FarmManager instance;
 
 	[Export] PackedScene [] _plantPrefabs;

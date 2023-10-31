@@ -20,6 +20,7 @@ public partial class ZombieChase : ZombieStates
 
 		if(_player != null)
 		{
+			_moveSpeed = ZombieManager.chaseSpeed;
 			Vector2 playerDirection = _player.GlobalPosition - _zombie.GlobalPosition;
 			Vector2 fenceDirection = _fences?.GlobalPosition - _zombie.GlobalPosition ?? Vector2.Zero;
 			
@@ -52,14 +53,14 @@ public partial class ZombieChase : ZombieStates
 
 	private void CheckIfPlayerAlive()
 	{
-		if (RoamingZombie.playerAlive)
+		if (!ZombieManager.playerAlive)
 		{
-			_player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
-			if(_player == null)
-			{
-				RoamingZombie.playerAlive = false;
+			// _player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
+			// if(_player == null)
+			// {
+			// 	ZombieManager.playerAlive = false;
 				EmitSignal("Transitioned", "idle");	
-			}
+		// 	}
 		}
 	}
 }

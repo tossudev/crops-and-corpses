@@ -41,7 +41,7 @@ public partial class StateMachine : Node
 
     public override void _PhysicsProcess(double delta)
     {
-        if (_current_state != null && RoamingZombie.playerAlive != false)
+        if (_current_state != null && ZombieManager.playerAlive != false)
         {
             _current_state.Physics_Update(delta);
         }

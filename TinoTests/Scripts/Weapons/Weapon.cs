@@ -28,4 +28,5 @@ public enum TargetType
     None,
     Enemy,
     Tree,
+    Rock,
 }

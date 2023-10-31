@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4fyxjshjenvv"]
+[gd_scene load_steps=7 format=3 uid="uid://b4fyxjshjenvv"]
 
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_1kfoc"]
 [ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://JanitaTests/Images/dirttemp.jpg" id="2_6ejys"]
 [ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://JanitaTests/Images/sprouttemp.png" id="3_bau8t"]
 [ext_resource type="Texture2D" uid="uid://dvhrkxcw50l7s" path="res://JanitaTests/Images/wheattemp.png" id="4_ypiri"]
-[ext_resource type="Shape2D" path="res://JanitaTests/Scripts/plant_shape.tres" id="5_2rkl1"]
+[ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="5_2rkl1"]
+[ext_resource type="Resource" uid="uid://bfdw482ap5ams" path="res://assets/resources/game_items/10_potato.tres" id="5_t4o1k"]
 
 [node name="plant_potato" type="Node2D" node_paths=PackedStringArray("_col")]
 z_index = 2
@@ -17,6 +18,7 @@ _seedTexture = ExtResource("2_6ejys")
 _sproutTexture = ExtResource("3_bau8t")
 _plantTexture = ExtResource("4_ypiri")
 _col = NodePath("Area2D")
+_harvestablePlant = ExtResource("5_t4o1k")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8

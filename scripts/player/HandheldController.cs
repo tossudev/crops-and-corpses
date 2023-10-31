@@ -29,10 +29,6 @@ public partial class HandheldController : Node2D
     private bool _actionHeld;
     private string _targetGroup;
 
-    public override void _Ready()
-    {
-    }
-
     private void Init()
     {
         if (PlayerInventoryController.heldItem != null)
@@ -75,6 +71,9 @@ public partial class HandheldController : Node2D
                 break;
             case TargetType.Tree:
                 _targetGroup = "tree";
+                break;
+            case TargetType.Rock:
+                _targetGroup = "rock";
                 break;
             default:
                 GD.Print("No target group set for weapon");
@@ -203,7 +202,7 @@ public partial class HandheldController : Node2D
         projectile.Init();
 
         // TODO: change this to be based on weapon reach or something
-        projectile.GlobalPosition = this.GlobalPosition + _attack.direction * 10;
+        projectile.GlobalPosition = this.GlobalPosition;
         projectile.GlobalRotation = _attack.direction.Angle();
 
         _timer.Start(_cooldown);

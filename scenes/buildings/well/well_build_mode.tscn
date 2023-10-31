@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="2_4qio6"]
 [ext_resource type="Shape2D" path="res://JanitaTests/Scripts/well_shape.tres" id="3_4biyn"]
 
-[node name="well" type="Node2D"]
+[node name="well2" type="Node2D"]
 scale = Vector2(0.15, 0.15)
 script = ExtResource("1_hi3rr")
 

@@ -8,5 +8,5 @@ script = ExtResource("1_aq3hl")
 ID = 19
 Name = "Lupine Seed"
 IconTexture = ExtResource("1_gdtde")
-StackSize = 0
+StackSize = 99
 craftingRequirements = Array[Object]([])

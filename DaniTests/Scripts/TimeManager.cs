@@ -3,13 +3,15 @@ using System;
 
 public partial class TimeManager : Node
 {
-    private float currentTime = 0f;
+    
+    private float currentTime;
     public float timeSpeed = 1f;
     [Export] private Color nightTimeColor = new Color((float)0.5,(float) 0.5, (float)0.5);  // Set your desired nighttime color
     [Export] private Color dayTimeColor = new Color(1, 1, 1);    // Set your desired daytime color
     [Export] private float transitionDuration = 3f; // Set the duration of the transition
     [Export] private float dayTimeLength = 60f;    // 10 min duration for day
     [Export] private float nightTimeLength = 30f;  // 10 min duration for night
+    private GlobalTime globalTime;
 
     private bool isDayTime = true;
     public bool dayTime { get { return isDayTime; } set { dayTime= value; } }
@@ -18,6 +20,7 @@ public partial class TimeManager : Node
 
     public override void _Ready()
     {
+        globalTime = GetNode<GlobalTime>("/root/GlobalTime");
         sunlight = GetNode<CanvasModulate>("Sunlight");
 
         if (sunlight != null)
@@ -28,14 +31,17 @@ public partial class TimeManager : Node
         {
             GD.Print("Sunlight not found in the scene.");
         }
-
-        currentTime = 0f;
+        currentTime = globalTime.GetTime();
+        sunlight.Color = globalTime.GetColor();
     }
 
     public override void _Process(double delta)
     {
+        
         currentTime += (float)delta * timeSpeed;
+        globalTime.SetTime(currentTime);
         float timeOfDay = currentTime % (dayTimeLength + nightTimeLength);
+        
 
         if (timeOfDay <= dayTimeLength)
         {
@@ -54,6 +60,7 @@ public partial class TimeManager : Node
             }
             
         }
+        globalTime.SetColor(sunlight.Color);
         isDayTime = timeOfDay <= dayTimeLength + 1f; // 10s for delaying zombievawes
     }
 

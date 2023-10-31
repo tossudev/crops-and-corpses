@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="GatheringObject" load_steps=3 format=3 uid="uid://btej4xw5h0mn1"]
 
 [ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/0_log.tres" id="1_5wq2c"]
-[ext_resource type="Script" path="res://TinoTests/Scripts/GatheringObject.cs" id="1_pp1aw"]
+[ext_resource type="Script" path="res://scripts/World/GatheringObject.cs" id="1_pp1aw"]
 
 [resource]
 script = ExtResource("1_pp1aw")

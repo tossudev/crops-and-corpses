@@ -10,13 +10,18 @@ public partial class Villager : CharacterBody2D
 	Vector2 _targetPosition;
 	Timer _timer;
 	[Export] DialogueControl dialogueControl;
+	[Export] NavigationAgent2D navMeshAgent;
+	[Export] NavigationRegion2D navRegionArea;
 	Plant _currentPlant;
 	int _plantIndex = 0;
 	float _speed = 0;
+	bool collision = false;
 	public bool dialogueWindow = false;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		
 		_timer = new Timer
 		{
 			WaitTime = 1f,
@@ -37,6 +42,8 @@ public partial class Villager : CharacterBody2D
 			GD.Print("Roaming around");
             _state = VillagerStates.RoamAround;
         } */
+
+		_state = VillagerStates.RoamAround;
 		
 	}
 
@@ -47,7 +54,7 @@ public partial class Villager : CharacterBody2D
 		{
 			Movement(_targetPosition);
 		}
-
+		
 	}
 
 	public VillagerStates GetVillagerStates()
@@ -97,6 +104,12 @@ public partial class Villager : CharacterBody2D
 		dialogueWindow = true;
 	}
 
+	public void _on_area_2d_area_entered(Area2D area)
+	{
+		collision = true;
+		//GD.Print("Touching something");
+	}
+
 	void Movement(Vector2 target)
 	{
 		_speed = 100;
@@ -107,13 +120,36 @@ public partial class Villager : CharacterBody2D
 
 	void RoamAround()
 	{
+		//navMeshAgent.TargetPosition = _targetPosition;
+
+		// Don't delete
 		float range = 100;
 		_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
+
+		//_targetPosition = RandomTargetPosition();
+		Vector2 direction = _targetPosition - GlobalPosition;
+		Vector2 oppDirection = -direction;
+		if(collision)
+		{
+			_targetPosition = oppDirection;
+			collision = false;
+		}
+
 		if (dialogueControl.Visible)
 		{
 			_state = VillagerStates.ChooseTask;
 			State();
 		}
+	}
+
+	Vector2 RandomTargetPosition()
+	{
+		float rangeX = 1500;
+		float rangeY = 2000;
+		float randomX = (GD.Randf() * rangeX);
+		float randomY = (GD.Randf() * rangeY);
+
+		return new Vector2(randomX, randomY);
 	}
 
 	void ChooseTask()

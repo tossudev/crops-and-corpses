@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://y0mf1chbk8yw"]
+
+[ext_resource type="Texture2D" uid="uid://bbei648d3eovx" path="res://assets/placeholder/test_character/character.png" id="1_3x5qy"]
+
+[node name="MinimapMarker" type="Sprite2D"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_3x5qy")
+offset = Vector2(0, -128)

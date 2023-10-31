@@ -2,20 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<< HEAD
-uid="uid://4t2wtosfjgg3"
-=======
-uid="uid://cnxri3napjk1d"
->>>>>>> main
-path="res://.godot/imported/item_iron.png-8d2647adaa4e54124b0c33d9eaad06e8.ctex"
+uid="uid://d0k7b4sc0xo7y"
+path="res://.godot/imported/delete_later.png-5c8f68e9d377f995104e7bc02473c34a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/item_iron.png"
-dest_files=["res://.godot/imported/item_iron.png-8d2647adaa4e54124b0c33d9eaad06e8.ctex"]
+source_file="res://assets/placeholder/test_character/delete_later.png"
+dest_files=["res://.godot/imported/delete_later.png-5c8f68e9d377f995104e7bc02473c34a.ctex"]
 
 [params]
 

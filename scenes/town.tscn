@@ -1,6 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=28 format=3 uid="uid://bgyv0c8xt1fd4"]
 
-[ext_resource type="PackedScene" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="1_2cwk5"]
+[ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="1_2cwk5"]
 [ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_vjhkw"]
 [ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://NikkeTests/scenes/building_menu.tscn" id="1_w3klu"]
 [ext_resource type="Texture2D" uid="uid://bhslt6uqn5lpc" path="res://assets/sprites/tiles/tile_grass.png" id="2_m0rkr"]
@@ -14,10 +14,12 @@
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="5_tpvf0"]
 [ext_resource type="Texture2D" uid="uid://bp0rwsioa22xs" path="res://assets/sprites/foliage/sprite_bush.png" id="6_nyoyv"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
-[ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/iron_ore.tscn" id="10_4wegq"]
+[ext_resource type="PackedScene" path="res://scenes/world/iron_ore.tscn" id="10_4wegq"]
 [ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="10_g8lte"]
+[ext_resource type="PackedScene" uid="uid://5agkiate7gox" path="res://scenes/ui/minimap.tscn" id="15_nhpcg"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
+[ext_resource type="Texture2D" uid="uid://d0k7b4sc0xo7y" path="res://assets/placeholder/test_character/delete_later.png" id="16_ilo7w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgdku"]
 texture = ExtResource("2_m0rkr")
@@ -218,6 +220,31 @@ text = "Press 'E' to toggle inventory"
 [node name="BuildingMenu" parent="Overlay" node_paths=PackedStringArray("_buildings", "_player") instance=ExtResource("1_w3klu")]
 _buildings = NodePath("../../Buildings")
 _player = NodePath("../../Objects/Player")
+
+[node name="MinimapContainer" type="Panel" parent="Overlay"]
+offset_left = 1576.0
+offset_top = 832.0
+offset_right = 1912.0
+offset_bottom = 1032.0
+
+[node name="Minimap" parent="Overlay/MinimapContainer" instance=ExtResource("15_nhpcg")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -92.0
+offset_right = 160.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Test" type="Sprite2D" parent="Overlay/MinimapContainer"]
+position = Vector2(168, 216)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("16_ilo7w")
 
 [node name="NightDayCycleAndZombieSpawn" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_2cwk5")]
 player = NodePath("../Objects/Player")

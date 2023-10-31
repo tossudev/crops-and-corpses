@@ -18,7 +18,7 @@ public partial class PlayerInventoryController : Control {
 	const string droppedItemNodePath = "res://scenes/world/dropped_item.tscn";
 	
 	public bool isOpen = false;
-    string slotNodePath = "res://scenes/ui/inventory_slot.tscn";
+    string slotNodePath = "res://scenes/ui/inventory/inventory_slot.tscn";
     Control _selectedItemNode;
     const string INVENTORY_GRID_GROUP = "InventoryGrid";
 	const string INVENTORY_PANEL_GROUP = "InventoryPanel";
@@ -63,6 +63,11 @@ public partial class PlayerInventoryController : Control {
 		if (@event.IsActionPressed("toggle_inventory")) {
 			isOpen = !isOpen;
 			_inventoryPanel.Visible = isOpen;
+		}
+		
+		if (@event.IsActionPressed("close_inventory")) {
+			isOpen = false;
+			_inventoryPanel.Visible = false;
 		}
 
 		for (int hotbarKey = 0; hotbarKey < 8; hotbarKey ++) {

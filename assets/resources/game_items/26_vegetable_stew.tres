@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Item" load_steps=10 format=3 uid="uid://b6qug6knflqvl"]
+[gd_resource type="Resource" script_class="Item" load_steps=10 format=3 uid="uid://c1q7mpup7mo0b"]
 
 [ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="1_ql082"]
 [ext_resource type="Texture2D" uid="uid://g4q3dxtyxv6s" path="res://JanitaTests/Images/sushi-removebg-preview.png" id="1_rqoi1"]

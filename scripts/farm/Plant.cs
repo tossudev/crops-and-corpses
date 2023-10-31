@@ -48,6 +48,8 @@ public partial class Plant : Node2D
 	[Export] CollisionObject2D _col;
 	
 	TextureRect trect = new TextureRect();
+
+	[Export] Item _harvestablePlant;
 	#endregion
 	
 	#region variables for growing
@@ -272,6 +274,8 @@ public partial class Plant : Node2D
 		if(_state == GrowthState.IsHarvestable){
 			// Add to inventory whatever collected
 			GD.Print("Harvested: "+plantName);
+			RawInventoryItem _plant = new RawInventoryItem(_harvestablePlant.ID, _harvestablePlant.Name, 4, _harvestablePlant.StackSize);
+			PlayerInventoryController.AddItem(_plant);
 		}else if(_state == GrowthState.IsDead){
 			GD.Print("Cleared plant: "+plantName);
 		}

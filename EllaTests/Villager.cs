@@ -82,7 +82,7 @@ public partial class Villager : CharacterBody2D
 				break;
 
 			case VillagerStates.FindResourchesTask:
-				GatherResourches();
+				//GatherResourches();
 				break;
 
 			case VillagerStates.GetHospitalized:
@@ -161,12 +161,12 @@ public partial class Villager : CharacterBody2D
 			_state = VillagerStates.FarmingTask;
 			State();
 		}
-		if(dialogueControl.resourcheTaskStarted)
+/* 		if(dialogueControl.resourcheTaskStarted)
 		{
 			GD.Print("Finding resourches");
 			_state = VillagerStates.FindResourchesTask;
 			State();
-		}
+		} */
 		if (dialogueControl.exitDialogue)
 		{
 			_state = VillagerStates.RoamAround;
@@ -175,14 +175,14 @@ public partial class Villager : CharacterBody2D
 		}
 	}
 
-	void GatherResourches()
+/* 	void GatherResourches()
 	{
 		_targetPosition = GetParent().GetNode<Node2D>("res://scenes/world/street_sign_post").GlobalPosition;
 		if (GlobalPosition.DistanceTo(_targetPosition) < 5)
 		{
 			GD.Print("I m at the sign");
 		}
-	}
+	} */
 
 	void CheckPlants()
 	{

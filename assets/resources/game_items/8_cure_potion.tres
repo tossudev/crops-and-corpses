@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=10 format=3 uid="uid://c5xluv5j2cu8v"]
 
-[ext_resource type="Texture2D" uid="uid://1jkk5rekyncp" path="res://assets/sprites/items/item_potion.png" id="1_n52q1"]
+[ext_resource type="Texture2D" uid="uid://cltilmkv6rxoj" path="res://assets/sprites/items/item_potion.png" id="1_n52q1"]
 [ext_resource type="Resource" uid="uid://466kaxdtvhse" path="res://assets/resources/game_items/14_mushroom.tres" id="2_0dqn2"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_g1ky8"]
 [ext_resource type="Resource" uid="uid://1ocpajcw4bxt" path="res://assets/resources/game_items/22_poppy.tres" id="4_vht52"]

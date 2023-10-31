@@ -42,7 +42,6 @@ public partial class ZombieAttackFence : ZombieStates
 		}
 		else if(fenceDirection.Length() > 300)
 		{
-			// fence too far to get zombies attention
 			EmitSignal("Transitioned", "idle");
 		}		
 	}
@@ -76,6 +75,7 @@ public partial class ZombieAttackFence : ZombieStates
 			}
 		}
 		
+		//GD.Print("closest : " + closestFence.Name);
 		return closestFence.GlobalPosition - _zombie.GlobalPosition;
 	}
 }

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cb3o7u5viapx8"]
+[gd_scene load_steps=7 format=3 uid="uid://cb3o7u5viapx8"]
 
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_6sli3"]
 [ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://JanitaTests/Images/dirttemp.jpg" id="2_djnfu"]
 [ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://JanitaTests/Images/sprouttemp.png" id="3_d8f8c"]
 [ext_resource type="Texture2D" uid="uid://dvhrkxcw50l7s" path="res://JanitaTests/Images/wheattemp.png" id="4_evnaa"]
+[ext_resource type="Resource" uid="uid://dt5r6o5ibel3e" path="res://assets/resources/game_items/16_wheat.tres" id="5_2mson"]
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="5_gd24g"]
 
 [node name="plant_wheat" type="Node2D" node_paths=PackedStringArray("_col")]
@@ -17,6 +18,7 @@ _seedTexture = ExtResource("2_djnfu")
 _sproutTexture = ExtResource("3_d8f8c")
 _plantTexture = ExtResource("4_evnaa")
 _col = NodePath("Area2D")
+_harvestablePlant = ExtResource("5_2mson")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8

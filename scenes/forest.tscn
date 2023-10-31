@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bge6kx3om5vec"]
+[gd_scene load_steps=26 format=3 uid="uid://cce2sygxgl033"]
 
 [ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_2kn8p"]
 [ext_resource type="Texture2D" uid="uid://bhslt6uqn5lpc" path="res://assets/sprites/tiles/tile_grass.png" id="2_g8id8"]
@@ -14,10 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/player_inventory.tscn" id="12_0u7ds"]
 [ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="13_6xujt"]
 [ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://NikkeTests/scenes/building_menu.tscn" id="14_c1748"]
-[ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="15_grgq1"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="16_rit5n"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="17_ay1u5"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_g46xp"]
+[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://DaniTests/Scenes/sunlight_container.tscn" id="18_j47l1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgdku"]
 texture = ExtResource("2_g8id8")
@@ -220,9 +220,6 @@ _archerTowerIcon = null
 _wellIcon = null
 _player = NodePath("../../Objects/Player")
 
-[node name="NightDayCycleAndZombieSpawn" parent="." node_paths=PackedStringArray("player") instance=ExtResource("15_grgq1")]
-player = NodePath("../Objects/Player")
-
 [node name="farm_manager" parent="." instance=ExtResource("16_rit5n")]
 
 [node name="TaskPoint" type="Marker2D" parent="." groups=["Taskpoint"]]
@@ -268,5 +265,7 @@ position = Vector2(320, 8)
 
 [node name="forest_sign" parent="street_sign_post" index="3"]
 visible = false
+
+[node name="SunlightContainer" parent="." instance=ExtResource("18_j47l1")]
 
 [editable path="street_sign_post"]

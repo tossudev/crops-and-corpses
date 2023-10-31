@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://cplc64alcfytf"]
+
+[ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="1_rc2i4"]
+
+[resource]
+script = ExtResource("1_rc2i4")
+ID = 24
+Name = "Iron Pickaxe"
+StackSize = 1
+craftingRequirements = null

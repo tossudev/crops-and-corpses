@@ -17,10 +17,6 @@ public partial class GatheringObjectController : StaticBody2D
 		_items = new List<Item>(_gatheringObject.items);
 	}
 
-	private void AttackReceived(Attack attack)
-	{
-	}
-
 	private void OnHealth(float health)
 	{
 		if (health >= 0)
@@ -28,17 +24,14 @@ public partial class GatheringObjectController : StaticBody2D
 
 		if (health <= 0)
 		{
-			_sprite.Visible = false;
-
-			// very temp
-			this.GetChild<CollisionShape2D>(2).Disabled = true;
+			QueueFree();
 		}
 	}
 
 	private void DropItems()
 	{
-		int dropAmount = (int)GD.RandRange(1, _gatheringObject.maxDrop);
-		int count = 0;
+		int weight = 3;
+		int dropAmount = GD.RandRange(0, weight) == 0 ? GD.RandRange(1, _maxDrop) : 1;
 
 		for (int i = 0; i < dropAmount; i++)
 		{
@@ -46,11 +39,15 @@ public partial class GatheringObjectController : StaticBody2D
 
 			RawInventoryItem dropItem = new RawInventoryItem(_items[randIndex].ID, _items[randIndex].Name, 1, _items[randIndex].StackSize);
 
-			// create drop item
-			PlayerInventoryController.CreateDroppedItem(dropItem, Vector2.Zero, this);
-			count++;
-		}
+			Node2D droppedIrem = PlayerInventoryController.CreateDroppedItem(dropItem, GlobalPosition, GetParent());
 
-		GD.Print("Dropped " + count + " items");
+			MoveDropItem(droppedIrem);
+		}
+	}
+
+	private void MoveDropItem(Node2D droppedItem)
+	{
+		var tween = GetTree().CreateTween();
+		tween.Parallel().TweenProperty(droppedItem, "position", droppedItem.Position + new Vector2(GD.RandRange(-75, 75), GD.RandRange(-75, 75)), 0.25f);
 	}
 }

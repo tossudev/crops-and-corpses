@@ -11,7 +11,7 @@ public partial class Villager : CharacterBody2D
 	Timer _timer;
 	[Export] DialogueControl dialogueControl;
 	[Export] NavigationAgent2D navMeshAgent;
-	[Export] NavigationRegion2D navRegionArea;
+	//[Export] NavigationRegion2D navRegionArea;
 	Plant _currentPlant;
 	int _plantIndex = 0;
 	float _speed = 0;
@@ -21,7 +21,6 @@ public partial class Villager : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		
 		_timer = new Timer
 		{
 			WaitTime = 1f,
@@ -83,6 +82,7 @@ public partial class Villager : CharacterBody2D
 				break;
 
 			case VillagerStates.FindResourchesTask:
+				GatherResourches();
 				break;
 
 			case VillagerStates.GetHospitalized:
@@ -161,11 +161,26 @@ public partial class Villager : CharacterBody2D
 			_state = VillagerStates.FarmingTask;
 			State();
 		}
+		if(dialogueControl.resourcheTaskStarted)
+		{
+			GD.Print("Finding resourches");
+			_state = VillagerStates.FindResourchesTask;
+			State();
+		}
 		if (dialogueControl.exitDialogue)
 		{
 			_state = VillagerStates.RoamAround;
 			State();
 			dialogueControl.exitDialogue = false;
+		}
+	}
+
+	void GatherResourches()
+	{
+		_targetPosition = GetParent().GetNode<Node2D>("res://scenes/world/street_sign_post").GlobalPosition;
+		if (GlobalPosition.DistanceTo(_targetPosition) < 5)
+		{
+			GD.Print("I m at the sign");
 		}
 	}
 

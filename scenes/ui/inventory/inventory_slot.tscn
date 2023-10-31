@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bdg0mgh0rgkvq"]
 
 [ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="1_nyjms"]
-[ext_resource type="Script" path="res://scripts/ui/InventorySlot.cs" id="1_uxrvb"]
+[ext_resource type="Script" path="res://scripts/ui/inventory/InventorySlot.cs" id="1_uxrvb"]
 [ext_resource type="LabelSettings" uid="uid://d08eb8aufif7l" path="res://assets/resources/labelsettings/inventory_slot_quantity_label.tres" id="3_ytlk2"]
 
 [node name="InventorySlot" type="Control"]

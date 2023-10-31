@@ -20,5 +20,13 @@ public partial class CraftingWindow : Control
 			_isOpen = !_isOpen;
 			_itemArea.Visible = _isOpen;
 		}
+		
+		if (@event.IsActionPressed("close_crafting_window"))
+		{
+			if (!_isOpen) return;
+			
+			_isOpen = false;
+			_itemArea.Visible = false;
+		}
 	}
 }

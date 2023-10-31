@@ -6,5 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="scripts\ui\crafting\" />
+    <Folder Include="scripts\ui\inventory\" />
   </ItemGroup>
 </Project>

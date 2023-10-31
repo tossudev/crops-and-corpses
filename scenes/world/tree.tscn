@@ -18,6 +18,10 @@ script = ExtResource("1_mmcik")
 _gatheringObject = ExtResource("2_es3so")
 _sprite = NodePath("Sprite2D")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-5, -90)
+texture = ExtResource("5_melyl")
+
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("2_nwmmy")]
 _parentScript = NodePath("..")
 _maxHealth = 4.0
@@ -36,7 +40,3 @@ shape = SubResource("RectangleShape2D_ljv8c")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.08165e-12, 8)
 shape = SubResource("RectangleShape2D_trqf4")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-5, -90)
-texture = ExtResource("5_melyl")

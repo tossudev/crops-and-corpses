@@ -34,9 +34,10 @@ public partial class ZombieIdle : ZombieStates
     {
 	    if (_zombie == null) return;
 	    
+		_moveSpeed = ZombieManager.idleSpeed;
 	    _zombie.Velocity = _moveDirection * _moveSpeed;
 
-	    if (_player == null || !RoamingZombie.playerAlive) return;
+	    if (_player == null || !ZombieManager.playerAlive) return;
 	    
 	    Vector2 playerDirection = _player.GlobalPosition - _zombie.GlobalPosition;
 		Vector2 fenceDirection = _fences?.GlobalPosition - _zombie.GlobalPosition ?? Vector2.Zero;
@@ -50,7 +51,6 @@ public partial class ZombieIdle : ZombieStates
 		// 	EmitSignal("Transitioned", "attackfence");
 		// }
     }
-
 
 	private void RandomizeRoam()
 	{

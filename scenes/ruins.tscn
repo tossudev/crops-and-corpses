@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c0o7irtwrvayp"]
+[gd_scene load_steps=27 format=3 uid="uid://c0o7irtwrvayp"]
 
 [ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_qt5pe"]
 [ext_resource type="Texture2D" uid="uid://bhslt6uqn5lpc" path="res://assets/sprites/tiles/tile_grass.png" id="2_b77ta"]
@@ -13,10 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="11_nsdah"]
 [ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/inventory/player_inventory.tscn" id="12_o06t2"]
 [ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="13_swis2"]
-[ext_resource type="PackedScene" path="res://scenes/ui/building_menu.tscn" id="14_mavxg"]
+[ext_resource type="PackedScene" uid="uid://bsoen384q11gf" path="res://scenes/ui/building_menu.tscn" id="14_mavxg"]
+[ext_resource type="PackedScene" uid="uid://c1r6la2nplhqp" path="res://DaniTests/Prefabs/DayCounterLabel.tscn" id="15_dr27d"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="16_ph1ix"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="17_d0coo"]
-[ext_resource type="PackedScene" path="res://DaniTests/Scenes/sunlight_container.tscn" id="18_sprpy"]
+[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://DaniTests/Scenes/sunlight_container.tscn" id="18_sprpy"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_xu2jk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgdku"]
@@ -219,6 +220,8 @@ _wellGhostScene = null
 _archerTowerIcon = null
 _wellIcon = null
 _player = NodePath("../../Objects/Player")
+
+[node name="DayCounterLabel" parent="Overlay" instance=ExtResource("15_dr27d")]
 
 [node name="farm_manager" parent="." instance=ExtResource("16_ph1ix")]
 

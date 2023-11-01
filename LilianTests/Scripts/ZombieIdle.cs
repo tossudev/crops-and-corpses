@@ -46,7 +46,7 @@ public partial class ZombieIdle : ZombieStates
 		{
 			EmitSignal("Transitioned", "chase");			
 		}
-		// else if (fenceDirection.Length() < 1000)
+		// else if (fenceDirection.Length() < 1500 || fenceDirection.Length() > 500)
 		// {
 		// 	EmitSignal("Transitioned", "attackfence");
 		// }

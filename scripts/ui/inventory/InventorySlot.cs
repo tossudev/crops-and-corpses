@@ -52,15 +52,17 @@ public partial class InventorySlot : Control {
 		    // Player has item a slot with item
 		    case true when slotHasItem:
 		    {
-			    if (PlayerInventoryController.selectedItem.isValidIndex &&
-			        slotIndex == PlayerInventoryController.selectedItem.indexInOrganizedInventory)
+			    var selectedItem = PlayerInventoryController.selectedItem;
+			    
+			    if (selectedItem.isValidIndex &&
+			        slotIndex == selectedItem.indexInOrganizedInventory)
 			    {
-				    ToggleVisuals(true);
+				    UpdateSlot(selectedItem, slotIndex);
 				    PlayerInventoryController.DeselectItem();
 			    }
 
-			    else if (slotItem.id == PlayerInventoryController.selectedItem.id) {
-				    PlayerInventoryController.AddItem(PlayerInventoryController.selectedItem, slotIndex, true);
+			    else if (slotItem.id == selectedItem.id) {
+				    PlayerInventoryController.AddItem(selectedItem, slotIndex, true);
 			    }
 
 			    else {
@@ -104,13 +106,28 @@ public partial class InventorySlot : Control {
 		{
 			SaveData.organizedPlayerInventory.Add(slotItem);
 		}
-
+		
+		if (PlayerInventoryController.isItemSelected)
+		{
+			if (PlayerInventoryController.selectedItem.indexInOrganizedInventory == slotIndex)
+			{
+				if (slotItem == null)
+				{
+					PlayerInventoryController.DeselectItem();
+				}
+				else
+				{
+					PlayerInventoryController.SelectItem(slotItem);
+				}
+			}
+		}
+        
 		if (doSync)
 		{
 			SaveData.SyncInventory();
 		}
 		
-		if (rawItem == null) {
+		if (slotItem == null) {
 			slotHasItem = false;
 
 			icon.Texture = null;

@@ -5,18 +5,12 @@ public partial class GlobalTime : Node
 {
 	private float globalTime=0f;
 	private Color sunlight;
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		
-	}
+	private int day=1;
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 
-	}
-	public float GetTime()
+   
+
+    public float GetTime()
 	{
 		return globalTime;
 	}
@@ -32,5 +26,13 @@ public partial class GlobalTime : Node
 	{
 		sunlight = color;
 	}
-	
+	public int GetDay()
+	{
+		return day;
+	}
+	public void SetDay(int currentDay)
+	{
+		day = currentDay;
+		GD.Print(day);
+	}
 }

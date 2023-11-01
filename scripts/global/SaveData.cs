@@ -14,15 +14,17 @@ public partial class SaveData : Node
     static string directoryPath = "";
     static string fullPath = "";
     
+    public const string TOWN_STATS_KEY = "townStats";
     public const string INVENTORY_ITEMS_KEY = "inventoryItems";
     public const string ORGANIZED_INVENTORY_ITEMS_KEY = "organizedInventoryItems";
     
     //---------Modifiable at runtime----------------------
     
+    public static RawTownStats townHallStats = new ();
     public static Array<RawInventoryItem> organizedPlayerInventory = new ();
     public static List<RawInventoryItem> totalInventoryItems = new ();
 
-    public static bool savingInProgress = false;
+    public static bool savingInProgress;
     //---------/Modifiable at runtime----------------------
 
     public override void _Ready()
@@ -32,14 +34,14 @@ public partial class SaveData : Node
         fullPath = directoryPath.PathJoin(SAVEFILENAME);
     }
     
-    static Task Save()
+    static void Save()
     {
         savingInProgress = true;
         if (string.IsNullOrEmpty(directoryPath))
         {
             GD.PrintErr("Save path not set, can't save game!");
             savingInProgress = false;
-            return null;
+            return;
         }
 
         if (!Directory.Exists(directoryPath))
@@ -49,6 +51,7 @@ public partial class SaveData : Node
         
         var rawSaveData = new RawSaveData()
         {
+            townStats = townHallStats,
             inventoryItems = totalInventoryItems,
             organizedInventoryItems = organizedPlayerInventory
         };
@@ -68,7 +71,6 @@ public partial class SaveData : Node
         }
 
         savingInProgress = false;
-        return null;
     }
     
     public static Dictionary LoadData()
@@ -102,12 +104,10 @@ public partial class SaveData : Node
     
     public static void SyncInventory()
     {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         UpdateTotalItemsAndSave();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
     }
 
-    static async Task UpdateTotalItemsAndSave()
+    static async void UpdateTotalItemsAndSave()
     {
         totalInventoryItems.Clear();
 
@@ -128,7 +128,7 @@ public partial class SaveData : Node
 
         if (!savingInProgress)
         {
-            await Save();
+            Save();
         }
         else {
             GD.Print("Saving was queued");
@@ -144,7 +144,7 @@ public partial class SaveData : Node
 
                 if (savingInProgress) continue;
                 
-                await Save();
+                Save();
                 break;
             }
             GD.Print($"Total Queue Time: {savingQueueTime_Ms}ms");

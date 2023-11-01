@@ -4,8 +4,57 @@ using Godot;
 using Godot.Collections;
 
 [System.Serializable]
+public partial class RawTownStats : GodotObject
+{
+    // Town stats
+    [Export] public float totalExperience;
+    public const string TOTAL_EXPERIENCE_KEY = "totalExperience";
+    
+    [Export] public int townHallLevel;
+    public const string TOWN_HALL_LEVEL_KEY = "townHallLevel";
+
+    [Export] public int populationCap;
+    public const string POPULATION_CAP_KEY = "populationCap";
+    
+    
+    
+    // Soldier stats
+    [Export] public int soldierAttackSpeed;
+    public const string SOLDIER_ATTACK_SPEED_KEY = "soldierAttackSpeed";
+
+    [Export] public int soldierAccuracy;
+    public const string SOLDIER_ACCURACY_KEY = "soldierAccuracy";
+    
+    
+    
+    // Farmer stats
+    [Export] public int farmerWalkSpeed;
+    public const string FARMER_WALK_SPEED_KEY = "farmerWalkSpeed";
+
+    [Export] public int farmerMaxFarms;
+    public const string FARMER_MAX_FARMS_KEY = "farmerMaxFarms";
+
+    [Export] public int pesticideEffectiveness;
+    public const string PESTICIDE_EFFECTIVENESS_KEY = "pesticideEffectiveness";
+    
+    // Walls
+    [Export] public int wallHP;
+    public const string WALL_HP_KEY = "wallHP";
+
+    [Export] public bool spikyWalls;
+    public const string SPIKY_WALLS_KEY = "spikyWalls";
+}
+
+[System.Serializable]
 public partial class RawInventoryItem : GodotObject
 {
+    // ITEM KEYS
+    public const string ITEM_ID_KEY = "id";
+    public const string ITEM_NAME_KEY = "name";
+    public const string ITEM_QUANTITY_KEY = "quantity";
+    public const string ITEM_STACKSIZE_KEY = "stackSize";
+    public const string ITEM_ORGANIZED_INDEX_KEY = "indexInOrganizedInventory";
+    
     public int id;
     public string name;
     public int quantity;
@@ -30,28 +79,40 @@ public partial class RawInventoryItem : GodotObject
 [System.Serializable]
 public partial class RawSaveData : GodotObject
 {
-    public const string ITEM_ID_KEY = "id";
-    public const string ITEM_NAME_KEY = "name";
-    public const string ITEM_QUANTITY_KEY = "quantity";
-    public const string ITEM_STACKSIZE_KEY = "stackSize";
-    public const string ITEM_ORGANIZED_INDEX_KEY = "indexInOrganizedInventory";
-    
+    public RawTownStats townStats = new ();
     public List<RawInventoryItem> inventoryItems = new ();
     public Array<RawInventoryItem> organizedInventoryItems = new ();
     
     public Dictionary GetFullDataDictionary()
     {
         Dictionary fullDictionary = new();
-
+        
+        
+        // Town stats
+        fullDictionary.Add(SaveData.TOWN_STATS_KEY,new Dictionary()
+        {
+            { RawTownStats.TOTAL_EXPERIENCE_KEY, townStats.totalExperience },
+            { RawTownStats.TOWN_HALL_LEVEL_KEY, townStats.townHallLevel },
+            { RawTownStats.POPULATION_CAP_KEY, townStats.populationCap },
+            { RawTownStats.SOLDIER_ATTACK_SPEED_KEY, townStats.soldierAttackSpeed },
+            { RawTownStats.SOLDIER_ACCURACY_KEY, townStats.soldierAccuracy },
+            { RawTownStats.FARMER_WALK_SPEED_KEY, townStats.farmerWalkSpeed },
+            { RawTownStats.FARMER_MAX_FARMS_KEY, townStats.farmerMaxFarms },
+            { RawTownStats.PESTICIDE_EFFECTIVENESS_KEY, townStats.pesticideEffectiveness },
+            { RawTownStats.WALL_HP_KEY, townStats.wallHP },
+            { RawTownStats.SPIKY_WALLS_KEY, townStats.spikyWalls }
+        });
+        
+        
         // All items in inventory
         Dictionary inventoryItemsDict = new();
         inventoryItems.ForEach(item =>
         {
             inventoryItemsDict.Add(item.id, new Dictionary()
             {
-                { ITEM_NAME_KEY, item.name },
-                { ITEM_QUANTITY_KEY, item.quantity },
-                {ITEM_STACKSIZE_KEY, item.stackSize}
+                { RawInventoryItem.ITEM_NAME_KEY, item.name },
+                { RawInventoryItem.ITEM_QUANTITY_KEY, item.quantity },
+                { RawInventoryItem.ITEM_STACKSIZE_KEY, item.stackSize}
             });
         });
         fullDictionary.Add(SaveData.INVENTORY_ITEMS_KEY,inventoryItemsDict);
@@ -66,11 +127,11 @@ public partial class RawSaveData : GodotObject
             
             organizedInventoryItemsDictArray.Add(new Dictionary()
             {
-                { ITEM_ID_KEY, rawInventoryItem.id },
-                { ITEM_NAME_KEY, rawInventoryItem.name },
-                { ITEM_QUANTITY_KEY, rawInventoryItem.quantity },
-                {ITEM_STACKSIZE_KEY, rawInventoryItem.stackSize},
-                {ITEM_ORGANIZED_INDEX_KEY, rawInventoryItem.indexInOrganizedInventory}
+                { RawInventoryItem.ITEM_ID_KEY, rawInventoryItem.id },
+                { RawInventoryItem.ITEM_NAME_KEY, rawInventoryItem.name },
+                { RawInventoryItem.ITEM_QUANTITY_KEY, rawInventoryItem.quantity },
+                { RawInventoryItem.ITEM_STACKSIZE_KEY, rawInventoryItem.stackSize},
+                { RawInventoryItem.ITEM_ORGANIZED_INDEX_KEY, rawInventoryItem.indexInOrganizedInventory}
             });
         }
         

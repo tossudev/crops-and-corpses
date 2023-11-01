@@ -34,14 +34,13 @@ public partial class SaveData : Node
         fullPath = directoryPath.PathJoin(SAVEFILENAME);
     }
     
-    static void Save()
+    static async Task Save()
     {
         savingInProgress = true;
         if (string.IsNullOrEmpty(directoryPath))
         {
             GD.PrintErr("Save path not set, can't save game!");
             savingInProgress = false;
-            return;
         }
 
         if (!Directory.Exists(directoryPath))
@@ -63,7 +62,7 @@ public partial class SaveData : Node
         
         try
         {
-            File.WriteAllText(fullPath, json);
+            await File.WriteAllTextAsync(fullPath, json);
         }
         catch (Exception e)
         {
@@ -73,15 +72,17 @@ public partial class SaveData : Node
         savingInProgress = false;
     }
     
-    public static Dictionary LoadData()
+    public static async Task<Dictionary> LoadData()
     {
         if (!File.Exists(fullPath)) return null;
 
+        await TaskExtensions.SuspendWhile(() => savingInProgress);
+        
         string data = "";
         
         try
         {
-            data = File.ReadAllText(fullPath);
+            data = await File.ReadAllTextAsync(fullPath);
         }
         catch (Exception e)
         {
@@ -92,19 +93,20 @@ public partial class SaveData : Node
         
         Error error = loadedJson.Parse(data);
 
-        if (error != Error.Ok)
-        {
-            GD.PrintErr(error, ": SaveData Load");
-            
-            return null;
-        }
-
-        return (Dictionary) loadedJson.Data;
+        if (error == Error.Ok) return (Dictionary)loadedJson.Data;
+        
+        GD.PrintErr(error, ": SaveData Load");
+        return null;
     }
     
     public static void SyncInventory()
     {
         UpdateTotalItemsAndSave();
+    }
+
+    public static async void SyncTownStats()
+    {
+        await Save();
     }
 
     static async void UpdateTotalItemsAndSave()

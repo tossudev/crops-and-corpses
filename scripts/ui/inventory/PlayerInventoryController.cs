@@ -126,7 +126,7 @@ public partial class PlayerInventoryController : Control {
 			((InventorySlot)itemSlot).UpdateSlot(null, i, false);
 		}
 		
-		await PlayerInventoryData.ReadInventoryDataFromFile(SaveData.LoadData());
+		await PlayerInventoryData.ReadInventoryDataFromFile(await SaveData.LoadData());
         
 		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++)
 		{

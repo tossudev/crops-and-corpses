@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FarmerUpgrade" load_steps=2 format=3 uid="uid://cqokklhiohslh"]
+
+[ext_resource type="Script" path="res://scripts/resource_classes/upgrades/FarmerUpgrade.cs" id="1_oxtwq"]
+
+[resource]
+script = ExtResource("1_oxtwq")
+_farmerWalkSpeed = 0
+_farmerMaxFarms = 0
+_pesticideEffectiveness = 0
+_id = 0

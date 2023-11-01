@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="TownStats" load_steps=2 format=3 uid="uid://soudkhba111j"]
+
+[ext_resource type="Script" path="res://scripts/resource_classes/TownStats.cs" id="1_ehs86"]
+
+[resource]
+script = ExtResource("1_ehs86")
+_totalExperience = 0.0
+_townHallLevel = 0
+_populationCap = 1
+_soldierAttackSpeed = 1
+_soldierAccuracy = 50
+_farmerWalkSpeed = 1
+_farmerMaxFarms = 3
+_pesticideEffectiveness = 1
+_wallHP = 15
+_spikyWalls = false
+_houseHP = 0

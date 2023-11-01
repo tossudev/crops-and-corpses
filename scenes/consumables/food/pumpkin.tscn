@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d1dkkqdm6w4fv"]
 
 [ext_resource type="Script" path="res://scripts/World/Heal.cs" id="1_nh64f"]
-[ext_resource type="Resource" uid="uid://bwqnnm74g8l7l" path="res://assets/resources/game_items/12_pumpkin.tres" id="2_tte81"]
+[ext_resource type="Resource" uid="uid://bwqnnm74g8l7l" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/103_pumpkin.tres" id="2_tte81"]
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="3_i854h"]
 
 [node name="pumpkin" type="Node2D"]

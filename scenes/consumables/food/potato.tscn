@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bcmw0lume6obc"]
 
 [ext_resource type="Script" path="res://scripts/World/Heal.cs" id="1_ew2ou"]
-[ext_resource type="Resource" uid="uid://bfdw482ap5ams" path="res://assets/resources/game_items/10_potato.tres" id="2_cs0fu"]
+[ext_resource type="Resource" uid="uid://bfdw482ap5ams" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/101_potato.tres" id="2_cs0fu"]
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="3_l4bpd"]
 
 [node name="potato" type="Node2D"]

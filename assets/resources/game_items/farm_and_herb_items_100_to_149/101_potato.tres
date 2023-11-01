@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://bfdw482ap5ams"]
+
+[ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="1_ecdjs"]
+
+[resource]
+script = ExtResource("1_ecdjs")
+ID = 101
+Name = "Potato"
+StackSize = 10
+craftingRequirements = Array[Object]([])

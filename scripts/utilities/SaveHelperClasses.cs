@@ -7,42 +7,67 @@ using Godot.Collections;
 public partial class RawTownStats : GodotObject
 {
     // Town stats
-    [Export] public float totalExperience;
+    public float totalExperience;
     public const string TOTAL_EXPERIENCE_KEY = "totalExperience";
     
-    [Export] public int townHallLevel;
+    public int townHallLevel;
     public const string TOWN_HALL_LEVEL_KEY = "townHallLevel";
 
-    [Export] public int populationCap;
+    public int populationCap;
     public const string POPULATION_CAP_KEY = "populationCap";
     
     
     
     // Soldier stats
-    [Export] public int soldierAttackSpeed;
+    public int soldierAttackSpeed;
     public const string SOLDIER_ATTACK_SPEED_KEY = "soldierAttackSpeed";
 
-    [Export] public int soldierAccuracy;
+    public int soldierAccuracy;
     public const string SOLDIER_ACCURACY_KEY = "soldierAccuracy";
     
     
     
     // Farmer stats
-    [Export] public int farmerWalkSpeed;
+    public int farmerWalkSpeed;
     public const string FARMER_WALK_SPEED_KEY = "farmerWalkSpeed";
 
-    [Export] public int farmerMaxFarms;
+    public int farmerMaxFarms;
     public const string FARMER_MAX_FARMS_KEY = "farmerMaxFarms";
 
-    [Export] public int pesticideEffectiveness;
+    public int pesticideEffectiveness;
     public const string PESTICIDE_EFFECTIVENESS_KEY = "pesticideEffectiveness";
     
     // Walls
-    [Export] public int wallHP;
+    public int wallHP;
     public const string WALL_HP_KEY = "wallHP";
 
-    [Export] public bool spikyWalls;
+    public bool spikyWalls;
     public const string SPIKY_WALLS_KEY = "spikyWalls";
+
+    // Houses
+    public int houseHP;
+    public const string HOUSE_HP_KEY = "houseHP";
+    
+    public RawTownStats () {}
+
+    public RawTownStats(float totalExperience,int townHallLevel, int populationCap,
+        int soldierAttackSpeed, int soldierAccuracy,
+        int farmerWalkSpeed, int farmerMaxFarms, int pesticideEffectiveness,
+        int wallHP, bool spikyWalls,
+        int houseHP)
+    {
+        this.totalExperience = totalExperience;
+        this.townHallLevel = townHallLevel;
+        this.populationCap = populationCap;
+        this.soldierAttackSpeed = soldierAttackSpeed;
+        this.soldierAccuracy = soldierAccuracy;
+        this.farmerWalkSpeed = farmerWalkSpeed;
+        this.farmerMaxFarms = farmerMaxFarms;
+        this.pesticideEffectiveness = pesticideEffectiveness;
+        this.wallHP = wallHP;
+        this.spikyWalls = spikyWalls;
+        this.houseHP = houseHP;
+    }
 }
 
 [System.Serializable]
@@ -100,7 +125,8 @@ public partial class RawSaveData : GodotObject
             { RawTownStats.FARMER_MAX_FARMS_KEY, townStats.farmerMaxFarms },
             { RawTownStats.PESTICIDE_EFFECTIVENESS_KEY, townStats.pesticideEffectiveness },
             { RawTownStats.WALL_HP_KEY, townStats.wallHP },
-            { RawTownStats.SPIKY_WALLS_KEY, townStats.spikyWalls }
+            { RawTownStats.SPIKY_WALLS_KEY, townStats.spikyWalls },
+            { RawTownStats.HOUSE_HP_KEY, townStats.houseHP }
         });
         
         

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Item" load_steps=10 format=3 uid="uid://c5xluv5j2cu8v"]
+
+[ext_resource type="Texture2D" uid="uid://cltilmkv6rxoj" path="res://assets/sprites/items/item_potion.png" id="1_fyvj1"]
+[ext_resource type="Resource" uid="uid://466kaxdtvhse" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/105_mushroom.tres" id="2_tabsg"]
+[ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_i6s6o"]
+[ext_resource type="Resource" uid="uid://1ocpajcw4bxt" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/113_poppy.tres" id="4_dyu4m"]
+[ext_resource type="Resource" uid="uid://djv78bsvabyah" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/109_maize.tres" id="5_xq4wj"]
+[ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="6_6qikc"]
+
+[sub_resource type="Resource" id="Resource_rhach"]
+script = ExtResource("3_i6s6o")
+item = ExtResource("2_tabsg")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_b8sxc"]
+script = ExtResource("3_i6s6o")
+item = ExtResource("4_dyu4m")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_6qlnq"]
+script = ExtResource("3_i6s6o")
+item = ExtResource("5_xq4wj")
+quantity = 1
+
+[resource]
+script = ExtResource("6_6qikc")
+ID = 300
+Name = "Cure Potion"
+IconTexture = ExtResource("1_fyvj1")
+StackSize = 3
+craftingRequirements = Array[Object]([SubResource("Resource_rhach"), SubResource("Resource_b8sxc"), SubResource("Resource_6qlnq")])

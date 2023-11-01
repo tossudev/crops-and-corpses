@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bwqnnm74g8l7l"]
+
+[ext_resource type="Texture2D" uid="uid://dqgscu3bl0gng" path="res://assets/sprites/items/item_pumpkin.png" id="1_uag2q"]
+[ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="2_fqmwj"]
+
+[resource]
+script = ExtResource("2_fqmwj")
+ID = 103
+Name = "Pumpkin"
+IconTexture = ExtResource("1_uag2q")
+StackSize = 6
+craftingRequirements = Array[Object]([])

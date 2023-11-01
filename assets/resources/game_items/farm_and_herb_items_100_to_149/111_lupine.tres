@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://bpa3bx68ohi5"]
+
+[ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="1_bx2ff"]
+
+[resource]
+script = ExtResource("1_bx2ff")
+ID = 111
+Name = "Lupine"
+StackSize = 12
+craftingRequirements = Array[Object]([])

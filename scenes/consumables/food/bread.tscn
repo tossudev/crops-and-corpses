@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://csdmv5fy2tvqa"]
 
 [ext_resource type="Script" path="res://scripts/World/Heal.cs" id="1_bysqr"]
-[ext_resource type="Resource" uid="uid://c3a2egsixn5e8" path="res://assets/resources/game_items/25_bread.tres" id="2_kl7s7"]
+[ext_resource type="Resource" uid="uid://dkln62c0vsgk8" path="res://assets/resources/game_items/food_items_250_to_299/250_bread.tres" id="2_qyl5m"]
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="6_dvnk2"]
 
 [node name="bread" type="Node2D"]
 z_index = 2
 script = ExtResource("1_bysqr")
-_healItem = ExtResource("2_kl7s7")
+_healItem = ExtResource("2_qyl5m")
 _healAmount = 20.0
 _healMessage = "You eat freshly baked bread."
 

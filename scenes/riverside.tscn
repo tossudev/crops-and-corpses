@@ -1,6 +1,5 @@
-[gd_scene load_steps=27 format=3 uid="uid://bpjn65wh8068y"]
+[gd_scene load_steps=26 format=3 uid="uid://bpjn65wh8068y"]
 
-[ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_ufw31"]
 [ext_resource type="Texture2D" uid="uid://bhslt6uqn5lpc" path="res://assets/sprites/tiles/tile_grass.png" id="2_oal4l"]
 [ext_resource type="Texture2D" uid="uid://n8iftcgk0ti0" path="res://assets/sprites/tiles/Sand_tile.png" id="3_cp063"]
 [ext_resource type="Texture2D" uid="uid://dbgwlhprokvwi" path="res://assets/sprites/tiles/Dirt_tile.png" id="4_yirag"]
@@ -13,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="11_q5jrp"]
 [ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/inventory/player_inventory.tscn" id="12_s7c1g"]
 [ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="13_atrpu"]
-[ext_resource type="PackedScene" uid="uid://bsoen384q11gf" path="res://scenes/ui/building_menu.tscn" id="14_b6vhh"]
+[ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://scenes/ui/building_menu.tscn" id="14_b6vhh"]
 [ext_resource type="PackedScene" uid="uid://c1r6la2nplhqp" path="res://DaniTests/Prefabs/DayCounterLabel.tscn" id="15_mfbf4"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="16_hutdy"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="17_eiwoh"]
@@ -60,7 +59,6 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="Riverside" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_ufw31")
 
 [node name="GroundTiles" type="TileMap" parent="."]
 z_index = -10

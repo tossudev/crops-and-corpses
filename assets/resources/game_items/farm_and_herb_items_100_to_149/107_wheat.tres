@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://dt5r6o5ibel3e"]
+
+[ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="1_rht2u"]
+
+[resource]
+script = ExtResource("1_rht2u")
+ID = 107
+Name = "Wheat"
+StackSize = 50
+craftingRequirements = Array[Object]([])

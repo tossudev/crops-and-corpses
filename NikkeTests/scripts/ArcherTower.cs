@@ -21,6 +21,7 @@ public partial class ArcherTower : Node2D
     Attack _attack;
     float _speed;
     string _targetGroup;
+    float _attackRange;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -28,6 +29,7 @@ public partial class ArcherTower : Node2D
         power = 1f;
         _speed = 800;
         _targetGroup = "enemy";
+        _attackRange = _speed * power * (_projectile.airtime - _projectile.despawnTime);
 
         _attack = new Attack
         {
@@ -84,7 +86,7 @@ public partial class ArcherTower : Node2D
             }
         }
 
-        if (_closestEnemy == null) 
+        if (_closestEnemy == null || _projectileStartPosition.GlobalPosition.DistanceTo(_closestEnemy.GlobalPosition) > _attackRange) 
         {
             return false;
         }
@@ -95,6 +97,7 @@ public partial class ArcherTower : Node2D
         }
 
         
+        // For testing purposes..
         Node2D _player = GetNode("/root/Town/Objects/Player") as Node2D;
         _attack.direction = _projectileStartPosition.GlobalPosition.DirectionTo(_player.GlobalPosition);
 

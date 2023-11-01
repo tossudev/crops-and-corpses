@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://f5m7wypxd5t7"]
+[gd_scene load_steps=14 format=3 uid="uid://bsoen384q11gf"]
 
 [ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMenu.cs" id="1_1usej"]
 [ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://scenes/farm/farm_plot.tscn" id="2_6b0va"]

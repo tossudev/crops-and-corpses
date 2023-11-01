@@ -69,9 +69,6 @@ public partial class BuildingMenu : Control
 	{
         if (Input.IsActionJustPressed("ui_cancel"))
         {
-            //_player.SetPhysicsProcess(true);
-            //_buildMenu.Hide();
-            //_buildButton.ReleaseFocus();
             _buildButton.ButtonPressed = false;
         }
     }

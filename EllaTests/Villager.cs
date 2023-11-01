@@ -9,18 +9,27 @@ public partial class Villager : CharacterBody2D
 	VillagerStates _state;
 	Vector2 _targetPosition;
 	Timer _timer;
+	Timer _resourcheGatherTime;
+
 	[Export] DialogueControl dialogueControl;
 	[Export] NavigationAgent2D navMeshAgent;
 	//[Export] NavigationRegion2D navRegionArea;
 	Plant _currentPlant;
+	Node2D _streetSign;
+	Sprite2D _villagerSprite;
 	int _plantIndex = 0;
 	float _speed = 0;
 	bool collision = false;
+	bool _timerStopped = false;
 	public bool dialogueWindow = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		_streetSign = GetParent().GetParent().GetNode<Node2D>("StreetSignSpot");
+		_villagerSprite = GetNode<Sprite2D>("Sprite2D");
+		//_resourcheGatherTime = GetNode<Timer>("Timer");
+
 		_timer = new Timer
 		{
 			WaitTime = 1f,
@@ -52,8 +61,7 @@ public partial class Villager : CharacterBody2D
 		if (!dialogueControl.Visible && GlobalPosition.DistanceTo(_targetPosition) > 5)
 		{
 			Movement(_targetPosition);
-		}
-		
+		}	
 	}
 
 	public VillagerStates GetVillagerStates()
@@ -82,7 +90,7 @@ public partial class Villager : CharacterBody2D
 				break;
 
 			case VillagerStates.FindResourchesTask:
-				//GatherResourches();
+				GatherResourches();
 				break;
 
 			case VillagerStates.GetHospitalized:
@@ -110,6 +118,11 @@ public partial class Villager : CharacterBody2D
 		//GD.Print("Touching something");
 	}
 
+	public void _on_timer_timeout()
+	{
+		_timerStopped = true;
+	}
+
 	void Movement(Vector2 target)
 	{
 		_speed = 100;
@@ -120,6 +133,8 @@ public partial class Villager : CharacterBody2D
 
 	void RoamAround()
 	{
+		dialogueControl.resourcheTaskStarted = false;
+		dialogueControl.farmingTaskStarted = false;
 		//navMeshAgent.TargetPosition = _targetPosition;
 
 		// Don't delete
@@ -142,6 +157,8 @@ public partial class Villager : CharacterBody2D
 		}
 	}
 
+
+	//Incase u reading this and wondering what is this Im testing diff movement bc its **** 
 	Vector2 RandomTargetPosition()
 	{
 		float rangeX = 1500;
@@ -161,12 +178,12 @@ public partial class Villager : CharacterBody2D
 			_state = VillagerStates.FarmingTask;
 			State();
 		}
-/* 		if(dialogueControl.resourcheTaskStarted)
+ 		if(dialogueControl.resourcheTaskStarted)
 		{
 			GD.Print("Finding resourches");
 			_state = VillagerStates.FindResourchesTask;
 			State();
-		} */
+		}
 		if (dialogueControl.exitDialogue)
 		{
 			_state = VillagerStates.RoamAround;
@@ -175,14 +192,35 @@ public partial class Villager : CharacterBody2D
 		}
 	}
 
-/* 	void GatherResourches()
+ 	void GatherResourches()
 	{
-		_targetPosition = GetParent().GetNode<Node2D>("res://scenes/world/street_sign_post").GlobalPosition;
+		bool _taskStarted = false;
+		_targetPosition = _streetSign.GlobalPosition;
 		if (GlobalPosition.DistanceTo(_targetPosition) < 5)
 		{
-			GD.Print("I m at the sign");
+			_taskStarted = true;
+			_villagerSprite.Visible = false;
 		}
-	} */
+		if(_taskStarted)
+		{
+			_resourcheGatherTime = new Timer{
+				WaitTime = 5f,
+			};
+			AddChild(_resourcheGatherTime);
+			_resourcheGatherTime.Start();
+			_resourcheGatherTime.Timeout += _on_timer_timeout;
+
+			if(_timerStopped == true)
+			{
+				GD.Print("timerstopped");
+				_resourcheGatherTime.QueueFree();
+				_resourcheGatherTime.Free();
+				_timerStopped = false;
+				_villagerSprite.Visible = true;
+				_state = VillagerStates.RoamAround;
+			} 
+		}
+	} 
 
 	void CheckPlants()
 	{
@@ -218,6 +256,7 @@ public partial class Villager : CharacterBody2D
 			else
 			{
 				_state = VillagerStates.RoamAround;
+				dialogueControl.farmingTaskStarted = false;
 				return;
 			}
 		}
@@ -232,14 +271,11 @@ public partial class Villager : CharacterBody2D
 			{
 				_currentPlant.CurePlant();
 			}
-
 			if (_currentPlant.GetGrowthState() != GrowthState.IsWilting && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
 			 _currentPlant.GetGrowthState() != GrowthState.WaitWatering && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
 			_currentPlant.GetGrowthState() != GrowthState.IsInfested && _plantIndex < FarmManager.instance.GetPlantedPlants().Count)
 			{
 				_plantIndex++;
-				//_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
-
 			}
 			if (_plantIndex == FarmManager.instance.GetPlantedPlants().Count)
 			{
@@ -250,7 +286,7 @@ public partial class Villager : CharacterBody2D
 
 	void FollowPlayer()
 	{
-		//not working
+		//not working (yet)
 		_targetPosition = GetParent().GetNode<CharacterBody2D>("Forest/Objects/Player").GlobalPosition;
 	}
 }

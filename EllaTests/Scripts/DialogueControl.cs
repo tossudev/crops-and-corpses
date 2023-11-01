@@ -8,6 +8,8 @@ public  partial class DialogueControl : Control
 	Button _buttonOpt1;
 	Button _buttonOpt2;
 	Button _buttonOpt3;
+	Button _buttonOpt4;
+	Button _buttonOpt5;
 	[Export] Villager _villager;
 	RichTextLabel _nameText;
 	RichTextLabel _text;
@@ -25,6 +27,8 @@ public  partial class DialogueControl : Control
 		_buttonOpt1 = GetNode<Button>("ColorRect/Button1");
 		_buttonOpt2 = GetNode<Button>("ColorRect/Button2");
 		_buttonOpt3 = GetNode<Button>("ColorRect/Button3");
+		_buttonOpt4 = GetNode<Button>("ColorRect/Button4");
+		_buttonOpt5 = GetNode<Button>("ColorRect/Button5");
 
 		_nameText = GetNode<RichTextLabel>("ColorRect/Name");
 		_text = GetNode<RichTextLabel>("ColorRect/Text");
@@ -35,6 +39,8 @@ public  partial class DialogueControl : Control
 		_buttonOpt2.Text = "Nevermind";
 		_buttonOpt3.Text = "Find some resourches";
 
+		_buttonOpt4.Visible = false;
+		_buttonOpt5.Visible = false;
 		Visible = false;
 
 	}
@@ -75,7 +81,25 @@ public  partial class DialogueControl : Control
 	public void _on_button_3_button_up()
 	{
 		resourcheTaskStarted = true;
+		ResourcheGathering();
+	}
+
+	public void _on_button_4_button_up()
+	{
+		if(resourcheTaskStarted)
+		{
+			GD.Print("Finding stone");
+		}
 		Visible = false;
+	}
+	public void _on_button_5_button_up()
+	{
+		if(resourcheTaskStarted)
+		{
+			GD.Print("Finding Wood");
+		}
+		Visible = false;
+
 	}
 
 	private void DialogueWindowVisible()
@@ -90,15 +114,33 @@ public  partial class DialogueControl : Control
 			_buttonOpt1.Text = "Yes, I need help with farm";
 			_buttonOpt2.Text = "Nevermind";
 			_buttonOpt3.Text = "Find some resourches";
+			_buttonOpt3.Visible = true;
+			_buttonOpt4.Visible = false;
+			_buttonOpt5.Visible = false;
 			_buttonOpt1.Visible = true;
 		}
 
-/* 		if (NPC.GetVillagerStates() == VillagerManager.VillagerStates.RoamAround)
+ 		if (_villager.GetVillagerStates() != VillagerManager.VillagerStates.RoamAround)
 		{
-			_text.Text = "I'm busy";
+			_text.Text = "I'M BUSY";
 			_buttonOpt2.Text = "Nevermind";
 
 			_buttonOpt1.Visible = false;
-		} */
+			_buttonOpt3.Visible = false;
+			_buttonOpt4.Visible = false;
+		} 
+	}
+
+	void ResourcheGathering()
+	{
+		_text.Text = "What would you like me to find?";
+		_buttonOpt5.Text = "Wood";
+		_buttonOpt2.Text = "Nevermind";
+		_buttonOpt4.Text = "Stone";
+		_buttonOpt3.Visible = false;
+		_buttonOpt1.Visible = false;
+		_buttonOpt4.Visible = true;
+		_buttonOpt5.Visible = true;
+		Visible = true;
 	}
 }

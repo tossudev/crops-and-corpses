@@ -14,3 +14,4 @@ _farmerMaxFarms = 3
 _pesticideEffectiveness = 1
 _wallHP = 15
 _spikyWalls = false
+_houseHP = 0

@@ -3,12 +3,14 @@ using System;
 
 public partial class TownManager : Node2D
 {
-	[Export] TownStats defaultStats;
+	TownStats defaultStats;
+	const string DEFAULT_STATS_PATH = "res://assets/resources/town_stats_upgrades/town_starting_stats.tres";
 
 	public RawTownStats currentTownStats = new();
 	
 	public override void _Ready()
 	{
+		defaultStats = ResourceLoader.Load<TownStats>(DEFAULT_STATS_PATH);
 		currentTownStats = SaveData.townHallStats;
 		if (currentTownStats.totalExperience == 0f)
 		{

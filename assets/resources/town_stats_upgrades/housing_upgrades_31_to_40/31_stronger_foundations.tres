@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_udmdn")
-_populationCap = 0
+_houseHP = 0
 _id = 0
+_craftingRequirements = null

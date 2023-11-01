@@ -69,7 +69,7 @@ public partial class PlayerInventoryData : Node
         PlayerInventoryController.AddItem(
             new RawInventoryItem(iron.ID, iron.Name, 20, iron.StackSize));
         
-        Item curePotion = ItemData.GetItemById(8);
+        Item curePotion = ItemData.GetItemById(300);
         PlayerInventoryController.AddItem(
             new RawInventoryItem(curePotion.ID, curePotion.Name, 15, curePotion.StackSize));
         

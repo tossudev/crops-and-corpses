@@ -7,3 +7,4 @@ script = ExtResource("1_dicta")
 _soldierAttackSpeed = 0
 _soldierAccuracy = 0
 _id = 0
+_craftingRequirements = null

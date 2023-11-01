@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://466kaxdtvhse"]
+
+[ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="1_fwjrf"]
+
+[resource]
+script = ExtResource("1_fwjrf")
+ID = 105
+Name = "Mushroom"
+StackSize = 12
+craftingRequirements = Array[Object]([])

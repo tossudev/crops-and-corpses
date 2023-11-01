@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PathContainer" load_steps=8 format=3 uid="uid://xriv8ov5b04y"]
+
+[ext_resource type="Resource" uid="uid://cw543gd31kb5l" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/farm_and_herb_items_keeper.tres" id="1_ntse0"]
+[ext_resource type="Script" path="res://scripts/utilities/PathContainer.cs" id="1_ubpon"]
+[ext_resource type="Resource" uid="uid://40x3cawhy7mm" path="res://assets/resources/game_items/food_items_250_to_299/food_items_keeper.tres" id="2_qmb2b"]
+[ext_resource type="Resource" uid="uid://bbx24v26sw1hf" path="res://assets/resources/game_items/potion_items_300_to_349/potion_items_keeper.tres" id="3_dms7d"]
+[ext_resource type="Resource" uid="uid://com1xyqmds5kf" path="res://assets/resources/game_items/resource_items_0_to_99/resource_items_keeper.tres" id="4_av524"]
+[ext_resource type="Resource" uid="uid://ktvi5rqh7b4v" path="res://assets/resources/game_items/tool_items_350_449/tool_items_keeper.tres" id="5_2s1bh"]
+[ext_resource type="Resource" uid="uid://bttfjju0hltoe" path="res://assets/resources/game_items/weapon_items_150_to_249/weapon_items_keeper.tres" id="6_gw7ld"]
+
+[resource]
+script = ExtResource("1_ubpon")
+_paths = Array[Object]([ExtResource("1_ntse0"), ExtResource("2_qmb2b"), ExtResource("3_dms7d"), ExtResource("4_av524"), ExtResource("5_2s1bh"), ExtResource("6_gw7ld")])

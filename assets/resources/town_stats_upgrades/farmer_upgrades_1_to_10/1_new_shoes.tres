@@ -8,3 +8,4 @@ _farmerWalkSpeed = 0
 _farmerMaxFarms = 0
 _pesticideEffectiveness = 0
 _id = 0
+_craftingRequirements = null

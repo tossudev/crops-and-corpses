@@ -9,7 +9,8 @@ public partial class InventorySlot : Control {
 	public RawInventoryItem slotItem;
 	[Export] public bool isCraftingSlot;
 	bool slotHasItem;
-	public int slotIndex = -1;
+    int _slotIndex;
+	public int slotIndex => _slotIndex;
 
 
 	public override void _Ready() {
@@ -57,7 +58,7 @@ public partial class InventorySlot : Control {
 			    if (selectedItem.isValidIndex &&
 			        slotIndex == selectedItem.indexInOrganizedInventory)
 			    {
-				    UpdateSlot(selectedItem, slotIndex);
+				    UpdateSlot(selectedItem);
 				    PlayerInventoryController.DeselectItem();
 			    }
 
@@ -89,14 +90,18 @@ public partial class InventorySlot : Control {
 	    quantityLabel.Visible = isOn;
     }
 
-	public void UpdateSlot(RawInventoryItem rawItem, int itemIndex, bool doSync = true)
+    public void InitiateSlot(int index)
+    {
+	    _slotIndex = index;
+    }
+    
+	public void UpdateSlot(RawInventoryItem rawItem, bool doSync = true)
 	{
 		ToggleVisuals(true);
-		slotItem = (rawItem != null) 
-			? new RawInventoryItem(rawItem.id, rawItem.name, rawItem.quantity, rawItem.stackSize, itemIndex) 
+
+		slotItem = (rawItem != null)
+			? new RawInventoryItem(rawItem.id, rawItem.name, rawItem.quantity, rawItem.stackSize, slotIndex)
 			: null;
-		
-		slotIndex = itemIndex;
         
 		if (SaveData.organizedPlayerInventory.Count > slotIndex)
 		{

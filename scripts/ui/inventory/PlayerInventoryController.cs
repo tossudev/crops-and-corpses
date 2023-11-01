@@ -122,8 +122,11 @@ public partial class PlayerInventoryController : Control {
 			else {
 				_inventoryGrid.AddChild(itemSlot);
 			}
-            
-			((InventorySlot)itemSlot).UpdateSlot(null, i, false);
+
+			var inventorySlot = (InventorySlot)itemSlot;
+			
+			inventorySlot?.InitiateSlot(i);
+			inventorySlot?.UpdateSlot(null, false);
 		}
 		
 		await PlayerInventoryData.ReadInventoryDataFromFile(await SaveData.LoadData());
@@ -139,11 +142,11 @@ public partial class PlayerInventoryController : Control {
 			
 			if (IsSlotInHotbar(i)) {
 				_hotbarGrid.GetChild<InventorySlot>(i - _hotbarStartIndex)
-					.UpdateSlot(SaveData.organizedPlayerInventory[i], slotIdx, false);
+					.UpdateSlot(SaveData.organizedPlayerInventory[i], false);
 			}
 			else {
 				_inventoryGrid.GetChild<InventorySlot>(i)
-					.UpdateSlot(SaveData.organizedPlayerInventory[i], slotIdx, false);
+					.UpdateSlot(SaveData.organizedPlayerInventory[i], false);
 			}
         }
 		
@@ -405,7 +408,7 @@ public partial class PlayerInventoryController : Control {
 		}
 
 		
-		SelectItem(item);
+		SelectItem(new RawInventoryItem(item.id, item.name, 1, item.stackSize));
 	}
 
     static void SelectItemAtSlot(int index)
@@ -440,7 +443,7 @@ public partial class PlayerInventoryController : Control {
 			slotToUpdate = _inventoryGrid.GetChild<InventorySlot>(index);
 		}
 
-		slotToUpdate.UpdateSlot(item, index);
+		slotToUpdate.UpdateSlot(item);
 	}
 
 	public static void DropSelectedItem(Vector2 position, Node parent)

@@ -55,7 +55,7 @@ public partial class PlayerInventoryController : Control {
 
 
     public override void _Process(double delta) {
-        _UpdateSelectedItem();
+        UpdateSelectedItem();
     }
 
 
@@ -93,7 +93,8 @@ public partial class PlayerInventoryController : Control {
 	}
 
 
-	async Task _InitInventory() {
+	async void _InitInventory() {
+		
 		SaveData.organizedPlayerInventory.Clear();
 
 		foreach (var node in _inventoryGrid.GetChildren())
@@ -156,7 +157,7 @@ public partial class PlayerInventoryController : Control {
 	}
 
 
-    void _UpdateSelectedItem() {
+    void UpdateSelectedItem() {
 		Vector2 mousePosition = GetGlobalMousePosition();
 		mousePosition.X -= SELECTED_ITEM_OFFSET;
 		mousePosition.Y -= SELECTED_ITEM_OFFSET;
@@ -283,65 +284,37 @@ public partial class PlayerInventoryController : Control {
         
 		return itemToAdd.quantity;
 	}
-	
 
 	/// <summary> Main inventory item removal method </summary>
 	/// 
-	/// <param name="rawItem"> Includes id, name and quantity to remove </param>
-	///	<returns> Whether the add operation was successful or not </returns>
-	/// <remarks> Automatically detects correct slots to remove items from </remarks>
-	public static bool RemoveItemFromInventory(RawInventoryItem rawItem)
+	/// <param name="rawItem"> Includes id, name and quantity to remove. </param>
+	/// <param name="index"> (Optional) If specified, only removes the quantity available in that index. </param>
+	///	<returns> Whether the removal operation was successful or not </returns>
+	public static bool RemoveItemFromInventory(RawInventoryItem rawItem, int index = -1)
 	{
+		if (rawItem == null)
+		{
+			GD.PushError("Tried to remove null item from inventory");
+			return false;
+		}
+		
 		if (!PlayerInventoryData.ExistsInInventory(rawItem.id, rawItem.quantity))
 		{
 			return false;
 		}
 
-		int amountToRemove = rawItem.quantity;
-		
-		for (int i = PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - 1; i >= 0; i--)
+		if (index >= 0)
 		{
-			if (SaveData.organizedPlayerInventory[i] == null) continue;
-			
-			if (SaveData.organizedPlayerInventory[i].id == rawItem.id)
+			if (index <= PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - 1)
 			{
-				RawInventoryItem itemInSlot = SaveData.organizedPlayerInventory[i];
-				
-				int amountRemoved = (itemInSlot.quantity - amountToRemove > 0)
-					? amountToRemove
-					: itemInSlot.quantity;
-
-				amountToRemove -= amountRemoved;
-				itemInSlot.quantity -= amountRemoved;
-				
-				if (itemInSlot.quantity > 0)
-				{
-					UpdateInventorySlot(itemInSlot, i);
-				}
-				else
-				{
-					NullifyInventoryItemAtIndex(i);
-				}
-
-				if (isItemSelected && selectedItem.id == rawItem.id)
-				{
-					if (PlayerInventoryData.ExistsInInventory(selectedItem.id, 1))
-					{
-						SelectItemAtSlot(itemInSlot.quantity > 0
-							? selectedItem.indexInOrganizedInventory
-							: PlayerInventoryData.GetFirstStackIndexOfItem(selectedItem.id));
-					}
-					else
-					{
-						DeselectItem();
-					}
-				}
+				return RemoveFromSlotUntilEmpty(rawItem, index, true) == 0;
 			}
 			
-			if (amountToRemove == 0) break;
-        }
-
-		switch (amountToRemove)
+			GD.PrintErr("Index was greater than player inventory max size - 1");
+			return false;
+		}
+		
+		switch (RemoveFromInventoryUntilEmptyOfItem(rawItem))
 		{
 			case 0:
 				SaveData.SyncInventory();
@@ -355,6 +328,62 @@ public partial class PlayerInventoryController : Control {
 				GD.PrintErr("Removed too many items from inventory! @PlayerInventoryController.cs");
 				return false;
 		}
+	}
+	
+	/// <summary>
+	/// Removes quantity of item from inventory as long as it is possible
+	/// </summary>
+	/// <param name="itemToRemove"></param>
+	/// <returns> How many could not be removed </returns>
+	static int RemoveFromInventoryUntilEmptyOfItem(RawInventoryItem itemToRemove)
+	{
+		int amountToRemove = itemToRemove.quantity;
+		
+		for (int i = PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - 1; i >= 0; i--)
+		{
+			if (SaveData.organizedPlayerInventory[i] == null) continue;
+			
+			if (SaveData.organizedPlayerInventory[i].id == itemToRemove.id)
+			{
+				amountToRemove = RemoveFromSlotUntilEmpty(itemToRemove, i);
+			}
+			
+			if (amountToRemove == 0) break;
+		}
+		
+		return amountToRemove;
+	}
+
+	/// <summary>
+	/// Removes items from inventory slot until all are removed OR slot's item quantity reaches 0.
+	/// </summary>
+	/// <param name="itemToRemove"> includes  </param>
+	/// <param name="index"> must be valid </param>
+	/// <param name="mustRemoveAll"> (optional) will not remove anything if itemToRemove.quantity is greater than quantity in slot. </param>
+	/// <returns> amount that couldn't be removed </returns>
+	static int RemoveFromSlotUntilEmpty(RawInventoryItem itemToRemove, int index, bool mustRemoveAll = false)
+	{
+		RawInventoryItem itemInSlot = SaveData.organizedPlayerInventory[index];
+				
+		int amountToRemove = itemToRemove.quantity;
+		int amountRemoved = (itemInSlot.quantity - amountToRemove > 0)
+			? amountToRemove
+			: itemInSlot.quantity;
+
+		if (mustRemoveAll && amountToRemove != amountRemoved) return amountToRemove;
+		
+		itemInSlot.quantity -= amountRemoved;
+        
+		if (itemInSlot.quantity > 0)
+		{
+			UpdateInventorySlot(itemInSlot, index);
+		}
+		else
+		{
+			NullifyInventoryItemAtIndex(index);
+		}
+        
+		return amountToRemove - amountRemoved;
 	}
 	
 	
@@ -376,7 +405,7 @@ public partial class PlayerInventoryController : Control {
 		}
 
 		
-		SelectItem(new RawInventoryItem(item.id, item.name, 1, item.stackSize));
+		SelectItem(item);
 	}
 
     static void SelectItemAtSlot(int index)

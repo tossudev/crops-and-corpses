@@ -13,7 +13,7 @@ public partial class PlayerInventoryData : Node
 
     public override void _Ready()
     {
-        TestAsyncAdd(new CancellationTokenSource());
+        var task = TestAsyncAdd(new CancellationTokenSource());
     }
 
     /// <summary>
@@ -39,11 +39,11 @@ public partial class PlayerInventoryData : Node
                 Dictionary itemDataDict = (Dictionary)rawItemVariant; 
                 
                 RawInventoryItem convertedRawItem = new RawInventoryItem(
-                    (int) itemDataDict[RawSaveData.ITEM_ID_KEY],
-                    (string) itemDataDict[RawSaveData.ITEM_NAME_KEY],
-                    (int) itemDataDict[RawSaveData.ITEM_QUANTITY_KEY],
-                    (int) itemDataDict[RawSaveData.ITEM_STACKSIZE_KEY],
-                    (int) itemDataDict[RawSaveData.ITEM_ORGANIZED_INDEX_KEY]);
+                    (int) itemDataDict[RawInventoryItem.ITEM_ID_KEY],
+                    (string) itemDataDict[RawInventoryItem.ITEM_NAME_KEY],
+                    (int) itemDataDict[RawInventoryItem.ITEM_QUANTITY_KEY],
+                    (int) itemDataDict[RawInventoryItem.ITEM_STACKSIZE_KEY],
+                    (int) itemDataDict[RawInventoryItem.ITEM_ORGANIZED_INDEX_KEY]);
                 
                 SaveData.organizedPlayerInventory[convertedRawItem.indexInOrganizedInventory] = convertedRawItem;
             }
@@ -121,7 +121,7 @@ public partial class PlayerInventoryData : Node
         }
         
         if (indexToReturn == 0) 
-            GD.Print("Item with specified criteria didn't exist in inventory, returning 0");
+            GD.PushWarning("Item with specified criteria didn't exist in inventory, returning 0");
         
         return indexToReturn;
     }

@@ -102,4 +102,9 @@ public partial class SpawnScript : Node2D
 	{
 		zombieList.Remove(zombie);
 	}
+
+	public bool GetIsNightOrDay()
+	{
+		return isNightOrDay;
+	}
 }

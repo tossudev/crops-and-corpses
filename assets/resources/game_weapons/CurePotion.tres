@@ -1,9 +1,8 @@
 [gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://domi3h5sb0i6n"]
 
-[ext_resource type="Resource" uid="uid://c5xluv5j2cu8v" path="res://assets/resources/game_items/8_cure_potion.tres" id="1_2jfs0"]
+[ext_resource type="Resource" uid="uid://c8l0px6xtxcak" path="res://assets/resources/game_items/8_cure_potion.tres" id="1_2jfs0"]
 [ext_resource type="Resource" uid="uid://ce2eq2q0gowgi" path="res://TinoTests/Resources/Potion1.tres" id="2_crhni"]
 [ext_resource type="Script" path="res://TinoTests/Scripts/Weapons/Weapon.cs" id="3_nkuev"]
-
 
 [resource]
 script = ExtResource("3_nkuev")

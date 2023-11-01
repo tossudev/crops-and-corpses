@@ -4,17 +4,17 @@ using System.Diagnostics.Tracing;
 
 public partial class RoamingZombie : CharacterBody2D
 {
-	[Export] private float _damage;
+	//[Export] private float _damage;
 	private Sprite2D _sprite;
 	private CharacterBody2D _player;
 	private HitboxComponent _hitbox;
 	private Attack _attack;
 	private Timer _timer;
+	private Timer _updateStatsTimer;
 	private ProgressBar _healthBar;
 	private HealthComponent _healthComponent;
 	private NodePath _rootNodePath;
-	private Node2D rootNode;
-	public static bool playerAlive = true; // this is not the best way for handling the player death but it'll do the job for now i guess
+	private Node2D rootNode;	
 	PackedScene instantiatedNPC;
 
 	public override void _Ready()
@@ -22,17 +22,20 @@ public partial class RoamingZombie : CharacterBody2D
 		instantiatedNPC = (PackedScene)GD.Load("res://EllaTests/npc.tscn");
 		_rootNodePath =  GetParent<Node2D>().GetPath();
 		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);	
-		_damage = 5.0f;
+		//_damage = 5.0f;
 		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
 		_timer = GetNodeOrNull<Timer>("AttackTimer");
+		_updateStatsTimer = GetNodeOrNull<Timer>("UpdateStatsTimer");
 		_healthBar = GetNodeOrNull<ProgressBar>("HealthBar");
 		_healthComponent = GetNodeOrNull<HealthComponent>("HealthComponent");
 
 		_attack = new Attack
 		{
-			damage = _damage,
+			damage = ZombieManager.damage,
 			knockback = 500f
 		};
+
+		_updateStatsTimer.Start();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -79,8 +82,7 @@ public partial class RoamingZombie : CharacterBody2D
 		 {
 			SpawnScript.RemoveZombieFromList(this);
 			GD.Print("Check");
-			QueueFree();
-		 	
+			QueueFree();		 	
 		 }
 	}
 
@@ -134,9 +136,16 @@ public partial class RoamingZombie : CharacterBody2D
 	private void OnTimerTimeout()
 	{
 		//GD.Print("attack player");
-		if(_hitbox != null && playerAlive != false)
+		if(_hitbox != null && ZombieManager.playerAlive != false)
 		{
 			_hitbox.ApplyAttack(_attack);
-		}
+		}		
+	}	
+
+	private void OnUpdateStatsTimeout()
+	{
+		_attack.damage = ZombieManager.damage;
+		_timer.WaitTime = ZombieManager.attackTime;
+		//GD.Print("DMG: " + _attack.damage + "\nwait time: " + _timer.WaitTime);
 	}
 }

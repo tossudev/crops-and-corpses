@@ -83,6 +83,10 @@ offset_bottom = -33.0
 scale = Vector2(0.4, 0.4)
 show_percentage = false
 
+[node name="UpdateStatsTimer" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="body_entered" from="AttackBox" to="." method="OnAttackBoxEntered"]
 [connection signal="body_exited" from="AttackBox" to="." method="OnAttackBoxExited"]
 [connection signal="timeout" from="AttackTimer" to="." method="OnTimerTimeout"]
+[connection signal="timeout" from="UpdateStatsTimer" to="." method="OnUpdateStatsTimeout"]

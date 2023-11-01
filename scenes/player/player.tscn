@@ -17,15 +17,18 @@
 [ext_resource type="Texture2D" uid="uid://dtxvt7hf4w3m1" path="res://assets/placeholder/test_character/LegR.png" id="16_3ecwo"]
 [ext_resource type="Texture2D" uid="uid://c2jmj7mhvoytp" path="res://assets/placeholder/test_character/FootR.png" id="17_uhi4p"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yn8u1"]
-radius = 7.5
+[sub_resource type="CircleShape2D" id="CircleShape2D_efott"]
+radius = 117.527
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1sqjf"]
+radius = 30.0
 
 [sub_resource type="Animation" id="Animation_vd6ii"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Skeleton2D/TorsoBone/HeadBone:rotation")
+tracks/0/path = NodePath("TorsoBone/HeadBone:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -37,7 +40,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Skeleton2D/TorsoBone/ArmLBone:rotation")
+tracks/1/path = NodePath("TorsoBone/ArmLBone:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -49,7 +52,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Skeleton2D/TorsoBone/ArmRBone:rotation")
+tracks/2/path = NodePath("TorsoBone/ArmRBone:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -61,7 +64,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Skeleton2D/TorsoBone/LegLBone:rotation")
+tracks/3/path = NodePath("TorsoBone/LegLBone:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -73,7 +76,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Skeleton2D/TorsoBone/LegRBone:rotation")
+tracks/4/path = NodePath("TorsoBone/LegRBone:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -89,7 +92,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Skeleton2D/TorsoBone/HeadBone:rotation")
+tracks/0/path = NodePath("TorsoBone/HeadBone:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -101,7 +104,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Skeleton2D/TorsoBone/ArmLBone:rotation")
+tracks/1/path = NodePath("TorsoBone/ArmLBone:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -113,7 +116,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Skeleton2D/TorsoBone/ArmRBone:rotation")
+tracks/2/path = NodePath("TorsoBone/ArmRBone:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -125,7 +128,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Skeleton2D/TorsoBone/LegLBone:rotation")
+tracks/3/path = NodePath("TorsoBone/LegLBone:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -137,7 +140,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Skeleton2D/TorsoBone/LegRBone:rotation")
+tracks/4/path = NodePath("TorsoBone/LegRBone:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -154,7 +157,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Skeleton2D/TorsoBone/HeadBone:rotation")
+tracks/0/path = NodePath("TorsoBone/HeadBone:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -166,7 +169,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Skeleton2D/TorsoBone/ArmLBone:rotation")
+tracks/1/path = NodePath("TorsoBone/ArmLBone:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -178,7 +181,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Skeleton2D/TorsoBone/ArmRBone:rotation")
+tracks/2/path = NodePath("TorsoBone/ArmRBone:rotation")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -190,7 +193,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Skeleton2D/TorsoBone/LegLBone:rotation")
+tracks/3/path = NodePath("TorsoBone/LegLBone:rotation")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -202,7 +205,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Skeleton2D/TorsoBone/LegRBone:rotation")
+tracks/4/path = NodePath("TorsoBone/LegRBone:rotation")
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -221,11 +224,8 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_12xgg"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_efott"]
-radius = 117.527
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_st5mf"]
-radius = 30.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_yn8u1"]
+radius = 7.5
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_handheld", "_pickupArea", "_rig") groups=["player"]]
 scale = Vector2(3.2, 3.2)
@@ -236,10 +236,23 @@ _rig = NodePath("Skeleton2D")
 minZoom = 0.75
 _speed = 300
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 position = Vector2(2.08165e-12, -5)
-shape = SubResource("CircleShape2D_yn8u1")
-debug_color = Color(0.0235294, 0.65098, 0, 1)
+shape = SubResource("CircleShape2D_efott")
+debug_color = Color(0, 0.647059, 0.243137, 0.419608)
+
+[node name="SmallInteractionArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallInteractionArea"]
+position = Vector2(2.08165e-12, -5)
+shape = SubResource("CircleShape2D_1sqjf")
+disabled = true
 
 [node name="Handheld" parent="." instance=ExtResource("2_00eh7")]
 position = Vector2(2.08165e-12, -12)
@@ -280,6 +293,7 @@ rest = Transform2D(0.985399, -0.170258, 0.170258, 0.985399, 26.32, -45.85)
 z_index = -1
 position = Vector2(4.06, 13.3)
 rotation = -0.0131563
+scale = Vector2(1, 1)
 texture = ExtResource("10_6b7e2")
 
 [node name="HandLBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
@@ -358,33 +372,23 @@ libraries = {
 "": SubResource("AnimationLibrary_uvgsj")
 }
 
-[node name="HealthComponent" parent="." instance=ExtResource("3_wuvdk")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_wuvdk")]
+_parentScript = NodePath("..")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_sa7m5")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("4_sa7m5")]
 collision_layer = 2
 collision_mask = 4
+_parentScript = NodePath("..")
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(2.08165e-12, -12)
 shape = SubResource("CapsuleShape2D_12xgg")
+debug_color = Color(0.984314, 0, 0.376471, 0.419608)
 
-[node name="InteractionArea" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.08165e-12, -5)
-shape = SubResource("CircleShape2D_efott")
-debug_color = Color(0, 0.647059, 0.243137, 0.419608)
-
-[node name="SmallInteractionArea" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 64
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallInteractionArea"]
-position = Vector2(2.08165e-12, -5)
-shape = SubResource("CircleShape2D_st5mf")
-disabled = true
+shape = SubResource("CircleShape2D_yn8u1")
+debug_color = Color(0, 0.494118, 0.929412, 0.419608)
 
 [connection signal="area_entered" from="SmallInteractionArea" to="." method="OnPickupAreaEntered"]

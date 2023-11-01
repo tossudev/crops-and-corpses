@@ -3,6 +3,8 @@ using System;
 
 public partial class ZombieManager : Node
 {
+	[Export] public Node2D _villageTarget;
+	public static Node2D moveTarget;
 	public static bool dayMode;
 	public static float damage;
 	public static double attackTime;
@@ -17,7 +19,10 @@ public partial class ZombieManager : Node
 	{
 		_dayNightSpawnNode = GetParent().GetNodeOrNull<SpawnScript>("NightDayCycleAndZombieSpawn");
 		_timer = GetNodeOrNull<Timer>("Timer");
-
+		if(_villageTarget != null)
+		{
+			moveTarget = _villageTarget;
+		}
 		_timer.Start();
 	}
 	public override void _Process(double delta)

@@ -55,9 +55,10 @@ _zombie = NodePath("../..")
 script = ExtResource("6_a8per")
 _zombie = NodePath("../..")
 
-[node name="AttackFence" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie")]
+[node name="AttackFence" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie", "_navAgent")]
 script = ExtResource("7_kbhaw")
 _zombie = NodePath("../..")
+_navAgent = NodePath("../../NavigationAgent2D")
 
 [node name="AttackBox" type="Area2D" parent="."]
 
@@ -85,6 +86,9 @@ show_percentage = false
 
 [node name="UpdateStatsTimer" type="Timer" parent="."]
 wait_time = 2.0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
 
 [connection signal="body_entered" from="AttackBox" to="." method="OnAttackBoxEntered"]
 [connection signal="body_exited" from="AttackBox" to="." method="OnAttackBoxExited"]

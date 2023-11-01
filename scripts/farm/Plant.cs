@@ -47,7 +47,7 @@ public partial class Plant : Node2D
 	}
 	[Export] CollisionObject2D _col;
 	
-	TextureRect trect = new TextureRect();
+	[Export]TextureRect trect;
 
 	[Export] Item _harvestablePlant;
 	#endregion
@@ -83,26 +83,21 @@ public partial class Plant : Node2D
 		InitializePlant();
 		FarmManager.instance.AddPlantedPlant(this);
 		
+
 	}
 
 	void InitializePlant(){
 
-		Position = new Vector2(0, -35);
+		Position = new Vector2(0, -5);
 		_state = GrowthState.WaitWatering;
-		_col.InputEvent +=InteractWithPlant;
-		trect.ExpandMode=TextureRect.ExpandModeEnum.FitWidth;
-		trect.StretchMode=TextureRect.StretchModeEnum.KeepCentered;
-		trect.AnchorTop = 0.5f;
-        trect.AnchorRight = 0.5f;
-        trect.AnchorBottom = 0.5f;
-        trect.AnchorLeft = 0.5f;
-
-		AddChild(trect);
+		_col = GetNode<Area2D>("%Area2D");
+		
+		
 		AddChild(_growthTimer);
 		
 		_growthTimer.Timeout += GrowthCycle;	
-		trect.Texture = _sproutTexture;
-
+		trect = GetNode<TextureRect>("%TextureRect");
+		GetNode<TextureRect>("%TextureRect").Texture = _sproutTexture;
 		_warningSign.Scale = new Vector2(0.75f,0.75f);
 		_warningSign.Position = new Vector2(0, -115);
 		AddChild(_warningSign);
@@ -110,13 +105,13 @@ public partial class Plant : Node2D
 		_bugSignTexture = ResourceLoader.Load("res://JanitaTests/Images/bugsign.png") as Texture2D;
 		_waterSignTexture = ResourceLoader.Load("res://JanitaTests/Images/watersign.png") as Texture2D;
 
-		var scene = ResourceLoader.Load<PackedScene>("res://JanitaTests/Scripts/plant_progress_bar.tscn").Instantiate();
+		var scene = ResourceLoader.Load<PackedScene>("res://scenes/farm/plant_progress_bar.tscn").Instantiate();
      	_progress = scene as TextureProgressBar;   
 		AddChild(_progress);
 		_progress.MaxValue = _growthCycleLength * _maxCycles;
 		_progress.Value= 0;
 		_progress.Hide();
-
+		_col.InputEvent +=InteractWithPlant;
 		PlantState();
 		
 	}

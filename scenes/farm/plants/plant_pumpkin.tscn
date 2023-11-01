@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_rb3wu"]
 [ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://JanitaTests/Images/dirttemp.jpg" id="2_kwl7q"]
 [ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://JanitaTests/Images/sprouttemp.png" id="3_sjgoh"]
-[ext_resource type="Texture2D" uid="uid://dvhrkxcw50l7s" path="res://JanitaTests/Images/wheattemp.png" id="4_s8j8f"]
+[ext_resource type="Texture2D" uid="uid://dqgscu3bl0gng" path="res://assets/sprites/items/item_pumpkin.png" id="4_c54b4"]
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="5_n1ybx"]
 [ext_resource type="Resource" uid="uid://bwqnnm74g8l7l" path="res://assets/resources/game_items/12_pumpkin.tres" id="5_tle7x"]
 
-[node name="plant_pumpkin" type="Node2D" node_paths=PackedStringArray("_col")]
+[node name="plant_pumpkin" type="Node2D" node_paths=PackedStringArray("_col", "trect")]
 z_index = 2
 script = ExtResource("1_rb3wu")
 _plantType = 1
@@ -16,16 +16,34 @@ _description = "Squishy"
 _maxCycles = 3
 _seedTexture = ExtResource("2_kwl7q")
 _sproutTexture = ExtResource("3_sjgoh")
-_plantTexture = ExtResource("4_s8j8f")
+_plantTexture = ExtResource("4_c54b4")
 _col = NodePath("Area2D")
+trect = NodePath("TextureRect")
 _harvestablePlant = ExtResource("5_tle7x")
 
 [node name="Area2D" type="Area2D" parent="."]
+unique_name_in_owner = true
 collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("5_n1ybx")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_c54b4")
+expand_mode = 2
 
 [connection signal="area_entered" from="Area2D" to="." method="OnInteractable"]
 [connection signal="area_exited" from="Area2D" to="." method="OnNonInteractable"]

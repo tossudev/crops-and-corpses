@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bxe1k2od7pwk1"]
 
 [ext_resource type="Script" path="res://scripts/World/Heal.cs" id="1_f6gdr"]
-[ext_resource type="Resource" uid="uid://c1q7mpup7mo0b" path="res://assets/resources/game_items/26_vegetable_stew.tres" id="2_mrwe6"]
+[ext_resource type="Resource" uid="uid://c32b5ppqu0xhc" path="res://assets/resources/game_items/26_vegetable_stew.tres" id="2_mrwe6"]
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="6_k4vhd"]
 
 [node name="vegetable_stew" type="Node2D"]

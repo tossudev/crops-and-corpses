@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://4awyyd7jsaqq"]
+[gd_scene load_steps=8 format=3 uid="uid://4awyyd7jsaqq"]
 
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_t4nyu"]
 [ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://JanitaTests/Images/dirttemp.jpg" id="2_cj33s"]
@@ -6,8 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dvhrkxcw50l7s" path="res://JanitaTests/Images/wheattemp.png" id="4_vkkn6"]
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="5_2sl8h"]
 [ext_resource type="Resource" uid="uid://djv78bsvabyah" path="res://assets/resources/game_items/18_maize.tres" id="5_culae"]
+[ext_resource type="Texture2D" uid="uid://dqgscu3bl0gng" path="res://assets/sprites/items/item_pumpkin.png" id="7_ni03q"]
 
-[node name="plant_maize" type="Node2D" node_paths=PackedStringArray("_col")]
+[node name="plant_maize" type="Node2D" node_paths=PackedStringArray("_col", "trect")]
 z_index = 2
 script = ExtResource("1_t4nyu")
 _plantType = 4
@@ -18,14 +19,32 @@ _seedTexture = ExtResource("2_cj33s")
 _sproutTexture = ExtResource("3_0mt0f")
 _plantTexture = ExtResource("4_vkkn6")
 _col = NodePath("Area2D")
+trect = NodePath("TextureRect")
 _harvestablePlant = ExtResource("5_culae")
 
 [node name="Area2D" type="Area2D" parent="."]
+unique_name_in_owner = true
 collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("5_2sl8h")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_ni03q")
+expand_mode = 2
 
 [connection signal="area_entered" from="Area2D" to="." method="OnInteractable"]
 [connection signal="area_exited" from="Area2D" to="." method="OnNonInteractable"]

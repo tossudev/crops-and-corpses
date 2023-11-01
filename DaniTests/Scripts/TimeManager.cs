@@ -80,7 +80,7 @@ public partial class TimeManager : Node
             
         }
         globalTime.SetColor(sunlight.Color);
-        isDayTime = timeOfDay <= dayTimeLength + 1f; // 1s for delaying zombievawes
+        isDayTime = timeOfDay <= dayTimeLength + 10f; // 1s for delaying zombievawes
 
     }
 

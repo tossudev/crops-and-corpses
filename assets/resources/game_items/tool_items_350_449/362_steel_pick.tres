@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_usmw8")
 ID = 362
-Name = "Iron Pick"
+Name = "Steel Pick"
 IconTexture = ExtResource("1_211dc")
 StackSize = 1
 craftingRequirements = null

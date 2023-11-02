@@ -22,7 +22,6 @@ public partial class RoamingZombie : CharacterBody2D
 		instantiatedNPC = (PackedScene)GD.Load("res://EllaTests/npc.tscn");
 		_rootNodePath = GetParent<Node2D>().GetPath();
 		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);
-		// _damage = 5.0f;
 		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
 		_timer = GetNodeOrNull<Timer>("AttackTimer");
 		_updateStatsTimer = GetNodeOrNull<Timer>("UpdateStatsTimer");

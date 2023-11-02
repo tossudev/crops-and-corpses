@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://b21ac8wanxvwu"]
+
+[ext_resource type="Resource" uid="uid://dn4elc6q0jdu3" path="res://assets/resources/game_items/weapon_items_150_to_249/151_iron_sword.tres" id="1_wsm4d"]
+[ext_resource type="Script" path="res://TinoTests/Scripts/Weapons/Weapon.cs" id="2_yp60e"]
+
+[resource]
+script = ExtResource("2_yp60e")
+item = ExtResource("1_wsm4d")
+damage = 15.0
+targetDamage = [34.0, 0.0, 0.0]
+knockback = 500.0
+cooldown = 0.5
+effect = 0
+reach = 1.5
+holdAction = false
+ranged = false
+speed = 0.0
+drawTime = 0.0

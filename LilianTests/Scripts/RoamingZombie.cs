@@ -4,38 +4,35 @@ using System.Diagnostics.Tracing;
 
 public partial class RoamingZombie : CharacterBody2D
 {
-	//[Export] private float _damage;
+	[Export] private float _damage;
 	private Sprite2D _sprite;
 	private CharacterBody2D _player;
 	private HitboxComponent _hitbox;
 	private Attack _attack;
 	private Timer _timer;
-	private Timer _updateStatsTimer;
 	private ProgressBar _healthBar;
 	private HealthComponent _healthComponent;
 	private NodePath _rootNodePath;
-	private Node2D rootNode;	
+	private Node2D rootNode;
+	public static bool playerAlive = true; // this is not the best way for handling the player death but it'll do the job for now i guess
 	PackedScene instantiatedNPC;
 
 	public override void _Ready()
 	{
 		instantiatedNPC = (PackedScene)GD.Load("res://EllaTests/npc.tscn");
-		_rootNodePath =  GetParent<Node2D>().GetPath();
-		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);	
-		//_damage = 5.0f;
+		_rootNodePath = GetParent<Node2D>().GetPath();
+		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);
+		_damage = 5.0f;
 		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
 		_timer = GetNodeOrNull<Timer>("AttackTimer");
-		_updateStatsTimer = GetNodeOrNull<Timer>("UpdateStatsTimer");
 		_healthBar = GetNodeOrNull<ProgressBar>("HealthBar");
 		_healthComponent = GetNodeOrNull<HealthComponent>("HealthComponent");
 
 		_attack = new Attack
 		{
-			damage = ZombieManager.damage,
+			damage = _damage,
 			knockback = 500f
 		};
-
-		_updateStatsTimer.Start();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -61,29 +58,30 @@ public partial class RoamingZombie : CharacterBody2D
 		/* GD.Print("2");
 		GD.Print(attack.effect); */
 		switch (attack.effect)
-				{
-				case EffectType.Cure:
-					
-					SpawnScript.RemoveZombieFromList(this);
-					Transform2D zombiePos = this.Transform;
-					CharacterBody2D spawnNPC = (CharacterBody2D)instantiatedNPC.Instantiate();
-					spawnNPC.Transform = zombiePos;
-					rootNode.AddChild(spawnNPC);
-					spawnNPC.Scale = new Vector2(0.5f,0.5f);
-					QueueFree();
-					break;
-				default:
-					break;
-				}
+		{
+			case EffectType.Cure:
+
+				SpawnScript.RemoveZombieFromList(this);
+				Transform2D zombiePos = this.Transform;
+				CharacterBody2D spawnNPC = (CharacterBody2D)instantiatedNPC.Instantiate();
+				spawnNPC.Transform = zombiePos;
+				rootNode.AddChild(spawnNPC);
+				spawnNPC.Scale = new Vector2(0.5f, 0.5f);
+				QueueFree();
+				break;
+			default:
+				break;
+		}
 	}
 	private void OnHealth(float _health)
 	{
-		 if(_health <= 0)
-		 {
+		if (_health <= 0)
+		{
 			SpawnScript.RemoveZombieFromList(this);
 			GD.Print("Check");
-			QueueFree();		 	
-		 }
+			QueueFree();
+
+		}
 	}
 
 	private void OnAttackBoxEntered(Node2D body)
@@ -115,13 +113,13 @@ public partial class RoamingZombie : CharacterBody2D
 		// update health bar when player damages zombie
 		if (_healthComponent != null)
 		{
-			_healthBar.Value = _healthComponent._health;
+			_healthBar.Value = _healthComponent.health;
 
-			if (_healthComponent._health >= 100)
+			if (_healthComponent.health >= 100)
 			{
 				_healthBar.Visible = false;
 			}
-			else 
+			else
 			{
 				_healthBar.Visible = true;
 			}
@@ -136,16 +134,9 @@ public partial class RoamingZombie : CharacterBody2D
 	private void OnTimerTimeout()
 	{
 		//GD.Print("attack player");
-		if(_hitbox != null && ZombieManager.playerAlive != false)
+		if (_hitbox != null && playerAlive != false)
 		{
 			_hitbox.ApplyAttack(_attack);
-		}		
-	}	
-
-	private void OnUpdateStatsTimeout()
-	{
-		_attack.damage = ZombieManager.damage;
-		_timer.WaitTime = ZombieManager.attackTime;
-		//GD.Print("DMG: " + _attack.damage + "\nwait time: " + _timer.WaitTime);
+		}
 	}
 }

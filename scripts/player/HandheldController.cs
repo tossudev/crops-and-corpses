@@ -17,6 +17,7 @@ public partial class HandheldController : Node2D
     private float _knockback;
     private float _cooldown;
     private EffectType _effect;
+    private List<float> _typeDamage;
     private float _reach;
     private bool _holdAction;
     private bool _ranged;
@@ -45,6 +46,7 @@ public partial class HandheldController : Node2D
         _knockback = _weapon.knockback;
         _cooldown = _weapon.cooldown;
         _effect = _weapon.effect;
+        _typeDamage = new List<float>(_weapon.targetDamage);
         _reach = _weapon.reach;
         _holdAction = _weapon.holdAction;
         _speed = _weapon.speed;
@@ -192,6 +194,23 @@ public partial class HandheldController : Node2D
     {
         if (body is HitboxComponent hitbox)
         {
+            if (body.IsInGroup("enemy"))
+            {
+                _attack.damage = _typeDamage[(int)TargetType.Enemy];
+            }
+            else if (body.IsInGroup("tree"))
+            {
+                _attack.damage = _typeDamage[(int)TargetType.Tree];
+            }
+            else if (body.IsInGroup("rock"))
+            {
+                _attack.damage = _typeDamage[(int)TargetType.Rock];
+            }
+            else
+            {
+                return;
+            }
+
             hitbox.ApplyAttack(_attack);
         }
     }

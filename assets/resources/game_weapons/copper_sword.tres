@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://b6a2oqc16p5rs"]
 
 [ext_resource type="Script" path="res://TinoTests/Scripts/Weapons/Weapon.cs" id="1_f8oqu"]
-[ext_resource type="Resource" uid="uid://di3mqk8b3d2ke" path="res://assets/resources/game_items/weapon_items_150_to_249/150_sword.tres" id="1_rgt5x"]
+[ext_resource type="Resource" uid="uid://di3mqk8b3d2ke" path="res://assets/resources/game_items/weapon_items_150_to_249/150_copper_sword.tres" id="1_rgt5x"]
 
 [resource]
 script = ExtResource("1_f8oqu")
 item = ExtResource("1_rgt5x")
 damage = 15.0
+targetDamage = [25.0, 0.0, 0.0]
 knockback = 500.0
 cooldown = 0.5
 effect = 0

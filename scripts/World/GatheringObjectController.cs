@@ -10,6 +10,7 @@ public partial class GatheringObjectController : StaticBody2D
 
 	private int _maxDrop;
 	private List<Item> _items;
+	private float healthPercent;
 
 	public override void _Ready()
 	{
@@ -19,8 +20,7 @@ public partial class GatheringObjectController : StaticBody2D
 
 	private void OnHealth(float health)
 	{
-		if (health >= 0)
-			DropItems();
+		DropItems();
 
 		if (health <= 0)
 		{
@@ -39,9 +39,9 @@ public partial class GatheringObjectController : StaticBody2D
 
 			RawInventoryItem dropItem = new RawInventoryItem(_items[randIndex].ID, _items[randIndex].Name, 1, _items[randIndex].StackSize);
 
-			Node2D droppedIrem = PlayerInventoryController.CreateDroppedItem(dropItem, GlobalPosition, GetParent());
+			Node2D droppedItem = PlayerInventoryController.CreateDroppedItem(dropItem, GlobalPosition, GetParent());
 
-			MoveDropItem(droppedIrem);
+			MoveDropItem(droppedItem);
 		}
 	}
 

@@ -19,7 +19,7 @@ quantity = 2
 [resource]
 script = ExtResource("5_6pfln")
 ID = 350
-Name = "Copper Axe"
+Name = "Iron Axe"
 IconTexture = ExtResource("1_4wdnq")
 StackSize = 1
 craftingRequirements = Array[Object]([SubResource("Resource_6icts"), SubResource("Resource_lu1di")])

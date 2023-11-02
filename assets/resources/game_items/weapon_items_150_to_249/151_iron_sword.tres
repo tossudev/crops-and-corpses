@@ -19,7 +19,7 @@ quantity = 3
 [resource]
 script = ExtResource("5_1akuh")
 ID = 151
-Name = "Sword"
+Name = "Iron Sword"
 IconTexture = ExtResource("1_ims1k")
 StackSize = 1
 craftingRequirements = Array[Object]([SubResource("Resource_8d7he"), SubResource("Resource_xkag0")])

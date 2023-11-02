@@ -47,6 +47,7 @@ offset_right = 58.0
 offset_bottom = 58.0
 
 [node name="Control" type="Control" parent="." node_paths=PackedStringArray("_villager")]
+visibility_layer = 512
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -165,6 +166,10 @@ offset_right = 281.672
 offset_bottom = -4.00203
 grow_vertical = 0
 
+[node name="GatheringTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
 [connection signal="button_up" from="Control/ColorRect/Button1" to="Control" method="_on_button_1_button_up" flags=18]
@@ -172,3 +177,4 @@ grow_vertical = 0
 [connection signal="button_up" from="Control/ColorRect/Button3" to="Control" method="_on_button_3_button_up" flags=18]
 [connection signal="button_up" from="Control/ColorRect/Button4" to="Control" method="_on_button_4_button_up"]
 [connection signal="button_up" from="Control/ColorRect/Button5" to="Control" method="_on_button_5_button_up"]
+[connection signal="timeout" from="GatheringTimer" to="." method="_on_gathering_timer_timeout"]

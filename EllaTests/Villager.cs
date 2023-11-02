@@ -11,7 +11,7 @@ public partial class Villager : CharacterBody2D
 	[Export] VillagerManager _villagerManager;
 	Vector2 _targetPosition;
 	Timer _timer;
-	Timer _resourcheGatherTime;
+	Timer _gatheringTimer;
 
 	[Export] DialogueControl dialogueControl;
 	[Export] NavigationAgent2D navMeshAgent;
@@ -31,14 +31,15 @@ public partial class Villager : CharacterBody2D
 	{
 		_streetSign = GetParent().GetParent().GetNode<Node2D>("StreetSignSpot");
 		_villagerSprite = GetNode<Sprite2D>("Sprite2D");
+		_gatheringTimer = GetNode<Timer>("GatheringTimer");
 
-		_timer = new Timer
+/* 		_timer = new Timer
 		{
 			WaitTime = 1f,
 		};
 		_timer.Timeout += State;
 		AddChild(_timer);
-		_timer.Start();
+		_timer.Start(); */
 
 /* 		string _currentScene = GetTree().CurrentScene.Name;
 
@@ -63,7 +64,12 @@ public partial class Villager : CharacterBody2D
 		if (!dialogueControl.Visible && GlobalPosition.DistanceTo(_targetPosition) > 5)
 		{
 			Movement(_targetPosition);
-		}	
+		}
+		while(_state == VillagerStates.RoamAround)
+		{
+			RoamAround();
+		}
+		//GD.Print(_gatheringTimer.TimeLeft);
 	}
 
 	public VillagerStates GetVillagerStates()
@@ -106,7 +112,12 @@ public partial class Villager : CharacterBody2D
 
 			case VillagerStates.FindShelter:
 				break;
+
+			default: 
+				GD.Print("State not found");
+				break;
 		}
+		GD.Print(_state);
 	}
 
 	public void _on_button_button_up()
@@ -120,9 +131,9 @@ public partial class Villager : CharacterBody2D
 		//GD.Print("Touching something");
 	}
 
-	public void _on_timer_timeout()
+	public void _on_gathering_timer_timeout()
 	{
-		_timerStopped = true;
+		ResourcheGatheringDone();
 	}
 
 	void Movement(Vector2 target)
@@ -138,19 +149,23 @@ public partial class Villager : CharacterBody2D
 		dialogueControl.resourcheTaskStarted = false;
 		dialogueControl.farmingTaskStarted = false;
 		//navMeshAgent.TargetPosition = _targetPosition;
-
-		// Don't delete
 		float range = 100;
-		_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
+        _targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
 
+		if (GlobalPosition.DistanceTo(_targetPosition) < 5)
+    	{
+        	_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
+			State();
+    	}
 		//_targetPosition = RandomTargetPosition();
-		Vector2 direction = _targetPosition - GlobalPosition;
+/* 		Vector2 direction = _targetPosition - GlobalPosition;
 		Vector2 oppDirection = -direction;
 		if(collision)
 		{
 			_targetPosition = oppDirection;
 			collision = false;
-		}
+		} */
+		//Movement(_targetPosition);
 
 		if (dialogueControl.Visible)
 		{
@@ -195,48 +210,50 @@ public partial class Villager : CharacterBody2D
 
  	void GatherResourches()
 	{
-		Random rnd = new Random();
 		_targetPosition = _streetSign.GlobalPosition;
 		if (GlobalPosition.DistanceTo(_targetPosition) < 5)
 		{
 			_taskStarted = true;
 			_villagerSprite.Visible = false;
+			_gatheringTimer.Start();
 		}
-		if(_taskStarted)
+/* 		if(_taskStarted)
 		{
-			_resourcheGatherTime = new Timer{
+			
+			/* _resourcheGatherTime = new Timer{
 				WaitTime = 5f,
 			};
 			AddChild(_resourcheGatherTime);
 			_resourcheGatherTime.Start();
-			_resourcheGatherTime.Timeout += _on_timer_timeout;
+			_resourcheGatherTime.Timeout += _on_timer_timeout; 
 
-			if(_timerStopped == true && !_villagerSprite.Visible)
+			if(_timerStopped == true)
 			{
-				//GD.Print("timerstopped");
-				_resourcheGatherTime.QueueFree();
-				_resourcheGatherTime.Free();
-				_timerStopped = false;
-				_villagerSprite.Visible = true;
-				if(dialogueControl.findStone == true)
-				{
-					//RandomAmountResourche("stone");
-					int amount = rnd.Next(4, 21);
-					GD.Print("Found: " + amount + " stone");
-					dialogueControl.findStone = false;
-				}
-				if(dialogueControl.findWood == true)
-				{
-					//RandomAmountResourche("wood");
-					int amount = rnd.Next(4, 21);
-					GD.Print("Found: " + amount + " wood");
-					dialogueControl.findWood = false;
-				}
-				_taskStarted = false;
-				_state = VillagerStates.RoamAround;
 				
 			} 
+		} */
+	}
+
+	void ResourcheGatheringDone()
+	{
+		Random rnd = new Random();
+		_villagerSprite.Visible = true;
+		if(dialogueControl.findStone == true)
+		{
+			//RandomAmountResourche("stone");
+			int amount = rnd.Next(4, 21);
+			GD.Print("Found: " + amount + " stone");
+			dialogueControl.findStone = false;
 		}
+		if(dialogueControl.findWood == true)
+		{
+		//RandomAmountResourche("wood");
+			int amount = rnd.Next(4, 21);
+			GD.Print("Found: " + amount + " wood");
+			dialogueControl.findWood = false;
+		}
+		_state = VillagerStates.RoamAround;
+		State();
 	}
 
 	void CheckPlants()
@@ -273,6 +290,7 @@ public partial class Villager : CharacterBody2D
 			else
 			{
 				_state = VillagerStates.RoamAround;
+				State();
 				dialogueControl.farmingTaskStarted = false;
 				return;
 			}

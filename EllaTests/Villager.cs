@@ -2,11 +2,13 @@ using Godot;
 using System;
 using System.Collections;
 using System.Diagnostics;
+using System.Reflection;
 using static VillagerManager;
 
 public partial class Villager : CharacterBody2D
 {
 	VillagerStates _state;
+	[Export] VillagerManager _villagerManager;
 	Vector2 _targetPosition;
 	Timer _timer;
 	Timer _resourcheGatherTime;
@@ -21,6 +23,7 @@ public partial class Villager : CharacterBody2D
 	float _speed = 0;
 	bool collision = false;
 	bool _timerStopped = false;
+	bool _taskStarted = false;
 	public bool dialogueWindow = false;
 
 	// Called when the node enters the scene tree for the first time.
@@ -28,7 +31,6 @@ public partial class Villager : CharacterBody2D
 	{
 		_streetSign = GetParent().GetParent().GetNode<Node2D>("StreetSignSpot");
 		_villagerSprite = GetNode<Sprite2D>("Sprite2D");
-		//_resourcheGatherTime = GetNode<Timer>("Timer");
 
 		_timer = new Timer
 		{
@@ -171,7 +173,6 @@ public partial class Villager : CharacterBody2D
 
 	void ChooseTask()
 	{
-		GD.Print("Choosing task");
 		if (dialogueControl.farmingTaskStarted)
 		{
 			GD.Print("Farming task started");
@@ -194,7 +195,7 @@ public partial class Villager : CharacterBody2D
 
  	void GatherResourches()
 	{
-		bool _taskStarted = false;
+		Random rnd = new Random();
 		_targetPosition = _streetSign.GlobalPosition;
 		if (GlobalPosition.DistanceTo(_targetPosition) < 5)
 		{
@@ -210,17 +211,33 @@ public partial class Villager : CharacterBody2D
 			_resourcheGatherTime.Start();
 			_resourcheGatherTime.Timeout += _on_timer_timeout;
 
-			if(_timerStopped == true)
+			if(_timerStopped == true && !_villagerSprite.Visible)
 			{
-				GD.Print("timerstopped");
+				//GD.Print("timerstopped");
 				_resourcheGatherTime.QueueFree();
 				_resourcheGatherTime.Free();
 				_timerStopped = false;
 				_villagerSprite.Visible = true;
+				if(dialogueControl.findStone == true)
+				{
+					//RandomAmountResourche("stone");
+					int amount = rnd.Next(4, 21);
+					GD.Print("Found: " + amount + " stone");
+					dialogueControl.findStone = false;
+				}
+				if(dialogueControl.findWood == true)
+				{
+					//RandomAmountResourche("wood");
+					int amount = rnd.Next(4, 21);
+					GD.Print("Found: " + amount + " wood");
+					dialogueControl.findWood = false;
+				}
+				_taskStarted = false;
 				_state = VillagerStates.RoamAround;
+				
 			} 
 		}
-	} 
+	}
 
 	void CheckPlants()
 	{

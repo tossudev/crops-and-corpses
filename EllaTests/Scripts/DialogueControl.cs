@@ -16,6 +16,8 @@ public  partial class DialogueControl : Control
 	ColorRect _backgroundColor;
 	public bool farmingTaskStarted = false;
 	public bool resourcheTaskStarted = false;
+	public bool findStone = false;
+	public bool findWood = false;
 	public bool exitDialogue = false;
 	public bool attackZombies = false;
 	// Called when the node enters the scene tree for the first time.
@@ -81,7 +83,7 @@ public  partial class DialogueControl : Control
 	public void _on_button_3_button_up()
 	{
 		resourcheTaskStarted = true;
-		ResourcheGathering();
+		ResourcheGatheringD();
 	}
 
 	public void _on_button_4_button_up()
@@ -89,6 +91,7 @@ public  partial class DialogueControl : Control
 		if(resourcheTaskStarted)
 		{
 			GD.Print("Finding stone");
+			findStone = true;
 		}
 		Visible = false;
 	}
@@ -97,6 +100,7 @@ public  partial class DialogueControl : Control
 		if(resourcheTaskStarted)
 		{
 			GD.Print("Finding Wood");
+			findWood = true;
 		}
 		Visible = false;
 
@@ -131,7 +135,7 @@ public  partial class DialogueControl : Control
 		} 
 	}
 
-	void ResourcheGathering()
+	void ResourcheGatheringD()
 	{
 		_text.Text = "What would you like me to find?";
 		_buttonOpt5.Text = "Wood";

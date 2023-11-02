@@ -18,7 +18,7 @@ quantity = 2
 
 [resource]
 script = ExtResource("5_6pfln")
-ID = 350
+ID = 351
 Name = "Iron Axe"
 IconTexture = ExtResource("1_4wdnq")
 StackSize = 1

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_6xvxm")
-ID = 360
+ID = 361
 Name = "Iron Pick"
 IconTexture = ExtResource("1_hqr14")
 StackSize = 1

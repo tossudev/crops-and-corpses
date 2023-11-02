@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://msff4kj1ku3r"]
+
+[ext_resource type="Script" path="res://scripts/World/Heal.cs" id="1_rgat5"]
+[ext_resource type="Resource" uid="uid://d0s103r1w5joo" path="res://assets/resources/game_items/potion_items_300_to_349/301_health_potion.tres" id="2_wceb2"]
+[ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="6_5qwxq"]
+
+[node name="health_potion" type="Node2D"]
+z_index = 2
+script = ExtResource("1_rgat5")
+_healItem = ExtResource("2_wceb2")
+_healAmount = 30.0
+_healMessage = "You drink a health potion."
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = ExtResource("6_5qwxq")
+
+[connection signal="area_entered" from="Area2D" to="." method="OnInteractable"]
+[connection signal="area_exited" from="Area2D" to="." method="OnNonInteractable"]
+[connection signal="input_event" from="Area2D" to="." method="InteractWithPlant"]
+[connection signal="mouse_entered" from="Area2D" to="." method="ShowProgress"]
+[connection signal="mouse_exited" from="Area2D" to="." method="HideProgress"]

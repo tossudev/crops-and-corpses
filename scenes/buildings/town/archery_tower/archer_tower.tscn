@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://54li2rwv5ov5"]
+
+[ext_resource type="Texture2D" uid="uid://cmyh3qeorleuc" path="res://NikkeTests/images/archer_tower_top.png" id="1_0mgif"]
+[ext_resource type="Script" path="res://NikkeTests/scripts/ArcherTower.cs" id="1_ce0vn"]
+[ext_resource type="PackedScene" uid="uid://dqmfwe15dtgat" path="res://scenes/Combat/projectile.tscn" id="2_151wa"]
+[ext_resource type="Texture2D" uid="uid://bljqq2o52y2uy" path="res://NikkeTests/images/archer_tower_bot.png" id="2_lwh2a"]
+[ext_resource type="Resource" uid="uid://cuipddm160c01" path="res://TinoTests/Resources/Arrow1.tres" id="3_l1866"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jggck"]
+size = Vector2(128, 255.656)
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("_attackTimer", "_projectileStartPosition") groups=["ArcherTower"]]
+script = ExtResource("1_ce0vn")
+_attackTimer = NodePath("Timer")
+_projectilePrefab = ExtResource("2_151wa")
+_projectile = ExtResource("3_l1866")
+_projectileStartPosition = NodePath("Node2D/projectileStartPosition")
+
+[node name="Node2D" type="Node2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="ArcherTowerTop" type="Sprite2D" parent="Node2D"]
+position = Vector2(-32, -96)
+texture = ExtResource("1_0mgif")
+
+[node name="ArcherTowerBot" type="Sprite2D" parent="Node2D"]
+position = Vector2(-32, -32)
+texture = ExtResource("2_lwh2a")
+
+[node name="projectileStartPosition" type="Node2D" parent="Node2D"]
+position = Vector2(-32, -50)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-64, -128)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_jggck")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-64, -128)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 12)
+scale = Vector2(0.9, 0.9)
+shape = SubResource("RectangleShape2D_jggck")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="Timer" to="." method="OnShootTimerTimeout"]

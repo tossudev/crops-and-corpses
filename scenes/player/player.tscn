@@ -1,8 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://c8bx46w1qix2q"]
+[gd_scene load_steps=30 format=3 uid="uid://c8bx46w1qix2q"]
 
 [ext_resource type="Script" path="res://scripts/player/PlayerController.cs" id="1_1gq73"]
 [ext_resource type="PackedScene" uid="uid://3hlx66fdaruu" path="res://scenes/player/Components/handheld.tscn" id="2_00eh7"]
-[ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="2_jvd4n"]
 [ext_resource type="Resource" uid="uid://be8oyimariure" path="res://TinoTests/Resources/Hand.tres" id="3_mnp0k"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_wuvdk"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_sa7m5"]
@@ -16,17 +15,25 @@
 [ext_resource type="Texture2D" uid="uid://bgp4wcx2fpky1" path="res://assets/placeholder/test_character/LegL.png" id="14_pxa3s"]
 [ext_resource type="Texture2D" uid="uid://dm80cnvcf6m5q" path="res://assets/placeholder/test_character/FootL.png" id="15_m13sc"]
 [ext_resource type="Texture2D" uid="uid://dtxvt7hf4w3m1" path="res://assets/placeholder/test_character/LegR.png" id="16_3ecwo"]
+[ext_resource type="PackedScene" uid="uid://csdmv5fy2tvqa" path="res://scenes/consumables/food/bread.tscn" id="16_patuu"]
+[ext_resource type="PackedScene" uid="uid://bcmw0lume6obc" path="res://scenes/consumables/food/potato.tscn" id="17_nh2gr"]
 [ext_resource type="Texture2D" uid="uid://c2jmj7mhvoytp" path="res://assets/placeholder/test_character/FootR.png" id="17_uhi4p"]
+[ext_resource type="PackedScene" uid="uid://d1dkkqdm6w4fv" path="res://scenes/consumables/food/pumpkin.tscn" id="18_4wo3v"]
+[ext_resource type="PackedScene" uid="uid://bxe1k2od7pwk1" path="res://scenes/consumables/food/vegetable_stew.tscn" id="19_lksru"]
+[ext_resource type="PackedScene" uid="uid://msff4kj1ku3r" path="res://scenes/consumables/potions/health_potion.tscn" id="20_d2w1s"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yn8u1"]
-radius = 7.5
+[sub_resource type="CircleShape2D" id="CircleShape2D_efott"]
+radius = 117.527
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1sqjf"]
+radius = 30.0
 
 [sub_resource type="Animation" id="Animation_vd6ii"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Skeleton2D/TorsoBone/HeadBone:rotation")
+tracks/0/path = NodePath("TorsoBone/HeadBone:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -38,7 +45,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Skeleton2D/TorsoBone/ArmLBone:rotation")
+tracks/1/path = NodePath("TorsoBone/ArmLBone:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -50,7 +57,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Skeleton2D/TorsoBone/ArmRBone:rotation")
+tracks/2/path = NodePath("TorsoBone/ArmRBone:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -62,7 +69,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Skeleton2D/TorsoBone/LegLBone:rotation")
+tracks/3/path = NodePath("TorsoBone/LegLBone:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -74,7 +81,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Skeleton2D/TorsoBone/LegRBone:rotation")
+tracks/4/path = NodePath("TorsoBone/LegRBone:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -90,7 +97,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Skeleton2D/TorsoBone/HeadBone:rotation")
+tracks/0/path = NodePath("TorsoBone/HeadBone:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -102,7 +109,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Skeleton2D/TorsoBone/ArmLBone:rotation")
+tracks/1/path = NodePath("TorsoBone/ArmLBone:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -114,7 +121,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Skeleton2D/TorsoBone/ArmRBone:rotation")
+tracks/2/path = NodePath("TorsoBone/ArmRBone:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -126,7 +133,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Skeleton2D/TorsoBone/LegLBone:rotation")
+tracks/3/path = NodePath("TorsoBone/LegLBone:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -138,7 +145,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Skeleton2D/TorsoBone/LegRBone:rotation")
+tracks/4/path = NodePath("TorsoBone/LegRBone:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -155,7 +162,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Skeleton2D/TorsoBone/HeadBone:rotation")
+tracks/0/path = NodePath("TorsoBone/HeadBone:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -167,7 +174,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Skeleton2D/TorsoBone/ArmLBone:rotation")
+tracks/1/path = NodePath("TorsoBone/ArmLBone:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -179,7 +186,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Skeleton2D/TorsoBone/ArmRBone:rotation")
+tracks/2/path = NodePath("TorsoBone/ArmRBone:rotation")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -191,7 +198,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Skeleton2D/TorsoBone/LegLBone:rotation")
+tracks/3/path = NodePath("TorsoBone/LegLBone:rotation")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -203,7 +210,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Skeleton2D/TorsoBone/LegRBone:rotation")
+tracks/4/path = NodePath("TorsoBone/LegRBone:rotation")
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -220,30 +227,40 @@ _data = {
 "walk": SubResource("Animation_tg3u8")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rv7w6"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_12xgg"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_efott"]
-radius = 117.527
+[sub_resource type="CircleShape2D" id="CircleShape2D_yn8u1"]
+radius = 7.5
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_st5mf"]
-radius = 30.0
-
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_handheld", "_sprite", "_pickupArea", "_rig") groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_handheld", "_pickupArea", "_rig") groups=["player"]]
 scale = Vector2(3.2, 3.2)
 script = ExtResource("1_1gq73")
 _handheld = NodePath("Handheld")
-_sprite = NodePath("Icon")
 _pickupArea = NodePath("SmallInteractionArea")
 _rig = NodePath("Skeleton2D")
+minZoom = 0.75
 _speed = 300
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 position = Vector2(2.08165e-12, -5)
-shape = SubResource("CircleShape2D_yn8u1")
-debug_color = Color(0.0235294, 0.65098, 0, 1)
+shape = SubResource("CircleShape2D_efott")
+debug_color = Color(0, 0.647059, 0.243137, 0.419608)
+
+[node name="SmallInteractionArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallInteractionArea"]
+position = Vector2(2.08165e-12, -5)
+shape = SubResource("CircleShape2D_1sqjf")
+disabled = true
 
 [node name="Handheld" parent="." instance=ExtResource("2_00eh7")]
-position = Vector2(2.08165e-12, -5)
+position = Vector2(2.08165e-12, -12)
 _hand = ExtResource("3_mnp0k")
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
@@ -254,69 +271,7 @@ script = ExtResource("5_xyhkk")
 [node name="TorsoBone" type="Bone2D" parent="Skeleton2D"]
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 
-[node name="Torso" type="Sprite2D" parent="Skeleton2D/TorsoBone"]
-position = Vector2(-1, -38)
-rotation = -0.018441
-texture = ExtResource("8_f81gn")
-
-[node name="HeadBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
-position = Vector2(-1, -78)
-rotation = -0.133036
-scale = Vector2(0.999997, 0.999997)
-rest = Transform2D(1, 0, 0, 1, -1, -78)
-
-[node name="Head" type="Sprite2D" parent="Skeleton2D/TorsoBone/HeadBone"]
-position = Vector2(6, -43)
-rotation = -0.014518
-texture = ExtResource("9_igyft")
-
-[node name="ArmLBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
-z_index = -3
-position = Vector2(26.32, -45.85)
-rotation = -0.171092
-scale = Vector2(0.999998, 0.999998)
-rest = Transform2D(0.985399, -0.170258, 0.170258, 0.985399, 26.32, -45.85)
-
-[node name="ArmL" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
-z_index = -1
-position = Vector2(4.06, 13.3)
-rotation = -0.0131563
-texture = ExtResource("10_6b7e2")
-
-[node name="HandLBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
-position = Vector2(18, 33)
-rest = Transform2D(1, 0, 0, 1, 18, 33)
-
-[node name="HandL" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmLBone/HandLBone"]
-z_index = -1
-position = Vector2(0.21, 0.58)
-texture = ExtResource("11_u2drr")
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
-position = Vector2(4.06, 13.3)
-rotation = -0.0131563
-remote_path = NodePath("../ArmL")
-
-[node name="ArmRBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
-position = Vector2(-27, -48)
-rotation = 0.235856
-scale = Vector2(1, 1)
-rest = Transform2D(0.972315, 0.233675, -0.233675, 0.972315, -27, -48)
-
-[node name="ArmR" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmRBone"]
-position = Vector2(-5, 13)
-texture = ExtResource("12_5kh5t")
-
-[node name="HandRBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmRBone"]
-position = Vector2(-20, 39)
-rest = Transform2D(1, 0, 0, 1, -20, 39)
-
-[node name="HandR" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmRBone/HandRBone"]
-position = Vector2(3, 1)
-texture = ExtResource("13_644b2")
-
 [node name="LegLBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
-z_index = -2
 position = Vector2(12.39, -0.8)
 rotation = 0.308657
 scale = Vector2(1, 1)
@@ -341,7 +296,6 @@ rotation = -0.462435
 rest = Transform2D(0.999877, 0.0156808, -0.0156808, 0.999877, -19, -0.35)
 
 [node name="LegR" type="Sprite2D" parent="Skeleton2D/TorsoBone/LegRBone"]
-z_index = -1
 position = Vector2(2.08165e-12, 14.7)
 texture = ExtResource("16_3ecwo")
 
@@ -353,47 +307,90 @@ rest = Transform2D(0.99991, 0.0134382, -0.0134382, 0.99991, 0, 0)
 position = Vector2(3.04, 44.37)
 texture = ExtResource("17_uhi4p")
 
+[node name="ArmLBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
+position = Vector2(26.32, -45.85)
+rotation = -0.171092
+scale = Vector2(0.999998, 0.999998)
+rest = Transform2D(0.985399, -0.170258, 0.170258, 0.985399, 26.32, -45.85)
+
+[node name="ArmL" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
+position = Vector2(4.06, 13.3)
+rotation = -0.0131563
+texture = ExtResource("10_6b7e2")
+
+[node name="HandLBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
+position = Vector2(18, 33)
+rest = Transform2D(1, 0, 0, 1, 18, 33)
+
+[node name="HandL" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmLBone/HandLBone"]
+position = Vector2(0.21, 0.58)
+texture = ExtResource("11_u2drr")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
+position = Vector2(4.06, 13.3)
+rotation = -0.0131563
+remote_path = NodePath("../ArmL")
+
+[node name="Torso" type="Sprite2D" parent="Skeleton2D/TorsoBone"]
+position = Vector2(-1, -38)
+rotation = -0.018441
+texture = ExtResource("8_f81gn")
+
+[node name="HeadBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
+position = Vector2(-1, -78)
+rotation = -0.133036
+scale = Vector2(0.999997, 0.999997)
+rest = Transform2D(1, 0, 0, 1, -1, -78)
+
+[node name="Head" type="Sprite2D" parent="Skeleton2D/TorsoBone/HeadBone"]
+position = Vector2(6, -43)
+rotation = -0.014518
+texture = ExtResource("9_igyft")
+
+[node name="ArmRBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
+position = Vector2(-27, -48)
+rotation = 0.235856
+scale = Vector2(1, 1)
+rest = Transform2D(0.972315, 0.233675, -0.233675, 0.972315, -27, -48)
+
+[node name="ArmR" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmRBone"]
+position = Vector2(-5, 13)
+texture = ExtResource("12_5kh5t")
+
+[node name="HandRBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmRBone"]
+position = Vector2(-20, 39)
+rest = Transform2D(1, 0, 0, 1, -20, 39)
+
+[node name="HandR" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmRBone/HandRBone"]
+position = Vector2(3, 1)
+texture = ExtResource("13_644b2")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Skeleton2D"]
 autoplay = "walk"
 libraries = {
 "": SubResource("AnimationLibrary_uvgsj")
 }
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_wuvdk")]
+_parentScript = NodePath("..")
+_healItemPrefabs = Array[PackedScene]([ExtResource("16_patuu"), ExtResource("17_nh2gr"), ExtResource("18_4wo3v"), ExtResource("19_lksru"), ExtResource("20_d2w1s")])
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("4_sa7m5")]
 visible = false
-scale = Vector2(0.15625, 0.15625)
-texture = ExtResource("2_jvd4n")
-offset = Vector2(0, -128)
-
-[node name="HealthComponent" parent="." instance=ExtResource("3_wuvdk")]
-
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_sa7m5")]
 collision_layer = 2
 collision_mask = 4
+_parentScript = NodePath("..")
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(2.08165e-12, -12)
+shape = SubResource("CapsuleShape2D_12xgg")
+debug_color = Color(0.984314, 0, 0.376471, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(2.08165e-12, -5)
-shape = SubResource("CircleShape2D_rv7w6")
-
-[node name="InteractionArea" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-position = Vector2(2.08165e-12, -5)
-shape = SubResource("CircleShape2D_efott")
-debug_color = Color(0, 0.647059, 0.243137, 0.419608)
-
-[node name="SmallInteractionArea" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 64
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallInteractionArea"]
-position = Vector2(2.08165e-12, -5)
-shape = SubResource("CircleShape2D_st5mf")
-disabled = true
-
-[node name="Sprite" type="Node2D" parent="."]
+shape = SubResource("CircleShape2D_yn8u1")
+debug_color = Color(0, 0.494118, 0.929412, 0.419608)
 
 [connection signal="area_entered" from="SmallInteractionArea" to="." method="OnPickupAreaEntered"]

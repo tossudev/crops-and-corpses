@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://bxlla5wafgnq6"]
+
+[ext_resource type="Resource" uid="uid://cplc64alcfytf" path="res://assets/resources/game_items/tool_items_350_449/361_iron_pick.tres" id="1_mmv8j"]
+[ext_resource type="Script" path="res://TinoTests/Scripts/Weapons/Weapon.cs" id="2_fh5da"]
+
+[resource]
+script = ExtResource("2_fh5da")
+item = ExtResource("1_mmv8j")
+damage = 1.0
+targetDamage = [0.0, 0.0, 34.0]
+knockback = 0.0
+cooldown = 0.5
+effect = 0
+reach = 2.0
+holdAction = true
+ranged = false
+speed = 0.0
+drawTime = 0.0

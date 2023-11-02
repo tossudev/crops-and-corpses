@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt0w6up5wga7i"]
+
+[ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMode.cs" id="1_hi3rr"]
+[ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="2_4qio6"]
+[ext_resource type="Shape2D" path="res://JanitaTests/Scripts/well_shape.tres" id="3_4biyn"]
+
+[node name="well2" type="Node2D"]
+scale = Vector2(0.15, 0.15)
+script = ExtResource("1_hi3rr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+position = Vector2(-426.667, -470)
+texture = ExtResource("2_4qio6")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-32, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-394, -394)
+scale = Vector2(2, 2)
+shape = ExtResource("3_4biyn")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

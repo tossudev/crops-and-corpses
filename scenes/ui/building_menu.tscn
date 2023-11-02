@@ -1,0 +1,104 @@
+[gd_scene load_steps=14 format=3 uid="uid://f5m7wypxd5t7"]
+
+[ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMenu.cs" id="1_1usej"]
+[ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://scenes/farm/farm_plot.tscn" id="2_6b0va"]
+[ext_resource type="PackedScene" uid="uid://c5f1jy5vlj4sd" path="res://scenes/buildings/town/farm_plot/farm_plot_build_mode.tscn" id="3_o47i0"]
+[ext_resource type="PackedScene" uid="uid://3ct83j0jgteb" path="res://scenes/buildings/town/house/house.tscn" id="4_lft42"]
+[ext_resource type="PackedScene" uid="uid://ceal2xj0w1t17" path="res://scenes/buildings/town/house/house_build_mode.tscn" id="5_cdtxw"]
+[ext_resource type="Texture2D" uid="uid://gx3rxc18ic1u" path="res://NikkeTests/images/farm_plot.jpg" id="6_jayxu"]
+[ext_resource type="PackedScene" uid="uid://54li2rwv5ov5" path="res://scenes/buildings/town/archery_tower/archer_tower.tscn" id="6_xt35f"]
+[ext_resource type="Texture2D" uid="uid://b5cv2b6w6tvm0" path="res://assets/sprites/buildings/housedesing2.png" id="7_fhaoc"]
+[ext_resource type="PackedScene" uid="uid://1y1xpa0ldkye" path="res://scenes/buildings/town/archery_tower/archer_tower_build_mode.tscn" id="7_ry1qf"]
+[ext_resource type="PackedScene" uid="uid://7m8c0ty0xcd0" path="res://scenes/buildings/town/well/well.tscn" id="8_8sdq7"]
+[ext_resource type="PackedScene" uid="uid://bt0w6up5wga7i" path="res://scenes/buildings/town/well/well_build_mode.tscn" id="9_2genf"]
+[ext_resource type="Texture2D" uid="uid://cmyh3qeorleuc" path="res://NikkeTests/images/archer_tower_top.png" id="10_henx8"]
+[ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="11_orgxb"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("_buildButton", "_buildMenu", "_buildMenuControl", "_vBoxContainer")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1usej")
+_buildButton = NodePath("BuildingMenu/BuildButton")
+_buildMenu = NodePath("BuildingMenu/BuildingMenu")
+_buildMenuControl = NodePath("BuildingMenu/BuildingMenu/Control")
+_vBoxContainer = NodePath("BuildingMenu/BuildingMenu/Control/VBoxContainer")
+_farmPlotScene = ExtResource("2_6b0va")
+_farmPlotGhostScene = ExtResource("3_o47i0")
+_houseScene = ExtResource("4_lft42")
+_houseGhostScene = ExtResource("5_cdtxw")
+_archerTowerScene = ExtResource("6_xt35f")
+_archerTowerGhostScene = ExtResource("7_ry1qf")
+_wellScene = ExtResource("8_8sdq7")
+_wellGhostScene = ExtResource("9_2genf")
+_farmPlotIcon = ExtResource("6_jayxu")
+_houseIcon = ExtResource("7_fhaoc")
+_archerTowerIcon = ExtResource("10_henx8")
+_wellIcon = ExtResource("11_orgxb")
+
+[node name="BuildingMenu" type="Node2D" parent="."]
+
+[node name="BuildingMenu" type="ScrollContainer" parent="BuildingMenu"]
+visible = false
+custom_minimum_size = Vector2(300, 250)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.0
+offset_top = -125.0
+offset_right = 154.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="Control" type="Control" parent="BuildingMenu/BuildingMenu"]
+clip_contents = true
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BuildingMenu/BuildingMenu/Control"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+anchor_left = -0.167
+anchor_top = 0.017
+anchor_right = -0.167
+anchor_bottom = 0.017
+offset_left = 50.1
+offset_top = -5.1
+offset_right = 350.1
+offset_bottom = 320.9
+grow_horizontal = 2
+
+[node name="BuildButton" type="Button" parent="BuildingMenu"]
+visibility_layer = 512
+custom_minimum_size = Vector2(200, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -850.0
+offset_top = 416.0
+offset_right = -650.0
+offset_bottom = 516.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+toggle_mode = true
+text = "Build"
+
+[connection signal="toggled" from="BuildingMenu/BuildButton" to="." method="_on_build_button_toggled"]

@@ -13,6 +13,7 @@ public  partial class DialogueControl : Control
 	RichTextLabel _text;
 	ColorRect _backgroundColor;
 	public bool farmingTaskStarted = false;
+	public bool resourcheTaskStarted = false;
 	public bool exitDialogue = false;
 	public bool attackZombies = false;
 	// Called when the node enters the scene tree for the first time.
@@ -23,7 +24,7 @@ public  partial class DialogueControl : Control
 
 		_buttonOpt1 = GetNode<Button>("ColorRect/Button1");
 		_buttonOpt2 = GetNode<Button>("ColorRect/Button2");
-		//_buttonOpt3 = GetNode<Button>("ColorRect/Button3");
+		_buttonOpt3 = GetNode<Button>("ColorRect/Button3");
 
 		_nameText = GetNode<RichTextLabel>("ColorRect/Name");
 		_text = GetNode<RichTextLabel>("ColorRect/Text");
@@ -32,7 +33,7 @@ public  partial class DialogueControl : Control
 		_text.Text = "Hello, do you need help?";
 		_buttonOpt1.Text = "Yes, I need help with farm";
 		_buttonOpt2.Text = "Nevermind";
-		//_buttonOpt3.Text = "Other task";
+		_buttonOpt3.Text = "Find some resourches";
 
 		Visible = false;
 
@@ -73,7 +74,7 @@ public  partial class DialogueControl : Control
 
 	public void _on_button_3_button_up()
 	{
-		attackZombies = true;
+		resourcheTaskStarted = true;
 		Visible = false;
 	}
 
@@ -88,7 +89,7 @@ public  partial class DialogueControl : Control
 			_text.Text = "Hello, do you need help?";
 			_buttonOpt1.Text = "Yes, I need help with farm";
 			_buttonOpt2.Text = "Nevermind";
-			//_buttonOpt3.Text = "Attack zombies";
+			_buttonOpt3.Text = "Find some resourches";
 			_buttonOpt1.Visible = true;
 		}
 

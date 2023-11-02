@@ -14,15 +14,17 @@ public partial class SaveData : Node
     static string directoryPath = "";
     static string fullPath = "";
     
+    public const string TOWN_STATS_KEY = "townStats";
     public const string INVENTORY_ITEMS_KEY = "inventoryItems";
     public const string ORGANIZED_INVENTORY_ITEMS_KEY = "organizedInventoryItems";
     
     //---------Modifiable at runtime----------------------
     
+    public static RawTownStats townHallStats = new ();
     public static Array<RawInventoryItem> organizedPlayerInventory = new ();
     public static List<RawInventoryItem> totalInventoryItems = new ();
 
-    public static bool savingInProgress = false;
+    public static bool savingInProgress;
     //---------/Modifiable at runtime----------------------
 
     public override void _Ready()
@@ -32,14 +34,13 @@ public partial class SaveData : Node
         fullPath = directoryPath.PathJoin(SAVEFILENAME);
     }
     
-    static Task Save()
+    static async Task Save()
     {
         savingInProgress = true;
         if (string.IsNullOrEmpty(directoryPath))
         {
             GD.PrintErr("Save path not set, can't save game!");
             savingInProgress = false;
-            return null;
         }
 
         if (!Directory.Exists(directoryPath))
@@ -49,6 +50,7 @@ public partial class SaveData : Node
         
         var rawSaveData = new RawSaveData()
         {
+            townStats = townHallStats,
             inventoryItems = totalInventoryItems,
             organizedInventoryItems = organizedPlayerInventory
         };
@@ -60,7 +62,7 @@ public partial class SaveData : Node
         
         try
         {
-            File.WriteAllText(fullPath, json);
+            await File.WriteAllTextAsync(fullPath, json);
         }
         catch (Exception e)
         {
@@ -68,18 +70,19 @@ public partial class SaveData : Node
         }
 
         savingInProgress = false;
-        return null;
     }
     
-    public static Dictionary LoadData()
+    public static async Task<Dictionary> LoadData()
     {
         if (!File.Exists(fullPath)) return null;
 
+        await TaskExtensions.SuspendWhile(() => savingInProgress);
+        
         string data = "";
         
         try
         {
-            data = File.ReadAllText(fullPath);
+            data = await File.ReadAllTextAsync(fullPath);
         }
         catch (Exception e)
         {
@@ -90,24 +93,23 @@ public partial class SaveData : Node
         
         Error error = loadedJson.Parse(data);
 
-        if (error != Error.Ok)
-        {
-            GD.PrintErr(error, ": SaveData Load");
-            
-            return null;
-        }
-
-        return (Dictionary) loadedJson.Data;
+        if (error == Error.Ok) return (Dictionary)loadedJson.Data;
+        
+        GD.PrintErr(error, ": SaveData Load");
+        return null;
     }
     
     public static void SyncInventory()
     {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         UpdateTotalItemsAndSave();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
     }
 
-    static async Task UpdateTotalItemsAndSave()
+    public static async void SyncTownStats()
+    {
+        await Save();
+    }
+
+    static async void UpdateTotalItemsAndSave()
     {
         totalInventoryItems.Clear();
 
@@ -128,7 +130,7 @@ public partial class SaveData : Node
 
         if (!savingInProgress)
         {
-            await Save();
+            Save();
         }
         else {
             GD.Print("Saving was queued");
@@ -144,7 +146,7 @@ public partial class SaveData : Node
 
                 if (savingInProgress) continue;
                 
-                await Save();
+                Save();
                 break;
             }
             GD.Print($"Total Queue Time: {savingQueueTime_Ms}ms");

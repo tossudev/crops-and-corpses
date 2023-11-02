@@ -1,19 +1,22 @@
-[gd_scene load_steps=16 format=3 uid="uid://ba8jl34px0fpl"]
+[gd_scene load_steps=19 format=3 uid="uid://ba8jl34px0fpl"]
 
 [ext_resource type="Script" path="res://scripts/ui/crafting/CraftingWindow.cs" id="1_glv8t"]
 [ext_resource type="PackedScene" uid="uid://b01xhkvdrkq54" path="res://scenes/ui/crafting/craft_panel.tscn" id="2_lljeh"]
 [ext_resource type="LabelSettings" uid="uid://dt5ytrcyx65cj" path="res://assets/resources/labelsettings/crafting_window_header.tres" id="3_hialj"]
 [ext_resource type="PackedScene" uid="uid://cwkfv4af2ta2g" path="res://scenes/ui/crafting/item_grid_slot.tscn" id="4_h3ga6"]
 [ext_resource type="PackedScene" uid="uid://dqyv3rj8otsnr" path="res://scenes/ui/crafting/craftable_item.tscn" id="5_8tf6t"]
+[ext_resource type="Resource" uid="uid://dkln62c0vsgk8" path="res://assets/resources/game_items/25_bread.tres" id="6_iyyl4"]
 [ext_resource type="Resource" uid="uid://c3e5qdsie8n0l" path="res://assets/resources/game_items/6_arrow.tres" id="6_wjko8"]
+[ext_resource type="Resource" uid="uid://c1q7mpup7mo0b" path="res://assets/resources/game_items/26_vegetable_stew.tres" id="7_8yp1b"]
 [ext_resource type="Resource" uid="uid://c5sh8gg8de5a2" path="res://assets/resources/game_items/5_bow.tres" id="7_g4egb"]
 [ext_resource type="Resource" uid="uid://cqnav3flekvvt" path="res://assets/resources/game_items/4_bucket.tres" id="8_badks"]
 [ext_resource type="Resource" uid="uid://cj0seqylk2aaa" path="res://assets/resources/game_items/3_axe.tres" id="11_et5q1"]
 [ext_resource type="Resource" uid="uid://c1v5a4ipu05d" path="res://assets/resources/game_items/11_pumpkin_seed.tres" id="11_nohmk"]
-[ext_resource type="Resource" uid="uid://be020c80kdfnj" path="res://assets/resources/game_items/9_potato_seed.tres" id="12_drq4m"]
 [ext_resource type="Resource" uid="uid://di3mqk8b3d2ke" path="res://assets/resources/game_items/2_sword.tres" id="12_t03sw"]
 [ext_resource type="Resource" uid="uid://bvjuri17vg701" path="res://assets/resources/game_items/13_mushroom_seed.tres" id="13_x8e0p"]
 [ext_resource type="Resource" uid="uid://c5xluv5j2cu8v" path="res://assets/resources/game_items/8_cure_potion.tres" id="14_b8mer"]
+[ext_resource type="Resource" uid="uid://bdxgtjm5ujcgk" path="res://assets/resources/game_items/17_maize_seed.tres" id="14_iu7o0"]
+[ext_resource type="Resource" uid="uid://d0s103r1w5joo" path="res://assets/resources/game_items/27_health_potion.tres" id="17_cxrdc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g7uv"]
 font_size = 24
@@ -65,8 +68,40 @@ columns = 9
 [node name="ItemGridSlot" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
 
+[node name="CraftableItemBread" parent="ItemArea/GridContainer/ItemGridSlot" instance=ExtResource("5_8tf6t")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 7.5
+offset_top = 7.5
+offset_right = 80.5
+offset_bottom = 80.5
+grow_horizontal = 1
+grow_vertical = 1
+pivot_offset = Vector2(28, 28)
+itemRes = ExtResource("6_iyyl4")
+
 [node name="ItemGridSlot2" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
+
+[node name="CraftableItemVegetableStew" parent="ItemArea/GridContainer/ItemGridSlot2" instance=ExtResource("5_8tf6t")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 7.5
+offset_top = 7.5
+offset_right = 80.5
+offset_bottom = 80.5
+grow_horizontal = 1
+grow_vertical = 1
+pivot_offset = Vector2(28, 28)
+itemRes = ExtResource("7_8yp1b")
 
 [node name="ItemGridSlot3" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
@@ -208,7 +243,7 @@ offset_bottom = 80.5
 grow_horizontal = 1
 grow_vertical = 1
 pivot_offset = Vector2(28, 28)
-itemRes = ExtResource("12_drq4m")
+itemRes = ExtResource("14_iu7o0")
 
 [node name="ItemGridSlot13" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
@@ -253,6 +288,22 @@ itemRes = ExtResource("14_b8mer")
 
 [node name="ItemGridSlot16" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
+
+[node name="CraftableItemHealthPotion" parent="ItemArea/GridContainer/ItemGridSlot16" instance=ExtResource("5_8tf6t")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 7.5
+offset_top = 7.5
+offset_right = 80.5
+offset_bottom = 80.5
+grow_horizontal = 1
+grow_vertical = 1
+pivot_offset = Vector2(28, 28)
+itemRes = ExtResource("17_cxrdc")
 
 [node name="ItemGridSlot17" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2

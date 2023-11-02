@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://dcti22whpjs7e"]
+
+[ext_resource type="Resource" uid="uid://c1sgw6il1u3lh" path="res://assets/resources/game_items/tool_items_350_449/351_iron_axe.tres" id="1_p47u8"]
+[ext_resource type="Script" path="res://TinoTests/Scripts/Weapons/Weapon.cs" id="2_ns54u"]
+
+[resource]
+script = ExtResource("2_ns54u")
+item = ExtResource("1_p47u8")
+damage = 1.0
+targetDamage = [42.0, 34.0, 0.0]
+knockback = 0.0
+cooldown = 0.5
+effect = 0
+reach = 2.0
+holdAction = true
+ranged = false
+speed = 0.0
+drawTime = 0.0

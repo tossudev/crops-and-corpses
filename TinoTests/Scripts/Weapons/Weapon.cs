@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 [GlobalClass, Icon("res://icon.svg")]
@@ -7,10 +8,10 @@ public partial class Weapon : Resource
     [ExportCategory("Global")]
     [Export] public Item item { get; set; }
     [Export] public float damage { get; set; }
+    [Export] public Array<float> targetDamage { get; set; } = new Array<float> { 0, 0, 0 };
     [Export] public float knockback { get; set; }
     [Export] public float cooldown { get; set; }
     [Export] public EffectType effect { get; set; }
-    [Export] public TargetType targetType { get; set; }
 
     [ExportCategory("Melee")]
     [Export] public float reach { get; set; } = 1;
@@ -25,7 +26,7 @@ public partial class Weapon : Resource
 
 public enum TargetType
 {
-    None,
     Enemy,
     Tree,
+    Rock,
 }

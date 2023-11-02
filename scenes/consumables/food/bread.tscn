@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://csdmv5fy2tvqa"]
+
+[ext_resource type="Script" path="res://scripts/World/Heal.cs" id="1_bysqr"]
+[ext_resource type="Resource" uid="uid://dkln62c0vsgk8" path="res://assets/resources/game_items/food_items_250_to_299/250_bread.tres" id="2_qyl5m"]
+[ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="6_dvnk2"]
+
+[node name="bread" type="Node2D"]
+z_index = 2
+script = ExtResource("1_bysqr")
+_healItem = ExtResource("2_qyl5m")
+_healAmount = 20.0
+_healMessage = "You eat freshly baked bread."
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = ExtResource("6_dvnk2")
+
+[connection signal="area_entered" from="Area2D" to="." method="OnInteractable"]
+[connection signal="area_exited" from="Area2D" to="." method="OnNonInteractable"]
+[connection signal="input_event" from="Area2D" to="." method="InteractWithPlant"]
+[connection signal="mouse_entered" from="Area2D" to="." method="ShowProgress"]
+[connection signal="mouse_exited" from="Area2D" to="." method="HideProgress"]

@@ -6,9 +6,11 @@ using System.Collections.Generic;
 public partial class GatheringObjectController : StaticBody2D
 {
 	[Export] private GatheringObject _gatheringObject;
+	[Export] private Sprite2D _sprite;
 
 	private int _maxDrop;
 	private List<Item> _items;
+	private float healthPercent;
 
 	public override void _Ready()
 	{
@@ -18,8 +20,7 @@ public partial class GatheringObjectController : StaticBody2D
 
 	private void OnHealth(float health)
 	{
-		if (health >= 0)
-			DropItems();
+		DropItems();
 
 		if (health <= 0)
 		{
@@ -29,7 +30,8 @@ public partial class GatheringObjectController : StaticBody2D
 
 	private void DropItems()
 	{
-		int dropAmount = (int)GD.RandRange(1, _gatheringObject.maxDrop);
+		int weight = 3;
+		int dropAmount = GD.RandRange(0, weight) == 0 ? GD.RandRange(1, _maxDrop) : 1;
 
 		for (int i = 0; i < dropAmount; i++)
 		{
@@ -37,9 +39,9 @@ public partial class GatheringObjectController : StaticBody2D
 
 			RawInventoryItem dropItem = new RawInventoryItem(_items[randIndex].ID, _items[randIndex].Name, 1, _items[randIndex].StackSize);
 
-			Node2D droppedIrem = PlayerInventoryController.CreateDroppedItem(dropItem, GlobalPosition, GetParent());
+			Node2D droppedItem = PlayerInventoryController.CreateDroppedItem(dropItem, GlobalPosition, GetParent());
 
-			MoveDropItem(droppedIrem);
+			MoveDropItem(droppedItem);
 		}
 	}
 

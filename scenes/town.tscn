@@ -1,23 +1,27 @@
-[gd_scene load_steps=26 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=30 format=3 uid="uid://bgyv0c8xt1fd4"]
 
 [ext_resource type="PackedScene" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="1_2cwk5"]
-[ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_vjhkw"]
-[ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://NikkeTests/scenes/building_menu.tscn" id="1_w3klu"]
+[ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://scenes/ui/building_menu.tscn" id="1_w3klu"]
 [ext_resource type="Texture2D" uid="uid://bhslt6uqn5lpc" path="res://assets/sprites/tiles/tile_grass.png" id="2_m0rkr"]
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="2_mph18"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_nnncm"]
 [ext_resource type="Texture2D" uid="uid://n8iftcgk0ti0" path="res://assets/sprites/tiles/Sand_tile.png" id="3_1kyq2"]
-[ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/player_inventory.tscn" id="3_tp6xx"]
+[ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/inventory/player_inventory.tscn" id="3_tp6xx"]
 [ext_resource type="Texture2D" uid="uid://dbgwlhprokvwi" path="res://assets/sprites/tiles/Dirt_tile.png" id="4_w0eh7"]
 [ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="5_d3kp8"]
-[ext_resource type="Texture2D" uid="uid://wis4r15rhkuo" path="res://assets/sprites/foliage/sprite_rock.png" id="5_fu2m3"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_ho2sg"]
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="5_tpvf0"]
 [ext_resource type="Texture2D" uid="uid://bp0rwsioa22xs" path="res://assets/sprites/foliage/sprite_bush.png" id="6_nyoyv"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
+[ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/iron_ore.tscn" id="10_4wegq"]
 [ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="10_g8lte"]
+[ext_resource type="PackedScene" uid="uid://cyk44y2mntxd0" path="res://scenes/buildings/town/town_hall/town_hall.tscn" id="11_r6hyg"]
+[ext_resource type="PackedScene" uid="uid://c1r6la2nplhqp" path="res://DaniTests/Prefabs/DayCounterLabel.tscn" id="14_kew7c"]
+[ext_resource type="PackedScene" uid="uid://5agkiate7gox" path="res://scenes/ui/minimap.tscn" id="15_nhpcg"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
+[ext_resource type="Texture2D" uid="uid://d0k7b4sc0xo7y" path="res://assets/placeholder/test_character/delete_later.png" id="16_ilo7w"]
+[ext_resource type="Script" path="res://LilianTests/Scripts/ZombieManager.cs" id="21_ar7s3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgdku"]
 texture = ExtResource("2_m0rkr")
@@ -59,7 +63,6 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="Town" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_vjhkw")
 
 [node name="GroundTiles" type="TileMap" parent="."]
 z_index = -10
@@ -96,10 +99,6 @@ position = Vector2(-968, 560)
 [node name="Tree5" parent="Objects/Deco" instance=ExtResource("5_tpvf0")]
 position = Vector2(-216, -720)
 
-[node name="Rock" type="Sprite2D" parent="Objects/Deco"]
-position = Vector2(-1224, -72)
-texture = ExtResource("5_fu2m3")
-
 [node name="Bush" type="Sprite2D" parent="Objects/Deco"]
 position = Vector2(656, 784)
 texture = ExtResource("6_nyoyv")
@@ -107,6 +106,15 @@ texture = ExtResource("6_nyoyv")
 [node name="Bush2" type="Sprite2D" parent="Objects/Deco"]
 position = Vector2(1240, -32)
 texture = ExtResource("6_nyoyv")
+
+[node name="Iron Ore" parent="Objects/Deco" instance=ExtResource("10_4wegq")]
+position = Vector2(-1224, 16)
+
+[node name="Iron Ore2" parent="Objects/Deco" instance=ExtResource("10_4wegq")]
+position = Vector2(1176, -536)
+
+[node name="Iron Ore3" parent="Objects/Deco" instance=ExtResource("10_4wegq")]
+position = Vector2(936, 816)
 
 [node name="Lights" type="Node2D" parent="Objects"]
 
@@ -180,6 +188,9 @@ z_index = -5
 y_sort_enabled = true
 position = Vector2(6.10352e-05, 6.10352e-05)
 
+[node name="TownHall" parent="Buildings" instance=ExtResource("11_r6hyg")]
+position = Vector2(-320, -256)
+
 [node name="Enemies" type="Node2D" parent="."]
 y_sort_enabled = true
 position = Vector2(6.10352e-05, 6.10352e-05)
@@ -210,15 +221,36 @@ offset_bottom = 100.0
 theme_override_font_sizes/font_size = 32
 text = "Press 'E' to toggle inventory"
 
+[node name="DayCounterLabel" parent="Overlay" instance=ExtResource("14_kew7c")]
+
 [node name="BuildingMenu" parent="Overlay" node_paths=PackedStringArray("_buildings", "_player") instance=ExtResource("1_w3klu")]
 _buildings = NodePath("../../Buildings")
-_archerTowerScene = null
-_archerTowerGhostScene = null
-_wellScene = null
-_wellGhostScene = null
-_archerTowerIcon = null
-_wellIcon = null
 _player = NodePath("../../Objects/Player")
+
+[node name="MinimapContainer" type="Panel" parent="Overlay"]
+offset_left = 1576.0
+offset_top = 832.0
+offset_right = 1912.0
+offset_bottom = 1032.0
+
+[node name="Minimap" parent="Overlay/MinimapContainer" instance=ExtResource("15_nhpcg")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -92.0
+offset_right = 160.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Test" type="Sprite2D" parent="Overlay/MinimapContainer"]
+position = Vector2(168, 216)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("16_ilo7w")
 
 [node name="NightDayCycleAndZombieSpawn" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_2cwk5")]
 player = NodePath("../Objects/Player")
@@ -268,5 +300,12 @@ position = Vector2(320, 8)
 
 [node name="town_sign" parent="street_sign_post" index="2"]
 visible = false
+
+[node name="ZombieManager" type="Node2D" parent="."]
+script = ExtResource("21_ar7s3")
+
+[node name="Timer" type="Timer" parent="ZombieManager"]
+
+[connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
 
 [editable path="street_sign_post"]

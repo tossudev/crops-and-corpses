@@ -17,7 +17,7 @@ public partial class HandheldController : Node2D
     private float _knockback;
     private float _cooldown;
     private EffectType _effect;
-    private TargetType _targetType;
+    private List<float> _typeDamage;
     private float _reach;
     private bool _holdAction;
     private bool _ranged;
@@ -27,11 +27,6 @@ public partial class HandheldController : Node2D
 
     private bool _isDrawing;
     private bool _actionHeld;
-    private string _targetGroup;
-
-    public override void _Ready()
-    {
-    }
 
     private void Init()
     {
@@ -51,7 +46,7 @@ public partial class HandheldController : Node2D
         _knockback = _weapon.knockback;
         _cooldown = _weapon.cooldown;
         _effect = _weapon.effect;
-        _targetType = _weapon.targetType;
+        _typeDamage = new List<float>(_weapon.targetDamage);
         _reach = _weapon.reach;
         _holdAction = _weapon.holdAction;
         _speed = _weapon.speed;
@@ -67,19 +62,6 @@ public partial class HandheldController : Node2D
             knockback = _knockback,
             effect = _effect
         };
-
-        switch (_targetType)
-        {
-            case TargetType.Enemy:
-                _targetGroup = "enemy";
-                break;
-            case TargetType.Tree:
-                _targetGroup = "tree";
-                break;
-            default:
-                GD.Print("No target group set for weapon");
-                break;
-        }
 
         this.Scale = Vector2.One * _reach;
     }
@@ -198,12 +180,11 @@ public partial class HandheldController : Node2D
         projectile.attack = _attack;
         projectile.speed = _speed * power;
         projectile.projectile = _projectile;
-        projectile.targetGroup = _targetGroup;
 
         projectile.Init();
 
         // TODO: change this to be based on weapon reach or something
-        projectile.GlobalPosition = this.GlobalPosition + _attack.direction * 10;
+        projectile.GlobalPosition = this.GlobalPosition;
         projectile.GlobalRotation = _attack.direction.Angle();
 
         _timer.Start(_cooldown);
@@ -213,8 +194,24 @@ public partial class HandheldController : Node2D
     {
         if (body is HitboxComponent hitbox)
         {
-            if (hitbox.IsInGroup(_targetGroup))
-                hitbox.ApplyAttack(_attack);
+            if (body.IsInGroup("enemy"))
+            {
+                _attack.damage = _typeDamage[(int)TargetType.Enemy];
+            }
+            else if (body.IsInGroup("tree"))
+            {
+                _attack.damage = _typeDamage[(int)TargetType.Tree];
+            }
+            else if (body.IsInGroup("rock"))
+            {
+                _attack.damage = _typeDamage[(int)TargetType.Rock];
+            }
+            else
+            {
+                return;
+            }
+
+            hitbox.ApplyAttack(_attack);
         }
     }
 }

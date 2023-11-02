@@ -3,7 +3,8 @@ using System;
 
 public partial class TimeManager : Node
 {
-    
+
+    private int dayCounter;
     private float currentTime;
     public float timeSpeed = 1f;
     [Export] private Color nightTimeColor = new Color((float)0.5,(float) 0.5, (float)0.5);  // Set your desired nighttime color
@@ -20,6 +21,7 @@ public partial class TimeManager : Node
 
     public override void _Ready()
     {
+        
         globalTime = GetNode<GlobalTime>("/root/GlobalTime");
         sunlight = GetNode<CanvasModulate>("Sunlight");
 
@@ -31,6 +33,8 @@ public partial class TimeManager : Node
         {
             GD.Print("Sunlight not found in the scene.");
         }
+
+        dayCounter = globalTime.GetDay();
         currentTime = globalTime.GetTime();
         sunlight.Color = globalTime.GetColor();
     }
@@ -41,10 +45,25 @@ public partial class TimeManager : Node
         currentTime += (float)delta * timeSpeed;
         globalTime.SetTime(currentTime);
         float timeOfDay = currentTime % (dayTimeLength + nightTimeLength);
-        
 
+        // Determine if it's daytime
+        bool isNowDayTime = timeOfDay <= dayTimeLength;
+        if(isNowDayTime != isDayTime)
+        {
+            // Day has changed, but only increment dayCounter when transitioning from night to day
+            if (!isDayTime && isNowDayTime)
+            {
+                dayCounter++;
+                globalTime.SetDay(dayCounter);
+                GD.Print(dayCounter);
+            }
+
+            isDayTime = isNowDayTime;
+        }
+        
         if (timeOfDay <= dayTimeLength)
         {
+            
             if (sunlight.Color != dayTimeColor)
             {
                 // Transition back to daytime
@@ -61,7 +80,8 @@ public partial class TimeManager : Node
             
         }
         globalTime.SetColor(sunlight.Color);
-        isDayTime = timeOfDay <= dayTimeLength + 1f; // 10s for delaying zombievawes
+        isDayTime = timeOfDay <= dayTimeLength + 10f; // 1s for delaying zombievawes
+
     }
 
     // Custom function to interpolate between two colors

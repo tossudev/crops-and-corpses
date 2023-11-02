@@ -72,8 +72,6 @@ public partial class PlayerController : CharacterBody2D
 	{
 		Vector2 newZoom = _camera.Zoom += new Vector2(zoomDelta, zoomDelta);
 		_camera.Zoom = newZoom;
-
-		GD.Print(_camera.Zoom);
 	}
 
 	private Vector2 GetMovementInputVector()

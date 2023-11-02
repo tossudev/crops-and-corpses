@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://1ocpajcw4bxt"]
+
+[ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="1_07ud5"]
+
+[resource]
+script = ExtResource("1_07ud5")
+ID = 113
+Name = "Poppy"
+StackSize = 12
+craftingRequirements = Array[Object]([])

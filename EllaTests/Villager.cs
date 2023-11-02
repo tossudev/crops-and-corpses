@@ -10,10 +10,14 @@ public partial class Villager : CharacterBody2D
 	Vector2 _targetPosition;
 	Timer _timer;
 	[Export] DialogueControl dialogueControl;
+	[Export] NavigationAgent2D navMeshAgent;
+	//[Export] NavigationRegion2D navRegionArea;
 	Plant _currentPlant;
 	int _plantIndex = 0;
 	float _speed = 0;
+	bool collision = false;
 	public bool dialogueWindow = false;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -25,7 +29,21 @@ public partial class Villager : CharacterBody2D
 		AddChild(_timer);
 		_timer.Start();
 
+/* 		string _currentScene = GetTree().CurrentScene.Name;
+
+		if (_currentScene != null && _currentScene == "Forest")
+        {
+			GD.Print("Following player");
+            _state = VillagerStates.FollowPlayer;
+        }
+        else
+        {
+			GD.Print("Roaming around");
+            _state = VillagerStates.RoamAround;
+        } */
+
 		_state = VillagerStates.RoamAround;
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,7 +53,7 @@ public partial class Villager : CharacterBody2D
 		{
 			Movement(_targetPosition);
 		}
-
+		
 	}
 
 	public VillagerStates GetVillagerStates()
@@ -64,6 +82,7 @@ public partial class Villager : CharacterBody2D
 				break;
 
 			case VillagerStates.FindResourchesTask:
+				//GatherResourches();
 				break;
 
 			case VillagerStates.GetHospitalized:
@@ -85,6 +104,12 @@ public partial class Villager : CharacterBody2D
 		dialogueWindow = true;
 	}
 
+	public void _on_area_2d_area_entered(Area2D area)
+	{
+		collision = true;
+		//GD.Print("Touching something");
+	}
+
 	void Movement(Vector2 target)
 	{
 		_speed = 100;
@@ -95,13 +120,36 @@ public partial class Villager : CharacterBody2D
 
 	void RoamAround()
 	{
+		//navMeshAgent.TargetPosition = _targetPosition;
+
+		// Don't delete
 		float range = 100;
 		_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
+
+		//_targetPosition = RandomTargetPosition();
+		Vector2 direction = _targetPosition - GlobalPosition;
+		Vector2 oppDirection = -direction;
+		if(collision)
+		{
+			_targetPosition = oppDirection;
+			collision = false;
+		}
+
 		if (dialogueControl.Visible)
 		{
 			_state = VillagerStates.ChooseTask;
 			State();
 		}
+	}
+
+	Vector2 RandomTargetPosition()
+	{
+		float rangeX = 1500;
+		float rangeY = 2000;
+		float randomX = (GD.Randf() * rangeX);
+		float randomY = (GD.Randf() * rangeY);
+
+		return new Vector2(randomX, randomY);
 	}
 
 	void ChooseTask()
@@ -113,6 +161,12 @@ public partial class Villager : CharacterBody2D
 			_state = VillagerStates.FarmingTask;
 			State();
 		}
+/* 		if(dialogueControl.resourcheTaskStarted)
+		{
+			GD.Print("Finding resourches");
+			_state = VillagerStates.FindResourchesTask;
+			State();
+		} */
 		if (dialogueControl.exitDialogue)
 		{
 			_state = VillagerStates.RoamAround;
@@ -120,6 +174,15 @@ public partial class Villager : CharacterBody2D
 			dialogueControl.exitDialogue = false;
 		}
 	}
+
+/* 	void GatherResourches()
+	{
+		_targetPosition = GetParent().GetNode<Node2D>("res://scenes/world/street_sign_post").GlobalPosition;
+		if (GlobalPosition.DistanceTo(_targetPosition) < 5)
+		{
+			GD.Print("I m at the sign");
+		}
+	} */
 
 	void CheckPlants()
 	{
@@ -187,6 +250,7 @@ public partial class Villager : CharacterBody2D
 
 	void FollowPlayer()
 	{
-		_targetPosition = GetParent().GetNode<CharacterBody2D>("Player").GlobalPosition;
+		//not working
+		_targetPosition = GetParent().GetNode<CharacterBody2D>("Forest/Objects/Player").GlobalPosition;
 	}
 }

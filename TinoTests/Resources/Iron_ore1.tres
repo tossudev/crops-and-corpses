@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GatheringObject" load_steps=3 format=3 uid="uid://bvejyv3jrvatm"]
+
+[ext_resource type="Resource" path="res://assets/resources/game_items/resource_items_0_to_99/1_iron.tres" id="1_hav0h"]
+[ext_resource type="Script" path="res://scripts/World/GatheringObject.cs" id="2_lpy0c"]
+
+[resource]
+script = ExtResource("2_lpy0c")
+maxDrop = 2
+items = [ExtResource("1_hav0h")]

@@ -29,7 +29,7 @@ public partial class Villager : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_streetSign = GetParent().GetParent().GetNode<Node2D>("StreetSignSpot");
+		//_streetSign = GetParent().GetParent().GetNode<Node2D>("StreetSignSpot");
 		_villagerSprite = GetNode<Sprite2D>("Sprite2D");
 		_gatheringTimer = GetNode<Timer>("GatheringTimer");
 
@@ -59,16 +59,23 @@ public partial class Villager : CharacterBody2D
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		if (!dialogueControl.Visible && GlobalPosition.DistanceTo(_targetPosition) > 5)
 		{
 			Movement(_targetPosition);
 		}
-		while(_state == VillagerStates.RoamAround)
+		_speed = 100;
+		Vector2 _direction = (_targetPosition - GlobalPosition).Normalized();
+		Velocity = _direction * _speed;
+		MoveAndSlide();
+
+/* 		if(_state == VillagerStates.RoamAround)
 		{
-			RoamAround();
+			float range = 100;
+        	_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
 		}
+		 */
 		//GD.Print(_gatheringTimer.TimeLeft);
 	}
 
@@ -152,11 +159,6 @@ public partial class Villager : CharacterBody2D
 		float range = 100;
         _targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
 
-		if (GlobalPosition.DistanceTo(_targetPosition) < 5)
-    	{
-        	_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
-			State();
-    	}
 		//_targetPosition = RandomTargetPosition();
 /* 		Vector2 direction = _targetPosition - GlobalPosition;
 		Vector2 oppDirection = -direction;

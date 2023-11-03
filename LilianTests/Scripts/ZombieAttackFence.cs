@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public partial class ZombieAttackFence : ZombieStates
 {
-	// todo: add health and hitbox components to fences and somehow get zombies to know if theres a hole in the wall somewhere and head there
+	// todo: add health and hitbox components to fences
 	public bool inTown;
 	[Export] private CharacterBody2D _zombie;
 	[Export] private float _moveSpeed = 100.0f;
@@ -92,24 +92,4 @@ public partial class ZombieAttackFence : ZombieStates
 		}
 	}
 
-	// private Vector2 NearestFence()
-	// {
-	// 	float shortestDistance = 5000f; // some big value at first
-	// 	Node2D closestFence = null;
-
-	// 	foreach (Node2D fence in _fenceList)
-	// 	{
-	// 		Vector2 fenceToZombie = _zombie.GlobalPosition - fence.GlobalPosition;
-	// 		float distance = fenceToZombie.Length();
-
-	// 		if(distance < shortestDistance)
-	// 		{
-	// 			shortestDistance = distance;
-	// 			closestFence = fence;
-	// 		}
-	// 	}
-		
-	// 	GD.Print("closest : " + closestFence.Name);
-	// 	return closestFence.GlobalPosition - _zombie.GlobalPosition;
-	// }
 }

@@ -7,7 +7,7 @@
 script = ExtResource("2_lins5")
 item = ExtResource("1_v6mmg")
 damage = 25.0
-knockback = 0.0
+knockback = 2.08165e-12
 cooldown = 0.5
 effect = 0
 targetType = 1

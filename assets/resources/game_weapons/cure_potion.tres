@@ -8,10 +8,10 @@
 script = ExtResource("3_2spoe")
 item = ExtResource("1_u6khl")
 damage = 0.0
-targetDamage = [0.0, 0.0, 0.0]
-knockback = 0.0
+knockback = 2.08165e-12
 cooldown = 0.0
 effect = 1
+targetType = 0
 reach = 1.0
 holdAction = false
 ranged = true

@@ -28,7 +28,7 @@ public partial class HandheldController : Node2D
 
     private bool _isDrawing;
     private bool _actionHeld;
-    private string targetGroup;
+    private string _targetGroup;
 
     private void Init()
     {
@@ -61,13 +61,13 @@ public partial class HandheldController : Node2D
         switch (_targetType)
         {
             case TargetType.Enemy:
-                targetGroup = "enemy";
+                _targetGroup = "enemy";
                 break;
             case TargetType.Tree:
-                targetGroup = "tree";
+                _targetGroup = "tree";
                 break;
             case TargetType.Rock:
-                targetGroup = "rock";
+                _targetGroup = "rock";
                 break;
             default:
                 return;
@@ -197,7 +197,7 @@ public partial class HandheldController : Node2D
         projectile.attack = _attack;
         projectile.speed = _speed * power;
         projectile.projectile = _projectile;
-        projectile.targetGroup = targetGroup;
+        projectile.targetGroup = _targetGroup;
 
         projectile.Init();
 
@@ -212,7 +212,7 @@ public partial class HandheldController : Node2D
     {
         if (body is HitboxComponent hitbox)
         {
-            if (body.IsInGroup(targetGroup))
+            if (body.IsInGroup(_targetGroup))
                 hitbox.ApplyAttack(_attack);
         }
     }

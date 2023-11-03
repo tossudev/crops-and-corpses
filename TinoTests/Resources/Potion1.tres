@@ -3,8 +3,6 @@
 [ext_resource type="Resource" uid="uid://c5xluv5j2cu8v" path="res://assets/resources/game_items/potion_items_300_to_349/300_cure_potion.tres" id="1_pasn7"]
 [ext_resource type="Script" path="res://TinoTests/Scripts/Projectiles/Projectile.cs" id="1_v3ox2"]
 
-
-
 [resource]
 script = ExtResource("1_v3ox2")
 item = ExtResource("1_pasn7")

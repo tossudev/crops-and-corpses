@@ -6,11 +6,11 @@
 [resource]
 script = ExtResource("2_fh5da")
 item = ExtResource("1_mmv8j")
-damage = 1.0
-targetDamage = [0.0, 0.0, 34.0]
+damage = 34.0
 knockback = 0.0
 cooldown = 0.5
 effect = 0
+targetType = 2
 reach = 2.0
 holdAction = true
 ranged = false

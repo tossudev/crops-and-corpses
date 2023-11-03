@@ -1,15 +1,8 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=5 format=3 uid="uid://domi3h5sb0i6n"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://domi3h5sb0i6n"]
 
 [ext_resource type="Resource" uid="uid://c5xluv5j2cu8v" path="res://assets/resources/game_items/potion_items_300_to_349/300_cure_potion.tres" id="1_u6khl"]
-[ext_resource type="Script" path="res://TinoTests/Scripts/Projectiles/Projectile.cs" id="2_xycrn"]
+[ext_resource type="Resource" uid="uid://ce2eq2q0gowgi" path="res://TinoTests/Resources/Potion1.tres" id="2_4s7ds"]
 [ext_resource type="Script" path="res://TinoTests/Scripts/Weapons/Weapon.cs" id="3_2spoe"]
-
-[sub_resource type="Resource" id="Resource_m17to"]
-script = ExtResource("2_xycrn")
-item = ExtResource("1_u6khl")
-airtime = 3.0
-despawnTime = 0.5
-effect = 1
 
 [resource]
 script = ExtResource("3_2spoe")
@@ -18,10 +11,10 @@ damage = 0.0
 targetDamage = [0.0, 0.0, 0.0]
 knockback = 0.0
 cooldown = 0.0
-effect = 0
+effect = 1
 reach = 1.0
 holdAction = false
 ranged = true
-speed = 1000.0
-drawTime = 1.0
-projectile = SubResource("Resource_m17to")
+speed = 500.0
+drawTime = 0.001
+projectile = ExtResource("2_4s7ds")

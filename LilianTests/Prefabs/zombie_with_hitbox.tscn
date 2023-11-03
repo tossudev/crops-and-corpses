@@ -33,10 +33,11 @@ debug_color = Color(0, 0.6, 0.701961, 0.12549)
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("1_46tua")]
 _parentScript = NodePath("..")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") groups=["enemy"] instance=ExtResource("2_lvwfs")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["enemy"] instance=ExtResource("2_lvwfs")]
 visible = false
 collision_layer = 4
 collision_mask = 32
+_parentScript = NodePath("..")
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]

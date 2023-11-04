@@ -21,9 +21,11 @@ public partial class TimeManager : Node
 
     public override void _Ready()
     {
+
         
         globalTime = GetNode<GlobalTime>("/root/GlobalTime");
         sunlight = GetNode<CanvasModulate>("Sunlight");
+        GD.Print("has town been destroyed "+ globalTime.HasTownBeenDestroyed());
 
         if (sunlight != null)
         {

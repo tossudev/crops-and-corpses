@@ -7,6 +7,7 @@ public partial class Minimap : Control {
 	public Node2D radar;
 	public Camera2D cam;
 	public PackedScene markerNode;
+	public TileMap groundTiles;
 	public const int MAP_SIZE_DIVIDER = 10;
 
 	Texture2D _characterTexture;
@@ -38,9 +39,21 @@ public partial class Minimap : Control {
 			newObjectMarker.Texture = _decoTexture;
 			radar.AddChild(newObjectMarker);
 		}
+
+		groundTiles = GetNode<TileMap>("%GroundTiles");
+		CreateMap();
 	}
 
 	public override void _Process(double delta) {
 		cam.GlobalPosition = player.GlobalPosition / MAP_SIZE_DIVIDER;
+	}
+
+
+	void CreateMap() {
+		Node mapTiles = groundTiles.Duplicate();
+		
+		radar.AddChild(mapTiles);
+		TileMap tileNode = mapTiles as TileMap;
+		tileNode.Scale = new Vector2(1f/MAP_SIZE_DIVIDER, 1f/MAP_SIZE_DIVIDER);
 	}
 }

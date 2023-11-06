@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://db6xmvd5lkpgm"]
+[gd_scene load_steps=7 format=3 uid="uid://db6xmvd5lkpgm"]
 
 [ext_resource type="Texture2D" uid="uid://dtu6mkyl4eal8" path="res://NikkeTests/images/fence_e.png" id="1_7ekis"]
+[ext_resource type="Script" path="res://scripts/farm/FenceHealth.cs" id="1_k801u"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_xrlmy"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_1xav7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_638cj"]
 size = Vector2(2.625, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fydxa"]
+size = Vector2(3, 151)
 
 [node name="Node2D2" type="Node2D"]
 
@@ -19,9 +25,28 @@ position = Vector2(-64, -64)
 position = Vector2(-61.5, -12)
 shape = SubResource("RectangleShape2D_638cj")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["fence"]]
 collision_layer = 255
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-125, -75)
 shape = SubResource("RectangleShape2D_638cj")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("2_xrlmy")]
+position = Vector2(-126, -75)
+_parentScript = NodePath("../FenceHealthParent")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("3_1xav7")]
+position = Vector2(-126, -75)
+_parentScript = NodePath("../FenceHealthParent")
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
+position = Vector2(0.5, -1.5)
+shape = SubResource("RectangleShape2D_fydxa")
+debug_color = Color(0.992157, 0, 0.262745, 0.419608)
+
+[node name="FenceHealthParent" type="Node2D" parent="."]
+script = ExtResource("1_k801u")

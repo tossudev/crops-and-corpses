@@ -7,8 +7,10 @@ public partial class RoamingZombie : CharacterBody2D
 	// [Export] private float _damage;
 	private Sprite2D _sprite;
 	private CharacterBody2D _player;
+	private Node2D _fence;
 	private HitboxComponent _hitbox;
 	private Attack _attack;
+	private Vector2 _knockback = Vector2.Zero;
 	private Timer _timer;
 	private Timer _updateStatsTimer;
 	private ProgressBar _healthBar;
@@ -57,6 +59,12 @@ public partial class RoamingZombie : CharacterBody2D
 
 	private void AttackReceived(Attack attack)
 	{
+		// var duration = 0.25f;
+		// _knockback = attack.direction * attack.knockback;
+
+		// var knockbackTween = GetTree().CreateTween();
+		// knockbackTween.Parallel().TweenProperty(this, "_knockback", new Vector2(0, 0), duration);
+		
 		/* GD.Print("2");
 		GD.Print(attack.effect); */
 		switch (attack.effect)
@@ -88,6 +96,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 	private void OnAttackBoxEntered(Node2D body)
 	{
+		// GD.Print("Collision with: " + body.Name);
 		if (body.IsInGroup("player"))
 		{
 			_player = (CharacterBody2D)body;
@@ -105,7 +114,27 @@ public partial class RoamingZombie : CharacterBody2D
 			}
 			else
 			{
-				GD.Print("No hitbox found on player");
+				GD.Print("ZOMBIE: No hitbox found on player");
+			}
+		}
+
+		if(body.IsInGroup("fence"))
+		{			
+			_fence = (Node2D)body;
+
+			// direction from zombie to fence
+			Vector2 _direction = (_fence.GlobalPosition - this.GlobalPosition).Normalized();
+			_attack.direction = _direction;
+
+			_hitbox = _fence.GetParent().GetNodeOrNull<HitboxComponent>("HitboxComponent");
+
+			if(_hitbox != null)
+			{
+				_timer.Start();
+			}
+			else
+			{
+				GD.Print("ZOMBIE: No hitbox found on fence");
 			}
 		}
 	}

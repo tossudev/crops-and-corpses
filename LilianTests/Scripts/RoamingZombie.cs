@@ -18,9 +18,12 @@ public partial class RoamingZombie : CharacterBody2D
 	private NodePath _rootNodePath;
 	private Node2D rootNode;
 	PackedScene instantiatedNPC;
+	private CompressedTexture2D strongZombieSprite;
 
 	public override void _Ready()
 	{
+		
+		strongZombieSprite=GD.Load<CompressedTexture2D>("res://DaniTests/Sprites/strongZombie.png");
 		instantiatedNPC = (PackedScene)GD.Load("res://EllaTests/npc.tscn");
 		_rootNodePath = GetParent<Node2D>().GetPath();
 		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);
@@ -175,6 +178,16 @@ public partial class RoamingZombie : CharacterBody2D
 	{
 		_attack.damage = ZombieManager.damage;
 		_timer.WaitTime = ZombieManager.attackTime;
+		if(ZombieManager.type == ZombieManager.ZombieType.Medium)
+		{
+			return;
+		}
+		else if(ZombieManager.type == ZombieManager.ZombieType.Strong)
+		{
+			GD.Print("Strong");
+			strongZombieSprite = GD.Load<CompressedTexture2D>("res://DaniTests/Sprites/strongZombie.png");
+			_sprite.Texture = strongZombieSprite;
+		}
 		//GD.Print("DMG: " + _attack.damage + "\nwait time: " + _timer.WaitTime);
 	}
 	

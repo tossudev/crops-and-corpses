@@ -21,7 +21,7 @@ public partial class ZombieManager : Node
 	public override void _Ready()
 	{
 		
-		_dayNightSpawnNode = GetParent().GetNodeOrNull<SpawnScript>("NightDayCycleAndZombieSpawn");
+		_dayNightSpawnNode = GetParent().GetNodeOrNull<SpawnScript>("ZombieSpawn");
 		_timer = GetNodeOrNull<Timer>("Timer");
 		if(_villageTarget != null)
 		{

@@ -11,7 +11,6 @@ public  partial class DialogueControl : Control
 	Button _buttonOpt4;
 	Button _buttonOpt5;
 	[Export] Villager _villager;
-	RichTextLabel _nameText;
 	RichTextLabel _text;
 	ColorRect _backgroundColor;
 	public bool farmingTaskStarted = false;
@@ -32,10 +31,8 @@ public  partial class DialogueControl : Control
 		_buttonOpt4 = GetNode<Button>("ColorRect/Button4");
 		_buttonOpt5 = GetNode<Button>("ColorRect/Button5");
 
-		_nameText = GetNode<RichTextLabel>("ColorRect/Name");
 		_text = GetNode<RichTextLabel>("ColorRect/Text");
 
-		_nameText.Text = "Name";
 		_text.Text = "Hello, do you need help?";
 		_buttonOpt1.Text = "Yes, I need help with farm";
 		_buttonOpt2.Text = "Nevermind";
@@ -114,6 +111,7 @@ public  partial class DialogueControl : Control
 
 		if (_villager.GetVillagerStates() == VillagerManager.VillagerStates.RoamAround)
 		{
+			GD.Print("OPEN DIALOGUE");
 			_text.Text = "Hello, do you need help?";
 			_buttonOpt1.Text = "Yes, I need help with farm";
 			_buttonOpt2.Text = "Nevermind";
@@ -132,6 +130,7 @@ public  partial class DialogueControl : Control
 			_buttonOpt1.Visible = false;
 			_buttonOpt3.Visible = false;
 			_buttonOpt4.Visible = false;
+			_buttonOpt5.Visible = false;
 		} 
 	}
 

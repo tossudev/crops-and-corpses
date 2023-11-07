@@ -19,15 +19,15 @@
 [ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/iron_ore.tscn" id="10_4wegq"]
 [ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://EllaTests/npc.tscn" id="10_g8lte"]
 [ext_resource type="PackedScene" uid="uid://cyk44y2mntxd0" path="res://scenes/buildings/town/town_hall/town_hall.tscn" id="11_r6hyg"]
-[ext_resource type="PackedScene" uid="uid://c1r6la2nplhqp" path="res://DaniTests/Prefabs/DayCounterLabel.tscn" id="14_kew7c"]
+[ext_resource type="PackedScene" path="res://DaniTests/Prefabs/DayCounterLabel.tscn" id="14_kew7c"]
 [ext_resource type="PackedScene" uid="uid://5agkiate7gox" path="res://scenes/ui/minimap.tscn" id="15_nhpcg"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
 [ext_resource type="Script" path="res://DaniTests/Scripts/HourCounter.cs" id="20_y1pju"]
 [ext_resource type="Script" path="res://LilianTests/Scripts/ZombieManager.cs" id="21_ar7s3"]
 [ext_resource type="Script" path="res://EllaTests/Scripts/VillagerManager.cs" id="23_m40il"]
-[ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://DaniTests/Scenes/ZombieSpawn.tscn" id="26_e61x0"]
-[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://DaniTests/Scenes/sunlight_container.tscn" id="27_71uoq"]
+[ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="26_e61x0"]
+[ext_resource type="PackedScene" path="res://DaniTests/Scenes/sunlight_container.tscn" id="27_71uoq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ea2vc"]
 texture = ExtResource("5_ho2sg")
@@ -278,41 +278,6 @@ grow_vertical = 2
 
 [node name="farm_manager" parent="." instance=ExtResource("8_v8hay")]
 
-[node name="TaskPoint" type="Marker2D" parent="." groups=["Taskpoint"]]
-position = Vector2(575, -449)
-
-[node name="ColorRect" type="ColorRect" parent="TaskPoint"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -70.5
-offset_top = -71.5
-offset_right = 70.5
-offset_bottom = 71.5
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.968627, 0.262745, 0.462745, 0.427451)
-
-[node name="TaskCompleted" type="Marker2D" parent="." groups=["TaskCompleted"]]
-position = Vector2(582, -101)
-
-[node name="ColorRect" type="ColorRect" parent="TaskCompleted"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.94902, 0.941176, 0, 0.427451)
-metadata/_edit_use_anchors_ = true
-
 [node name="well" parent="." instance=ExtResource("15_y8o5s")]
 position = Vector2(328, -287)
 
@@ -321,6 +286,9 @@ position = Vector2(320, 8)
 
 [node name="town_sign" parent="street_sign_post" index="2"]
 visible = false
+
+[node name="StreetSignSpot" type="Node2D" parent="."]
+position = Vector2(244, 180)
 
 [node name="ZombieManager" type="Node2D" parent="."]
 script = ExtResource("21_ar7s3")

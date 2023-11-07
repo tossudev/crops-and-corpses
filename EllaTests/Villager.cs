@@ -21,6 +21,7 @@ public partial class Villager : CharacterBody2D
 	bool collision = false;
 	bool _timerStopped = false;
 	bool _taskStarted = false;
+	int _resourcheTaskCounter = 0;
 	public bool dialogueWindow = false;
 
 	[Export] Villager_Info _info;
@@ -30,17 +31,17 @@ public partial class Villager : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		//_streetSign = GetParent().GetParent().GetNode<Node2D>("StreetSignSpot");
+		_streetSign = GetParent().GetParent().GetNode<Node2D>("StreetSignSpot");
 		_villagerSprite = GetNode<Sprite2D>("Sprite2D");
 		_gatheringTimer = GetNode<Timer>("GatheringTimer");
 
-/* 		_timer = new Timer
+		_timer = new Timer
 		{
 			WaitTime = 1f,
 		};
 		_timer.Timeout += State;
 		AddChild(_timer);
-		_timer.Start(); */
+		_timer.Start();
 
 /* 		string _currentScene = GetTree().CurrentScene.Name;
 
@@ -57,14 +58,11 @@ public partial class Villager : CharacterBody2D
 
 		_state = VillagerStates.RoamAround;
 
-		
-
 		_villagerName = instance.GetVillagerData().name;
 		_villagerInfo = instance.GetVillagerData().info;
 		_villagerSprite.Texture = instance.GetVillagerData().texture;
 		
 		_info.InitializeVillagerInfo(_villagerSprite.Texture, _villagerName, _villagerInfo, _state);
-		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -74,18 +72,10 @@ public partial class Villager : CharacterBody2D
 		{
 			Movement(_targetPosition);
 		}
-		_speed = 100;
-		Vector2 _direction = (_targetPosition - GlobalPosition).Normalized();
-		Velocity = _direction * _speed;
-		MoveAndSlide();
-
-/* 		if(_state == VillagerStates.RoamAround)
+		if(_taskStarted == true && _resourcheTaskCounter == 5)
 		{
-			float range = 100;
-        	_targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
+			ResourcheGatheringDone();
 		}
-		 */
-		//GD.Print(_gatheringTimer.TimeLeft);
 	}
 
 	public VillagerStates GetVillagerStates()
@@ -133,12 +123,13 @@ public partial class Villager : CharacterBody2D
 				GD.Print("State not found");
 				break;
 		}
-		GD.Print(_state);
+		//GD.Print(_state);
 	}
 
 	public void _on_button_button_up()
 	{
-		//dialogueWindow = true;
+		//dialogueControl.Visible = true;
+		dialogueWindow = true;
 		_info.Visible = true;
 		_info.UpdateStatus(_state);
 	}
@@ -149,10 +140,10 @@ public partial class Villager : CharacterBody2D
 		//GD.Print("Touching something");
 	}
 
-	public void _on_gathering_timer_timeout()
+/* 	public void _on_gathering_timer_timeout()
 	{
 		ResourcheGatheringDone();
-	}
+	} */
 
 	void Movement(Vector2 target)
 	{
@@ -166,37 +157,12 @@ public partial class Villager : CharacterBody2D
 	{
 		dialogueControl.resourcheTaskStarted = false;
 		dialogueControl.farmingTaskStarted = false;
-		//navMeshAgent.TargetPosition = _targetPosition;
 		float range = 100;
         _targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
-
-		//_targetPosition = RandomTargetPosition();
-/* 		Vector2 direction = _targetPosition - GlobalPosition;
-		Vector2 oppDirection = -direction;
-		if(collision)
-		{
-			_targetPosition = oppDirection;
-			collision = false;
-		} */
-		//Movement(_targetPosition);
-
 		if (dialogueControl.Visible)
 		{
 			_state = VillagerStates.ChooseTask;
-			State();
 		}
-	}
-
-
-	//Incase u reading this and wondering what is this Im testing diff movement bc its **** 
-	Vector2 RandomTargetPosition()
-	{
-		float rangeX = 1500;
-		float rangeY = 2000;
-		float randomX = (GD.Randf() * rangeX);
-		float randomY = (GD.Randf() * rangeY);
-
-		return new Vector2(randomX, randomY);
 	}
 
 	void ChooseTask()
@@ -205,18 +171,18 @@ public partial class Villager : CharacterBody2D
 		{
 			GD.Print("Farming task started");
 			_state = VillagerStates.FarmingTask;
-			State();
+			dialogueWindow = false;
 		}
  		if(dialogueControl.resourcheTaskStarted)
 		{
 			GD.Print("Finding resourches");
 			_state = VillagerStates.FindResourchesTask;
-			State();
+			dialogueWindow = false;
 		}
 		if (dialogueControl.exitDialogue)
 		{
 			_state = VillagerStates.RoamAround;
-			State();
+			dialogueWindow = false;
 			dialogueControl.exitDialogue = false;
 		}
 	}
@@ -226,25 +192,11 @@ public partial class Villager : CharacterBody2D
 		_targetPosition = _streetSign.GlobalPosition;
 		if (GlobalPosition.DistanceTo(_targetPosition) < 5)
 		{
+			_info.Visible = false;
 			_taskStarted = true;
 			_villagerSprite.Visible = false;
-			_gatheringTimer.Start();
+			_resourcheTaskCounter ++;
 		}
-/* 		if(_taskStarted)
-		{
-			
-			/* _resourcheGatherTime = new Timer{
-				WaitTime = 5f,
-			};
-			AddChild(_resourcheGatherTime);
-			_resourcheGatherTime.Start();
-			_resourcheGatherTime.Timeout += _on_timer_timeout; 
-
-			if(_timerStopped == true)
-			{
-				
-			} 
-		} */
 	}
 
 	void ResourcheGatheringDone()
@@ -253,20 +205,20 @@ public partial class Villager : CharacterBody2D
 		_villagerSprite.Visible = true;
 		if(dialogueControl.findStone == true)
 		{
-			//RandomAmountResourche("stone");
 			int amount = rnd.Next(4, 21);
 			GD.Print("Found: " + amount + " stone");
 			dialogueControl.findStone = false;
 		}
 		if(dialogueControl.findWood == true)
 		{
-		//RandomAmountResourche("wood");
 			int amount = rnd.Next(4, 21);
 			GD.Print("Found: " + amount + " wood");
 			dialogueControl.findWood = false;
 		}
+		_taskStarted = false;
+		_resourcheTaskCounter = 0;
+		dialogueControl.resourcheTaskStarted = false;
 		_state = VillagerStates.RoamAround;
-		State();
 	}
 
 	void CheckPlants()
@@ -303,7 +255,6 @@ public partial class Villager : CharacterBody2D
 			else
 			{
 				_state = VillagerStates.RoamAround;
-				State();
 				dialogueControl.farmingTaskStarted = false;
 				return;
 			}
@@ -334,7 +285,7 @@ public partial class Villager : CharacterBody2D
 
 	void FollowPlayer()
 	{
-		//not working (yet)
+		//not working anymore(yet)
 		_targetPosition = GetParent().GetNode<CharacterBody2D>("Forest/Objects/Player").GlobalPosition;
 	}
 }

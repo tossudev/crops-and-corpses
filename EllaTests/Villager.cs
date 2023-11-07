@@ -1,14 +1,11 @@
 using Godot;
 using System;
-using System.Collections;
-using System.Diagnostics;
-using System.Reflection;
 using static VillagerManager;
 
 public partial class Villager : CharacterBody2D
 {
 	VillagerStates _state;
-	[Export] VillagerManager _villagerManager;
+	//[Export] VillagerManager _villagerManager;
 	Vector2 _targetPosition;
 	Timer _timer;
 	Timer _gatheringTimer;
@@ -26,6 +23,10 @@ public partial class Villager : CharacterBody2D
 	bool _taskStarted = false;
 	public bool dialogueWindow = false;
 
+	[Export] Villager_Info _info;
+
+	string _villagerName;
+	string _villagerInfo;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -55,6 +56,14 @@ public partial class Villager : CharacterBody2D
         } */
 
 		_state = VillagerStates.RoamAround;
+
+		
+
+		_villagerName = instance.GetVillagerData().name;
+		_villagerInfo = instance.GetVillagerData().info;
+		_villagerSprite.Texture = instance.GetVillagerData().texture;
+		
+		_info.InitializeVillagerInfo(_villagerSprite.Texture, _villagerName, _villagerInfo, _state);
 		
 	}
 
@@ -129,7 +138,9 @@ public partial class Villager : CharacterBody2D
 
 	public void _on_button_button_up()
 	{
-		dialogueWindow = true;
+		//dialogueWindow = true;
+		_info.Visible = true;
+		_info.UpdateStatus(_state);
 	}
 
 	public void _on_area_2d_area_entered(Area2D area)
@@ -327,3 +338,5 @@ public partial class Villager : CharacterBody2D
 		_targetPosition = GetParent().GetNode<CharacterBody2D>("Forest/Objects/Player").GlobalPosition;
 	}
 }
+
+

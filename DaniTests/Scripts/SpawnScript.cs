@@ -22,9 +22,10 @@ public partial class SpawnScript : Node2D
 	[Export]private float maxDistance=1500f;
 	[Export] public CharacterBody2D player;
 	private static List<CharacterBody2D> zombieList = new List<CharacterBody2D>();
+	public GlobalTime globalTime;
 	public override void _Ready()
 	{
-		
+		globalTime = GetNode<GlobalTime>("/root/GlobalTime");
 		zombieList.Clear();
 		counter = 0;
 		spawnPoints = new Node2D[4];
@@ -58,6 +59,10 @@ public partial class SpawnScript : Node2D
         {
             spawnDelay.Stop();
         }
+		if(globalTime.HasTownBeenDestroyed())
+		{
+			spawnDelay.Stop();
+		}
 		if(zombieList.Count > 0 && zombieDelayBool)
 		{
 			Vector2 playerPos = player.Position;
@@ -83,7 +88,6 @@ public partial class SpawnScript : Node2D
 	}
 	private void ZombieSpawn()
 	{
-
 		rootPath =  GetParent<Node2D>().GetPath();
 		GD.Print(rootPath);
 		rootNode = GetNodeOrNull<Node2D>(rootPath);

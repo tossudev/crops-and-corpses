@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr1drq28ycxbn"
-path="res://.godot/imported/item_potato.png-23d2f9fd1495c6211005cff18a5b2ff9.ctex"
+uid="uid://c8xb0af08ypnv"
+path="res://.godot/imported/Sand_rocks_tile.png-03ef58edb450e35881748e80b39123d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/item_potato.png"
-dest_files=["res://.godot/imported/item_potato.png-23d2f9fd1495c6211005cff18a5b2ff9.ctex"]
+source_file="res://assets/sprites/tiles/Sand_rocks_tile.png"
+dest_files=["res://.godot/imported/Sand_rocks_tile.png-03ef58edb450e35881748e80b39123d0.ctex"]
 
 [params]
 

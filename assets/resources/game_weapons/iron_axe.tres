@@ -7,7 +7,7 @@
 script = ExtResource("2_ns54u")
 item = ExtResource("1_p47u8")
 damage = 34.0
-knockback = 0.0
+knockback = 2.08165e-12
 cooldown = 0.5
 effect = 0
 targetType = 1

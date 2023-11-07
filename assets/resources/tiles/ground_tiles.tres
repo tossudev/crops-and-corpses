@@ -1,0 +1,87 @@
+[gd_resource type="TileSet" load_steps=17 format=3 uid="uid://c8hb8l070pv4u"]
+
+[ext_resource type="Texture2D" uid="uid://b0dlu5nexmss2" path="res://assets/sprites/tiles/grass_tile.png" id="1_leq8e"]
+[ext_resource type="Texture2D" uid="uid://cejtv4mq41rkm" path="res://assets/sprites/tiles/grass_rocks_tile.png" id="2_ex64r"]
+[ext_resource type="Texture2D" uid="uid://wx026lyp8qku" path="res://assets/sprites/tiles/grass_flowers_tile.png" id="3_nt7yg"]
+[ext_resource type="Texture2D" uid="uid://ehsp5k83fvvb" path="res://assets/sprites/tiles/grass_flowers2_tile.png" id="4_ws2c7"]
+[ext_resource type="Texture2D" uid="uid://dbgwlhprokvwi" path="res://assets/sprites/tiles/Dirt_tile.png" id="5_715fp"]
+[ext_resource type="Texture2D" uid="uid://bf0kk4xsi7048" path="res://assets/sprites/tiles/Dirt_rocks_tile.png" id="6_ojcv7"]
+[ext_resource type="Texture2D" uid="uid://n8iftcgk0ti0" path="res://assets/sprites/tiles/Sand_tile.png" id="7_roj6b"]
+[ext_resource type="Texture2D" uid="uid://c8xb0af08ypnv" path="res://assets/sprites/tiles/Sand_rocks_tile.png" id="8_5spgs"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgoqj"]
+texture = ExtResource("1_leq8e")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/probability = 10.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j24m8"]
+texture = ExtResource("2_ex64r")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xxt5e"]
+texture = ExtResource("3_nt7yg")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pmb14"]
+texture = ExtResource("4_ws2c7")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mg8fd"]
+texture = ExtResource("5_715fp")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 1
+0:0/0/probability = 10.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_evwlh"]
+texture = ExtResource("6_ojcv7")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 1
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ekkrr"]
+texture = ExtResource("7_roj6b")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 2
+0:0/0/probability = 10.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vnykd"]
+texture = ExtResource("8_5spgs")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 2
+
+[resource]
+tile_size = Vector2i(128, 128)
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Grass"
+terrain_set_0/terrain_0/color = Color(0.886275, 0.0705882, 0.607843, 1)
+terrain_set_0/terrain_1/name = "Dirt"
+terrain_set_0/terrain_1/color = Color(0.486275, 0.286275, 0.901961, 1)
+terrain_set_0/terrain_2/name = "Sand"
+terrain_set_0/terrain_2/color = Color(0.188235, 0.129412, 1, 1)
+sources/0 = SubResource("TileSetAtlasSource_hgoqj")
+sources/1 = SubResource("TileSetAtlasSource_j24m8")
+sources/2 = SubResource("TileSetAtlasSource_xxt5e")
+sources/3 = SubResource("TileSetAtlasSource_pmb14")
+sources/4 = SubResource("TileSetAtlasSource_mg8fd")
+sources/5 = SubResource("TileSetAtlasSource_evwlh")
+sources/6 = SubResource("TileSetAtlasSource_ekkrr")
+sources/7 = SubResource("TileSetAtlasSource_vnykd")

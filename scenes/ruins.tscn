@@ -221,7 +221,8 @@ _archerTowerIcon = null
 _wellIcon = null
 _player = NodePath("../../Objects/Player")
 
-[node name="DayCounterLabel" parent="Overlay" instance=ExtResource("15_dr27d")]
+[node name="DayCounterLabel" parent="Overlay" node_paths=PackedStringArray("timeManager") instance=ExtResource("15_dr27d")]
+timeManager = NodePath("../../SunlightContainer")
 
 [node name="farm_manager" parent="." instance=ExtResource("16_ph1ix")]
 

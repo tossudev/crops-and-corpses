@@ -1,13 +1,12 @@
-[gd_scene load_steps=32 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=34 format=3 uid="uid://bgyv0c8xt1fd4"]
 
-[ext_resource type="PackedScene" path="res://DaniTests/Scenes/DayTimeCycleAndZombieSpawn.tscn" id="1_2cwk5"]
 [ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://scenes/ui/building_menu.tscn" id="1_w3klu"]
 [ext_resource type="Script" path="res://scripts/global/AllVillagerData.cs" id="2_ilkp0"]
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="2_mph18"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_nnncm"]
-[ext_resource type="Texture2D" path="res://assets/placeholder/test_character/character1.png" id="3_d8jee"]
+[ext_resource type="Texture2D" uid="uid://c0iyfaellpf6m" path="res://assets/placeholder/test_character/character1.png" id="3_d8jee"]
 [ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/inventory/player_inventory.tscn" id="3_tp6xx"]
-[ext_resource type="Texture2D" path="res://assets/placeholder/test_character/character2.png" id="4_h4g06"]
+[ext_resource type="Texture2D" uid="uid://cxqn4mwpjria2" path="res://assets/placeholder/test_character/character2.png" id="4_h4g06"]
 [ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="5_d3kp8"]
 [ext_resource type="Texture2D" uid="uid://bbei648d3eovx" path="res://assets/placeholder/test_character/character.png" id="5_d5jej"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_ho2sg"]
@@ -24,8 +23,11 @@
 [ext_resource type="PackedScene" uid="uid://5agkiate7gox" path="res://scenes/ui/minimap.tscn" id="15_nhpcg"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
+[ext_resource type="Script" path="res://DaniTests/Scripts/HourCounter.cs" id="20_y1pju"]
 [ext_resource type="Script" path="res://LilianTests/Scripts/ZombieManager.cs" id="21_ar7s3"]
 [ext_resource type="Script" path="res://EllaTests/Scripts/VillagerManager.cs" id="23_m40il"]
+[ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://DaniTests/Scenes/ZombieSpawn.tscn" id="26_e61x0"]
+[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://DaniTests/Scenes/sunlight_container.tscn" id="27_71uoq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ea2vc"]
 texture = ExtResource("5_ho2sg")
@@ -58,8 +60,9 @@ fill_from = Vector2(0.5, 0.5)
 [node name="Town" type="Node2D"]
 y_sort_enabled = true
 
-[node name="VillagerManager" type="Node" parent="."]
+[node name="VillagerManager" type="Node" parent="." node_paths=PackedStringArray("_allData")]
 script = ExtResource("23_m40il")
+_allData = NodePath("AllVillagerData")
 
 [node name="AllVillagerData" type="Node" parent="VillagerManager"]
 script = ExtResource("2_ilkp0")
@@ -240,7 +243,14 @@ offset_bottom = 100.0
 theme_override_font_sizes/font_size = 32
 text = "Press 'E' to toggle inventory"
 
-[node name="DayCounterLabel" parent="Overlay" instance=ExtResource("14_kew7c")]
+[node name="DayCounterLabel" parent="Overlay" node_paths=PackedStringArray("timeManager") instance=ExtResource("14_kew7c")]
+timeManager = NodePath("../../SunlightContainer")
+
+[node name="HourCounterLabel" parent="Overlay" instance=ExtResource("14_kew7c")]
+offset_left = 192.0
+offset_right = 1144.0
+text = "Hour: "
+script = ExtResource("20_y1pju")
 
 [node name="BuildingMenu" parent="Overlay" node_paths=PackedStringArray("_buildings", "_player") instance=ExtResource("1_w3klu")]
 _buildings = NodePath("../../Buildings")
@@ -265,9 +275,6 @@ offset_right = 160.0
 offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="NightDayCycleAndZombieSpawn" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_2cwk5")]
-player = NodePath("../Objects/Player")
 
 [node name="farm_manager" parent="." instance=ExtResource("8_v8hay")]
 
@@ -319,6 +326,12 @@ visible = false
 script = ExtResource("21_ar7s3")
 
 [node name="Timer" type="Timer" parent="ZombieManager"]
+
+[node name="ZombieSpawn" parent="." node_paths=PackedStringArray("dayTimeCheck", "player") instance=ExtResource("26_e61x0")]
+dayTimeCheck = NodePath("../SunlightContainer")
+player = NodePath("../Objects/Player")
+
+[node name="SunlightContainer" parent="." instance=ExtResource("27_71uoq")]
 
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
 

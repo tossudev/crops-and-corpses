@@ -265,12 +265,12 @@ public partial class Plant : Node2D
 		_growthTimer.Stop();
 		trect.Texture = plantTexture;
 	}
-	void Harvest(){
+	async void Harvest(){
 		if(_state == GrowthState.IsHarvestable){
 			// Add to inventory whatever collected
 			GD.Print("Harvested: "+plantName);
 			RawInventoryItem _plant = new RawInventoryItem(_harvestablePlant.ID, _harvestablePlant.Name, 4, _harvestablePlant.StackSize);
-			PlayerInventoryController.AddItem(_plant);
+			await PlayerInventoryController.AddItem(_plant);
 		}else if(_state == GrowthState.IsDead){
 			GD.Print("Cleared plant: "+plantName);
 		}

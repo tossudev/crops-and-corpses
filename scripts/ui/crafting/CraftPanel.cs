@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 public partial class CraftPanel : Control
 {
@@ -54,7 +55,7 @@ public partial class CraftPanel : Control
 				requiredResSlots[i].Visible = false;
 				continue;
 			}
-			
+			requiredResSlots[i].InitiateSlot(-1);
 			requiredResSlots[i].Visible = true;
 
 			CraftingRequirement requirement = craftedItem.craftingRequirements[i];
@@ -75,7 +76,7 @@ public partial class CraftPanel : Control
 		Visible = false;
 	}
 
-	public void _on_craft_button_pressed()
+	public async void _on_craft_button_pressed()
 	{
 		int amountToCraft = 0;
 		
@@ -91,7 +92,7 @@ public partial class CraftPanel : Control
 			ErrorMsgLabel.Text = "Enter a valid number";
 		}
 
-		if (!TryCraft(Mathf.Max(1, amountToCraft)))
+		if (!await TryCraft(Mathf.Max(1, amountToCraft)))
 		{
 			ErrorMsgLabel.Visible = true;
 			ErrorMsgLabel.Text = "Not enough resources";
@@ -102,7 +103,7 @@ public partial class CraftPanel : Control
 		}
 	}
 
-	bool TryCraft(int amountToCraft)
+	async Task<bool> TryCraft(int amountToCraft)
 	{
 		try
 		{
@@ -118,13 +119,13 @@ public partial class CraftPanel : Control
 				craftingRequirement.quantity *= amountToCraft;
 
 
-				if (!PlayerInventoryController.RemoveItemFromInventory(craftingRequirement.RequirementAsRaw()))
+				if (!await PlayerInventoryController.RemoveItemFromInventory(craftingRequirement.RequirementAsRaw()))
 				{
 					return false;
 				}
 			}
 
-			PlayerInventoryController.AddItem(
+			await PlayerInventoryController.AddItem(
 				new RawInventoryItem(craftedItem.ID, craftedItem.Name, amountToCraft, craftedItem.StackSize));
 			
 			return true;

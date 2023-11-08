@@ -16,8 +16,8 @@ public partial class TownStats : Resource
     }
     
     // Town stats
-    [Export] float _totalExperience;
-    public float totalExperience => _totalExperience;
+    [Export] int _totalExperience;
+    public int totalExperience => _totalExperience;
     
     [Export] int _townHallLevel;
     public int townHallLevel => _townHallLevel;
@@ -55,36 +55,6 @@ public partial class TownStats : Resource
     // Houses
     [Export] int _houseHP;
     public int houseHP => _houseHP;
-    
-    
-    /// <summary>
-    /// Reads TownStats from save data
-    /// </summary>
-    /// <param name="saveData"></param>
-    public static bool ReadStatsDataFromFile(Dictionary saveData)
-    {
-        if (saveData == null) return false;
-        
-        var townStatsData = saveData[SaveData.TOWN_STATS_KEY];
-
-        
-        Dictionary rawStatsDict = (Dictionary) townStatsData;
-
-        SaveData.townHallStats = new RawTownStats(
-            totalExperience: (float)rawStatsDict[RawTownStats.TOTAL_EXPERIENCE_KEY],
-            townHallLevel: (int)rawStatsDict[RawTownStats.TOWN_HALL_LEVEL_KEY],
-            populationCap: (int)rawStatsDict[RawTownStats.POPULATION_CAP_KEY],
-            soldierAttackSpeed: (int)rawStatsDict[RawTownStats.SOLDIER_ATTACK_SPEED_KEY],
-            soldierAccuracy: (int)rawStatsDict[RawTownStats.SOLDIER_ACCURACY_KEY],
-            farmerWalkSpeed: (int)rawStatsDict[RawTownStats.FARMER_WALK_SPEED_KEY],
-            farmerMaxFarms: (int)rawStatsDict[RawTownStats.FARMER_MAX_FARMS_KEY],
-            pesticideEffectiveness: (int)rawStatsDict[RawTownStats.PESTICIDE_EFFECTIVENESS_KEY],
-            wallHP: (int)rawStatsDict[RawTownStats.WALL_HP_KEY],
-            spikyWalls: (bool)rawStatsDict[RawTownStats.SPIKY_WALLS_KEY],
-            houseHP: (int)rawStatsDict[RawTownStats.HOUSE_HP_KEY]
-        );
-        return true;
-    }
     
     public RawTownStats TownStatsAsRaw()
     {

@@ -8,7 +8,7 @@ texture = ExtResource("1_mpok7")
 [node name="ItemGridSlot" type="Control"]
 light_mask = 16
 visibility_layer = 16
-custom_minimum_size = Vector2(73, 73)
+custom_minimum_size = Vector2(72, 72)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 72.0
@@ -17,7 +17,10 @@ pivot_offset = Vector2(37.5, 37.5)
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(72, 72)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_etjiy")

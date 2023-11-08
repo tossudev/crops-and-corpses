@@ -7,13 +7,14 @@ public partial class CraftableItem : Button
     [Export] public Item itemRes;
 
     TextureRect smallIcon;
+    const string SMALL_ICON_NODENAME = "%CraftableItemIcon";
 
     CraftPanel _craftPanel;
     public override void _Ready()
     {
         try
         {
-            smallIcon = GetNode<TextureRect>("TextureRect");
+            smallIcon = GetNode<TextureRect>(SMALL_ICON_NODENAME);
             smallIcon.Texture = itemRes.IconTexture;
             _craftPanel = (CraftPanel)GetTree().GetNodesInGroup(CraftPanel.GROUP_NAME)[0];
         }

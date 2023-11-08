@@ -146,6 +146,8 @@ public partial class RawInventoryItem : GodotObject
     /// <param name="saveData"></param>
     public static async Task ReadInventoryDataFromFile(Dictionary saveData, bool sync = true)
     {
+        SaveData.organizedPlayerInventory.Clear();
+        
         if (SaveData.organizedPlayerInventory.Count < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE)
         {
             // Init inventory array with null values

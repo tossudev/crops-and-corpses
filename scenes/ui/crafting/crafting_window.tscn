@@ -31,27 +31,29 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_glv8t")
 
-[node name="Panel" parent="." groups=["CraftPanel"] instance=ExtResource("2_lljeh")]
+[node name="CraftPanel" parent="." groups=["CraftPanel"] instance=ExtResource("2_lljeh")]
 layout_mode = 0
-offset_left = 1408.0
+offset_left = 1384.0
 offset_top = 128.0
-offset_right = 1792.0
+offset_right = 1768.0
 offset_bottom = 608.0
 pivot_offset = Vector2(400, 0)
 
 [node name="ItemArea" type="Panel" parent="."]
-custom_minimum_size = Vector2(768, 256)
+custom_minimum_size = Vector2(824, 256)
 layout_mode = 0
-offset_left = 640.0
+offset_left = 568.0
 offset_top = 128.0
-offset_right = 1408.0
+offset_right = 1383.81
 offset_bottom = 384.0
 
 [node name="Label" type="Label" parent="ItemArea"]
 custom_minimum_size = Vector2(768, 0)
-layout_mode = 0
-offset_right = 768.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
 offset_bottom = 53.0
+grow_horizontal = 2
 text = "CRAFTING"
 label_settings = ExtResource("3_hialj")
 horizontal_alignment = 1
@@ -60,27 +62,22 @@ vertical_alignment = 1
 [node name="GridContainer" type="GridContainer" parent="ItemArea"]
 layout_mode = 2
 offset_left = 16.0
-offset_top = 96.0
-offset_right = 696.0
-offset_bottom = 244.0
-columns = 9
+offset_top = 88.0
+offset_right = 728.0
+offset_bottom = 240.0
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 10
 
 [node name="ItemGridSlot" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
 
 [node name="CraftableItemBread" parent="ItemArea/GridContainer/ItemGridSlot" instance=ExtResource("5_8tf6t")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 7.5
-offset_top = 7.5
-offset_right = 80.5
-offset_bottom = 80.5
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
+offset_left = -36.5
+offset_top = -36.5
+offset_right = 36.5
+offset_bottom = 36.5
 pivot_offset = Vector2(28, 28)
 itemRes = ExtResource("6_iyyl4")
 
@@ -88,18 +85,12 @@ itemRes = ExtResource("6_iyyl4")
 layout_mode = 2
 
 [node name="CraftableItemVegetableStew" parent="ItemArea/GridContainer/ItemGridSlot2" instance=ExtResource("5_8tf6t")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 7.5
-offset_top = 7.5
-offset_right = 80.5
-offset_bottom = 80.5
-grow_horizontal = 1
-grow_vertical = 1
+layout_direction = 0
+layout_mode = 1
+offset_left = -36.5
+offset_top = -36.5
+offset_right = 36.5
+offset_bottom = 36.5
 pivot_offset = Vector2(28, 28)
 itemRes = ExtResource("7_8yp1b")
 
@@ -107,18 +98,12 @@ itemRes = ExtResource("7_8yp1b")
 layout_mode = 2
 
 [node name="CraftableItemArrow" parent="ItemArea/GridContainer/ItemGridSlot3" instance=ExtResource("5_8tf6t")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 7.5
-offset_top = 7.5
-offset_right = 63.5
-offset_bottom = 63.5
-grow_horizontal = 1
-grow_vertical = 1
+layout_direction = 0
+layout_mode = 1
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
 pivot_offset = Vector2(28, 28)
 itemRes = ExtResource("6_wjko8")
 
@@ -132,18 +117,12 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="CraftableItemBow" parent="ItemArea/GridContainer/ItemGridSlot6" instance=ExtResource("5_8tf6t")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 7.5
-offset_top = 7.5
-offset_right = 63.5
-offset_bottom = 63.5
-grow_horizontal = 1
-grow_vertical = 1
+layout_direction = 0
+layout_mode = 1
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
 pivot_offset = Vector2(28, 28)
 itemRes = ExtResource("7_g4egb")
 
@@ -151,18 +130,12 @@ itemRes = ExtResource("7_g4egb")
 layout_mode = 2
 
 [node name="CraftableItemBucket" parent="ItemArea/GridContainer/ItemGridSlot7" instance=ExtResource("5_8tf6t")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 7.5
-offset_top = 7.5
-offset_right = 63.5
-offset_bottom = 63.5
-grow_horizontal = 1
-grow_vertical = 1
+layout_direction = 0
+layout_mode = 1
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
 pivot_offset = Vector2(28, 28)
 itemRes = ExtResource("8_badks")
 
@@ -170,18 +143,12 @@ itemRes = ExtResource("8_badks")
 layout_mode = 2
 
 [node name="CraftableItemAxe" parent="ItemArea/GridContainer/ItemGridSlot8" instance=ExtResource("5_8tf6t")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 7.5
-offset_top = 7.5
-offset_right = 63.5
-offset_bottom = 63.5
-grow_horizontal = 1
-grow_vertical = 1
+layout_direction = 0
+layout_mode = 1
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
 pivot_offset = Vector2(28, 28)
 itemRes = ExtResource("11_vkb3h")
 
@@ -189,18 +156,12 @@ itemRes = ExtResource("11_vkb3h")
 layout_mode = 2
 
 [node name="CraftableItemSword" parent="ItemArea/GridContainer/ItemGridSlot9" instance=ExtResource("5_8tf6t")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 7.5
-offset_top = 7.5
-offset_right = 63.5
-offset_bottom = 63.5
-grow_horizontal = 1
-grow_vertical = 1
+layout_direction = 0
+layout_mode = 1
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
 pivot_offset = Vector2(28, 28)
 itemRes = ExtResource("12_eclrf")
 
@@ -211,18 +172,12 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="CraftableItemTomatoSeed" parent="ItemArea/GridContainer/ItemGridSlot11" instance=ExtResource("5_8tf6t")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 7.5
-offset_top = 7.5
-offset_right = 80.5
-offset_bottom = 80.5
-grow_horizontal = 1
-grow_vertical = 1
+layout_direction = 0
+layout_mode = 1
+offset_left = -36.5
+offset_top = -36.5
+offset_right = 36.5
+offset_bottom = 36.5
 pivot_offset = Vector2(28, 28)
 itemRes = ExtResource("11_nohmk")
 
@@ -230,18 +185,12 @@ itemRes = ExtResource("11_nohmk")
 layout_mode = 2
 
 [node name="CraftableItemPotatoSeed" parent="ItemArea/GridContainer/ItemGridSlot12" instance=ExtResource("5_8tf6t")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 7.5
-offset_top = 7.5
-offset_right = 80.5
-offset_bottom = 80.5
-grow_horizontal = 1
-grow_vertical = 1
+layout_direction = 0
+layout_mode = 1
+offset_left = -36.5
+offset_top = -36.5
+offset_right = 36.5
+offset_bottom = 36.5
 pivot_offset = Vector2(28, 28)
 itemRes = ExtResource("14_iu7o0")
 
@@ -249,18 +198,12 @@ itemRes = ExtResource("14_iu7o0")
 layout_mode = 2
 
 [node name="CraftableItemCabbageSeed" parent="ItemArea/GridContainer/ItemGridSlot13" instance=ExtResource("5_8tf6t")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 7.5
-offset_top = 7.5
-offset_right = 80.5
-offset_bottom = 80.5
-grow_horizontal = 1
-grow_vertical = 1
+layout_direction = 0
+layout_mode = 1
+offset_left = -36.5
+offset_top = -36.5
+offset_right = 36.5
+offset_bottom = 36.5
 pivot_offset = Vector2(28, 28)
 itemRes = ExtResource("13_x8e0p")
 
@@ -271,18 +214,12 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="CraftableItemCurePotion" parent="ItemArea/GridContainer/ItemGridSlot15" instance=ExtResource("5_8tf6t")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 7.5
-offset_top = 7.5
-offset_right = 80.5
-offset_bottom = 80.5
-grow_horizontal = 1
-grow_vertical = 1
+layout_direction = 0
+layout_mode = 1
+offset_left = -36.5
+offset_top = -36.5
+offset_right = 36.5
+offset_bottom = 36.5
 pivot_offset = Vector2(28, 28)
 itemRes = ExtResource("14_b8mer")
 
@@ -290,18 +227,12 @@ itemRes = ExtResource("14_b8mer")
 layout_mode = 2
 
 [node name="CraftableItemHealthPotion" parent="ItemArea/GridContainer/ItemGridSlot16" instance=ExtResource("5_8tf6t")]
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 7.5
-offset_top = 7.5
-offset_right = 80.5
-offset_bottom = 80.5
-grow_horizontal = 1
-grow_vertical = 1
+layout_direction = 0
+layout_mode = 1
+offset_left = -36.5
+offset_top = -36.5
+offset_right = 36.5
+offset_bottom = 36.5
 pivot_offset = Vector2(28, 28)
 itemRes = ExtResource("17_cxrdc")
 
@@ -309,6 +240,12 @@ itemRes = ExtResource("17_cxrdc")
 layout_mode = 2
 
 [node name="ItemGridSlot18" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
+layout_mode = 2
+
+[node name="ItemGridSlot19" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
+layout_mode = 2
+
+[node name="ItemGridSlot20" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="."]

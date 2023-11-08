@@ -26,17 +26,6 @@ public partial class CraftPanel : Control
 	    Visible = false;
     }
 
-	public override void _UnhandledInput(InputEvent @event)
-	{
-		base._UnhandledInput(@event);
-
-		if (@event is InputEventMouseButton or InputEventKey
-			&& @event.IsPressed())
-		{
-			ClosePanel();
-		}
-	}
-
 	public void OpenPanel(Item craftItem)
 	{
 		ErrorMsgLabel.Visible = false;

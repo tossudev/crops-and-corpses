@@ -21,14 +21,14 @@ AmountToCraftTextEdit = NodePath("FlowContainer/HBoxContainer2/AmountToCraft")
 craftButton = NodePath("FlowContainer/HBoxContainer2/CraftButton")
 
 [node name="FlowContainer" type="FlowContainer" parent="."]
-custom_minimum_size = Vector2(400, 200)
+custom_minimum_size = Vector2(400, 480)
 layout_mode = 0
 offset_right = 250.0
 offset_bottom = 104.0
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="FlowContainer"]
-custom_minimum_size = Vector2(400, 30)
+custom_minimum_size = Vector2(400, 56)
 layout_mode = 2
 text = "BUCKET"
 label_settings = ExtResource("2_w562g")
@@ -65,7 +65,7 @@ custom_minimum_size = Vector2(400, 16)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="FlowContainer"]
-custom_minimum_size = Vector2(400, 72)
+custom_minimum_size = Vector2(400, 96)
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
@@ -173,14 +173,6 @@ offset_right = 73.8948
 offset_bottom = 79.94
 scale = Vector2(0.85, 0.85)
 
-[node name="ErrorMsg" type="Label" parent="FlowContainer"]
-visible = false
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 2
-text = "--------------------"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="FlowContainer"]
 custom_minimum_size = Vector2(400, 40)
 layout_mode = 2
@@ -198,6 +190,14 @@ caret_blink_interval = 0.7
 [node name="CraftButton" type="Button" parent="FlowContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Craft"
+
+[node name="ErrorMsg" type="Label" parent="FlowContainer"]
+visible = false
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+text = "--------------------"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="FlowContainer/HBoxContainer2/CraftButton" to="." method="_on_craft_button_pressed"]
 

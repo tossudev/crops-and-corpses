@@ -76,11 +76,11 @@ public partial class HealthComponent : Node2D
 		return _maxHealth;
 	}
 
-	void Heal(float amount)
+	async void Heal(float amount)
 	{
 		health += amount;
 		if (health > _maxHealth) health = _maxHealth;
-		PlayerInventoryController.RemoveItemFromInventory(new RawInventoryItem(
+		await PlayerInventoryController.RemoveItemFromInventory(new RawInventoryItem(
 			PlayerInventoryController.selectedItem.id,
 			PlayerInventoryController.selectedItem.name,
 			1,

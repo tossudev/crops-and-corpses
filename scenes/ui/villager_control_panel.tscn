@@ -1,0 +1,117 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp0j6co1k7bim"]
+
+[ext_resource type="Script" path="res://EllaTests/Scripts/DialogueControl.cs" id="1_aekrx"]
+
+[node name="VillagerControlPanel" type="Control"]
+visibility_layer = 512
+layout_mode = 3
+anchors_preset = 0
+offset_left = -1696.0
+offset_top = -672.0
+offset_right = 226.0
+offset_bottom = -445.0
+scale = Vector2(2, 2)
+script = ExtResource("1_aekrx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.203
+anchor_top = 0.062
+anchor_right = 0.558
+anchor_bottom = 1.079
+offset_left = 76.834
+offset_top = -102.074
+offset_right = 0.523926
+offset_bottom = 0.0670013
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.603922, 0.545098, 0.8, 1)
+
+[node name="MoodText" type="RichTextLabel" parent="ColorRect"]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_top = 0.141
+anchor_right = 0.719
+anchor_bottom = 0.535
+offset_left = 258.214
+offset_top = -22.571
+offset_right = 257.414
+offset_bottom = -22.441
+grow_horizontal = 2
+grow_vertical = 2
+text = "text here"
+
+[node name="OccupationsLabel" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 10.0
+offset_right = 205.0
+offset_bottom = 36.0
+text = "Occupations"
+
+[node name="FarmerButton" type="Button" parent="ColorRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 37.0
+offset_top = 64.0
+offset_right = 168.0
+offset_bottom = 95.0
+text = "Become Farmer"
+
+[node name="SoldierButton" type="Button" parent="ColorRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.423
+anchor_top = 0.83
+anchor_right = 0.552
+anchor_bottom = 0.996
+offset_left = -243.338
+offset_top = -172.39
+offset_right = -121.512
+offset_bottom = -179.668
+text = "Become Soldier"
+
+[node name="WoodcutterButton" type="Button" parent="ColorRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = -157.0
+offset_right = 213.0
+offset_bottom = -125.0
+grow_vertical = 0
+text = "Become Woodcutter"
+
+[node name="MinerButton" type="Button" parent="ColorRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = -117.0
+offset_right = 213.0
+offset_bottom = -82.0
+grow_vertical = 0
+text = "Become Miner"
+
+[node name="DismissButton" type="Button" parent="ColorRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.219
+anchor_top = 0.845
+anchor_right = 0.375
+anchor_bottom = 0.972
+offset_left = -119.714
+offset_top = -9.38501
+offset_right = -14.25
+offset_bottom = -3.72202
+text = "Dismiss"

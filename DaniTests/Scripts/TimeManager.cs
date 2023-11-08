@@ -14,8 +14,8 @@ public partial class TimeManager : Node
     [Export] private float nightTimeLength = 30f;  // 10 min duration for night
     private GlobalTime globalTime;
 
-    private bool isDayTime = true;
-    public bool dayTime { get { return isDayTime; } set { dayTime= value; } }
+    private static bool isDayTime = true;
+    public static bool dayTime { get { return isDayTime; } set { dayTime= value; } }
 
     private CanvasModulate sunlight;
 

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://EllaTests/Villager.cs" id="1_8h5vp"]
 [ext_resource type="Texture2D" uid="uid://bbei648d3eovx" path="res://assets/placeholder/test_character/character.png" id="2_n3vwh"]
-[ext_resource type="Script" path="res://EllaTests/Scripts/DialogueControl.cs" id="3_w0yh6"]
-[ext_resource type="PackedScene" path="res://scenes/ui/villager_info.tscn" id="4_iwgqm"]
+[ext_resource type="PackedScene" uid="uid://bp0j6co1k7bim" path="res://scenes/ui/villager_control_panel.tscn" id="3_surgq"]
+[ext_resource type="PackedScene" uid="uid://bmh424wu5k4gb" path="res://scenes/ui/villager_info.tscn" id="4_iwgqm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sgd6u"]
 radius = 25.8088
@@ -16,7 +16,7 @@ scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_8h5vp")
-dialogueControl = NodePath("Control")
+dialogueControl = NodePath("VillagerControlPanel")
 navMeshAgent = NodePath("NavigationAgent2D")
 _info = NodePath("VillagerInfo")
 
@@ -36,6 +36,7 @@ debug_enabled = true
 debug_path_custom_color = Color(0.984314, 0.12549, 0.788235, 1)
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-5, -111)
@@ -44,117 +45,12 @@ debug_color = Color(0.784314, 0.431373, 0.0823529, 0.419608)
 
 [node name="Button" type="Button" parent="."]
 self_modulate = Color(1, 1, 1, 0)
-offset_left = -60.0
-offset_top = -60.0
-offset_right = 58.0
-offset_bottom = 58.0
+offset_left = -64.0
+offset_top = -192.0
+offset_right = 54.0
+offset_bottom = 6.0
 
-[node name="Control" type="Control" parent="." node_paths=PackedStringArray("_villager")]
-visibility_layer = 512
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1792.0
-offset_top = -656.0
-offset_right = 130.0
-offset_bottom = -429.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2, 2)
-script = ExtResource("3_w0yh6")
-_villager = NodePath("..")
-
-[node name="ColorRect" type="ColorRect" parent="Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.203
-anchor_top = 0.062
-anchor_right = 0.558
-anchor_bottom = 1.079
-offset_left = 76.834
-offset_top = -0.0740004
-offset_right = 0.523926
-offset_bottom = 0.0670013
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.603922, 0.545098, 0.8, 1)
-
-[node name="Text" type="RichTextLabel" parent="Control/ColorRect"]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.031
-anchor_top = 0.141
-anchor_right = 0.719
-anchor_bottom = 0.535
-offset_left = 0.399998
-offset_top = -18.571
-offset_right = -0.400024
-offset_bottom = -18.441
-grow_horizontal = 2
-grow_vertical = 2
-text = "text here"
-
-[node name="Button1" type="Button" parent="Control/ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.031
-anchor_top = 0.845
-anchor_right = 0.187
-anchor_bottom = 0.978
-offset_left = -3.786
-offset_top = -150.195
-offset_right = 101.678
-offset_bottom = -145.918
-
-[node name="Button2" type="Button" parent="Control/ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.219
-anchor_top = 0.845
-anchor_right = 0.375
-anchor_bottom = 0.972
-offset_left = -113.714
-offset_top = -11.195
-offset_right = -8.25
-offset_bottom = -5.532
-
-[node name="Button3" type="Button" parent="Control/ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.423
-anchor_top = 0.83
-anchor_right = 0.552
-anchor_bottom = 0.996
-offset_left = -241.338
-offset_top = -108.73
-offset_right = -119.512
-offset_bottom = -112.076
-
-[node name="Button4" type="Button" parent="Control/ColorRect"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = -184.0
-offset_right = 215.0
-offset_bottom = -149.0
-grow_vertical = 0
-
-[node name="Button5" type="Button" parent="Control/ColorRect"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = -148.0
-offset_right = 215.0
-offset_bottom = -113.0
-grow_vertical = 0
+[node name="VillagerControlPanel" parent="." instance=ExtResource("3_surgq")]
 
 [node name="GatheringTimer" type="Timer" parent="."]
 wait_time = 5.0
@@ -166,9 +62,4 @@ offset_right = -6.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
-[connection signal="button_up" from="Control/ColorRect/Button1" to="Control" method="_on_button_1_button_up" flags=18]
-[connection signal="button_up" from="Control/ColorRect/Button2" to="Control" method="_on_button_2_button_up" flags=18]
-[connection signal="button_up" from="Control/ColorRect/Button3" to="Control" method="_on_button_3_button_up" flags=18]
-[connection signal="button_up" from="Control/ColorRect/Button4" to="Control" method="_on_button_4_button_up"]
-[connection signal="button_up" from="Control/ColorRect/Button5" to="Control" method="_on_button_5_button_up"]
 [connection signal="timeout" from="GatheringTimer" to="." method="_on_gathering_timer_timeout"]

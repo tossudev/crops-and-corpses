@@ -15,12 +15,12 @@ public partial class TownManager : Node2D
 	{
 	}
 
-	public static async void ReadTownDataFromFile(Dictionary saveData)
+	public static async void ReadTownDataFromFile(Dictionary saveData, bool sync = true)
 	{
-		if (await RawTownStats.AssignStatsDataFromDictionary(saveData)) return;
+		if (await RawTownStats.AssignStatsDataFromDictionary(saveData, sync)) return;
         
 		SaveData.townHallStats = ResourceLoader.Load<TownStats>(DEFAULT_STATS_PATH).TownStatsAsRaw();
-		await SaveData.SyncTownStats();
+		if (sync) await SaveData.SyncTownStats();
 	}
 
 	public static void GainExp(TownStats.ExpGain amount)

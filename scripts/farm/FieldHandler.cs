@@ -32,9 +32,9 @@ public partial class FieldHandler : Node2D
 		}
 		
 	}
-	void PlantPlant(){
+	async void PlantPlant(){
 		
-		PlayerInventoryController.RemoveItemFromInventory(new RawInventoryItem(
+		await PlayerInventoryController.RemoveItemFromInventory(new RawInventoryItem(
 			PlayerInventoryController.selectedItem.id,
 			PlayerInventoryController.selectedItem.name,
 			1,

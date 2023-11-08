@@ -74,7 +74,7 @@ public partial class RawTownStats : GodotObject
     /// Reads TownStats from save data
     /// </summary>
     /// <param name="saveData"></param>
-    public static async Task<bool> AssignStatsDataFromDictionary(Dictionary saveData)
+    public static async Task<bool> AssignStatsDataFromDictionary(Dictionary saveData, bool sync = true)
     {
         if (saveData == null) return false;
         
@@ -104,7 +104,7 @@ public partial class RawTownStats : GodotObject
             SaveData.appliedUpgrades.Add(appliedUpgrade);
         }
 
-        await SaveData.SyncTownStats();
+        if (sync) await SaveData.SyncTownStats();
         return true;
     }
 }
@@ -144,7 +144,7 @@ public partial class RawInventoryItem : GodotObject
     /// Reads inventory data from save data
     /// </summary>
     /// <param name="saveData"></param>
-    public static async Task ReadInventoryDataFromFile(Dictionary saveData)
+    public static async Task ReadInventoryDataFromFile(Dictionary saveData, bool sync = true)
     {
         if (SaveData.organizedPlayerInventory.Count < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE)
         {
@@ -177,7 +177,7 @@ public partial class RawInventoryItem : GodotObject
             });
         }
         
-        await SaveData.SyncInventory();
+        await SaveData.SyncInventory(sync);
     }
 }
 

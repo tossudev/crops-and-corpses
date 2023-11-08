@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Godot.Collections;
 
 public partial class HandheldController : Node2D
 {
@@ -17,7 +18,7 @@ public partial class HandheldController : Node2D
     private float _knockback;
     private float _cooldown;
     private EffectType _effect;
-    private List<float> _typeDamage;
+    private TargetType _targetType;
     private float _reach;
     private bool _holdAction;
     private bool _ranged;
@@ -27,6 +28,7 @@ public partial class HandheldController : Node2D
 
     private bool _isDrawing;
     private bool _actionHeld;
+    private string _targetGroup;
 
     private void Init()
     {
@@ -46,7 +48,7 @@ public partial class HandheldController : Node2D
         _knockback = _weapon.knockback;
         _cooldown = _weapon.cooldown;
         _effect = _weapon.effect;
-        _typeDamage = new List<float>(_weapon.targetDamage);
+        _targetType = _weapon.targetType;
         _reach = _weapon.reach;
         _holdAction = _weapon.holdAction;
         _speed = _weapon.speed;
@@ -55,6 +57,21 @@ public partial class HandheldController : Node2D
         _projectile = _weapon.projectile;
 
         _isDrawing = false;
+
+        switch (_targetType)
+        {
+            case TargetType.Enemy:
+                _targetGroup = "enemy";
+                break;
+            case TargetType.Tree:
+                _targetGroup = "tree";
+                break;
+            case TargetType.Rock:
+                _targetGroup = "rock";
+                break;
+            default:
+                return;
+        }
 
         _attack = new Attack
         {
@@ -122,11 +139,11 @@ public partial class HandheldController : Node2D
         _timer.Start(_cooldown);
     }
 
-    private void StartDraw()
+    async void StartDraw()
     {
         RawInventoryItem projectile = new RawInventoryItem(_projectile.item.ID, _projectile.item.Name, 1, _projectile.item.StackSize);
 
-        if (PlayerInventoryController.RemoveItemFromInventory(projectile) == false)
+        if (await PlayerInventoryController.RemoveItemFromInventory(projectile) == false)
         {
             GD.Print("Handheld: out of ammo");
             return;
@@ -180,6 +197,7 @@ public partial class HandheldController : Node2D
         projectile.attack = _attack;
         projectile.speed = _speed * power;
         projectile.projectile = _projectile;
+        projectile.targetGroup = _targetGroup;
 
         projectile.Init();
 
@@ -194,24 +212,8 @@ public partial class HandheldController : Node2D
     {
         if (body is HitboxComponent hitbox)
         {
-            if (body.IsInGroup("enemy"))
-            {
-                _attack.damage = _typeDamage[(int)TargetType.Enemy];
-            }
-            else if (body.IsInGroup("tree"))
-            {
-                _attack.damage = _typeDamage[(int)TargetType.Tree];
-            }
-            else if (body.IsInGroup("rock"))
-            {
-                _attack.damage = _typeDamage[(int)TargetType.Rock];
-            }
-            else
-            {
-                return;
-            }
-
-            hitbox.ApplyAttack(_attack);
+            if (body.IsInGroup(_targetGroup))
+                hitbox.ApplyAttack(_attack);
         }
     }
 }

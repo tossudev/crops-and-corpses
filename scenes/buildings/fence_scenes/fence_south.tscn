@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxrco0upucsjx"]
+[gd_scene load_steps=7 format=3 uid="uid://dxrco0upucsjx"]
 
+[ext_resource type="Script" path="res://scripts/farm/FenceHealth.cs" id="1_torf7"]
 [ext_resource type="Texture2D" uid="uid://bfjpjx088kp1o" path="res://NikkeTests/images/fence_s.png" id="1_vyx5g"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_l2cro"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_5a3ey"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_um4c4"]
 size = Vector2(126, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66lty"]
+size = Vector2(125, 62)
 
 [node name="Node2D2" type="Node2D"]
 
@@ -19,10 +25,30 @@ position = Vector2(-64, -151)
 position = Vector2(0, 32)
 shape = SubResource("RectangleShape2D_um4c4")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["fence"]]
 position = Vector2(0, -87)
 collision_layer = 255
+collision_mask = 5
+script = ExtResource("1_torf7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-64, -32)
 shape = SubResource("RectangleShape2D_um4c4")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_l2cro")]
+position = Vector2(-65, -117)
+_parentScript = NodePath("../FenceHealthParent")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("4_5a3ey")]
+position = Vector2(-63, -118)
+_parentScript = NodePath("../FenceHealthParent")
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_66lty")
+debug_color = Color(0.992157, 0, 0.266667, 0.419608)
+
+[node name="FenceHealthParent" type="Node2D" parent="."]
+script = ExtResource("1_torf7")

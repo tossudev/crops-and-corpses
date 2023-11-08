@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dyagdsgc6dam3"]
 
-[ext_resource type="Script" path="res://scripts/World/GatheringObjectController.cs" id="1_mmcik"]
-[ext_resource type="Resource" uid="uid://btej4xw5h0mn1" path="res://TinoTests/Resources/Tree1.tres" id="2_es3so"]
+[ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_hvnxh"]
+[ext_resource type="Resource" uid="uid://btej4xw5h0mn1" path="res://TinoTests/Resources/tree.tres" id="2_7mwtb"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_nwmmy"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_ykn2p"]
 [ext_resource type="Texture2D" uid="uid://bqah3wgx4il3q" path="res://assets/sprites/foliage/sprite_tree1.png" id="5_melyl"]
@@ -14,8 +14,8 @@ size = Vector2(80, 32)
 
 [node name="Tree" type="StaticBody2D" node_paths=PackedStringArray("_sprite")]
 position = Vector2(2.08165e-12, 2.08165e-12)
-script = ExtResource("1_mmcik")
-_gatheringObject = ExtResource("2_es3so")
+script = ExtResource("1_hvnxh")
+_loot = ExtResource("2_7mwtb")
 _sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -24,7 +24,6 @@ texture = ExtResource("5_melyl")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("2_nwmmy")]
 _parentScript = NodePath("..")
-_maxHealth = 4.0
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["tree"] instance=ExtResource("3_ykn2p")]
 position = Vector2(-1, 0)

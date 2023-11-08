@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Loot" load_steps=2 format=3 uid="uid://khdsb508afg6"]
+
+[ext_resource type="Script" path="res://scripts/World/Loot.cs" id="3_n4uu4"]
+
+[resource]
+script = ExtResource("3_n4uu4")
+lootItems = []

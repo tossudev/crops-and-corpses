@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class InventorySlot : Control {
 	
@@ -9,14 +10,9 @@ public partial class InventorySlot : Control {
 	public RawInventoryItem slotItem;
 	[Export] public bool isCraftingSlot;
 	bool slotHasItem;
+	public bool slotInitiated;
     int _slotIndex;
 	public int slotIndex => _slotIndex;
-
-
-	public override void _Ready() {
-		icon = GetNode("Icon") as TextureRect;
-		quantityLabel = GetNode("Quantity") as Label;
-	}
 
 
     void OnButtonGuiInput(InputEvent @event)
@@ -34,7 +30,7 @@ public partial class InventorySlot : Control {
 	}
 
 
-    void ClickLeft()
+    async void ClickLeft()
     {
 	    switch (PlayerInventoryController.isItemSelected)
 	    {
@@ -46,7 +42,7 @@ public partial class InventorySlot : Control {
 		    
 		    // Player deselected item from hand
 		    case true when !slotHasItem:
-                PlayerInventoryController.AddItem(PlayerInventoryController.selectedItem, slotIndex, true);
+                await PlayerInventoryController.AddItem(PlayerInventoryController.selectedItem, slotIndex, true);
                 
 				break;
 		    
@@ -58,12 +54,12 @@ public partial class InventorySlot : Control {
 			    if (selectedItem.isValidIndex &&
 			        slotIndex == selectedItem.indexInOrganizedInventory)
 			    {
-				    UpdateSlot(selectedItem);
+				    await UpdateSlot(selectedItem);
 				    PlayerInventoryController.DeselectItem();
 			    }
 
 			    else if (slotItem.id == selectedItem.id) {
-				    PlayerInventoryController.AddItem(selectedItem, slotIndex, true);
+				    await PlayerInventoryController.AddItem(selectedItem, slotIndex, true);
 			    }
 
 			    else {
@@ -92,11 +88,18 @@ public partial class InventorySlot : Control {
 
     public void InitiateSlot(int index)
     {
+	    icon = GetNode("Icon") as TextureRect;
+	    quantityLabel = GetNode("Quantity") as Label;
+	    
 	    _slotIndex = index;
+
+	    slotInitiated = true;
     }
     
-	public void UpdateSlot(RawInventoryItem rawItem, bool doSync = true)
+	public async Task UpdateSlot(RawInventoryItem rawItem, bool doSync = true)
 	{
+		await TaskExtensions.SuspendWhile(() => !slotInitiated);
+		
 		ToggleVisuals(true);
 
 		slotItem = (rawItem != null)
@@ -129,7 +132,7 @@ public partial class InventorySlot : Control {
         
 		if (doSync)
 		{
-			SaveData.SyncInventory();
+			Task sync = SaveData.SyncInventory();
 		}
 		
 		if (slotItem == null) {

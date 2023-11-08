@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 using System.IO;
 using Dictionary = Godot.Collections.Dictionary;
 
@@ -9,20 +10,29 @@ public partial class GlobalTime : Node
     private Color sunlight;
     private int day;
 
+    private int currenTowntDay;
+
     private string _savePath = ProjectSettings.GlobalizePath("user://saves/");
     private string _fileName = "Time.cfg";
+    private bool hasTownBeenDestroyed;
+
+    TimeManager timeManager;
 
     public override void _Ready()
     {
+        hasTownBeenDestroyed = false;
+     
         if (!Directory.Exists(_savePath))
         {
             Directory.CreateDirectory(_savePath);
         }
+        GD.Print(day);
 
         LoadData();
     }
+  
 
-   public override void _Notification(int what)
+    public override void _Notification(int what)
 	{
 		if (what == NotificationWMCloseRequest)
 		{
@@ -59,7 +69,22 @@ public partial class GlobalTime : Node
 
     public void SetDay(int currentDay)
     {
+        //Check if player is in town, when day changes. If not then town is destroyed and zombiespawning is stopped.
+        Node root = GetTree().Root;
+        Node2D townScene = root.GetNodeOrNull<Node2D>("Town");
+        if(townScene == null)
+        {
+            hasTownBeenDestroyed = true;
+        }
+        else
+        {
+            hasTownBeenDestroyed = false;
+        }
         day = currentDay;
+    }
+    public bool HasTownBeenDestroyed()
+    {
+        return hasTownBeenDestroyed;
     }
 
     public void LoadData()

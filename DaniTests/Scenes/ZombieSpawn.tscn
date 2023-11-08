@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://k1nr7tplu40i"]
+
+[ext_resource type="Script" path="res://DaniTests/Scripts/SpawnScript.cs" id="1_68m56"]
+
+[node name="ZombieSpawn" type="Node2D"]
+script = ExtResource("1_68m56")
+
+[node name="SpawnPoint1" type="Node2D" parent="."]
+position = Vector2(-648, 520)
+
+[node name="SpawnPoint0" type="Node2D" parent="."]
+position = Vector2(-688, -544)
+
+[node name="SpawnPoint2" type="Node2D" parent="."]
+position = Vector2(736, -672)
+
+[node name="SpawnPoint3" type="Node2D" parent="."]
+position = Vector2(704, 536)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="ZombieDeletionTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="ZombieSpawn"]
+[connection signal="timeout" from="ZombieDeletionTimer" to="." method="DeleteZombieDelay"]

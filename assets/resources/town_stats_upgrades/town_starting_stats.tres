@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_ehs86")
-_totalExperience = 0.0
+_totalExperience = 0
 _townHallLevel = 0
 _populationCap = 1
 _soldierAttackSpeed = 1
@@ -14,4 +14,4 @@ _farmerMaxFarms = 3
 _pesticideEffectiveness = 1
 _wallHP = 15
 _spikyWalls = false
-_houseHP = 0
+_houseHP = 50

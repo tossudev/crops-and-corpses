@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
 
@@ -7,7 +8,7 @@ using Godot.Collections;
 public partial class RawTownStats : GodotObject
 {
     // Town stats
-    public float totalExperience;
+    public int totalExperience;
     public const string TOTAL_EXPERIENCE_KEY = "totalExperience";
     
     public int townHallLevel;
@@ -50,7 +51,7 @@ public partial class RawTownStats : GodotObject
     
     public RawTownStats () {}
 
-    public RawTownStats(float totalExperience,int townHallLevel, int populationCap,
+    public RawTownStats(int totalExperience,int townHallLevel, int populationCap,
         int soldierAttackSpeed, int soldierAccuracy,
         int farmerWalkSpeed, int farmerMaxFarms, int pesticideEffectiveness,
         int wallHP, bool spikyWalls,
@@ -67,6 +68,44 @@ public partial class RawTownStats : GodotObject
         this.wallHP = wallHP;
         this.spikyWalls = spikyWalls;
         this.houseHP = houseHP;
+    }
+    
+    /// <summary>
+    /// Reads TownStats from save data
+    /// </summary>
+    /// <param name="saveData"></param>
+    public static async Task<bool> AssignStatsDataFromDictionary(Dictionary saveData)
+    {
+        if (saveData == null) return false;
+        
+        var townStatsData = saveData[SaveData.TOWN_STATS_KEY];
+
+        
+        Dictionary rawStatsDict = (Dictionary) townStatsData;
+
+        SaveData.townHallStats = new RawTownStats(
+            totalExperience: (int)rawStatsDict[TOTAL_EXPERIENCE_KEY],
+            townHallLevel: (int)rawStatsDict[TOWN_HALL_LEVEL_KEY],
+            populationCap: (int)rawStatsDict[POPULATION_CAP_KEY],
+            soldierAttackSpeed: (int)rawStatsDict[SOLDIER_ATTACK_SPEED_KEY],
+            soldierAccuracy: (int)rawStatsDict[SOLDIER_ACCURACY_KEY],
+            farmerWalkSpeed: (int)rawStatsDict[FARMER_WALK_SPEED_KEY],
+            farmerMaxFarms: (int)rawStatsDict[FARMER_MAX_FARMS_KEY],
+            pesticideEffectiveness: (int)rawStatsDict[PESTICIDE_EFFECTIVENESS_KEY],
+            wallHP: (int)rawStatsDict[WALL_HP_KEY],
+            spikyWalls: (bool)rawStatsDict[SPIKY_WALLS_KEY],
+            houseHP: (int)rawStatsDict[HOUSE_HP_KEY]
+        );
+
+        foreach (var kvp in (Dictionary) saveData[SaveData.APPLIED_TOWN_STATS_KEY])
+        {
+            var appliedUpgrade = new TownUpgrade((int) kvp.Key, (string) kvp.Value);
+            
+            SaveData.appliedUpgrades.Add(appliedUpgrade);
+        }
+
+        await SaveData.SyncTownStats();
+        return true;
     }
 }
 
@@ -99,12 +138,54 @@ public partial class RawInventoryItem : GodotObject
 
     public bool isValidIndex => (indexInOrganizedInventory >= 0 &&
                                  indexInOrganizedInventory < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE);
+    
+    
+    /// <summary>
+    /// Reads inventory data from save data
+    /// </summary>
+    /// <param name="saveData"></param>
+    public static async Task ReadInventoryDataFromFile(Dictionary saveData)
+    {
+        if (SaveData.organizedPlayerInventory.Count < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE)
+        {
+            // Init inventory array with null values
+            for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++)
+            {
+                SaveData.organizedPlayerInventory.Add(null);
+            }
+        }
+
+        if (saveData != null)
+        {
+            Array organizedInventoryItemData = (Array) saveData[SaveData.ORGANIZED_INVENTORY_ITEMS_KEY];
+            await Task.Run(() =>
+            {
+                foreach (var rawItemVariant in organizedInventoryItemData)
+                {
+                    Dictionary itemDataDict = (Dictionary)rawItemVariant; 
+                
+                    RawInventoryItem convertedRawItem = new RawInventoryItem(
+                        (int) itemDataDict[ITEM_ID_KEY],
+                        (string) itemDataDict[ITEM_NAME_KEY],
+                        (int) itemDataDict[ITEM_QUANTITY_KEY],
+                        (int) itemDataDict[ITEM_STACKSIZE_KEY],
+                        (int) itemDataDict[ITEM_ORGANIZED_INDEX_KEY]);
+                
+                    SaveData.organizedPlayerInventory[convertedRawItem.indexInOrganizedInventory] = convertedRawItem;
+                }
+
+            });
+        }
+        
+        await SaveData.SyncInventory();
+    }
 }
 
 [System.Serializable]
 public partial class RawSaveData : GodotObject
 {
     public RawTownStats townStats = new ();
+    public List<TownUpgrade> appliedUpgrades = new ();
     public List<RawInventoryItem> inventoryItems = new ();
     public Array<RawInventoryItem> organizedInventoryItems = new ();
     
@@ -128,6 +209,15 @@ public partial class RawSaveData : GodotObject
             { RawTownStats.SPIKY_WALLS_KEY, townStats.spikyWalls },
             { RawTownStats.HOUSE_HP_KEY, townStats.houseHP }
         });
+
+        Dictionary appliedUpgradeDict = new ();
+        
+        foreach (var appliedUpgrade in appliedUpgrades)
+        {
+            appliedUpgradeDict.Add(appliedUpgrade.id, appliedUpgrade.upgradeHeader);
+        }
+        fullDictionary.Add(SaveData.APPLIED_TOWN_STATS_KEY, appliedUpgradeDict);
+        
         
         
         // All items in inventory
@@ -143,6 +233,7 @@ public partial class RawSaveData : GodotObject
         });
         fullDictionary.Add(SaveData.INVENTORY_ITEMS_KEY,inventoryItemsDict);
 
+        
         
         // Organized inventory
         Array organizedInventoryItemsDictArray = new();
@@ -160,7 +251,6 @@ public partial class RawSaveData : GodotObject
                 { RawInventoryItem.ITEM_ORGANIZED_INDEX_KEY, rawInventoryItem.indexInOrganizedInventory}
             });
         }
-        
         fullDictionary.Add(SaveData.ORGANIZED_INVENTORY_ITEMS_KEY, organizedInventoryItemsDictArray);
 
         

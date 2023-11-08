@@ -13,67 +13,27 @@ public partial class PlayerInventoryData : Node
 
     public override void _Ready()
     {
-        var task = TestAsyncAdd(new CancellationTokenSource());
-    }
-
-    /// <summary>
-    /// Reads inventory data from save data
-    /// </summary>
-    /// <param name="saveData"></param>
-    /// <remarks> INVENTORY MUST BE INITIALIZED BEFORE CALLING </remarks>
-    public static async Task ReadInventoryDataFromFile(Dictionary saveData)
-    {
-        if (SaveData.organizedPlayerInventory.Count == 0)
-        {
-            GD.PrintErr("Inventory was not initialized with null values");
-            return;
-        }
-
-        if (saveData == null) return;
-        
-        Array organizedInventoryItemData = (Array) saveData[SaveData.ORGANIZED_INVENTORY_ITEMS_KEY];
-        await Task.Run(() =>
-        {
-            foreach (var rawItemVariant in organizedInventoryItemData)
-            {
-                Dictionary itemDataDict = (Dictionary)rawItemVariant; 
-                
-                RawInventoryItem convertedRawItem = new RawInventoryItem(
-                    (int) itemDataDict[RawInventoryItem.ITEM_ID_KEY],
-                    (string) itemDataDict[RawInventoryItem.ITEM_NAME_KEY],
-                    (int) itemDataDict[RawInventoryItem.ITEM_QUANTITY_KEY],
-                    (int) itemDataDict[RawInventoryItem.ITEM_STACKSIZE_KEY],
-                    (int) itemDataDict[RawInventoryItem.ITEM_ORGANIZED_INDEX_KEY]);
-                
-                SaveData.organizedPlayerInventory[convertedRawItem.indexInOrganizedInventory] = convertedRawItem;
-            }
-
-            SaveData.SyncInventory();
-        });
+        TestAsyncAdd();
     }
     
-    async Task TestAsyncAdd(CancellationTokenSource tokenSrc)
+    async void TestAsyncAdd()
     {
-        CancellationToken token = tokenSrc.Token;
-
-        await Task.Delay(1000, token);
+        await TaskExtensions.SuspendWhile(() => !PlayerInventoryController.isInitialized, 100);
         
         if (SaveData.totalInventoryItems.Count > 0) return;
         
         Item log = ItemData.GetItemById(0);
-        PlayerInventoryController.AddItem(
+        await PlayerInventoryController.AddItem(
             new RawInventoryItem(log.ID, log.Name, 20, log.StackSize));
         
         
         Item iron = ItemData.GetItemById(1);
-        PlayerInventoryController.AddItem(
+        await PlayerInventoryController.AddItem(
             new RawInventoryItem(iron.ID, iron.Name, 20, iron.StackSize));
         
         Item curePotion = ItemData.GetItemById(300);
-        PlayerInventoryController.AddItem(
+        await PlayerInventoryController.AddItem(
             new RawInventoryItem(curePotion.ID, curePotion.Name, 15, curePotion.StackSize));
-        
-        tokenSrc.Dispose();
     }
 
     public static bool AddItemToTotalItems(int itemId, int amount)

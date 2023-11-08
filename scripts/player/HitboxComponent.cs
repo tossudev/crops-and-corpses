@@ -10,7 +10,7 @@ public partial class HitboxComponent : Area2D
 	{
 		if (_healthComponent == null)
 		{
-			GD.Print("HitboxComponent: No health component found");
+			GD.PrintErr("HitboxComponent: No health component found");
 			return;
 		}
 

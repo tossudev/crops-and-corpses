@@ -15,9 +15,9 @@ public partial class DroppedItem : Node2D
 		_displayImage.Texture = _containedAsItem.IconTexture;
 	}
 
-	public void Pickup()
+	public async void Pickup()
 	{
-		int addedItems = PlayerInventoryController.AddItem(_containedRawItem, -1, true, false);
+		int addedItems = await PlayerInventoryController.AddItem(_containedRawItem, -1, true, false);
 
 		if (addedItems > 0) return;
 		

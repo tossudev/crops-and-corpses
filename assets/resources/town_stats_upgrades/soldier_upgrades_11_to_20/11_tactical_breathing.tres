@@ -1,10 +1,27 @@
-[gd_resource type="Resource" script_class="SoldierUpgrade" load_steps=2 format=3 uid="uid://1arvwvsmoipx"]
+[gd_resource type="Resource" script_class="SoldierUpgrade" load_steps=8 format=3 uid="uid://1arvwvsmoipx"]
 
+[ext_resource type="Resource" uid="uid://1ocpajcw4bxt" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/113_poppy.tres" id="1_6lqjg"]
 [ext_resource type="Script" path="res://scripts/resource_classes/upgrades/SoldierUpgrade.cs" id="1_dicta"]
+[ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_wjonn"]
+[ext_resource type="Resource" uid="uid://bpjwmo4fvwr48" path="res://assets/resources/game_items/tool_items_350_449/400_bug_spray.tres" id="3_ikf2a"]
+[ext_resource type="Texture2D" uid="uid://ds4d0bkp8w0vx" path="res://assets/sprites/items/item_bow.png" id="4_kqptm"]
+
+[sub_resource type="Resource" id="Resource_u5ok3"]
+script = ExtResource("2_wjonn")
+item = ExtResource("1_6lqjg")
+quantity = 5
+
+[sub_resource type="Resource" id="Resource_mbxym"]
+script = ExtResource("2_wjonn")
+item = ExtResource("3_ikf2a")
+quantity = 10
 
 [resource]
 script = ExtResource("1_dicta")
 _soldierAttackSpeed = 0
-_soldierAccuracy = 0
-_id = 0
-_craftingRequirements = null
+_soldierAccuracy = 15
+_id = 11
+_upgradeIcon = ExtResource("4_kqptm")
+_upgradeHeader = "Tactical Breathing"
+_upgradeDescription = "Soldiers learn to take deep, steady breaths and therefore control their heart rate, which leads to improved aiming capabilities."
+_craftingRequirements = Array[Object]([SubResource("Resource_u5ok3"), SubResource("Resource_mbxym")])

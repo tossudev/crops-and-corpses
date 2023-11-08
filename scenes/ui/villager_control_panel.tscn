@@ -1,15 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxtn34rmvpq8j"]
+[gd_scene load_steps=2 format=3 uid="uid://bp0j6co1k7bim"]
 
 [ext_resource type="Script" path="res://EllaTests/Scripts/DialogueControl.cs" id="1_aekrx"]
 
 [node name="VillagerControlPanel" type="Control"]
 visibility_layer = 512
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 scale = Vector2(2, 2)
 script = ExtResource("1_aekrx")
 
@@ -26,23 +22,25 @@ grow_horizontal = 2
 
 [node name="OccupationsLabel" type="Label" parent="Panel"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -48.5
-offset_right = 48.5
+anchors_preset = 10
+anchor_right = 1.0
 offset_bottom = 26.0
 grow_horizontal = 2
 text = "Occupations"
+horizontal_alignment = 1
 
 [node name="MoodText" type="RichTextLabel" parent="Panel"]
 unique_name_in_owner = true
 modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 14.0
-offset_top = 24.0
-offset_right = 192.0
-offset_bottom = 74.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 15.5
+offset_top = 35.5
+offset_right = 15.5
+offset_bottom = 72.5
+grow_horizontal = 2
+scale = Vector2(0.847, 1)
 text = "text here"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
@@ -83,15 +81,7 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Dismiss"
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="Panel/VBoxContainer"]
 visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_top = -0.546
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -0.0579987
-offset_right = -660.0
-grow_horizontal = 2
-grow_vertical = 0
+layout_mode = 2
 color = Color(0.603922, 0.545098, 0.8, 1)

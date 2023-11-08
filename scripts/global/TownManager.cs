@@ -10,9 +10,14 @@ public partial class TownManager : Node2D
 	const string DEFAULT_STATS_PATH = "res://assets/resources/town_stats_upgrades/town_starting_stats.tres";
 
 	public static RawTownStats currentTownStats => SaveData.townHallStats;
-	
+
+	static Vector2 _townHallPosition;
+	public static Vector2 townHallPosition => _townHallPosition;
+
 	public override void _Ready()
 	{
+		base._Ready();
+		_townHallPosition = GlobalPosition - new Vector2(13,13);
 	}
 
 	public static async void ReadTownDataFromFile(Dictionary saveData, bool sync = true)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=38 format=3 uid="uid://bgyv0c8xt1fd4"]
 
 [ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://scenes/ui/building_menu.tscn" id="1_w3klu"]
 [ext_resource type="Script" path="res://scripts/global/AllVillagerData.cs" id="2_ilkp0"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
 [ext_resource type="Script" path="res://DaniTests/Scripts/HourCounter.cs" id="20_y1pju"]
 [ext_resource type="Script" path="res://EllaTests/Scripts/VillagerManager.cs" id="23_m40il"]
+[ext_resource type="Script" path="res://scripts/ui/PlayerHud.cs" id="23_vm0j4"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="26_e7msj"]
 [ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://DaniTests/Scenes/ZombieSpawn.tscn" id="26_e61x0"]
 [ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://DaniTests/Scenes/sunlight_container.tscn" id="27_71uoq"]
@@ -56,6 +57,38 @@ width = 256
 height = 256
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tqqpk"]
+bg_color = Color(0, 0, 0, 0.368627)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ytw6o"]
+bg_color = Color(1, 0, 0.0705882, 1)
+
+[sub_resource type="FontFile" id="FontFile_kvdlr"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/20/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/20/0/ascent = 0.0
+cache/0/20/0/descent = 0.0
+cache/0/20/0/underline_position = 0.0
+cache/0/20/0/underline_thickness = 0.0
+cache/0/20/0/scale = 1.0
+cache/0/20/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/20/0/kerning_overrides/20/0 = Vector2(0, 0)
+cache/0/20/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/20/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
 
 [node name="Town" type="Node2D"]
 y_sort_enabled = true
@@ -273,8 +306,7 @@ offset_bottom = 100.0
 theme_override_font_sizes/font_size = 32
 text = "Press 'E' to toggle inventory"
 
-[node name="DayCounterLabel" parent="Overlay" node_paths=PackedStringArray("timeManager") instance=ExtResource("14_kew7c")]
-timeManager = NodePath("../../SunlightContainer")
+[node name="DayCounterLabel" parent="Overlay" instance=ExtResource("14_kew7c")]
 
 [node name="HourCounterLabel" parent="Overlay" instance=ExtResource("14_kew7c")]
 offset_left = 192.0
@@ -305,6 +337,46 @@ offset_right = 160.0
 offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PlayerHud" type="Control" parent="Overlay"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1600.0
+offset_right = 1920.0
+offset_bottom = 128.0
+script = ExtResource("23_vm0j4")
+
+[node name="PlayerHealthBG" type="Panel" parent="Overlay/PlayerHud"]
+layout_mode = 0
+offset_left = -64.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 96.0
+
+[node name="PlayerHealth" type="ProgressBar" parent="Overlay/PlayerHud"]
+layout_mode = 0
+offset_left = -56.0
+offset_top = 24.0
+offset_right = 296.0
+offset_bottom = 88.0
+theme_override_styles/background = SubResource("StyleBoxFlat_tqqpk")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ytw6o")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="Text" type="Label" parent="Overlay/PlayerHud/PlayerHealth"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 344.0
+offset_bottom = 56.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("FontFile_kvdlr")
+theme_override_font_sizes/font_size = 32
+text = "100"
+vertical_alignment = 1
 
 [node name="farm_manager" parent="." instance=ExtResource("8_v8hay")]
 
@@ -338,8 +410,7 @@ script = ExtResource("26_e7msj")
 
 [node name="Timer" type="Timer" parent="ZombieManager"]
 
-[node name="ZombieSpawn" parent="." node_paths=PackedStringArray("dayTimeCheck", "player") instance=ExtResource("26_e61x0")]
-dayTimeCheck = NodePath("../SunlightContainer")
+[node name="ZombieSpawn" parent="." node_paths=PackedStringArray("player") instance=ExtResource("26_e61x0")]
 player = NodePath("../Objects/Player")
 
 [node name="SunlightContainer" parent="." instance=ExtResource("27_71uoq")]

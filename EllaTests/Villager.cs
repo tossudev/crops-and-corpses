@@ -12,6 +12,7 @@ public partial class Villager : CharacterBody2D
 
 	[Export] DialogueControl dialogueControl;
 	[Export] NavigationAgent2D navMeshAgent;
+	[Export]TimeManager dayTimeCheck;
 	//[Export] NavigationRegion2D navRegionArea;
 	Plant _currentPlant;
 	Node2D _streetSign;
@@ -21,6 +22,7 @@ public partial class Villager : CharacterBody2D
 	bool collision = false;
 	bool _timerStopped = false;
 	bool _taskStarted = false;
+	bool _dayTime;
 	int _resourcheTaskCounter = 0;
 	public bool dialogueWindow = false;
 
@@ -68,6 +70,12 @@ public partial class Villager : CharacterBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
+		_dayTime = dayTimeCheck.dayTime;
+		if(!_dayTime)
+		{
+			_state = VillagerStates.FindShelter;
+		}
+
 		if (!dialogueControl.Visible && GlobalPosition.DistanceTo(_targetPosition) > 5)
 		{
 			Movement(_targetPosition);
@@ -117,6 +125,7 @@ public partial class Villager : CharacterBody2D
 				break;
 
 			case VillagerStates.FindShelter:
+				FindShelter();
 				break;
 
 			default: 
@@ -153,18 +162,6 @@ public partial class Villager : CharacterBody2D
 		MoveAndSlide();
 	}
 
-	void RoamAround()
-	{
-		dialogueControl.resourcheTaskStarted = false;
-		dialogueControl.farmingTaskStarted = false;
-		float range = 100;
-        _targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
-		if (dialogueControl.Visible)
-		{
-			_state = VillagerStates.ChooseTask;
-		}
-	}
-
 	void ChooseTask()
 	{
 		if (dialogueControl.farmingTaskStarted)
@@ -184,6 +181,29 @@ public partial class Villager : CharacterBody2D
 			_state = VillagerStates.RoamAround;
 			dialogueWindow = false;
 			dialogueControl.exitDialogue = false;
+		}
+	}
+
+	void FindShelter()
+	{
+		if (dialogueControl.Visible)
+		{
+			_state = VillagerStates.ChooseTask;
+		}
+		else{
+			_state = VillagerStates.RoamAround;
+		}
+	}
+
+	void RoamAround()
+	{
+		dialogueControl.resourcheTaskStarted = false;
+		dialogueControl.farmingTaskStarted = false;
+		float range = 100;
+        _targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
+		if (dialogueControl.Visible)
+		{
+			_state = VillagerStates.ChooseTask;
 		}
 	}
 

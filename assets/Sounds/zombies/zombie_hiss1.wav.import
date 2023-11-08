@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b4giy84o2s7c5"
-path="res://.godot/imported/zombie hiss1.wav-87628cc7ac9da8e1269dab99aedaeba8.sample"
+path="res://.godot/imported/zombie_hiss1.wav-44f569b2d028f799902adce36d62df00.sample"
 
 [deps]
 
-source_file="res://assets/sounds/zombies/zombie hiss1.wav"
-dest_files=["res://.godot/imported/zombie hiss1.wav-87628cc7ac9da8e1269dab99aedaeba8.sample"]
+source_file="res://assets/Sounds/zombies/zombie_hiss1.wav"
+dest_files=["res://.godot/imported/zombie_hiss1.wav-44f569b2d028f799902adce36d62df00.sample"]
 
 [params]
 

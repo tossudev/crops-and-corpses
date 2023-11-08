@@ -5,6 +5,7 @@ using System.Diagnostics.Tracing;
 public partial class RoamingZombie : CharacterBody2D
 {
 	// [Export] private float _damage;
+	[Export] private AudioStreamPlayer2D _audioStreamPlayer2D;
 	private Sprite2D _sprite;
 	private CharacterBody2D _player;
 	private Node2D _fence;
@@ -21,7 +22,6 @@ public partial class RoamingZombie : CharacterBody2D
 	private CompressedTexture2D strongZombieSprite;
 	private CompressedTexture2D mediumZombieSprite;
 
-
 	public override void _Ready()
 	{
 		instantiatedNPC = (PackedScene)GD.Load("res://EllaTests/npc.tscn");
@@ -32,6 +32,7 @@ public partial class RoamingZombie : CharacterBody2D
 		_updateStatsTimer = GetNodeOrNull<Timer>("UpdateStatsTimer");
 		_healthBar = GetNodeOrNull<ProgressBar>("HealthBar");
 		_healthComponent = GetNodeOrNull<HealthComponent>("HealthComponent");
+		_audioStreamPlayer2D = GetNodeOrNull<AudioStreamPlayer2D>("ZombieNoise");
 
 		_attack = new Attack
 		{
@@ -39,7 +40,7 @@ public partial class RoamingZombie : CharacterBody2D
 			knockback = 500f
 		};
 
-		_updateStatsTimer.Start();
+		_updateStatsTimer.Start();		
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -58,6 +59,15 @@ public partial class RoamingZombie : CharacterBody2D
 				_sprite.FlipH = true;
 			}
 		}
+	}
+
+	public void ChangeZombieNoise(AudioStream audioStream)
+	{
+		if(audioStream != null)
+		{
+			_audioStreamPlayer2D.Stream = audioStream;
+			_audioStreamPlayer2D.Play();
+		}		
 	}
 
 	private void AttackReceived(Attack attack)
@@ -93,7 +103,6 @@ public partial class RoamingZombie : CharacterBody2D
 			SpawnScript.RemoveZombieFromList(this);
 			GD.Print("Check");
 			QueueFree();
-
 		}
 	}
 
@@ -175,8 +184,7 @@ public partial class RoamingZombie : CharacterBody2D
 	}
 
 	private void OnUpdateStatsTimeout()
-	{
-		
+	{		
 		{
 			if(ZombieManager.type == ZombieManager.ZombieType.Weak)
 			{
@@ -198,9 +206,6 @@ public partial class RoamingZombie : CharacterBody2D
 			_attack.damage = ZombieManager.damage;
 			_timer.WaitTime = ZombieManager.attackTime;
 			//GD.Print("DMG: " + _attack.damage + "\nwait time: " + _timer.WaitTime);
-		}
-		
-		
-	}
-	
+		}		
+	}	
 }

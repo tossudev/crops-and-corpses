@@ -11,7 +11,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5h8wa"]
 radius = 27.0
-height = 90.0
+height = 58.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_64jqc"]
 radius = 27.0
@@ -21,12 +21,10 @@ height = 90.0
 radius = 70.0
 
 [node name="Zombie" type="CharacterBody2D"]
-collision_layer = 5
-collision_mask = 6
 script = ExtResource("1_g0i6d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2(0, 19)
 shape = SubResource("CapsuleShape2D_5h8wa")
 debug_color = Color(0, 0.6, 0.701961, 0.12549)
 
@@ -34,7 +32,6 @@ debug_color = Color(0, 0.6, 0.701961, 0.12549)
 _parentScript = NodePath("..")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["enemy"] instance=ExtResource("3_flbni")]
-visible = false
 collision_layer = 4
 collision_mask = 32
 _parentScript = NodePath("..")
@@ -62,6 +59,8 @@ _zombie = NodePath("../..")
 _navAgent = NodePath("../../NavigationAgent2D")
 
 [node name="AttackBox" type="Area2D" parent="."]
+collision_layer = 5
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
 shape = SubResource("CircleShape2D_mytwi")

@@ -11,7 +11,6 @@ public partial class SpawnScript : Node2D
 	Timer spawnDelay;
 	Timer zombieDeleteDelay;
 	PackedScene packedScene;
-	[Export]TimeManager dayTimeCheck;
 	NodePath rootPath;
 	Node2D rootNode;
 	bool isNightOrDay;
@@ -48,7 +47,7 @@ public partial class SpawnScript : Node2D
 	  public override void _Process(double delta)
     {
        
-	   isNightOrDay = dayTimeCheck.dayTime;
+	   isNightOrDay = TimeManager.dayTime;
 	   
         
         if (!spawnDelay.IsStopped() && isNightOrDay)

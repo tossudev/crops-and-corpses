@@ -11,18 +11,28 @@ public partial class VillagerResidence : Control
 	
 	GridContainer _villagerFaceButtonParentGrid;
 	const string VILLAGER_GRID_NODENAME = "%VillagerParentGrid";
+
+	DialogueControl _villagerDialoguePanel;
+	const string VILLAGER_DIALOGUE_PANEL_NODENAME = "%VillagerDialoguePanel";
 	
 	public override void _Ready()
 	{
 		_villagerFaceButtonParentGrid = GetNode<GridContainer>(VILLAGER_GRID_NODENAME);
-	}
-
-	Array<ulong> _currentResidents;
-	public void VillagerEnterBuilding(Villager_Info newVillager)
-	{
-		// TODO: Not sure if VillagerInfo is the correct class to pass as argument
-		// (To create a new VillagerFaceButton) 
+		_villagerDialoguePanel = GetNode<DialogueControl>(VILLAGER_DIALOGUE_PANEL_NODENAME);
 		
+		CloseDialoguePanel();
+	}
+	
+	Array<ulong> _currentResidents = new ();
+	public void VillagerEnterBuilding(Villager newVillager)
+	{
+		if (newVillager == null)
+		{
+			GD.PushError("Villager trying to enter building was null");
+			return;
+		}
+			
+		newVillager.EnterShelter();
 		_currentResidents.Add(newVillager.GetInstanceId());
 		
 		VillagerFaceButton villagerFaceButton = 
@@ -33,7 +43,18 @@ public partial class VillagerResidence : Control
 		_villagerFaceButtonParentGrid.AddChild(villagerFaceButton);
     }
 
-	public void VillagerExitBuilding (Villager_Info leavingVillager)
+	public void OpenVillagerDialoguePanel(Villager villager)
+	{
+		_villagerDialoguePanel.AssignVillager(villager);
+		_villagerDialoguePanel.OpenDialogueWindow();
+	}
+
+	public void CloseDialoguePanel()
+	{
+		_villagerDialoguePanel.ExitDialogue();
+	}
+	
+	public void VillagerExitBuilding (Villager leavingVillager)
 	{
 		ulong villagerInstanceId = leavingVillager.GetInstanceId();
 		
@@ -47,6 +68,7 @@ public partial class VillagerResidence : Control
 				if (villagerFaceButton.id != villagerInstanceId) continue;
 				
 				villagerFaceButton.QueueFree();
+				leavingVillager.ExitShelter();
 				break;
 			}
 		}

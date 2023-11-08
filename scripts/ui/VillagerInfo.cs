@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Villager_Info : Control
+public partial class VillagerInfo : Control
 {
 	ColorRect _backgroundColor;
 	TextureRect _villagerTexture;
@@ -24,7 +24,6 @@ public partial class Villager_Info : Control
 		_closeButton = GetNode<Button>("ColorRect/CloseButton");
 
 		Visible = false;
-		
 	}
 
 	public void InitializeVillagerInfo(Texture2D villagerTexture, string villagerName, string villagerLore, VillagerManager.VillagerStates villagerState){
@@ -65,8 +64,13 @@ public partial class Villager_Info : Control
 			case VillagerManager.VillagerStates.FarmingTask:
 				_statusText.Text = "Status: Farming";
 				break;
-			case VillagerManager.VillagerStates.FindResourchesTask:
-				_statusText.Text = "Status: Scavenging";
+			
+			case VillagerManager.VillagerStates.FindWoodTask:
+				_statusText.Text = "Status: Cutting wood";
+				break;
+			
+			case VillagerManager.VillagerStates.FindStoneTask:
+				_statusText.Text = "Status: Mining stone";
 				break;
 		}
 	}

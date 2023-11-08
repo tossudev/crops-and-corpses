@@ -77,9 +77,11 @@ public partial class VillagerManager : Node
 		FixFence,
 		FindArcherTower,
 		FindShelter,
+		InShelter,
 		GetHospitalized,
 		ChooseTask,
 		FarmingTask,
-		FindResourchesTask
+		FindWoodTask,
+		FindStoneTask
 	}
 }

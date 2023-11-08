@@ -15,6 +15,7 @@ custom_minimum_size = Vector2(640, 420)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
+mouse_filter = 2
 script = ExtResource("1_8dpyt")
 
 [node name="MainPanel" type="Panel" parent="."]
@@ -147,6 +148,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="VillagerGrid" parent="MainPanel/VBoxContainer/Lowest HBox" instance=ExtResource("2_awj87")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="UpgradePanel" type="Panel" parent="."]

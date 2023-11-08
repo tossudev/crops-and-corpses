@@ -30,6 +30,10 @@ public partial class TownHallMenu : Control
 	
 	Button _storageButton;
 	const string STORAGE_BUTTON_NODENAME = "%StorageButton";
+
+	public VillagerResidence _villagerResidence;
+	const string VILLAGER_RESIDENCE_NODENAME = "%VillagerGrid";
+
 	
 	public override void _Ready()
 	{
@@ -39,6 +43,7 @@ public partial class TownHallMenu : Control
 		_storagePanel = GetNode<Panel>(STORAGE_PANEL_NODENAME);
 		
 		_upgradeGridContainer = GetNode<GridContainer>(UPGRADE_GRID_NODENAME);
+		_villagerResidence = GetNode<VillagerResidence>(VILLAGER_RESIDENCE_NODENAME);
 		InitUpgradeList();
 
 		// Main Panel mappings

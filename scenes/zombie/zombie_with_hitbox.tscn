@@ -1,13 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bfgy4jnvcy7pk"]
+[gd_scene load_steps=12 format=3 uid="uid://dkbu28ujdb2cw"]
 
-[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="1_46tua"]
-[ext_resource type="Script" path="res://scripts/zombie/RoamingZombie.cs" id="1_p77g8"]
-[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="2_lvwfs"]
-[ext_resource type="Texture2D" uid="uid://c1sm88vok0oma" path="res://LilianTests/Sprites/zombie_placeholder.png" id="4_c41wj"]
-[ext_resource type="Script" path="res://scripts/zombie/StateMachine.cs" id="4_e11dm"]
-[ext_resource type="Script" path="res://scripts/zombie/states/ZombieIdle.cs" id="5_m256t"]
-[ext_resource type="Script" path="res://scripts/zombie/states/ZombieChase.cs" id="6_ch1pp"]
-[ext_resource type="Script" path="res://scripts/zombie/states/ZombieAttackFence.cs" id="7_m3vts"]
+[ext_resource type="Script" path="res://scripts/zombie/RoamingZombie.cs" id="1_g0i6d"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_v5tjs"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_flbni"]
+[ext_resource type="Script" path="res://scripts/zombie/StateMachine.cs" id="4_rkmj5"]
+[ext_resource type="Script" path="res://scripts/zombie/states/ZombieIdle.cs" id="5_gi7w1"]
+[ext_resource type="Script" path="res://scripts/zombie/states/ZombieChase.cs" id="6_con0m"]
+[ext_resource type="Script" path="res://scripts/zombie/states/ZombieAttackFence.cs" id="7_5n6sa"]
+[ext_resource type="Texture2D" uid="uid://c1sm88vok0oma" path="res://LilianTests/Sprites/zombie_placeholder.png" id="8_c1rot"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5h8wa"]
 radius = 27.0
@@ -23,17 +23,17 @@ radius = 70.0
 [node name="Zombie" type="CharacterBody2D"]
 collision_layer = 5
 collision_mask = 6
-script = ExtResource("1_p77g8")
+script = ExtResource("1_g0i6d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CapsuleShape2D_5h8wa")
 debug_color = Color(0, 0.6, 0.701961, 0.12549)
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("1_46tua")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("2_v5tjs")]
 _parentScript = NodePath("..")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["enemy"] instance=ExtResource("2_lvwfs")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["enemy"] instance=ExtResource("3_flbni")]
 visible = false
 collision_layer = 4
 collision_mask = 32
@@ -45,19 +45,19 @@ shape = SubResource("CapsuleShape2D_64jqc")
 debug_color = Color(0.498039, 0.45098, 0.94902, 0.890196)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("4_e11dm")
+script = ExtResource("4_rkmj5")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie")]
-script = ExtResource("5_m256t")
+script = ExtResource("5_gi7w1")
 _zombie = NodePath("../..")
 
 [node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie")]
-script = ExtResource("6_ch1pp")
+script = ExtResource("6_con0m")
 _zombie = NodePath("../..")
 
 [node name="AttackFence" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie", "_navAgent")]
-script = ExtResource("7_m3vts")
+script = ExtResource("7_5n6sa")
 _zombie = NodePath("../..")
 _navAgent = NodePath("../../NavigationAgent2D")
 
@@ -73,7 +73,7 @@ process_callback = 0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1.90735e-06, -1.90735e-06)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("4_c41wj")
+texture = ExtResource("8_c1rot")
 offset = Vector2(0, -20)
 
 [node name="HealthBar" type="ProgressBar" parent="."]

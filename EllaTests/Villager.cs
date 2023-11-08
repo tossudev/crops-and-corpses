@@ -52,7 +52,7 @@ public partial class Villager : CharacterBody2D
 		
 		_timer = new Timer
 		{
-			WaitTime = 1f,
+			WaitTime = GD.RandRange(0.8f, 1.25f),
 		};
 		_timer.Timeout += State;
 		AddChild(_timer);
@@ -101,6 +101,7 @@ public partial class Villager : CharacterBody2D
 	public void EnterShelter()
 	{
 		_state = VillagerStates.InShelter;
+		_targetPosition = GlobalPosition;
 		Visible = false;
 	}
 
@@ -125,13 +126,10 @@ public partial class Villager : CharacterBody2D
 			        if (_state != VillagerStates.InShelter)
 			        {
 				        _state = VillagerStates.FindShelter;
-
 			        }
 			        break;
 		        }
 	        }
-
-	        return;
         }
 
         // Food for thought?
@@ -184,6 +182,10 @@ public partial class Villager : CharacterBody2D
 				{
 					_state = VillagerStates.ChooseTask;
 				}
+				else
+				{
+					FindShelter();
+				}
 				
 				break;
 			
@@ -229,10 +231,25 @@ public partial class Villager : CharacterBody2D
 
 	void RoamAround()
 	{
-		float range = 100;
-        _targetPosition = GlobalPosition + new Vector2(GD.Randf() * range * 8 - range, GD.Randf() * range * 8 - range);
+		_targetPosition = GlobalPosition + CreateOffsetVector2(-200, 200);
 	}
-    
+
+	void FindShelter()
+	{
+		_targetPosition = TownManager.townHallPosition - GlobalPosition + CreateOffsetVector2(-100, 100);
+	}
+
+	Vector2 CreateOffsetVector2(double min, double max)
+	{
+		GD.Randomize();
+		float x = (float) GD.RandRange(min, max);
+			
+		GD.Randomize();
+		float y = (float) GD.RandRange(min, max);
+		
+		return new Vector2(x, y);
+	}
+	
 	void ChooseTask()
 	{
 		switch (_currentOccupation)

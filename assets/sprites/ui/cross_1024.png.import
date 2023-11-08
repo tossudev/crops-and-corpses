@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btvrgdl7ajiub"
-path="res://.godot/imported/grass_tiles_placeholder.png-d94d34ae32182dbcc0e9e7f1486377f0.ctex"
+uid="uid://dha0ys5o7lb1b"
+path="res://.godot/imported/cross_1024.png-e05056ec51882db1c33506d2bbd877d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://LilianTests/Sprites/grass_tiles_placeholder.png"
-dest_files=["res://.godot/imported/grass_tiles_placeholder.png-d94d34ae32182dbcc0e9e7f1486377f0.ctex"]
+source_file="res://assets/sprites/ui/cross_1024.png"
+dest_files=["res://.godot/imported/cross_1024.png-e05056ec51882db1c33506d2bbd877d7.ctex"]
 
 [params]
 

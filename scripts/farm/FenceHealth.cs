@@ -10,4 +10,9 @@ public partial class FenceHealth : Node2D
 			GetParent().QueueFree();
 		}
 	}
+
+	private void AttackReceived(Attack attack)
+	{
+		// idk made this just to get rid of the debug spam 
+	}
 }

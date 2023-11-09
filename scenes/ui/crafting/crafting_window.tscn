@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ba8jl34px0fpl"]
+[gd_scene load_steps=24 format=3 uid="uid://ba8jl34px0fpl"]
 
 [ext_resource type="Script" path="res://scripts/ui/crafting/CraftingWindow.cs" id="1_glv8t"]
 [ext_resource type="PackedScene" uid="uid://b01xhkvdrkq54" path="res://scenes/ui/crafting/craft_panel.tscn" id="2_lljeh"]
@@ -10,13 +10,18 @@
 [ext_resource type="Resource" uid="uid://c1q7mpup7mo0b" path="res://assets/resources/game_items/food_items_250_to_299/251_vegetable_stew.tres" id="7_8yp1b"]
 [ext_resource type="Resource" uid="uid://c5sh8gg8de5a2" path="res://assets/resources/game_items/weapon_items_150_to_249/160_bow.tres" id="7_g4egb"]
 [ext_resource type="Resource" uid="uid://cqnav3flekvvt" path="res://assets/resources/game_items/tool_items_350_449/405_bucket.tres" id="8_badks"]
+[ext_resource type="Resource" uid="uid://bpjwmo4fvwr48" path="res://assets/resources/game_items/tool_items_350_449/400_bug_spray.tres" id="9_p7d3c"]
 [ext_resource type="Resource" uid="uid://c1v5a4ipu05d" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/102_pumpkin_seed.tres" id="11_nohmk"]
 [ext_resource type="Resource" uid="uid://c1sgw6il1u3lh" path="res://assets/resources/game_items/tool_items_350_449/351_iron_axe.tres" id="11_vkb3h"]
 [ext_resource type="Resource" uid="uid://dn4elc6q0jdu3" path="res://assets/resources/game_items/weapon_items_150_to_249/151_iron_sword.tres" id="12_eclrf"]
+[ext_resource type="Resource" uid="uid://be020c80kdfnj" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/100_potato_seed.tres" id="13_ghdjx"]
 [ext_resource type="Resource" uid="uid://bvjuri17vg701" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/104_mushroom_seed.tres" id="13_x8e0p"]
 [ext_resource type="Resource" uid="uid://c5xluv5j2cu8v" path="res://assets/resources/game_items/potion_items_300_to_349/300_cure_potion.tres" id="14_b8mer"]
 [ext_resource type="Resource" uid="uid://bdxgtjm5ujcgk" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/108_maize_seed.tres" id="14_iu7o0"]
+[ext_resource type="Resource" uid="uid://7a8gf2arabq3" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/106_wheat_seed.tres" id="16_5f0j3"]
 [ext_resource type="Resource" uid="uid://d0s103r1w5joo" path="res://assets/resources/game_items/potion_items_300_to_349/301_health_potion.tres" id="17_cxrdc"]
+[ext_resource type="Resource" uid="uid://ctt564su20h2f" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/110_lupine_seed.tres" id="18_5dxtt"]
+[ext_resource type="Resource" uid="uid://be88krv16kuqn" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/112_poppy_seed.tres" id="19_xn58k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1g7uv"]
 font_size = 24
@@ -73,12 +78,7 @@ columns = 10
 layout_mode = 2
 
 [node name="CraftableItemBread" parent="ItemArea/GridContainer/ItemGridSlot" instance=ExtResource("5_8tf6t")]
-layout_mode = 1
-offset_left = -36.5
-offset_top = -36.5
-offset_right = 36.5
-offset_bottom = 36.5
-pivot_offset = Vector2(28, 28)
+layout_mode = 2
 itemRes = ExtResource("6_iyyl4")
 
 [node name="ItemGridSlot2" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
@@ -86,70 +86,50 @@ layout_mode = 2
 
 [node name="CraftableItemVegetableStew" parent="ItemArea/GridContainer/ItemGridSlot2" instance=ExtResource("5_8tf6t")]
 layout_direction = 0
-layout_mode = 1
-offset_left = -36.5
-offset_top = -36.5
-offset_right = 36.5
-offset_bottom = 36.5
-pivot_offset = Vector2(28, 28)
+layout_mode = 2
 itemRes = ExtResource("7_8yp1b")
 
 [node name="ItemGridSlot3" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
 
-[node name="CraftableItemArrow" parent="ItemArea/GridContainer/ItemGridSlot3" instance=ExtResource("5_8tf6t")]
-layout_direction = 0
-layout_mode = 1
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
-pivot_offset = Vector2(28, 28)
-itemRes = ExtResource("6_wjko8")
-
 [node name="ItemGridSlot4" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
 
+[node name="CraftableItemBucket" parent="ItemArea/GridContainer/ItemGridSlot4" instance=ExtResource("5_8tf6t")]
+layout_direction = 0
+layout_mode = 2
+itemRes = ExtResource("8_badks")
+
 [node name="ItemGridSlot5" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
+
+[node name="CraftableItemBugSpray" parent="ItemArea/GridContainer/ItemGridSlot5" instance=ExtResource("5_8tf6t")]
+layout_direction = 0
+layout_mode = 2
+itemRes = ExtResource("9_p7d3c")
 
 [node name="ItemGridSlot6" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
 
 [node name="CraftableItemBow" parent="ItemArea/GridContainer/ItemGridSlot6" instance=ExtResource("5_8tf6t")]
 layout_direction = 0
-layout_mode = 1
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
-pivot_offset = Vector2(28, 28)
+layout_mode = 2
 itemRes = ExtResource("7_g4egb")
 
 [node name="ItemGridSlot7" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
 
-[node name="CraftableItemBucket" parent="ItemArea/GridContainer/ItemGridSlot7" instance=ExtResource("5_8tf6t")]
+[node name="CraftableItemArrow" parent="ItemArea/GridContainer/ItemGridSlot7" instance=ExtResource("5_8tf6t")]
 layout_direction = 0
-layout_mode = 1
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
-pivot_offset = Vector2(28, 28)
-itemRes = ExtResource("8_badks")
+layout_mode = 2
+itemRes = ExtResource("6_wjko8")
 
 [node name="ItemGridSlot8" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
 
 [node name="CraftableItemAxe" parent="ItemArea/GridContainer/ItemGridSlot8" instance=ExtResource("5_8tf6t")]
 layout_direction = 0
-layout_mode = 1
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
-pivot_offset = Vector2(28, 28)
+layout_mode = 2
 itemRes = ExtResource("11_vkb3h")
 
 [node name="ItemGridSlot9" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
@@ -157,12 +137,7 @@ layout_mode = 2
 
 [node name="CraftableItemSword" parent="ItemArea/GridContainer/ItemGridSlot9" instance=ExtResource("5_8tf6t")]
 layout_direction = 0
-layout_mode = 1
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
-pivot_offset = Vector2(28, 28)
+layout_mode = 2
 itemRes = ExtResource("12_eclrf")
 
 [node name="ItemGridSlot10" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
@@ -171,73 +146,58 @@ layout_mode = 2
 [node name="ItemGridSlot11" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
 
-[node name="CraftableItemTomatoSeed" parent="ItemArea/GridContainer/ItemGridSlot11" instance=ExtResource("5_8tf6t")]
+[node name="CraftableItemPotatoSeed" parent="ItemArea/GridContainer/ItemGridSlot11" instance=ExtResource("5_8tf6t")]
 layout_direction = 0
-layout_mode = 1
-offset_left = -36.5
-offset_top = -36.5
-offset_right = 36.5
-offset_bottom = 36.5
-pivot_offset = Vector2(28, 28)
-itemRes = ExtResource("11_nohmk")
+layout_mode = 2
+itemRes = ExtResource("13_ghdjx")
 
 [node name="ItemGridSlot12" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
 
-[node name="CraftableItemPotatoSeed" parent="ItemArea/GridContainer/ItemGridSlot12" instance=ExtResource("5_8tf6t")]
+[node name="CraftableItemPumpkinSeed" parent="ItemArea/GridContainer/ItemGridSlot12" instance=ExtResource("5_8tf6t")]
 layout_direction = 0
-layout_mode = 1
-offset_left = -36.5
-offset_top = -36.5
-offset_right = 36.5
-offset_bottom = 36.5
-pivot_offset = Vector2(28, 28)
-itemRes = ExtResource("14_iu7o0")
+layout_mode = 2
+itemRes = ExtResource("11_nohmk")
 
 [node name="ItemGridSlot13" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
 
-[node name="CraftableItemCabbageSeed" parent="ItemArea/GridContainer/ItemGridSlot13" instance=ExtResource("5_8tf6t")]
+[node name="CraftableItemMushroomSeed" parent="ItemArea/GridContainer/ItemGridSlot13" instance=ExtResource("5_8tf6t")]
 layout_direction = 0
-layout_mode = 1
-offset_left = -36.5
-offset_top = -36.5
-offset_right = 36.5
-offset_bottom = 36.5
-pivot_offset = Vector2(28, 28)
+layout_mode = 2
 itemRes = ExtResource("13_x8e0p")
 
 [node name="ItemGridSlot14" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
 
+[node name="CraftableItemWheatSeed" parent="ItemArea/GridContainer/ItemGridSlot14" instance=ExtResource("5_8tf6t")]
+layout_direction = 0
+layout_mode = 2
+itemRes = ExtResource("16_5f0j3")
+
 [node name="ItemGridSlot15" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
 
-[node name="CraftableItemCurePotion" parent="ItemArea/GridContainer/ItemGridSlot15" instance=ExtResource("5_8tf6t")]
+[node name="CraftableItemMaizeSeed" parent="ItemArea/GridContainer/ItemGridSlot15" instance=ExtResource("5_8tf6t")]
 layout_direction = 0
-layout_mode = 1
-offset_left = -36.5
-offset_top = -36.5
-offset_right = 36.5
-offset_bottom = 36.5
-pivot_offset = Vector2(28, 28)
-itemRes = ExtResource("14_b8mer")
+layout_mode = 2
+itemRes = ExtResource("14_iu7o0")
 
 [node name="ItemGridSlot16" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
 
-[node name="CraftableItemHealthPotion" parent="ItemArea/GridContainer/ItemGridSlot16" instance=ExtResource("5_8tf6t")]
+[node name="CraftableItemLupineSeed" parent="ItemArea/GridContainer/ItemGridSlot16" instance=ExtResource("5_8tf6t")]
 layout_direction = 0
-layout_mode = 1
-offset_left = -36.5
-offset_top = -36.5
-offset_right = 36.5
-offset_bottom = 36.5
-pivot_offset = Vector2(28, 28)
-itemRes = ExtResource("17_cxrdc")
+layout_mode = 2
+itemRes = ExtResource("18_5dxtt")
 
 [node name="ItemGridSlot17" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
+
+[node name="CraftableItemPoppySeed" parent="ItemArea/GridContainer/ItemGridSlot17" instance=ExtResource("5_8tf6t")]
+layout_direction = 0
+layout_mode = 2
+itemRes = ExtResource("19_xn58k")
 
 [node name="ItemGridSlot18" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
@@ -245,8 +205,18 @@ layout_mode = 2
 [node name="ItemGridSlot19" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
 
+[node name="CraftableItemHealthPotion" parent="ItemArea/GridContainer/ItemGridSlot19" instance=ExtResource("5_8tf6t")]
+layout_direction = 0
+layout_mode = 2
+itemRes = ExtResource("17_cxrdc")
+
 [node name="ItemGridSlot20" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
+
+[node name="CraftableItemCurePotion" parent="ItemArea/GridContainer/ItemGridSlot20" instance=ExtResource("5_8tf6t")]
+layout_direction = 0
+layout_mode = 2
+itemRes = ExtResource("14_b8mer")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0

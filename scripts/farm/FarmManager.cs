@@ -85,7 +85,7 @@ public partial class FarmManager : Node
 	
 	public void EmptyWaterBucket(){
 		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bucket of Water"){
-			Item emptyB = ResourceLoader.Load("res://assets/resources/game_items/4_bucket.tres") as Item;
+			Item emptyB = ResourceLoader.Load("res://assets/resources/game_items/tool_items_350_449/405_bucket.tres") as Item;
 			RawInventoryItem bucket = new RawInventoryItem(emptyB.ID, emptyB.Name, 1, emptyB.StackSize);
 			PlayerInventoryController.SwapItems(bucket, PlayerInventoryController.selectedItem.indexInOrganizedInventory);		
 		}else{
@@ -94,7 +94,7 @@ public partial class FarmManager : Node
 	}
 	public void FillWaterBucket(){
 		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bucket"){
-			Item waterB = ResourceLoader.Load("res://assets/resources/game_items/7_bucket_water.tres") as Item;
+			Item waterB = ResourceLoader.Load("res://assets/resources/game_items/tool_items_350_449/406_bucket_water.tres") as Item;
 			RawInventoryItem waterBucket = new RawInventoryItem(waterB.ID, waterB.Name, 1, waterB.StackSize);
 			PlayerInventoryController.SwapItems(waterBucket, PlayerInventoryController.selectedItem.indexInOrganizedInventory);		
 

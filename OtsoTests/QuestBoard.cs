@@ -34,7 +34,7 @@ public partial class QuestBoard : Node2D
     {
         GD.Print("Quest board button pressed");
 
-        questManager.R
+        
 
         questManager.CreateRescueMission("Otso");
     }

@@ -22,7 +22,7 @@ public partial class FieldHandler : Node2D
 
 	void InteractWithField(Node viewport, InputEvent @event, long shapeIdx)
 	{
-		if(@event is InputEventMouseButton button && _isPlayerNearby && button.IsPressed())
+		if(@event is InputEventMouseButton button && _isPlayerNearby && button.IsPressed() && button.ButtonIndex == MouseButton.Left)
 		{
 			if (!PlayerInventoryController.isItemSelected) return;
 

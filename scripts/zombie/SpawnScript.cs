@@ -35,13 +35,12 @@ public partial class SpawnScript : Node2D
 		for(int i = 0; i < spawnPoints.Length; i++)
 		{
 			spawnPoints[i] = GetNode<Node2D>("SpawnPoint"+i);
-			GD.Print(spawnPoints[i]);
+			//GD.Print(spawnPoints[i]);
 		}
 		
 		packedScene = (PackedScene)GD.Load("res://LilianTests/Prefabs/zombie_with_hitbox.tscn");
 		//dayTimeCheck = GetNode<TimeManager>("SunlightContainer");
 		spawnDelay.Start();
-		GD.Print(zombieList.Count);
 	}
   
 	  public override void _Process(double delta)

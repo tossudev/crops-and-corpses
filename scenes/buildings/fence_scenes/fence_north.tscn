@@ -34,10 +34,9 @@ script = ExtResource("1_whbvh")
 position = Vector2(-64, -32)
 shape = SubResource("RectangleShape2D_asoab")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthBar") instance=ExtResource("3_xy11f")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_xy11f")]
 position = Vector2(-64, -33)
 _parentScript = NodePath("../FenceHealthParent")
-_healthBar = NodePath("../HealthBar")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("4_rslnb")]
 position = Vector2(-64, -32)

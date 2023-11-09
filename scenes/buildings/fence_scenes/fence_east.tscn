@@ -33,10 +33,9 @@ collision_mask = 5
 position = Vector2(-125, -75)
 shape = SubResource("RectangleShape2D_638cj")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthBar") instance=ExtResource("2_xrlmy")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("2_xrlmy")]
 position = Vector2(-126, -75)
 _parentScript = NodePath("../FenceHealthParent")
-_healthBar = NodePath("../HealthBar")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("3_1xav7")]
 position = Vector2(-126, -75)

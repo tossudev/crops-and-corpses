@@ -26,7 +26,7 @@ public partial class GlobalTime : Node
         {
             Directory.CreateDirectory(_savePath);
         }
-        GD.Print(day);
+       // GD.Print(day);
 
         LoadData();
     }
@@ -107,7 +107,7 @@ public partial class GlobalTime : Node
             if (loaded.ContainsKey("global_time"))
             {
                 globalTime = (float)loaded["global_time"];
-				GD.Print(globalTime);
+				//GD.Print(globalTime);
             }
 
             if (loaded.ContainsKey("sunlight_r") && loaded.ContainsKey("sunlight_g") && loaded.ContainsKey("sunlight_b"))
@@ -118,7 +118,7 @@ public partial class GlobalTime : Node
             if (loaded.ContainsKey("day"))
             {
                 day = (int)loaded["day"];
-				GD.Print(day);
+				//GD.Print(day);
             }
         }
     }

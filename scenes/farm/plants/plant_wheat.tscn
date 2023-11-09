@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://cb3o7u5viapx8"]
 
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_6sli3"]
-[ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://JanitaTests/Images/dirttemp.jpg" id="2_djnfu"]
-[ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://JanitaTests/Images/sprouttemp.png" id="3_d8f8c"]
-[ext_resource type="Texture2D" uid="uid://dvhrkxcw50l7s" path="res://JanitaTests/Images/wheattemp.png" id="4_evnaa"]
-[ext_resource type="Resource" uid="uid://dt5r6o5ibel3e" path="res://assets/resources/game_items/16_wheat.tres" id="5_2mson"]
-[ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="5_gd24g"]
+[ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://assets/placeholder/J_Sprites/dirttemp.jpg" id="2_p70tt"]
+[ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://assets/placeholder/J_Sprites/sprouttemp.png" id="3_wkide"]
+[ext_resource type="Texture2D" uid="uid://dvhrkxcw50l7s" path="res://assets/placeholder/J_Sprites/wheattemp.png" id="4_ylc87"]
+[ext_resource type="Resource" uid="uid://dt5r6o5ibel3e" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/107_wheat.tres" id="5_2mson"]
+[ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://scenes/farm/shapes/plant_shape.tres" id="5_gd24g"]
 [ext_resource type="Texture2D" uid="uid://dqgscu3bl0gng" path="res://assets/sprites/items/item_pumpkin.png" id="7_twm35"]
 
 [node name="plant_wheat" type="Node2D" node_paths=PackedStringArray("_col", "trect")]
@@ -15,9 +15,9 @@ _plantType = 3
 _seedName = "wheat seed"
 _description = "Basic ingredient for bread"
 _maxCycles = 3
-_seedTexture = ExtResource("2_djnfu")
-_sproutTexture = ExtResource("3_d8f8c")
-_plantTexture = ExtResource("4_evnaa")
+_seedTexture = ExtResource("2_p70tt")
+_sproutTexture = ExtResource("3_wkide")
+_plantTexture = ExtResource("4_ylc87")
 _col = NodePath("Area2D")
 trect = NodePath("TextureRect")
 _harvestablePlant = ExtResource("5_2mson")

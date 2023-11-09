@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b40hqfagems1h"]
 
 [ext_resource type="Script" path="res://scripts/farm/Well.cs" id="1_urfjr"]
-[ext_resource type="Shape2D" uid="uid://cexw2rv4qd6l6" path="res://JanitaTests/Scripts/well_shape.tres" id="2_g8j44"]
+[ext_resource type="Shape2D" uid="uid://cexw2rv4qd6l6" path="res://scenes/farm/shapes/well_shape.tres" id="2_g8j44"]
 [ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="3_a8jms"]
 
 [node name="well" type="Node2D"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diivpfjg7x88y"
-path="res://.godot/imported/watersign.png-1e4a3d6a54059854e3eecac2d39079da.ctex"
+uid="uid://emb45j66h4m7"
+path="res://.godot/imported/sprouttemp.png-bac81b155f8457feef297d64e84ba09c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://JanitaTests/Images/watersign.png"
-dest_files=["res://.godot/imported/watersign.png-1e4a3d6a54059854e3eecac2d39079da.ctex"]
+source_file="res://assets/placeholder/J_Sprites/sprouttemp.png"
+dest_files=["res://.godot/imported/sprouttemp.png-bac81b155f8457feef297d64e84ba09c.ctex"]
 
 [params]
 

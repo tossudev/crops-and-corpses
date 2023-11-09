@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ivpbqnj87cwl"
-path="res://.godot/imported/dirttemp.jpg-d8dfec575d96e1423c9cb1f7a41ce1c6.ctex"
+uid="uid://dvhrkxcw50l7s"
+path="res://.godot/imported/wheattemp.png-28bbe973734d0c64bbc5a5ea0f334e53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://JanitaTests/Images/dirttemp.jpg"
-dest_files=["res://.godot/imported/dirttemp.jpg-d8dfec575d96e1423c9cb1f7a41ce1c6.ctex"]
+source_file="res://assets/placeholder/J_Sprites/wheattemp.png"
+dest_files=["res://.godot/imported/wheattemp.png-28bbe973734d0c64bbc5a5ea0f334e53.ctex"]
 
 [params]
 

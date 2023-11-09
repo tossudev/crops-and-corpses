@@ -102,8 +102,8 @@ public partial class Plant : Node2D
 		_warningSign.Position = new Vector2(0, -115);
 		AddChild(_warningSign);
 
-		_bugSignTexture = ResourceLoader.Load("res://JanitaTests/Images/bugsign.png") as Texture2D;
-		_waterSignTexture = ResourceLoader.Load("res://JanitaTests/Images/watersign.png") as Texture2D;
+		_bugSignTexture = ResourceLoader.Load("res://assets/placeholder/J_Sprites/bugsign.png") as Texture2D;
+		_waterSignTexture = ResourceLoader.Load("res://assets/placeholder/J_Sprites/watersign.png") as Texture2D;
 
 		var scene = ResourceLoader.Load<PackedScene>("res://scenes/farm/plant_progress_bar.tscn").Instantiate();
      	_progress = scene as TextureProgressBar;   

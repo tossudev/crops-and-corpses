@@ -44,7 +44,7 @@ public partial class Villager : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_streetSign = GetParent().GetParent().GetNode<Node2D>("StreetSignSpot");
+		_streetSign = GetParent().GetNode<Node2D>("%StreetSignSpot");
 		_villagerSprite = GetNode<Sprite2D>("Sprite2D");
 		_gatheringTimer = GetNode<Timer>("GatheringTimer");
 

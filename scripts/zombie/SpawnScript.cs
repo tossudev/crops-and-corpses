@@ -87,7 +87,7 @@ public partial class SpawnScript : Node2D
 	private void ZombieSpawn()
 	{
 		rootPath =  GetParent<Node2D>().GetPath();
-		GD.Print(rootPath);
+		//GD.Print(rootPath);
 		rootNode = GetNodeOrNull<Node2D>(rootPath);
 		CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
 		prefab.Position = spawnPoints[counter].Position;

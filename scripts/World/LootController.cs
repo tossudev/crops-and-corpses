@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public partial class LootController : StaticBody2D
 {
 	[Export] private Loot _loot;
-	[Export] private Sprite2D _sprite;
+	[Export] private AnimationPlayer _animationPlayer;
 
 	private List<Item> _items = new List<Item>();
 
@@ -32,6 +32,9 @@ public partial class LootController : StaticBody2D
 		if (_items.Count > 1)
 			DropItems();
 
+		_animationPlayer.SpeedScale = 15;
+		_animationPlayer.Play("shake");
+
 		if (health <= 0)
 		{
 			DropItems(_items.Count);
@@ -43,7 +46,6 @@ public partial class LootController : StaticBody2D
 	{
 		for (int i = 0; i < dropAmount; i++)
 		{
-			GD.Print(_items[_items.Count - 1].Name);
 			int randIndex = (int)GD.RandRange(0, _items.Count - 1);
 
 			RawInventoryItem dropItem = new RawInventoryItem(_items[randIndex].ID, _items[randIndex].Name, 1, _items[randIndex].StackSize);

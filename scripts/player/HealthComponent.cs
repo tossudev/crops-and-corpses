@@ -60,11 +60,9 @@ public partial class HealthComponent : Node2D
 	{
 		health -= attack.damage;
 
-		GD.Print(GetParent().Name + " health: " + health);
-
 		if (_parentScript == null || !_parentScript.HasMethod("OnHealth"))
 		{
-			GD.Print("HealthComponent: No method or parent script found");
+			// GD.Print("HealthComponent: No method or parent script found");
 			return;
 		}
 

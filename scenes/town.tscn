@@ -97,10 +97,6 @@ cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
 [node name="Town" type="Node2D"]
 y_sort_enabled = true
 
-[node name="StreetSignSpot" type="Node2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(408, 0)
-
 [node name="VillagerManager" type="Node" parent="." node_paths=PackedStringArray("_allData")]
 script = ExtResource("1_r70qj")
 _allData = NodePath("AllVillagerData")
@@ -1038,6 +1034,10 @@ position = Vector2(-66.6666, -329.667)
 
 [node name="riverside_sign" parent="street_sign_post" index="4"]
 position = Vector2(-66.6666, -360)
+
+[node name="StreetSignSpot" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(408, 0)
 
 [node name="ZombieManager" type="Node2D" parent="."]
 script = ExtResource("26_e7msj")

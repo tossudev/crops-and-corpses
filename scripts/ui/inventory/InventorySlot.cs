@@ -5,8 +5,17 @@ using System.Threading.Tasks;
 public partial class InventorySlot : Control {
 	
 	public TextureRect icon;
-	public Label quantityLabel;
+	const string ICON_TEXTURE_NODENAME = "%ItemIcon";
 
+	public Label quantityLabel;
+	const string QUANTITY_LABEL_NODENAME = "%ItemQuantityLabel";
+
+	Panel _itemNamePanel;
+	const string ITEM_NAME_PANEL_NODENAME = "%ItemNamePanel";
+	
+	Label _itemNameLabel;
+	const string ITEM_NAME_LABEL_NODENAME = "%ItemNameLabel";
+	
 	public RawInventoryItem slotItem;
 	[Export] public bool isCraftingSlot;
 	bool slotHasItem;
@@ -15,6 +24,11 @@ public partial class InventorySlot : Control {
 	public int slotIndex => _slotIndex;
 
 
+
+	
+	bool _nameFollowMouse;
+	Vector2 offsetVector = new Vector2(-16, -16);
+	
     void OnButtonGuiInput(InputEvent @event)
 	{
 		if (isCraftingSlot) return;
@@ -88,16 +102,37 @@ public partial class InventorySlot : Control {
 
     public void OnMouseEntered()
     {
-	    if (slotInitiated)
+	    if (!slotInitiated) return;
+	    
+	    _itemNamePanel.Visible = true;
+	    _nameFollowMouse = true;
+    }
+    
+    public override void _PhysicsProcess(double delta)
+    {
+	    base._PhysicsProcess(delta);
+
+	    if (_nameFollowMouse)
 	    {
-		    
+		    _itemNamePanel.Position = GetGlobalMousePosition() + offsetVector;
 	    }
     }
+
+    public void OnMouseExited()
+    {
+	    _itemNamePanel.Visible = false;
+	    _nameFollowMouse = false;
+    }
+    
+    
     
     public void InitiateSlot(int index)
     {
-	    icon = GetNode("Icon") as TextureRect;
-	    quantityLabel = GetNode("Quantity") as Label;
+	    icon = GetNode<TextureRect>(ICON_TEXTURE_NODENAME);
+	    quantityLabel = GetNode<Label>(QUANTITY_LABEL_NODENAME);
+	    _itemNamePanel = GetNode<Panel>(ITEM_NAME_PANEL_NODENAME);
+	    _itemNameLabel = GetNode<Label>(ITEM_NAME_LABEL_NODENAME);
+	    
 	    
 	    _slotIndex = index;
 

@@ -112,7 +112,7 @@ public partial class SaveData : Node
         Dictionary saveData = await LoadData();
         
         // Town stats
-        TownManager.ReadTownDataFromFile(saveData);
+        TownManager.ReadTownDataFromFile(saveData, false);
         
         // Inventory Data
         await RawInventoryItem.ReadInventoryDataFromFile(saveData);
@@ -121,13 +121,13 @@ public partial class SaveData : Node
     }
     
     
-    public static async Task SyncInventory()
+    public static async Task SyncInventory(bool doSync = true)
     {
         await TaskExtensions.SuspendWhile(() => inventorySyncInProgress);
         inventorySyncInProgress = true;
         
         
-        await UpdateTotalItemsAndSave();
+        await UpdateTotalItems(doSync);
         inventorySyncInProgress = false;
     }
 
@@ -136,7 +136,7 @@ public partial class SaveData : Node
         await Save();
     }
 
-    static async Task UpdateTotalItemsAndSave()
+    static async Task UpdateTotalItems(bool doSync = true)
     {
         totalInventoryItems.Clear();
 
@@ -162,6 +162,6 @@ public partial class SaveData : Node
                          () => savingInProgress, GD.Randi() % 200 + 50)+  " ms");
         }
         
-        await Save();
+        if (doSync) await Save();
     }
 }

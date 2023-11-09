@@ -5,19 +5,15 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_etjiy"]
 texture = ExtResource("1_mpok7")
 
-[node name="ItemGridSlot" type="Control"]
+[node name="ItemGridSlot" type="CenterContainer"]
 light_mask = 16
 visibility_layer = 16
-custom_minimum_size = Vector2(73, 73)
-layout_mode = 3
-anchors_preset = 0
+custom_minimum_size = Vector2(72, 72)
 offset_right = 72.0
 offset_bottom = 72.0
 pivot_offset = Vector2(37.5, 37.5)
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(72, 72)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_etjiy")

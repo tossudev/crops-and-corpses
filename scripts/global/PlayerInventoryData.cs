@@ -9,7 +9,7 @@ using Array = Godot.Collections.Array;
 [GlobalClass]
 public partial class PlayerInventoryData : Node
 {
-    public const int PLAYER_INVENTORY_MAX_SIZE = 32;
+    public const int PLAYER_INVENTORY_MAX_SIZE = 40;
 
     public override void _Ready()
     {
@@ -19,8 +19,9 @@ public partial class PlayerInventoryData : Node
     async void TestAsyncAdd()
     {
         await TaskExtensions.SuspendWhile(() => !PlayerInventoryController.isInitialized, 100);
-        
-        if (SaveData.totalInventoryItems.Count > 0) return;
+
+        await Task.Delay(1000);
+        if (SaveData.organizedPlayerInventory.Count > 0) return;
         
         Item log = ItemData.GetItemById(0);
         await PlayerInventoryController.AddItem(

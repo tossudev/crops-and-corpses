@@ -16,6 +16,23 @@ public partial class ZombieIdle : ZombieStates
         _player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
 		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
 		RandomizeRoam();
+
+		if (_zombie != null && _zombie.HasMethod("ChangeZombieNoise"))
+		{
+			int random = (int)GD.Randi() % 3 + 1;
+			if (random == 1)
+			{
+				_zombie.CallDeferred("ChangeZombieNoise", ZombieManager._breath);
+			}
+			else if (random == 2)
+			{
+				_zombie.CallDeferred("ChangeZombieNoise", ZombieManager._growl);
+			}
+			else
+			{
+				_zombie.CallDeferred("ChangeZombieNoise", ZombieManager._hiss2);
+			}
+		}		
     }
 
     public override void Update(double delta)

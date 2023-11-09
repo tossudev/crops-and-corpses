@@ -1,38 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyk44y2mntxd0"]
+[gd_scene load_steps=6 format=3 uid="uid://cyk44y2mntxd0"]
 
-[ext_resource type="Texture2D" uid="uid://dpen3guunbkyn" path="res://NikkeTests/images/town_hall.png" id="1_2vw6x"]
 [ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_53rsh"]
+[ext_resource type="Texture2D" uid="uid://x18pjfkxudrg" path="res://assets/Lineart/townhall_lineart.png" id="2_rqetj"]
 [ext_resource type="PackedScene" uid="uid://di5l0mrx44owj" path="res://scenes/buildings/town/town_hall/town_hall_menu.tscn" id="3_2gy07"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r4d4i"]
-size = Vector2(192, 192)
+size = Vector2(952.001, 343.998)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubi7p"]
+size = Vector2(320, 95.9996)
 
 [node name="TownHall" type="Node2D"]
 script = ExtResource("1_53rsh")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 64)
 collision_mask = 16
 
 [node name="TownHall" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(-96, -96)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("1_2vw6x")
+position = Vector2(200, -400)
+texture = ExtResource("2_rqetj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-96, -96)
+position = Vector2(-100, -244)
 rotation = -3.14159
 shape = SubResource("RectangleShape2D_r4d4i")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-96.0001, -47.9998)
+rotation = -3.14159
+shape = SubResource("RectangleShape2D_ubi7p")
+
 [node name="area 2d" type="Area2D" parent="."]
-collision_layer = 24
+collision_layer = 25
 collision_mask = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="area 2d"]
-position = Vector2(-96, -96)
+position = Vector2(-104, -240)
 rotation = -3.14159
 shape = SubResource("RectangleShape2D_r4d4i")
 
 [node name="TownHallMenu" parent="." instance=ExtResource("3_2gy07")]
+unique_name_in_owner = true
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

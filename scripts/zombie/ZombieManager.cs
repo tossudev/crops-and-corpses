@@ -16,10 +16,15 @@ public partial class ZombieManager : Node
 	private SpawnScript _dayNightSpawnNode;
 	private Timer _timer;
 	public enum ZombieType {Weak,Medium,Strong};
-	
+	public static AudioStream _hiss1, _hiss2, _growl, _breath;	
 
 	public override void _Ready()
 	{
+		_hiss1 = (AudioStream)GD.Load("res://assets/Sounds/zombies/zombie_hiss1.wav");
+		_hiss2 = (AudioStream)GD.Load("res://assets/Sounds/zombies/zombie_hiss2.wav");
+		_growl = (AudioStream)GD.Load("res://assets/Sounds/zombies/zombie_growl.wav");
+		_breath = (AudioStream)GD.Load("res://assets/Sounds/zombies/zombie_breath.wav");
+		// to do: some sound logic lol
 		
 		_dayNightSpawnNode = GetParent().GetNodeOrNull<SpawnScript>("ZombieSpawn");
 		_timer = GetNodeOrNull<Timer>("Timer");
@@ -49,7 +54,6 @@ public partial class ZombieManager : Node
 
 	private void UpdateStats()
 	{
-	
 		if (dayMode)
 		{
 			type= ZombieType.Weak;

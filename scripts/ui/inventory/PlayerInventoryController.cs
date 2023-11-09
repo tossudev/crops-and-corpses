@@ -31,7 +31,7 @@ public partial class PlayerInventoryController : Control {
 	
 	const int SELECTED_ITEM_OFFSET = 64;
 	const int HOTBAR_SIZE = 8;
-	static int _hotbarStartIndex = 24;
+    public const int HOTBAR_START_IDX = PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - HOTBAR_SIZE;
 
 
 	public override void _Ready()
@@ -83,7 +83,7 @@ public partial class PlayerInventoryController : Control {
 
 
 	void UpdateHeldItem(int hotbarIndex) {
-		int itemInventoryIndex =_hotbarStartIndex + hotbarIndex;
+		int itemInventoryIndex =HOTBAR_START_IDX + hotbarIndex;
 		heldItem = SaveData.organizedPlayerInventory[itemInventoryIndex];
 
 		Vector2 heldItemPos = _hotbarGrid.GetChild<Control>(hotbarIndex).GlobalPosition;
@@ -96,7 +96,6 @@ public partial class PlayerInventoryController : Control {
 
     async void _InitInventory()
     {
-
 	    await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete, 100);
 	    
 		foreach (var node in _inventoryGrid.GetChildren())
@@ -108,9 +107,7 @@ public partial class PlayerInventoryController : Control {
 		{
 			node.Free();
 		}
-
-		_hotbarStartIndex = PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - HOTBAR_SIZE;
-
+        
 		// Init all slots with null items
 		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++) {
 			
@@ -128,14 +125,13 @@ public partial class PlayerInventoryController : Control {
 			var inventorySlot = (InventorySlot)itemSlot;
 			
 			inventorySlot?.InitiateSlot(i);
-			inventorySlot?.UpdateSlot(null, false);
 		}
         
 		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++)
 		{
 			if (IsSlotInHotbar(i))
 			{
-				await _hotbarGrid.GetChild<InventorySlot>(i - _hotbarStartIndex)
+				await _hotbarGrid.GetChild<InventorySlot>(i - HOTBAR_START_IDX)
 					.UpdateSlot(SaveData.organizedPlayerInventory[i], false);
 			}
 			else 
@@ -152,7 +148,7 @@ public partial class PlayerInventoryController : Control {
 
 
 	static bool IsSlotInHotbar(int index) {
-		return index >= _hotbarStartIndex;
+		return index >= HOTBAR_START_IDX;
 	}
 
 
@@ -410,7 +406,7 @@ public partial class PlayerInventoryController : Control {
     static void SelectItemAtSlot(int index)
 	{
 		InventorySlot slot = IsSlotInHotbar(index) 
-			? _hotbarGrid.GetChild<InventorySlot>(index - _hotbarStartIndex)
+			? _hotbarGrid.GetChild<InventorySlot>(index - HOTBAR_START_IDX)
 			: _inventoryGrid.GetChild<InventorySlot>(index);
 		
 		SelectItem(slot.slotItem);
@@ -433,7 +429,7 @@ public partial class PlayerInventoryController : Control {
 	{
 		InventorySlot slotToUpdate;
 		if (IsSlotInHotbar(index)) {
-			slotToUpdate = _hotbarGrid.GetChild<InventorySlot>(index - _hotbarStartIndex);
+			slotToUpdate = _hotbarGrid.GetChild<InventorySlot>(index - HOTBAR_START_IDX);
 		}
 		else {
 			slotToUpdate = _inventoryGrid.GetChild<InventorySlot>(index);

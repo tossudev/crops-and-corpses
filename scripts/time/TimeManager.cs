@@ -25,7 +25,7 @@ public partial class TimeManager : Node
         
         globalTime = GetNode<GlobalTime>("/root/GlobalTime");
         sunlight = GetNode<CanvasModulate>("Sunlight");
-        GD.Print("has town been destroyed "+ globalTime.HasTownBeenDestroyed());
+       // GD.Print("has town been destroyed "+ globalTime.HasTownBeenDestroyed());
 
         if (sunlight != null)
         {

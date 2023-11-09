@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="1_68m56"]
 
-
 [node name="ZombieSpawn" type="Node2D"]
 script = ExtResource("1_68m56")
 

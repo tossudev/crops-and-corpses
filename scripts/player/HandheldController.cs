@@ -12,6 +12,7 @@ public partial class HandheldController : Node2D
     [Export] private AnimationPlayer _animationPlayer;
     [Export] private Timer _timer;
     [Export] private PackedScene _projectilePrefab;
+    [Export] private PlayerController _player;
 
     private Attack _attack;
     private float _damage;
@@ -91,7 +92,14 @@ public partial class HandheldController : Node2D
         }
 
         if (_actionHeld)
+        {
             Use();
+            _player.SetPhysicsProcess(false);
+        }
+        else
+        {
+            _player.SetPhysicsProcess(true);
+        }
     }
 
     public void Use()

@@ -3,8 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="1_nyjms"]
 [ext_resource type="Script" path="res://scripts/ui/inventory/InventorySlot.cs" id="1_uxrvb"]
 [ext_resource type="LabelSettings" uid="uid://d08eb8aufif7l" path="res://assets/resources/labelsettings/inventory_slot_quantity_label.tres" id="3_ytlk2"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_imsc2"]
+[ext_resource type="LabelSettings" uid="uid://djc0rw8m0xbax" path="res://assets/resources/labelsettings/item_name_label_settings.tres" id="4_4qeig"]
 
 [node name="InventorySlot" type="Control"]
 custom_minimum_size = Vector2(72, 72)
@@ -20,7 +19,8 @@ layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 
-[node name="Icon" type="TextureRect" parent="."]
+[node name="ItemIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 0
 offset_right = 72.0
@@ -30,7 +30,8 @@ texture = ExtResource("1_nyjms")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Quantity" type="Label" parent="."]
+[node name="ItemQuantityLabel" type="Label" parent="."]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 0
 offset_top = 4.0
@@ -45,16 +46,29 @@ label_settings = ExtResource("3_ytlk2")
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="ItemNameLabel" type="Label" parent="."]
+[node name="ItemNamePanel" type="Panel" parent="."]
 unique_name_in_owner = true
 visible = false
+z_index = 101
+custom_minimum_size = Vector2(72, 24)
 layout_mode = 0
-offset_left = -8.0
-offset_top = -24.0
-offset_right = 75.0
-offset_bottom = 2.0
+offset_right = 72.0
+offset_bottom = 24.0
+mouse_filter = 2
+
+[node name="ItemNameLabel" type="Label" parent="ItemNamePanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "ItemName"
-label_settings = SubResource("LabelSettings_imsc2")
+label_settings = ExtResource("4_4qeig")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="." to="." method="OnMouseExited"]
 [connection signal="gui_input" from="Button" to="." method="OnButtonGuiInput"]

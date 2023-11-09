@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://bbia6yxwghu3o"]
 
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_wuxn7"]
-[ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://JanitaTests/Images/dirttemp.jpg" id="2_534la"]
-[ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://JanitaTests/Images/sprouttemp.png" id="3_hnjp5"]
-[ext_resource type="Texture2D" uid="uid://dvhrkxcw50l7s" path="res://JanitaTests/Images/wheattemp.png" id="4_2vn2g"]
-[ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="5_5udmy"]
-[ext_resource type="Resource" uid="uid://bpa3bx68ohi5" path="res://assets/resources/game_items/20_lupine.tres" id="5_7awt4"]
+[ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://assets/placeholder/J_Sprites/dirttemp.jpg" id="2_u7sct"]
+[ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://assets/placeholder/J_Sprites/sprouttemp.png" id="3_6jifj"]
+[ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://scenes/farm/shapes/plant_shape.tres" id="4_ph7au"]
+[ext_resource type="Texture2D" uid="uid://brllcegw86j6w" path="res://assets/sprites/foliage/mini_tree.png" id="4_uj1fy"]
+[ext_resource type="Resource" uid="uid://bpa3bx68ohi5" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/111_lupine.tres" id="5_7awt4"]
 [ext_resource type="Texture2D" uid="uid://dqgscu3bl0gng" path="res://assets/sprites/items/item_pumpkin.png" id="7_eyfe1"]
 
 [node name="plant_lupine" type="Node2D" node_paths=PackedStringArray("_col", "trect")]
@@ -15,9 +15,9 @@ _plantType = 5
 _seedName = "lupine seed"
 _description = "Pretty"
 _maxCycles = 3
-_seedTexture = ExtResource("2_534la")
-_sproutTexture = ExtResource("3_hnjp5")
-_plantTexture = ExtResource("4_2vn2g")
+_seedTexture = ExtResource("2_u7sct")
+_sproutTexture = ExtResource("3_6jifj")
+_plantTexture = ExtResource("4_uj1fy")
 _col = NodePath("Area2D")
 trect = NodePath("TextureRect")
 _harvestablePlant = ExtResource("5_7awt4")
@@ -28,7 +28,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = ExtResource("5_5udmy")
+shape = ExtResource("4_ph7au")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 unique_name_in_owner = true

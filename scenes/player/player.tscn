@@ -285,6 +285,9 @@ texture = ExtResource("14_pxa3s")
 [node name="FootLBone" type="Bone2D" parent="Skeleton2D/TorsoBone/LegLBone"]
 rotation = 0.0205502
 rest = Transform2D(0.999789, 0.0205488, -0.0205488, 0.999789, 0, 0)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 1.17744
 
 [node name="FootL" type="Sprite2D" parent="Skeleton2D/TorsoBone/LegLBone/FootLBone"]
 position = Vector2(9, 45.58)
@@ -302,6 +305,9 @@ texture = ExtResource("16_3ecwo")
 [node name="FootRBone" type="Bone2D" parent="Skeleton2D/TorsoBone/LegRBone"]
 rotation = 0.0134386
 rest = Transform2D(0.99991, 0.0134382, -0.0134382, 0.99991, 0, 0)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.769975
 
 [node name="FootR" type="Sprite2D" parent="Skeleton2D/TorsoBone/LegRBone/FootRBone"]
 position = Vector2(3.04, 44.37)
@@ -316,12 +322,14 @@ rest = Transform2D(0.985399, -0.170258, 0.170258, 0.985399, 26.32, -45.85)
 [node name="ArmL" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
 position = Vector2(4.06, 13.3)
 rotation = -0.0131563
-scale = Vector2(1, 1)
 texture = ExtResource("10_6b7e2")
 
 [node name="HandLBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
 position = Vector2(18, 33)
 rest = Transform2D(1, 0, 0, 1, 18, 33)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
 
 [node name="HandL" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmLBone/HandLBone"]
 position = Vector2(0.21, 0.58)
@@ -342,6 +350,9 @@ position = Vector2(-1, -78)
 rotation = -0.133036
 scale = Vector2(0.999997, 0.999997)
 rest = Transform2D(1, 0, 0, 1, -1, -78)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = -7.6224
 
 [node name="Head" type="Sprite2D" parent="Skeleton2D/TorsoBone/HeadBone"]
 position = Vector2(6, -43)
@@ -361,6 +372,9 @@ texture = ExtResource("12_5kh5t")
 [node name="HandRBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmRBone"]
 position = Vector2(-20, 39)
 rest = Transform2D(1, 0, 0, 1, -20, 39)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
 
 [node name="HandR" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmRBone/HandRBone"]
 position = Vector2(3, 1)
@@ -377,7 +391,6 @@ _parentScript = NodePath("..")
 _healItemPrefabs = Array[PackedScene]([ExtResource("16_patuu"), ExtResource("17_nh2gr"), ExtResource("18_4wo3v"), ExtResource("19_lksru"), ExtResource("20_d2w1s")])
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("4_sa7m5")]
-visible = false
 collision_layer = 2
 collision_mask = 4
 _parentScript = NodePath("..")
@@ -389,7 +402,6 @@ shape = SubResource("CapsuleShape2D_12xgg")
 debug_color = Color(0.984314, 0, 0.376471, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(2.08165e-12, -5)
 shape = SubResource("CircleShape2D_yn8u1")
 debug_color = Color(0, 0.494118, 0.929412, 0.419608)

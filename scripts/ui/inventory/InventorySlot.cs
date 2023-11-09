@@ -86,6 +86,14 @@ public partial class InventorySlot : Control {
 	    quantityLabel.Visible = isOn;
     }
 
+    public void OnMouseEntered()
+    {
+	    if (slotInitiated)
+	    {
+		    
+	    }
+    }
+    
     public void InitiateSlot(int index)
     {
 	    icon = GetNode("Icon") as TextureRect;

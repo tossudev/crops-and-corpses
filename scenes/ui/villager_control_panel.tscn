@@ -1,13 +1,13 @@
 [gd_scene load_steps=2 format=3 uid="uid://bp0j6co1k7bim"]
 
-[ext_resource type="Script" path="res://EllaTests/Scripts/DialogueControl.cs" id="1_aekrx"]
+[ext_resource type="Script" path="res://scripts/villager/DialogueControl.cs" id="1_02ul8"]
 
 [node name="VillagerControlPanel" type="Control"]
 visibility_layer = 512
 layout_mode = 3
 anchors_preset = 0
 scale = Vector2(2, 2)
-script = ExtResource("1_aekrx")
+script = ExtResource("1_02ul8")
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(200, 250)

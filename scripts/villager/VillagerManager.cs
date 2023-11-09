@@ -4,11 +4,8 @@ using System.Collections.Generic;
 
 public partial class VillagerManager : Node
 {
-	CharacterBody2D _villagerPrefab;
-	Villager _newVillager;
 	public static VillagerManager instance;
 	List<Villager> _villager = new List<Villager>();
-	int _villagerCount;
 	public int villagerMaxAmount;
 	public int townhallLevel = 0;
 	// Called when the node enters the scene tree for the first time.
@@ -32,18 +29,12 @@ public partial class VillagerManager : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		
 	}
 
-	void FindVillagers()
+	public void AddNewVillager(Villager newVillager)
 	{
- 	/* 	_villagerPrefab = GetNode<CharacterBody2D>("Enemies/NPC");
-		_villagerPrefab = _newVillager;
-
-		for(int i = 0; i < _villagerPrefab.Count; i++)
-		{
-			 _villager.Add(_newVillager);
-		} */ 
-
+		_villager.Add(newVillager);
 	}
 
 	void VillagerAmountInGame()

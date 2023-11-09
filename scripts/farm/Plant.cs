@@ -166,22 +166,22 @@ public partial class Plant : Node2D
 		if(@event is InputEventMouseButton button && _isPlayerNearby)
 		{
 			// Plant is planted, wait for water so it can start to grow
-			if(button.IsPressed() && _state == GrowthState.WaitWatering && FarmManager.instance.IsWaterBucketEquipped()){
+			if(button.IsPressed() && button.ButtonIndex == MouseButton.Left && _state == GrowthState.WaitWatering && FarmManager.instance.IsWaterBucketEquipped() ){
 				WaterPlant();
 			}
 
 			// Plant is wilted, water it
-			if(button.IsPressed() && _state == GrowthState.IsWilting && FarmManager.instance.IsWaterBucketEquipped()){
+			if(button.IsPressed()&& button.ButtonIndex == MouseButton.Left && _state == GrowthState.IsWilting && FarmManager.instance.IsWaterBucketEquipped()){
 				WaterPlant();
 			}
 
 			// Plant is infested, bug spray it
-			if(button.IsPressed() && _state == GrowthState.IsInfested && FarmManager.instance.IsBugSprayEquipped()){
+			if(button.IsPressed()&& button.ButtonIndex == MouseButton.Left && _state == GrowthState.IsInfested && FarmManager.instance.IsBugSprayEquipped()){
 				CurePlant();
 			}
 
 			// Plant is ready for harvest or it is dead
-			if(button.IsPressed() && _state == GrowthState.IsHarvestable || button.IsPressed() && _state == GrowthState.IsDead){
+			if(button.IsPressed()&& button.ButtonIndex == MouseButton.Left && _state == GrowthState.IsHarvestable || button.IsPressed() && _state == GrowthState.IsDead){
 				Harvest();
 			}
 

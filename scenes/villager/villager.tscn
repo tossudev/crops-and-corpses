@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ba8mb2whyo4dy"]
 
-[ext_resource type="Script" path="res://EllaTests/Villager.cs" id="1_8h5vp"]
+[ext_resource type="Script" path="res://scripts/villager/Villager.cs" id="1_nruw1"]
 [ext_resource type="Texture2D" uid="uid://bbei648d3eovx" path="res://assets/placeholder/test_character/character.png" id="2_n3vwh"]
 [ext_resource type="PackedScene" uid="uid://bp0j6co1k7bim" path="res://scenes/ui/villager_control_panel.tscn" id="3_surgq"]
 [ext_resource type="PackedScene" uid="uid://bmh424wu5k4gb" path="res://scenes/ui/villager_info.tscn" id="4_iwgqm"]
@@ -15,7 +15,7 @@ size = Vector2(294, 350)
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("1_8h5vp")
+script = ExtResource("1_nruw1")
 dialogueControl = NodePath("VillagerControlPanel")
 navMeshAgent = NodePath("NavigationAgent2D")
 _info = NodePath("VillagerInfo")

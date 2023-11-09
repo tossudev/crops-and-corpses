@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://bubxxn5xqaun7"]
 
-[ext_resource type="Script" path="res://EllaTests/Scripts/DialogueControl.cs" id="1_yy4r0"]
+[ext_resource type="Script" path="res://scripts/villager/DialogueControl.cs" id="1_yy4r0"]
+
 
 [node name="Control" type="Control"]
 layout_mode = 3

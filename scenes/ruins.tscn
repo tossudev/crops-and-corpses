@@ -16,8 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://c1r6la2nplhqp" path="res://scenes/ui/DayCounterLabel.tscn" id="15_dr27d"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="16_s7swj"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="17_d0coo"]
-[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://scenes/world/sunlight_container.tscn" id="18_sprpy"]
+[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://scenes/world/SunlightContainer.tscn" id="18_sprpy"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_xu2jk"]
+
 
 [sub_resource type="Gradient" id="Gradient_ksvwj"]
 offsets = PackedFloat32Array(0, 0.528169)

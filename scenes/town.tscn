@@ -28,7 +28,7 @@
 [ext_resource type="Script" path="res://scripts/ui/PlayerHud.cs" id="23_vm0j4"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="26_e7msj"]
 [ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://scenes/spawn/ZombieSpawn.tscn" id="26_e61x0"]
-[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://scenes/world/sunlight_container.tscn" id="27_71uoq"]
+[ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="29_6j2s6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ea2vc"]
 texture = ExtResource("5_ho2sg")
@@ -557,348 +557,263 @@ y_sort_enabled = true
 [node name="Tree" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-1200, -424)
 
-[node name="Tree2" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree2" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-736, -1032)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree3" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree3" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(840, -856)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree4" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree4" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(2088, -968)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree5" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree5" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(1712, -224)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree6" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree6" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(2112, 344)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree7" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree7" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(1336, 784)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree8" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree8" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(2224, 928)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree9" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree9" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(472, 1280)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree10" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree10" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-616, 760)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree11" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree11" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-840, 1200)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree12" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree12" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-1888, 752)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree13" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree13" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-1488, 464)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree14" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree14" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-2216, -544)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree15" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree15" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-1472, -1008)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree16" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree16" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-192, -1632)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree17" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree17" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(1320, -1440)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree18" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree18" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(2768, -1496)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree19" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree19" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(2688, -344)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree20" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree20" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(3184, 960)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree21" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree21" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-1480, -2104)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree22" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree22" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-1952, -1968)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree23" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree23" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-2488, -1440)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree24" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree24" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-2304, -2616)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree25" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree25" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-816, -2680)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree26" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree26" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(2128, -2528)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree27" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree27" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(728, -3000)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree28" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree28" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-3040, 88)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree29" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree29" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-2440, 1392)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree30" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree30" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-2224, 1168)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree31" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree31" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-1496, 1800)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree32" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree32" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-168, 2088)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree33" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree33" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(2120, 1664)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree34" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree34" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(1816, 1912)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree35" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree35" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(2112, 2224)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree36" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree36" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(3296, 1864)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree37" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree37" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-1360, 2712)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree38" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree38" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-2576, 2832)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree39" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree39" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-3288, 2512)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree40" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree40" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-4168, 1904)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree41" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree41" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-3584, 1208)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree42" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree42" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-3920, 368)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree43" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree43" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-3712, -408)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree44" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree44" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-3240, -1056)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree45" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree45" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-3536, -1896)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree46" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree46" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-4072, -1336)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree47" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree47" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(952, -2216)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree48" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree48" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(2952, -2640)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree49" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree49" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(3640, -1552)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree50" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree50" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(256, 2888)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree51" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree51" parent="Objects/Breakable" instance=ExtResource("5_tpvf0")]
 position = Vector2(-1856, 3512)
-_sprite = NodePath("../Tree/Sprite2D")
 
 [node name="Iron Ore" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-1368, -40)
 
-[node name="Iron Ore2" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore2" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(1640, 400)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore3" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore3" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(1376, -768)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore4" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore4" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-320, -1288)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore5" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore5" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(632, -1312)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore6" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore6" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-2128, -1704)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore7" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore7" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-2880, -392)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore8" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore8" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-1768, 1120)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore9" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore9" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-592, 1648)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore10" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore10" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(304, 1536)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore11" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore11" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(1448, 2032)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore12" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore12" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(2928, 1416)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore13" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore13" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(3008, 264)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore14" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore14" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(3432, -984)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore15" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore15" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(2480, -1728)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore16" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore16" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-208, -2544)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore17" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore17" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-2640, 2152)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore18" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore18" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-608, 2296)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore19" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore19" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(1232, -2496)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore21" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore21" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(1920, -3072)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore22" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore22" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(3544, -2464)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore23" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore23" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(4032, -904)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore24" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore24" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(3752, 864)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore25" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore25" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(2776, 2832)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore26" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore26" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-384, 3552)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore27" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore27" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-1784, 2872)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore28" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore28" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-2752, 3928)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore29" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore29" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-4304, 3216)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore30" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore30" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-4808, 2408)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore31" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore31" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-4608, 864)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore32" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore32" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-4784, -600)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore33" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore33" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-4200, -2184)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore34" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore34" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-3752, 744)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore35" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore35" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-1496, -2768)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore36" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore36" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(24, -3568)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
-[node name="Iron Ore20" parent="Objects/Breakable" node_paths=PackedStringArray("_sprite") instance=ExtResource("10_4wegq")]
+[node name="Iron Ore20" parent="Objects/Breakable" instance=ExtResource("10_4wegq")]
 position = Vector2(-3072, -2824)
-_sprite = NodePath("../Iron Ore/Sprite2D")
 
 [node name="Lights" type="Node2D" parent="Objects"]
 
@@ -1047,7 +962,11 @@ script = ExtResource("26_e7msj")
 [node name="ZombieSpawn" parent="." node_paths=PackedStringArray("player") instance=ExtResource("26_e61x0")]
 player = NodePath("../Objects/Player")
 
-[node name="SunlightContainer" parent="." instance=ExtResource("27_71uoq")]
+[node name="SunlightContainer" type="Node" parent="."]
+script = ExtResource("29_6j2s6")
+
+[node name="Sunlight" type="CanvasModulate" parent="SunlightContainer"]
+position = Vector2(-71, -4)
 
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
 

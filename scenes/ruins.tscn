@@ -14,13 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/inventory/player_inventory.tscn" id="12_o06t2"]
 [ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="13_swis2"]
 [ext_resource type="PackedScene" uid="uid://c1r6la2nplhqp" path="res://scenes/ui/DayCounterLabel.tscn" id="15_dr27d"]
+[ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="16_pefaa"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="16_s7swj"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="17_d0coo"]
-<<<<<<< HEAD
-[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://DaniTests/Scenes/sunlight_container.tscn" id="18_sprpy"]
-=======
-[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://scenes/world/sunlight_container.tscn" id="18_sprpy"]
->>>>>>> Daniel
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_xu2jk"]
 
 [sub_resource type="Gradient" id="Gradient_ksvwj"]
@@ -69,109 +65,83 @@ y_sort_enabled = true
 [node name="Tree" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(576, -1976)
 
-[node name="Tree7" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree7" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(1224, -3120)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree8" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree8" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-336, -3016)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree9" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree9" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-1568, -3224)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree10" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree10" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-2960, -3152)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree11" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree11" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-3984, -2768)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree12" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree12" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-3984, -2768)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree13" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree13" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-5656, -2960)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree14" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree14" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-6144, -1984)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree15" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree15" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-5888, -568)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree16" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree16" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-6728, 768)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree17" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree17" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-5640, 1784)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree18" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree18" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-3880, 2984)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree19" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree19" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-2648, 2120)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree20" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree20" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-1488, 3168)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree21" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree21" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-960, 2520)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree22" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree22" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-408, 3528)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree23" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree23" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(1304, 2336)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree24" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree24" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(1776, 3296)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree25" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree25" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(2712, 2032)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree26" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree26" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(3976, 2520)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree27" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree27" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(4624, 1144)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree28" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree28" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(5624, -984)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree29" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree29" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(5912, 120)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree30" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree30" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(4152, -1296)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree31" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree31" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(4592, -2384)
-_sprite = NodePath("../Tree/Sprite2D")
 
-[node name="Tree32" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree32" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(3208, -3048)
-_sprite = NodePath("../Tree/Sprite2D")
 
 [node name="Tree2" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(2296, -1464)
@@ -185,9 +155,8 @@ position = Vector2(3256, -200)
 [node name="Tree5" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-1896, -1688)
 
-[node name="Tree6" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_sprite") instance=ExtResource("7_et7tw")]
+[node name="Tree6" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(-1912, 400)
-_sprite = NodePath("../Tree5/Sprite2D")
 
 [node name="Rocks" type="Node" parent="Objects/Foliage"]
 
@@ -564,7 +533,11 @@ position = Vector2(360, 2984)
 [node name="ruins_sign" parent="street_sign_post" index="1"]
 visible = false
 
-[node name="SunlightContainer" parent="." instance=ExtResource("18_sprpy")]
+[node name="SunlightContainer" type="Node" parent="."]
+script = ExtResource("16_pefaa")
+
+[node name="Sunlight" type="CanvasModulate" parent="SunlightContainer"]
+position = Vector2(-71, -4)
 
 [node name="TempWater" type="TileMap" parent="."]
 unique_name_in_owner = true

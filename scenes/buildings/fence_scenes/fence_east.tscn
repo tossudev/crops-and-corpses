@@ -33,9 +33,10 @@ collision_mask = 5
 position = Vector2(-125, -75)
 shape = SubResource("RectangleShape2D_638cj")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("2_xrlmy")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthBar") instance=ExtResource("2_xrlmy")]
 position = Vector2(-126, -75)
 _parentScript = NodePath("../FenceHealthParent")
+_healthBar = NodePath("../HealthBar")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("3_1xav7")]
 position = Vector2(-126, -75)
@@ -50,3 +51,12 @@ debug_color = Color(0.992157, 0, 0.262745, 0.419608)
 
 [node name="FenceHealthParent" type="Node2D" parent="."]
 script = ExtResource("1_k801u")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+modulate = Color(0.2, 0.356863, 1, 1)
+offset_left = -152.0
+offset_top = -81.0
+offset_right = -22.0
+offset_bottom = -54.0
+scale = Vector2(0.4, 0.4)
+show_percentage = false

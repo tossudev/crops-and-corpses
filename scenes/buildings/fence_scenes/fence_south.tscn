@@ -35,9 +35,10 @@ script = ExtResource("1_torf7")
 position = Vector2(-64, -32)
 shape = SubResource("RectangleShape2D_um4c4")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_l2cro")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthBar") instance=ExtResource("3_l2cro")]
 position = Vector2(-65, -117)
 _parentScript = NodePath("../FenceHealthParent")
+_healthBar = NodePath("../HealthBar")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("4_5a3ey")]
 position = Vector2(-63, -118)
@@ -52,3 +53,12 @@ debug_color = Color(0.992157, 0, 0.266667, 0.419608)
 
 [node name="FenceHealthParent" type="Node2D" parent="."]
 script = ExtResource("1_torf7")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+modulate = Color(0.2, 0.356863, 1, 1)
+offset_left = -88.0
+offset_top = -122.0
+offset_right = 42.0
+offset_bottom = -95.0
+scale = Vector2(0.4, 0.4)
+show_percentage = false

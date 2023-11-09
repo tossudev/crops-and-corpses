@@ -1,12 +1,16 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 
 public partial class HealthComponent : Node2D
 {
 	[Export] private Node _parentScript;
 	[Export] private float _maxHealth = 100.0f;
 	public float health;
+	[Export]
+	public ProgressBar _healthBar;
+		
 
 	[Export] PackedScene[] _healItemPrefabs;
 	List<Heal> _heal = new List<Heal>();
@@ -14,13 +18,37 @@ public partial class HealthComponent : Node2D
 	int _count = 0;
 	public override void _Ready()
 	{
+		
+		
 		health = _maxHealth;
 		if (_parentScript != null && _parentScript.Name == "Player")
 		{
 			_isPlayer = true;
 			InitializeHealItems();
 		}
+		UpdateHealth();
+
+	
+
+			if (_healthBar == null)
+	{
+		_healthBar = GetNodeOrNull<ProgressBar>("HealthBar");
+
+		if (_healthBar == null)
+		{
+			GD.Print("Error: HealthBar not found in the parent.");
+			// Handle the error as appropriate for your application
+			return;
+		}
 	}
+
+	// Set up initial health values
+	_healthBar.MaxValue = _maxHealth;
+	health = _maxHealth;
+	_healthBar.Value = health;
+}
+
+	
 	void InitializeHealItems()
 	{
 		for (int i = 0; i < _healItemPrefabs.Length; i++)
@@ -55,10 +83,13 @@ public partial class HealthComponent : Node2D
 			}
 
 		}
+
+	
 	}
 	public void TakeDamage(Attack attack)
 	{
 		health -= attack.damage;
+		UpdateHealth();
 
 		if (_parentScript == null || !_parentScript.HasMethod("OnHealth"))
 		{
@@ -74,11 +105,12 @@ public partial class HealthComponent : Node2D
 		return _maxHealth;
 	}
 
-	async void Heal(float amount)
+	void Heal(float amount)
 	{
 		health += amount;
+		UpdateHealth();
 		if (health > _maxHealth) health = _maxHealth;
-		await PlayerInventoryController.RemoveItemFromInventory(new RawInventoryItem(
+		PlayerInventoryController.RemoveItemFromInventory(new RawInventoryItem(
 			PlayerInventoryController.selectedItem.id,
 			PlayerInventoryController.selectedItem.name,
 			1,
@@ -99,4 +131,22 @@ public partial class HealthComponent : Node2D
 		}
 
 	}
+	public void UpdateHealth(){
+		
+if (_healthBar != null)
+    {
+        _healthBar.Value = health;
+
+        if (health == _maxHealth)
+        {
+            _healthBar.Visible = false;
+        }
+        else
+        {
+            _healthBar.Visible = true;
+        }
+    }
+
+}
+
 }

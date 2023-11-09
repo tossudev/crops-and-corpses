@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="Item" load_steps=10 format=3 uid="uid://c1q7mpup7mo0b"]
 
-[ext_resource type="Texture2D" uid="uid://g4q3dxtyxv6s" path="res://JanitaTests/Images/sushi-removebg-preview.png" id="1_o5r0u"]
 [ext_resource type="Resource" uid="uid://bfdw482ap5ams" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/101_potato.tres" id="2_y2fui"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_vufkg"]
 [ext_resource type="Resource" uid="uid://djv78bsvabyah" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/109_maize.tres" id="4_7k5x8"]
 [ext_resource type="Resource" uid="uid://bwqnnm74g8l7l" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/103_pumpkin.tres" id="5_5wxrn"]
 [ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="6_t4c2i"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yw1gt"]
 
 [sub_resource type="Resource" id="Resource_deeq0"]
 script = ExtResource("3_vufkg")
@@ -26,6 +27,6 @@ quantity = 1
 script = ExtResource("6_t4c2i")
 ID = 251
 Name = "Vegetable Stew"
-IconTexture = ExtResource("1_o5r0u")
+IconTexture = SubResource("CompressedTexture2D_yw1gt")
 StackSize = 6
 craftingRequirements = Array[Object]([SubResource("Resource_deeq0"), SubResource("Resource_k3ugx"), SubResource("Resource_k28i1")])

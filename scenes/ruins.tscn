@@ -13,12 +13,15 @@
 [ext_resource type="PackedScene" uid="uid://e58507ft315b" path="res://scenes/buildings/fence_scenes/fence_north.tscn" id="12_moe38"]
 [ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/inventory/player_inventory.tscn" id="12_o06t2"]
 [ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="13_swis2"]
-[ext_resource type="PackedScene" path="res://DaniTests/Prefabs/DayCounterLabel.tscn" id="15_dr27d"]
+[ext_resource type="PackedScene" uid="uid://c1r6la2nplhqp" path="res://scenes/ui/DayCounterLabel.tscn" id="15_dr27d"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="16_s7swj"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="17_d0coo"]
-[ext_resource type="PackedScene" path="res://DaniTests/Scenes/sunlight_container.tscn" id="18_sprpy"]
+<<<<<<< HEAD
+[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://DaniTests/Scenes/sunlight_container.tscn" id="18_sprpy"]
+=======
+[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://scenes/world/sunlight_container.tscn" id="18_sprpy"]
+>>>>>>> Daniel
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_xu2jk"]
-
 
 [sub_resource type="Gradient" id="Gradient_ksvwj"]
 offsets = PackedFloat32Array(0, 0.528169)
@@ -294,7 +297,6 @@ texture_scale = 4.0
 
 [node name="Fences" parent="Objects" instance=ExtResource("10_4qh86")]
 z_index = 130
-y_sort_enabled = true
 position = Vector2(-192, -512)
 fenceLengthY = 40
 fenceLengthX = 80
@@ -517,8 +519,7 @@ offset_bottom = 100.0
 theme_override_font_sizes/font_size = 32
 text = "Press 'E' to toggle inventory"
 
-[node name="DayCounterLabel" parent="Overlay" node_paths=PackedStringArray("timeManager") instance=ExtResource("15_dr27d")]
-timeManager = NodePath("../../SunlightContainer")
+[node name="DayCounterLabel" parent="Overlay" instance=ExtResource("15_dr27d")]
 
 [node name="TaskPoint" type="Marker2D" parent="." groups=["Taskpoint"]]
 visible = false

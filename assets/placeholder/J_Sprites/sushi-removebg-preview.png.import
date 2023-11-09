@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://emb45j66h4m7"
-path="res://.godot/imported/sprouttemp.png-a77a10e25a2afa13e13f2fd400e00f6a.ctex"
+uid="uid://g4q3dxtyxv6s"
+path="res://.godot/imported/sushi-removebg-preview.png-f90cda45175e30a5b1b23daebf31093d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://JanitaTests/Images/sprouttemp.png"
-dest_files=["res://.godot/imported/sprouttemp.png-a77a10e25a2afa13e13f2fd400e00f6a.ctex"]
+source_file="res://assets/placeholder/J_Sprites/sushi-removebg-preview.png"
+dest_files=["res://.godot/imported/sushi-removebg-preview.png-f90cda45175e30a5b1b23daebf31093d.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nssu7mse7xb2"
-path="res://.godot/imported/bugsign.png-75f9ee13e5e37a7b38b2d3a1ab0a6e14.ctex"
+uid="uid://diivpfjg7x88y"
+path="res://.godot/imported/watersign.png-acbd2f61baea3f12076e7f2b43389fbf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://JanitaTests/Images/bugsign.png"
-dest_files=["res://.godot/imported/bugsign.png-75f9ee13e5e37a7b38b2d3a1ab0a6e14.ctex"]
+source_file="res://assets/placeholder/J_Sprites/watersign.png"
+dest_files=["res://.godot/imported/watersign.png-acbd2f61baea3f12076e7f2b43389fbf.ctex"]
 
 [params]
 

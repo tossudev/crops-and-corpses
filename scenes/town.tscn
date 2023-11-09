@@ -28,7 +28,7 @@
 [ext_resource type="Script" path="res://scripts/ui/PlayerHud.cs" id="23_vm0j4"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="26_e7msj"]
 [ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://scenes/spawn/ZombieSpawn.tscn" id="26_e61x0"]
-[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://scenes/world/SunlightContainer.tscn" id="27_71uoq"]
+[ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="29_6j2s6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ea2vc"]
 texture = ExtResource("5_ho2sg")
@@ -962,7 +962,11 @@ script = ExtResource("26_e7msj")
 [node name="ZombieSpawn" parent="." node_paths=PackedStringArray("player") instance=ExtResource("26_e61x0")]
 player = NodePath("../Objects/Player")
 
-[node name="SunlightContainer" parent="." instance=ExtResource("27_71uoq")]
+[node name="SunlightContainer" type="Node" parent="."]
+script = ExtResource("29_6j2s6")
+
+[node name="Sunlight" type="CanvasModulate" parent="SunlightContainer"]
+position = Vector2(-71, -4)
 
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
 

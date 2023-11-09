@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/World/Heal.cs" id="1_bysqr"]
 [ext_resource type="Resource" uid="uid://dkln62c0vsgk8" path="res://assets/resources/game_items/food_items_250_to_299/250_bread.tres" id="2_qyl5m"]
-[ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://JanitaTests/Scripts/plant_shape.tres" id="6_dvnk2"]
+[ext_resource type="Shape2D" path="res://scenes/farm/shapes/plant_shape.tres" id="6_dvnk2"]
 
 [node name="bread" type="Node2D"]
 z_index = 2

@@ -12,6 +12,11 @@ public partial class ZombieChase : ZombieStates
     {
 		_player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
 		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
+
+		if (_zombie != null && _zombie.HasMethod("ChangeZombieNoise"))
+		{
+			_zombie.CallDeferred("ChangeZombieNoise", ZombieManager._hiss1);
+		}		
     }
 
     public override void Physics_Update(double delta)

@@ -24,9 +24,12 @@ public partial class FieldHandler : Node2D
 	{
 		if(@event is InputEventMouseButton button && _isPlayerNearby && button.IsPressed() && button.ButtonIndex == MouseButton.Left)
 		{
-			if (!PlayerInventoryController.isItemSelected) return;
+			if (!PlayerInventoryController.isItemSelected || PlayerInventoryController.heldItem == null) return;
 
-			SetPlant(PlayerInventoryController.selectedItem.name);
+			SetPlant(
+				PlayerInventoryController.isItemSelected
+					? PlayerInventoryController.selectedItem.name
+					: PlayerInventoryController.heldItem.name);
 
 			if(_plant!=null && _currentPlants < _maxPlantSlots){
 				GD.Print("Planted a "+_plant.seedName);

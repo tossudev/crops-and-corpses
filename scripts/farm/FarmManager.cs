@@ -77,10 +77,10 @@ public partial class FarmManager : Node
 		return true;
 		else return false;
 	}
-	public bool IsBugSprayEquipped(){
-		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bug Spray")
-		return true;
-		else return false;
+	public bool IsBugSprayEquipped()
+	{
+		return PlayerInventoryController.selectedItem != null &&
+		       PlayerInventoryController.selectedItem.name == "Bug Spray";
 	}
 	
 	public void EmptyWaterBucket(){

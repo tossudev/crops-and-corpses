@@ -1,16 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://k1nr7tplu40i"]
+[gd_scene load_steps=2 format=3 uid="uid://k1nr7tplu40i"]
 
-[ext_resource type="Script" path="res://DaniTests/Scripts/SpawnScript.cs" id="1_68m56"]
-[ext_resource type="Script" path="res://DaniTests/Scripts/TimeManager.cs" id="2_0e2ak"]
+[ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="1_68m56"]
 
-[node name="Node2D" type="Node2D"]
+
+[node name="ZombieSpawn" type="Node2D"]
 script = ExtResource("1_68m56")
-
-[node name="SunlightContainer" type="Node" parent="."]
-script = ExtResource("2_0e2ak")
-
-[node name="Sunlight" type="CanvasModulate" parent="SunlightContainer"]
-position = Vector2(-1, 8)
 
 [node name="SpawnPoint1" type="Node2D" parent="."]
 position = Vector2(-648, 520)

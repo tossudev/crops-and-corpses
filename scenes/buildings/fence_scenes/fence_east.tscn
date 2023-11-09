@@ -36,6 +36,7 @@ shape = SubResource("RectangleShape2D_638cj")
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("2_xrlmy")]
 position = Vector2(-126, -75)
 _parentScript = NodePath("../FenceHealthParent")
+_healItemPrefabs = Array[PackedScene]([])
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("3_1xav7")]
 position = Vector2(-126, -75)
@@ -52,6 +53,7 @@ debug_color = Color(0.992157, 0, 0.262745, 0.419608)
 script = ExtResource("1_k801u")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
 modulate = Color(0.2, 0.356863, 1, 1)
 offset_left = -152.0
 offset_top = -81.0

@@ -21,7 +21,7 @@ public partial class PlayerInventoryData : Node
         await TaskExtensions.SuspendWhile(() => !PlayerInventoryController.isInitialized, 100);
 
         await Task.Delay(1000);
-        if (SaveData.totalInventoryItems.Count > 0) return;
+        if (SaveData.organizedPlayerInventory.Any(item => item != null)) return;
         
         Item log = ItemData.GetItemById(0);
         await PlayerInventoryController.AddItem(

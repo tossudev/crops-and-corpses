@@ -215,9 +215,11 @@ public partial class Villager : CharacterBody2D
 
 		if (area.Owner.HasNode(VILLAGER_RESIDENCE_NODENAME))
 		{
-			currentResidence = area.Owner.GetNode<TownHallMenu>(VILLAGER_RESIDENCE_NODENAME)._villagerResidence;
+			currentResidence = area.Owner.GetNodeOrNull<TownHallMenu>(VILLAGER_RESIDENCE_NODENAME)._villagerResidence;
 
 			currentResidence?.VillagerEnterBuilding(this);
+
+			area.GetInstanceId();
 		}
 	}
 

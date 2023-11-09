@@ -32,7 +32,7 @@ public partial class HealthComponent : Node2D
 
 			if (_healthBar == null)
 	{
-		_healthBar = GetNodeOrNull<ProgressBar>("HealthBar");
+		_healthBar = GetNodeOrNull<ProgressBar>("%HealthBar");
 
 		if (_healthBar == null)
 		{

@@ -54,6 +54,7 @@ debug_color = Color(0.992157, 0, 0.266667, 0.419608)
 script = ExtResource("1_torf7")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
 modulate = Color(0.2, 0.356863, 1, 1)
 offset_left = -88.0
 offset_top = -122.0

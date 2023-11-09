@@ -100,12 +100,26 @@ public partial class InventorySlot : Control {
 	    quantityLabel.Visible = isOn;
     }
 
+    public override void _Ready()
+    {
+	    base._Ready();
+	    InitiateSlot(-2);
+    }
+
     public void OnMouseEntered()
     {
 	    if (!slotInitiated) return;
 	    
 	    _itemNamePanel.Visible = true;
 	    _nameFollowMouse = true;
+    }
+    
+    public void OnMouseExited()
+    {
+	    if (!slotInitiated) return;
+
+        _itemNamePanel.Visible = false;
+        _nameFollowMouse = false;
     }
     
     public override void _PhysicsProcess(double delta)
@@ -118,11 +132,7 @@ public partial class InventorySlot : Control {
 	    }
     }
 
-    public void OnMouseExited()
-    {
-	    _itemNamePanel.Visible = false;
-	    _nameFollowMouse = false;
-    }
+    
     
     
     

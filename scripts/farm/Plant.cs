@@ -81,22 +81,27 @@ public partial class Plant : Node2D
 	public override void _Ready()
 	{
 		InitializePlant();
-		FarmManager.instance.AddPlantedPlant(this);
+		if(FarmManager.instance!=null) FarmManager.instance.AddPlantedPlant(this);
 		
-
 	}
 
 	void InitializePlant(){
 
+		_col = GetNode<Area2D>("%Area2D");
+		trect = GetNode<TextureRect>("%TextureRect");
+		if(myField==null){
+			GetNode<TextureRect>("%TextureRect").Texture = _plantTexture;
+			_state = GrowthState.IsHarvestable;
+			return;
+		}
 		Position = new Vector2(0, -5);
 		_state = GrowthState.WaitWatering;
-		_col = GetNode<Area2D>("%Area2D");
 		
 		
 		AddChild(_growthTimer);
 		
 		_growthTimer.Timeout += GrowthCycle;	
-		trect = GetNode<TextureRect>("%TextureRect");
+		
 		GetNode<TextureRect>("%TextureRect").Texture = _sproutTexture;
 		_warningSign.Scale = new Vector2(0.75f,0.75f);
 		_warningSign.Position = new Vector2(0, -115);
@@ -163,8 +168,10 @@ public partial class Plant : Node2D
 	}
 	void InteractWithPlant(Node viewport, InputEvent @event, long shapeIdx)
 	{
+		GD.Print("Harvested: "+plantName);
 		if(@event is InputEventMouseButton button && _isPlayerNearby)
 		{
+			
 			// Plant is planted, wait for water so it can start to grow
 			if(button.IsPressed() && button.ButtonIndex == MouseButton.Left && _state == GrowthState.WaitWatering && FarmManager.instance.IsWaterBucketEquipped() ){
 				WaterPlant();
@@ -275,7 +282,7 @@ public partial class Plant : Node2D
 			GD.Print("Cleared plant: "+plantName);
 		}
 		
-		myField.RemovePlant();
+		if(myField!=null)myField.RemovePlant();
 		QueueFree();
 	}
 

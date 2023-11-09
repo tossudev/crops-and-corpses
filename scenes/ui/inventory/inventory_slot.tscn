@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdg0mgh0rgkvq"]
+[gd_scene load_steps=5 format=3 uid="uid://bdg0mgh0rgkvq"]
 
 [ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="1_nyjms"]
 [ext_resource type="Script" path="res://scripts/ui/inventory/InventorySlot.cs" id="1_uxrvb"]
 [ext_resource type="LabelSettings" uid="uid://d08eb8aufif7l" path="res://assets/resources/labelsettings/inventory_slot_quantity_label.tres" id="3_ytlk2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_imsc2"]
 
 [node name="InventorySlot" type="Control"]
 custom_minimum_size = Vector2(72, 72)
@@ -43,4 +45,16 @@ label_settings = ExtResource("3_ytlk2")
 horizontal_alignment = 2
 vertical_alignment = 2
 
+[node name="ItemNameLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = -8.0
+offset_top = -24.0
+offset_right = 75.0
+offset_bottom = 2.0
+text = "ItemName"
+label_settings = SubResource("LabelSettings_imsc2")
+
+[connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]
 [connection signal="gui_input" from="Button" to="." method="OnButtonGuiInput"]

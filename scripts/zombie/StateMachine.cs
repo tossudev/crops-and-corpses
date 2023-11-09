@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public partial class StateMachine : Node
 {
 	[Export] public ZombieStates initial_state;
-
     private ZombieStates _current_state;
     private Dictionary<string, ZombieStates> _states = new Dictionary<string, ZombieStates>();
 

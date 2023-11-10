@@ -12,6 +12,7 @@ public partial class HandheldController : Node2D
     [Export] private AnimationPlayer _animationPlayer;
     [Export] private Timer _timer;
     [Export] private PackedScene _projectilePrefab;
+    [Export] private PlayerController _player;
 
     private Attack _attack;
     private float _damage;
@@ -90,8 +91,13 @@ public partial class HandheldController : Node2D
             LookAt(GetGlobalMousePosition());
         }
 
+        if (_timer.TimeLeft <= 0)
+            _player.SetPhysicsProcess(true);
+
         if (_actionHeld)
+        {
             Use();
+        }
     }
 
     public void Use()
@@ -160,6 +166,7 @@ public partial class HandheldController : Node2D
     public void Release()
     {
         _actionHeld = false;
+        _player.SetPhysicsProcess(true);
 
         if (_ranged)
         {
@@ -213,7 +220,10 @@ public partial class HandheldController : Node2D
         if (body is HitboxComponent hitbox)
         {
             if (body.IsInGroup(_targetGroup))
+            {
                 hitbox.ApplyAttack(_attack);
+                _player.SetPhysicsProcess(false);
+            }
         }
     }
 }

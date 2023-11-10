@@ -121,7 +121,7 @@ public partial class PlayerController : CharacterBody2D
 
 	private void Respawn()
 	{
-		_healthComponent.health = _healthComponent.GetMaxHealth();
+		_healthComponent.SetHealth(_healthComponent.GetMaxHealth());
 		_isDead = false;
 
 		if (_respawnPoint == null)

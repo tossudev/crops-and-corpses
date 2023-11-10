@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bxxw1vc1b8ys3"]
+[gd_scene load_steps=10 format=3 uid="uid://bykmle4l5oo8c"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_k5454"]
 [ext_resource type="Resource" uid="uid://b7jgjk4165udm" path="res://TinoTests/Resources/tree.tres" id="2_tf5dk"]

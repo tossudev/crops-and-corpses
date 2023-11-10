@@ -106,8 +106,9 @@ z_index = -2
 [node name="Objects" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Player" parent="Objects" node_paths=PackedStringArray("_camera") instance=ExtResource("2_nnncm")]
+[node name="Player" parent="Objects" node_paths=PackedStringArray("_camera", "_respawnPoint") instance=ExtResource("2_nnncm")]
 _camera = NodePath("MainCamera")
+_respawnPoint = NodePath("../PlayerSpawn")
 
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
 position_smoothing_enabled = true
@@ -780,6 +781,8 @@ position = Vector2(-3072, -2824)
 
 [node name="well" parent="Objects" instance=ExtResource("15_y8o5s")]
 position = Vector2(0, 408)
+
+[node name="PlayerSpawn" type="Node2D" parent="Objects"]
 
 [node name="Buildings" type="Node2D" parent="."]
 y_sort_enabled = true

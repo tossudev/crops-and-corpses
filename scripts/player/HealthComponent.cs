@@ -11,29 +11,29 @@ public partial class HealthComponent : Node2D
 
 	[Export] bool _hasHealthBar = true;
 	[Export] bool _hideHealthBarOnFullHP = true;
-    ProgressBar _healthBar;
-    const string HEALTH_BAR_NODENAME = "%HealthBar";
+	ProgressBar _healthBar;
+	const string HEALTH_BAR_NODENAME = "%HealthBar";
 
-    Node _overlay;
-    const string OVERLAY_NODENAME = "%PlayerOverlay";
+	Node _overlay;
+	const string OVERLAY_NODENAME = "%PlayerOverlay";
 
 
 	[Export] PackedScene[] _healItemPrefabs;
 	List<Heal> _heal = new List<Heal>();
 	bool _isPlayer = false;
-	
+
 	int _count = 0;
 
 	public override void _Ready()
 	{
 		_health = _maxHealth;
-		
+
 		if (_parentScript != null && _parentScript.Name == "Player")
 		{
 			_isPlayer = true;
 			InitializeHealItems();
 		}
-        
+
 		if (_hasHealthBar)
 		{
 			_healthBar = _isPlayer
@@ -51,26 +51,26 @@ public partial class HealthComponent : Node2D
 		}
 	}
 
-	
+
 	void InitializeHealItems()
 	{
 		foreach (var packedScene in _healItemPrefabs)
 		{
 			var scene = ResourceLoader.Load<PackedScene>(packedScene.ResourcePath).Instantiate();
-			
+
 			if (scene is Heal _newHeal)
 			{
 				_heal.Add(_newHeal);
 				GD.Print(_newHeal._healItem.Name);
 			}
-			
+
 			else
 			{
 				GD.Print("Failed to cast to Heal: " + packedScene.ResourceName);
 			}
 		}
 	}
-	
+
 	public override void _PhysicsProcess(double delta)
 	{
 		if (!_isPlayer || PlayerInventoryController.selectedItem == null)
@@ -88,7 +88,7 @@ public partial class HealthComponent : Node2D
 
 		}
 
-	
+
 	}
 	public void TakeDamage(Attack attack)
 	{
@@ -104,7 +104,7 @@ public partial class HealthComponent : Node2D
 		_parentScript.CallDeferred("OnHealth", _health);
 	}
 
-	public float GetMaxHealth()
+	public int GetMaxHealth()
 	{
 		return _maxHealth;
 	}
@@ -120,7 +120,7 @@ public partial class HealthComponent : Node2D
 			1,
 			PlayerInventoryController.selectedItem.stackSize));
 	}
-    void TryHeal()
+	void TryHeal()
 	{
 		foreach (Heal h in _heal)
 		{
@@ -137,13 +137,13 @@ public partial class HealthComponent : Node2D
 	public void UpdateHealthBar()
 	{
 		if (!_hasHealthBar) return;
-		
+
 		if (_healthBar == null)
 		{
 			GD.PushError("HealthBar missing from " + GetParent().Name);
 			return;
 		}
-		
+
 		_healthBar.Value = _health;
 
 		if (_hideHealthBarOnFullHP)
@@ -157,4 +157,9 @@ public partial class HealthComponent : Node2D
 		}
 	}
 
+	public void SetHealth(int health)
+	{
+		_health = health;
+		UpdateHealthBar();
+	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpwol4hy8ibo4"]
+[gd_scene load_steps=10 format=3 uid="uid://4p7m38jvun6e"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_bnnfg"]
 [ext_resource type="Resource" uid="uid://b7jgjk4165udm" path="res://TinoTests/Resources/tree.tres" id="2_d74pb"]
@@ -32,7 +32,7 @@ _data = {
 "shake": SubResource("Animation_ur5ux")
 }
 
-[node name="Tree" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer")]
+[node name="Tree2" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_bnnfg")
 _loot = ExtResource("2_d74pb")
@@ -55,6 +55,7 @@ _healthComponent = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(6, 8)
 shape = SubResource("RectangleShape2D_ljv8c")
+debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(4, 8)

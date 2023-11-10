@@ -6,17 +6,11 @@ using System.Threading.Tasks;
 using Godot.Collections;
 using Array = Godot.Collections.Array;
 
-[GlobalClass]
 public partial class PlayerInventoryData : Node
 {
     public const int PLAYER_INVENTORY_MAX_SIZE = 40;
-
-    public override void _Ready()
-    {
-        TestAsyncAdd();
-    }
     
-    async void TestAsyncAdd()
+    public static async void AddDefaultResourcesToInventoryIfEmpty()
     {
         await TaskExtensions.SuspendWhile(() => !PlayerInventoryController.isInitialized, 100);
 

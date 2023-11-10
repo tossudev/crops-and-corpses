@@ -37,7 +37,9 @@ public partial class SaveData : Node
         directoryPath = ProjectSettings.GlobalizePath($"user://{SAVEFOLDERNAME}");
         fullPath = directoryPath.PathJoin(SAVEFILENAME);
 
+        ItemData.InitiateItemData();
         LoadSaveDataIntoMemory();
+        PlayerInventoryData.AddDefaultResourcesToInventoryIfEmpty();
     }
     
     static async Task Save()

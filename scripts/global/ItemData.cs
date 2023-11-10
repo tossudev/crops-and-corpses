@@ -4,17 +4,23 @@ using System.Linq;
 
 public partial class ItemData : Node {
 
-    PathContainer _itemsDirectories;
+    static PathContainer _itemsDirectories;
     const string ITEM_PATH_CONTAINER_PATH = "res://assets/resources/game_items/game_item_paths.tres";
+    static bool _itemDataInitiated = false;
+    public static bool itemDataInitiated => _itemDataInitiated;
     public static Godot.Collections.Dictionary items = new ();
 
-    public override void _Ready() {
+    public static void InitiateItemData()
+    {
+        if (_itemDataInitiated) return;
+        
         _itemsDirectories = (PathContainer) ResourceLoader.Load(ITEM_PATH_CONTAINER_PATH);
-
         _LoadItemsFromEachPath();
+        
+        _itemDataInitiated = true;
     }
 
-    void _LoadItemsFromEachPath()
+    static void _LoadItemsFromEachPath()
     {
         foreach (var folderPathKeeper in _itemsDirectories.paths)
         {
@@ -22,7 +28,7 @@ public partial class ItemData : Node {
         }
     }
     
-    void _LoadItemsFromPath(string path) {
+    static void _LoadItemsFromPath(string path) {
 
         using var dir = DirAccess.Open(path);
         // Open item directory

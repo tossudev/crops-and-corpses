@@ -6,67 +6,71 @@ using System.ComponentModel.Design;
 public partial class HealthComponent : Node2D
 {
 	[Export] private Node _parentScript;
-	[Export] private float _maxHealth = 100.0f;
-	public float health;
-	[Export]
-	public ProgressBar _healthBar;
-		
+	[Export] private int _maxHealth = 100;
+	int _health;
+
+	[Export] bool _hasHealthBar = true;
+	[Export] bool _hideHealthBarOnFullHP = true;
+    ProgressBar _healthBar;
+    const string HEALTH_BAR_NODENAME = "%HealthBar";
+
+    Node _overlay;
+    const string OVERLAY_NODENAME = "%PlayerOverlay";
+
 
 	[Export] PackedScene[] _healItemPrefabs;
 	List<Heal> _heal = new List<Heal>();
 	bool _isPlayer = false;
+	
 	int _count = 0;
+
 	public override void _Ready()
 	{
+		_health = _maxHealth;
 		
-		
-		health = _maxHealth;
 		if (_parentScript != null && _parentScript.Name == "Player")
 		{
 			_isPlayer = true;
 			InitializeHealItems();
 		}
-		UpdateHealth();
-
-	
+        
+		if (_hasHealthBar)
+		{
+			_healthBar = _isPlayer
+				? GetTree().GetFirstNodeInGroup("PlayerHealthBar") as ProgressBar
+				: GetParent().GetNodeOrNull<ProgressBar>(HEALTH_BAR_NODENAME);
 
 			if (_healthBar == null)
-	{
-		_healthBar = GetNodeOrNull<ProgressBar>("%HealthBar");
-
-		if (_healthBar == null)
-		{
-			GD.Print("Error: HealthBar not found in the parent.");
-			// Handle the error as appropriate for your application
-			return;
+			{
+				GD.Print("Error: HealthBar not found: " + GetParent().Name);
+				return;
+			}
+			_healthBar.MaxValue = _maxHealth;
+			_healthBar.Value = _health;
+			UpdateHealthBar();
 		}
 	}
-
-	// Set up initial health values
-	_healthBar.MaxValue = _maxHealth;
-	health = _maxHealth;
-	_healthBar.Value = health;
-}
 
 	
 	void InitializeHealItems()
 	{
-		for (int i = 0; i < _healItemPrefabs.Length; i++)
+		foreach (var packedScene in _healItemPrefabs)
 		{
-
-			var scene = ResourceLoader.Load<PackedScene>(_healItemPrefabs[i].ResourcePath).Instantiate();
-			Heal _newHeal = scene as Heal;
-			if (_newHeal != null)
+			var scene = ResourceLoader.Load<PackedScene>(packedScene.ResourcePath).Instantiate();
+			
+			if (scene is Heal _newHeal)
 			{
 				_heal.Add(_newHeal);
 				GD.Print(_newHeal._healItem.Name);
 			}
+			
 			else
 			{
-				GD.Print("Failed to cast to Heal: " + _healItemPrefabs[i].ResourceName);
+				GD.Print("Failed to cast to Heal: " + packedScene.ResourceName);
 			}
 		}
 	}
+	
 	public override void _PhysicsProcess(double delta)
 	{
 		if (!_isPlayer || PlayerInventoryController.selectedItem == null)
@@ -88,8 +92,8 @@ public partial class HealthComponent : Node2D
 	}
 	public void TakeDamage(Attack attack)
 	{
-		health -= attack.damage;
-		UpdateHealth();
+		_health -= attack.damage;
+		UpdateHealthBar();
 
 		if (_parentScript == null || !_parentScript.HasMethod("OnHealth"))
 		{
@@ -97,7 +101,7 @@ public partial class HealthComponent : Node2D
 			return;
 		}
 
-		_parentScript.CallDeferred("OnHealth", health);
+		_parentScript.CallDeferred("OnHealth", _health);
 	}
 
 	public float GetMaxHealth()
@@ -105,18 +109,18 @@ public partial class HealthComponent : Node2D
 		return _maxHealth;
 	}
 
-	void Heal(float amount)
+	async void Heal(int amount)
 	{
-		health += amount;
-		UpdateHealth();
-		if (health > _maxHealth) health = _maxHealth;
-		PlayerInventoryController.RemoveItemFromInventory(new RawInventoryItem(
+		_health += amount;
+		UpdateHealthBar();
+		if (_health > _maxHealth) _health = _maxHealth;
+		await PlayerInventoryController.RemoveItemFromInventory(new RawInventoryItem(
 			PlayerInventoryController.selectedItem.id,
 			PlayerInventoryController.selectedItem.name,
 			1,
 			PlayerInventoryController.selectedItem.stackSize));
 	}
-	void TryHeal()
+    void TryHeal()
 	{
 		foreach (Heal h in _heal)
 		{
@@ -127,26 +131,30 @@ public partial class HealthComponent : Node2D
 				_count = 0;
 				return;
 			}
+		}
+	}
 
+	public void UpdateHealthBar()
+	{
+		if (!_hasHealthBar) return;
+		
+		if (_healthBar == null)
+		{
+			GD.PushError("HealthBar missing from " + GetParent().Name);
+			return;
+		}
+		
+		_healthBar.Value = _health;
+
+		if (_hideHealthBarOnFullHP)
+		{
+			_healthBar.Visible = _health != _maxHealth;
 		}
 
+		if (GetParent().Name == "Player")
+		{
+			return;
+		}
 	}
-	public void UpdateHealth(){
-		
-if (_healthBar != null)
-    {
-        _healthBar.Value = health;
-
-        if (health == _maxHealth)
-        {
-            _healthBar.Visible = false;
-        }
-        else
-        {
-            _healthBar.Visible = true;
-        }
-    }
-
-}
 
 }

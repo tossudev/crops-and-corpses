@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/zombie/states/ZombieIdle.cs" id="5_m256t"]
 [ext_resource type="Script" path="res://scripts/zombie/states/ZombieChase.cs" id="6_ch1pp"]
 [ext_resource type="Script" path="res://scripts/zombie/states/ZombieAttackFence.cs" id="7_m3vts"]
-[ext_resource type="AudioStream" uid="uid://b4giy84o2s7c5" path="res://assets/Sounds/zombies/zombie_hiss1.wav" id="9_t8tic"]
+[ext_resource type="AudioStream" uid="uid://b4giy84o2s7c5" path="res://assets/sounds/zombies/zombie_hiss1.wav" id="9_t8tic"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5h8wa"]
 radius = 27.0
@@ -32,6 +32,17 @@ debug_color = Color(0, 0.6, 0.701961, 0.12549)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("1_46tua")]
 _parentScript = NodePath("..")
+_hasHealthBar = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.2, 0.356863, 1, 1)
+offset_left = -26.0
+offset_top = -60.0
+offset_right = 104.0
+offset_bottom = -33.0
+scale = Vector2(0.4, 0.4)
+show_percentage = false
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["enemy"] instance=ExtResource("2_lvwfs")]
 visible = false
@@ -77,15 +88,6 @@ position = Vector2(1.90735e-06, -1.90735e-06)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_c41wj")
 offset = Vector2(0, -20)
-
-[node name="HealthBar" type="ProgressBar" parent="."]
-modulate = Color(0.2, 0.356863, 1, 1)
-offset_left = -26.0
-offset_top = -60.0
-offset_right = 104.0
-offset_bottom = -33.0
-scale = Vector2(0.4, 0.4)
-show_percentage = false
 
 [node name="UpdateStatsTimer" type="Timer" parent="."]
 wait_time = 2.0

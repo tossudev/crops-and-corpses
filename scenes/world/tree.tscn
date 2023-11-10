@@ -44,6 +44,7 @@ texture = ExtResource("3_80g65")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("2_nwmmy")]
 _parentScript = NodePath("..")
+_hasHealthBar = false
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["tree"] instance=ExtResource("3_ykn2p")]
 position = Vector2(-1, 0)

@@ -46,7 +46,6 @@ public partial class RoamingZombie : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		MoveAndSlide();
-		UpdateHealth();
 
 		if (_sprite != null)
 		{
@@ -147,24 +146,6 @@ public partial class RoamingZombie : CharacterBody2D
 			else
 			{
 				GD.Print("ZOMBIE: No hitbox found on fence");
-			}
-		}
-	}
-
-	private void UpdateHealth()
-	{
-		// update health bar when player damages zombie
-		if (_healthComponent != null)
-		{
-			_healthBar.Value = _healthComponent.health;
-
-			if (_healthComponent.health >= 100)
-			{
-				_healthBar.Visible = false;
-			}
-			else
-			{
-				_healthBar.Visible = true;
 			}
 		}
 	}

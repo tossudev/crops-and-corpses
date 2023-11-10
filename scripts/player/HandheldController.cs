@@ -15,7 +15,7 @@ public partial class HandheldController : Node2D
     [Export] private PlayerController _player;
 
     private Attack _attack;
-    private float _damage;
+    private int _damage;
     private float _knockback;
     private float _cooldown;
     private EffectType _effect;
@@ -200,7 +200,7 @@ public partial class HandheldController : Node2D
         ProjectileController projectile = (ProjectileController)_projectilePrefab.Instantiate();
         GetParent().AddChild(projectile);
 
-        _attack.damage *= power;
+        _attack.damage *= Mathf.RoundToInt(power);
         projectile.attack = _attack;
         projectile.speed = _speed * power;
         projectile.projectile = _projectile;

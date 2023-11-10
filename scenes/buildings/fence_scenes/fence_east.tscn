@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://db6xmvd5lkpgm"]
+[gd_scene load_steps=6 format=3 uid="uid://db6xmvd5lkpgm"]
 
 [ext_resource type="Texture2D" uid="uid://dtu6mkyl4eal8" path="res://NikkeTests/images/fence_e.png" id="1_7ekis"]
-[ext_resource type="Script" path="res://scripts/farm/FenceHealth.cs" id="1_k801u"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_xrlmy"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_1xav7"]
 
@@ -35,12 +34,12 @@ shape = SubResource("RectangleShape2D_638cj")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("2_xrlmy")]
 position = Vector2(-126, -75)
-_parentScript = NodePath("../FenceHealthParent")
+_parentScript = NodePath("")
 _healItemPrefabs = Array[PackedScene]([])
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("3_1xav7")]
 position = Vector2(-126, -75)
-_parentScript = NodePath("../FenceHealthParent")
+_parentScript = NodePath("")
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
@@ -48,9 +47,6 @@ visible = false
 position = Vector2(0.5, -1.5)
 shape = SubResource("RectangleShape2D_fydxa")
 debug_color = Color(0.992157, 0, 0.262745, 0.419608)
-
-[node name="FenceHealthParent" type="Node2D" parent="."]
-script = ExtResource("1_k801u")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true

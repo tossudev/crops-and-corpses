@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://b50blftb1dypc"]
+
+[ext_resource type="Script" path="res://scripts/ui/PlayerHud.cs" id="1_m40pp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tqqpk"]
+bg_color = Color(0, 0, 0, 0.368627)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ytw6o"]
+bg_color = Color(1, 0, 0.0705882, 1)
+
+[sub_resource type="FontFile" id="FontFile_kvdlr"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/20/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/20/0/ascent = 0.0
+cache/0/20/0/descent = 0.0
+cache/0/20/0/underline_position = 0.0
+cache/0/20/0/underline_thickness = 0.0
+cache/0/20/0/scale = 1.0
+cache/0/20/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/20/0/kerning_overrides/20/0 = Vector2(0, 0)
+cache/0/20/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/20/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
+
+[node name="PlayerHud" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1600.0
+offset_right = 1920.0
+offset_bottom = 128.0
+script = ExtResource("1_m40pp")
+
+[node name="PlayerHealthBG" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -64.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 96.0
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="." groups=["PlayerHealthBar"]]
+layout_mode = 0
+offset_left = -56.0
+offset_top = 24.0
+offset_right = 296.0
+offset_bottom = 88.0
+theme_override_styles/background = SubResource("StyleBoxFlat_tqqpk")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ytw6o")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="Text" type="Label" parent="PlayerHealthBar"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 344.0
+offset_bottom = 56.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("FontFile_kvdlr")
+theme_override_font_sizes/font_size = 32
+text = "100"
+vertical_alignment = 1

@@ -7,7 +7,7 @@ public partial class ZombieManager : Node
 	[Export] public Node2D _villageTarget;
 	public static Node2D moveTarget;
 	public static bool dayMode;
-	public static float damage;
+	public static int damage;
 	public static double attackTime;
 	public static float idleSpeed;
 	public static float chaseSpeed;
@@ -73,19 +73,19 @@ public partial class ZombieManager : Node
 		{	
 			case ZombieType.Strong:
 				
-				damage = 15f;
+				damage = 15;
 				attackTime = 0.5;
 				idleSpeed = 200;
 				chaseSpeed = 250;
 				break;
 			case ZombieType.Medium:
-				damage = 10f;
+				damage = 10;
 				attackTime = 0.5;
 				idleSpeed = 150f;
 				chaseSpeed = 200f;
 				break;
 			case ZombieType.Weak:
-				damage = 5f;
+				damage = 5;
 				attackTime = 1.0f;
 				idleSpeed = 100f;
 				chaseSpeed = 150f;

@@ -7,7 +7,7 @@ public partial class Weapon : Resource
 {
     [ExportCategory("Global")]
     [Export] public Item item { get; set; }
-    [Export] public float damage { get; set; }
+    [Export] public int damage { get; set; }
     [Export] public float knockback { get; set; }
     [Export] public float cooldown { get; set; }
     [Export] public EffectType effect { get; set; }

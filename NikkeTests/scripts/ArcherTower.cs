@@ -16,7 +16,7 @@ public partial class ArcherTower : Node2D
     [Export]
     Node2D _projectileStartPosition;
 
-    public float power;
+    public int power;
 
     Attack _attack;
     float _speed;
@@ -26,7 +26,7 @@ public partial class ArcherTower : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-        power = 1f;
+        power = 1;
         _speed = 800;
         _targetGroup = "enemy";
         _attackRange = _speed * power * (_projectile.airtime - _projectile.despawnTime);

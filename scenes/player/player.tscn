@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c8bx46w1qix2q"]
+[gd_scene load_steps=31 format=3 uid="uid://c8bx46w1qix2q"]
 
 [ext_resource type="Script" path="res://scripts/player/PlayerController.cs" id="1_1gq73"]
 [ext_resource type="PackedScene" uid="uid://3hlx66fdaruu" path="res://scenes/player/Components/handheld.tscn" id="2_00eh7"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://d1dkkqdm6w4fv" path="res://scenes/consumables/food/pumpkin.tscn" id="18_4wo3v"]
 [ext_resource type="PackedScene" uid="uid://bxe1k2od7pwk1" path="res://scenes/consumables/food/vegetable_stew.tscn" id="19_lksru"]
 [ext_resource type="PackedScene" uid="uid://msff4kj1ku3r" path="res://scenes/consumables/potions/health_potion.tscn" id="20_d2w1s"]
+[ext_resource type="PackedScene" uid="uid://0onjm62rd2pi" path="res://scenes/ui/player/overlay.tscn" id="22_gao6a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_efott"]
 radius = 117.527
@@ -322,6 +323,7 @@ rest = Transform2D(0.985399, -0.170258, 0.170258, 0.985399, 26.32, -45.85)
 [node name="ArmL" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
 position = Vector2(4.06, 13.3)
 rotation = -0.0131563
+scale = Vector2(1, 1)
 texture = ExtResource("10_6b7e2")
 
 [node name="HandLBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
@@ -388,6 +390,7 @@ libraries = {
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_wuvdk")]
 _parentScript = NodePath("..")
+_hideHealthBarOnFullHP = false
 _healItemPrefabs = Array[PackedScene]([ExtResource("16_patuu"), ExtResource("17_nh2gr"), ExtResource("18_4wo3v"), ExtResource("19_lksru"), ExtResource("20_d2w1s")])
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("4_sa7m5")]
@@ -405,5 +408,8 @@ debug_color = Color(0.984314, 0, 0.376471, 0.419608)
 position = Vector2(2.08165e-12, -5)
 shape = SubResource("CircleShape2D_yn8u1")
 debug_color = Color(0, 0.494118, 0.929412, 0.419608)
+
+[node name="PlayerOverlay" parent="." instance=ExtResource("22_gao6a")]
+unique_name_in_owner = true
 
 [connection signal="area_entered" from="SmallInteractionArea" to="." method="OnPickupAreaEntered"]

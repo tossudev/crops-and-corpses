@@ -36,11 +36,12 @@ shape = SubResource("RectangleShape2D_10v6f")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_xoojr")]
 position = Vector2(-3, -74)
-_parentScript = NodePath("../FenceHealthParent")
+_parentScript = NodePath("")
+_hasHealthBar = true
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("4_vkqwf")]
 position = Vector2(-3, -75)
-_parentScript = NodePath("../FenceHealthParent")
+_parentScript = NodePath("")
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
@@ -48,9 +49,6 @@ visible = false
 position = Vector2(0.5, -1.5)
 shape = SubResource("RectangleShape2D_8al56")
 debug_color = Color(0.992157, 0, 0.262745, 0.419608)
-
-[node name="FenceHealthParent" type="Node2D" parent="."]
-script = ExtResource("1_wari8")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true

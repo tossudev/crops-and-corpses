@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class Minimap : Control {
 
@@ -15,7 +16,12 @@ public partial class Minimap : Control {
 	Texture2D _characterTexture;
 	Texture2D _decoTexture;
 
+	const string FOLIAGE_GROUP = "Foliage";
+
 	public override void _Ready() {
+		
+		return;
+		
 		foreach (CharacterBody2D playerNode in GetTree().GetNodesInGroup("player")) {
 			player = playerNode;
 		}
@@ -35,21 +41,28 @@ public partial class Minimap : Control {
 		}
 
 		// Change the path later
-		foreach (Node2D decoNode in GetNode("../../../Objects/Deco").GetChildren()) {
+		foreach (Node2D decoNode in GetTree().GetNodesInGroup(FOLIAGE_GROUP)) {
 			Sprite2D newObjectMarker = markerNode.Instantiate<Sprite2D>();
 			newObjectMarker.GlobalPosition = decoNode.GlobalPosition / MAP_SIZE_DIVIDER;
 			newObjectMarker.Texture = _decoTexture;
 			radar.AddChild(newObjectMarker);
 		}
 
-		groundTiles = GetNode<TileMap>("%GroundTiles");
-		waterTiles = GetNode<TileMap>("%TempWater");
-		fences = GetNode<Node2D>("%Fences");
+		
+		
+		//GetInitialNodes();
+		
+		var root = GetTree().Root;
+
+		groundTiles = root.FindChild("GroundTiles") as TileMap;
+		waterTiles = root.FindChild("TempWater") as TileMap;
+		fences = root.FindChild("Fences") as Node2D;
+			
 		CreateMap();
 	}
-
+	
 	public override void _Process(double delta) {
-		cam.GlobalPosition = player.GlobalPosition / MAP_SIZE_DIVIDER;
+		//cam.GlobalPosition = player.GlobalPosition / MAP_SIZE_DIVIDER;
 	}
 
 

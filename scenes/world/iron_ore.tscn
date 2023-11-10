@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://neenh87kgx15"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_bon0e"]
-[ext_resource type="Resource" uid="uid://bvejyv3jrvatm" path="res://TinoTests/Resources/iron_ore.tres" id="2_8s4jw"]
+[ext_resource type="Resource" uid="uid://bqdor0tg0upjq" path="res://TinoTests/Resources/iron_ore.tres" id="2_8s4jw"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_kqi3m"]
 [ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_wq47n"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_o6xgg"]
@@ -44,6 +44,7 @@ texture = ExtResource("3_wq47n")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_kqi3m")]
 _parentScript = NodePath("..")
+_hasHealthBar = false
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["tree"] instance=ExtResource("4_o6xgg")]
 position = Vector2(-1, 0)

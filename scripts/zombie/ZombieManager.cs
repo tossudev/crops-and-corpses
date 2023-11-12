@@ -22,10 +22,6 @@ public partial class ZombieManager : Node
 	public override void _Ready()
 	{
 		_audioController = GetNode<AudioController>("/root/Audio");
-		//testing
-		PlayZombieNoise(ZombieNoises.ZOMBIE_HISS_1);
-		
-		// to do: some sound logic lol
 		
 		_dayNightSpawnNode = GetParent().GetNodeOrNull<SpawnScript>("ZombieSpawn");
 		_timer = GetNodeOrNull<Timer>("Timer");

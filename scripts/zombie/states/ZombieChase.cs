@@ -13,9 +13,9 @@ public partial class ZombieChase : ZombieStates
 		_player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
 		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
 
-		if (_zombie != null && _zombie.HasMethod("ChangeZombieNoise"))
+		if (_zombie != null)
 		{
-			_zombie.CallDeferred("ChangeZombieNoise", ZombieManager._hiss1);
+			ZombieManager.PlayZombieNoise(ZombieNoises.ZOMBIE_HISS_1);
 		}		
     }
 

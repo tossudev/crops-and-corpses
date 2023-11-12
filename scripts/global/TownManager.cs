@@ -23,8 +23,10 @@ public partial class TownManager : Node2D
 	public static async void ReadTownDataFromFile(Dictionary saveData, bool sync = true)
 	{
 		if (await RawTownStats.AssignStatsDataFromDictionary(saveData, sync)) return;
-        
-		SaveData.townHallStats = ResourceLoader.Load<TownStats>(DEFAULT_STATS_PATH).TownStatsAsRaw();
+
+		TownStats townStats = (TownStats) FileLoader.LoadCustomResource(DEFAULT_STATS_PATH);
+		
+		SaveData.townHallStats = townStats?.TownStatsAsRaw();
 		if (sync) await SaveData.SyncTownStats();
 	}
 

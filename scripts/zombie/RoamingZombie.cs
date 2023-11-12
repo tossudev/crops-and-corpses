@@ -60,15 +60,6 @@ public partial class RoamingZombie : CharacterBody2D
 		}
 	}
 
-	public void ChangeZombieNoise(AudioStream audioStream)
-	{
-		if(audioStream != null)
-		{
-			_audioStreamPlayer2D.Stream = audioStream;
-			_audioStreamPlayer2D.Play();
-		}		
-	}
-
 	private void AttackReceived(Attack attack)
 	{
 		// var duration = 0.25f;

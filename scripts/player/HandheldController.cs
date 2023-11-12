@@ -35,7 +35,7 @@ public partial class HandheldController : Node2D
     {
         if (PlayerInventoryController.heldItem != null)
         {
-            _weapon = WeaponData.GetWeaponByItem(PlayerInventoryController.heldItem.id);
+            _weapon = WeaponData.GetWeaponByItemId(PlayerInventoryController.heldItem.id);
         }
         else
         {

@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class ZombieManager : Node
 {
@@ -16,14 +15,16 @@ public partial class ZombieManager : Node
 	private SpawnScript _dayNightSpawnNode;
 	private Timer _timer;
 	public enum ZombieType {Weak,Medium,Strong};
-	public static AudioStream _hiss1, _hiss2, _growl, _breath;	
+
+    static AudioController _audioController;
+	
 
 	public override void _Ready()
 	{
-		_hiss1 = (AudioStream)GD.Load("res://assets/Sounds/zombies/zombie_hiss1.wav");
-		_hiss2 = (AudioStream)GD.Load("res://assets/Sounds/zombies/zombie_hiss2.wav");
-		_growl = (AudioStream)GD.Load("res://assets/Sounds/zombies/zombie_growl.wav");
-		_breath = (AudioStream)GD.Load("res://assets/Sounds/zombies/zombie_breath.wav");
+		_audioController = GetNode<AudioController>("/root/Audio");
+		//testing
+		PlayZombieNoise(ZombieNoises.ZOMBIE_HISS_1);
+		
 		// to do: some sound logic lol
 		
 		_dayNightSpawnNode = GetParent().GetNodeOrNull<SpawnScript>("ZombieSpawn");
@@ -40,6 +41,11 @@ public partial class ZombieManager : Node
 		dayMode = _dayNightSpawnNode.GetIsNightOrDay();			
 	}
 
+	public static void PlayZombieNoise(ZombieNoises noise)
+	{
+		_audioController.PlayEffect(noise.ToString());	
+	}
+	
 	private void CheckIfPlayerAlive()
 	{
 		if (playerAlive)

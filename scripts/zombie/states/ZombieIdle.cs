@@ -17,20 +17,20 @@ public partial class ZombieIdle : ZombieStates
 		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
 		RandomizeRoam();
 
-		if (_zombie != null && _zombie.HasMethod("ChangeZombieNoise"))
+		if (_zombie != null)
 		{
 			int random = (int)GD.Randi() % 3 + 1;
 			if (random == 1)
 			{
-				_zombie.CallDeferred("ChangeZombieNoise", ZombieManager._breath);
+				ZombieManager.PlayZombieNoise(ZombieNoises.ZOMBIE_BREATH);
 			}
 			else if (random == 2)
 			{
-				_zombie.CallDeferred("ChangeZombieNoise", ZombieManager._growl);
+				ZombieManager.PlayZombieNoise(ZombieNoises.ZOMBIE_GROWL);
 			}
 			else
 			{
-				_zombie.CallDeferred("ChangeZombieNoise", ZombieManager._hiss2);
+				ZombieManager.PlayZombieNoise(ZombieNoises.ZOMBIE_HISS_2);
 			}
 		}		
     }

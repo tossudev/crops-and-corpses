@@ -38,6 +38,7 @@ public partial class SaveData : Node
         fullPath = directoryPath.PathJoin(SAVEFILENAME);
 
         ItemData.InitiateItemData();
+        WeaponData.InitiateWeaponData();
         LoadSaveDataIntoMemory();
         PlayerInventoryData.AddDefaultResourcesToInventoryIfEmpty();
     }

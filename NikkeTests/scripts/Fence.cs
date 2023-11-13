@@ -12,7 +12,6 @@ public partial class Fence : Node2D
     public bool centered = true;
 
     Node2D _fences;
-    Script _fenceDoorScript;
 
     Area2D _inputArea;
 
@@ -21,8 +20,6 @@ public partial class Fence : Node2D
 	{
         _fences = GetNode("Fences") as Node2D;
 
-
-        _fenceDoorScript = ResourceLoader.Load<Script>("res://NikkeTests/scripts/FenceDoor.cs");
 		_fenceNorth = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_north.tscn");
         _fenceSouth = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_south.tscn");
         _fenceWest = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_west.tscn");

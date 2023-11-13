@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PathContainer" load_steps=3 format=3 uid="uid://blwg08v1d0p2w"]
+
+[ext_resource type="Script" path="res://scripts/utilities/PathContainer.cs" id="1_4uh54"]
+[ext_resource type="Resource" uid="uid://dpeiikift2gu8" path="res://assets/resources/game_weapons/main_weapon_path_keeper.tres" id="1_p4rp1"]
+
+[resource]
+script = ExtResource("1_4uh54")
+_paths = Array[Object]([ExtResource("1_p4rp1")])

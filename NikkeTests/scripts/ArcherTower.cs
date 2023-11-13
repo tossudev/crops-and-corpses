@@ -38,6 +38,8 @@ public partial class ArcherTower : Node2D
             effect = 0
         };
 
+
+        // Remove this when villager "jobs" are added
         _attackTimer.Start();
     }
 
@@ -47,7 +49,17 @@ public partial class ArcherTower : Node2D
 		
 	}
 
-	public void OnShootTimerTimeout()
+    public void ActivateTower()
+    {
+        _attackTimer.Start();
+    }
+
+    public void DeactivateTower()
+    {
+        _attackTimer.Stop();
+    }
+
+    public void OnShootTimerTimeout()
 	{
         if (!FindTarget())
             return;

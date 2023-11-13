@@ -125,53 +125,31 @@ public partial class TownHallMenu : Control
 
 
     bool _upgradesInitiated;
-	PathContainer _upgradeDirectories;
-	const string UPGRADE_PATH_CONTAINER_PATH = "res://assets/resources/town_stats_upgrades/upgrade_path_container.tres";
+	const string UPGRADE_DIRECTORY_PATH = "res://assets/resources/town_stats_upgrades/upgrade_path_container.tres";
 	const string UPGRADE_SCENE_PATH = "res://scenes/ui/town_ui/town_upgrade_button.tscn";
     async void InitUpgradeList()
 	{
 		await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete);
-		_LoadUpgradesFromEachPath((PathContainer) ResourceLoader.Load(UPGRADE_PATH_CONTAINER_PATH));
+		_LoadUpgradesFromEachPath();
 	}
 	
-	void _LoadUpgradesFromEachPath(PathContainer container)
+	void _LoadUpgradesFromEachPath()
 	{
 		foreach (var node in _upgradeGridContainer.GetChildren())
 		{
 			node.QueueFree();
 		}
 		
-		foreach (var folderPathKeeper in container.paths)
+		foreach (var resource in FileLoader._LoadResourcesFromEachPath(UPGRADE_DIRECTORY_PATH))
 		{
-			_LoadUpgradesFromPath(folderPathKeeper.GetFolderPath());
-		}
-	}
-    
-    void _LoadUpgradesFromPath(string path) {
-
-		using var dir = DirAccess.Open(path);
-		// Open item directory
-		if (dir != null) {
-			dir.ListDirBegin();
-			string fileName = dir.GetNext();
-
-			// Add all items from directory to resource array
-			while (fileName != "") {
-				string filePath = path + fileName;
-				var resource = ResourceLoader.Load(filePath);
-
-				if (resource is TownUpgrade upgrade)
-				{
-					TownUpgradeButton upgradeButton = 
-						(TownUpgradeButton) GD.Load<PackedScene>(UPGRADE_SCENE_PATH).Instantiate<Control>();
+			if (resource is not TownUpgrade upgrade) continue;
+			
+			TownUpgradeButton upgradeButton = 
+				(TownUpgradeButton) GD.Load<PackedScene>(UPGRADE_SCENE_PATH).Instantiate<Control>();
 					
-					upgradeButton.InitButton(upgrade);
+			upgradeButton.InitButton(upgrade);
 					
-					_upgradeGridContainer.AddChild(upgradeButton);
-				}
-                
-				fileName = dir.GetNext();
-			}
+			_upgradeGridContainer.AddChild(upgradeButton);
 		}
 	}
 }

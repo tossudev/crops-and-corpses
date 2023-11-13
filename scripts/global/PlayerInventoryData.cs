@@ -1,12 +1,9 @@
-using System;
 using System.Linq;
 using Godot;
-using System.Threading;
 using System.Threading.Tasks;
-using Godot.Collections;
-using Array = Godot.Collections.Array;
 
-public partial class PlayerInventoryData : Node
+
+public static class PlayerInventoryData
 {
     public const int PLAYER_INVENTORY_MAX_SIZE = 40;
     

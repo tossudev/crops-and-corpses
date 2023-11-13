@@ -1,39 +1,42 @@
-using Godot;
-using System;
-using System.Linq;
+using Godot.Collections;
 
-public partial class WeaponData : Node
+public static class WeaponData
 {
 
-	[Export] public string weaponDirectory = "res://assets/resources/game_weapons/";
-	public static Godot.Collections.Dictionary weapons = new();
+	const string WEAPON_DIRECTORIES_PATH = "res://assets/resources/game_weapons/weapon_path_container.tres";
+	
+	static bool _weaponDataInitiated = false;
+	public static bool weaponDataInitiated => _weaponDataInitiated;
+	
+    static Dictionary weapons = new();
 
-	public override void _Ready()
-	{
-		_LoadWeaponsFromPath();
-	}
 
-	void _LoadWeaponsFromPath()
+    public static void InitiateWeaponData()
+    {
+	    if (_weaponDataInitiated) return;
+	    
+	    LoadWeaponsFromPath();
+	    _weaponDataInitiated = true;
+    }
+
+	static void LoadWeaponsFromPath()
 	{
-		using var dir = DirAccess.Open(weaponDirectory);
-		if (dir != null)
+		foreach (var resource in FileLoader._LoadResourcesFromEachPath(WEAPON_DIRECTORIES_PATH))
 		{
-			dir.ListDirBegin();
-			string fileName = dir.GetNext();
-
-			while (fileName != "")
+			if (resource is Weapon weapon)
 			{
-				string filePath = weaponDirectory + fileName;
-				var resource = (Weapon)GD.Load(filePath);
-				weapons.Add(resource.item.ID, resource);
-
-				fileName = dir.GetNext();
+				weapons.Add(weapon.item.ID, resource);
 			}
 		}
 	}
 
-	public static Weapon GetWeaponByItem(int id)
+	public static Weapon GetWeaponByItemId(int id)
 	{
+		if (!_weaponDataInitiated)
+		{
+			InitiateWeaponData();
+		}
+		
 		if (weapons.TryGetValue(id, out var weapon))
 		{
 			return (Weapon)weapon;

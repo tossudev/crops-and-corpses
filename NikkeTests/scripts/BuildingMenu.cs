@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.IO;
+using Godot.NativeInterop;
 
 public partial class BuildingMenu : Control
 {
@@ -32,7 +33,6 @@ public partial class BuildingMenu : Control
     [Export]
     Texture2D _farmPlotIcon, _houseIcon, _archerTowerIcon, _wellIcon;
 
-    [Export]
     CharacterBody2D _player;
 
 	int _resources;
@@ -44,6 +44,10 @@ public partial class BuildingMenu : Control
 	{
         _savePath = ProjectSettings.GlobalizePath("user://saves/");
         _fileName = "buildings.txt";
+
+        _player = GetParent().GetParent() as CharacterBody2D;
+
+        _buildings = GetNode("/root/Town/Buildings/SaveableBuildings") as Node2D;
 
         _buildingPrefabs = new List<Building>();
 
@@ -270,11 +274,7 @@ public partial class BuildingMenu : Control
     private void BuildingMode()
 	{
         _buildButton.Disabled = true;
-        _buildMenu.Hide();
-        //_buildButton.ButtonPressed = false;
-        //_player.SetPhysicsProcess(false);
-
-        //Input.MouseMode = Input.MouseModeEnum.Hidden;      
+        _buildMenu.Hide();     
 
         _ghostBuilding = _currentBuilding.buildingModeScene.Instantiate() as Node2D;
 

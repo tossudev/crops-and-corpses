@@ -18,9 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 SaveData="*res://scripts/global/SaveData.cs"
-Audio="*res://scenes/audio.tscn"
-WeaponData="*res://scripts/global/WeaponData.cs"
 GlobalTime="*res://scripts/global/GlobalTime.cs"
+Audio="*res://scenes/audio.tscn"
 TownManager="*res://scripts/global/TownManager.cs"
 
 [display]

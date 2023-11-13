@@ -35,15 +35,15 @@ public partial class PlayerController : CharacterBody2D
 			_handheld.Release();
 		}
 
-		if (@event.IsActionPressed("wheel_up"))
+		if (@event.IsActionPressed("wheel_down"))
 		{
 			if (_camera.Zoom.X < maxZoom)
-				CameraZoom(-0.1f);
+				CameraZoom(0.1f);
 		}
-		else if (@event.IsActionPressed("wheel_down"))
+		else if (@event.IsActionPressed("wheel_up"))
 		{
 			if (_camera.Zoom.X > minZoom)
-				CameraZoom(0.1f);
+				CameraZoom(-0.1f);
 		}
 
 		if (@event.IsActionPressed("pickup_item"))

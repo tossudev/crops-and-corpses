@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://4p7m38jvun6e"]
+[gd_scene load_steps=11 format=3 uid="uid://bcoq8weob6f7g"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_bnnfg"]
 [ext_resource type="Resource" uid="uid://b7jgjk4165udm" path="res://TinoTests/Resources/tree.tres" id="2_d74pb"]
@@ -24,11 +24,27 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-24, -160), Vector2(-29, -160), Vector2(-24, -160)]
+"values": [Vector2(8, -128), Vector2(3, -128), Vector2(8, -128)]
+}
+
+[sub_resource type="Animation" id="Animation_onk4k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, -128)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nedua"]
 _data = {
+"RESET": SubResource("Animation_onk4k"),
 "shake": SubResource("Animation_ur5ux")
 }
 
@@ -44,6 +60,7 @@ texture = ExtResource("3_ubmpw")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("4_tuq8w")]
 _parentScript = NodePath("..")
+_hasHealthBar = false
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["tree"] instance=ExtResource("5_noskx")]
 position = Vector2(-1, 0)

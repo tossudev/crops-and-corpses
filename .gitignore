@@ -30,4 +30,6 @@ Thumbs.db
 # ignore OSX folder icon files
 Icon[
 ]
-#
+
+#Maybe get rid of some of the import spam?
+*.import

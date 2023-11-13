@@ -38,12 +38,12 @@ public partial class PlayerController : CharacterBody2D
 		if (@event.IsActionPressed("wheel_up"))
 		{
 			if (_camera.Zoom.X < maxZoom)
-				CameraZoom(0.1f);
+				CameraZoom(-0.1f);
 		}
 		else if (@event.IsActionPressed("wheel_down"))
 		{
 			if (_camera.Zoom.X > minZoom)
-				CameraZoom(-0.1f);
+				CameraZoom(0.1f);
 		}
 
 		if (@event.IsActionPressed("pickup_item"))

@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="FolderPathKeeper" load_steps=2 format=3 uid="uid://dpeiikift2gu8"]
+
+[ext_resource type="Script" path="res://scripts/utilities/FolderPathKeeper.cs" id="1_isbxj"]
+
+[resource]
+script = ExtResource("1_isbxj")

@@ -1,0 +1,87 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp0j6co1k7bim"]
+
+[ext_resource type="Script" path="res://scripts/villager/DialogueControl.cs" id="1_02ul8"]
+
+[node name="VillagerControlPanel" type="Control"]
+visibility_layer = 512
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(2, 2)
+script = ExtResource("1_02ul8")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(200, 250)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 250.0
+grow_horizontal = 2
+
+[node name="OccupationsLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "Occupations"
+horizontal_alignment = 1
+
+[node name="MoodText" type="RichTextLabel" parent="Panel"]
+unique_name_in_owner = true
+modulate = Color(0.235294, 0.796078, 0.94902, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 15.5
+offset_top = 35.5
+offset_right = 15.5
+offset_bottom = 72.5
+grow_horizontal = 2
+scale = Vector2(0.847, 1)
+text = "text here"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = -171.0
+offset_right = 83.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="FarmerButton" type="Button" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Become Farmer"
+
+[node name="SoldierButton" type="Button" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Become Soldier"
+
+[node name="WoodcutterButton" type="Button" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Become Woodcutter"
+
+[node name="MinerButton" type="Button" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Become Miner"
+
+[node name="DismissButton" type="Button" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Dismiss"
+
+[node name="ColorRect" type="ColorRect" parent="Panel/VBoxContainer"]
+visible = false
+layout_mode = 2
+color = Color(0.603922, 0.545098, 0.8, 1)

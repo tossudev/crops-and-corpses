@@ -22,9 +22,15 @@ public partial class FieldHandler : Node2D
 
 	void InteractWithField(Node viewport, InputEvent @event, long shapeIdx)
 	{
-		if(@event is InputEventMouseButton button && _isPlayerNearby && button.IsPressed())
-		{	
-			if(PlayerInventoryController.selectedItem!=null ) SetPlant(PlayerInventoryController.selectedItem.name);
+		if(@event is InputEventMouseButton button && _isPlayerNearby && button.IsPressed() && button.ButtonIndex == MouseButton.Left)
+		{
+			if (!PlayerInventoryController.isItemSelected || PlayerInventoryController.heldItem == null) return;
+
+			SetPlant(
+				PlayerInventoryController.isItemSelected
+					? PlayerInventoryController.selectedItem.name
+					: PlayerInventoryController.heldItem.name);
+
 			if(_plant!=null && _currentPlants < _maxPlantSlots){
 				GD.Print("Planted a "+_plant.seedName);
 				PlantPlant();
@@ -32,9 +38,9 @@ public partial class FieldHandler : Node2D
 		}
 		
 	}
-	void PlantPlant(){
+	async void PlantPlant(){
 		
-		PlayerInventoryController.RemoveItemFromInventory(new RawInventoryItem(
+		await PlayerInventoryController.RemoveItemFromInventory(new RawInventoryItem(
 			PlayerInventoryController.selectedItem.id,
 			PlayerInventoryController.selectedItem.name,
 			1,

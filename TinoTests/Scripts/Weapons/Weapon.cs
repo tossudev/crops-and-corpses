@@ -7,10 +7,11 @@ public partial class Weapon : Resource
 {
     [ExportCategory("Global")]
     [Export] public Item item { get; set; }
-    [Export] public float damage { get; set; }
+    [Export] public int damage { get; set; }
     [Export] public float knockback { get; set; }
     [Export] public float cooldown { get; set; }
     [Export] public EffectType effect { get; set; }
+    [Export] public TargetType targetType { get; set; }
 
     [ExportCategory("Melee")]
     [Export] public float reach { get; set; } = 1;
@@ -21,4 +22,11 @@ public partial class Weapon : Resource
     [Export] public float speed { get; set; }
     [Export] public float drawTime { get; set; }
     [Export] public Projectile projectile { get; set; }
+}
+
+public enum TargetType
+{
+    Enemy,
+    Tree,
+    Rock,
 }

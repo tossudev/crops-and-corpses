@@ -15,7 +15,7 @@ mouse_filter = 2
 script = ExtResource("1_kcr62")
 
 [node name="InventoryPanel" type="Panel" parent="." groups=["InventoryPanel"]]
-custom_minimum_size = Vector2(664, 264)
+custom_minimum_size = Vector2(664, 344)
 layout_mode = 0
 offset_left = 640.0
 offset_top = 440.0
@@ -102,6 +102,30 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="InventorySlot24" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+layout_mode = 2
+
+[node name="InventorySlot25" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+layout_mode = 2
+
+[node name="InventorySlot26" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+layout_mode = 2
+
+[node name="InventorySlot27" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+layout_mode = 2
+
+[node name="InventorySlot28" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+layout_mode = 2
+
+[node name="InventorySlot29" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+layout_mode = 2
+
+[node name="InventorySlot30" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+layout_mode = 2
+
+[node name="InventorySlot31" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+layout_mode = 2
+
+[node name="InventorySlot32" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
 layout_mode = 2
 
 [node name="HotbarPanel" type="Panel" parent="." groups=["HotbarPanel"]]

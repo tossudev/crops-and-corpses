@@ -10,7 +10,7 @@ public partial class HitboxComponent : Area2D
 	{
 		if (_healthComponent == null)
 		{
-			GD.Print("HitboxComponent: No health component found");
+			// GD.PrintErr("HitboxComponent: No health component found");
 			return;
 		}
 
@@ -18,7 +18,7 @@ public partial class HitboxComponent : Area2D
 
 		if (_parentScript == null || !_parentScript.HasMethod("AttackReceived"))
 		{
-			GD.Print("HitboxComponent: No method or parent script found");
+			// GD.Print("HitboxComponent: No method or parent script found");
 
 			// temp
 			if (this.GetParent().HasMethod("AttackReceived"))

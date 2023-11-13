@@ -47,7 +47,7 @@ public partial class Plant : Node2D
 	}
 	[Export] CollisionObject2D _col;
 	
-	TextureRect trect = new TextureRect();
+	[Export]TextureRect trect;
 
 	[Export] Item _harvestablePlant;
 	#endregion
@@ -81,42 +81,42 @@ public partial class Plant : Node2D
 	public override void _Ready()
 	{
 		InitializePlant();
-		FarmManager.instance.AddPlantedPlant(this);
+		if(FarmManager.instance!=null) FarmManager.instance.AddPlantedPlant(this);
 		
 	}
 
 	void InitializePlant(){
 
-		Position = new Vector2(0, -35);
+		_col = GetNode<Area2D>("%Area2D");
+		trect = GetNode<TextureRect>("%TextureRect");
+		if(myField==null){
+			GetNode<TextureRect>("%TextureRect").Texture = _plantTexture;
+			_state = GrowthState.IsHarvestable;
+			return;
+		}
+		Position = new Vector2(0, -5);
 		_state = GrowthState.WaitWatering;
-		_col.InputEvent +=InteractWithPlant;
-		trect.ExpandMode=TextureRect.ExpandModeEnum.FitWidth;
-		trect.StretchMode=TextureRect.StretchModeEnum.KeepCentered;
-		trect.AnchorTop = 0.5f;
-        trect.AnchorRight = 0.5f;
-        trect.AnchorBottom = 0.5f;
-        trect.AnchorLeft = 0.5f;
-
-		AddChild(trect);
+		
+		
 		AddChild(_growthTimer);
 		
 		_growthTimer.Timeout += GrowthCycle;	
-		trect.Texture = _sproutTexture;
-
+		
+		GetNode<TextureRect>("%TextureRect").Texture = _sproutTexture;
 		_warningSign.Scale = new Vector2(0.75f,0.75f);
 		_warningSign.Position = new Vector2(0, -115);
 		AddChild(_warningSign);
 
-		_bugSignTexture = ResourceLoader.Load("res://JanitaTests/Images/bugsign.png") as Texture2D;
-		_waterSignTexture = ResourceLoader.Load("res://JanitaTests/Images/watersign.png") as Texture2D;
+		_bugSignTexture = ResourceLoader.Load("res://assets/placeholder/J_Sprites/bugsign.png") as Texture2D;
+		_waterSignTexture = ResourceLoader.Load("res://assets/placeholder/J_Sprites/watersign.png") as Texture2D;
 
-		var scene = ResourceLoader.Load<PackedScene>("res://JanitaTests/Scripts/plant_progress_bar.tscn").Instantiate();
+		var scene = ResourceLoader.Load<PackedScene>("res://scenes/farm/plant_progress_bar.tscn").Instantiate();
      	_progress = scene as TextureProgressBar;   
 		AddChild(_progress);
 		_progress.MaxValue = _growthCycleLength * _maxCycles;
 		_progress.Value= 0;
 		_progress.Hide();
-
+		_col.InputEvent +=InteractWithPlant;
 		PlantState();
 		
 	}
@@ -168,25 +168,27 @@ public partial class Plant : Node2D
 	}
 	void InteractWithPlant(Node viewport, InputEvent @event, long shapeIdx)
 	{
+		GD.Print("Harvested: "+plantName);
 		if(@event is InputEventMouseButton button && _isPlayerNearby)
 		{
+			
 			// Plant is planted, wait for water so it can start to grow
-			if(button.IsPressed() && _state == GrowthState.WaitWatering && FarmManager.instance.IsWaterBucketEquipped()){
+			if(button.IsPressed() && button.ButtonIndex == MouseButton.Left && _state == GrowthState.WaitWatering && FarmManager.instance.IsWaterBucketEquipped() ){
 				WaterPlant();
 			}
 
 			// Plant is wilted, water it
-			if(button.IsPressed() && _state == GrowthState.IsWilting && FarmManager.instance.IsWaterBucketEquipped()){
+			if(button.IsPressed()&& button.ButtonIndex == MouseButton.Left && _state == GrowthState.IsWilting && FarmManager.instance.IsWaterBucketEquipped()){
 				WaterPlant();
 			}
 
 			// Plant is infested, bug spray it
-			if(button.IsPressed() && _state == GrowthState.IsInfested && FarmManager.instance.IsBugSprayEquipped()){
+			if(button.IsPressed()&& button.ButtonIndex == MouseButton.Left && _state == GrowthState.IsInfested && FarmManager.instance.IsBugSprayEquipped()){
 				CurePlant();
 			}
 
 			// Plant is ready for harvest or it is dead
-			if(button.IsPressed() && _state == GrowthState.IsHarvestable || button.IsPressed() && _state == GrowthState.IsDead){
+			if(button.IsPressed()&& button.ButtonIndex == MouseButton.Left && _state == GrowthState.IsHarvestable || button.IsPressed() && _state == GrowthState.IsDead){
 				Harvest();
 			}
 
@@ -270,17 +272,17 @@ public partial class Plant : Node2D
 		_growthTimer.Stop();
 		trect.Texture = plantTexture;
 	}
-	void Harvest(){
+	async void Harvest(){
 		if(_state == GrowthState.IsHarvestable){
 			// Add to inventory whatever collected
 			GD.Print("Harvested: "+plantName);
 			RawInventoryItem _plant = new RawInventoryItem(_harvestablePlant.ID, _harvestablePlant.Name, 4, _harvestablePlant.StackSize);
-			PlayerInventoryController.AddItem(_plant);
+			await PlayerInventoryController.AddItem(_plant);
 		}else if(_state == GrowthState.IsDead){
 			GD.Print("Cleared plant: "+plantName);
 		}
 		
-		myField.RemovePlant();
+		if(myField!=null)myField.RemovePlant();
 		QueueFree();
 	}
 

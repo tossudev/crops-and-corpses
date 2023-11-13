@@ -1,23 +1,34 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class InventorySlot : Control {
 	
 	public TextureRect icon;
-	public Label quantityLabel;
+	const string ICON_TEXTURE_NODENAME = "%ItemIcon";
 
+	public Label quantityLabel;
+	const string QUANTITY_LABEL_NODENAME = "%ItemQuantityLabel";
+
+	Panel _itemNamePanel;
+	const string ITEM_NAME_PANEL_NODENAME = "%ItemNamePanel";
+	
+	Label _itemNameLabel;
+	const string ITEM_NAME_LABEL_NODENAME = "%ItemNameLabel";
+	
 	public RawInventoryItem slotItem;
 	[Export] public bool isCraftingSlot;
 	bool slotHasItem;
-	public int slotIndex = -1;
+	public bool slotInitiated;
+    int _slotIndex;
+	public int slotIndex => _slotIndex;
 
 
-	public override void _Ready() {
-		icon = GetNode("Icon") as TextureRect;
-		quantityLabel = GetNode("Quantity") as Label;
-	}
 
-
+	
+	bool _nameFollowMouse;
+	Vector2 offsetVector = new Vector2(-16, -16);
+	
     void OnButtonGuiInput(InputEvent @event)
 	{
 		if (isCraftingSlot) return;
@@ -33,7 +44,7 @@ public partial class InventorySlot : Control {
 	}
 
 
-    void ClickLeft()
+    async void ClickLeft()
     {
 	    switch (PlayerInventoryController.isItemSelected)
 	    {
@@ -45,22 +56,24 @@ public partial class InventorySlot : Control {
 		    
 		    // Player deselected item from hand
 		    case true when !slotHasItem:
-                PlayerInventoryController.AddItem(PlayerInventoryController.selectedItem, slotIndex, true);
+                await PlayerInventoryController.AddItem(PlayerInventoryController.selectedItem, slotIndex, true);
                 
 				break;
 		    
 		    // Player has item a slot with item
 		    case true when slotHasItem:
 		    {
-			    if (PlayerInventoryController.selectedItem.isValidIndex &&
-			        slotIndex == PlayerInventoryController.selectedItem.indexInOrganizedInventory)
+			    var selectedItem = PlayerInventoryController.selectedItem;
+			    
+			    if (selectedItem.isValidIndex &&
+			        slotIndex == selectedItem.indexInOrganizedInventory)
 			    {
-				    ToggleVisuals(true);
+				    await UpdateSlot(selectedItem);
 				    PlayerInventoryController.DeselectItem();
 			    }
 
-			    else if (slotItem.id == PlayerInventoryController.selectedItem.id) {
-				    PlayerInventoryController.AddItem(PlayerInventoryController.selectedItem, slotIndex, true);
+			    else if (slotItem.id == selectedItem.id) {
+				    await PlayerInventoryController.AddItem(selectedItem, slotIndex, true);
 			    }
 
 			    else {
@@ -87,14 +100,64 @@ public partial class InventorySlot : Control {
 	    quantityLabel.Visible = isOn;
     }
 
-	public void UpdateSlot(RawInventoryItem rawItem, int itemIndex, bool doSync = true)
+    public override void _Ready()
+    {
+	    base._Ready();
+	    InitiateSlot(-2);
+    }
+
+    public void OnMouseEntered()
+    {
+	    if (!slotInitiated) return;
+	    
+	    _itemNamePanel.Visible = true;
+	    _nameFollowMouse = true;
+    }
+    
+    public void OnMouseExited()
+    {
+	    if (!slotInitiated) return;
+
+        _itemNamePanel.Visible = false;
+        _nameFollowMouse = false;
+    }
+    
+    public override void _PhysicsProcess(double delta)
+    {
+	    base._PhysicsProcess(delta);
+
+	    if (_nameFollowMouse)
+	    {
+		    _itemNamePanel.Position = GetGlobalMousePosition() + offsetVector;
+	    }
+    }
+
+    
+    
+    
+    
+    public void InitiateSlot(int index)
+    {
+	    icon = GetNode<TextureRect>(ICON_TEXTURE_NODENAME);
+	    quantityLabel = GetNode<Label>(QUANTITY_LABEL_NODENAME);
+	    _itemNamePanel = GetNode<Panel>(ITEM_NAME_PANEL_NODENAME);
+	    _itemNameLabel = GetNode<Label>(ITEM_NAME_LABEL_NODENAME);
+	    
+	    
+	    _slotIndex = index;
+
+	    slotInitiated = true;
+    }
+    
+	public async Task UpdateSlot(RawInventoryItem rawItem, bool doSync = true)
 	{
-		ToggleVisuals(true);
-		slotItem = (rawItem != null) 
-			? new RawInventoryItem(rawItem.id, rawItem.name, rawItem.quantity, rawItem.stackSize, itemIndex) 
-			: null;
+		await TaskExtensions.SuspendWhile(() => !slotInitiated);
 		
-		slotIndex = itemIndex;
+		ToggleVisuals(true);
+
+		slotItem = (rawItem != null)
+			? new RawInventoryItem(rawItem.id, rawItem.name, rawItem.quantity, rawItem.stackSize, slotIndex)
+			: null;
         
 		if (SaveData.organizedPlayerInventory.Count > slotIndex)
 		{
@@ -104,13 +167,28 @@ public partial class InventorySlot : Control {
 		{
 			SaveData.organizedPlayerInventory.Add(slotItem);
 		}
-
+		
+		if (PlayerInventoryController.isItemSelected)
+		{
+			if (PlayerInventoryController.selectedItem.indexInOrganizedInventory == slotIndex)
+			{
+				if (slotItem == null)
+				{
+					PlayerInventoryController.DeselectItem();
+				}
+				else
+				{
+					PlayerInventoryController.SelectItem(slotItem);
+				}
+			}
+		}
+        
 		if (doSync)
 		{
-			SaveData.SyncInventory();
+			Task sync = SaveData.SyncInventory();
 		}
 		
-		if (rawItem == null) {
+		if (slotItem == null) {
 			slotHasItem = false;
 
 			icon.Texture = null;

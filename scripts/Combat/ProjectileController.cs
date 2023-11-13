@@ -21,7 +21,9 @@ public partial class ProjectileController : Node2D
         _despawnTime = projectile.despawnTime;
 
         if (projectile.effect != EffectType.None)
+        {
             attack.effect = projectile.effect;
+        }
 
         this.TopLevel = true;
         _lifetimeTimer.Start(_airtime);
@@ -47,8 +49,10 @@ public partial class ProjectileController : Node2D
     {
         if (body is HitboxComponent hitbox)
         {
-            if (hitbox.IsInGroup(targetGroup))
+            if (body.IsInGroup(targetGroup))
+            {
                 hitbox.ApplyAttack(attack);
+            }
         }
 
         QueueFree();

@@ -9,6 +9,9 @@ public partial class PlayerController : CharacterBody2D
 	[Export] private Sprite2D _sprite;
 	[Export] private Area2D _pickupArea;
 	[Export] private PlayerSpriteController _rig;
+	[Export] private HealthComponent _healthComponent;
+
+	[Export] private Node2D _respawnPoint;
 
 	[ExportCategory("Settings")]
 	[Export] private float maxZoom = 2f;
@@ -111,8 +114,23 @@ public partial class PlayerController : CharacterBody2D
 	{
 		if (health <= 0)
 		{
-			GD.Print("Stop! He's already dead!");
+			_isDead = true;
+			Respawn();
 		}
+	}
+
+	private void Respawn()
+	{
+		_healthComponent.SetHealth(_healthComponent.GetMaxHealth());
+		_isDead = false;
+
+		if (_respawnPoint == null)
+		{
+			GD.PrintErr("PlayerController: Respawn point is null");
+			return;
+		}
+
+		Position = _respawnPoint.Position;
 	}
 
 	void OnPickupAreaEntered(Area2D body)

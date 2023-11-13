@@ -13,6 +13,7 @@ public partial class PlayerInventoryController : Control {
 	static Control _hotbarGrid;
 	
 	public static bool isItemSelected = false;
+	public static bool isInitialized = false;
 	public static RawInventoryItem selectedItem;
 	public static RawInventoryItem heldItem;
 	const string droppedItemNodePath = "res://scenes/world/dropped_item.tscn";
@@ -30,7 +31,7 @@ public partial class PlayerInventoryController : Control {
 	
 	const int SELECTED_ITEM_OFFSET = 64;
 	const int HOTBAR_SIZE = 8;
-	static int _hotbarStartIndex = 24;
+    public const int HOTBAR_START_IDX = PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - HOTBAR_SIZE;
 
 
 	public override void _Ready()
@@ -55,7 +56,7 @@ public partial class PlayerInventoryController : Control {
 
 
     public override void _Process(double delta) {
-        _UpdateSelectedItem();
+        UpdateSelectedItem();
     }
 
 
@@ -82,7 +83,7 @@ public partial class PlayerInventoryController : Control {
 
 
 	void UpdateHeldItem(int hotbarIndex) {
-		int itemInventoryIndex =_hotbarStartIndex + hotbarIndex;
+		int itemInventoryIndex =HOTBAR_START_IDX + hotbarIndex;
 		heldItem = SaveData.organizedPlayerInventory[itemInventoryIndex];
 
 		Vector2 heldItemPos = _hotbarGrid.GetChild<Control>(hotbarIndex).GlobalPosition;
@@ -93,21 +94,20 @@ public partial class PlayerInventoryController : Control {
 	}
 
 
-	async Task _InitInventory() {
-		SaveData.organizedPlayerInventory.Clear();
-
+    async void _InitInventory()
+    {
+	    await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete, 100);
+	    
 		foreach (var node in _inventoryGrid.GetChildren())
 		{
-			node.QueueFree();
+			node.Free();
 		}
 		
 		foreach (var node in _hotbarGrid.GetChildren())
 		{
-			node.QueueFree();
+			node.Free();
 		}
-
-		_hotbarStartIndex = PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - HOTBAR_SIZE;
-
+        
 		// Init all slots with null items
 		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++) {
 			
@@ -121,42 +121,38 @@ public partial class PlayerInventoryController : Control {
 			else {
 				_inventoryGrid.AddChild(itemSlot);
 			}
-            
-			((InventorySlot)itemSlot).UpdateSlot(null, i, false);
+
+			var inventorySlot = (InventorySlot)itemSlot;
+			
+			inventorySlot?.InitiateSlot(i);
 		}
-		
-		await PlayerInventoryData.ReadInventoryDataFromFile(SaveData.LoadData());
         
 		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++)
 		{
-
-			int slotIdx = (SaveData.organizedPlayerInventory[i] != null)
-				? SaveData.organizedPlayerInventory[i].indexInOrganizedInventory
-				: -1;
-
-			if (slotIdx < 0 || slotIdx > PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - 1) slotIdx = i;
-			
-			if (IsSlotInHotbar(i)) {
-				_hotbarGrid.GetChild<InventorySlot>(i - _hotbarStartIndex)
-					.UpdateSlot(SaveData.organizedPlayerInventory[i], slotIdx, false);
+			if (IsSlotInHotbar(i))
+			{
+				await _hotbarGrid.GetChild<InventorySlot>(i - HOTBAR_START_IDX)
+					.UpdateSlot(SaveData.organizedPlayerInventory[i], false);
 			}
-			else {
-				_inventoryGrid.GetChild<InventorySlot>(i)
-					.UpdateSlot(SaveData.organizedPlayerInventory[i], slotIdx, false);
+			else 
+			{
+				await _inventoryGrid.GetChild<InventorySlot>(i)
+					.UpdateSlot(SaveData.organizedPlayerInventory[i], false);
 			}
         }
 		
 		UpdateHeldItem(0);
-		SaveData.SyncInventory();
-	}
+		await SaveData.SyncInventory();
+		isInitialized = true;
+    }
 
 
 	static bool IsSlotInHotbar(int index) {
-		return index >= _hotbarStartIndex;
+		return index >= HOTBAR_START_IDX;
 	}
 
 
-    void _UpdateSelectedItem() {
+    void UpdateSelectedItem() {
 		Vector2 mousePosition = GetGlobalMousePosition();
 		mousePosition.X -= SELECTED_ITEM_OFFSET;
 		mousePosition.Y -= SELECTED_ITEM_OFFSET;
@@ -194,7 +190,7 @@ public partial class PlayerInventoryController : Control {
 	/// <param name="deselectOnAllAdded"> optional : deselect current item if all items were added </param>
 	/// 
 	///	<returns> how many items could *NOT* be added </returns>
-	public static int AddItem(RawInventoryItem rawItem, int index = -1, bool affectSelectedItem = false, bool deselectOnAllAdded = true)
+	public static async Task<int> AddItem(RawInventoryItem rawItem, int index = -1, bool affectSelectedItem = false, bool deselectOnAllAdded = true)
 	{
 
 		if (rawItem == null)
@@ -204,8 +200,8 @@ public partial class PlayerInventoryController : Control {
 		}
 		
 		rawItem.quantity = index == -1 
-			? AddToInventoryUntilFull(rawItem) // index not specified
-			: AddToSlotUntilFull(rawItem, index); // index given
+			? await AddToInventoryUntilFull(rawItem) // index not specified
+			: await AddToSlotUntilFull(rawItem, index); // index given
 
 		if (rawItem.quantity == 0 && rawItem.isValidIndex)
 		{
@@ -225,11 +221,11 @@ public partial class PlayerInventoryController : Control {
 				    
         }
         
-        SaveData.SyncInventory();
+        Task sync = SaveData.SyncInventory();
         return rawItem.quantity;
 	}
 
-	static int AddToInventoryUntilFull(RawInventoryItem itemToAdd)
+	static async Task<int> AddToInventoryUntilFull(RawInventoryItem itemToAdd)
 	{
 		for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++)
 		{
@@ -242,7 +238,7 @@ public partial class PlayerInventoryController : Control {
 
 			if (rawItem == null || itemToAdd.id == rawItem.id)
 			{
-				itemToAdd.quantity = AddToSlotUntilFull(itemToAdd, i);
+				itemToAdd.quantity = await AddToSlotUntilFull(itemToAdd, i);
 			}
 
 			if (itemToAdd.quantity == 0) break;
@@ -251,7 +247,7 @@ public partial class PlayerInventoryController : Control {
 		return itemToAdd.quantity;
 	}
 	
-	static int AddToSlotUntilFull(RawInventoryItem itemToAdd, int index)
+	static async Task<int> AddToSlotUntilFull(RawInventoryItem itemToAdd, int index)
 	{
         
 		RawInventoryItem itemInSlot = (SaveData.organizedPlayerInventory.Count > index)
@@ -276,75 +272,48 @@ public partial class PlayerInventoryController : Control {
 				itemToAdd.stackSize - spaceRemainingAtIndex + howManyWereAdded,
 				itemToAdd.stackSize);
 			
-            UpdateInventorySlot(addedItem, index);
+            await UpdateInventorySlot(addedItem, index);
 
 			itemToAdd.quantity -= howManyWereAdded;
 		}
         
 		return itemToAdd.quantity;
 	}
-	
 
 	/// <summary> Main inventory item removal method </summary>
 	/// 
-	/// <param name="rawItem"> Includes id, name and quantity to remove </param>
-	///	<returns> Whether the add operation was successful or not </returns>
-	/// <remarks> Automatically detects correct slots to remove items from </remarks>
-	public static bool RemoveItemFromInventory(RawInventoryItem rawItem)
+	/// <param name="rawItem"> Includes id, name and quantity to remove. </param>
+	/// <param name="index"> (Optional) If specified, only removes the quantity available in that index. </param>
+	///	<returns> Whether the removal operation was successful or not </returns>
+	public static async Task<bool> RemoveItemFromInventory(RawInventoryItem rawItem, int index = -1)
 	{
+		if (rawItem == null)
+		{
+			GD.PushError("Tried to remove null item from inventory");
+			return false;
+		}
+		
 		if (!PlayerInventoryData.ExistsInInventory(rawItem.id, rawItem.quantity))
 		{
 			return false;
 		}
 
-		int amountToRemove = rawItem.quantity;
-		
-		for (int i = PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - 1; i >= 0; i--)
+		if (index >= 0)
 		{
-			if (SaveData.organizedPlayerInventory[i] == null) continue;
-			
-			if (SaveData.organizedPlayerInventory[i].id == rawItem.id)
+			if (index <= PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - 1)
 			{
-				RawInventoryItem itemInSlot = SaveData.organizedPlayerInventory[i];
-				
-				int amountRemoved = (itemInSlot.quantity - amountToRemove > 0)
-					? amountToRemove
-					: itemInSlot.quantity;
-
-				amountToRemove -= amountRemoved;
-				itemInSlot.quantity -= amountRemoved;
-				
-				if (itemInSlot.quantity > 0)
-				{
-					UpdateInventorySlot(itemInSlot, i);
-				}
-				else
-				{
-					NullifyInventoryItemAtIndex(i);
-				}
-
-				if (isItemSelected && selectedItem.id == rawItem.id)
-				{
-					if (PlayerInventoryData.ExistsInInventory(selectedItem.id, 1))
-					{
-						SelectItemAtSlot(itemInSlot.quantity > 0
-							? selectedItem.indexInOrganizedInventory
-							: PlayerInventoryData.GetFirstStackIndexOfItem(selectedItem.id));
-					}
-					else
-					{
-						DeselectItem();
-					}
-				}
+				return await RemoveFromSlotUntilEmpty(
+					rawItem, rawItem.quantity, index, true) == 0;
 			}
 			
-			if (amountToRemove == 0) break;
-        }
-
-		switch (amountToRemove)
+			GD.PrintErr("Index was greater than player inventory max size - 1");
+			return false;
+		}
+		
+		switch (await RemoveFromInventoryUntilEmptyOfItem(rawItem))
 		{
 			case 0:
-				SaveData.SyncInventory();
+				Task sync = SaveData.SyncInventory();
 				return true;
 				
 			case > 0:
@@ -357,10 +326,65 @@ public partial class PlayerInventoryController : Control {
 		}
 	}
 	
+	/// <summary>
+	/// Removes quantity of item from inventory as long as it is possible
+	/// </summary>
+	/// <param name="itemToRemove"></param>
+	/// <returns> How many could not be removed </returns>
+	static async Task<int> RemoveFromInventoryUntilEmptyOfItem(RawInventoryItem itemToRemove)
+	{
+		int amountToRemove = itemToRemove.quantity;
+		
+		for (int i = PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - 1; i >= 0; i--)
+		{
+			if (SaveData.organizedPlayerInventory[i] == null) continue;
+			
+			if (SaveData.organizedPlayerInventory[i].id == itemToRemove.id)
+			{
+				amountToRemove = await RemoveFromSlotUntilEmpty(itemToRemove, amountToRemove, i);
+			}
+			
+			if (amountToRemove == 0) break;
+		}
+		
+		return amountToRemove;
+	}
+
+	/// <summary>
+	/// Removes items from inventory slot until all are removed OR slot's item quantity reaches 0.
+	/// </summary>
+	/// <param name="itemToRemove"> includes  </param>
+	/// <param name="index"> must be valid </param>
+	/// <param name="mustRemoveAll"> (optional) will not remove anything if itemToRemove.quantity is greater than quantity in slot. </param>
+	/// <returns> amount that couldn't be removed </returns>
+	static async Task<int> RemoveFromSlotUntilEmpty(RawInventoryItem itemToRemove, int amountToRemove, int index, bool mustRemoveAll = false)
+	{
+		RawInventoryItem itemInSlot = SaveData.organizedPlayerInventory[index];
+				
+		int amountRemoved = (itemInSlot.quantity - amountToRemove > 0)
+			? amountToRemove
+			: itemInSlot.quantity;
+
+		if (mustRemoveAll && amountToRemove != amountRemoved) return amountToRemove;
+		
+		itemInSlot.quantity -= amountRemoved;
+        
+		if (itemInSlot.quantity > 0)
+		{
+			await UpdateInventorySlot(itemInSlot, index);
+		}
+		else
+		{
+			NullifyInventoryItemAtIndex(index);
+		}
+        
+		return amountToRemove - amountRemoved;
+	}
+	
 	
     static void NullifyInventoryItemAtIndex(int index)
 	{
-		UpdateInventorySlot(null, index);
+		Task update = UpdateInventorySlot(null, index);
 	}
 
 
@@ -369,7 +393,7 @@ public partial class PlayerInventoryController : Control {
 		item.quantity -= 1;
 
 		if (item.quantity >= 1) {
-			UpdateInventorySlot(item, index);
+			Task update = UpdateInventorySlot(item, index);
 		}
 		else {
 			NullifyInventoryItemAtIndex(index);
@@ -382,7 +406,7 @@ public partial class PlayerInventoryController : Control {
     static void SelectItemAtSlot(int index)
 	{
 		InventorySlot slot = IsSlotInHotbar(index) 
-			? _hotbarGrid.GetChild<InventorySlot>(index - _hotbarStartIndex)
+			? _hotbarGrid.GetChild<InventorySlot>(index - HOTBAR_START_IDX)
 			: _inventoryGrid.GetChild<InventorySlot>(index);
 		
 		SelectItem(slot.slotItem);
@@ -394,24 +418,24 @@ public partial class PlayerInventoryController : Control {
 		RawInventoryItem tempSwapItem = new(
 			slotItem.id, slotItem.name, slotItem.quantity, slotItem.stackSize);
         
-		UpdateInventorySlot(selectedItem, index);
+		Task update = UpdateInventorySlot(selectedItem, index);
 
-		UpdateInventorySlot(tempSwapItem, selectedItem.indexInOrganizedInventory);
+		Task update2 = UpdateInventorySlot(tempSwapItem, selectedItem.indexInOrganizedInventory);
 		
 		SelectItemAtSlot(selectedItem.indexInOrganizedInventory);
 	}
 
-	static void UpdateInventorySlot(RawInventoryItem item, int index)
+	static async Task UpdateInventorySlot(RawInventoryItem item, int index)
 	{
 		InventorySlot slotToUpdate;
 		if (IsSlotInHotbar(index)) {
-			slotToUpdate = _hotbarGrid.GetChild<InventorySlot>(index - _hotbarStartIndex);
+			slotToUpdate = _hotbarGrid.GetChild<InventorySlot>(index - HOTBAR_START_IDX);
 		}
 		else {
 			slotToUpdate = _inventoryGrid.GetChild<InventorySlot>(index);
 		}
 
-		slotToUpdate.UpdateSlot(item, index);
+		await slotToUpdate.UpdateSlot(item);
 	}
 
 	public static void DropSelectedItem(Vector2 position, Node parent)

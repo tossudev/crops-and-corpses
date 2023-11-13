@@ -1,0 +1,107 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmh424wu5k4gb"]
+
+[ext_resource type="Script" path="res://scripts/ui/VillagerInfo.cs" id="1_t72qs"]
+[ext_resource type="Texture2D" uid="uid://c1sm88vok0oma" path="res://LilianTests/Sprites/zombie_placeholder.png" id="2_ediht"]
+
+[node name="VillagerInfo" type="Control"]
+visibility_layer = 512
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -710.0
+offset_bottom = -390.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+script = ExtResource("1_t72qs")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.603922, 0.545098, 0.8, 1)
+
+[node name="VillagerTexture" type="TextureRect" parent="ColorRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 478.0
+offset_bottom = 522.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_ediht")
+
+[node name="NameText" type="RichTextLabel" parent="ColorRect"]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_right = 0.406
+anchor_bottom = 0.141
+offset_left = 96.25
+offset_top = 16.0
+offset_right = 122.5
+offset_bottom = 19.85
+grow_horizontal = 2
+text = "Npc name"
+
+[node name="LoreText" type="RichTextLabel" parent="ColorRect"]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_top = 0.141
+anchor_right = 0.719
+anchor_bottom = 0.535
+offset_left = 96.25
+offset_top = 19.8
+offset_right = 44.25
+offset_bottom = 10.7
+grow_horizontal = 2
+grow_vertical = 2
+text = "text here"
+
+[node name="StatusText" type="RichTextLabel" parent="ColorRect"]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_right = 0.406
+anchor_bottom = 0.141
+offset_left = 10.7
+offset_top = 116.0
+offset_right = 46.95
+offset_bottom = 119.85
+grow_horizontal = 2
+text = "Status: Injured"
+
+[node name="HealButton" type="Button" parent="ColorRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 168.0
+offset_top = 112.0
+offset_right = 211.0
+offset_bottom = 143.0
+text = "Heal
+"
+
+[node name="CloseButton" type="Button" parent="ColorRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 216.0
+offset_top = 112.0
+offset_right = 247.0
+offset_bottom = 143.0
+text = "X
+"
+
+[connection signal="button_up" from="ColorRect/CloseButton" to="." method="CloseInfo"]

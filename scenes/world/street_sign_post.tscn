@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/World/PlayerTravel.cs" id="1_ffm7f"]
 [ext_resource type="Texture2D" uid="uid://3465re0y5s7f" path="res://assets/sprites/items/street_sign_post.png" id="1_rlsfp"]
-[ext_resource type="Shape2D" uid="uid://di7g70k760mp3" path="res://JanitaTests/Scripts/road_sign_shape.tres" id="3_y35pe"]
+[ext_resource type="Shape2D" uid="uid://di7g70k760mp3" path="res://scenes/farm/shapes/road_sign_shape.tres" id="3_y35pe"]
 [ext_resource type="Texture2D" uid="uid://ds0ykpdv4ev7y" path="res://assets/sprites/items/post_ruins.png" id="4_7x21e"]
 [ext_resource type="Texture2D" uid="uid://bkhi7xspqtvt7" path="res://assets/sprites/items/post_town.png" id="5_80p6s"]
 [ext_resource type="Texture2D" uid="uid://c3tmforyijtta" path="res://assets/sprites/items/post_forest.png" id="6_s8p2d"]

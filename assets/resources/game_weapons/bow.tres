@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://dsa6q3jkek4am"]
+
+[ext_resource type="Resource" uid="uid://c5sh8gg8de5a2" path="res://assets/resources/game_items/weapon_items_150_to_249/160_bow.tres" id="1_l4o1s"]
+[ext_resource type="Resource" uid="uid://cuipddm160c01" path="res://TinoTests/Resources/arrow.tres" id="2_7f6ti"]
+[ext_resource type="Script" path="res://TinoTests/Scripts/Weapons/Weapon.cs" id="3_v135q"]
+
+[resource]
+script = ExtResource("3_v135q")
+item = ExtResource("1_l4o1s")
+damage = 50.0
+knockback = 200.0
+cooldown = 0.5
+effect = 0
+targetType = 0
+reach = 1.0
+holdAction = false
+ranged = true
+speed = 800.0
+drawTime = 1.0
+projectile = ExtResource("2_7f6ti")

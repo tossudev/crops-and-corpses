@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="FarmerUpgrade" load_steps=6 format=3 uid="uid://cqokklhiohslh"]
+
+[ext_resource type="Script" path="res://scripts/resource_classes/upgrades/FarmerUpgrade.cs" id="1_oxtwq"]
+[ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="1_uwbj7"]
+[ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_61f2e"]
+[ext_resource type="Texture2D" uid="uid://bubejl5xmd4jn" path="res://assets/sprites/items/item_potato.png" id="3_s2bh2"]
+
+[sub_resource type="Resource" id="Resource_pa213"]
+script = ExtResource("2_61f2e")
+item = ExtResource("1_uwbj7")
+quantity = 10
+
+[resource]
+script = ExtResource("1_oxtwq")
+_farmerWalkSpeed = 1
+_farmerMaxFarms = 1
+_pesticideEffectiveness = 0
+_id = 1
+_upgradeIcon = ExtResource("3_s2bh2")
+_upgradeHeader = "New Shoes"
+_upgradeDescription = "New farmer shoes made from wood will improve the comfort of your farmers, making them faster and more productive."
+_craftingRequirements = Array[Object]([SubResource("Resource_pa213")])

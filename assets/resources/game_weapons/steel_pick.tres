@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://muxfat74fp3x"]
+
+[ext_resource type="Resource" uid="uid://d4e854xetxte8" path="res://assets/resources/game_items/tool_items_350_449/362_steel_pick.tres" id="1_tm7x5"]
+[ext_resource type="Script" path="res://TinoTests/Scripts/Weapons/Weapon.cs" id="2_nspnc"]
+
+[resource]
+script = ExtResource("2_nspnc")
+item = ExtResource("1_tm7x5")
+damage = 50.0
+knockback = 2.08165e-12
+cooldown = 0.5
+effect = 0
+targetType = 2
+reach = 2.0
+holdAction = true
+ranged = false
+speed = 0.0
+drawTime = 0.0

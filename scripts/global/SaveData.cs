@@ -14,15 +14,21 @@ public partial class SaveData : Node
     static string directoryPath = "";
     static string fullPath = "";
     
+    public const string TOWN_STATS_KEY = "townStats";
+    public const string APPLIED_TOWN_STATS_KEY = "appliedTownStats";
     public const string INVENTORY_ITEMS_KEY = "inventoryItems";
     public const string ORGANIZED_INVENTORY_ITEMS_KEY = "organizedInventoryItems";
     
     //---------Modifiable at runtime----------------------
     
+    public static RawTownStats townHallStats = new ();
+    public static List<TownUpgrade> appliedUpgrades = new ();
     public static Array<RawInventoryItem> organizedPlayerInventory = new ();
     public static List<RawInventoryItem> totalInventoryItems = new ();
 
     public static bool savingInProgress = false;
+    public static bool firstLoadComplete = false;
+    public static bool inventorySyncInProgress = false;
     //---------/Modifiable at runtime----------------------
 
     public override void _Ready()
@@ -30,16 +36,21 @@ public partial class SaveData : Node
         base._Ready();
         directoryPath = ProjectSettings.GlobalizePath($"user://{SAVEFOLDERNAME}");
         fullPath = directoryPath.PathJoin(SAVEFILENAME);
+
+        ItemData.InitiateItemData();
+        WeaponData.InitiateWeaponData();
+        LoadSaveDataIntoMemory();
+        PlayerInventoryData.AddDefaultResourcesToInventoryIfEmpty();
     }
     
-    static Task Save()
+    static async Task Save()
     {
         savingInProgress = true;
         if (string.IsNullOrEmpty(directoryPath))
         {
             GD.PrintErr("Save path not set, can't save game!");
             savingInProgress = false;
-            return null;
+            return;
         }
 
         if (!Directory.Exists(directoryPath))
@@ -49,6 +60,8 @@ public partial class SaveData : Node
         
         var rawSaveData = new RawSaveData()
         {
+            townStats = townHallStats,
+            appliedUpgrades = appliedUpgrades,
             inventoryItems = totalInventoryItems,
             organizedInventoryItems = organizedPlayerInventory
         };
@@ -60,7 +73,7 @@ public partial class SaveData : Node
         
         try
         {
-            File.WriteAllText(fullPath, json);
+            await File.WriteAllTextAsync(fullPath, json);
         }
         catch (Exception e)
         {
@@ -68,18 +81,19 @@ public partial class SaveData : Node
         }
 
         savingInProgress = false;
-        return null;
     }
     
-    public static Dictionary LoadData()
+    public static async Task<Dictionary> LoadData()
     {
         if (!File.Exists(fullPath)) return null;
 
+        await TaskExtensions.SuspendWhile(() => savingInProgress);
+        
         string data = "";
         
         try
         {
-            data = File.ReadAllText(fullPath);
+            data = await File.ReadAllTextAsync(fullPath);
         }
         catch (Exception e)
         {
@@ -90,24 +104,42 @@ public partial class SaveData : Node
         
         Error error = loadedJson.Parse(data);
 
-        if (error != Error.Ok)
-        {
-            GD.PrintErr(error, ": SaveData Load");
-            
-            return null;
-        }
+        if (error == Error.Ok) return (Dictionary)loadedJson.Data;
+        
+        GD.PrintErr(error, ": SaveData Load");
+        return null;
+    }
 
-        return (Dictionary) loadedJson.Data;
+    static async void LoadSaveDataIntoMemory()
+    {
+        Dictionary saveData = await LoadData();
+        
+        // Town stats
+        TownManager.ReadTownDataFromFile(saveData, false);
+        
+        // Inventory Data
+        await RawInventoryItem.ReadInventoryDataFromFile(saveData);
+
+        firstLoadComplete = true;
     }
     
-    public static void SyncInventory()
+    
+    public static async Task SyncInventory(bool doSync = true)
     {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-        UpdateTotalItemsAndSave();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+        await TaskExtensions.SuspendWhile(() => inventorySyncInProgress);
+        inventorySyncInProgress = true;
+        
+        
+        await UpdateTotalItems(doSync);
+        inventorySyncInProgress = false;
     }
 
-    static async Task UpdateTotalItemsAndSave()
+    public static async Task SyncTownStats()
+    {
+        await Save();
+    }
+
+    static async Task UpdateTotalItems(bool doSync = true)
     {
         totalInventoryItems.Clear();
 
@@ -126,28 +158,13 @@ public partial class SaveData : Node
         }
 
 
-        if (!savingInProgress)
+        if (savingInProgress)
         {
-            await Save();
+            GD.Print("Saving was queued for " +
+                     await TaskExtensions.SuspendWhile(
+                         () => savingInProgress, GD.Randi() % 200 + 50)+  " ms");
         }
-        else {
-            GD.Print("Saving was queued");
-            int savingQueueTime_Ms = 0;
-
-            while (savingQueueTime_Ms < 5000)
-            {
-                int timeout_Ms = (GD.Randi() % 2 == 0) ? 100 : 250;
-                
-                savingQueueTime_Ms += timeout_Ms;
-                
-                await Task.Delay(timeout_Ms);
-
-                if (savingInProgress) continue;
-                
-                await Save();
-                break;
-            }
-            GD.Print($"Total Queue Time: {savingQueueTime_Ms}ms");
-        }
+        
+        if (doSync) await Save();
     }
 }

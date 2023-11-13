@@ -12,6 +12,8 @@ public partial class FarmManager : Node
 	List<Plant> _plants = new List<Plant>();
 
 	List <Plant> _allPlantedPlants = new List<Plant>();
+
+	List<RawInventoryItem> _buckets = new List<RawInventoryItem>();
 	
 	public override void _Ready()
 	{
@@ -20,19 +22,13 @@ public partial class FarmManager : Node
 		InitializePlants();
 		
 		
-		/*Item asd = ResourceLoader.Load("res://assets/resources/game_items/7_tomato_seed.tres") as Item;
-		Item asd1 = ResourceLoader.Load("res://assets/resources/game_items/8_potato_seed.tres") as Item;
-		Item asd2 = ResourceLoader.Load("res://assets/resources/game_items/9_cabbage_seed.tres") as Item;
-
-		RawInventoryItem asd3 = new RawInventoryItem(asd.ID, asd.Name, 10, asd.StackSize);
-		RawInventoryItem asd4 = new RawInventoryItem(asd1.ID, asd1.Name, 10, asd1.StackSize);
-		RawInventoryItem asd5 = new RawInventoryItem(asd2.ID, asd2.Name, 10, asd2.StackSize);
-		items.Add(asd3);
-		items.Add(asd4);
-		items.Add(asd5);
-		for(int i=0; i<items.Count; i++){
-			PlayerInventoryController.AddItem(items[i]);
-		}*/
+		/*Item asd = ResourceLoader.Load("res://assets/resources/game_items/0_log.tres") as Item;
+		
+		
+		RawInventoryItem asd1 = new RawInventoryItem(asd.ID, asd.Name, 10, asd.StackSize);
+		
+		PlayerInventoryController.AddItem(asd1);*/
+		
 		
 
 	}
@@ -46,7 +42,6 @@ public partial class FarmManager : Node
         	if (_newPlant != null)
         	{
             	_plants.Add(_newPlant);
-            	GD.Print(_newPlant.plantName);
         	}
         	else
         	{
@@ -72,11 +67,9 @@ public partial class FarmManager : Node
 	}
 	public void AddPlantedPlant(Plant plant){
 		_allPlantedPlants.Add(plant);
-		GD.Print(_allPlantedPlants.Count);
 	}
 	public void RemovePlantedPlant(Plant plant){
 		_allPlantedPlants.Remove(plant);
-		GD.Print(_allPlantedPlants.Count);
 	}
 
 	public bool IsWaterBucketEquipped(){
@@ -84,30 +77,34 @@ public partial class FarmManager : Node
 		return true;
 		else return false;
 	}
-	public bool IsBugSprayEquipped(){
-		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bug Spray")
-		return true;
-		else return false;
+	public bool IsBugSprayEquipped()
+	{
+		return PlayerInventoryController.selectedItem != null &&
+		       PlayerInventoryController.selectedItem.name == "Bug Spray";
 	}
 	
 	public void EmptyWaterBucket(){
 		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bucket of Water"){
-			Item emptyB = ResourceLoader.Load("res://assets/resources/game_items/4_bucket.tres") as Item;
-			RawInventoryItem bucket = new RawInventoryItem(emptyB.ID, emptyB.Name, 1, emptyB.StackSize);	
-			PlayerInventoryController.RemoveItemFromInventory(PlayerInventoryController.selectedItem);
-			PlayerInventoryController.SelectItem(bucket);
+			Item emptyB = ResourceLoader.Load("res://assets/resources/game_items/tool_items_350_449/405_bucket.tres") as Item;
+			RawInventoryItem bucket = new RawInventoryItem(emptyB.ID, emptyB.Name, 1, emptyB.StackSize);
+			PlayerInventoryController.SwapItems(bucket, PlayerInventoryController.selectedItem.indexInOrganizedInventory);		
 		}else{
 			GD.Print("Water bucket not selected");
 		}
 	}
 	public void FillWaterBucket(){
 		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bucket"){
-			Item waterB = ResourceLoader.Load("res://assets/resources/game_items/7_bucket_water.tres") as Item;
-			RawInventoryItem waterBucket = new RawInventoryItem(waterB.ID, waterB.Name, 1, waterB.StackSize);	
-			PlayerInventoryController.RemoveItemFromInventory(PlayerInventoryController.selectedItem);
-			PlayerInventoryController.SelectItem(waterBucket);
+			Item waterB = ResourceLoader.Load("res://assets/resources/game_items/tool_items_350_449/406_bucket_water.tres") as Item;
+			RawInventoryItem waterBucket = new RawInventoryItem(waterB.ID, waterB.Name, 1, waterB.StackSize);
+			PlayerInventoryController.SwapItems(waterBucket, PlayerInventoryController.selectedItem.indexInOrganizedInventory);		
+
+			int index = PlayerInventoryController.selectedItem.indexInOrganizedInventory;
+
+			//PlayerInventoryController.RemoveItemFromInventory(PlayerInventoryController.selectedItem);
+
+
 		}else{
-			GD.Print("Empty bucket not selected"+PlayerInventoryController.selectedItem.name);
+			GD.Print("Empty bucket not selected");
 		}
 
 	}

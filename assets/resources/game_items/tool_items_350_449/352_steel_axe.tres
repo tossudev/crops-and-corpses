@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Item" load_steps=8 format=3 uid="uid://b7m6k2h3ssdyx"]
+
+[ext_resource type="Texture2D" uid="uid://b5w4ofxa2ivwg" path="res://assets/sprites/items/item_axe.png" id="1_yj4nk"]
+[ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="2_og44w"]
+[ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_jvrxs"]
+[ext_resource type="Resource" path="res://assets/resources/game_items/resource_items_0_to_99/3_steel.tres" id="4_bdoab"]
+[ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="5_la7mj"]
+
+[sub_resource type="Resource" id="Resource_6icts"]
+script = ExtResource("3_jvrxs")
+item = ExtResource("2_og44w")
+quantity = 2
+
+[sub_resource type="Resource" id="Resource_lu1di"]
+script = ExtResource("3_jvrxs")
+item = ExtResource("4_bdoab")
+quantity = 2
+
+[resource]
+script = ExtResource("5_la7mj")
+ID = 352
+Name = "Steel Axe"
+IconTexture = ExtResource("1_yj4nk")
+StackSize = 1
+craftingRequirements = Array[Object]([SubResource("Resource_6icts"), SubResource("Resource_lu1di")])

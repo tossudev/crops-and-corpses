@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Godot.Collections;
 
 public partial class HandheldController : Node2D
 {
@@ -11,12 +12,14 @@ public partial class HandheldController : Node2D
     [Export] private AnimationPlayer _animationPlayer;
     [Export] private Timer _timer;
     [Export] private PackedScene _projectilePrefab;
+    [Export] private PlayerController _player;
 
     private Attack _attack;
-    private float _damage;
+    private int _damage;
     private float _knockback;
     private float _cooldown;
     private EffectType _effect;
+    private TargetType _targetType;
     private float _reach;
     private bool _holdAction;
     private bool _ranged;
@@ -26,12 +29,13 @@ public partial class HandheldController : Node2D
 
     private bool _isDrawing;
     private bool _actionHeld;
+    private string _targetGroup;
 
     private void Init()
     {
         if (PlayerInventoryController.heldItem != null)
         {
-            _weapon = WeaponData.GetWeaponByItem(PlayerInventoryController.heldItem.id);
+            _weapon = WeaponData.GetWeaponByItemId(PlayerInventoryController.heldItem.id);
         }
         else
         {
@@ -45,6 +49,7 @@ public partial class HandheldController : Node2D
         _knockback = _weapon.knockback;
         _cooldown = _weapon.cooldown;
         _effect = _weapon.effect;
+        _targetType = _weapon.targetType;
         _reach = _weapon.reach;
         _holdAction = _weapon.holdAction;
         _speed = _weapon.speed;
@@ -53,6 +58,21 @@ public partial class HandheldController : Node2D
         _projectile = _weapon.projectile;
 
         _isDrawing = false;
+
+        switch (_targetType)
+        {
+            case TargetType.Enemy:
+                _targetGroup = "enemy";
+                break;
+            case TargetType.Tree:
+                _targetGroup = "tree";
+                break;
+            case TargetType.Rock:
+                _targetGroup = "rock";
+                break;
+            default:
+                return;
+        }
 
         _attack = new Attack
         {
@@ -71,8 +91,13 @@ public partial class HandheldController : Node2D
             LookAt(GetGlobalMousePosition());
         }
 
+        if (_timer.TimeLeft <= 0)
+            _player.SetPhysicsProcess(true);
+
         if (_actionHeld)
+        {
             Use();
+        }
     }
 
     public void Use()
@@ -120,11 +145,11 @@ public partial class HandheldController : Node2D
         _timer.Start(_cooldown);
     }
 
-    private void StartDraw()
+    async void StartDraw()
     {
         RawInventoryItem projectile = new RawInventoryItem(_projectile.item.ID, _projectile.item.Name, 1, _projectile.item.StackSize);
 
-        if (PlayerInventoryController.RemoveItemFromInventory(projectile) == false)
+        if (await PlayerInventoryController.RemoveItemFromInventory(projectile) == false)
         {
             GD.Print("Handheld: out of ammo");
             return;
@@ -141,6 +166,7 @@ public partial class HandheldController : Node2D
     public void Release()
     {
         _actionHeld = false;
+        _player.SetPhysicsProcess(true);
 
         if (_ranged)
         {
@@ -174,10 +200,11 @@ public partial class HandheldController : Node2D
         ProjectileController projectile = (ProjectileController)_projectilePrefab.Instantiate();
         GetParent().AddChild(projectile);
 
-        _attack.damage *= power;
+        _attack.damage *= Mathf.RoundToInt(power);
         projectile.attack = _attack;
         projectile.speed = _speed * power;
         projectile.projectile = _projectile;
+        projectile.targetGroup = _targetGroup;
 
         projectile.Init();
 
@@ -192,7 +219,11 @@ public partial class HandheldController : Node2D
     {
         if (body is HitboxComponent hitbox)
         {
-            hitbox.ApplyAttack(_attack);
+            if (body.IsInGroup(_targetGroup))
+            {
+                hitbox.ApplyAttack(_attack);
+                _player.SetPhysicsProcess(false);
+            }
         }
     }
 }

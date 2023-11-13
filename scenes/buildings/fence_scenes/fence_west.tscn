@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://disyt3fuu77je"]
+[gd_scene load_steps=7 format=3 uid="uid://disyt3fuu77je"]
 
 [ext_resource type="Texture2D" uid="uid://dlq67503pdi34" path="res://NikkeTests/images/fence_w.png" id="1_lsfpb"]
+[ext_resource type="Script" path="res://scripts/farm/FenceHealth.cs" id="1_wari8"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_xoojr"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_vkqwf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_10v6f"]
 size = Vector2(2.625, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8al56"]
+size = Vector2(5, 151)
 
 [node name="Node2D" type="Node2D"]
 
@@ -19,9 +25,37 @@ position = Vector2(-64, -64)
 position = Vector2(61, -12)
 shape = SubResource("RectangleShape2D_10v6f")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["fence"]]
 collision_layer = 255
+collision_mask = 5
+script = ExtResource("1_wari8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-3, -75)
 shape = SubResource("RectangleShape2D_10v6f")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_xoojr")]
+position = Vector2(-3, -74)
+_parentScript = NodePath("")
+_hasHealthBar = true
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("4_vkqwf")]
+position = Vector2(-3, -75)
+_parentScript = NodePath("")
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
+position = Vector2(0.5, -1.5)
+shape = SubResource("RectangleShape2D_8al56")
+debug_color = Color(0.992157, 0, 0.262745, 0.419608)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.2, 0.356863, 1, 1)
+offset_left = -28.0
+offset_top = -77.0
+offset_right = 102.0
+offset_bottom = -50.0
+scale = Vector2(0.4, 0.4)
+show_percentage = false

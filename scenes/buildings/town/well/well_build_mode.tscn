@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMode.cs" id="1_hi3rr"]
 [ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="2_4qio6"]
-[ext_resource type="Shape2D" path="res://JanitaTests/Scripts/well_shape.tres" id="3_4biyn"]
+[ext_resource type="Shape2D" uid="uid://cexw2rv4qd6l6" path="res://scenes/farm/shapes/well_shape.tres" id="3_rpme0"]
 
 [node name="well2" type="Node2D"]
 scale = Vector2(0.15, 0.15)
@@ -19,7 +19,7 @@ position = Vector2(-32, -32)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-394, -394)
 scale = Vector2(2, 2)
-shape = ExtResource("3_4biyn")
+shape = ExtResource("3_rpme0")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

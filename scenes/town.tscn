@@ -791,6 +791,9 @@ position = Vector2(6.10352e-05, 6.10352e-05)
 [node name="TownHall" parent="Buildings" instance=ExtResource("11_r6hyg")]
 position = Vector2(104, -240)
 
+[node name="SaveableBuildings" type="Node2D" parent="Buildings"]
+position = Vector2(-6.10352e-05, -6.10352e-05)
+
 [node name="Enemies" type="Node2D" parent="."]
 y_sort_enabled = true
 position = Vector2(6.10352e-05, 6.10352e-05)

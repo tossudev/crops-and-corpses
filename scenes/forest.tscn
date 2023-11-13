@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cce2sygxgl033"]
+[gd_scene load_steps=22 format=3 uid="uid://cce2sygxgl033"]
 
 [ext_resource type="Texture2D" uid="uid://bhslt6uqn5lpc" path="res://assets/sprites/tiles/tile_grass.png" id="2_g8id8"]
 [ext_resource type="Texture2D" uid="uid://n8iftcgk0ti0" path="res://assets/sprites/tiles/Sand_tile.png" id="3_a7xy6"]
@@ -10,14 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://bp0rwsioa22xs" path="res://assets/sprites/foliage/sprite_bush.png" id="9_484hk"]
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="10_gpcxf"]
 [ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://scenes/villager/villager.tscn" id="11_civu1"]
-[ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/inventory/player_inventory.tscn" id="12_0u7ds"]
-[ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="13_6xujt"]
-[ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://scenes/ui/building_menu.tscn" id="14_c1748"]
-[ext_resource type="PackedScene" uid="uid://c1r6la2nplhqp" path="res://scenes/ui/DayCounterLabel.tscn" id="15_5yel2"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="16_rit5n"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="17_ay1u5"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_g46xp"]
-[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://scenes/world/sunlight_container.tscn" id="18_j47l1"]
+[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://scenes/world/SunlightContainer.tscn" id="18_j47l1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgdku"]
 texture = ExtResource("2_g8id8")
@@ -193,32 +189,6 @@ position = Vector2(-640, 384)
 
 [node name="NPC" parent="Enemies" instance=ExtResource("11_civu1")]
 position = Vector2(-840, -200)
-
-[node name="Overlay" type="CanvasLayer" parent="."]
-
-[node name="PlayerInventory" parent="Overlay" instance=ExtResource("12_0u7ds")]
-
-[node name="CraftingWindow" parent="Overlay" instance=ExtResource("13_6xujt")]
-
-[node name="TestInfo" type="Label" parent="Overlay"]
-offset_left = 8.0
-offset_top = 4.0
-offset_right = 960.0
-offset_bottom = 100.0
-theme_override_font_sizes/font_size = 32
-text = "Press 'E' to toggle inventory"
-
-[node name="BuildingMenu" parent="Overlay" node_paths=PackedStringArray("_buildings", "_player") instance=ExtResource("14_c1748")]
-_buildings = NodePath("../../Buildings")
-_archerTowerScene = null
-_archerTowerGhostScene = null
-_wellScene = null
-_wellGhostScene = null
-_archerTowerIcon = null
-_wellIcon = null
-_player = NodePath("../../Objects/Player")
-
-[node name="DayCounterLabel" parent="Overlay" instance=ExtResource("15_5yel2")]
 
 [node name="farm_manager" parent="." instance=ExtResource("16_rit5n")]
 

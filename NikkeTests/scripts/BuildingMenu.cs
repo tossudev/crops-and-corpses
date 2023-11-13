@@ -270,11 +270,7 @@ public partial class BuildingMenu : Control
     private void BuildingMode()
 	{
         _buildButton.Disabled = true;
-        _buildMenu.Hide();
-        //_buildButton.ButtonPressed = false;
-        //_player.SetPhysicsProcess(false);
-
-        //Input.MouseMode = Input.MouseModeEnum.Hidden;      
+        _buildMenu.Hide();     
 
         _ghostBuilding = _currentBuilding.buildingModeScene.Instantiate() as Node2D;
 

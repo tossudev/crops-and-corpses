@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c0o7irtwrvayp"]
+[gd_scene load_steps=20 format=3 uid="uid://c0o7irtwrvayp"]
 
 [ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_qt5pe"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_xoqnb"]
@@ -10,9 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="10_4qh86"]
 [ext_resource type="PackedScene" uid="uid://disyt3fuu77je" path="res://scenes/buildings/fence_scenes/fence_west.tscn" id="11_3dwxc"]
 [ext_resource type="PackedScene" uid="uid://e58507ft315b" path="res://scenes/buildings/fence_scenes/fence_north.tscn" id="12_moe38"]
-[ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/inventory/player_inventory.tscn" id="12_o06t2"]
-[ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="13_swis2"]
-[ext_resource type="PackedScene" path="res://scenes/ui/DayCounterLabel.tscn" id="15_dr27d"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="16_pefaa"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="16_s7swj"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="17_d0coo"]
@@ -459,22 +456,6 @@ position = Vector2(-2624, 120)
 
 [node name="Node2D8" parent="Objects/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
 position = Vector2(-2624, 272)
-
-[node name="Overlay" type="CanvasLayer" parent="."]
-
-[node name="PlayerInventory" parent="Overlay" instance=ExtResource("12_o06t2")]
-
-[node name="CraftingWindow" parent="Overlay" instance=ExtResource("13_swis2")]
-
-[node name="TestInfo" type="Label" parent="Overlay"]
-offset_left = 8.0
-offset_top = 4.0
-offset_right = 960.0
-offset_bottom = 100.0
-theme_override_font_sizes/font_size = 32
-text = "Press 'E' to toggle inventory"
-
-[node name="DayCounterLabel" parent="Overlay" instance=ExtResource("15_dr27d")]
 
 [node name="TaskPoint" type="Marker2D" parent="." groups=["Taskpoint"]]
 visible = false

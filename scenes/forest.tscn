@@ -1,5 +1,6 @@
-[gd_scene load_steps=33 format=3 uid="uid://cce2sygxgl033"]
+[gd_scene load_steps=37 format=3 uid="uid://cce2sygxgl033"]
 
+[ext_resource type="Texture2D" uid="uid://lcg5swlsccjt" path="res://assets/sprites/tiles/Burnt_grass2_tile.png" id="1_ehunh"]
 [ext_resource type="Texture2D" uid="uid://ehsp5k83fvvb" path="res://assets/sprites/tiles/grass_flowers2_tile.png" id="1_sbei6"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/water.gdshader" id="2_3pryh"]
 [ext_resource type="Texture2D" uid="uid://wx026lyp8qku" path="res://assets/sprites/tiles/grass_flowers_tile.png" id="2_5tcwd"]
@@ -13,13 +14,27 @@
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="7_jud20"]
 [ext_resource type="Texture2D" uid="uid://wis4r15rhkuo" path="res://assets/sprites/foliage/sprite_rock.png" id="8_enyil"]
 [ext_resource type="Texture2D" uid="uid://bp0rwsioa22xs" path="res://assets/sprites/foliage/sprite_bush.png" id="9_484hk"]
-[ext_resource type="PackedScene" uid="uid://4p7m38jvun6e" path="res://scenes/world/tree2.tscn" id="11_r6rlm"]
-[ext_resource type="PackedScene" uid="uid://bykmle4l5oo8c" path="res://scenes/world/tree3.tscn" id="12_0nbqh"]
+[ext_resource type="PackedScene" path="res://scenes/world/tree2.tscn" id="11_r6rlm"]
+[ext_resource type="PackedScene" uid="uid://f0c6g3ysjw81" path="res://scenes/world/tree3.tscn" id="12_0nbqh"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="16_rit5n"]
 [ext_resource type="PackedScene" uid="uid://3ct83j0jgteb" path="res://scenes/buildings/town/house/house.tscn" id="16_tadus"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="17_ay1u5"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_g46xp"]
 [ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://scenes/world/SunlightContainer.tscn" id="18_j47l1"]
+[ext_resource type="Texture2D" uid="uid://q5wxg1if5hb8" path="res://assets/sprites/foliage/tree_2.png" id="22_r2sim"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n5je7"]
+texture = ExtResource("1_ehunh")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_b261q"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_n5je7")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5o3xo"]
 texture = ExtResource("5_5m7lu")
@@ -101,6 +116,13 @@ offset_bottom = 4503.0
 mouse_filter = 2
 color = Color(0.113725, 0.52549, 0.698039, 1)
 
+[node name="MapWalls" type="TileMap" parent="."]
+visible = false
+position = Vector2(1436, 283)
+tile_set = SubResource("TileSet_b261q")
+format = 2
+layer_0/tile_data = PackedInt32Array(-2097191, 1, 0, -2097190, 1, 0, -2097189, 1, 0, -2097188, 1, 0, -2097187, 1, 0, -2097186, 1, 0, -2097185, 1, 0, -2097184, 1, 0, -2097183, 1, 0, -2097182, 1, 0, -2097181, 1, 0, -2097180, 1, 0, -2097179, 1, 0, -2097178, 1, 0, -2097177, 1, 0, -2097176, 1, 0, -2097175, 1, 0, -2097174, 1, 0, -2097173, 1, 0, -2097172, 1, 0, -2097171, 1, 0, -2097170, 1, 0, -2097169, 1, 0, -2097168, 1, 0, -2097167, 1, 0, -2097166, 1, 0, -2097165, 1, 0, -2097164, 1, 0, -2097163, 1, 0, -2097162, 1, 0, -2097161, 1, 0, -2097160, 1, 0, -2097159, 1, 0, -2097158, 1, 0, -2097157, 1, 0, -2097156, 1, 0, -2097155, 1, 0, -2097154, 1, 0, -2097153, 1, 0, -2162688, 1, 0, -2162687, 1, 0, -2162686, 1, 0, -2097151, 1, 0, -2031615, 1, 0, -2097150, 1, 0, -2031614, 1, 0, -2162685, 1, 0, -2097149, 1, 0, -2031613, 1, 0, -2162684, 1, 0, -2097148, 1, 0, -2031612, 1, 0, -2162683, 1, 0, -2097147, 1, 0, -2031611, 1, 0, -2162682, 1, 0, -2097146, 1, 0, -2031610, 1, 0, -2162681, 1, 0, -2097145, 1, 0, -2031609, 1, 0, -2162680, 1, 0, -2097144, 1, 0, -2031608, 1, 0, -2162679, 1, 0, -2097143, 1, 0, -2031607, 1, 0, -2162678, 1, 0, -2097142, 1, 0, -2031606, 1, 0, -2162677, 1, 0, -2097141, 1, 0, -2031605, 1, 0, -2031638, 1, 0, -1966102, 1, 0, -2031637, 1, 0, -1966101, 1, 0, -2031636, 1, 0, -1966100, 1, 0, -2031635, 1, 0, -1966099, 1, 0, -2031634, 1, 0, -1966098, 1, 0, -2031633, 1, 0, -1966097, 1, 0, -2031632, 1, 0, -1966096, 1, 0, -2031631, 1, 0, -1966095, 1, 0, -2031630, 1, 0, -1966094, 1, 0, -2031629, 1, 0, -1966093, 1, 0, -2031628, 1, 0, -1966092, 1, 0, -2031627, 1, 0, -1966091, 1, 0, -2031626, 1, 0, -1966090, 1, 0, -2031625, 1, 0, -1966089, 1, 0, -2031624, 1, 0, -1966088, 1, 0, -2031623, 1, 0, -1966087, 1, 0, -2031622, 1, 0, -1966086, 1, 0, -2031621, 1, 0, -1966085, 1, 0, -2031620, 1, 0, -1966084, 1, 0, -2031619, 1, 0, -1966083, 1, 0, -2031618, 1, 0, -1966082, 1, 0, -2031617, 1, 0, -1966081, 1, 0, -2097152, 1, 0, -2031616, 1, 0, -2031655, 1, 0, -1966119, 1, 0, -2031654, 1, 0, -1966118, 1, 0, -2031653, 1, 0, -1966117, 1, 0, -2031652, 1, 0, -1966116, 1, 0, -2031651, 1, 0, -1966115, 1, 0, -2031650, 1, 0, -1966114, 1, 0, -2031649, 1, 0, -1966113, 1, 0, -2031648, 1, 0, -1966112, 1, 0, -2031647, 1, 0, -1966111, 1, 0, -2031646, 1, 0, -1966110, 1, 0, -2031645, 1, 0, -1966109, 1, 0, -2031644, 1, 0, -1966108, 1, 0, -2031643, 1, 0, -1966107, 1, 0, -2031642, 1, 0, -1966106, 1, 0, -2031641, 1, 0, -1966105, 1, 0, -2031640, 1, 0, -1966104, 1, 0, -2031639, 1, 0, -1966103, 1, 0)
+
 [node name="WaterTiles" type="TileMap" parent="."]
 z_index = -15
 tile_set = SubResource("TileSet_6gttr")
@@ -125,7 +147,7 @@ layer_0/tile_data = PackedInt32Array(786402, 6, 0, 851938, 6, 0, 917474, 6, 0, 9
 y_sort_enabled = true
 
 [node name="Player" parent="Objects" node_paths=PackedStringArray("_camera") instance=ExtResource("6_d65ob")]
-position = Vector2(-7647, -3133)
+position = Vector2(465, -3261)
 _camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
@@ -322,7 +344,7 @@ position = Vector2(-5861, -271)
 _animationPlayer = NodePath("../Tree7/AnimationPlayer")
 
 [node name="Tree19" parent="Objects/Deco/Trees" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
-position = Vector2(911, -3343)
+position = Vector2(911, -2682)
 _animationPlayer = NodePath("../Tree/AnimationPlayer")
 
 [node name="Tree20" parent="Objects/Deco/Trees" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("11_r6rlm")]
@@ -457,22 +479,427 @@ texture_scale = 4.0
 
 [node name="SunlightContainer" parent="." instance=ExtResource("18_j47l1")]
 
-[node name="Tree" parent="." instance=ExtResource("12_0nbqh")]
-position = Vector2(-7544, 1228)
+[node name="TreeDecorGroup1" type="Node" parent="."]
 
-[node name="Tree2" parent="." instance=ExtResource("11_r6rlm")]
-position = Vector2(-7118, 1012)
+[node name="TreeDecor12" type="Node2D" parent="TreeDecorGroup1"]
+position = Vector2(-3368, -3899)
 
-[node name="Tree3" parent="." instance=ExtResource("12_0nbqh")]
-position = Vector2(-6661, 1304)
+[node name="Spruce" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor12"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(141, -20)
+texture = ExtResource("22_r2sim")
+flip_h = true
 
-[node name="Tree4" parent="." instance=ExtResource("11_r6rlm")]
-position = Vector2(-6414, 1508)
+[node name="Spruce2" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor12"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(290, 32)
+texture = ExtResource("22_r2sim")
 
-[node name="Tree5" parent="." instance=ExtResource("12_0nbqh")]
-position = Vector2(-6687, 1717)
+[node name="Spruce3" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor12"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(-4, 13)
+texture = ExtResource("22_r2sim")
 
-[node name="Tree6" parent="." instance=ExtResource("7_jud20")]
-position = Vector2(-5944, 1717)
+[node name="Spruce4" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor12"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(108, 72)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce5" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor12"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(-103, 66)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce6" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor12"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(399, 102)
+texture = ExtResource("22_r2sim")
+
+[node name="TreeDecor11" type="Node2D" parent="TreeDecorGroup1"]
+position = Vector2(-2804, -3827)
+
+[node name="Spruce" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor11"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(141, -20)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce2" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor11"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(290, 32)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce3" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor11"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(-4, 13)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce4" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor11"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(108, 72)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce5" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor11"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(-103, 66)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce6" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor11"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(399, 102)
+texture = ExtResource("22_r2sim")
+
+[node name="TreeDecor10" type="Node2D" parent="TreeDecorGroup1"]
+position = Vector2(-2304, -3895)
+
+[node name="Spruce" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor10"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(141, -20)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce2" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor10"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(290, 32)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce3" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor10"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(-4, 13)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce4" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor10"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(108, 72)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce5" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor10"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(-103, 66)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce6" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor10"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(399, 102)
+texture = ExtResource("22_r2sim")
+
+[node name="TreeDecor9" type="Node2D" parent="TreeDecorGroup1"]
+position = Vector2(-1800, -3827)
+
+[node name="Spruce" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor9"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(141, -20)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce2" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor9"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(290, 32)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce3" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor9"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(-4, 13)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce4" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor9"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(108, 72)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce5" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor9"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(-103, 66)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce6" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor9"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(399, 102)
+texture = ExtResource("22_r2sim")
+
+[node name="TreeDecor8" type="Node2D" parent="TreeDecorGroup1"]
+position = Vector2(2255, -3848)
+
+[node name="Spruce" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor8"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(141, -20)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce2" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor8"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(290, 32)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce3" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor8"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(-4, 13)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce4" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor8"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(108, 72)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce5" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor8"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(-103, 66)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce6" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor8"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(399, 102)
+texture = ExtResource("22_r2sim")
+
+[node name="TreeDecor" type="Node2D" parent="TreeDecorGroup1"]
+z_index = -1
+position = Vector2(448, -3827)
+
+[node name="Spruce" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(141, -20)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce2" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(290, 32)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce3" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(-4, 13)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce4" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(108, 72)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce5" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(-103, 66)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce6" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(399, 102)
+texture = ExtResource("22_r2sim")
+
+[node name="TreeDecor2" type="Node2D" parent="TreeDecorGroup1"]
+position = Vector2(-132, -3867)
+
+[node name="Spruce" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor2"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(141, -20)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce2" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor2"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(290, 32)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce3" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor2"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(-4, 13)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce4" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor2"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(108, 72)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce5" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor2"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(-103, 66)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce6" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor2"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(399, 102)
+texture = ExtResource("22_r2sim")
+
+[node name="TreeDecor3" type="Node2D" parent="TreeDecorGroup1"]
+position = Vector2(-741, -3864)
+
+[node name="Spruce" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor3"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(141, -20)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce2" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor3"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(290, 32)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce3" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor3"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(-4, 13)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce4" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor3"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(108, 72)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce5" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor3"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(-103, 66)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce6" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor3"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(399, 102)
+texture = ExtResource("22_r2sim")
+
+[node name="TreeDecor4" type="Node2D" parent="TreeDecorGroup1"]
+position = Vector2(-1252, -3839)
+
+[node name="Spruce" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor4"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(141, -20)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce2" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor4"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(290, 32)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce3" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor4"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(-4, 13)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce4" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor4"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(108, 72)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce5" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor4"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(-103, 66)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce6" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor4"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(399, 102)
+texture = ExtResource("22_r2sim")
+
+[node name="TreeDecor5" type="Node2D" parent="TreeDecorGroup1"]
+position = Vector2(1014, -3838)
+
+[node name="Spruce" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor5"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(141, -20)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce2" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor5"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(290, 32)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce3" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor5"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(-4, 13)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce4" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor5"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(108, 72)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce5" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor5"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(-103, 66)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce6" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor5"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(399, 102)
+texture = ExtResource("22_r2sim")
+
+[node name="TreeDecor6" type="Node2D" parent="TreeDecorGroup1"]
+position = Vector2(1577, -3852)
+
+[node name="Spruce" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor6"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(141, -20)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce2" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor6"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(290, 32)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce3" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor6"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(-4, 13)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce4" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor6"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(108, 72)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce5" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor6"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(-103, 66)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce6" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor6"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(399, 102)
+texture = ExtResource("22_r2sim")
+
+[node name="TreeDecor13" type="Node2D" parent="TreeDecorGroup1"]
+position = Vector2(1934, -3692)
+
+[node name="Spruce" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor13"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(141, -20)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce2" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor13"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(290, 32)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce3" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor13"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(-4, 13)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce4" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor13"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(108, 72)
+texture = ExtResource("22_r2sim")
+flip_h = true
+
+[node name="Spruce5" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor13"]
+modulate = Color(0.729412, 0.686275, 0.917647, 1)
+position = Vector2(-103, 66)
+texture = ExtResource("22_r2sim")
+
+[node name="Spruce6" type="Sprite2D" parent="TreeDecorGroup1/TreeDecor13"]
+modulate = Color(0.529412, 0.529412, 0.796078, 1)
+position = Vector2(399, 102)
+texture = ExtResource("22_r2sim")
 
 [editable path="Objects/Deco/Other/street_sign_post"]

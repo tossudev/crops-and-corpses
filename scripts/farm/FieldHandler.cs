@@ -47,8 +47,9 @@ public partial class FieldHandler : Node2D
 			PlayerInventoryController.selectedItem.stackSize));
 		
 		TextureRect plantTexture =  GetNode<TextureRect>(_nodePath);
-		plantTexture.AddChild(_plant);
 		_plant.myField = this;
+		plantTexture.AddChild(_plant);
+		
 		plantTexture.Visible=true;
 		_currentPlants++;
 	}

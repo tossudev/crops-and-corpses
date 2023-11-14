@@ -15,6 +15,7 @@ _plantType = 2
 _seedName = "mushroom seed"
 _description = "ShroOooms"
 _maxCycles = 3
+_maxHarvestableAmount = 3
 _seedTexture = ExtResource("2_u2f41")
 _sproutTexture = ExtResource("3_ku8ep")
 _plantTexture = ExtResource("4_j8elg")

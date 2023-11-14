@@ -11,6 +11,7 @@ public partial class Plant : Node2D
 	[Export] float _growthCycleLength = 5f;
 	[Export] int _maxCycles;
 
+[Export] int _maxHarvestableAmount;
 	[Export] Texture2D _seedTexture;
 	[Export] Texture2D _sproutTexture;
 	[Export] Texture2D _plantTexture;
@@ -73,7 +74,7 @@ public partial class Plant : Node2D
 	
 	int _progressValue=0;
 	bool _isPlayerNearby=false;
-
+	bool _harvested=false;
 	double _progressTimer;
 	int index=0;
  	#endregion
@@ -168,7 +169,6 @@ public partial class Plant : Node2D
 	}
 	void InteractWithPlant(Node viewport, InputEvent @event, long shapeIdx)
 	{
-		GD.Print("Harvested: "+plantName);
 		if(@event is InputEventMouseButton button && _isPlayerNearby)
 		{
 			
@@ -273,10 +273,13 @@ public partial class Plant : Node2D
 		trect.Texture = plantTexture;
 	}
 	async void Harvest(){
-		if(_state == GrowthState.IsHarvestable){
+		if(_state == GrowthState.IsHarvestable && !_harvested){
+			_harvested=true;
 			// Add to inventory whatever collected
-			GD.Print("Harvested: "+plantName);
-			RawInventoryItem _plant = new RawInventoryItem(_harvestablePlant.ID, _harvestablePlant.Name, 4, _harvestablePlant.StackSize);
+			 Random random = new Random();
+        	 int randomAmount = random.Next(1, _maxHarvestableAmount);
+			GD.Print("Harvested: " +plantName +" x"+randomAmount);
+			RawInventoryItem _plant = new RawInventoryItem(_harvestablePlant.ID, _harvestablePlant.Name, randomAmount, _harvestablePlant.StackSize);
 			await PlayerInventoryController.AddItem(_plant);
 		}else if(_state == GrowthState.IsDead){
 			GD.Print("Cleared plant: "+plantName);

@@ -15,6 +15,7 @@ _plantType = 5
 _seedName = "lupine seed"
 _description = "Pretty"
 _maxCycles = 3
+_maxHarvestableAmount = 1
 _seedTexture = ExtResource("2_u7sct")
 _sproutTexture = ExtResource("3_6jifj")
 _plantTexture = ExtResource("4_uj1fy")

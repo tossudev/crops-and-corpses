@@ -15,6 +15,7 @@ _plantType = 6
 _seedName = "poppy seed"
 _description = "Red flower"
 _maxCycles = 3
+_maxHarvestableAmount = 1
 _seedTexture = ExtResource("2_gudm4")
 _sproutTexture = ExtResource("3_hpaiq")
 _plantTexture = ExtResource("4_ucsto")

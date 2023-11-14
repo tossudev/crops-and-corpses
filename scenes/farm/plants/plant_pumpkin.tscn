@@ -14,6 +14,7 @@ _plantType = 1
 _seedName = "pumpkin seed"
 _description = "Squishy"
 _maxCycles = 3
+_maxHarvestableAmount = 1
 _seedTexture = ExtResource("2_gjo7g")
 _sproutTexture = ExtResource("3_6ejsm")
 _plantTexture = ExtResource("4_c54b4")

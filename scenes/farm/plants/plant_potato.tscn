@@ -15,6 +15,7 @@ _seedName = "potato seed"
 _description = "Pototoes"
 _growthCycleLength = 15.0
 _maxCycles = 5
+_maxHarvestableAmount = 6
 _seedTexture = ExtResource("2_op64y")
 _sproutTexture = ExtResource("3_27elw")
 _plantTexture = ExtResource("4_sv24x")

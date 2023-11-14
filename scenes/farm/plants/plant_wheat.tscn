@@ -15,6 +15,7 @@ _plantType = 3
 _seedName = "wheat seed"
 _description = "Basic ingredient for bread"
 _maxCycles = 3
+_maxHarvestableAmount = 8
 _seedTexture = ExtResource("2_p70tt")
 _sproutTexture = ExtResource("3_wkide")
 _plantTexture = ExtResource("4_ylc87")

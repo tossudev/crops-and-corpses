@@ -11,6 +11,9 @@ public partial class Fence : Node2D
     [Export]
     public bool centered = true;
 
+    [Export]
+    private int _northDoorSpot = -1, _southDoorSpot = -1, _westDoorSpot = -1, _eastDoorSpot = -1;
+
     Node2D _fences;
 
     Area2D _inputArea;
@@ -45,7 +48,12 @@ public partial class Fence : Node2D
                 x += 128;
             }
 
-            if (Math.Floor(fenceLengthY / 2f) == i)
+            if (_westDoorSpot == i)
+            {
+                InstantiateDoor(x - 128, y + 40, _fenceNorth, x, y, _fenceEast);
+                continue;
+            }
+            else if (Math.Floor(fenceLengthY / 2f) == i && _westDoorSpot == -1)
             {
                 InstantiateDoor(x - 128, y + 40, _fenceNorth, x, y, _fenceEast);
                 continue;
@@ -59,7 +67,12 @@ public partial class Fence : Node2D
             int x = (fenceLengthX / 2) * 128;
             int y = (fenceLengthY / 2) * 128 - i * 128;
 
-            if (Math.Floor(fenceLengthY / 2f) == i)
+            if (_eastDoorSpot == i)
+            {
+                InstantiateDoor(x + 128, y + 40, _fenceNorth, x, y, _fenceWest);
+                continue;
+            }
+            else if (Math.Floor(fenceLengthY / 2f) == i && _eastDoorSpot == -1)
             {
                 InstantiateDoor(x + 128, y + 40, _fenceNorth, x, y, _fenceWest);
                 continue;
@@ -78,7 +91,12 @@ public partial class Fence : Node2D
                 y -= 128;
             }
 
-            if (Math.Floor(fenceLengthX / 2f) == i)
+            if (_northDoorSpot == i)
+            {
+                InstantiateDoor(x, y, _fenceWest, x, y, _fenceNorth);
+                continue;
+            }
+            else if (Math.Floor(fenceLengthX / 2f) == i && _northDoorSpot == -1)
             {
                 InstantiateDoor(x, y, _fenceWest, x, y, _fenceNorth);
                 continue;
@@ -92,7 +110,12 @@ public partial class Fence : Node2D
             int x = (fenceLengthX / 2) * 128 - i * 128;
             int y = (fenceLengthY / 2) * 128;
 
-            if (Math.Floor(fenceLengthX / 2f) == i)
+            if (_southDoorSpot == i)
+            {
+                InstantiateDoor(x + 128, y + 90, _fenceEast, x, y, _fenceNorth);
+                continue;
+            }
+            else if (Math.Floor(fenceLengthX / 2f) == i && _southDoorSpot == -1)
             {
                 InstantiateDoor(x + 128, y + 90, _fenceEast, x, y, _fenceNorth);
                 continue;

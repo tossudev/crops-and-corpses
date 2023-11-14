@@ -20,8 +20,6 @@ public partial class BuildingMenu : Control
     [Export]
 	Node2D _buildings;
     [Export]
-    Button _buildButton;
-    [Export]
     ScrollContainer _buildMenu;
     [Export]
     Control _buildMenuControl;
@@ -77,10 +75,35 @@ public partial class BuildingMenu : Control
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-        if (Input.IsActionJustPressed("ui_cancel"))
+        if (Input.IsActionJustPressed("open_build_menu"))
         {
-            _buildButton.ButtonPressed = false;
+            if(_buildMenu.Visible == false)
+            {
+                OpenBuildMenu();
+            }
+            else
+            {
+                CloseBuildMenu();
+            }
         }
+        else if (Input.IsActionJustPressed("ui_cancel"))
+        {
+            CloseBuildMenu();
+        }
+    }
+
+    private void OpenBuildMenu()
+    {
+        _player.SetPhysicsProcess(false);
+        _player.SetProcessUnhandledInput(false);
+        _buildMenu.Show();
+    }
+
+    public void CloseBuildMenu()
+    {
+        _player.SetPhysicsProcess(true);
+        _player.SetProcessUnhandledInput(true);
+        _buildMenu.Hide();
     }
 
     private void CreateBuildMenu()
@@ -255,31 +278,8 @@ public partial class BuildingMenu : Control
         _resources -= _currentBuilding.price;
     }
 
-	private void _on_build_button_toggled(bool isToggledOn)
-	{
-        if (isToggledOn)
-		{
-            _player.SetPhysicsProcess(false);
-            _player.SetProcessUnhandledInput(false);
-			_buildMenu.Show();
-		}
-		else 
-		{
-            _player.SetPhysicsProcess(true);
-            _player.SetProcessUnhandledInput(true);
-            _buildMenu.Hide();
-			_buildButton.ReleaseFocus();
-        }
-	}
-
-    public void EnableBuildButton()
-    {
-        _buildButton.Disabled = false;
-    }
-
     private void BuildingMode()
 	{
-        _buildButton.Disabled = true;
         _buildMenu.Hide();     
 
         _ghostBuilding = _currentBuilding.buildingModeScene.Instantiate() as Node2D;

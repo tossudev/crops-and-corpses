@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://f5m7wypxd5t7"]
+[gd_scene load_steps=15 format=3 uid="uid://bsoen384q11gf"]
 
 [ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMenu.cs" id="1_1usej"]
 [ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://scenes/farm/farm_plot.tscn" id="2_6b0va"]
@@ -14,7 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://cmyh3qeorleuc" path="res://NikkeTests/images/archer_tower_top.png" id="10_henx8"]
 [ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="11_orgxb"]
 
-[node name="Control" type="Control" node_paths=PackedStringArray("_buildButton", "_buildMenu", "_buildMenuControl", "_vBoxContainer")]
+[sub_resource type="LabelSettings" id="LabelSettings_3htb0"]
+font_size = 32
+
+[node name="Control" type="Control" node_paths=PackedStringArray("_buildMenu", "_buildMenuControl", "_vBoxContainer")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -28,7 +31,6 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1usej")
-_buildButton = NodePath("BuildingMenu/BuildButton")
 _buildMenu = NodePath("BuildingMenu/BuildingMenu")
 _buildMenuControl = NodePath("BuildingMenu/BuildingMenu/Control")
 _vBoxContainer = NodePath("BuildingMenu/BuildingMenu/Control/VBoxContainer")
@@ -83,22 +85,18 @@ offset_right = 350.1
 offset_bottom = 320.9
 grow_horizontal = 2
 
-[node name="BuildButton" type="Button" parent="BuildingMenu"]
-visibility_layer = 512
-custom_minimum_size = Vector2(200, 100)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -850.0
-offset_top = 416.0
-offset_right = -650.0
-offset_bottom = 516.0
-grow_horizontal = 2
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -23.47
+anchor_top = -12.97
+anchor_right = -23.47
+anchor_bottom = -12.97
+offset_left = 10.8
+offset_top = 91.8
+offset_right = 443.8
+offset_bottom = 178.8
+grow_horizontal = 0
 grow_vertical = 2
-theme_override_font_sizes/font_size = 64
-toggle_mode = true
-text = "Build"
-
-[connection signal="toggled" from="BuildingMenu/BuildButton" to="." method="_on_build_button_toggled"]
+text = "Press 'V' to build"
+label_settings = SubResource("LabelSettings_3htb0")

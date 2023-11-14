@@ -120,12 +120,12 @@ public partial class ArcherTower : Node2D
 
         if (_closestEnemy == null || _projectileStartPosition.GlobalPosition.DistanceTo(_closestEnemy.GlobalPosition) > _attackRange) 
         {
-            //return false;
+            return false;
         }
         else
         {
-            //_attack.direction = _projectileStartPosition.GlobalPosition.DirectionTo(_closestEnemy.GlobalPosition);
-            //return true;
+            _attack.direction = _projectileStartPosition.GlobalPosition.DirectionTo(_closestEnemy.GlobalPosition);
+            return true;
         }
 
         

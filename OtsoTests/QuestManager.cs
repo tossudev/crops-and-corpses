@@ -9,11 +9,9 @@ public partial class QuestManager : Node
 
 	public Node2D[] QuestPoints;
 
-	
+    public int CurrentDifficulty { get; internal set; }
 
-
-
-	public void AddQuest(string title, string description)
+    public void AddQuest(string title, string description)
 	{
 		
 		
@@ -81,4 +79,8 @@ public partial class QuestManager : Node
         return _quests.FindAll(quest => !quest.IsCompleted);
     }
 
+    internal object GetCurrentQuest()
+    {
+        throw new NotImplementedException();
+    }
 }

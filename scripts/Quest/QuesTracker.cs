@@ -6,7 +6,7 @@ public partial class QuesTracker : Node
 {
 	private Node2D[] ForrestQuestPoints;
 	private Node2D[] ForrestQuestPoints2;
-	private Node2D[] ForrestQuestPoints3;
+
 	private Node2D[] RuinsQuestPoints;
 	private Node2D[] CaveQuestPoints;
 
@@ -25,16 +25,7 @@ public partial class QuesTracker : Node
 		RuinsQuestScene = GD.Load<PackedScene>("res://scenes/Quests/RuinsQuest.tscn");
 		CaveQuestScene = GD.Load<PackedScene>("res://scenes/Quests/CaveQuest.tscn");
 		// if quest is active, spawn quest
-		// if quest is not active, do nothing
-
-		if(questManager.GetCurrentQuest() != null)
-		{
-			SpawnQuest();
-		}
-		else
-		{
-			GD.Print("No quest active");
-		}
+		
 	}
 
 	public void SpawnQuest()
@@ -88,16 +79,21 @@ public partial class QuesTracker : Node
 	private void SpawnForrestQuest()
 	{
 		Node2D[] questPoints = ForrestQuestPoints;
-		if (questManager.CurrentDifficulty == 2)
+		if ( questManager.CurrentDifficulty == 2)
 		{
-			questPoints = questPoints.Union(ForrestQuestPoints2).ToArray();
-		}
 
+			questPoints = questPoints.Union(ForrestQuestPoints2).ToArray();
+
+
+		}
 		if (questPoints.Length == 0)
 		{
 			GD.Print("No quest points found");
 			return;
 		}
+		
+		
+	
 
 		int randomIndex = random.Next(questPoints.Length);
 		var quest = (Node2D)ForrestQuestScene.Instantiate();

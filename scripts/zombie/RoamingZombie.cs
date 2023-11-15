@@ -1,17 +1,12 @@
 using Godot;
 using System;
-using System.Diagnostics;
-using System.Diagnostics.Tracing;
 
 public partial class RoamingZombie : CharacterBody2D
 {
-	// [Export] private float _damage;
 	[Export] private AudioStreamPlayer2D _audioStreamPlayer2D;
 	private Sprite2D _sprite;
 	private CharacterBody2D _player;
-	private Node2D _fence;
-	private Node2D _building;
-	private HitboxComponent _hitbox;
+	private HitboxComponent[] _hitboxes;
 	private Attack _attack;
 	private Vector2 _knockback = Vector2.Zero;
 	private Timer _timer;
@@ -23,9 +18,14 @@ public partial class RoamingZombie : CharacterBody2D
 	PackedScene instantiatedNPC;
 	private CompressedTexture2D strongZombieSprite;
 	private CompressedTexture2D mediumZombieSprite;
+	private bool _playerInRange = false;
+	private bool _fenceInRange = false;
+	private ulong entered;
+	private ulong exited;
 
 	public override void _Ready()
 	{
+		_hitboxes = new HitboxComponent[2];
 		instantiatedNPC = (PackedScene)GD.Load("res://scenes/villager/villager.tscn");
 		_rootNodePath = GetParent<Node2D>().GetPath();
 		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);
@@ -104,14 +104,15 @@ public partial class RoamingZombie : CharacterBody2D
 		if (body.IsInGroup("player"))
 		{
 			_player = (CharacterBody2D)body;
+			_playerInRange = true;
 
 			// direction from zombie to player
 			Vector2 _direction = (_player.GlobalPosition - this.GlobalPosition).Normalized();
 			_attack.direction = _direction;
 
-			_hitbox = _player.GetNodeOrNull<HitboxComponent>("HitboxComponent");
+			_hitboxes[0] = _player.GetNodeOrNull<HitboxComponent>("HitboxComponent");
 
-			if (_hitbox != null)
+			if (_hitboxes[0] != null)
 			{
                 //_hitbox.ApplyAttack(_attack);
                 if (_timer.TimeLeft <= 0)
@@ -125,17 +126,18 @@ public partial class RoamingZombie : CharacterBody2D
 			}
 		}
 
-		if(body.IsInGroup("fence"))
+		if(body.IsInGroup("fence") || body.IsInGroup("building"))
 		{			
-			_fence = (Node2D)body;
+			_fenceInRange = true;
+			entered = body.GetInstanceId();
 
-			// direction from zombie to fence
-			Vector2 _direction = (_fence.GlobalPosition - this.GlobalPosition).Normalized();
+			// direction from zombie to fence/building
+			Vector2 _direction = (body.GlobalPosition - this.GlobalPosition).Normalized();
 			_attack.direction = _direction;
 
-			_hitbox = _fence.GetParent().GetNodeOrNull<HitboxComponent>("HitboxComponent");
+			_hitboxes[1] = body.GetParent().GetNodeOrNull<HitboxComponent>("HitboxComponent");
 
-			if(_hitbox != null)
+			if(_hitboxes[1] != null)
 			{
                 if (_timer.TimeLeft <= 0)
                 {
@@ -144,46 +146,42 @@ public partial class RoamingZombie : CharacterBody2D
             }
 			else
 			{
-				GD.Print("ZOMBIE: No hitbox found on fence");
+				GD.Print("ZOMBIE: No hitbox found on fence/building. ");
 			}
 		}
-
-        if (body.IsInGroup("building"))
-        {
-            _building = (Node2D)body;
-
-            // direction from zombie to fence
-            Vector2 _direction = (_building.GlobalPosition - this.GlobalPosition).Normalized();
-            _attack.direction = _direction;
-
-            _hitbox = _building.GetParent().GetNodeOrNull<HitboxComponent>("HitboxComponent");
-
-            if (_hitbox != null)
-            {
-				if(_timer.TimeLeft <= 0)
-				{
-                    _timer.Start();
-                }
-            }
-            else
-            {
-                GD.Print("ZOMBIE: No hitbox found on building");
-            }
-        }
     }
 
 	private void OnAttackBoxExited(Node2D body)
 	{
-		_timer.Stop();
-	}
+		exited = body.GetInstanceId();
+		if (body.IsInGroup("player"))
+		{
+			_playerInRange = false;
+		}
 
+		if (body.IsInGroup("fence") || body.IsInGroup("building"))
+		{			
+			if (entered == exited)
+			{
+				_fenceInRange = false;
+			}			
+		}
+
+		if (!_playerInRange && !_fenceInRange)
+		{			
+			_timer.Stop();
+		}
+	}
 	private void OnTimerTimeout()
 	{
-		//GD.Print("attack player");
-		if (_hitbox != null && ZombieManager.playerAlive != false)
+		if (_playerInRange && _hitboxes[0] != null && ZombieManager.playerAlive)
 		{
-			_hitbox.ApplyAttack(_attack);
+			_hitboxes[0].ApplyAttack(_attack);
 		}
+		else if (_fenceInRange && _hitboxes[1] != null)
+		{
+			_hitboxes[1].ApplyAttack(_attack);
+		}		
 	}
 
 	private void OnUpdateStatsTimeout()

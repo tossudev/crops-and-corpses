@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 using System.Diagnostics.Tracing;
 
 public partial class RoamingZombie : CharacterBody2D
@@ -9,6 +10,7 @@ public partial class RoamingZombie : CharacterBody2D
 	private Sprite2D _sprite;
 	private CharacterBody2D _player;
 	private Node2D _fence;
+	private Node2D _building;
 	private HitboxComponent _hitbox;
 	private Attack _attack;
 	private Vector2 _knockback = Vector2.Zero;
@@ -111,9 +113,12 @@ public partial class RoamingZombie : CharacterBody2D
 
 			if (_hitbox != null)
 			{
-				//_hitbox.ApplyAttack(_attack);
-				_timer.Start();
-			}
+                //_hitbox.ApplyAttack(_attack);
+                if (_timer.TimeLeft <= 0)
+                {
+                    _timer.Start();
+                }
+            }
 			else
 			{
 				GD.Print("ZOMBIE: No hitbox found on player");
@@ -132,14 +137,40 @@ public partial class RoamingZombie : CharacterBody2D
 
 			if(_hitbox != null)
 			{
-				_timer.Start();
-			}
+                if (_timer.TimeLeft <= 0)
+                {
+                    _timer.Start();
+                }
+            }
 			else
 			{
 				GD.Print("ZOMBIE: No hitbox found on fence");
 			}
 		}
-	}
+
+        if (body.IsInGroup("building"))
+        {
+            _building = (Node2D)body;
+
+            // direction from zombie to fence
+            Vector2 _direction = (_building.GlobalPosition - this.GlobalPosition).Normalized();
+            _attack.direction = _direction;
+
+            _hitbox = _building.GetParent().GetNodeOrNull<HitboxComponent>("HitboxComponent");
+
+            if (_hitbox != null)
+            {
+				if(_timer.TimeLeft <= 0)
+				{
+                    _timer.Start();
+                }
+            }
+            else
+            {
+                GD.Print("ZOMBIE: No hitbox found on building");
+            }
+        }
+    }
 
 	private void OnAttackBoxExited(Node2D body)
 	{

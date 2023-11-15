@@ -1,13 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://54li2rwv5ov5"]
+[gd_scene load_steps=10 format=3 uid="uid://54li2rwv5ov5"]
 
 [ext_resource type="Texture2D" uid="uid://cmyh3qeorleuc" path="res://NikkeTests/images/archer_tower_top.png" id="1_0mgif"]
 [ext_resource type="Script" path="res://NikkeTests/scripts/ArcherTower.cs" id="1_ce0vn"]
 [ext_resource type="PackedScene" uid="uid://dqmfwe15dtgat" path="res://scenes/Combat/projectile.tscn" id="2_151wa"]
 [ext_resource type="Texture2D" uid="uid://bljqq2o52y2uy" path="res://NikkeTests/images/archer_tower_bot.png" id="2_lwh2a"]
 [ext_resource type="Resource" path="res://TinoTests/Resources/arrow.tres" id="3_6ttkk"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="6_hcsx8"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="7_u83t5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jggck"]
 size = Vector2(128, 255.656)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fuikt"]
+size = Vector2(122, 253)
 
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("_attackTimer", "_projectileStartPosition") groups=["ArcherTower"]]
 script = ExtResource("1_ce0vn")
@@ -36,7 +41,7 @@ position = Vector2(-64, -128)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_jggck")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["building"]]
 position = Vector2(-64, -128)
 collision_layer = 3
 collision_mask = 3
@@ -48,5 +53,36 @@ shape = SubResource("RectangleShape2D_jggck")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_hcsx8")]
+position = Vector2(-126, -75)
+_healItemPrefabs = Array[PackedScene]([])
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("7_u83t5")]
+position = Vector2(-126, -75)
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
+position = Vector2(61, -52.5)
+shape = SubResource("RectangleShape2D_fuikt")
+debug_color = Color(0.866667, 0, 0.133333, 0.419608)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.2, 0.356863, 1, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -247.0
+offset_right = 39.0
+offset_bottom = -220.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+show_percentage = false
 
 [connection signal="timeout" from="Timer" to="." method="OnShootTimerTimeout"]

@@ -42,11 +42,12 @@ public partial class RoamingZombie : CharacterBody2D
 			knockback = 500f
 		};
 
-		_updateStatsTimer.Start();		
+		_updateStatsTimer.Start();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		Velocity += _knockback;
 		MoveAndSlide();
 
 		if (_sprite != null)
@@ -64,12 +65,12 @@ public partial class RoamingZombie : CharacterBody2D
 
 	private void AttackReceived(Attack attack)
 	{
-		// var duration = 0.25f;
-		// _knockback = attack.direction * attack.knockback;
+		var duration = 0.25f;
+		_knockback = attack.direction * attack.knockback;
 
-		// var knockbackTween = GetTree().CreateTween();
-		// knockbackTween.Parallel().TweenProperty(this, "_knockback", new Vector2(0, 0), duration);
-		
+		var knockbackTween = GetTree().CreateTween();
+		knockbackTween.Parallel().TweenProperty(this, "_knockback", new Vector2(0, 0), duration);
+
 		/* GD.Print("2");
 		GD.Print(attack.effect); */
 		switch (attack.effect)
@@ -114,20 +115,20 @@ public partial class RoamingZombie : CharacterBody2D
 
 			if (_hitboxes[0] != null)
 			{
-                //_hitbox.ApplyAttack(_attack);
-                if (_timer.TimeLeft <= 0)
-                {
-                    _timer.Start();
-                }
-            }
+				//_hitbox.ApplyAttack(_attack);
+				if (_timer.TimeLeft <= 0)
+				{
+					_timer.Start();
+				}
+			}
 			else
 			{
 				GD.Print("ZOMBIE: No hitbox found on player");
 			}
 		}
 
-		if(body.IsInGroup("fence") || body.IsInGroup("building"))
-		{			
+		if (body.IsInGroup("fence") || body.IsInGroup("building"))
+		{
 			_fenceInRange = true;
 			entered = body.GetInstanceId();
 
@@ -137,19 +138,19 @@ public partial class RoamingZombie : CharacterBody2D
 
 			_hitboxes[1] = body.GetParent().GetNodeOrNull<HitboxComponent>("HitboxComponent");
 
-			if(_hitboxes[1] != null)
+			if (_hitboxes[1] != null)
 			{
-                if (_timer.TimeLeft <= 0)
-                {
-                    _timer.Start();
-                }
-            }
+				if (_timer.TimeLeft <= 0)
+				{
+					_timer.Start();
+				}
+			}
 			else
 			{
 				GD.Print("ZOMBIE: No hitbox found on fence/building. ");
 			}
 		}
-    }
+	}
 
 	private void OnAttackBoxExited(Node2D body)
 	{
@@ -160,15 +161,15 @@ public partial class RoamingZombie : CharacterBody2D
 		}
 
 		if (body.IsInGroup("fence") || body.IsInGroup("building"))
-		{			
+		{
 			if (entered == exited)
 			{
 				_fenceInRange = false;
-			}			
+			}
 		}
 
 		if (!_playerInRange && !_fenceInRange)
-		{			
+		{
 			_timer.Stop();
 		}
 	}
@@ -181,24 +182,24 @@ public partial class RoamingZombie : CharacterBody2D
 		else if (_fenceInRange && _hitboxes[1] != null)
 		{
 			_hitboxes[1].ApplyAttack(_attack);
-		}		
+		}
 	}
 
 	private void OnUpdateStatsTimeout()
-	{		
+	{
 		{
-			if(ZombieManager.type == ZombieManager.ZombieType.Weak)
+			if (ZombieManager.type == ZombieManager.ZombieType.Weak)
 			{
 				mediumZombieSprite = GD.Load<CompressedTexture2D>("res://LilianTests/Sprites/zombie_placeholder.png");
 				_sprite.Texture = mediumZombieSprite;
 			}
-			else if(ZombieManager.type == ZombieManager.ZombieType.Medium)
+			else if (ZombieManager.type == ZombieManager.ZombieType.Medium)
 			{
 				mediumZombieSprite = GD.Load<CompressedTexture2D>("res://LilianTests/Sprites/zombie_placeholder.png");
 				_sprite.Texture = mediumZombieSprite;
-				
+
 			}
-			else if(ZombieManager.type == ZombieManager.ZombieType.Strong)
+			else if (ZombieManager.type == ZombieManager.ZombieType.Strong)
 			{
 				GD.Print("Strong");
 				strongZombieSprite = GD.Load<CompressedTexture2D>("res://DaniTests/Sprites/strongZombie.png");
@@ -207,6 +208,6 @@ public partial class RoamingZombie : CharacterBody2D
 			_attack.damage = ZombieManager.damage;
 			_timer.WaitTime = ZombieManager.attackTime;
 			//GD.Print("DMG: " + _attack.damage + "\nwait time: " + _timer.WaitTime);
-		}		
-	}	
+		}
+	}
 }

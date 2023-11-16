@@ -31,10 +31,12 @@ scale = Vector2(2, 2)
 shape = ExtResource("3_emjl7")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["building"]]
+position = Vector2(0, -40)
+scale = Vector2(1, 0.6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-423.333, -446.667)
-scale = Vector2(2, 2)
+position = Vector2(-420, -280)
+scale = Vector2(2, 0.933333)
 shape = SubResource("RectangleShape2D_8jifx")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_e1ffk")]

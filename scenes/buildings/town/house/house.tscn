@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://3ct83j0jgteb"]
+[gd_scene load_steps=6 format=3 uid="uid://3ct83j0jgteb"]
 
 [ext_resource type="Texture2D" uid="uid://b5cv2b6w6tvm0" path="res://assets/sprites/buildings/housedesing2.png" id="1_soon6"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_driju"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_u5tml"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kphka"]
 size = Vector2(126.5, 126.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24awm"]
+size = Vector2(125.5, 125.5)
 
 [node name="House" type="Node2D" groups=["House"]]
 scale = Vector2(2, 2)
@@ -20,10 +25,41 @@ position = Vector2(-64, -64)
 position = Vector2(0.25, -0.75)
 shape = SubResource("RectangleShape2D_kphka")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["building"]]
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-64, -64)
 shape = SubResource("RectangleShape2D_kphka")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_driju")]
+position = Vector2(-126, -75)
+_healItemPrefabs = Array[PackedScene]([])
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_u5tml")]
+position = Vector2(-126, -75)
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
+position = Vector2(61.75, 10.25)
+shape = SubResource("RectangleShape2D_24awm")
+debug_color = Color(0.898039, 0.117647, 0.137255, 0.431373)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.2, 0.356863, 1, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.5
+offset_top = -147.5
+offset_right = 39.5
+offset_bottom = -120.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+show_percentage = false

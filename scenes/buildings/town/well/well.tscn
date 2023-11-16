@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://7m8c0ty0xcd0"]
+[gd_scene load_steps=8 format=3 uid="uid://7m8c0ty0xcd0"]
 
 [ext_resource type="Script" path="res://scripts/farm/Well.cs" id="1_yeq5k"]
 [ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="3_7hhxw"]
 [ext_resource type="Shape2D" uid="uid://cexw2rv4qd6l6" path="res://scenes/farm/shapes/well_shape.tres" id="3_emjl7"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_e1ffk"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_yvkoe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8jifx"]
+size = Vector2(370, 420)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fcsfu"]
+size = Vector2(720, 893.333)
 
 [node name="well" type="Node2D" groups=["Well"]]
 scale = Vector2(0.15, 0.15)
@@ -18,16 +26,47 @@ collision_layer = 9
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-394.667, -394.667)
+position = Vector2(-389.667, -449.875)
 scale = Vector2(2, 2)
 shape = ExtResource("3_emjl7")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["building"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-426.667, -426.667)
+position = Vector2(-423.333, -446.667)
 scale = Vector2(2, 2)
-shape = ExtResource("3_emjl7")
+shape = SubResource("RectangleShape2D_8jifx")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_e1ffk")]
+position = Vector2(-126, -75)
+_healItemPrefabs = Array[PackedScene]([])
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("5_yvkoe")]
+position = Vector2(-126, -75)
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
+position = Vector2(-300.667, -398.333)
+shape = SubResource("RectangleShape2D_fcsfu")
+debug_color = Color(0.752941, 0.0470588, 0, 0.419608)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.2, 0.356863, 1, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -800.0
+offset_right = 266.7
+offset_bottom = -620.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+show_percentage = false
 
 [connection signal="area_entered" from="Area2D" to="." method="OnInteractable"]
 [connection signal="area_exited" from="Area2D" to="." method="OnNonInteractable"]

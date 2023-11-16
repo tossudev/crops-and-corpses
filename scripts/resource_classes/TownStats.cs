@@ -1,6 +1,4 @@
-using System.Threading.Tasks;
 using Godot;
-using Godot.Collections;
 
 [GlobalClass, Icon("res://icon.svg")]
 public partial class TownStats : Resource
@@ -24,6 +22,18 @@ public partial class TownStats : Resource
 
     [Export] int _populationCap;
     public int populationCap => _populationCap;
+    
+    
+    // Unlocks
+
+    [Export] bool _isRuinsUnlocked;                 // Bridge is built
+    public bool isRuinsUnlocked => _isRuinsUnlocked;
+    
+    [Export] bool _isMineshaftUnlocked;             // Mineshaft entrance is cleared
+    public bool isMineshaftUnlocked => _isMineshaftUnlocked;
+    
+    [Export] bool _isCaveStalagmiteMined;           // Stalagmite is mined from the mineshaft side of the cave
+    public bool isCaveStalagmiteMined => _isCaveStalagmiteMined;
     
     
     // Soldier stats
@@ -62,13 +72,31 @@ public partial class TownStats : Resource
             totalExperience: _totalExperience,
             townHallLevel: _townHallLevel,
             populationCap: _populationCap,
+            
+            
+            
+            isRuinsUnlocked: _isRuinsUnlocked,
+            isMineshaftUnlocked: _isMineshaftUnlocked,
+            isCaveStalagmiteMined: _isCaveStalagmiteMined,
+            
+            
+            
             soldierAttackSpeed: _soldierAttackSpeed,
             soldierAccuracy: _soldierAccuracy,
+            
+            
+            
             farmerWalkSpeed: _farmerWalkSpeed,
             farmerMaxFarms: _farmerMaxFarms,
             pesticideEffectiveness: _pesticideEffectiveness,
+            
+            
+            
             wallHP: _wallHP,
             spikyWalls: _spikyWalls,
+            
+            
+            
             houseHP: _houseHP);
     }
 }

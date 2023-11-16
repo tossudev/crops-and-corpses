@@ -17,6 +17,15 @@ public partial class RawTownStats : GodotObject
     public int populationCap;
     public const string POPULATION_CAP_KEY = "populationCap";
     
+    // Unlocks 
+    public bool isRuinsUnlocked;
+    public const string RUINS_UNLOCKED_KEY = "isRuinsUnlocked";
+
+    public bool isMineshaftUnlocked;
+    public const string MINESHAFT_UNLOCKED_KEY = "isMineshaftUnlocked";
+
+    public bool isCaveStalagmiteMined;
+    public const string CAVE_STALAGMITE_MINED_KEY = "isCaveStalagmiteMined";
     
     
     // Soldier stats
@@ -52,6 +61,7 @@ public partial class RawTownStats : GodotObject
     public RawTownStats () {}
 
     public RawTownStats(int totalExperience,int townHallLevel, int populationCap,
+        bool isRuinsUnlocked, bool isMineshaftUnlocked, bool isCaveStalagmiteMined,
         int soldierAttackSpeed, int soldierAccuracy,
         int farmerWalkSpeed, int farmerMaxFarms, int pesticideEffectiveness,
         int wallHP, bool spikyWalls,
@@ -60,13 +70,31 @@ public partial class RawTownStats : GodotObject
         this.totalExperience = totalExperience;
         this.townHallLevel = townHallLevel;
         this.populationCap = populationCap;
+
+
+
+        this.isRuinsUnlocked = isRuinsUnlocked;
+        this.isMineshaftUnlocked = isMineshaftUnlocked;
+        this.isCaveStalagmiteMined = isCaveStalagmiteMined;
+        
+        
+        
         this.soldierAttackSpeed = soldierAttackSpeed;
         this.soldierAccuracy = soldierAccuracy;
+        
+        
+        
         this.farmerWalkSpeed = farmerWalkSpeed;
         this.farmerMaxFarms = farmerMaxFarms;
         this.pesticideEffectiveness = pesticideEffectiveness;
+        
+        
+        
         this.wallHP = wallHP;
         this.spikyWalls = spikyWalls;
+        
+        
+        
         this.houseHP = houseHP;
     }
     
@@ -87,13 +115,29 @@ public partial class RawTownStats : GodotObject
             totalExperience: (int)rawStatsDict[TOTAL_EXPERIENCE_KEY],
             townHallLevel: (int)rawStatsDict[TOWN_HALL_LEVEL_KEY],
             populationCap: (int)rawStatsDict[POPULATION_CAP_KEY],
+            
+            
+            
+            isRuinsUnlocked: (bool)rawStatsDict[RUINS_UNLOCKED_KEY],
+            isMineshaftUnlocked: (bool)rawStatsDict[MINESHAFT_UNLOCKED_KEY],
+            isCaveStalagmiteMined: (bool)rawStatsDict[CAVE_STALAGMITE_MINED_KEY],
+            
+            
             soldierAttackSpeed: (int)rawStatsDict[SOLDIER_ATTACK_SPEED_KEY],
             soldierAccuracy: (int)rawStatsDict[SOLDIER_ACCURACY_KEY],
+            
+            
             farmerWalkSpeed: (int)rawStatsDict[FARMER_WALK_SPEED_KEY],
             farmerMaxFarms: (int)rawStatsDict[FARMER_MAX_FARMS_KEY],
             pesticideEffectiveness: (int)rawStatsDict[PESTICIDE_EFFECTIVENESS_KEY],
+            
+            
+            
             wallHP: (int)rawStatsDict[WALL_HP_KEY],
             spikyWalls: (bool)rawStatsDict[SPIKY_WALLS_KEY],
+            
+            
+            
             houseHP: (int)rawStatsDict[HOUSE_HP_KEY]
         );
 

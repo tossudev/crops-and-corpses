@@ -25,6 +25,7 @@ public partial class Villager : CharacterBody2D
 	//[Export] NavigationRegion2D navRegionArea;
 	Plant _currentPlant;
 	Node2D _streetSign;
+	Node2D _forestScene;
 	Sprite2D _villagerSprite;
 	int _plantIndex = 0;
 	float _speed = 0;
@@ -32,6 +33,10 @@ public partial class Villager : CharacterBody2D
 	bool _timerStopped = false;
 	bool _taskStarted = false;
 	int _resourceTaskCounter = 0;
+	const string PLAYER_NODENAME = "%Player";
+	const string STREETSIGN_NODENAME = "%StreetSign";
+	const string FOREST_SCENE_NODENAME = "%ForestScene";
+	CharacterBody2D _player;
 
 	[Export] VillagerInfo _info;
 
@@ -45,7 +50,10 @@ public partial class Villager : CharacterBody2D
 	public override void _Ready()
 	{
 
-		_streetSign = GetParent().GetNode<Node2D>("%StreetSignSpot");
+		_player = GetParent().GetNodeOrNull<CharacterBody2D>(PLAYER_NODENAME);
+		_streetSign = GetParent().GetNodeOrNull<Node2D>(STREETSIGN_NODENAME);
+		_forestScene = GetParent().GetNodeOrNull<Node2D>(FOREST_SCENE_NODENAME);
+
 		_villagerSprite = GetNode<Sprite2D>("Sprite2D");
 		_gatheringTimer = GetNode<Timer>("GatheringTimer");
 
@@ -115,7 +123,7 @@ public partial class Villager : CharacterBody2D
 	
 	void State()
 	{
-        if (!TimeManager.dayTime)
+        if (!TimeManager.dayTime && _forestScene == null)
         {
 	        switch (_currentOccupation)
 	        {
@@ -386,8 +394,7 @@ public partial class Villager : CharacterBody2D
 
 	void FollowPlayer()
 	{
-		//not working anymore(yet)
-		_targetPosition = GetParent().GetNode<CharacterBody2D>("Forest/Objects/Player").GlobalPosition;
+		_targetPosition = _player.GlobalPosition;
 	}
 }
 

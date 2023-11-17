@@ -1,14 +1,20 @@
-[gd_scene load_steps=94 format=3 uid="uid://cce2sygxgl033"]
+[gd_scene load_steps=100 format=3 uid="uid://cce2sygxgl033"]
 
+[ext_resource type="Script" path="res://scripts/villager/VillagerManager.cs" id="1_r3xju"]
 [ext_resource type="Texture2D" uid="uid://ehsp5k83fvvb" path="res://assets/sprites/tiles/grass_flowers2_tile.png" id="1_sbei6"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/water.gdshader" id="2_3pryh"]
 [ext_resource type="Texture2D" uid="uid://wx026lyp8qku" path="res://assets/sprites/tiles/grass_flowers_tile.png" id="2_5tcwd"]
+[ext_resource type="Script" path="res://scripts/global/AllVillagerData.cs" id="2_ujqye"]
 [ext_resource type="Texture2D" uid="uid://cejtv4mq41rkm" path="res://assets/sprites/tiles/grass_rocks_tile.png" id="3_a6p7s"]
+[ext_resource type="Texture2D" uid="uid://c0iyfaellpf6m" path="res://assets/placeholder/test_character/character1.png" id="3_lsp5n"]
 [ext_resource type="Texture2D" uid="uid://dks6iqnb0a6gx" path="res://assets/resources/shaders/water_noise_texture.tres" id="3_rbird"]
 [ext_resource type="Texture2D" uid="uid://dbgwlhprokvwi" path="res://assets/sprites/tiles/Dirt_tile.png" id="4_ahqt4"]
+[ext_resource type="Texture2D" uid="uid://cxqn4mwpjria2" path="res://assets/placeholder/test_character/character2.png" id="4_g12oc"]
 [ext_resource type="Texture2D" uid="uid://b0dlu5nexmss2" path="res://assets/sprites/tiles/grass_tile.png" id="4_jql1j"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_5m7lu"]
+[ext_resource type="Texture2D" uid="uid://bbei648d3eovx" path="res://assets/placeholder/test_character/character.png" id="5_grghj"]
 [ext_resource type="Texture2D" uid="uid://bf0kk4xsi7048" path="res://assets/sprites/tiles/Dirt_rocks_tile.png" id="6_5rtbt"]
+[ext_resource type="PackedScene" uid="uid://ba8mb2whyo4dy" path="res://scenes/villager/villager.tscn" id="6_77mhp"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="6_d65ob"]
 [ext_resource type="Texture2D" uid="uid://brutn5ktd7w2u" path="res://assets/sprites/tiles/dirt_corner_tile1.png" id="6_u3bux"]
 [ext_resource type="Texture2D" uid="uid://cw3dy2u2chkbm" path="res://assets/sprites/tiles/dirt_corner_tile5.png" id="7_3xb4g"]
@@ -301,6 +307,22 @@ fill_from = Vector2(0.5, 0.5)
 y_sort_enabled = true
 position = Vector2(-62, 18)
 
+[node name="ForestScene" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="VillagerManager" type="Node" parent="." node_paths=PackedStringArray("_allData")]
+script = ExtResource("1_r3xju")
+_allData = NodePath("AllVillagerData")
+
+[node name="AllVillagerData" type="Node" parent="VillagerManager"]
+script = ExtResource("2_ujqye")
+_villagerTextures = Array[Texture2D]([ExtResource("3_lsp5n"), ExtResource("4_g12oc"), ExtResource("5_grghj")])
+_villagerNames = PackedStringArray("Mikko", "Pekka", "Pirjo", "Martta", "Toope", "Nasse", "Kikke", "Tupu")
+_villagerInfos = PackedStringArray("Ei helvetti mitä tähänki kirjottais.", "Super positiviinen tyyppi ja hyvä farmaa.", "Kaikkien kaveri.", "Mersumies.", "Teletapeista tuttu.", "Entinen merimies. Yarr!", "Nyt kyl saa riittää nää. Hihhei!", "Kerta vielä kiellon päälle.", "Karpalon makuinen.")
+
+[node name="NPC" parent="." instance=ExtResource("6_77mhp")]
+position = Vector2(-7287, -2631)
+
 [node name="WaterBG" type="ColorRect" parent="."]
 z_index = -20
 offset_left = -9463.0
@@ -354,12 +376,24 @@ _animationPlayer = NodePath("../Objects/Deco/Trees/Tree7/AnimationPlayer")
 y_sort_enabled = true
 
 [node name="Player" parent="Objects" node_paths=PackedStringArray("_camera") instance=ExtResource("6_d65ob")]
+unique_name_in_owner = true
 position = Vector2(-7602, -3070)
 _camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
+
+[node name="StreetSign" type="Node2D" parent="Objects"]
+unique_name_in_owner = true
+position = Vector2(-7878, -3011)
+scale = Vector2(0.6, 0.6)
+
+[node name="street_sign_post" parent="Objects" instance=ExtResource("18_g46xp")]
+position = Vector2(-7876, -3153)
+
+[node name="forest_sign" parent="Objects/street_sign_post" index="3"]
+visible = false
 
 [node name="Deco" type="Node2D" parent="Objects"]
 y_sort_enabled = true
@@ -605,12 +639,6 @@ position = Vector2(7715, 3445)
 scale = Vector2(0.36, 0.36)
 
 [node name="forest_sign" parent="Objects/Deco/Other/street_sign_post2" index="3"]
-visible = false
-
-[node name="street_sign_post" parent="Objects/Deco/Other" instance=ExtResource("18_g46xp")]
-position = Vector2(-7938, -3135)
-
-[node name="forest_sign" parent="Objects/Deco/Other/street_sign_post" index="3"]
 visible = false
 
 [node name="MiniTree" type="Sprite2D" parent="Objects/Deco/Other"]
@@ -7079,5 +7107,5 @@ texture = ExtResource("21_tox2m")
 
 [node name="SunlightContainer" parent="." instance=ExtResource("18_j47l1")]
 
+[editable path="Objects/street_sign_post"]
 [editable path="Objects/Deco/Other/street_sign_post2"]
-[editable path="Objects/Deco/Other/street_sign_post"]

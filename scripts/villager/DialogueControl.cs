@@ -31,15 +31,19 @@ public  partial class DialogueControl : Control
         
 		_farmerButton = GetNode<Button>(FARMER_BUTTON_NODENAME);
 		_farmerButton.Pressed += () => _hostVillager.ChangeOccupation(VillagerOccupation.Farmer);
+		_farmerButton.Pressed += ExitDialogue;
 		
 		_soldierButton = GetNode<Button>(SOLDIER_BUTTON_NODENAME);
 		_soldierButton.Pressed += () => _hostVillager.ChangeOccupation(VillagerOccupation.Soldier);
+		_soldierButton.Pressed += ExitDialogue;
 		
 		_woodcutterButton = GetNode<Button>(WOODCUTTER_BUTTON_NODENAME);
 		_woodcutterButton.Pressed += () => _hostVillager.ChangeOccupation(VillagerOccupation.Woodcutter);
+		_woodcutterButton.Pressed += ExitDialogue;
 		
 		_minerButton = GetNode<Button>(MINER_BUTTON_NODENAME);
 		_minerButton.Pressed += () => _hostVillager.ChangeOccupation(VillagerOccupation.Miner);
+		_minerButton.Pressed += ExitDialogue;
 		
 		_dismissButton = GetNode<Button>(DISMISS_BUTTON_NODENAME);
 		_dismissButton.Pressed += ExitDialogue;

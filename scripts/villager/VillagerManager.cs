@@ -5,16 +5,16 @@ using System.Collections.Generic;
 public partial class VillagerManager : Node
 {
 	public static VillagerManager instance;
+	TownStats _townStats;
 	List<Villager> _villager = new List<Villager>();
 	public int villagerMaxAmount;
-	public int townhallLevel = 0;
+
 	// Called when the node enters the scene tree for the first time.
 
 	[Export] AllVillagerData _allData;
 	public override void _Ready()
 	{
 		if(instance==null)instance=this;else QueueFree();
-		townhallLevel = 0;
 	}
 
 	public VillagerData GetVillagerData(){
@@ -31,29 +31,15 @@ public partial class VillagerManager : Node
 	{
 		
 	}
-
 	public void AddNewVillager(Villager newVillager)
 	{
+	/* 	if(_villager.Count < _townStats.populationCap)
+		{
+			_villager.Add(newVillager);
+		} */
 		_villager.Add(newVillager);
 	}
 
-	void VillagerAmountInGame()
-	{
-		switch(townhallLevel)
-		{
-			case 0:
-			villagerMaxAmount = 4;
-			break;
-
-			case 1:
-			villagerMaxAmount = 5;
-			break;
-
-			case 2:
-			villagerMaxAmount = 6;
-			break;
-		}
-	}
 
 	public struct VillagerData{
 		public string name;

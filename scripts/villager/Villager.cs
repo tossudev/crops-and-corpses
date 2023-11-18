@@ -68,6 +68,8 @@ public partial class Villager : CharacterBody2D
 		AddChild(_timer);
 		_timer.Start();
 
+//TO DO: jos ollaan townissa: roam, jos ollaan ei townissa followPlayer.
+//Idle state tms. questeja varten
 /* 		string _currentScene = GetTree().CurrentScene.Name;
 
 		if (_currentScene != null && _currentScene == "Forest")
@@ -142,7 +144,7 @@ public partial class Villager : CharacterBody2D
 	        }
         }
 
-        // Food for thought?
+        // yes
         // if (dialogueControl.Visible)
         // {
 	       //  _state = VillagerStates.Idle;
@@ -394,6 +396,7 @@ public partial class Villager : CharacterBody2D
 
 	void FollowPlayer()
 	{
+		_speed = 200;
 		_targetPosition = _player.GlobalPosition;
 	}
 }

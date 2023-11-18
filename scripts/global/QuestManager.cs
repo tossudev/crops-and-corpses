@@ -1,90 +1,67 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace Quests
+public partial class QuestManager : Node
 {
-	public class Quest
-	{
-		public enum QuestType
-		{
-			RescueMission
-		}
+    private Quest activeQuest = null;
+    private string currentSceneName = "";
 
-		public string Title { get; }
-		public string Description { get; }
-		public QuestType Type { get; }
-		public int Difficulty { get; }
-		public bool IsCompleted { get; private set; }
+    public override void _Ready()
+    {
+        // Initialize quests
+        InitializeQuests();
+    }
 
-		public Quest(string title, string description, QuestType type, int difficulty)
-		{
-			Title = title;
-			Description = description;
-			Type = type;
-			Difficulty = difficulty;
-		}
+    private void InitializeQuests()
+    {
+        // Add quests to the list with stages
+        List<string> stages1 = new List<string> { "Collect 5 items", "Deliver items to NPC" };
+        List<string> stages2 = new List<string> { "Talk to NPC", "Retrieve an item" };
 
-		public void Complete()
-		{
-			IsCompleted = true;
-		}
-	}
+        Quest quest1 = new Quest();
+        quest1.Initialize("Quest 1", "Help villagers", stages1, "forest");
 
-	public partial class QuestManager : Node
-	{
-		private readonly List<Quest> _quests = new List<Quest>();
-		private readonly Random _random = new();
+        Quest quest2 = new Quest();
+        quest2.Initialize("Quest 2", "Explore dungeon", stages2, "ruins");
 
-		public int CurrentDifficulty = 1;
+        SetActiveQuest(quest1); // Set the initial active quest
+    }
 
-		public Node2D[] QuestPointsForest;
-		public Node2D[] QuestPointsCave;
-		public void AddQuest(string title)
-		{
-			_quests.Add(new Quest(title, "", Quest.QuestType.RescueMission, 0));
-		}
+    public void SetActiveQuest(Quest quest)
+    {
+        activeQuest = quest;
+        currentSceneName = activeQuest.SceneName;
+    }
 
-		public void RemoveQuest(string title)
-		{
-			_quests.RemoveAll(quest => quest.Title == title);
-		}
+    public void SetActiveQuestForScene(string sceneName)
+    {
+        // Assuming this method is called when the player enters a new scene
+        if (activeQuest != null && activeQuest.SceneName != sceneName)
+        {
+            // Reset the current quest if it's not for the new scene
+            activeQuest.ResetQuest();
+            activeQuest = null;
+        }
 
-		public void CompleteQuest(string title)
-		{
-			var quest = _quests.FirstOrDefault(q => q.Title == title);
-			if (quest != null)
-			{
-				quest.Complete();
-			}
-		}
+        if (activeQuest == null)
+        {
+            // Initialize a new quest for the current scene
+            List<string> newQuestStages = new List<string> { "Stage 1", "Stage 2", "Stage 3" };
+            Quest newQuest = new Quest();
+            newQuest.Initialize("New Quest", "Quest description", newQuestStages, sceneName);
+            SetActiveQuest(newQuest);
+            activeQuest.StartQuest(); // Start the quest immediately when initialized
+        }
+    }
 
-		public void CreateRescueMission(int difficulty)
-		{
-			string title = $"Rescue Villager";
-			string description = $"Rescue Villager from danger!";
-			Quest rescueMission = new Quest(title, description, Quest.QuestType.RescueMission, difficulty);
-			_quests.Add(rescueMission);
+    public Quest GetActiveQuest()
+    {
+        return activeQuest;
+    }
 
-			GD.Print("Rescue mission created: " + title);
-		}
-
-		public Quest GetCurrentQuest()
-		{
-			return _quests.FirstOrDefault(quest => !quest.IsCompleted);
-		}
-
-		
-
-		public int GetCurrentDifficulty()
-		{
-			return CurrentDifficulty;
-		}
-
-		internal IEnumerable<Quest> GetQuests()
-		{
-			return _quests.Where(quest => !quest.IsCompleted);
-		}
-	}
+    public string GetCurrentSceneName()
+    {
+        return currentSceneName;
+    }
 }

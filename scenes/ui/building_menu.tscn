@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://f5m7wypxd5t7"]
+[gd_scene load_steps=17 format=3 uid="uid://bsoen384q11gf"]
 
 [ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMenu.cs" id="1_1usej"]
 [ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://scenes/farm/farm_plot.tscn" id="2_6b0va"]
@@ -13,8 +13,13 @@
 [ext_resource type="PackedScene" uid="uid://bt0w6up5wga7i" path="res://scenes/buildings/town/well/well_build_mode.tscn" id="9_2genf"]
 [ext_resource type="Texture2D" uid="uid://cmyh3qeorleuc" path="res://NikkeTests/images/archer_tower_top.png" id="10_henx8"]
 [ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="11_orgxb"]
+[ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="14_ktk8x"]
+[ext_resource type="Resource" uid="uid://bofkpec0ir7h3" path="res://assets/resources/game_items/resource_items_0_to_99/2_copper.tres" id="15_gpcam"]
 
-[node name="Control" type="Control" node_paths=PackedStringArray("_buildButton", "_buildMenu", "_buildMenuControl", "_vBoxContainer")]
+[sub_resource type="LabelSettings" id="LabelSettings_3htb0"]
+font_size = 32
+
+[node name="Control" type="Control" node_paths=PackedStringArray("_buildMenu", "_buildMenuControl", "_vBoxContainer")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -28,7 +33,6 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1usej")
-_buildButton = NodePath("BuildingMenu/BuildButton")
 _buildMenu = NodePath("BuildingMenu/BuildingMenu")
 _buildMenuControl = NodePath("BuildingMenu/BuildingMenu/Control")
 _vBoxContainer = NodePath("BuildingMenu/BuildingMenu/Control/VBoxContainer")
@@ -44,61 +48,59 @@ _farmPlotIcon = ExtResource("6_jayxu")
 _houseIcon = ExtResource("7_fhaoc")
 _archerTowerIcon = ExtResource("10_henx8")
 _wellIcon = ExtResource("11_orgxb")
+_log = ExtResource("14_ktk8x")
+_copper = ExtResource("15_gpcam")
 
 [node name="BuildingMenu" type="Node2D" parent="."]
 
 [node name="BuildingMenu" type="ScrollContainer" parent="BuildingMenu"]
 visible = false
-custom_minimum_size = Vector2(300, 250)
+custom_minimum_size = Vector2(600, 250)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -154.0
-offset_top = -125.0
-offset_right = 154.0
-offset_bottom = 125.0
+offset_left = -304.0
+offset_top = -275.0
+offset_right = 304.0
+offset_bottom = -75.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 
 [node name="Control" type="Control" parent="BuildingMenu/BuildingMenu"]
 clip_contents = true
-custom_minimum_size = Vector2(300, 400)
+custom_minimum_size = Vector2(600, 600)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="BuildingMenu/BuildingMenu/Control"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(600, 400)
 layout_mode = 2
 anchor_left = -0.167
 anchor_top = 0.017
 anchor_right = -0.167
 anchor_bottom = 0.017
-offset_left = 50.1
+offset_left = 100.2
 offset_top = -5.1
-offset_right = 350.1
-offset_bottom = 320.9
+offset_right = 700.2
+offset_bottom = 394.9
 grow_horizontal = 2
 
-[node name="BuildButton" type="Button" parent="BuildingMenu"]
-visibility_layer = 512
-custom_minimum_size = Vector2(200, 100)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -850.0
-offset_top = 416.0
-offset_right = -650.0
-offset_bottom = 516.0
-grow_horizontal = 2
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -23.47
+anchor_top = -12.97
+anchor_right = -23.47
+anchor_bottom = -12.97
+offset_left = 10.8
+offset_top = 91.8
+offset_right = 443.8
+offset_bottom = 178.8
+grow_horizontal = 0
 grow_vertical = 2
-theme_override_font_sizes/font_size = 64
-toggle_mode = true
-text = "Build"
-
-[connection signal="toggled" from="BuildingMenu/BuildButton" to="." method="_on_build_button_toggled"]
+text = "Press 'V' to build"
+label_settings = SubResource("LabelSettings_3htb0")

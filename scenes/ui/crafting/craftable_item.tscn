@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqyv3rj8otsnr"]
+[gd_scene load_steps=5 format=3 uid="uid://dqyv3rj8otsnr"]
 
 [ext_resource type="Script" path="res://scripts/ui/crafting/CraftableItem.cs" id="1_jgcw2"]
 [ext_resource type="Resource" uid="uid://dmm0h1ba6feb7" path="res://assets/resources/game_items/resource_items_0_to_99/1_iron.tres" id="2_egp64"]
 [ext_resource type="Texture2D" uid="uid://cp7b2wy8o2pqk" path="res://assets/placeholder/R_mockupSprites/pepper.png" id="3_bxmbj"]
+[ext_resource type="PackedScene" uid="uid://cdi621xg0nv2g" path="res://scenes/ui/general/floating_button_name_panel.tscn" id="4_8v7m1"]
 
 [node name="CraftableItem" type="Button"]
 custom_minimum_size = Vector2(64, 64)
@@ -40,3 +41,11 @@ custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 texture = ExtResource("3_bxmbj")
 expand_mode = 1
+
+[node name="FloatingButtonNamePanel" parent="." instance=ExtResource("4_8v7m1")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 100.0
+
+[connection signal="mouse_entered" from="." to="FloatingButtonNamePanel" method="OnMouseEntered"]
+[connection signal="mouse_exited" from="." to="FloatingButtonNamePanel" method="OnMouseExited"]

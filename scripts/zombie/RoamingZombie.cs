@@ -1,15 +1,12 @@
 using Godot;
 using System;
-using System.Diagnostics.Tracing;
 
 public partial class RoamingZombie : CharacterBody2D
 {
-	// [Export] private float _damage;
 	[Export] private AudioStreamPlayer2D _audioStreamPlayer2D;
 	private Sprite2D _sprite;
 	private CharacterBody2D _player;
-	private Node2D _fence;
-	private HitboxComponent _hitbox;
+	private HitboxComponent[] _hitboxes;
 	private Attack _attack;
 	private Vector2 _knockback = Vector2.Zero;
 	private Timer _timer;
@@ -21,9 +18,14 @@ public partial class RoamingZombie : CharacterBody2D
 	PackedScene instantiatedNPC;
 	private CompressedTexture2D strongZombieSprite;
 	private CompressedTexture2D mediumZombieSprite;
+	private bool _playerInRange = false;
+	private bool _fenceInRange = false;
+	private ulong entered;
+	private ulong exited;
 
 	public override void _Ready()
 	{
+		_hitboxes = new HitboxComponent[2];
 		instantiatedNPC = (PackedScene)GD.Load("res://scenes/villager/villager.tscn");
 		_rootNodePath = GetParent<Node2D>().GetPath();
 		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);
@@ -40,11 +42,12 @@ public partial class RoamingZombie : CharacterBody2D
 			knockback = 500f
 		};
 
-		_updateStatsTimer.Start();		
+		_updateStatsTimer.Start();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		Velocity += _knockback;
 		MoveAndSlide();
 
 		if (_sprite != null)
@@ -62,12 +65,12 @@ public partial class RoamingZombie : CharacterBody2D
 
 	private void AttackReceived(Attack attack)
 	{
-		// var duration = 0.25f;
-		// _knockback = attack.direction * attack.knockback;
+		var duration = 0.25f;
+		_knockback = attack.direction * attack.knockback;
 
-		// var knockbackTween = GetTree().CreateTween();
-		// knockbackTween.Parallel().TweenProperty(this, "_knockback", new Vector2(0, 0), duration);
-		
+		var knockbackTween = GetTree().CreateTween();
+		knockbackTween.Parallel().TweenProperty(this, "_knockback", new Vector2(0, 0), duration);
+
 		/* GD.Print("2");
 		GD.Print(attack.effect); */
 		switch (attack.effect)
@@ -102,17 +105,21 @@ public partial class RoamingZombie : CharacterBody2D
 		if (body.IsInGroup("player"))
 		{
 			_player = (CharacterBody2D)body;
+			_playerInRange = true;
 
 			// direction from zombie to player
 			Vector2 _direction = (_player.GlobalPosition - this.GlobalPosition).Normalized();
 			_attack.direction = _direction;
 
-			_hitbox = _player.GetNodeOrNull<HitboxComponent>("HitboxComponent");
+			_hitboxes[0] = _player.GetNodeOrNull<HitboxComponent>("HitboxComponent");
 
-			if (_hitbox != null)
+			if (_hitboxes[0] != null)
 			{
 				//_hitbox.ApplyAttack(_attack);
-				_timer.Start();
+				if (_timer.TimeLeft <= 0)
+				{
+					_timer.Start();
+				}
 			}
 			else
 			{
@@ -120,56 +127,79 @@ public partial class RoamingZombie : CharacterBody2D
 			}
 		}
 
-		if(body.IsInGroup("fence"))
-		{			
-			_fence = (Node2D)body;
+		if (body.IsInGroup("fence") || body.IsInGroup("building"))
+		{
+			_fenceInRange = true;
+			entered = body.GetInstanceId();
 
-			// direction from zombie to fence
-			Vector2 _direction = (_fence.GlobalPosition - this.GlobalPosition).Normalized();
+			// direction from zombie to fence/building
+			Vector2 _direction = (body.GlobalPosition - this.GlobalPosition).Normalized();
 			_attack.direction = _direction;
 
-			_hitbox = _fence.GetParent().GetNodeOrNull<HitboxComponent>("HitboxComponent");
+			_hitboxes[1] = body.GetParent().GetNodeOrNull<HitboxComponent>("HitboxComponent");
 
-			if(_hitbox != null)
+			if (_hitboxes[1] != null)
 			{
-				_timer.Start();
+				if (_timer.TimeLeft <= 0)
+				{
+					_timer.Start();
+				}
 			}
 			else
 			{
-				GD.Print("ZOMBIE: No hitbox found on fence");
+				GD.Print("ZOMBIE: No hitbox found on fence/building. ");
 			}
 		}
 	}
 
 	private void OnAttackBoxExited(Node2D body)
 	{
-		_timer.Stop();
-	}
+		exited = body.GetInstanceId();
+		if (body.IsInGroup("player"))
+		{
+			_playerInRange = false;
+		}
 
+		if (body.IsInGroup("fence") || body.IsInGroup("building"))
+		{
+			if (entered == exited)
+			{
+				_fenceInRange = false;
+			}
+		}
+
+		if (!_playerInRange && !_fenceInRange)
+		{
+			_timer.Stop();
+		}
+	}
 	private void OnTimerTimeout()
 	{
-		//GD.Print("attack player");
-		if (_hitbox != null && ZombieManager.playerAlive != false)
+		if (_playerInRange && _hitboxes[0] != null && ZombieManager.playerAlive)
 		{
-			_hitbox.ApplyAttack(_attack);
+			_hitboxes[0].ApplyAttack(_attack);
+		}
+		else if (_fenceInRange && _hitboxes[1] != null)
+		{
+			_hitboxes[1].ApplyAttack(_attack);
 		}
 	}
 
 	private void OnUpdateStatsTimeout()
-	{		
+	{
 		{
-			if(ZombieManager.type == ZombieManager.ZombieType.Weak)
+			if (ZombieManager.type == ZombieManager.ZombieType.Weak)
 			{
 				mediumZombieSprite = GD.Load<CompressedTexture2D>("res://LilianTests/Sprites/zombie_placeholder.png");
 				_sprite.Texture = mediumZombieSprite;
 			}
-			else if(ZombieManager.type == ZombieManager.ZombieType.Medium)
+			else if (ZombieManager.type == ZombieManager.ZombieType.Medium)
 			{
 				mediumZombieSprite = GD.Load<CompressedTexture2D>("res://LilianTests/Sprites/zombie_placeholder.png");
 				_sprite.Texture = mediumZombieSprite;
-				
+
 			}
-			else if(ZombieManager.type == ZombieManager.ZombieType.Strong)
+			else if (ZombieManager.type == ZombieManager.ZombieType.Strong)
 			{
 				GD.Print("Strong");
 				strongZombieSprite = GD.Load<CompressedTexture2D>("res://DaniTests/Sprites/strongZombie.png");
@@ -178,6 +208,6 @@ public partial class RoamingZombie : CharacterBody2D
 			_attack.damage = ZombieManager.damage;
 			_timer.WaitTime = ZombieManager.attackTime;
 			//GD.Print("DMG: " + _attack.damage + "\nwait time: " + _timer.WaitTime);
-		}		
-	}	
+		}
+	}
 }

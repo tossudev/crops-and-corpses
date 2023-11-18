@@ -27,11 +27,10 @@ public partial class BuildingMode : Node2D
 
     public override async void _Process(double delta)
     {
-        if (Input.IsActionPressed("ui_cancel"))
+        if (Input.IsActionPressed("ui_cancel") || Input.IsActionJustPressed("open_build_menu"))
         {
             QueueFree();
-            //Input.MouseMode = Input.MouseModeEnum.Visible;
-            buildingMenu.EnableBuildButton();
+            buildingMenu.CloseBuildMenu();
         }
 
 

@@ -16,38 +16,46 @@ public partial class ArcherTower : Node2D
     [Export]
     Node2D _projectileStartPosition;
 
-    public int power;
-
     Attack _attack;
     float _speed;
     string _targetGroup;
     float _attackRange;
 
+    int _attackSpeed;
+    int _accuracy;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-        power = 1;
         _speed = 800;
         _targetGroup = "enemy";
-        _attackRange = _speed * power * (_projectile.airtime - _projectile.despawnTime);
+        _attackRange = _speed * (_projectile.airtime - _projectile.despawnTime);
 
         _attack = new Attack
         {
-            damage = 20,
+            damage = 10,
             knockback = 200,
             effect = 0
         };
+
+        if (TownManager.currentTownStats.soldierAttackSpeed != 0)
+        {
+            _attackSpeed = TownManager.currentTownStats.soldierAttackSpeed;
+            _attackTimer.WaitTime = 1f / _attackSpeed;
+        }
+
+        if (TownManager.currentTownStats.soldierAccuracy != 0)
+        {
+            _accuracy = TownManager.currentTownStats.soldierAccuracy;
+            _speed = _accuracy * _speed;
+            _attackRange = _speed * (_projectile.airtime - _projectile.despawnTime);
+        }
 
 
         // Remove this when villager "jobs" are added
         _attackTimer.Start();
     }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-		
-	}
 
     public void ActivateTower()
     {
@@ -64,12 +72,24 @@ public partial class ArcherTower : Node2D
         if (!FindTarget())
             return;
 
+        if (_attackSpeed != TownManager.currentTownStats.soldierAttackSpeed && TownManager.currentTownStats.soldierAttackSpeed != 0)
+        {
+            _attackSpeed = TownManager.currentTownStats.soldierAttackSpeed;
+            _attackTimer.WaitTime = 1f / _attackSpeed;
+        }
+        
+        if(_accuracy != TownManager.currentTownStats.soldierAccuracy && TownManager.currentTownStats.soldierAccuracy != 0)
+        {
+            _accuracy = TownManager.currentTownStats.soldierAccuracy;
+            _speed = _accuracy * _speed;
+            _attackRange = _speed * (_projectile.airtime - _projectile.despawnTime);
+        }
+
         ProjectileController projectile = (ProjectileController)_projectilePrefab.Instantiate();
         AddChild(projectile);
 
-        _attack.damage *= power;
         projectile.attack = _attack;
-        projectile.speed = _speed * power;
+        projectile.speed = _speed;
         projectile.projectile = _projectile;
         projectile.targetGroup = _targetGroup;
 

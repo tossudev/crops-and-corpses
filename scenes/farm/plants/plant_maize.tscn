@@ -15,6 +15,7 @@ _plantType = 4
 _seedName = "maize seed"
 _description = "Popcorn?"
 _maxCycles = 3
+_maxHarvestableAmount = 4
 _seedTexture = ExtResource("2_m0mit")
 _sproutTexture = ExtResource("3_pxkxj")
 _plantTexture = ExtResource("4_w6k8m")

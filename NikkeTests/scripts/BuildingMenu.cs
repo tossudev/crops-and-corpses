@@ -20,8 +20,6 @@ public partial class BuildingMenu : Control
     [Export]
 	Node2D _buildings;
     [Export]
-    Button _buildButton;
-    [Export]
     ScrollContainer _buildMenu;
     [Export]
     Control _buildMenuControl;
@@ -34,6 +32,11 @@ public partial class BuildingMenu : Control
     Texture2D _farmPlotIcon, _houseIcon, _archerTowerIcon, _wellIcon;
 
     CharacterBody2D _player;
+
+    [Export]
+    Item _log;
+    [Export]
+    Item _copper;
 
 	int _resources;
 
@@ -57,16 +60,16 @@ public partial class BuildingMenu : Control
 
         _buildingPrefabs = new List<Building>();
 
-        _farmPlot = new Building(_farmPlotScene, _farmPlotGhostScene, 10, "Farm Plot", _farmPlotIcon);
+        _farmPlot = new Building(_farmPlotScene, _farmPlotGhostScene, 1, "Farm Plot", _farmPlotIcon);
         _buildingPrefabs.Add(_farmPlot);
 
-        _house = new Building(_houseScene, _houseGhostScene, 40, "House", _houseIcon);
+        _house = new Building(_houseScene, _houseGhostScene, 4, "House", _houseIcon);
         _buildingPrefabs.Add(_house);
 
-        _well = new Building(_wellScene, _wellGhostScene, 20, "Well", _wellIcon);
+        _well = new Building(_wellScene, _wellGhostScene, 2, "Well", _wellIcon);
         _buildingPrefabs.Add(_well);
 
-        _archerTower = new Building(_archerTowerScene, _archerTowerGhostScene, 60, "Archer Tower", _archerTowerIcon);
+        _archerTower = new Building(_archerTowerScene, _archerTowerGhostScene, 6, "Archer Tower", _archerTowerIcon);
         _buildingPrefabs.Add(_archerTower);
 
         _resources = 500;
@@ -77,26 +80,68 @@ public partial class BuildingMenu : Control
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-        if (Input.IsActionJustPressed("ui_cancel"))
+        if (Input.IsActionJustPressed("open_build_menu"))
         {
-            _buildButton.ButtonPressed = false;
+            if(_buildMenu.Visible == false)
+            {
+                OpenBuildMenu();
+            }
+            else
+            {
+                CloseBuildMenu();
+            }
         }
+        else if (Input.IsActionJustPressed("ui_cancel"))
+        {
+            CloseBuildMenu();
+        }
+    }
+
+    private void OpenBuildMenu()
+    {
+        _player.SetPhysicsProcess(false);
+        _player.SetProcessUnhandledInput(false);
+        _buildMenu.Show();
+    }
+
+    public void CloseBuildMenu()
+    {
+        _player.SetPhysicsProcess(true);
+        _player.SetProcessUnhandledInput(true);
+        _buildMenu.Hide();
     }
 
     private void CreateBuildMenu()
     {
-        _buildMenuControl.CustomMinimumSize = new Vector2(300, 200);
-        _vBoxContainer.CustomMinimumSize = new Vector2(300, 400);
+        //_buildMenuControl.CustomMinimumSize = new Vector2(600, 300);
+        _vBoxContainer.CustomMinimumSize = new Vector2(600, 400);
 
         foreach (Building _building in _buildingPrefabs)
         {
             Button _button = new Button();
             _vBoxContainer.AddChild(_button);
-            _button.Text = _building.name + "\n" + "Price: " + _building.price;
+            _button.CustomMinimumSize = new Vector2(400, 100);
+            _button.Text = _building.name + "         ";
             _button.Icon = _building.icon;
             _button.ExpandIcon = true;
             _button.AddThemeFontSizeOverride("font_size", 32);
             _button.ButtonUp += () => OnButtonUp(_building);
+
+
+            Sprite2D _sprite = new Sprite2D();
+            _button.AddChild(_sprite);
+            _sprite.Texture = _log.IconTexture;
+            _sprite.Scale = new Vector2(0.4f, 0.4f);
+            _sprite.Position = new Vector2(540, 50);
+
+            Label _label = new Label();
+            _sprite.AddChild(_label);
+            _label.Text = _building.price.ToString();
+            _label.HorizontalAlignment = HorizontalAlignment.Right;
+            _label.VerticalAlignment = VerticalAlignment.Bottom;
+            _label.AnchorsPreset = 8;
+            _label.Size = new Vector2(130, 130);
+            _label.AddThemeFontSizeOverride("font_size", 80);
         }
 
         for (int i = 0; i < 3; i++)        
@@ -124,7 +169,7 @@ public partial class BuildingMenu : Control
         _loadButton.AddThemeFontSizeOverride("font_size", 40);
         _loadButton.ButtonUp += () => LoadBuildings(_savePath, _fileName);
 
-        _buildMenuControl.CustomMinimumSize = new Vector2(300, _vBoxContainer.GetMinimumSize().Y + 20);
+        _buildMenuControl.CustomMinimumSize = new Vector2(_buildMenuControl.CustomMinimumSize.X, _vBoxContainer.GetMinimumSize().Y + 20);
     }
 
     public JsonArray GetBuildings()
@@ -240,13 +285,23 @@ public partial class BuildingMenu : Control
         BuildingMode();
     }
 
-    public void Build()
+    public async void Build()
     {
         if (_resources < _currentBuilding.price)
         {
             Debug.WriteLine("You don't have enough resources");
             return;
         }
+
+        RawInventoryItem logs = new RawInventoryItem(_log.ID, _log.Name, _currentBuilding.price, _log.StackSize);
+
+        if (await PlayerInventoryController.RemoveItemFromInventory(logs) == false)
+        {
+            GD.Print("Not enough resources!");
+            return;
+        }
+
+
 
         Node2D _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;
         _buildingScene.Position = _ghostBuilding.Position;
@@ -255,31 +310,8 @@ public partial class BuildingMenu : Control
         _resources -= _currentBuilding.price;
     }
 
-	private void _on_build_button_toggled(bool isToggledOn)
-	{
-        if (isToggledOn)
-		{
-            _player.SetPhysicsProcess(false);
-            _player.SetProcessUnhandledInput(false);
-			_buildMenu.Show();
-		}
-		else 
-		{
-            _player.SetPhysicsProcess(true);
-            _player.SetProcessUnhandledInput(true);
-            _buildMenu.Hide();
-			_buildButton.ReleaseFocus();
-        }
-	}
-
-    public void EnableBuildButton()
-    {
-        _buildButton.Disabled = false;
-    }
-
     private void BuildingMode()
 	{
-        _buildButton.Disabled = true;
         _buildMenu.Hide();     
 
         _ghostBuilding = _currentBuilding.buildingModeScene.Instantiate() as Node2D;

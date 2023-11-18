@@ -9,12 +9,6 @@ public partial class InventorySlot : Control {
 
 	public Label quantityLabel;
 	const string QUANTITY_LABEL_NODENAME = "%ItemQuantityLabel";
-
-	Panel _itemNamePanel;
-	const string ITEM_NAME_PANEL_NODENAME = "%ItemNamePanel";
-	
-	Label _itemNameLabel;
-	const string ITEM_NAME_LABEL_NODENAME = "%ItemNameLabel";
 	
 	public RawInventoryItem slotItem;
 	[Export] public bool isCraftingSlot;
@@ -24,10 +18,7 @@ public partial class InventorySlot : Control {
 	public int slotIndex => _slotIndex;
 
 
-
-	
-	bool _nameFollowMouse;
-	Vector2 offsetVector = new Vector2(-16, -16);
+	FloatingButtonName _floatingNamePanel;
 	
     void OnButtonGuiInput(InputEvent @event)
 	{
@@ -99,50 +90,13 @@ public partial class InventorySlot : Control {
 	    icon.Visible = isOn;
 	    quantityLabel.Visible = isOn;
     }
-
-    public override void _Ready()
-    {
-	    base._Ready();
-	    InitiateSlot(-2);
-    }
-
-    public void OnMouseEntered()
-    {
-	    if (!slotInitiated) return;
-	    
-	    _itemNamePanel.Visible = true;
-	    _nameFollowMouse = true;
-    }
-    
-    public void OnMouseExited()
-    {
-	    if (!slotInitiated) return;
-
-        _itemNamePanel.Visible = false;
-        _nameFollowMouse = false;
-    }
-    
-    public override void _PhysicsProcess(double delta)
-    {
-	    base._PhysicsProcess(delta);
-
-	    if (_nameFollowMouse)
-	    {
-		    _itemNamePanel.Position = GetGlobalMousePosition() + offsetVector;
-	    }
-    }
-
-    
-    
     
     
     public void InitiateSlot(int index)
     {
 	    icon = GetNode<TextureRect>(ICON_TEXTURE_NODENAME);
 	    quantityLabel = GetNode<Label>(QUANTITY_LABEL_NODENAME);
-	    _itemNamePanel = GetNode<Panel>(ITEM_NAME_PANEL_NODENAME);
-	    _itemNameLabel = GetNode<Label>(ITEM_NAME_LABEL_NODENAME);
-	    
+	    _floatingNamePanel = GetNode<FloatingButtonName>(FloatingButtonName.FLOATING_NAME_NODENAME);
 	    
 	    _slotIndex = index;
 
@@ -193,6 +147,7 @@ public partial class InventorySlot : Control {
 
 			icon.Texture = null;
 			quantityLabel.Text = "";
+			_floatingNamePanel.UpdateName("");
 			return;
 		}
 
@@ -205,5 +160,7 @@ public partial class InventorySlot : Control {
 
 		quantityLabel.Visible = itemResource.StackSize > 1;
 		quantityLabel.Text = rawItem.quantity.ToString();
+		
+		_floatingNamePanel.UpdateName(rawItem.name);
 	}
 }

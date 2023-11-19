@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using static VillagerManager;
 
 
@@ -44,6 +45,9 @@ public partial class Villager : CharacterBody2D
 	string _villagerInfo;
 
     VillagerOccupation _currentOccupation;
+    public VillagerOccupation currentOccupation => _currentOccupation;
+
+    public List<Villager> currentOccupationList;
 
     public VillagerResidence currentResidence;
 	// Called when the node enters the scene tree for the first time.
@@ -297,6 +301,7 @@ public partial class Villager : CharacterBody2D
 	
 	public void ChangeOccupation(VillagerOccupation occupation)
 	{
+		instance.SetVillagerOccupation(this, occupation);
 		_currentOccupation = occupation;
 	}
 	

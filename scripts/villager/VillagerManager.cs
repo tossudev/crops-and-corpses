@@ -6,7 +6,27 @@ public partial class VillagerManager : Node
 {
 	public static VillagerManager instance;
 	TownStats _townStats;
-	List<Villager> _villager = new List<Villager>();
+	
+	
+	// Villager Lists
+	List<Villager> _allVillagers = new ();
+	
+	List<Villager> _unemployed = new ();
+	public List<Villager> unemployedVillagers => _unemployed;
+	
+	List<Villager> _farmers = new ();
+	public List<Villager> farmerVillagers => _farmers;
+
+	List<Villager> _soldiers = new ();
+	public List<Villager> soldierVillagers => _soldiers;
+
+	List<Villager> _woodcutters = new ();
+	public List<Villager> woodcutterVillagers => _woodcutters;
+	
+	List<Villager> _miners = new ();
+	public List<Villager> minerVillagers => _miners;
+
+	
 	public int villagerMaxAmount;
 
 	// Called when the node enters the scene tree for the first time.
@@ -26,20 +46,40 @@ public partial class VillagerManager : Node
 		return data;
 
 	}
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-		
-	}
+
 	public void AddNewVillager(Villager newVillager)
 	{
 	/* 	if(_villager.Count < _townStats.populationCap)
 		{
 			_villager.Add(newVillager);
 		} */
-		_villager.Add(newVillager);
+		_allVillagers.Add(newVillager);
 	}
 
+	public void SetVillagerOccupation(Villager villager, VillagerOccupation newOccupation)
+	{
+		if (villager == null)
+		{
+			GD.PushError("Can't set occupation for null @VillagerManager");
+			return;
+		}
+
+		if (villager.currentOccupation == newOccupation) return;
+
+		villager.currentOccupationList?.Remove(villager);
+
+		villager.currentOccupationList = newOccupation switch
+		{
+			VillagerOccupation.Unemployed => _unemployed,
+			VillagerOccupation.Farmer => _farmers,
+			VillagerOccupation.Soldier => _soldiers,
+			VillagerOccupation.Woodcutter => _woodcutters,
+			VillagerOccupation.Miner => _miners,
+			_ => throw new ArgumentOutOfRangeException(nameof(newOccupation), newOccupation, null)
+		};
+		
+		villager.currentOccupationList.Add(villager);
+	}
 
 	public struct VillagerData{
 		public string name;

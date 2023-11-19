@@ -246,13 +246,30 @@ public partial class RawSaveData : GodotObject
             { RawTownStats.TOTAL_EXPERIENCE_KEY, townStats.totalExperience },
             { RawTownStats.TOWN_HALL_LEVEL_KEY, townStats.townHallLevel },
             { RawTownStats.POPULATION_CAP_KEY, townStats.populationCap },
+            
+            
+            
+            {RawTownStats.RUINS_UNLOCKED_KEY, townStats.isRuinsUnlocked},
+            {RawTownStats.MINESHAFT_UNLOCKED_KEY, townStats.isMineshaftUnlocked},
+            {RawTownStats.CAVE_STALAGMITE_MINED_KEY, townStats.isCaveStalagmiteMined},
+            
+            
             { RawTownStats.SOLDIER_ATTACK_SPEED_KEY, townStats.soldierAttackSpeed },
             { RawTownStats.SOLDIER_ACCURACY_KEY, townStats.soldierAccuracy },
+            
+            
+            
             { RawTownStats.FARMER_WALK_SPEED_KEY, townStats.farmerWalkSpeed },
             { RawTownStats.FARMER_MAX_FARMS_KEY, townStats.farmerMaxFarms },
             { RawTownStats.PESTICIDE_EFFECTIVENESS_KEY, townStats.pesticideEffectiveness },
+            
+            
+            
             { RawTownStats.WALL_HP_KEY, townStats.wallHP },
             { RawTownStats.SPIKY_WALLS_KEY, townStats.spikyWalls },
+            
+            
+            
             { RawTownStats.HOUSE_HP_KEY, townStats.houseHP }
         });
 

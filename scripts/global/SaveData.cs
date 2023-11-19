@@ -16,6 +16,7 @@ public partial class SaveData : Node
     
     public const string TOWN_STATS_KEY = "townStats";
     public const string APPLIED_TOWN_STATS_KEY = "appliedTownStats";
+    public const string VILLAGER_DATA_KEY = "allVillagers";
     public const string INVENTORY_ITEMS_KEY = "inventoryItems";
     public const string ORGANIZED_INVENTORY_ITEMS_KEY = "organizedInventoryItems";
     
@@ -23,6 +24,7 @@ public partial class SaveData : Node
     
     public static RawTownStats townHallStats = new ();
     public static List<TownUpgrade> appliedUpgrades = new ();
+    public static List<VillagerRawData> allVillagers = new ();
     public static Array<RawInventoryItem> organizedPlayerInventory = new ();
     public static List<RawInventoryItem> totalInventoryItems = new ();
 
@@ -62,6 +64,7 @@ public partial class SaveData : Node
         {
             townStats = townHallStats,
             appliedUpgrades = appliedUpgrades,
+            allVillagers = allVillagers,
             inventoryItems = totalInventoryItems,
             organizedInventoryItems = organizedPlayerInventory
         };

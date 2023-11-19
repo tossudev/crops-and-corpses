@@ -4,7 +4,16 @@ using System;
 public partial class VillagerInfo : Control
 {
 	ColorRect _backgroundColor;
-	TextureRect _villagerTexture;
+	
+	TextureRect _villagerHatTextureRect;
+	Texture2D _villagerHatTexture;
+	public Texture2D villagerHatTexture => _villagerHatTexture;
+	
+	TextureRect _villagerFaceTextureRect;
+	
+	Texture2D _villagerFaceTexture;
+	public Texture2D villagerFaceTexture => _villagerFaceTexture;
+	
 	RichTextLabel _nameText;
 	RichTextLabel _loreText;
 	RichTextLabel _statusText;
@@ -16,7 +25,7 @@ public partial class VillagerInfo : Control
 	{
 		_backgroundColor = GetNode<ColorRect>("ColorRect");
 
-		_villagerTexture = GetNode<TextureRect>("ColorRect/VillagerTexture");
+		_villagerFaceTextureRect = GetNode<TextureRect>("ColorRect/VillagerTexture");
 		_nameText = GetNode<RichTextLabel>("ColorRect/NameText");
 		_loreText = GetNode<RichTextLabel>("ColorRect/LoreText");
 		_statusText = GetNode<RichTextLabel>("ColorRect/StatusText");
@@ -26,9 +35,15 @@ public partial class VillagerInfo : Control
 		Visible = false;
 	}
 
-	public void InitializeVillagerInfo(Texture2D villagerTexture, string villagerName, string villagerLore, VillagerManager.VillagerStates villagerState){
-
-		_villagerTexture.Texture = villagerTexture;
+	public void InitializeVillagerInfo(Texture2D villagerFaceTexture, string villagerName, string villagerLore, VillagerState villagerState)
+	{
+		//TODO: Correct textures setter
+		// _villagerHatTexture = 
+		// _villagerHatTextureRect.Texture = _villagerHatTexture;
+		
+		_villagerFaceTexture = villagerFaceTexture;
+		_villagerFaceTextureRect.Texture = _villagerFaceTexture;
+		
 		_nameText.Text = villagerName;
 		_loreText.Text = villagerLore;
 		UpdateStatus(villagerState);
@@ -36,40 +51,40 @@ public partial class VillagerInfo : Control
 	}
 
 
-	public void UpdateStatus(VillagerManager.VillagerStates villagerState){
+	public void UpdateStatus(VillagerState villagerState){
 		_healButton.Visible=false;
 		switch(villagerState){
-			case VillagerManager.VillagerStates.RoamAround:
+			case VillagerState.RoamAround:
 				_statusText.Text = "Status: Healthy";
 				break;
-			case VillagerManager.VillagerStates.FollowPlayer:
+			case VillagerState.FollowPlayer:
 				_statusText.Text = "Status: Following";
 				break;
-			case VillagerManager.VillagerStates.FixFence:
+			case VillagerState.FixFence:
 				_statusText.Text = "Status: Repairing";
 				break;
-			case VillagerManager.VillagerStates.FindArcherTower:
+			case VillagerState.FindArcherTower:
 				_statusText.Text = "Status: Defending";
 				break;
-			case VillagerManager.VillagerStates.FindShelter:
+			case VillagerState.FindShelter:
 				_statusText.Text = "Status: Finding Cover";
 				break;
-			case VillagerManager.VillagerStates.GetHospitalized:
+			case VillagerState.GetHospitalized:
 				_statusText.Text = "Status: Injured";
 				_healButton.Visible=true;
 				break;
-			case VillagerManager.VillagerStates.ChooseTask:
+			case VillagerState.ChooseTask:
 				_statusText.Text = "Status: Healthy";
 				break;
-			case VillagerManager.VillagerStates.FarmingTask:
+			case VillagerState.FarmingTask:
 				_statusText.Text = "Status: Farming";
 				break;
 			
-			case VillagerManager.VillagerStates.FindWoodTask:
+			case VillagerState.FindWoodTask:
 				_statusText.Text = "Status: Cutting wood";
 				break;
 			
-			case VillagerManager.VillagerStates.FindStoneTask:
+			case VillagerState.FindStoneTask:
 				_statusText.Text = "Status: Mining stone";
 				break;
 		}

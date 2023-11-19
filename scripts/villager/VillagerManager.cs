@@ -5,8 +5,6 @@ using System.Collections.Generic;
 public partial class VillagerManager : Node
 {
 	public static VillagerManager instance;
-	TownStats _townStats;
-	
 	
 	// Villager Lists
 	List<Villager> _allVillagers = new ();
@@ -25,10 +23,7 @@ public partial class VillagerManager : Node
 	
 	List<Villager> _miners = new ();
 	public List<Villager> minerVillagers => _miners;
-
-	
-	public int villagerMaxAmount;
-
+    
 	// Called when the node enters the scene tree for the first time.
 
 	[Export] AllVillagerData _allData;
@@ -47,13 +42,24 @@ public partial class VillagerManager : Node
 
 	}
 
-	public void AddNewVillager(Villager newVillager)
+	public bool AddNewVillager(Villager newVillager, bool intoTown = true)
 	{
-	/* 	if(_villager.Count < _townStats.populationCap)
-		{
-			_villager.Add(newVillager);
-		} */
+		if (intoTown && _allVillagers.Count >= TownManager.currentTownStats.populationCap) return false;
+		
 		_allVillagers.Add(newVillager);
+
+		VillagerData newData = GetVillagerData();
+		VillagerRawData newRawData = new VillagerRawData(newData.name, newData.info, intoTown);
+		
+		SaveData.allVillagers.Add(newRawData);
+		newVillager.InitializeVillager(newRawData);
+		return true;
+	}
+
+	public void AddExistingVillager(Villager existingVillager, VillagerRawData data)
+	{
+		_allVillagers.Add(existingVillager);
+		existingVillager.InitializeVillager(data);
 	}
 
 	public void SetVillagerOccupation(Villager villager, VillagerOccupation newOccupation)
@@ -63,9 +69,6 @@ public partial class VillagerManager : Node
 			GD.PushError("Can't set occupation for null @VillagerManager");
 			return;
 		}
-
-		if (villager.currentOccupation == newOccupation) return;
-
 		villager.currentOccupationList?.Remove(villager);
 
 		villager.currentOccupationList = newOccupation switch
@@ -86,19 +89,19 @@ public partial class VillagerManager : Node
 		public string info;
 		public Texture2D texture;
 	}
+}
 
-	public enum VillagerStates
-	{
-		RoamAround,
-		FollowPlayer,
-		FixFence,
-		FindArcherTower,
-		FindShelter,
-		InShelter,
-		GetHospitalized,
-		ChooseTask,
-		FarmingTask,
-		FindWoodTask,
-		FindStoneTask
-	}
+public enum VillagerState
+{
+	RoamAround,
+	FollowPlayer,
+	FixFence,
+	FindArcherTower,
+	FindShelter,
+	InShelter,
+	GetHospitalized,
+	ChooseTask,
+	FarmingTask,
+	FindWoodTask,
+	FindStoneTask
 }

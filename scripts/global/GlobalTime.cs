@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using Dictionary = Godot.Collections.Dictionary;
 
+[GlobalClass]
 public partial class GlobalTime : Node
 {
     private float globalTime;

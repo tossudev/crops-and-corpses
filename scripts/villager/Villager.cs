@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using static VillagerManager;
 
 
 public enum VillagerOccupation
@@ -15,7 +14,7 @@ public enum VillagerOccupation
 
 public partial class Villager : CharacterBody2D
 {
-	VillagerStates _state;
+	VillagerState _state;
 	//[Export] VillagerManager _villagerManager;
 	Vector2 _targetPosition;
 	Timer _timer;
@@ -40,9 +39,13 @@ public partial class Villager : CharacterBody2D
 	CharacterBody2D _player;
 
 	[Export] VillagerInfo _info;
+	public VillagerInfo villagerInfo => _info;
+
+	VillagerRawData _rawData;
+	public VillagerRawData rawData => _rawData;
 
 	string _villagerName;
-	string _villagerInfo;
+	string _villagerInfoText;
 
     VillagerOccupation _currentOccupation;
     public VillagerOccupation currentOccupation => _currentOccupation;
@@ -62,7 +65,7 @@ public partial class Villager : CharacterBody2D
 		_gatheringTimer = GetNode<Timer>("GatheringTimer");
 
 		dialogueControl.AssignVillager(this);
-		VillagerManager.instance.AddNewVillager(this);
+		VillagerManager.instance.AddNewVillager(this, false);
 		
 		_timer = new Timer
 		{
@@ -86,17 +89,23 @@ public partial class Villager : CharacterBody2D
 			GD.Print("Roaming around");
             _state = VillagerStates.RoamAround;
         } */
-
-		_state = VillagerStates.RoamAround;
-
-		_villagerName = instance.GetVillagerData().name;
-		_villagerInfo = instance.GetVillagerData().info;
-		_villagerSprite.Texture = instance.GetVillagerData().texture;
-		
-		_info.InitializeVillagerInfo(_villagerSprite.Texture, _villagerName, _villagerInfo, _state);
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public void InitializeVillager(VillagerRawData data)
+	{
+		_rawData = data;
+		
+		ChangeOccupation(data.currentOccupation);
+		_state = VillagerState.RoamAround;
+
+		_villagerName = data.name;
+		_villagerInfoText = data.lore;
+		_villagerSprite.Texture = VillagerManager.instance.GetVillagerData().texture;
+		
+		_info.InitializeVillagerInfo(_villagerSprite.Texture, _villagerName, _villagerInfoText, _state);
+	}
+	
+	
 	public override void _PhysicsProcess(double delta)
 	{
 		if (!dialogueControl.Visible && GlobalPosition.DistanceTo(_targetPosition) > 5)
@@ -109,21 +118,21 @@ public partial class Villager : CharacterBody2D
 		}
 	}
 
-	public VillagerStates GetVillagerStates()
+	public VillagerState GetVillagerStates()
 	{
 		return _state;
 	}
 
 	public void EnterShelter()
 	{
-		_state = VillagerStates.InShelter;
+		_state = VillagerState.InShelter;
 		_targetPosition = GlobalPosition;
 		Visible = false;
 	}
 
 	public void ExitShelter()
 	{
-		_state = VillagerStates.ChooseTask;
+		_state = VillagerState.ChooseTask;
 		Visible = true;
 	}
 	
@@ -134,14 +143,14 @@ public partial class Villager : CharacterBody2D
 	        switch (_currentOccupation)
 	        {
 		        case VillagerOccupation.Soldier:
-			        _state = VillagerStates.FindArcherTower;
+			        _state = VillagerState.FindArcherTower;
 			        break;
 
 		        default:
 		        {
-			        if (_state != VillagerStates.InShelter)
+			        if (_state != VillagerState.InShelter)
 			        {
-				        _state = VillagerStates.FindShelter;
+				        _state = VillagerState.FindShelter;
 			        }
 			        break;
 		        }
@@ -156,47 +165,47 @@ public partial class Villager : CharacterBody2D
 		
         switch (_state)
 		{
-			case VillagerStates.RoamAround:
+			case VillagerState.RoamAround:
 				RoamAround();
 				break;
 
-			case VillagerStates.FollowPlayer:
+			case VillagerState.FollowPlayer:
 				FollowPlayer();
 				break;
 
-			case VillagerStates.ChooseTask:
+			case VillagerState.ChooseTask:
 				ChooseTask();
 				break;
 
-			case VillagerStates.FarmingTask:
+			case VillagerState.FarmingTask:
 				CheckPlants();
 				break;
 
-			case VillagerStates.FindWoodTask:
+			case VillagerState.FindWoodTask:
 				GatherResources();
 				break;
 
-			case VillagerStates.FindStoneTask:
+			case VillagerState.FindStoneTask:
 				GatherResources();
 				break;
 			
-			case VillagerStates.GetHospitalized:
+			case VillagerState.GetHospitalized:
 				//TODO
 				break;
 
-			case VillagerStates.FixFence:
+			case VillagerState.FixFence:
 				//TODO
 				break;
 
-			case VillagerStates.FindArcherTower:
+			case VillagerState.FindArcherTower:
 				//TODO
 				break;
 
-			case VillagerStates.FindShelter:
+			case VillagerState.FindShelter:
 
 				if (TimeManager.dayTime)
 				{
-					_state = VillagerStates.ChooseTask;
+					_state = VillagerState.ChooseTask;
 				}
 				else
 				{
@@ -205,7 +214,7 @@ public partial class Villager : CharacterBody2D
 				
 				break;
 			
-			case VillagerStates.InShelter when TimeManager.dayTime:
+			case VillagerState.InShelter when TimeManager.dayTime:
 				currentResidence.VillagerExitBuilding(this);
 				break;
 
@@ -219,6 +228,11 @@ public partial class Villager : CharacterBody2D
 	public void _on_button_button_up()
 	{
 		
+		OpenDialogue();
+	}
+
+	public void OpenDialogue()
+	{
 		_info.Visible = true;
 		_info.UpdateStatus(_state);
 		dialogueControl.OpenDialogueWindow();
@@ -274,7 +288,7 @@ public partial class Villager : CharacterBody2D
 		{
 			case VillagerOccupation.Farmer:
 				GD.Print("Farming task started");
-				_state = VillagerStates.FarmingTask;
+				_state = VillagerState.FarmingTask;
 				break;
 			
 			case VillagerOccupation.Soldier:
@@ -282,17 +296,17 @@ public partial class Villager : CharacterBody2D
 			
 			case VillagerOccupation.Woodcutter:
 				GD.Print("Finding wood");
-				_state = VillagerStates.FindWoodTask;
+				_state = VillagerState.FindWoodTask;
 				break;
 			
 			case VillagerOccupation.Miner:
 				GD.Print("Finding stone");
-				_state = VillagerStates.FindStoneTask;
+				_state = VillagerState.FindStoneTask;
 				break;
 			
 			default:
 				GD.Print("Villager Unemployed :(");
-				_state = VillagerStates.RoamAround;
+				_state = VillagerState.RoamAround;
 				break;
 		}
 
@@ -301,7 +315,7 @@ public partial class Villager : CharacterBody2D
 	
 	public void ChangeOccupation(VillagerOccupation occupation)
 	{
-		instance.SetVillagerOccupation(this, occupation);
+		VillagerManager.instance.SetVillagerOccupation(this, occupation);
 		_currentOccupation = occupation;
 	}
 	
@@ -335,7 +349,7 @@ public partial class Villager : CharacterBody2D
 		
 		_taskStarted = false;
 		_resourceTaskCounter = 0;
-		_state = VillagerStates.RoamAround;
+		_state = VillagerState.RoamAround;
 	}
 
 	void CheckPlants()
@@ -371,7 +385,7 @@ public partial class Villager : CharacterBody2D
 			}
 			else
 			{
-				_state = VillagerStates.RoamAround;
+				_state = VillagerState.RoamAround;
 				return;
 			}
 		}

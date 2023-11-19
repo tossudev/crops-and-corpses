@@ -228,10 +228,95 @@ public partial class RawInventoryItem : GodotObject
 }
 
 [System.Serializable]
+public partial class VillagerRawData : GodotObject
+{
+    // Data keys
+    public const string VILLAGER_ID_KEY = "id";
+    public const string VILLAGER_NAME_KEY = "name";
+    public const string VILLAGER_LORE_KEY = "lore";
+    public const string VILLAGER_IS_TOWN_POPULATION_KEY = "isTownPopulation";
+    public const string VILLAGER_CURRENT_OCCUPATION_KEY = "currentOccupation";
+    public const string VILLAGER_CURRENT_STATE_KEY = "currentState";
+    
+    public int id;
+    public string name;
+    public string lore;
+    public bool isTownPopulation;
+    public VillagerOccupation currentOccupation;
+    public VillagerState currentState;
+
+    public VillagerRawData() {}
+
+    public VillagerRawData(string name, string lore, bool isTownPopulation)
+    {
+        id = SaveData.allVillagers.Count;
+        this.name = name;
+        this.lore = lore;
+        this.isTownPopulation = isTownPopulation;
+        currentOccupation = VillagerOccupation.Unemployed;
+        currentState = VillagerState.ChooseTask;
+    }
+
+    public VillagerRawData(
+        int id,
+        string name,
+        string lore,
+        bool isTownPopulation,
+        VillagerOccupation currentOccupation,
+        VillagerState currentState)
+    {
+        this.id = id;
+        this.name = name;
+        this.lore = lore;
+        this.isTownPopulation = isTownPopulation;
+        this.currentOccupation = currentOccupation;
+        this.currentState = currentState;
+    }
+    
+    
+    /// <summary>
+    /// Reads all villager data from save data
+    /// </summary>
+    /// <param name="saveData"></param>
+    public static async Task ReadVillagerDataFromFile(Dictionary saveData, bool spawnAll = true)
+    {
+        SaveData.allVillagers.Clear();
+
+        if (saveData != null)
+        {
+            Array rawVillagerVariants = (Array) saveData[SaveData.VILLAGER_DATA_KEY];
+            await Task.Run(() =>
+            {
+                foreach (var rawVillagerVariant in rawVillagerVariants)
+                {
+                    Dictionary villagerDataDict = (Dictionary) rawVillagerVariant; 
+                
+                    VillagerRawData convertedRawVillager = new VillagerRawData(
+                        (int) villagerDataDict[VILLAGER_ID_KEY],
+                        (string) villagerDataDict[VILLAGER_NAME_KEY],
+                        (string) villagerDataDict[VILLAGER_LORE_KEY],
+                        (bool) villagerDataDict[VILLAGER_IS_TOWN_POPULATION_KEY],
+                        (VillagerOccupation) (int) villagerDataDict[VILLAGER_CURRENT_OCCUPATION_KEY],
+                        (VillagerState) (int) villagerDataDict[VILLAGER_CURRENT_STATE_KEY]);
+                
+                    SaveData.allVillagers.Add(convertedRawVillager);
+                }
+            });
+        }
+        
+        // TODO: spawn all town villagers
+    }
+}
+
+
+
+
+[System.Serializable]
 public partial class RawSaveData : GodotObject
 {
     public RawTownStats townStats = new ();
     public List<TownUpgrade> appliedUpgrades = new ();
+    public List<VillagerRawData> allVillagers = new ();
     public List<RawInventoryItem> inventoryItems = new ();
     public Array<RawInventoryItem> organizedInventoryItems = new ();
     
@@ -273,6 +358,9 @@ public partial class RawSaveData : GodotObject
             { RawTownStats.HOUSE_HP_KEY, townStats.houseHP }
         });
 
+        
+        
+        // Applied upgrades
         Dictionary appliedUpgradeDict = new ();
         
         foreach (var appliedUpgrade in appliedUpgrades)
@@ -280,6 +368,25 @@ public partial class RawSaveData : GodotObject
             appliedUpgradeDict.Add(appliedUpgrade.id, appliedUpgrade.upgradeHeader);
         }
         fullDictionary.Add(SaveData.APPLIED_TOWN_STATS_KEY, appliedUpgradeDict);
+        
+        
+        
+        // Villager Data
+        Dictionary villagerDataDict = new ();
+        
+        allVillagers.ForEach(villager =>
+        {
+            villagerDataDict.Add(villager.id, new Dictionary()
+            {
+                { VillagerRawData.VILLAGER_ID_KEY, villager.id },
+                { VillagerRawData.VILLAGER_NAME_KEY, villager.name },
+                { VillagerRawData.VILLAGER_LORE_KEY, villager.lore },
+                { VillagerRawData.VILLAGER_IS_TOWN_POPULATION_KEY, villager.isTownPopulation },
+                { VillagerRawData.VILLAGER_CURRENT_OCCUPATION_KEY, (int) villager.currentOccupation },
+                { VillagerRawData.VILLAGER_CURRENT_STATE_KEY, (int) villager.currentState }
+            });
+        });
+        fullDictionary.Add(SaveData.VILLAGER_DATA_KEY, villagerDataDict);
         
         
         

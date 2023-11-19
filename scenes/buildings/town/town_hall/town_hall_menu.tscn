@@ -327,18 +327,22 @@ layout_mode = 2
 [node name="Farmers" parent="OccupationsPanel/VBoxContainer/MarginContainer/TabContainer" instance=ExtResource("7_xljdt")]
 visible = false
 layout_mode = 2
+_occupation = 1
 
 [node name="Soldiers" parent="OccupationsPanel/VBoxContainer/MarginContainer/TabContainer" instance=ExtResource("7_xljdt")]
 visible = false
 layout_mode = 2
+_occupation = 2
 
 [node name="Woodcutters" parent="OccupationsPanel/VBoxContainer/MarginContainer/TabContainer" instance=ExtResource("7_xljdt")]
 visible = false
 layout_mode = 2
+_occupation = 3
 
 [node name="Miners" parent="OccupationsPanel/VBoxContainer/MarginContainer/TabContainer" instance=ExtResource("7_xljdt")]
 visible = false
 layout_mode = 2
+_occupation = 4
 
 [node name="StoragePanel" type="Panel" parent="."]
 unique_name_in_owner = true

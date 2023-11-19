@@ -5,9 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Godot.Collections;
 
+[GlobalClass]
 public partial class TownManager : Node2D
 {
 	const string DEFAULT_STATS_PATH = "res://assets/resources/town_stats_upgrades/town_starting_stats.tres";
+	
+	public const int ONE_SECOND_IN_TICKS = 60;
+
+	static int _globalPhysicsTicks;
+	public static int globalPhysicsTicks => _globalPhysicsTicks;
 
 	public static RawTownStats currentTownStats => SaveData.townHallStats;
 
@@ -81,4 +87,10 @@ public partial class TownManager : Node2D
 		SaveData.appliedUpgrades.Add(upgrade);
 		Task sync = SaveData.SyncTownStats();
 	}
+
+	public override void _PhysicsProcess(double delta)
+	{
+		base._PhysicsProcess(delta);
+		_globalPhysicsTicks++;
+    }
 }

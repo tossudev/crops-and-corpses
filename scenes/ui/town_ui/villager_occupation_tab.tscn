@@ -1,9 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://boj0vr56041sl"]
 
-[ext_resource type="PackedScene" uid="uid://bdlsr0753oqd6" path="res://scenes/ui/town_ui/villager_face_button.tscn" id="1_hohrn"]
+[ext_resource type="Script" path="res://scripts/ui/town/VillagerOccupationTab.cs" id="1_wi0bj"]
 
 [node name="VillagerOccupationTab" type="ScrollContainer"]
 custom_minimum_size = Vector2(612, 192)
+script = ExtResource("1_wi0bj")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -11,31 +12,8 @@ theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
 columns = 8
-
-[node name="Villager Face Button" parent="MarginContainer/GridContainer" instance=ExtResource("1_hohrn")]
-layout_mode = 2
-
-[node name="Villager Face Button2" parent="MarginContainer/GridContainer" instance=ExtResource("1_hohrn")]
-layout_mode = 2
-
-[node name="Villager Face Button3" parent="MarginContainer/GridContainer" instance=ExtResource("1_hohrn")]
-layout_mode = 2
-
-[node name="Villager Face Button4" parent="MarginContainer/GridContainer" instance=ExtResource("1_hohrn")]
-layout_mode = 2
-
-[node name="Villager Face Button5" parent="MarginContainer/GridContainer" instance=ExtResource("1_hohrn")]
-layout_mode = 2
-
-[node name="Villager Face Button6" parent="MarginContainer/GridContainer" instance=ExtResource("1_hohrn")]
-layout_mode = 2
-
-[node name="Villager Face Button7" parent="MarginContainer/GridContainer" instance=ExtResource("1_hohrn")]
-layout_mode = 2
-
-[node name="Villager Face Button8" parent="MarginContainer/GridContainer" instance=ExtResource("1_hohrn")]
-layout_mode = 2

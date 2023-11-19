@@ -7,7 +7,7 @@ public partial class VillagerResidence : Control
 	
 	//TODO: Get villagers to enter and execute appropriate functions
 	
-	const string VILLAGER_FACE_BUTTON_FILEPATH = "res://scenes/ui/town_ui/villager_face_button.tscn";
+	public const string VILLAGER_FACE_BUTTON_FILEPATH = "res://scenes/ui/town_ui/villager_face_button.tscn";
 	
 	GridContainer _villagerFaceButtonParentGrid;
 	const string VILLAGER_GRID_NODENAME = "%VillagerParentGrid";
@@ -23,7 +23,7 @@ public partial class VillagerResidence : Control
 		CloseDialoguePanel();
 	}
 	
-	Array<ulong> _currentResidents = new ();
+	Array<int> _currentResidents = new ();
 	public void VillagerEnterBuilding(Villager newVillager)
 	{
 		if (newVillager == null)
@@ -33,7 +33,7 @@ public partial class VillagerResidence : Control
 		}
 			
 		newVillager.EnterShelter();
-		_currentResidents.Add(newVillager.GetInstanceId());
+		_currentResidents.Add(newVillager.rawData.id);
 		
 		VillagerFaceButton villagerFaceButton = 
 			(VillagerFaceButton) GD.Load<PackedScene>(VILLAGER_FACE_BUTTON_FILEPATH).Instantiate<Control>();
@@ -56,7 +56,7 @@ public partial class VillagerResidence : Control
 	
 	public void VillagerExitBuilding (Villager leavingVillager)
 	{
-		ulong villagerInstanceId = leavingVillager.GetInstanceId();
+		int villagerInstanceId = leavingVillager.rawData.id;
 		
 		if (_currentResidents.Contains(villagerInstanceId))
 		{

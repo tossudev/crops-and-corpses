@@ -36,7 +36,9 @@ public partial class Villager : CharacterBody2D
 	const string PLAYER_NODENAME = "%Player";
 	const string STREETSIGN_NODENAME = "%StreetSign";
 	const string FOREST_SCENE_NODENAME = "%ForestScene";
+	string _currentScene;
 	CharacterBody2D _player;
+	public bool needResque = false;
 
 	[Export] VillagerInfo _info;
 	public VillagerInfo villagerInfo => _info;
@@ -56,7 +58,7 @@ public partial class Villager : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
+		_currentScene = GetTree().CurrentScene.Name;
 		_player = GetParent().GetNodeOrNull<CharacterBody2D>(PLAYER_NODENAME);
 		_streetSign = GetParent().GetNodeOrNull<Node2D>(STREETSIGN_NODENAME);
 		_forestScene = GetParent().GetNodeOrNull<Node2D>(FOREST_SCENE_NODENAME);
@@ -75,20 +77,16 @@ public partial class Villager : CharacterBody2D
 		AddChild(_timer);
 		_timer.Start();
 
-//TO DO: jos ollaan townissa: roam, jos ollaan ei townissa followPlayer.
-//Idle state tms. questeja varten
-/* 		string _currentScene = GetTree().CurrentScene.Name;
-
-		if (_currentScene != null && _currentScene == "Forest")
-        {
-			GD.Print("Following player");
-            _state = VillagerStates.FollowPlayer;
-        }
-        else
-        {
-			GD.Print("Roaming around");
-            _state = VillagerStates.RoamAround;
-        } */
+		if(_currentScene == "Forest" || _currentScene == "Ruins" || _currentScene == "Riverside")
+		{
+			needResque = true;
+			_state = VillagerState.ResqueQuest;
+		}
+		else
+		{
+			needResque = false;
+			_state = VillagerState.RoamAround;
+		}
 	}
 
 	public void InitializeVillager(VillagerRawData data)
@@ -156,12 +154,6 @@ public partial class Villager : CharacterBody2D
 		        }
 	        }
         }
-
-        // yes
-        // if (dialogueControl.Visible)
-        // {
-	       //  _state = VillagerStates.Idle;
-        // }
 		
         switch (_state)
 		{
@@ -187,6 +179,10 @@ public partial class Villager : CharacterBody2D
 
 			case VillagerState.FindStoneTask:
 				GatherResources();
+				break;
+
+			case VillagerState.ResqueQuest:
+				WaitingResque();
 				break;
 			
 			case VillagerState.GetHospitalized:
@@ -227,8 +223,14 @@ public partial class Villager : CharacterBody2D
 
 	public void _on_button_button_up()
 	{
-		
-		OpenDialogue();
+		if(_currentScene != "Town" && needResque == true)
+		{
+			OpenResqueDialogue();
+		}
+		else
+		{
+			OpenDialogue();
+		}	
 	}
 
 	public void OpenDialogue()
@@ -236,6 +238,13 @@ public partial class Villager : CharacterBody2D
 		_info.Visible = true;
 		_info.UpdateStatus(_state);
 		dialogueControl.OpenDialogueWindow();
+	}
+
+	public void OpenResqueDialogue()
+	{
+		GD.Print("You saved me");
+		// Tähä joku button tai joku ?????
+		_state = VillagerState.FollowPlayer;
 	}
 
 	const string VILLAGER_RESIDENCE_NODENAME = "%TownHallMenu";
@@ -350,6 +359,11 @@ public partial class Villager : CharacterBody2D
 		_taskStarted = false;
 		_resourceTaskCounter = 0;
 		_state = VillagerState.RoamAround;
+	}
+
+	void WaitingResque()
+	{
+		_targetPosition = GlobalPosition + CreateOffsetVector2(-10, 10);
 	}
 
 	void CheckPlants()

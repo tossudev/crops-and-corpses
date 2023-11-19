@@ -103,5 +103,6 @@ public enum VillagerState
 	ChooseTask,
 	FarmingTask,
 	FindWoodTask,
-	FindStoneTask
+	FindStoneTask,
+	ResqueQuest
 }

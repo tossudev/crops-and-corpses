@@ -32,12 +32,13 @@ _data = {
 "shake": SubResource("Animation_ur5ux")
 }
 
-[node name="Tree2" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer")]
+[node name="Tree" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer", "_sprite")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 collision_layer = 5
 script = ExtResource("1_hvnxh")
 _loot = ExtResource("2_7mwtb")
 _animationPlayer = NodePath("AnimationPlayer")
+_sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-24, -160)

@@ -24,6 +24,7 @@ collision_mask = 3
 shape = ExtResource("2_r82bd")
 
 [node name="plant_slot" type="TextureRect" parent="."]
+z_index = 1
 custom_minimum_size = Vector2(500, 0)
 anchors_preset = 1
 anchor_left = 1.0

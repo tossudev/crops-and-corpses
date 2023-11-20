@@ -92,7 +92,14 @@ public partial class Plant : Node2D
 		trect = GetNode<TextureRect>("%TextureRect");
 		if(myField==null){
 			GetNode<TextureRect>("%TextureRect").Texture = _plantTexture;
+			GD.Print(_plantType);
 			_state = GrowthState.IsHarvestable;
+			GetNode<TextureRect>("%TextureRect").Size= new Vector2(96, 96);
+			if(_plantType == PlantType.Lupine) {
+					GetNode<TextureRect>("%TextureRect").ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
+			} 
+		
+			
 			return;
 		}
 		Position = new Vector2(0, -5);

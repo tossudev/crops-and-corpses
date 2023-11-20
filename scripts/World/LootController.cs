@@ -19,12 +19,19 @@ public partial class LootController : StaticBody2D
 
 	private List<Item> _items = new List<Item>();
 	private int animSpeed = 15;
+	RandomNumberGenerator rng;
 
 	public override void _Ready()
 	{
 		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
 		_animationPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
 		_timer = GetNodeOrNull<Timer>("Timer");
+
+		rng = new RandomNumberGenerator();
+		var x = (this.Position.X);
+		var y = (this.Position.Y);
+		// unique seed for each coordinate
+		rng.Seed = (ulong)((x + y) * (x + y + 1) / 2 + y);
 
 		Variations();
 
@@ -45,17 +52,17 @@ public partial class LootController : StaticBody2D
 
 	private void Variations()
 	{
-		float brightness = (float)GD.RandRange(_minBrightness, 1f);
+		float brightness = rng.RandfRange(_minBrightness, 1f);
 
 		if (_color != new Color(0, 0, 0, 0))
 			_sprite.Modulate = new Color(_color.R * brightness, _color.G * brightness, _color.B * brightness, 1);
 
-		if (GD.RandRange(0, 1) > 0.5f)
+		if (rng.RandfRange(0, 1) > 0.5f)
 			this.Scale = new Vector2(-Scale.X, Scale.Y);
 
-		this.Scale *= (float)GD.RandRange(1 - _scaleVariation, 1f);
+		this.Scale *= rng.RandfRange(1 - _scaleVariation, 1f);
 
-		this.RotationDegrees += GD.RandRange(-_rotationVariation, _rotationVariation);
+		this.RotationDegrees += rng.RandfRange(-_rotationVariation, _rotationVariation);
 	}
 
 	private void OnHealth(float health)

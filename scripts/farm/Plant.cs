@@ -11,7 +11,7 @@ public partial class Plant : Node2D
 	[Export] float _growthCycleLength = 5f;
 	[Export] int _maxCycles;
 
-[Export] int _maxHarvestableAmount;
+	[Export] int _maxHarvestableAmount;
 	[Export] Texture2D _seedTexture;
 	[Export] Texture2D _sproutTexture;
 	[Export] Texture2D _plantTexture;
@@ -46,6 +46,7 @@ public partial class Plant : Node2D
 		get {return _plantTexture;}
 		set {_plantTexture = value;}	
 	}
+	
 	[Export] CollisionObject2D _col;
 	
 	[Export]TextureRect trect;
@@ -77,6 +78,11 @@ public partial class Plant : Node2D
 	bool _harvested=false;
 	double _progressTimer;
 	int index=0;
+
+	public double currentGrowthTime{
+		get {return _progress.Value;}
+		set {_progress.Value = value;}	
+	}
  	#endregion
 	
 	public override void _Ready()
@@ -84,6 +90,7 @@ public partial class Plant : Node2D
 		InitializePlant();
 		if(FarmManager.instance!=null) FarmManager.instance.AddPlantedPlant(this);
 		
+		GD.Print(currentGrowthTime);
 	}
 
 	void InitializePlant(){
@@ -146,6 +153,7 @@ public partial class Plant : Node2D
     }
 
     void PlantState(){
+		GD.Print(currentGrowthTime);
 		switch(_state){
 			case GrowthState.WaitWatering:
 				_warningSign.Texture = _waterSignTexture;

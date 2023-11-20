@@ -5,22 +5,22 @@ public partial class PlayerTravel : Node
 {
 	void TravelTown(Node viewport, InputEvent @event, long shapeIdx)
 	{
-		if(@event is InputEventMouseButton button && button.IsPressed() && button.ButtonIndex == MouseButton.Left)
+		if (@event is InputEventMouseButton button && button.IsPressed() && button.ButtonIndex == MouseButton.Left)
 		{
 			GetTree().ChangeSceneToFile("res://scenes/town.tscn");
 		}
 	}
-	void TravelRiverside(Node viewport, InputEvent @event, long shapeIdx)
+	void TravelCave(Node viewport, InputEvent @event, long shapeIdx)
 	{
-		if(@event is InputEventMouseButton button && button.IsPressed() && button.ButtonIndex == MouseButton.Left)
+		if (@event is InputEventMouseButton button && button.IsPressed() && button.ButtonIndex == MouseButton.Left)
 		{
-			GetTree().ChangeSceneToFile("res://scenes/riverside.tscn");
+			GetTree().ChangeSceneToFile("res://scenes/cave.tscn");
 		}
 	}
 
 	void TravelRuins(Node viewport, InputEvent @event, long shapeIdx)
 	{
-		if(@event is InputEventMouseButton button && button.IsPressed() && button.ButtonIndex == MouseButton.Left)
+		if (@event is InputEventMouseButton button && button.IsPressed() && button.ButtonIndex == MouseButton.Left)
 		{
 			GetTree().ChangeSceneToFile("res://scenes/ruins.tscn");
 		}
@@ -28,7 +28,7 @@ public partial class PlayerTravel : Node
 
 	void TravelForest(Node viewport, InputEvent @event, long shapeIdx)
 	{
-		if(@event is InputEventMouseButton button && button.IsPressed()&& button.ButtonIndex == MouseButton.Left)
+		if (@event is InputEventMouseButton button && button.IsPressed() && button.ButtonIndex == MouseButton.Left)
 		{
 			GetTree().ChangeSceneToFile("res://scenes/forest.tscn");
 		}

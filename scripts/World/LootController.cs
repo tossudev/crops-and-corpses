@@ -7,11 +7,23 @@ public partial class LootController : StaticBody2D
 {
 	[Export] private Loot _loot;
 	[Export] private AnimationPlayer _animationPlayer;
+	[Export] private Sprite2D _sprite;
+	[Export] private Timer _timer;
+	[Export] private Color _color;
+	[Export] private float _minBrightness = 1f;
 
 	private List<Item> _items = new List<Item>();
+	private int animSpeed = 15;
 
 	public override void _Ready()
 	{
+		// workaround for godot duplication reference thingy
+		_animationPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
+		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
+		_timer = GetNodeOrNull<Timer>("Timer");
+
+		AppearanceVariation();
+
 		if (_loot == null)
 		{
 			GD.PrintErr("LootController: Loot is null");
@@ -27,12 +39,27 @@ public partial class LootController : StaticBody2D
 		}
 	}
 
+	private void AppearanceVariation()
+	{
+		float brightness = (float)GD.RandRange(1f, _minBrightness);
+
+		if (_color != new Color(0, 0, 0, 0))
+			_sprite.Modulate = new Color(_color.R * brightness, _color.G * brightness, _color.B * brightness, _color.A);
+
+		if (GD.RandRange(0, 1) > 0.5f)
+			Scale = new Vector2(-1, 1);
+
+		Scale *= (float)GD.RandRange(0.75f, 1f);
+
+		RotationDegrees = (float)GD.RandRange(-5, 5);
+	}
+
 	private void OnHealth(float health)
 	{
 		if (_items.Count > 1)
 			DropItems();
 
-		_animationPlayer.SpeedScale = 15;
+		_animationPlayer.SpeedScale = animSpeed;
 		_animationPlayer.Play("shake");
 
 		if (health <= 0)

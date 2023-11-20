@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Loot" load_steps=5 format=3 uid="uid://b7jgjk4165udm"]
 
-[ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="1_5wq2c"]
+[ext_resource type="Resource" uid="uid://b4q0ubmpskqjm" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="1_5wq2c"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_pnxwd"]
 [ext_resource type="Script" path="res://scripts/World/Loot.cs" id="3_g11aq"]
 

@@ -51,11 +51,11 @@ public partial class LootController : StaticBody2D
 			_sprite.Modulate = new Color(_color.R * brightness, _color.G * brightness, _color.B * brightness, 1);
 
 		if (GD.RandRange(0, 1) > 0.5f)
-			this.Scale = new Vector2(-1, 1);
+			this.Scale = new Vector2(-Scale.X, Scale.Y);
 
-		Scale *= (float)GD.RandRange(1 - _scaleVariation, 1f);
+		this.Scale *= (float)GD.RandRange(1 - _scaleVariation, 1f);
 
-		RotationDegrees += GD.RandRange(-_rotationVariation, _rotationVariation);
+		this.RotationDegrees += GD.RandRange(-_rotationVariation, _rotationVariation);
 	}
 
 	private void OnHealth(float health)

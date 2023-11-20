@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://dqgscu3bl0gng" path="res://assets/sprites/items/item_pumpkin.png" id="7_rbebr"]
 
 [node name="plant_poppy" type="Node2D" node_paths=PackedStringArray("_col", "trect")]
-z_index = 2
 script = ExtResource("1_a3wlm")
 _plantType = 6
 _seedName = "poppy seed"

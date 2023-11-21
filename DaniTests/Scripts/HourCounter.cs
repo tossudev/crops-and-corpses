@@ -4,7 +4,7 @@ using System;
 public partial class HourCounter : Label
 {
 	private float currentHour;
-	
+	private bool isDayTime;
 	private GlobalTime globalTime;
 	private float dayDuration = 60.0f;
 	private float nightDuration = 30.0f;
@@ -23,6 +23,10 @@ public partial class HourCounter : Label
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		isDayTime = TimeManager.dayTime;
+		Modulate = isDayTime 
+			? new Color(1f,1f,1f) 
+			: new Color(1f,0,0);
 		currentHour = globalTime.GetTime();
 		hourOfDay = MathF.Floor(currentHour / (dayDuration + nightDuration) * 24) % 24;
 		Text = "Hour: "+hourOfDay.ToString();

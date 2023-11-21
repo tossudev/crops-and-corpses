@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class ZombieManager : Node
@@ -103,4 +104,9 @@ public partial class ZombieManager : Node
 	{
 		UpdateStats();	
 	}
+
+    internal void SpawnZombieAtPosition(Vector2 position)
+    {
+        throw new NotImplementedException();
+    }
 }

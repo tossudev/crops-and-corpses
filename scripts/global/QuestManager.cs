@@ -2,22 +2,56 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Manages the active quest in the game.
+/// </summary>
 public partial class QuestManager : Node
 {
     private Quest activeQuest;
 
-    public void SetActiveQuestForScene(string sceneName)
+
+     public override void _Ready(){
+
+        
+     }
+
+    public void StartQuest(string questName, string questDescription, List<string> questStages, string questLocation)
     {
-        // Implement logic to set the active quest based on the scene (if needed)
-        // For simplicity, let's assume there's only one global quest for now.
-        // You can extend this logic to support different quests for different scenes.
         if (activeQuest == null)
         {
-            List<string> questStages = new List<string> { "Stage 1", "Stage 2", "Stage 3" };
-            Quest newQuest = new Quest();
-            newQuest.Initialize("Global Quest", "Global quest description", questStages, sceneName);
+            Quest newQuest = new Quest
+            {
+                Name = questName,
+                Description = questDescription,
+                Stages = questStages,
+                Location = questLocation
+            };
             SetActiveQuest(newQuest);
         }
+    }
+
+    public void StartForrestQuest()
+    {
+        List<string> questStages = new List<string> { "Find", "Rescue", "Deliver" };
+        StartQuest("Forrest Quest", "Rescue Villager From Forrest", questStages, "Forrest");
+    }
+
+    public void StartRuinsQuest()
+    {
+        List<string> questStages = new List<string> { "Find", "Rescue", "Deliver" };
+        StartQuest("Ruins Quest", "Rescue Villager From Ruins", questStages, "Ruins");
+    }
+
+    public void StartCaveQuest()
+    {
+        List<string> questStages = new List<string> { "Find", "Rescue", "Deliver" };
+        StartQuest("Cave Quest", "Rescue Villager From cave", questStages, "Cave");
+    }
+
+    public void LoadQuest()
+    {
+        //load quest from save file
+
     }
 
     public Quest GetActiveQuest()
@@ -29,5 +63,15 @@ public partial class QuestManager : Node
     {
         activeQuest = quest;
         GD.Print($"Active quest set: {quest.Name}");
+    }
+
+    public int GetActiveQuestDifficulty()
+    {
+        return activeQuest?.Difficulty ?? 0;
+    }
+
+    public void CompleteQuestStage(string stage)
+    {
+        activeQuest?.CompleteQuestStage(stage);
     }
 }

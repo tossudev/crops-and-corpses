@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/inventory/player_inventory.tscn" id="1_j4acp"]
 [ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="2_atu7v"]
-[ext_resource type="PackedScene" uid="uid://c1r6la2nplhqp" path="res://scenes/ui/DayCounterLabel.tscn" id="3_bmooi"]
+[ext_resource type="PackedScene" path="res://scenes/ui/DayCounterLabel.tscn" id="3_bmooi"]
 [ext_resource type="Script" path="res://DaniTests/Scripts/HourCounter.cs" id="4_sv1al"]
 [ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://scenes/ui/building_menu.tscn" id="5_om3g0"]
 [ext_resource type="PackedScene" uid="uid://5agkiate7gox" path="res://scenes/ui/minimap.tscn" id="6_khm13"]

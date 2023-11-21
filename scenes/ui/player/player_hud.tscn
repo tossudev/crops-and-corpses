@@ -83,16 +83,16 @@ vertical_alignment = 1
 [node name="PlayerStaminaBG" type="Panel" parent="."]
 layout_mode = 0
 offset_left = -64.0
-offset_top = 128.0
+offset_top = 112.0
 offset_right = 304.0
-offset_bottom = 208.0
+offset_bottom = 176.0
 
 [node name="PlayerStaminaBar" type="ProgressBar" parent="." groups=["PlayerStaminaBar"]]
 layout_mode = 0
 offset_left = -56.0
-offset_top = 137.0
+offset_top = 120.0
 offset_right = 296.0
-offset_bottom = 201.0
+offset_bottom = 168.0
 theme_override_styles/background = SubResource("StyleBoxFlat_wp12y")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ddvoa")
 step = 1.0
@@ -102,9 +102,9 @@ show_percentage = false
 [node name="Text" type="Label" parent="PlayerStaminaBar"]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 8.0
+offset_top = -9.0
 offset_right = 344.0
-offset_bottom = 56.0
+offset_bottom = 64.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = SubResource("FontFile_kvdlr")

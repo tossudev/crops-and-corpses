@@ -107,7 +107,17 @@ public partial class BuildingMenu : Control
     {
         foreach (Button button in _vBoxContainer.GetChildren())
         {
-            Label label = button.GetChild(0).GetChild(0) as Label;
+            Label label;
+
+            if (button.GetChildCount() > 0)
+            {
+                label = button.GetChild(0).GetChild(0) as Label;
+            }
+            else
+            {
+                return;
+            }
+
             int price = Int32.Parse(label.Text);
 
             if (!PlayerInventoryData.ExistsInInventory(log.ID, price))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=30 format=3 uid="uid://bgyv0c8xt1fd4"]
 
 [ext_resource type="Script" path="res://scripts/villager/VillagerManager.cs" id="1_r70qj"]
 [ext_resource type="Script" path="res://scripts/global/AllVillagerData.cs" id="2_ilkp0"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://cyk44y2mntxd0" path="res://scenes/buildings/town/town_hall/town_hall.tscn" id="11_r6hyg"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
+[ext_resource type="Script" path="res://scripts/World/NavigationManager.cs" id="23_0od72"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="26_e7msj"]
 [ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://scenes/spawn/ZombieSpawn.tscn" id="26_e61x0"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="29_6j2s6"]
@@ -54,6 +55,11 @@ width = 256
 height = 256
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_pf84x"]
+vertices = PackedVector2Array(-4904, -3984, 4528, -4352, 4608, 4088, -5800, 4632)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-4904, -3984, 4528, -4352, 4608, 4088, -5800, 4632)])
 
 [node name="Town" type="Node2D"]
 y_sort_enabled = true
@@ -848,6 +854,18 @@ script = ExtResource("29_6j2s6")
 
 [node name="Sunlight" type="CanvasModulate" parent="SunlightContainer"]
 position = Vector2(-71, -4)
+
+[node name="NavigationManager" type="Node2D" parent="."]
+script = ExtResource("23_0od72")
+arrayTest = PackedVector2Array(0, 0, 10, 0, 10, -10, 0, -10)
+
+[node name="Region" type="NavigationRegion2D" parent="NavigationManager"]
+z_index = -100
+navigation_polygon = SubResource("NavigationPolygon_pf84x")
+
+[node name="testPolygon" type="Polygon2D" parent="NavigationManager" groups=["obstacle_area"]]
+color = Color(1, 1, 1, 0)
+polygon = PackedVector2Array(-616, -112, -584, 40, -344, 0)
 
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
 

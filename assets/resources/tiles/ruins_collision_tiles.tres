@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=7 format=3 uid="uid://dajdby7nadxkd"]
 
-[ext_resource type="Texture2D" uid="uid://b0dlu5nexmss2" path="res://assets/sprites/tiles/grass_tile.png" id="1_8vy6i"]
+[ext_resource type="Texture2D" uid="uid://try021ljeoay" path="res://assets/sprites/tiles/grass_tile.png" id="1_8vy6i"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="3_fanbg"]
 [ext_resource type="Texture2D" uid="uid://n8iftcgk0ti0" path="res://assets/sprites/tiles/Sand_tile.png" id="7_ll0no"]
 

@@ -860,12 +860,8 @@ script = ExtResource("23_0od72")
 arrayTest = PackedVector2Array(0, 0, 10, 0, 10, -10, 0, -10)
 
 [node name="Region" type="NavigationRegion2D" parent="NavigationManager"]
-z_index = -100
+self_modulate = Color(1, 1, 1, 0.337255)
 navigation_polygon = SubResource("NavigationPolygon_pf84x")
-
-[node name="testPolygon" type="Polygon2D" parent="NavigationManager" groups=["obstacle_area"]]
-color = Color(1, 1, 1, 0)
-polygon = PackedVector2Array(-616, -112, -584, 40, -344, 0)
 
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
 

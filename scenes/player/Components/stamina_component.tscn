@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu54axeet2w5"]
+
+[ext_resource type="Script" path="res://scenes/player/StaminaComponent.cs" id="1_xvjnl"]
+
+[node name="StaminaComponent" type="Node2D" node_paths=PackedStringArray("_regenTimer")]
+script = ExtResource("1_xvjnl")
+_regenTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

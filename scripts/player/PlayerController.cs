@@ -10,6 +10,7 @@ public partial class PlayerController : CharacterBody2D
 	[Export] private Area2D _pickupArea;
 	[Export] private PlayerSpriteController _rig;
 	[Export] private HealthComponent _healthComponent;
+	[Export] private StaminaComponent _staminaComponent;
 
 	[Export] private Node2D _respawnPoint;
 
@@ -17,10 +18,18 @@ public partial class PlayerController : CharacterBody2D
 	[Export] private float maxZoom = 2f;
 	[Export] private float minZoom = 1f;
 	[Export] private int _speed = 100;
+	[Export] private float _runMultiplier = 1;
 
 	private bool _canMelee = true;
+	private bool _canRun;
 	private bool _isDead = false;
+	private float _speedMultiplier = 1;
 	private Vector2 _knockback = Vector2.Zero;
+
+	public override void _Ready()
+	{
+		_canRun = true;
+	}
 
 	// to disable the player input, use:
 	// player.SetProcessUnhandledInput(true/false);
@@ -90,7 +99,33 @@ public partial class PlayerController : CharacterBody2D
 
 	private void Movement()
 	{
-		var movement = GetMovementInputVector() * _speed;
+		if (Input.IsActionPressed("run"))
+		{
+			if (Velocity != Vector2.Zero && _staminaComponent.currentStamina > 0 && _canRun)
+			{
+				_speedMultiplier = _runMultiplier;
+				_staminaComponent.drainRate = 0.3f;
+				_staminaComponent.canDrain = true;
+			}
+			else
+			{
+				_speedMultiplier = 1;
+				_staminaComponent.canDrain = false;
+			}
+
+			if (_staminaComponent.currentStamina <= 0)
+			{
+				_canRun = false;
+			}
+		}
+		else if (Input.IsActionJustReleased("run") || _staminaComponent.currentStamina <= 0)
+		{
+			_speedMultiplier = 1;
+			_staminaComponent.canDrain = false;
+			_canRun = true;
+		}
+
+		var movement = GetMovementInputVector() * _speed * _speedMultiplier;
 		Velocity = movement + _knockback;
 
 		_rig.UpdateSprite(movement);

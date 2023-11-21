@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b50blftb1dypc"]
+[gd_scene load_steps=7 format=3 uid="uid://b50blftb1dypc"]
 
 [ext_resource type="Script" path="res://scripts/ui/PlayerHud.cs" id="1_m40pp"]
 
@@ -34,6 +34,12 @@ cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
 cache/0/32/0/kerning_overrides/20/0 = Vector2(0, 0)
 cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wp12y"]
+bg_color = Color(0, 0, 0, 0.368627)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ddvoa"]
+bg_color = Color(1, 0.764706, 0.0705882, 1)
+
 [node name="PlayerHud" type="Control"]
 layout_mode = 3
 anchors_preset = 0
@@ -62,6 +68,38 @@ value = 100.0
 show_percentage = false
 
 [node name="Text" type="Label" parent="PlayerHealthBar"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 344.0
+offset_bottom = 56.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("FontFile_kvdlr")
+theme_override_font_sizes/font_size = 32
+text = "100"
+vertical_alignment = 1
+
+[node name="PlayerStaminaBG" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -64.0
+offset_top = 128.0
+offset_right = 304.0
+offset_bottom = 208.0
+
+[node name="PlayerStaminaBar" type="ProgressBar" parent="." groups=["PlayerStaminaBar"]]
+layout_mode = 0
+offset_left = -56.0
+offset_top = 137.0
+offset_right = 296.0
+offset_bottom = 201.0
+theme_override_styles/background = SubResource("StyleBoxFlat_wp12y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ddvoa")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="Text" type="Label" parent="PlayerStaminaBar"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0

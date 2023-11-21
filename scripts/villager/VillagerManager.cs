@@ -15,6 +15,8 @@ public partial class VillagerManager : Node
 	{
 		if(instance==null)instance=this;else QueueFree();
 		townhallLevel = 0;
+
+		AddNewVillager(new Villager());
 	}
 
 	public VillagerData GetVillagerData(){
@@ -29,14 +31,33 @@ public partial class VillagerManager : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+
 		
 	}
 
 	public void AddNewVillager(Villager newVillager)
 	{
+	
+	
+
 		_villager.Add(newVillager);
+
+		GD.Print("Villager added");
+		GD.Print(newVillager.Name);
+
+
 	}
 
+
+
+
+	public void RemoveVillager(Villager villagerToRemove)
+	{
+		_villager.Remove(villagerToRemove);
+	}
+	
+
+	
 	void VillagerAmountInGame()
 	{
 		switch(townhallLevel)

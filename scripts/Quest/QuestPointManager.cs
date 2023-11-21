@@ -1,41 +1,72 @@
 
 using Godot;
-
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Manages the quest points in the game.
+/// </summary>
 public partial class QuestPointManager : Node
-{
-    private List<QuestPoint> questPoints = new List<QuestPoint>();
-    private Quest activeQuest = null;
+{ private Dictionary<string, PackedScene> questScenesByScene = new Dictionary<string, PackedScene>();
+    private List<QuestPoint> activeQuestPoints = new List<QuestPoint>();
+    private QuestManager questManager;
 
-    public void AddQuest(Quest quest)
+    public override void _Ready()
     {
-        activeQuest = quest;
+        questManager = GetNode<QuestManager>("/root/QuestManager");
+
+        // Load and store PackedScenes for each quest type
+        questScenesByScene["forest"] = GD.Load<PackedScene>("res://path/to/forest_quest_scene.tscn");
+        questScenesByScene["ruins"] = GD.Load<PackedScene>("res://path/to/ruins_quest_scene.tscn");
+        questScenesByScene["cave"] = GD.Load<PackedScene>("res://path/to/cave_quest_scene.tscn");
     }
 
-    public Vector2 GetRandomQuestPoint()
+    public void AddQuestPoint(QuestPoint questPoint, string sceneName)
     {
-        if (questPoints.Count > 0 && activeQuest != null)
+        // Add the quest point to the list of active quest points
+        activeQuestPoints.Add(questPoint);
+    }
+
+    public Vector2 GetRandomQuestPoint(string sceneName)
+    {
+        // Your existing code to get a random quest point
+        // ...
+
+        return Vector2.Zero; // Placeholder, replace with your logic
+    }
+
+    public void ActivateQuestPointForScene(string sceneName)
+    {
+        Vector2 randomQuestPoint = GetRandomQuestPoint(sceneName);
+
+        if (randomQuestPoint != Vector2.Zero && questManager.GetActiveQuest() == null)
         {
-            // Pick a random quest point from the list
-            int randomIndex = GD.RandRange(0, questPoints.Count);
-            return questPoints[randomIndex].GlobalPosition;
-        }
+            // Load the PackedScene for the specific quest type
+            if (questScenesByScene.TryGetValue(sceneName, out PackedScene questScene))
+            {
+                // Instantiate the quest from the PackedScene
+                Quest newQuest = (Quest)questScene.Instantiate();
+                newQuest.Position = randomQuestPoint;
+                GetTree().CurrentScene.AddChild(newQuest);
 
-        return Vector2.Zero;
+                GD.Print($"Quest instantiated at random position: {randomQuestPoint}");
+
+                // Assign the quest to the QuestPoint or perform other actions
+                QuestPoint questPoint = newQuest.GetNode<QuestPoint>(".");
+                questPoint.AssignQuest(newQuest);
+            }
+            else
+            {
+                GD.PrintErr($"PackedScene not found for scene: {sceneName}");
+            }
+        }
     }
 
-    public void InstantiateQuestAtPoint(PackedScene questScene, Vector2 point)
+    // Example method to deactivate a specific quest point
+    public void DeactivateQuestPoint(QuestPoint questPoint)
     {
-        Quest newQuest = (Quest)questScene.Instantiate();
-        newQuest.Position = point;
-        GetTree().CurrentScene.AddChild(newQuest);
-
-        GD.Print($"Quest instantiated at point: {point}");
-
-        // Assign the quest to the QuestPoint
-        QuestPoint questPoint = newQuest.GetNode<QuestPoint>(".");
-        questPoint.AssignQuest(activeQuest);
+        // Deactivate or perform other actions related to deactivation
+        questPoint.QueueFree(); // Assuming QuestPoint is a Node2D, change as needed
+        activeQuestPoints.Remove(questPoint);
     }
 }

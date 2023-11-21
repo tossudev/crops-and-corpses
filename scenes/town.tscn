@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
 [ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="21_mo6ng"]
-[ext_resource type="Script" path="res://scripts/World/NavigationManager.cs" id="23_0od72"]
+[ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="23_vb7um"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="26_e7msj"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="29_6j2s6"]
 
@@ -56,10 +56,10 @@ height = 256
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_pf84x"]
-vertices = PackedVector2Array(-4904, -3984, 4528, -4352, 4608, 4088, -5800, 4632)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_02qf6"]
+vertices = PackedVector2Array(-5032, -3904, 4360, -4288, 4800, 3440, -5424, 4952)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-4904, -3984, 4528, -4352, 4608, 4088, -5800, 4632)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-5032, -3904, 4360, -4288, 4800, 3440, -5424, 4952)])
 
 [node name="Town" type="Node2D"]
 y_sort_enabled = true
@@ -877,16 +877,14 @@ script = ExtResource("29_6j2s6")
 [node name="Sunlight" type="CanvasModulate" parent="SunlightContainer"]
 position = Vector2(-71, -4)
 
-[node name="NavigationManager" type="Node2D" parent="."]
-script = ExtResource("23_0od72")
-arrayTest = PackedVector2Array(0, 0, 10, 0, 10, -10, 0, -10)
+[node name="NavigationManager" parent="." instance=ExtResource("23_vb7um")]
 
-[node name="Region" type="NavigationRegion2D" parent="NavigationManager"]
-self_modulate = Color(1, 1, 1, 0.337255)
-navigation_polygon = SubResource("NavigationPolygon_pf84x")
+[node name="Region" parent="NavigationManager" index="0"]
+navigation_polygon = SubResource("NavigationPolygon_02qf6")
 
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
 [connection signal="timeout" from="ZombieSpawn/Timer" to="ZombieSpawn" method="ZombieSpawn" flags=18]
 [connection signal="timeout" from="ZombieSpawn/ZombieDeletionTimer" to="ZombieSpawn" method="DeleteZombieDelay" flags=18]
 
 [editable path="street_sign_post"]
+[editable path="NavigationManager"]

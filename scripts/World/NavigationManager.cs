@@ -10,7 +10,6 @@ public partial class NavigationManager : Node2D {
 	NavigationPolygon _regionPolygon;
 
 	Godot.Collections.Array<Vector2[]> _obstacleAreas = new ();
-	[Export] public Vector2[] arrayTest;
 
 
     public override void _Ready() {
@@ -45,5 +44,10 @@ public partial class NavigationManager : Node2D {
 		}
 
 		return _polygonPoints;
+	}
+
+
+	public void RemoveArea(int nodeIndex) {
+		GD.Print("Remove!");
 	}
 }

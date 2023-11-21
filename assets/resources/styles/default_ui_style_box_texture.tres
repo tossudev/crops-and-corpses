@@ -1,0 +1,10 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cekqcomecgkhn"]
+
+[ext_resource type="Texture2D" uid="uid://ba2jmtxjesl44" path="res://assets/sprites/ui/wooden_panel.png" id="1_tdpbh"]
+
+[resource]
+texture = ExtResource("1_tdpbh")
+expand_margin_left = 8.0
+expand_margin_top = 4.0
+expand_margin_right = 8.0
+expand_margin_bottom = 4.0

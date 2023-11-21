@@ -5,18 +5,31 @@ using System.Collections.Generic;
 public partial class VillagerManager : Node
 {
 	public static VillagerManager instance;
-	List<Villager> _villager = new List<Villager>();
-	public int villagerMaxAmount;
-	public int townhallLevel = 0;
+	
+	// Villager Lists
+	List<Villager> _allVillagers = new ();
+	
+	List<Villager> _unemployed = new ();
+	public List<Villager> unemployedVillagers => _unemployed;
+	
+	List<Villager> _farmers = new ();
+	public List<Villager> farmerVillagers => _farmers;
+
+	List<Villager> _soldiers = new ();
+	public List<Villager> soldierVillagers => _soldiers;
+
+	List<Villager> _woodcutters = new ();
+	public List<Villager> woodcutterVillagers => _woodcutters;
+	
+	List<Villager> _miners = new ();
+	public List<Villager> minerVillagers => _miners;
+    
 	// Called when the node enters the scene tree for the first time.
 
 	[Export] AllVillagerData _allData;
 	public override void _Ready()
 	{
 		if(instance==null)instance=this;else QueueFree();
-		townhallLevel = 0;
-
-		AddNewVillager(new Villager());
 	}
 
 	public VillagerData GetVillagerData(){
@@ -28,52 +41,47 @@ public partial class VillagerManager : Node
 		return data;
 
 	}
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 
+	public bool AddNewVillager(Villager newVillager, bool intoTown = true)
+	{
+		if (intoTown && _allVillagers.Count >= TownManager.currentTownStats.populationCap) return false;
 		
+		_allVillagers.Add(newVillager);
+
+		VillagerData newData = GetVillagerData();
+		VillagerRawData newRawData = new VillagerRawData(newData.name, newData.info, intoTown);
+		
+		SaveData.allVillagers.Add(newRawData);
+		newVillager.InitializeVillager(newRawData);
+		return true;
 	}
 
-	public void AddNewVillager(Villager newVillager)
+	public void AddExistingVillager(Villager existingVillager, VillagerRawData data)
 	{
-	
-	
-
-		_villager.Add(newVillager);
-
-		GD.Print("Villager added");
-		GD.Print(newVillager.Name);
-
-
+		_allVillagers.Add(existingVillager);
+		existingVillager.InitializeVillager(data);
 	}
 
-
-
-
-	public void RemoveVillager(Villager villagerToRemove)
+	public void SetVillagerOccupation(Villager villager, VillagerOccupation newOccupation)
 	{
-		_villager.Remove(villagerToRemove);
-	}
-	
-
-	
-	void VillagerAmountInGame()
-	{
-		switch(townhallLevel)
+		if (villager == null)
 		{
-			case 0:
-			villagerMaxAmount = 4;
-			break;
-
-			case 1:
-			villagerMaxAmount = 5;
-			break;
-
-			case 2:
-			villagerMaxAmount = 6;
-			break;
+			GD.PushError("Can't set occupation for null @VillagerManager");
+			return;
 		}
+		villager.currentOccupationList?.Remove(villager);
+
+		villager.currentOccupationList = newOccupation switch
+		{
+			VillagerOccupation.Unemployed => _unemployed,
+			VillagerOccupation.Farmer => _farmers,
+			VillagerOccupation.Soldier => _soldiers,
+			VillagerOccupation.Woodcutter => _woodcutters,
+			VillagerOccupation.Miner => _miners,
+			_ => throw new ArgumentOutOfRangeException(nameof(newOccupation), newOccupation, null)
+		};
+		
+		villager.currentOccupationList.Add(villager);
 	}
 
 	public struct VillagerData{
@@ -81,19 +89,20 @@ public partial class VillagerManager : Node
 		public string info;
 		public Texture2D texture;
 	}
+}
 
-	public enum VillagerStates
-	{
-		RoamAround,
-		FollowPlayer,
-		FixFence,
-		FindArcherTower,
-		FindShelter,
-		InShelter,
-		GetHospitalized,
-		ChooseTask,
-		FarmingTask,
-		FindWoodTask,
-		FindStoneTask
-	}
+public enum VillagerState
+{
+	RoamAround,
+	FollowPlayer,
+	FixFence,
+	FindArcherTower,
+	FindShelter,
+	InShelter,
+	GetHospitalized,
+	ChooseTask,
+	FarmingTask,
+	FindWoodTask,
+	FindStoneTask,
+	ResqueQuest
 }

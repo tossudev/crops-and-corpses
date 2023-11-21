@@ -126,7 +126,7 @@ public partial class PlayerController : CharacterBody2D
 
 		if (_respawnPoint == null)
 		{
-			GD.PrintErr("PlayerController: Respawn point is null");
+			GD.Print("Move to town scene spawn point");
 			return;
 		}
 

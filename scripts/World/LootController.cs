@@ -7,11 +7,34 @@ public partial class LootController : StaticBody2D
 {
 	[Export] private Loot _loot;
 	[Export] private AnimationPlayer _animationPlayer;
+	[Export] private Sprite2D _sprite;
+	[Export] private Timer _timer;
+	[Export] private Color _color;
+	//should be between 0 and 1
+	[Export] private float _minBrightness = 1f;
+	// should be between 0 and 180
+	[Export] private int _rotationVariation = 0;
+	//should be between 0 and 1
+	[Export] private float _scaleVariation = 0f;
 
 	private List<Item> _items = new List<Item>();
+	private int animSpeed = 15;
+	RandomNumberGenerator rng;
 
 	public override void _Ready()
 	{
+		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
+		_animationPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
+		_timer = GetNodeOrNull<Timer>("Timer");
+
+		rng = new RandomNumberGenerator();
+		var x = (this.Position.X);
+		var y = (this.Position.Y);
+		// unique seed for each coordinate
+		rng.Seed = (ulong)((x + y) * (x + y + 1) / 2 + y);
+
+		Variations();
+
 		if (_loot == null)
 		{
 			GD.PrintErr("LootController: Loot is null");
@@ -27,12 +50,27 @@ public partial class LootController : StaticBody2D
 		}
 	}
 
+	private void Variations()
+	{
+		float brightness = rng.RandfRange(_minBrightness, 1f);
+
+		if (_color != new Color(0, 0, 0, 0))
+			_sprite.Modulate = new Color(_color.R * brightness, _color.G * brightness, _color.B * brightness, 1);
+
+		if (rng.RandfRange(0, 1) > 0.5f)
+			this.Scale = new Vector2(-Scale.X, Scale.Y);
+
+		this.Scale *= rng.RandfRange(1 - _scaleVariation, 1f);
+
+		this.RotationDegrees += rng.RandfRange(-_rotationVariation, _rotationVariation);
+	}
+
 	private void OnHealth(float health)
 	{
 		if (_items.Count > 1)
 			DropItems();
 
-		_animationPlayer.SpeedScale = 15;
+		_animationPlayer.SpeedScale = animSpeed;
 		_animationPlayer.Play("shake");
 
 		if (health <= 0)
@@ -50,7 +88,7 @@ public partial class LootController : StaticBody2D
 
 			RawInventoryItem dropItem = new RawInventoryItem(_items[randIndex].ID, _items[randIndex].Name, 1, _items[randIndex].StackSize);
 
-			Node2D droppedItem = PlayerInventoryController.CreateDroppedItem(dropItem, GlobalPosition, GetParent());
+			Node2D droppedItem = PlayerInventoryController.CreateDroppedItem(dropItem, this.Position, GetParent());
 
 			_items.RemoveAt(randIndex);
 

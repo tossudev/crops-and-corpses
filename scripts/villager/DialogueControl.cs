@@ -57,12 +57,12 @@ public  partial class DialogueControl : Control
 	{
 		Visible = true;
 
-		if (_hostVillager.GetVillagerStates() == VillagerManager.VillagerStates.RoamAround)
+		if (_hostVillager.GetVillagerStates() == VillagerState.RoamAround)
 		{
 			_moodText.Text = "Hello, do you need help?";
 		}
 
-		if (_hostVillager.GetVillagerStates() != VillagerManager.VillagerStates.RoamAround)
+		if (_hostVillager.GetVillagerStates() != VillagerState.RoamAround)
 		{
 			_moodText.Text = "I'M BUSY";
 		} 

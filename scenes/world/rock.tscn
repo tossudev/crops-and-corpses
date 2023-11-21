@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://b6w8cr3rm5pu3"]
+
+[ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_i45ep"]
+[ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_i6dnf"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_lv2gj"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_yudbm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pn142"]
+radius = 85.9731
+height = 288.353
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgg0g"]
+radius = 57.9772
+height = 258.482
+
+[sub_resource type="Animation" id="Animation_ir0ao"]
+resource_name = "shake"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-5, -90), Vector2(2.08165e-12, -90), Vector2(-5, -90)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x8yya"]
+_data = {
+"shake": SubResource("Animation_ir0ao")
+}
+
+[node name="Rock" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer", "_sprite", "_timer")]
+position = Vector2(2.08165e-12, 2.08165e-12)
+script = ExtResource("1_i45ep")
+_animationPlayer = NodePath("AnimationPlayer")
+_sprite = NodePath("Sprite2D")
+_timer = NodePath("Timer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-5, -90)
+texture = ExtResource("3_i6dnf")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("4_lv2gj")]
+_parentScript = NodePath("..")
+_hasHealthBar = false
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["tree"] instance=ExtResource("5_yudbm")]
+position = Vector2(-1, 0)
+collision_layer = 16
+collision_mask = 32
+_parentScript = NodePath("..")
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(-7, -80)
+rotation = 1.25664
+shape = SubResource("CapsuleShape2D_pn142")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, -72)
+rotation = 1.25664
+shape = SubResource("CapsuleShape2D_wgg0g")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x8yya")
+}
+
+[node name="Timer" type="Timer" parent="."]

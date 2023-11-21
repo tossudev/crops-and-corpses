@@ -8,7 +8,6 @@
 [ext_resource type="Resource" uid="uid://bwqnnm74g8l7l" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/103_pumpkin.tres" id="5_tle7x"]
 
 [node name="plant_pumpkin" type="Node2D" node_paths=PackedStringArray("_col", "trect")]
-z_index = 2
 script = ExtResource("1_rb3wu")
 _plantType = 1
 _seedName = "pumpkin seed"

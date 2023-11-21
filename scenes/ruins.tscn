@@ -1,25 +1,32 @@
-[gd_scene load_steps=25 format=3 uid="uid://c0o7irtwrvayp"]
+[gd_scene load_steps=32 format=3 uid="uid://c0o7irtwrvayp"]
 
 [ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_qt5pe"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_xoqnb"]
+[ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://scenes/spawn/ZombieSpawn.tscn" id="6_moakj"]
 [ext_resource type="Texture2D" uid="uid://q5wxg1if5hb8" path="res://assets/sprites/foliage/tree_2.png" id="6_rt25r"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="6_urqth"]
 [ext_resource type="PackedScene" uid="uid://3ct83j0jgteb" path="res://scenes/buildings/town/house/house.tscn" id="7_1hir6"]
 [ext_resource type="Texture2D" uid="uid://dcyviqfhbqcay" path="res://assets/sprites/foliage/tree_1.png" id="7_dpch5"]
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="7_et7tw"]
+[ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="7_ms5xt"]
 [ext_resource type="Texture2D" uid="uid://wis4r15rhkuo" path="res://assets/sprites/foliage/sprite_rock.png" id="8_o2ikw"]
+[ext_resource type="PackedScene" uid="uid://bfgy4jnvcy7pk" path="res://LilianTests/Prefabs/zombie_with_hitbox.tscn" id="8_ovu31"]
 [ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="8_pei51"]
 [ext_resource type="Texture2D" uid="uid://bp0rwsioa22xs" path="res://assets/sprites/foliage/sprite_bush.png" id="9_23ldn"]
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="10_4qh86"]
 [ext_resource type="PackedScene" uid="uid://b4fyxjshjenvv" path="res://scenes/farm/plants/plant_potato.tscn" id="10_c8c0f"]
 [ext_resource type="PackedScene" uid="uid://disyt3fuu77je" path="res://scenes/buildings/fence_scenes/fence_west.tscn" id="11_3dwxc"]
+[ext_resource type="PackedScene" uid="uid://bljea7oopk7tf" path="res://scenes/farm/plants/plant_mushroom.tscn" id="11_koiqo"]
 [ext_resource type="PackedScene" uid="uid://e58507ft315b" path="res://scenes/buildings/fence_scenes/fence_north.tscn" id="12_moe38"]
+[ext_resource type="PackedScene" uid="uid://luqdfx7qh2jl" path="res://scenes/farm/plants/plant_pumpkin.tscn" id="12_w0m5s"]
 [ext_resource type="TileSet" uid="uid://dajdby7nadxkd" path="res://assets/resources/tiles/ruins_collision_tiles.tres" id="14_yfo2u"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="16_pefaa"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="16_s7swj"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_xu2jk"]
 [ext_resource type="PackedScene" uid="uid://dt4impfdusiy" path="res://scenes/farm/plants/plant_poppy.tscn" id="19_ukssx"]
 [ext_resource type="PackedScene" uid="uid://7m8c0ty0xcd0" path="res://scenes/buildings/town/well/well.tscn" id="20_jm3gc"]
+[ext_resource type="PackedScene" uid="uid://cb3o7u5viapx8" path="res://scenes/farm/plants/plant_wheat.tscn" id="22_i4jq8"]
+[ext_resource type="PackedScene" uid="uid://bbia6yxwghu3o" path="res://scenes/farm/plants/plant_lupine.tscn" id="23_5yyo7"]
 
 [sub_resource type="Gradient" id="Gradient_ksvwj"]
 offsets = PackedFloat32Array(0, 0.528169)
@@ -176,12 +183,39 @@ position = Vector2(-1480, 87.9999)
 position = Vector2(-1152, -1936)
 
 [node name="well" parent="Objects/Buildings" instance=ExtResource("20_jm3gc")]
+y_sort_enabled = true
 position = Vector2(417, -560)
 scale = Vector2(0.25, 0.25)
+
+[node name="HealthComponent" parent="Objects/Buildings/well" index="3"]
+visible = false
+
+[node name="HealthBar" parent="Objects/Buildings/well" index="5"]
+visible = false
 
 [node name="Enemies" type="Node2D" parent="Objects"]
 y_sort_enabled = true
 position = Vector2(6.10352e-05, 6.10352e-05)
+
+[node name="ZombieSpawn" parent="Objects/Enemies" node_paths=PackedStringArray("player") instance=ExtResource("6_moakj")]
+player = NodePath("../../Player")
+
+[node name="SpawnPoint1" parent="Objects/Enemies/ZombieSpawn" index="0"]
+position = Vector2(-3405, -260)
+
+[node name="SpawnPoint0" parent="Objects/Enemies/ZombieSpawn" index="1"]
+position = Vector2(34.9999, -952)
+
+[node name="SpawnPoint3" parent="Objects/Enemies/ZombieSpawn" index="3"]
+position = Vector2(472, 317)
+
+[node name="ZombieManager" type="Node2D" parent="Objects/Enemies"]
+script = ExtResource("7_ms5xt")
+
+[node name="Timer" type="Timer" parent="Objects/Enemies/ZombieManager"]
+
+[node name="Zombie" parent="Objects/Enemies" instance=ExtResource("8_ovu31")]
+position = Vector2(-88.0001, 624)
 
 [node name="CemeteryFence" type="Node2D" parent="Objects"]
 y_sort_enabled = true
@@ -440,13 +474,79 @@ texture = ExtResource("8_o2ikw")
 [node name="Collectables" type="Node2D" parent="Objects/Foliage"]
 y_sort_enabled = true
 
-[node name="plant_potato" parent="Objects/Foliage/Collectables" instance=ExtResource("10_c8c0f")]
-position = Vector2(-2344, -2280)
-
 [node name="plant_poppy" parent="Objects/Foliage/Collectables" instance=ExtResource("19_ukssx")]
-z_index = 0
 y_sort_enabled = true
-position = Vector2(-24, 3136)
+position = Vector2(-1896, 1952)
+
+[node name="plant_mushroom" parent="Objects/Foliage/Collectables" instance=ExtResource("11_koiqo")]
+position = Vector2(-3600, -570)
+
+[node name="plant_mushroom2" parent="Objects/Foliage/Collectables" instance=ExtResource("11_koiqo")]
+position = Vector2(-4064, -266)
+
+[node name="plant_pumpkin" parent="Objects/Foliage/Collectables" instance=ExtResource("12_w0m5s")]
+position = Vector2(-2064, -2528)
+
+[node name="plant_pumpkin2" parent="Objects/Foliage/Collectables" instance=ExtResource("12_w0m5s")]
+y_sort_enabled = true
+position = Vector2(-2288, -2288)
+
+[node name="plant_wheat" parent="Objects/Foliage/Collectables" instance=ExtResource("22_i4jq8")]
+position = Vector2(-1416, -2729)
+
+[node name="plant_wheat2" parent="Objects/Foliage/Collectables" instance=ExtResource("22_i4jq8")]
+position = Vector2(-1168, -2729)
+
+[node name="plant_wheat3" parent="Objects/Foliage/Collectables" instance=ExtResource("22_i4jq8")]
+position = Vector2(-1416, -2561)
+
+[node name="plant_pumpkin3" parent="Objects/Foliage/Collectables" instance=ExtResource("12_w0m5s")]
+position = Vector2(1808, -2209)
+
+[node name="plant_pumpkin4" parent="Objects/Foliage/Collectables" instance=ExtResource("12_w0m5s")]
+position = Vector2(2128, -2209)
+
+[node name="plant_pumpkin5" parent="Objects/Foliage/Collectables" instance=ExtResource("12_w0m5s")]
+position = Vector2(1808, -2048)
+
+[node name="plant_pumpkin6" parent="Objects/Foliage/Collectables" instance=ExtResource("12_w0m5s")]
+position = Vector2(2128, -2048)
+
+[node name="plant_poppy2" parent="Objects/Foliage/Collectables" instance=ExtResource("19_ukssx")]
+position = Vector2(2616, -1512)
+
+[node name="plant_poppy3" parent="Objects/Foliage/Collectables" instance=ExtResource("19_ukssx")]
+position = Vector2(1792, -672)
+
+[node name="plant_lupine" parent="Objects/Foliage/Collectables" instance=ExtResource("23_5yyo7")]
+position = Vector2(3157, 288)
+
+[node name="plant_potato" parent="Objects/Foliage/Collectables" instance=ExtResource("10_c8c0f")]
+position = Vector2(3048, -1039)
+
+[node name="plant_potato2" parent="Objects/Foliage/Collectables" instance=ExtResource("10_c8c0f")]
+position = Vector2(3224, -911)
+
+[node name="plant_potato3" parent="Objects/Foliage/Collectables" instance=ExtResource("10_c8c0f")]
+position = Vector2(3056, -776)
+
+[node name="plant_poppy4" parent="Objects/Foliage/Collectables" instance=ExtResource("19_ukssx")]
+position = Vector2(-608, 408)
+
+[node name="plant_poppy5" parent="Objects/Foliage/Collectables" instance=ExtResource("19_ukssx")]
+y_sort_enabled = true
+position = Vector2(200, -594)
+
+[node name="plant_lupine2" parent="Objects/Foliage/Collectables" instance=ExtResource("23_5yyo7")]
+position = Vector2(-704, -363)
+
+[node name="plant_lupine4" parent="Objects/Foliage/Collectables" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("23_5yyo7")]
+position = Vector2(-613, -285)
+_col = NodePath("../plant_lupine2/Area2D")
+trect = NodePath("../plant_lupine2/TextureRect")
+
+[node name="plant_lupine3" parent="Objects/Foliage/Collectables" instance=ExtResource("23_5yyo7")]
+position = Vector2(840, -1952)
 
 [node name="Bushes" type="Node2D" parent="Objects/Foliage"]
 y_sort_enabled = true
@@ -2396,6 +2496,9 @@ layer_0/tile_data = PackedInt32Array(-196616, 0, 0, -196615, 0, 0, -131078, 0, 0
 
 [node name="Tree21" parent="." instance=ExtResource("7_et7tw")]
 position = Vector2(-584, 3424)
-_animationPlayer = NodePath("")
 
+[connection signal="timeout" from="Objects/Enemies/ZombieManager/Timer" to="Objects/Enemies/ZombieManager" method="OnTimerTimeout"]
+
+[editable path="Objects/Buildings/well"]
+[editable path="Objects/Enemies/ZombieSpawn"]
 [editable path="street_sign_post"]

@@ -17,8 +17,8 @@ public partial class PlayerController : CharacterBody2D
 	[ExportCategory("Settings")]
 	[Export] private float maxZoom = 2f;
 	[Export] private float minZoom = 1f;
-	[Export] private int _speed = 100;
-	[Export] private float _runMultiplier = 1;
+	[Export] private int _speed = 250;
+	[Export] private float _runMultiplier = 1.5f;
 
 	private bool _canMelee = true;
 	private bool _canRun;
@@ -118,7 +118,7 @@ public partial class PlayerController : CharacterBody2D
 				_canRun = false;
 			}
 		}
-		else if (Input.IsActionJustReleased("run") || _staminaComponent.currentStamina <= 0)
+		else if (Input.IsActionJustReleased("run"))
 		{
 			_speedMultiplier = 1;
 			_staminaComponent.canDrain = false;

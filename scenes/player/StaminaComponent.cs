@@ -10,8 +10,8 @@ public partial class StaminaComponent : Node2D
 	private ProgressBar _staminaBar;
 	public bool canRegen = true;
 	public bool canDrain = false;
+	public float regenRate = 0.15f;
 	public float drainRate = 0.25f;
-	public bool cooldown = false;
 
 	public override void _Ready()
 	{
@@ -28,7 +28,12 @@ public partial class StaminaComponent : Node2D
 			return;
 		}
 
-		if (canDrain == true || _staminaBar.Value == _maxStamina)
+		if (currentStamina <= 0)
+		{
+			canRegen = true;
+			canDrain = false;
+		}
+		else if (currentStamina >= _maxStamina)
 		{
 			canRegen = false;
 		}
@@ -37,9 +42,14 @@ public partial class StaminaComponent : Node2D
 			canRegen = true;
 		}
 
+		if (canDrain == true)
+		{
+			canRegen = false;
+		}
+
 		if (canRegen && currentStamina < _maxStamina)
 		{
-			RegenStamina(0.15f);
+			RegenStamina(regenRate);
 			UpdateStaminaBar();
 		}
 		else if (canDrain && currentStamina > 0)
@@ -69,6 +79,18 @@ public partial class StaminaComponent : Node2D
 		{
 			currentStamina = 0;
 		}
+	}
+
+	public void UseStamina(int amount)
+	{
+		currentStamina -= amount;
+
+		if (currentStamina < 0)
+		{
+			currentStamina = 0;
+		}
+
+		UpdateStaminaBar();
 	}
 
 	private void StaminaCooldown(float duration)

@@ -243,8 +243,6 @@ _rig = NodePath("Skeleton2D")
 _healthComponent = NodePath("HealthComponent")
 _staminaComponent = NodePath("StaminaComponent")
 minZoom = 0.75
-_speed = 250
-_runMultiplier = 1.5
 
 [node name="InteractionArea" type="Area2D" parent="."]
 collision_layer = 2

@@ -10,9 +10,9 @@ public partial class GlobalTime : Node
     private float globalTime;
     private Color sunlight;
     private int day;
-
-    private int currenTowntDay;
-
+    private float timeSpeed = 1;
+   // private int currenTowntDay;
+   // private float globalhour;
     private string _savePath = ProjectSettings.GlobalizePath("user://saves/");
     private string _fileName = "Time.cfg";
     private bool hasTownBeenDestroyed;
@@ -27,11 +27,16 @@ public partial class GlobalTime : Node
         {
             Directory.CreateDirectory(_savePath);
         }
+     
        // GD.Print(day);
 
         LoadData();
     }
-  
+    public override void _Process(double delta)
+    {
+        globalTime += (float)delta * timeSpeed;
+    }
+
 
     public override void _Notification(int what)
 	{
@@ -43,6 +48,15 @@ public partial class GlobalTime : Node
 		
 	}
 
+
+  /*   public float GetHour()
+    {
+        return globalhour;
+    }
+    public void SetHour(float hour)
+    {
+        globalhour = hour;
+    } */
     public float GetTime()
     {
         return globalTime;

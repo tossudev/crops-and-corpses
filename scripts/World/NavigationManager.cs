@@ -10,6 +10,7 @@ public partial class NavigationManager : Node2D {
 	NavigationPolygon _region;
 
 	Godot.Collections.Array<Vector2[]> _obstacleAreas = new ();
+	NavigationObstacle _obstacle;
 
 
     public override void _Ready() {
@@ -34,13 +35,13 @@ public partial class NavigationManager : Node2D {
 	}
 
 
-	static Vector2[] GetPolygonFromObject(Polygon2D _obstacleArea) {
-		Vector2[] _polygonPoints = (Vector2[]) _obstacleArea.Get("polygon");
+	static Vector2[] GetPolygonFromObject(Polygon2D _obstacleNode) {
+		Vector2[] _polygonPoints = (Vector2[]) _obstacleNode.Get("polygon");
 
 		// Adjust areas local position to global
 		int _posIndex = 0;
 		foreach (Vector2 pos in _polygonPoints) {
-			_polygonPoints[_posIndex] += _obstacleArea.GlobalPosition;
+			_polygonPoints[_posIndex] += _obstacleNode.GlobalPosition;
 			_posIndex ++;
 		}
 
@@ -50,18 +51,16 @@ public partial class NavigationManager : Node2D {
 
 	void UpdateObstacleIndexes() {
 		int _index = 0;
-		// foreach (NavigationObstacle _obstacle in GetTree().GetNodesInGroup(_obstacleGroupName)) {
-		// 	_obstacle.nodeIndex = _index;
-		// }
+		foreach (Polygon2D _obstacleNode in GetTree().GetNodesInGroup(_obstacleGroupName)) {
+			_obstacleNode.Set("nodeIndex", _index); // TODO: this doesn't assign anything yet
+		}
 	}
 
 
 	public void RemoveArea(int nodeIndex) {
-		GD.Print("Remove!");
-
 		// _region.RemoveOutline(nodeIndex);
-		// _region.MakePolygonsFromOutlines();
+		_region.MakePolygonsFromOutlines();
 
-
+		UpdateObstacleIndexes();
 	}
 }

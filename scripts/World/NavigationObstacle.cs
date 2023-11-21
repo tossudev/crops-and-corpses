@@ -9,7 +9,7 @@ public partial class NavigationObstacle : Polygon2D
 
 	public override void _Ready() {
 		// remove this cursed reference by the holy power of ra
-		// for some reason the unique name accessor didn't work for this node (?)
+		// for some reason the unique name accessor didn't work for this node (TODO)
 		navManager = GetNode<Node2D>("../../../../NavigationManager") as NavigationManager;
 	}
 

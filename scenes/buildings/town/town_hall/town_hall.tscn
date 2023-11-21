@@ -53,4 +53,8 @@ offset_bottom = -140.0
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="NavigationObstacleArea" type="Polygon2D" parent="." groups=["obstacle_area"]]
+color = Color(1, 1, 1, 0)
+polygon = PackedVector2Array(-576, -360, -576, 64, 376, 64, 376, -360)
+
 [connection signal="input_event" from="area 2d" to="TownHallMenu" method="OnTownHallInputEvent"]

@@ -6,7 +6,7 @@ public partial class TimeManager : Node
 
     private int dayCounter;
     private float currentTime;
-    public float timeSpeed = 1f;
+    private float timeSpeed = 1;
     [Export] private Color nightTimeColor = new Color((float)0.5,(float) 0.5, (float)0.5);  // Set your desired nighttime color
     [Export] private Color dayTimeColor = new Color(1, 1, 1);    // Set your desired daytime color
     [Export] private float transitionDuration = 3f; // Set the duration of the transition
@@ -44,8 +44,9 @@ public partial class TimeManager : Node
     public override void _Process(double delta)
     {
         
-        currentTime += (float)delta * timeSpeed;
-        globalTime.SetTime(currentTime);
+       // currentTime += (float)delta * timeSpeed;
+       // GD.Print(currentTime);
+        currentTime =  globalTime.GetTime();
         float timeOfDay = currentTime % (dayTimeLength + nightTimeLength);
 
         // Determine if it's daytime

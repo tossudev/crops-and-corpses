@@ -7,7 +7,7 @@ using System.Linq;
 
 public partial class SpawnScript : Node2D
 {
-	Node2D[] spawnPoints;
+	List<Node2D> spawnPoints = new List<Node2D>();
 	Timer spawnDelay;
 	Timer zombieDeleteDelay;
 	PackedScene packedScene;
@@ -16,7 +16,7 @@ public partial class SpawnScript : Node2D
 	bool isNightOrDay;
 	string isNightOrDayString;
 	private int counter;
-
+	private int spawnPointCount;
 	private bool zombieDelayBool=false;
 	[Export]private float maxDistance=1500f;
 	[Export] public CharacterBody2D player;
@@ -24,19 +24,29 @@ public partial class SpawnScript : Node2D
 	public GlobalTime globalTime;
 	public override void _Ready()
 	{
+
 		globalTime = GetNode<GlobalTime>("/root/GlobalTime");
 		zombieList.Clear();
 		counter = 0;
-		spawnPoints = new Node2D[4];
+		//spawnPoints = new Node2D[4];
+
+		foreach (Node node in GetChildren())
+		{
+			if(node is Node2D spawnPoint && node.Name.ToString().Contains("SpawnPoint"))
+			{
+				spawnPoints.Add(spawnPoint);
+			//	GD.Print(spawnPoint);
+			}
+		}
 		spawnDelay =GetNode<Timer>("Timer");
 		zombieDeleteDelay = GetNode<Timer>("ZombieDeletionTimer");
 		
 		
-		for(int i = 0; i < spawnPoints.Length; i++)
+	/* 	for(int i = 0; i < spawnPoints.Length; i++)
 		{
 			spawnPoints[i] = GetNode<Node2D>("SpawnPoint"+i);
 			//GD.Print(spawnPoints[i]);
-		}
+		} */
 		
 		packedScene = (PackedScene)GD.Load("res://LilianTests/Prefabs/zombie_with_hitbox.tscn");
 		//dayTimeCheck = GetNode<TimeManager>("SunlightContainer");
@@ -95,7 +105,7 @@ public partial class SpawnScript : Node2D
 		zombieList.Add(prefab);
 		//GetNode<Node2D>("/root/Town").AddChild(prefab);
 		counter ++;
-		if(counter == spawnPoints.Length)
+		if(counter == spawnPoints.Count)
 		{
 			counter = 0;
 		}

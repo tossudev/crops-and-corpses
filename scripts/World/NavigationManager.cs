@@ -7,14 +7,14 @@ public partial class NavigationManager : Node2D {
 
 	string _obstacleGroupName = "obstacle_area";
 	NavigationRegion2D _regionNode;
-	NavigationPolygon _regionPolygon;
+	NavigationPolygon _region;
 
 	Godot.Collections.Array<Vector2[]> _obstacleAreas = new ();
 
 
     public override void _Ready() {
         _regionNode = GetNode<NavigationRegion2D>("Region");
-		_regionPolygon = _regionNode.NavigationPolygon;
+		_region = _regionNode.NavigationPolygon;
 
 		InitRegion();
     }
@@ -25,11 +25,12 @@ public partial class NavigationManager : Node2D {
 		foreach (Polygon2D _obstacleArea in GetTree().GetNodesInGroup(_obstacleGroupName)) {
 			Vector2[] polygonPoints = GetPolygonFromObject(_obstacleArea);
 			_obstacleAreas.Add(polygonPoints);
-			_regionPolygon.AddOutline(polygonPoints);
+			_region.AddOutline(polygonPoints);
 		}
 
 		// Update navigation region
-		_regionPolygon.MakePolygonsFromOutlines();
+		_region.MakePolygonsFromOutlines();
+		UpdateObstacleIndexes();
 	}
 
 
@@ -47,7 +48,20 @@ public partial class NavigationManager : Node2D {
 	}
 
 
+	void UpdateObstacleIndexes() {
+		int _index = 0;
+		// foreach (NavigationObstacle _obstacle in GetTree().GetNodesInGroup(_obstacleGroupName)) {
+		// 	_obstacle.nodeIndex = _index;
+		// }
+	}
+
+
 	public void RemoveArea(int nodeIndex) {
 		GD.Print("Remove!");
+
+		// _region.RemoveOutline(nodeIndex);
+		// _region.MakePolygonsFromOutlines();
+
+
 	}
 }

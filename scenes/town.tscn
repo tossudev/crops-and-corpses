@@ -19,9 +19,9 @@
 [ext_resource type="PackedScene" uid="uid://cyk44y2mntxd0" path="res://scenes/buildings/town/town_hall/town_hall.tscn" id="11_r6hyg"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
+[ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="21_mo6ng"]
 [ext_resource type="Script" path="res://scripts/World/NavigationManager.cs" id="23_0od72"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="26_e7msj"]
-[ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://scenes/spawn/ZombieSpawn.tscn" id="26_e61x0"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="29_6j2s6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ea2vc"]
@@ -846,8 +846,30 @@ script = ExtResource("26_e7msj")
 
 [node name="Timer" type="Timer" parent="ZombieManager"]
 
-[node name="ZombieSpawn" parent="." node_paths=PackedStringArray("player") instance=ExtResource("26_e61x0")]
+[node name="ZombieSpawn" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("21_mo6ng")
 player = NodePath("../Objects/Player")
+
+[node name="SpawnPoint1" type="Node2D" parent="ZombieSpawn"]
+position = Vector2(-648, 520)
+
+[node name="SpawnPoint0" type="Node2D" parent="ZombieSpawn"]
+position = Vector2(-688, -544)
+
+[node name="SpawnPoint2" type="Node2D" parent="ZombieSpawn"]
+position = Vector2(736, -672)
+
+[node name="SpawnPoint3" type="Node2D" parent="ZombieSpawn"]
+position = Vector2(672, 568)
+
+[node name="SpawnPoint4" type="Node2D" parent="ZombieSpawn"]
+position = Vector2(48, 784)
+
+[node name="Timer" type="Timer" parent="ZombieSpawn"]
+autostart = true
+
+[node name="ZombieDeletionTimer" type="Timer" parent="ZombieSpawn"]
+autostart = true
 
 [node name="SunlightContainer" type="Node" parent="."]
 script = ExtResource("29_6j2s6")
@@ -864,5 +886,7 @@ self_modulate = Color(1, 1, 1, 0.337255)
 navigation_polygon = SubResource("NavigationPolygon_pf84x")
 
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
+[connection signal="timeout" from="ZombieSpawn/Timer" to="ZombieSpawn" method="ZombieSpawn" flags=18]
+[connection signal="timeout" from="ZombieSpawn/ZombieDeletionTimer" to="ZombieSpawn" method="DeleteZombieDelay" flags=18]
 
 [editable path="street_sign_post"]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://cwkfv4af2ta2g"]
 
-[ext_resource type="Texture2D" uid="uid://dimmd0t6iyqa1" path="res://assets/placeholder/R_mockupSprites/crafting_menu_grid_background.png" id="1_mpok7"]
+[ext_resource type="Texture2D" uid="uid://xtlgy7kqo7q7" path="res://assets/resources/styles/item_grid_slot_square_gradient.tres" id="1_oqgdf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_etjiy"]
-texture = ExtResource("1_mpok7")
+texture = ExtResource("1_oqgdf")
 
 [node name="ItemGridSlot" type="CenterContainer"]
 light_mask = 16

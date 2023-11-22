@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,9 +40,92 @@ public partial class TownManager : Node2D
 	public static void GainExp(TownStats.ExpGain amount)
 	{
 		SaveData.townHallStats.totalExperience += (int) amount;
+
+		int currentTownHallLevel = SaveData.townHallStats.townHallLevel;
+		switch (SaveData.townHallStats.totalExperience)
+		{
+			case > (int) TownHallLevelExpRequirement.LEVEL_5 when currentTownHallLevel < 5:
+				// best unlocks
+				ApplyUnlock(TownUnlock.POP_CAP_LEVEL_5);
+
+				SaveData.townHallStats.townHallLevel = 5;
+				break;
+			
+			case > (int) TownHallLevelExpRequirement.LEVEL_4 when currentTownHallLevel < 4:
+				// very nice unlocks
+				ApplyUnlock(TownUnlock.POP_CAP_LEVEL_4);
+
+				SaveData.townHallStats.townHallLevel = 4;
+				break;
+			
+			case > (int) TownHallLevelExpRequirement.LEVEL_3 when currentTownHallLevel < 3:
+				// good unlocks
+				ApplyUnlock(TownUnlock.POP_CAP_LEVEL_3);
+
+				SaveData.townHallStats.townHallLevel = 3;
+				break;
+			
+			case > (int) TownHallLevelExpRequirement.LEVEL_2 when currentTownHallLevel < 2:
+				// decent unlocks
+				ApplyUnlock(TownUnlock.POP_CAP_LEVEL_2);
+
+				SaveData.townHallStats.townHallLevel = 2;
+				break;
+			
+			case > (int) TownHallLevelExpRequirement.LEVEL_1 when currentTownHallLevel < 1:
+				
+				ApplyUnlock(TownUnlock.POP_CAP_LEVEL_1);
+				
+				SaveData.townHallStats.townHallLevel = 1;
+				break;
+		}
 	}
-    
-	
+
+	public static void ApplyUnlock(TownUnlock unlock)
+	{
+		if (SaveData.appliedUnlocks.Contains(unlock)) return;
+		
+		switch (unlock)
+		{
+			case TownUnlock.POP_CAP_LEVEL_1:
+				SaveData.townHallStats.populationCap = 5;
+				break;
+			
+			case TownUnlock.POP_CAP_LEVEL_2:
+				SaveData.townHallStats.populationCap = 10;
+				break;
+			
+			case TownUnlock.POP_CAP_LEVEL_3:
+				SaveData.townHallStats.populationCap = 25;
+				break;
+			
+			case TownUnlock.POP_CAP_LEVEL_4:
+				SaveData.townHallStats.populationCap = 50;
+				break;
+			
+			case TownUnlock.POP_CAP_LEVEL_5:
+				SaveData.townHallStats.populationCap = 100;
+				break;
+			
+			case TownUnlock.RUINS_UNLOCK:
+				SaveData.townHallStats.isRuinsUnlocked = true;
+				break;
+			
+			case TownUnlock.MINESHAFT_UNLOCK:
+				SaveData.townHallStats.isMineshaftUnlocked = true;
+				break;
+			
+			case TownUnlock.STALAGMITE_UNLOCK:
+				SaveData.townHallStats.isCaveStalagmiteMined = true;
+				break;
+			
+			default:
+				throw new ArgumentOutOfRangeException();
+		}
+		
+		SaveData.appliedUnlocks.Add(unlock);
+		Task sync = SaveData.SyncTownStats();
+	}
 	
 	public static void ApplyUpgrade(TownUpgrade upgrade)
 	{
@@ -92,5 +176,38 @@ public partial class TownManager : Node2D
 	{
 		base._PhysicsProcess(delta);
 		_globalPhysicsTicks++;
-    }
+	}
+
+	public static Dictionary GetUnlockDictionary(List<TownUnlock> unlocks)
+	{
+		Dictionary unlockDict = new();
+
+		foreach (var unlock in unlocks)
+		{
+			unlockDict.Add((int) unlock, unlock.ToString());
+		}
+
+		return unlockDict;
+	}
+}
+
+public enum TownHallLevelExpRequirement
+{
+	LEVEL_1 = 1000,
+	LEVEL_2 = 2500,
+	LEVEL_3 = 5000,
+	LEVEL_4 = 10000,
+	LEVEL_5 = 15000
+}
+
+public enum TownUnlock
+{
+	POP_CAP_LEVEL_1,
+	POP_CAP_LEVEL_2,
+	POP_CAP_LEVEL_3,
+	POP_CAP_LEVEL_4,
+	POP_CAP_LEVEL_5,
+	RUINS_UNLOCK,
+	MINESHAFT_UNLOCK,
+	STALAGMITE_UNLOCK
 }

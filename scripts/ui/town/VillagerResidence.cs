@@ -11,17 +11,11 @@ public partial class VillagerResidence : Control
 	
 	GridContainer _villagerFaceButtonParentGrid;
 	const string VILLAGER_GRID_NODENAME = "%VillagerParentGrid";
-
-	DialogueControl _villagerDialoguePanel;
-	const string VILLAGER_DIALOGUE_PANEL_NODENAME = "%VillagerDialoguePanel";
 	
 	public override void _Ready()
 	{
 		_villagerFaceButtonParentGrid = GetNode<GridContainer>(VILLAGER_GRID_NODENAME);
-		_villagerDialoguePanel = GetNode<DialogueControl>(VILLAGER_DIALOGUE_PANEL_NODENAME);
-		
-		CloseDialoguePanel();
-	}
+    }
 	
 	Array<int> _currentResidents = new ();
 	public void VillagerEnterBuilding(Villager newVillager)
@@ -45,13 +39,13 @@ public partial class VillagerResidence : Control
 
 	public void OpenVillagerDialoguePanel(Villager villager)
 	{
-		_villagerDialoguePanel.AssignVillager(villager);
-		_villagerDialoguePanel.OpenDialogueWindow();
+		DialogueControl.instance.AssignVillager(villager);
+		DialogueControl.instance.OpenDialogueWindow();
 	}
 
 	public void CloseDialoguePanel()
 	{
-		_villagerDialoguePanel.ExitDialogue();
+		DialogueControl.instance.ExitDialogue();
 	}
 	
 	public void VillagerExitBuilding (Villager leavingVillager)

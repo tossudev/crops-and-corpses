@@ -34,9 +34,21 @@ public partial class TownHallMenu : Control
 	public VillagerResidence _villagerResidence;
 	const string VILLAGER_RESIDENCE_NODENAME = "%VillagerGrid";
 
+
+	public static TownHallMenu menuInstance;
 	
 	public override void _Ready()
 	{
+		if (menuInstance != null)
+		{
+			if (menuInstance.IsNodeReady())
+			{
+				menuInstance.QueueFree();
+			}
+		}
+		
+		menuInstance = this;
+		
 		_mainPanel = GetNode<Panel>(MAIN_PANEL_NODENAME);
 		_upgradePanel = GetNode<Panel>(UPGRADE_PANEL_NODENAME);
 		_occupationsPanel = GetNode<Panel>(OCCUPATIONS_PANEL_NODENAME);
@@ -70,7 +82,7 @@ public partial class TownHallMenu : Control
 	
 	// Main panel functions
 
-	void OpenMainPanel()
+	public void OpenMainPanel()
 	{
 		_mainPanel.Visible = true;
 		_upgradePanel.Visible = false;
@@ -103,16 +115,6 @@ public partial class TownHallMenu : Control
 		_occupationsPanel.Visible = false;
 		_storagePanel.Visible = true;
 	}
-
-    void OnTownHallInputEvent(Node viewport, InputEvent @event, int shapeIdx)
-    {
-	    if (@event is not InputEventMouseButton { Pressed: true } mouseEvent) return;
-		
-	    if (mouseEvent.ButtonIndex == MouseButton.Left)
-	    {
-		    OpenMainPanel();
-	    }
-    }
 
     public override void _Input(InputEvent @event)
     {

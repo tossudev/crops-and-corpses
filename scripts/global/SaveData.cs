@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Godot.Collections;
+using Array = Godot.Collections.Array;
 using Dictionary = Godot.Collections.Dictionary;
 
 [GlobalClass]
@@ -15,7 +16,8 @@ public partial class SaveData : Node
     static string fullPath = "";
     
     public const string TOWN_STATS_KEY = "townStats";
-    public const string APPLIED_TOWN_STATS_KEY = "appliedTownStats";
+    public const string APPLIED_TOWN_UPGRADES_KEY = "appliedTownUpgrades";
+    public const string APPLIED_TOWN_UNLOCKS_KEY = "appliedTownUnlocks";
     public const string VILLAGER_DATA_KEY = "allVillagers";
     public const string INVENTORY_ITEMS_KEY = "inventoryItems";
     public const string ORGANIZED_INVENTORY_ITEMS_KEY = "organizedInventoryItems";
@@ -24,6 +26,7 @@ public partial class SaveData : Node
     
     public static RawTownStats townHallStats = new ();
     public static List<TownUpgrade> appliedUpgrades = new ();
+    public static List<TownUnlock> appliedUnlocks = new ();
     public static List<VillagerRawData> allVillagers = new ();
     public static Array<RawInventoryItem> organizedPlayerInventory = new ();
     public static List<RawInventoryItem> totalInventoryItems = new ();
@@ -38,12 +41,14 @@ public partial class SaveData : Node
         base._Ready();
         directoryPath = ProjectSettings.GlobalizePath($"user://{SAVEFOLDERNAME}");
         fullPath = directoryPath.PathJoin(SAVEFILENAME);
-
+        
         ItemData.InitiateItemData();
         WeaponData.InitiateWeaponData();
         LoadSaveDataIntoMemory();
         PlayerInventoryData.AddDefaultResourcesToInventoryIfEmpty();
     }
+
+        
     
     static async Task Save()
     {

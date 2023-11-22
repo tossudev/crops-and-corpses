@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cyk44y2mntxd0"]
 
-[ext_resource type="Texture2D" uid="uid://x18pjfkxudrg" path="res://assets/Lineart/townhall_lineart.png" id="2_rqetj"]
-[ext_resource type="PackedScene" uid="uid://di5l0mrx44owj" path="res://scenes/buildings/town/town_hall/town_hall_menu.tscn" id="3_2gy07"]
+[ext_resource type="Script" path="res://scripts/ui/town/TownHallControl.cs" id="1_cq4gd"]
+[ext_resource type="Texture2D" uid="uid://cl2us6n4fnxbi" path="res://assets/sprites/buildings/townhall_color.png" id="1_ylbb2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r4d4i"]
 size = Vector2(952.001, 343.998)
@@ -10,6 +10,7 @@ size = Vector2(952.001, 343.998)
 size = Vector2(320, 95.9996)
 
 [node name="TownHall" type="Node2D"]
+script = ExtResource("1_cq4gd")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 63)
@@ -18,7 +19,7 @@ collision_mask = 16
 
 [node name="TownHall" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(200, -400)
-texture = ExtResource("2_rqetj")
+texture = ExtResource("1_ylbb2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-100, -244)
@@ -39,22 +40,8 @@ position = Vector2(-104, -240)
 rotation = -3.14159
 shape = SubResource("RectangleShape2D_r4d4i")
 
-[node name="TownHallMenu" parent="." instance=ExtResource("3_2gy07")]
-unique_name_in_owner = true
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -420.0
-offset_top = -560.0
-offset_right = 220.0
-offset_bottom = -140.0
-grow_horizontal = 2
-grow_vertical = 0
-
 [node name="NavigationObstacleArea" type="Polygon2D" parent="." groups=["obstacle_area"]]
 color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(-576, -360, -576, 64, 376, 64, 376, -360)
 
-[connection signal="input_event" from="area 2d" to="TownHallMenu" method="OnTownHallInputEvent"]
+[connection signal="input_event" from="area 2d" to="." method="OnTownHallInput"]

@@ -1,30 +1,33 @@
-[gd_scene load_steps=21 format=3 uid="uid://di5l0mrx44owj"]
+[gd_scene load_steps=25 format=3 uid="uid://di5l0mrx44owj"]
 
 [ext_resource type="Script" path="res://scripts/ui/town/TownHallMenu.cs" id="1_8dpyt"]
 [ext_resource type="LabelSettings" uid="uid://djab4esbcqs0l" path="res://assets/resources/labelsettings/town_hall_menu_Header_label_settings.tres" id="1_dqf6y"]
 [ext_resource type="PackedScene" uid="uid://blc0ulydodwt3" path="res://scenes/ui/town_ui/villager_grid.tscn" id="2_awj87"]
 [ext_resource type="LabelSettings" uid="uid://cajhmdtd7uw76" path="res://assets/resources/labelsettings/town_hall_menu_buttons_label_settings.tres" id="2_v313t"]
+[ext_resource type="StyleBox" uid="uid://bbwealwe8brh6" path="res://assets/resources/styles/default_button_style_box.tres" id="4_aoiff"]
 [ext_resource type="PackedScene" uid="uid://dwgkh3nvox0s2" path="res://scenes/ui/town_ui/town_upgrade_button.tscn" id="5_4q6yl"]
+[ext_resource type="StyleBox" uid="uid://xd4dptkhsu7w" path="res://assets/resources/styles/default_button_hover_style_box.tres" id="5_ra1mq"]
+[ext_resource type="StyleBox" uid="uid://dsvrgshq7hla0" path="res://assets/resources/styles/default_button_pressed_style_box.tres" id="6_7jxuw"]
 [ext_resource type="PackedScene" uid="uid://c8ndg5vww0u33" path="res://scenes/ui/town_ui/upgrade_confirmation_panel.tscn" id="6_r3fm0"]
 [ext_resource type="StyleBox" uid="uid://cekqcomecgkhn" path="res://assets/resources/styles/default_ui_style_box_texture.tres" id="7_sjab3"]
 [ext_resource type="PackedScene" uid="uid://boj0vr56041sl" path="res://scenes/ui/town_ui/villager_occupation_tab.tscn" id="7_xljdt"]
 [ext_resource type="StyleBox" uid="uid://nn38c2paqf77" path="res://assets/resources/styles/default_tab_container_selected_tab_style.tres" id="8_4h6ko"]
 [ext_resource type="FontFile" uid="uid://doceug7kw76yx" path="res://assets/resources/labelsettings/base_ui_font.tres" id="8_q7o4c"]
 [ext_resource type="PackedScene" uid="uid://2wht6mkjuojy" path="res://scenes/ui/town_ui/occupation_icon.tscn" id="8_ta5mm"]
-[ext_resource type="Texture2D" uid="uid://cocg7hkc1vyur" path="res://assets/sprites/character/hats/straw_hat.png" id="9_485m0"]
+[ext_resource type="Texture2D" uid="uid://kjimq4t0wnvv" path="res://assets/sprites/character/hats/straw_hat.png" id="9_485m0"]
 [ext_resource type="StyleBox" uid="uid://ddenh15clg401" path="res://assets/resources/styles/default_tab_container_unselected_tab_style.tres" id="9_ggc6j"]
-[ext_resource type="Texture2D" uid="uid://bgunyuv4o1rnf" path="res://assets/sprites/character/hats/bucket_helmet.png" id="10_1vu63"]
+[ext_resource type="Texture2D" uid="uid://dvrpluxm42nf4" path="res://assets/sprites/character/hats/bucket_helmet.png" id="10_1vu63"]
 [ext_resource type="StyleBox" uid="uid://bjrxs66a6rkm7" path="res://assets/resources/styles/default_tab_container_panel_style.tres" id="10_r4bd2"]
-[ext_resource type="Texture2D" uid="uid://c0rhspd1ospk3" path="res://assets/sprites/character/hats/ushanka.png" id="11_so3fe"]
-[ext_resource type="Texture2D" uid="uid://cl7hmikwk5n0l" path="res://assets/sprites/character/hats/mining_hat.png" id="12_7e7qn"]
+[ext_resource type="Texture2D" uid="uid://bnd33hpfvrxau" path="res://assets/sprites/character/hats/ushanka.png" id="11_so3fe"]
+[ext_resource type="Texture2D" uid="uid://p106vjb26wkd" path="res://assets/sprites/items/item_log.png" id="12_0vd3i"]
+[ext_resource type="Texture2D" uid="uid://bakys00o3rkly" path="res://assets/sprites/character/hats/mining_hat.png" id="12_7e7qn"]
 [ext_resource type="Script" path="res://scripts/ui/town/TownStorage.cs" id="18_ugm6s"]
 [ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory/inventory_slot.tscn" id="19_2cmba"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_tl3sp"]
+[ext_resource type="StyleBox" uid="uid://bfq7mg2htfllb" path="res://assets/resources/styles/inventory_style_box_texture.tres" id="22_u1bpq"]
 
 [node name="Town Hall Menu" type="Control"]
 z_index = 100
-custom_minimum_size = Vector2(640, 420)
+custom_minimum_size = Vector2(720, 512)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
@@ -33,15 +36,13 @@ script = ExtResource("1_8dpyt")
 
 [node name="MainPanel" type="Panel" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 80.0
-offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("7_sjab3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainPanel"]
 layout_mode = 1
@@ -64,7 +65,7 @@ horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="Spacer2" type="Control" parent="MainPanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 96)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 
 [node name="Buttons HBox" type="HBoxContainer" parent="MainPanel/VBoxContainer"]
@@ -75,17 +76,11 @@ alignment = 1
 
 [node name="UpgradesButton" type="Button" parent="MainPanel/VBoxContainer/Buttons HBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(156, 48)
+custom_minimum_size = Vector2(196, 128)
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="MainPanel/VBoxContainer/Buttons HBox/UpgradesButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CanvasTexture_tl3sp")
+theme_override_styles/normal = ExtResource("4_aoiff")
+theme_override_styles/hover = ExtResource("5_ra1mq")
+theme_override_styles/pressed = ExtResource("6_7jxuw")
 
 [node name="Label" type="Label" parent="MainPanel/VBoxContainer/Buttons HBox/UpgradesButton"]
 layout_mode = 1
@@ -101,17 +96,11 @@ vertical_alignment = 1
 
 [node name="OccupationsButton" type="Button" parent="MainPanel/VBoxContainer/Buttons HBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(156, 48)
+custom_minimum_size = Vector2(196, 128)
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="MainPanel/VBoxContainer/Buttons HBox/OccupationsButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CanvasTexture_tl3sp")
+theme_override_styles/normal = ExtResource("4_aoiff")
+theme_override_styles/hover = ExtResource("5_ra1mq")
+theme_override_styles/pressed = ExtResource("6_7jxuw")
 
 [node name="Label" type="Label" parent="MainPanel/VBoxContainer/Buttons HBox/OccupationsButton"]
 layout_mode = 1
@@ -127,17 +116,11 @@ vertical_alignment = 1
 
 [node name="StorageButton" type="Button" parent="MainPanel/VBoxContainer/Buttons HBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(156, 48)
+custom_minimum_size = Vector2(196, 128)
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="MainPanel/VBoxContainer/Buttons HBox/StorageButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CanvasTexture_tl3sp")
+theme_override_styles/normal = ExtResource("4_aoiff")
+theme_override_styles/hover = ExtResource("5_ra1mq")
+theme_override_styles/pressed = ExtResource("6_7jxuw")
 
 [node name="Label" type="Label" parent="MainPanel/VBoxContainer/Buttons HBox/StorageButton"]
 layout_mode = 1
@@ -152,7 +135,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Spacer" type="Control" parent="MainPanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 96)
+custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 
 [node name="Lowest HBox" type="HBoxContainer" parent="MainPanel/VBoxContainer"]
@@ -171,10 +154,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 80.0
-offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("7_sjab3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UpgradePanel"]
 layout_mode = 1
@@ -183,6 +165,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Spacer3" type="Control" parent="UpgradePanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
 
 [node name="Upper HBox" type="HBoxContainer" parent="UpgradePanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 48)
@@ -197,7 +183,7 @@ horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="Spacer2" type="Control" parent="UpgradePanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 
 [node name="Buttons ScrollContainer" type="ScrollContainer" parent="UpgradePanel/VBoxContainer"]
@@ -245,11 +231,11 @@ offset_bottom = 480.0
 
 [node name="OccupationsPanel" type="Panel" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("7_sjab3")
@@ -261,7 +247,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 8
 
 [node name="Upper HBox" type="HBoxContainer" parent="OccupationsPanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 48)
@@ -277,13 +263,16 @@ vertical_alignment = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="OccupationsPanel/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 48
+theme_override_constants/margin_left = 28
 theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OccupationsPanel/VBoxContainer/MarginContainer2"]
 layout_mode = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 20
+
+[node name="BuilderOccupationIcon" parent="OccupationsPanel/VBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource("8_ta5mm")]
+layout_mode = 2
+_iconSprite = ExtResource("12_0vd3i")
 
 [node name="FarmerOccupationIcon" parent="OccupationsPanel/VBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource("8_ta5mm")]
 layout_mode = 2
@@ -307,21 +296,21 @@ _occupation = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="OccupationsPanel/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 16
+theme_override_constants/margin_left = 17
 theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 16
+theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 0
 
 [node name="TabContainer" type="TabContainer" parent="OccupationsPanel/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/side_margin = 6
 theme_override_fonts/font = ExtResource("8_q7o4c")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 theme_override_styles/tab_selected = ExtResource("8_4h6ko")
 theme_override_styles/tab_unselected = ExtResource("9_ggc6j")
 theme_override_styles/panel = ExtResource("10_r4bd2")
 
-[node name="Unemployed" parent="OccupationsPanel/VBoxContainer/MarginContainer/TabContainer" instance=ExtResource("7_xljdt")]
+[node name="Builders" parent="OccupationsPanel/VBoxContainer/MarginContainer/TabContainer" instance=ExtResource("7_xljdt")]
 layout_mode = 2
 
 [node name="Farmers" parent="OccupationsPanel/VBoxContainer/MarginContainer/TabContainer" instance=ExtResource("7_xljdt")]
@@ -351,7 +340,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("7_sjab3")
@@ -363,6 +351,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="spacer" type="Control" parent="StoragePanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
 
 [node name="Upper HBox" type="HBoxContainer" parent="StoragePanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 48)
@@ -378,114 +371,176 @@ vertical_alignment = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="StoragePanel/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
 
-[node name="InventoryPanel" type="Panel" parent="StoragePanel/VBoxContainer/MarginContainer" groups=["InventoryPanel"]]
-custom_minimum_size = Vector2(664, 344)
+[node name="InventoryPanel" type="Panel" parent="StoragePanel/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(664, 420)
 layout_mode = 2
+theme_override_styles/panel = ExtResource("22_u1bpq")
 script = ExtResource("18_ugm6s")
 
-[node name="InventoryGrid" type="GridContainer" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel" groups=["InventoryGrid"]]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 648.0
-offset_bottom = 248.0
+[node name="MarginContainer" type="MarginContainer" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+
+[node name="ScrollContainer" type="ScrollContainer" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="InventoryGrid" type="GridContainer" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer"]
+layout_mode = 2
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 8
 
-[node name="InventorySlot" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot2" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot2" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot3" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot3" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot4" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot4" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot5" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot5" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot6" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot6" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot7" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot7" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot8" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot8" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot9" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot9" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot10" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot10" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot11" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot11" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot12" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot12" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot13" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot13" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot14" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot14" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot15" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot15" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot16" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot16" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot17" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot17" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot18" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot18" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot19" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot19" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot20" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot20" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot21" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot21" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot22" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot22" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot23" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot23" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot24" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot24" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot25" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot25" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot26" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot26" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot27" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot27" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot28" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot28" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot29" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot29" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot30" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot30" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot31" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot31" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
 
-[node name="InventorySlot32" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/InventoryGrid" instance=ExtResource("19_2cmba")]
+[node name="InventorySlot32" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot33" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot34" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot35" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot36" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot37" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot38" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot39" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot40" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot41" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot42" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot43" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot44" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot45" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot46" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot47" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
+layout_mode = 2
+
+[node name="InventorySlot48" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2

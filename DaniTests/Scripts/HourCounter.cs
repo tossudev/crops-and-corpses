@@ -8,15 +8,16 @@ public partial class HourCounter : Label
 	private GlobalTime globalTime;
 	private float dayDuration = 60.0f;
 	private float nightDuration = 30.0f;
+	
 
 
-	private float hourOfDay;
+	private float hourOfDay=6;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		globalTime = GetNode<GlobalTime>("/root/GlobalTime");
 		currentHour = globalTime.GetTime();
-		hourOfDay = MathF.Floor(currentHour / (dayDuration + nightDuration) * 24) % 24;
+		hourOfDay = MathF.Floor(currentHour / (dayDuration + nightDuration) * 24+6) % 24;
 		Text ="Hour: "+ currentHour.ToString();
 	}
 
@@ -28,7 +29,11 @@ public partial class HourCounter : Label
 			? new Color(1f,1f,1f) 
 			: new Color(1f,0,0);
 		currentHour = globalTime.GetTime();
-		hourOfDay = MathF.Floor(currentHour / (dayDuration + nightDuration) * 24) % 24;
+		hourOfDay = MathF.Floor(currentHour / (dayDuration + nightDuration) * 24+6) % 24;
+		if(hourOfDay == 0)
+		{
+			hourOfDay = 24;
+		}
 		Text = "Hour: "+hourOfDay.ToString();
 		
 	}

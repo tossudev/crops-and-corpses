@@ -1,11 +1,15 @@
-[gd_scene load_steps=24 format=3 uid="uid://ba8jl34px0fpl"]
+[gd_scene load_steps=39 format=3 uid="uid://ba8jl34px0fpl"]
 
 [ext_resource type="Script" path="res://scripts/ui/crafting/CraftingWindow.cs" id="1_glv8t"]
-[ext_resource type="PackedScene" uid="uid://b01xhkvdrkq54" path="res://scenes/ui/crafting/craft_panel.tscn" id="2_lljeh"]
+[ext_resource type="Texture2D" uid="uid://d0p1n5y0uaenf" path="res://assets/sprites/ui/wooden_panel.png" id="2_g6msi"]
+[ext_resource type="Script" path="res://scripts/ui/crafting/CraftPanel.cs" id="2_imgwl"]
 [ext_resource type="LabelSettings" uid="uid://dt5ytrcyx65cj" path="res://assets/resources/labelsettings/crafting_window_header.tres" id="3_hialj"]
+[ext_resource type="LabelSettings" uid="uid://dv17cjn3uthox" path="res://assets/resources/labelsettings/crafting_panel_item_label_settings.tres" id="3_p7dgv"]
 [ext_resource type="PackedScene" uid="uid://cwkfv4af2ta2g" path="res://scenes/ui/crafting/item_grid_slot.tscn" id="4_h3ga6"]
 [ext_resource type="PackedScene" uid="uid://dqyv3rj8otsnr" path="res://scenes/ui/crafting/craftable_item.tscn" id="5_8tf6t"]
+[ext_resource type="LabelSettings" uid="uid://bbixx2rjsddy7" path="res://assets/resources/labelsettings/crafting_resource_label_settings.tres" id="5_yt4sl"]
 [ext_resource type="Resource" uid="uid://dkln62c0vsgk8" path="res://assets/resources/game_items/food_items_250_to_299/250_bread.tres" id="6_iyyl4"]
+[ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory/inventory_slot.tscn" id="6_n1xj2"]
 [ext_resource type="Resource" uid="uid://c3e5qdsie8n0l" path="res://assets/resources/game_items/weapon_items_150_to_249/161_arrow.tres" id="6_wjko8"]
 [ext_resource type="Resource" uid="uid://c1q7mpup7mo0b" path="res://assets/resources/game_items/food_items_250_to_299/251_vegetable_stew.tres" id="7_8yp1b"]
 [ext_resource type="Resource" uid="uid://c5sh8gg8de5a2" path="res://assets/resources/game_items/weapon_items_150_to_249/160_bow.tres" id="7_g4egb"]
@@ -22,9 +26,30 @@
 [ext_resource type="Resource" uid="uid://d0s103r1w5joo" path="res://assets/resources/game_items/potion_items_300_to_349/301_health_potion.tres" id="17_cxrdc"]
 [ext_resource type="Resource" uid="uid://ctt564su20h2f" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/110_lupine_seed.tres" id="18_5dxtt"]
 [ext_resource type="Resource" uid="uid://be88krv16kuqn" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/112_poppy_seed.tres" id="19_xn58k"]
+[ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="25_0cpqs"]
+[ext_resource type="Texture2D" uid="uid://g0b72r3myf3c" path="res://assets/sprites/items/item_arrow.png" id="26_p2h1b"]
+[ext_resource type="FontFile" uid="uid://doceug7kw76yx" path="res://assets/resources/labelsettings/base_ui_font.tres" id="29_dhdnb"]
+[ext_resource type="Texture2D" uid="uid://c6n0vrm0ae5c1" path="res://scenes/ui/general/button.png" id="29_esti5"]
+[ext_resource type="LabelSettings" uid="uid://ddsqt02wte6x0" path="res://assets/resources/labelsettings/default_button_label_settings.tres" id="30_d5325"]
+[ext_resource type="StyleBox" uid="uid://ddenh15clg401" path="res://assets/resources/styles/default_tab_container_unselected_tab_style.tres" id="30_qwsbn"]
+[ext_resource type="StyleBox" uid="uid://bbwealwe8brh6" path="res://assets/resources/styles/default_button_style_box.tres" id="32_jdgb2"]
+[ext_resource type="StyleBox" uid="uid://xd4dptkhsu7w" path="res://assets/resources/styles/default_button_hover_style_box.tres" id="33_862nd"]
+[ext_resource type="StyleBox" uid="uid://dsvrgshq7hla0" path="res://assets/resources/styles/default_button_pressed_style_box.tres" id="34_4ie25"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_1g7uv"]
-font_size = 24
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ah2od"]
+texture = ExtResource("2_g6msi")
+expand_margin_left = 24.0
+expand_margin_right = 24.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8q3ri"]
+texture = ExtResource("29_esti5")
+expand_margin_left = 8.0
+expand_margin_top = 4.0
+expand_margin_right = 8.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_85xb4"]
 
 [node name="CraftingWindow" type="Control"]
 layout_mode = 3
@@ -36,21 +61,15 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_glv8t")
 
-[node name="CraftPanel" parent="." groups=["CraftPanel"] instance=ExtResource("2_lljeh")]
-layout_mode = 0
-offset_left = 1384.0
-offset_top = 128.0
-offset_right = 1768.0
-offset_bottom = 608.0
-pivot_offset = Vector2(400, 0)
-
 [node name="ItemArea" type="Panel" parent="."]
 custom_minimum_size = Vector2(824, 256)
-layout_mode = 0
+layout_mode = 1
 offset_left = 568.0
 offset_top = 128.0
-offset_right = 1383.81
+offset_right = 1392.0
 offset_bottom = 384.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ah2od")
 
 [node name="Label" type="Label" parent="ItemArea"]
 custom_minimum_size = Vector2(768, 0)
@@ -218,11 +237,185 @@ layout_direction = 0
 layout_mode = 2
 itemRes = ExtResource("14_b8mer")
 
-[node name="Label" type="Label" parent="."]
+[node name="CraftPanel" type="Panel" parent="." node_paths=PackedStringArray("_requiredResSlots") groups=["CraftPanel"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(384, 512)
 layout_mode = 0
-offset_left = 24.0
-offset_top = 64.0
-offset_right = 267.0
-offset_bottom = 101.0
-text = "Press \"Q\" for crafting"
-label_settings = SubResource("LabelSettings_1g7uv")
+offset_left = 1400.0
+offset_top = 128.0
+offset_right = 1784.0
+offset_bottom = 608.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_8q3ri")
+script = ExtResource("2_imgwl")
+_requiredResSlots = [NodePath("FlowContainer/HBoxContainer/InventorySlot"), NodePath("FlowContainer/HBoxContainer/InventorySlot2"), NodePath("FlowContainer/HBoxContainer/InventorySlot3"), NodePath("FlowContainer/HBoxContainer/InventorySlot4"), NodePath("FlowContainer/HBoxContainer/InventorySlot5")]
+
+[node name="FlowContainer" type="FlowContainer" parent="CraftPanel"]
+custom_minimum_size = Vector2(400, 480)
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 480.0
+mouse_filter = 2
+
+[node name="Spacer5" type="Control" parent="CraftPanel/FlowContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="CraftItemLabel" type="Label" parent="CraftPanel/FlowContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 56)
+layout_mode = 2
+text = "BUCKET"
+label_settings = ExtResource("3_p7dgv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CraftPanel/FlowContainer"]
+custom_minimum_size = Vector2(400, 156)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="BackGround" type="TextureRect" parent="CraftPanel/FlowContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(156, 156)
+layout_mode = 2
+texture = ExtResource("25_0cpqs")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CraftItemImage" type="TextureRect" parent="CraftPanel/FlowContainer/HBoxContainer3/BackGround"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_p2h1b")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Spacer3" type="Control" parent="CraftPanel/FlowContainer"]
+custom_minimum_size = Vector2(400, 24)
+layout_mode = 2
+
+[node name="RequiredResourcesLabel" type="Label" parent="CraftPanel/FlowContainer"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+text = "Required Resources:"
+label_settings = ExtResource("5_yt4sl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CraftPanel/FlowContainer"]
+custom_minimum_size = Vector2(400, 96)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="InventorySlot" parent="CraftPanel/FlowContainer/HBoxContainer" instance=ExtResource("6_n1xj2")]
+layout_mode = 2
+mouse_filter = 2
+isCraftingSlot = true
+
+[node name="Button" parent="CraftPanel/FlowContainer/HBoxContainer/InventorySlot" index="0"]
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="InventorySlot2" parent="CraftPanel/FlowContainer/HBoxContainer" instance=ExtResource("6_n1xj2")]
+layout_mode = 2
+mouse_filter = 2
+isCraftingSlot = true
+
+[node name="Button" parent="CraftPanel/FlowContainer/HBoxContainer/InventorySlot2" index="0"]
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="InventorySlot3" parent="CraftPanel/FlowContainer/HBoxContainer" instance=ExtResource("6_n1xj2")]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+isCraftingSlot = true
+
+[node name="Button" parent="CraftPanel/FlowContainer/HBoxContainer/InventorySlot3" index="0"]
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="InventorySlot4" parent="CraftPanel/FlowContainer/HBoxContainer" instance=ExtResource("6_n1xj2")]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+isCraftingSlot = true
+
+[node name="Button" parent="CraftPanel/FlowContainer/HBoxContainer/InventorySlot4" index="0"]
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="InventorySlot5" parent="CraftPanel/FlowContainer/HBoxContainer" instance=ExtResource("6_n1xj2")]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+isCraftingSlot = true
+
+[node name="Button" parent="CraftPanel/FlowContainer/HBoxContainer/InventorySlot5" index="0"]
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Spacer4" type="Control" parent="CraftPanel/FlowContainer"]
+custom_minimum_size = Vector2(400, 8)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CraftPanel/FlowContainer"]
+custom_minimum_size = Vector2(400, 40)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="CraftAmountDropdown" type="OptionButton" parent="CraftPanel/FlowContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("29_dhdnb")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("30_qwsbn")
+
+[node name="CraftButton" type="Button" parent="CraftPanel/FlowContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 48)
+layout_mode = 2
+theme = SubResource("Theme_85xb4")
+theme_override_styles/normal = ExtResource("32_jdgb2")
+theme_override_styles/hover = ExtResource("33_862nd")
+theme_override_styles/pressed = ExtResource("34_4ie25")
+
+[node name="Label" type="Label" parent="CraftPanel/FlowContainer/HBoxContainer2/CraftButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Craft"
+label_settings = ExtResource("30_d5325")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ErrorLabel" type="Label" parent="CraftPanel/FlowContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+text = "--------------------"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[editable path="CraftPanel/FlowContainer/HBoxContainer/InventorySlot"]
+[editable path="CraftPanel/FlowContainer/HBoxContainer/InventorySlot2"]
+[editable path="CraftPanel/FlowContainer/HBoxContainer/InventorySlot3"]
+[editable path="CraftPanel/FlowContainer/HBoxContainer/InventorySlot4"]
+[editable path="CraftPanel/FlowContainer/HBoxContainer/InventorySlot5"]

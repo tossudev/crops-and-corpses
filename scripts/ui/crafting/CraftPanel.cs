@@ -1,19 +1,40 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
 public partial class CraftPanel : Control
 {
-	[Export] public Label itemLabel;
-	[Export] public TextureRect itemImage;
-    
-	[Export] public InventorySlot[] requiredResSlots;
+	List<int> craftableAmounts = new List<int>()
+	{
+		1,
+		5,
+		10,
+		25,
+		100
+	};
+	
+	Label _itemLabel;
+	const string CRAFT_ITEM_LABEL_NODENAME = "%CraftItemLabel";
+	
+	TextureRect _itemImage;
+	const string CRAFT_ITEM_IMAGE_NODENAME = "%CraftItemImage";
 
-	[Export] public Label ErrorMsgLabel;
-	[Export] public TextEdit AmountToCraftTextEdit;
-	[Export] public Button craftButton;
+	[Export] InventorySlot[] _requiredResSlots;
+
+	Label _errorMsgLabel;
+	const string ERROR_LABEL_NODENAME = "%ErrorLabel";
+
+	
+	OptionButton _amountToCraftDropdown;
+	const string AMOUNT_DROPDOWN_NODENAME = "%CraftAmountDropdown";
+
+	
+	Button _craftButton;
+	const string CRAFT_BUTTON_NODENAME = "%CraftButton";
+
 
 	public Item craftedItem;
 	public RawInventoryItem currentItemAsRaw;
@@ -24,28 +45,43 @@ public partial class CraftPanel : Control
     public override void _Ready()
     {
 	    Visible = false;
+
+	    _itemLabel = GetNode<Label>(CRAFT_ITEM_LABEL_NODENAME);
+	    _itemImage = GetNode<TextureRect>(CRAFT_ITEM_IMAGE_NODENAME);
+	    _amountToCraftDropdown = GetNode<OptionButton>(AMOUNT_DROPDOWN_NODENAME);
+	    _errorMsgLabel = GetNode<Label>(ERROR_LABEL_NODENAME);
+	    _craftButton = GetNode<Button>(CRAFT_BUTTON_NODENAME);
+
+	    _craftButton.Pressed += OnCraftButtonPressed;
+	    
+	    foreach (var amount in craftableAmounts)
+	    {
+		    _amountToCraftDropdown.AddItem(amount.ToString());
+	    }
+	    
+	    _amountToCraftDropdown.Select(0);
     }
 
 	public void OpenPanel(Item craftItem)
 	{
-		ErrorMsgLabel.Visible = false;
+		_errorMsgLabel.Visible = false;
 		
 		Visible = true;
 		craftedItem = craftItem;
 		currentItemAsRaw = new RawInventoryItem(craftItem.ID, craftItem.Name, 0, craftItem.StackSize);
 
-		itemLabel.Text = craftedItem.Name.ToUpper();
-		itemImage.Texture = craftedItem.IconTexture;
+		_itemLabel.Text = craftedItem.Name.ToUpper();
+		_itemImage.Texture = craftedItem.IconTexture;
 
-		for (int i = 0; i < requiredResSlots.Length; i++)
+		for (int i = 0; i < _requiredResSlots.Length; i++)
 		{
 			if (i > craftedItem.craftingRequirements.Length - 1)
 			{
-				requiredResSlots[i].Visible = false;
+				_requiredResSlots[i].Visible = false;
 				continue;
 			}
-			requiredResSlots[i].InitiateSlot(-1);
-			requiredResSlots[i].Visible = true;
+			_requiredResSlots[i].InitiateSlot(-1);
+			_requiredResSlots[i].Visible = true;
 
 			CraftingRequirement requirement = craftedItem.craftingRequirements[i];
 
@@ -54,9 +90,9 @@ public partial class CraftPanel : Control
 			RawInventoryItem requiredAsRaw = new RawInventoryItem(
 				requirement.item.ID, requirement.item.Name, requirement.quantity, requirement.item.StackSize);
 			
-			requiredResSlots[i].icon.Texture = requirement.item.IconTexture;
-			requiredResSlots[i].slotItem = requiredAsRaw;
-			requiredResSlots[i].quantityLabel.Text = requirement.quantity.ToString();
+			_requiredResSlots[i].icon.Texture = requirement.item.IconTexture;
+			_requiredResSlots[i].slotItem = requiredAsRaw;
+			_requiredResSlots[i].quantityLabel.Text = requirement.quantity.ToString();
 		}
 	}
 
@@ -65,30 +101,30 @@ public partial class CraftPanel : Control
 		Visible = false;
 	}
 
-	public async void _on_craft_button_pressed()
+    async void OnCraftButtonPressed()
 	{
 		int amountToCraft = 0;
 		
 		try
 		{
-			amountToCraft = int.Parse(AmountToCraftTextEdit.Text);
+			amountToCraft = int.Parse(_amountToCraftDropdown.Text);
 		}
 		catch (Exception e)
 		{
 			GD.PrintErr("Not a valid number of items to craft", e.Message);
 			
-			ErrorMsgLabel.Visible = true;
-			ErrorMsgLabel.Text = "Enter a valid number";
+			_errorMsgLabel.Visible = true;
+			_errorMsgLabel.Text = "Enter a valid number";
 		}
 
 		if (!await TryCraft(Mathf.Max(1, amountToCraft)))
 		{
-			ErrorMsgLabel.Visible = true;
-			ErrorMsgLabel.Text = "Not enough resources";
+			_errorMsgLabel.Visible = true;
+			_errorMsgLabel.Text = "Not enough resources";
 		}
 		else
 		{
-			ErrorMsgLabel.Visible = false;
+			_errorMsgLabel.Visible = false;
 		}
 	}
 

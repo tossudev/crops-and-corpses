@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc8irw10q6vqe"]
+
+[ext_resource type="Script" path="res://scripts/World/NavigationManager.cs" id="1_10jrq"]
+
+[node name="NavigationManager" type="Node2D"]
+script = ExtResource("1_10jrq")
+
+[node name="Region" type="NavigationRegion2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.337255)

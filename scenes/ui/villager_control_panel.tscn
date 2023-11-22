@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bp0j6co1k7bim"]
+[gd_scene load_steps=3 format=3 uid="uid://bp0j6co1k7bim"]
 
 [ext_resource type="Script" path="res://scripts/villager/DialogueControl.cs" id="1_02ul8"]
+[ext_resource type="PackedScene" uid="uid://bmh424wu5k4gb" path="res://scenes/ui/villager_info.tscn" id="2_nfk07"]
 
 [node name="VillagerControlPanel" type="Control"]
 visibility_layer = 512
@@ -85,3 +86,11 @@ text = "Dismiss"
 visible = false
 layout_mode = 2
 color = Color(0.603922, 0.545098, 0.8, 1)
+
+[node name="VillagerInfo" parent="." instance=ExtResource("2_nfk07")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -100.0
+offset_top = -168.0
+offset_right = 68.0
+offset_bottom = 0.0

@@ -68,3 +68,7 @@ shape = SubResource("RectangleShape2D_kxksx")
 libraries = {
 "": SubResource("AnimationLibrary_nedua")
 }
+
+[node name="NavigationObstacleArea" type="Polygon2D" parent="." groups=["obstacle_area"]]
+color = Color(1, 1, 1, 0)
+polygon = PackedVector2Array(-40, -32, -40, 24, 40, 24, 40, -32)

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_i45ep"]
 [ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_i6dnf"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_lv2gj"]
-[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="5_kva6i"]
+[ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="5_vty0u"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_yudbm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pn142"]
@@ -34,12 +34,11 @@ _data = {
 "shake": SubResource("Animation_ir0ao")
 }
 
-[node name="Rock" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer", "_sprite", "_timer")]
+[node name="Rock" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer", "_sprite")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_i45ep")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite = NodePath("Sprite2D")
-_timer = NodePath("")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-5, -90)
@@ -72,8 +71,6 @@ libraries = {
 "": SubResource("AnimationLibrary_x8yya")
 }
 
-[node name="Timer" type="Timer" parent="."]
-
-[node name="NavigationObstacleArea" parent="." instance=ExtResource("5_kva6i")]
+[node name="NavigationObstacleArea" parent="." instance=ExtResource("5_vty0u")]
 polygon = PackedVector2Array(-64, 32, 112, -24, 144, -96, 120, -160, 48, -192, -128, -136, -160, -72, -136, 8)
 metadata/_edit_pinned_properties_ = [&"polygon"]

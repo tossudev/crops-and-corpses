@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Projectile" load_steps=3 format=3 uid="uid://crwemoqf3d5lp"]
+
+[ext_resource type="Resource" uid="uid://c3e5qdsie8n0l" path="res://assets/resources/game_items/weapon_items_150_to_249/161_arrow.tres" id="1_03101"]
+[ext_resource type="Script" path="res://TinoTests/Scripts/Projectiles/Projectile.cs" id="2_quu4s"]
+
+[resource]
+script = ExtResource("2_quu4s")
+item = ExtResource("1_03101")
+airtime = 2.0
+despawnTime = 0.5
+objectCollision = false
+effect = 0

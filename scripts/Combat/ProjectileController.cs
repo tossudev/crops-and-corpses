@@ -13,12 +13,14 @@ public partial class ProjectileController : Node2D
     public float speed;
     private float _airtime;
     private float _despawnTime;
+    private bool _objectCollision;
 
     public void Init()
     {
         _sprite.Texture = projectile.item.IconTexture;
         _airtime = projectile.airtime;
         _despawnTime = projectile.despawnTime;
+        _objectCollision = projectile.objectCollision;
 
         if (projectile.effect != EffectType.None)
         {
@@ -59,7 +61,7 @@ public partial class ProjectileController : Node2D
 
     private void OnObjectEntered(Node2D body)
     {
-        if (!body.IsInGroup("player"))
+        if (!body.IsInGroup("player") && _objectCollision)
         {
             this.GetNode<Area2D>("Hitbox").SetDeferred("monitoring", false);
             _lifetimeTimer.Stop();

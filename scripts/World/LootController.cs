@@ -8,7 +8,6 @@ public partial class LootController : StaticBody2D
 	[Export] private Loot _loot;
 	[Export] private AnimationPlayer _animationPlayer;
 	[Export] private Sprite2D _sprite;
-	[Export] private Timer _timer;
 	[Export] private Color _color;
 	//should be between 0 and 1
 	[Export] private float _minBrightness = 1f;
@@ -24,7 +23,6 @@ public partial class LootController : StaticBody2D
 	{
 		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
 		_animationPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
-		_timer = GetNodeOrNull<Timer>("Timer");
 
 		rng = new RandomNumberGenerator();
 		rng.Seed = this.GetInstanceId();

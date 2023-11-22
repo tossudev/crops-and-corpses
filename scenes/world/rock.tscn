@@ -25,7 +25,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-5, -90), Vector2(2.08165e-12, -90), Vector2(-5, -90)]
+"values": [Vector2(-5, -90), Vector2(5, -90), Vector2(-5, -90)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x8yya"]
@@ -38,7 +38,7 @@ position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_i45ep")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite = NodePath("Sprite2D")
-_timer = NodePath("Timer")
+_timer = NodePath("")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-5, -90)
@@ -70,9 +70,3 @@ shape = SubResource("CapsuleShape2D_wgg0g")
 libraries = {
 "": SubResource("AnimationLibrary_x8yya")
 }
-
-[node name="Timer" type="Timer" parent="."]
-
-[node name="NavigationObstacleArea" type="Polygon2D" parent="." groups=["obstacle_area"]]
-color = Color(1, 1, 1, 0)
-polygon = PackedVector2Array(-64, 32, 112, -24, 144, -96, 120, -160, 48, -192, -128, -136, -160, -72, -136, 8)

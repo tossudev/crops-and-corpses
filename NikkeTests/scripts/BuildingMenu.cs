@@ -32,9 +32,7 @@ public partial class BuildingMenu : Control
 
     CharacterBody2D _player;
 
-    [Export]
     public Item log;
-    [Export]
     public Item copper;
 
     string _savePath, _fileName;
@@ -70,7 +68,7 @@ public partial class BuildingMenu : Control
         _buildingPrefabs.Add(_archerTower);
 
         _notEnoughResourcesLabel.AddThemeFontSizeOverride("font_size", 32);
-
+        
         CreateBuildMenu();
     }
 
@@ -141,6 +139,9 @@ public partial class BuildingMenu : Control
 
     private void CreateBuildMenu()
     {
+        log = ItemData.GetItemById(0);
+        copper = ItemData.GetItemById(2);
+        
         //_buildMenuControl.CustomMinimumSize = new Vector2(600, 300);
         _vBoxContainer.CustomMinimumSize = new Vector2(600, 400);
 

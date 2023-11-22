@@ -1,9 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdg0mgh0rgkvq"]
+[gd_scene load_steps=6 format=3 uid="uid://bdg0mgh0rgkvq"]
 
-[ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="1_nyjms"]
 [ext_resource type="Script" path="res://scripts/ui/inventory/InventorySlot.cs" id="1_uxrvb"]
 [ext_resource type="LabelSettings" uid="uid://d08eb8aufif7l" path="res://assets/resources/labelsettings/inventory_slot_quantity_label.tres" id="3_ytlk2"]
 [ext_resource type="PackedScene" uid="uid://cdi621xg0nv2g" path="res://scenes/ui/general/floating_button_name_panel.tscn" id="4_31v0k"]
+
+[sub_resource type="Gradient" id="Gradient_r2ia5"]
+offsets = PackedFloat32Array(0, 0.784314, 0.973039, 1)
+colors = PackedColorArray(0.501961, 0.501961, 0.501961, 0.501961, 0.61339, 0.61339, 0.61339, 0.572922, 0.180005, 0.180005, 0.180005, 0.862745, 0.000113828, 0.000113828, 0.000113828, 0.862745)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bnah0"]
+gradient = SubResource("Gradient_r2ia5")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
 
 [node name="InventorySlot" type="Control"]
 custom_minimum_size = Vector2(72, 72)
@@ -19,24 +28,41 @@ layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 
-[node name="ItemIcon" type="TextureRect" parent="Button"]
+[node name="BackGround" type="TextureRect" parent="Button"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 0
 offset_right = 72.0
 offset_bottom = 72.0
 mouse_filter = 2
-texture = ExtResource("1_nyjms")
+texture = SubResource("GradientTexture2D_bnah0")
 expand_mode = 1
 stretch_mode = 4
 
+[node name="MarginContainer" type="MarginContainer" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ItemIcon" type="TextureRect" parent="Button/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
 [node name="ItemQuantityLabel" type="Label" parent="Button"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(72, 76)
 layout_mode = 0
-offset_right = 72.0
+offset_right = 66.0
 offset_bottom = 72.0
-scale = Vector2(1, 1.01076)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 32

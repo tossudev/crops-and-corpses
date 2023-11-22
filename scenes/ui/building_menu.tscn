@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bsoen384q11gf"]
+[gd_scene load_steps=16 format=3 uid="uid://f5m7wypxd5t7"]
 
 [ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMenu.cs" id="1_1usej"]
 [ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://scenes/farm/farm_plot.tscn" id="2_6b0va"]
@@ -15,9 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="11_orgxb"]
 [ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="14_ktk8x"]
 [ext_resource type="Resource" uid="uid://bofkpec0ir7h3" path="res://assets/resources/game_items/resource_items_0_to_99/2_copper.tres" id="15_gpcam"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_3htb0"]
-font_size = 32
 
 [node name="Control" type="Control" node_paths=PackedStringArray("_buildMenu", "_buildMenuControl", "_vBoxContainer", "_notEnoughResourcesLabel")]
 layout_mode = 3
@@ -98,19 +95,3 @@ offset_right = 88.0
 offset_bottom = 46.0
 grow_horizontal = 2
 text = "Not enough resources!"
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -23.47
-anchor_top = -12.97
-anchor_right = -23.47
-anchor_bottom = -12.97
-offset_left = 10.8
-offset_top = 91.8
-offset_right = 443.8
-offset_bottom = 178.8
-grow_horizontal = 0
-grow_vertical = 2
-text = "Press 'V' to build"
-label_settings = SubResource("LabelSettings_3htb0")

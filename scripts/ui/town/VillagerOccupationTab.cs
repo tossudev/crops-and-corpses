@@ -31,7 +31,7 @@ public partial class VillagerOccupationTab : ScrollContainer
 		
 		_occupationList = _occupation switch
 		{
-			VillagerOccupation.Unemployed => VillagerManager.instance.unemployedVillagers,
+			VillagerOccupation.Builder => VillagerManager.instance.BuilderVillagers,
 			VillagerOccupation.Farmer => VillagerManager.instance.farmerVillagers,
 			VillagerOccupation.Soldier => VillagerManager.instance.soldierVillagers,
 			VillagerOccupation.Woodcutter => VillagerManager.instance.woodcutterVillagers,

@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using Godot.Collections;
 
 public partial class TownUpgrade : Resource
 {
@@ -46,4 +48,16 @@ public partial class TownUpgrade : Resource
 		return SaveData.appliedUpgrades.Any(upgrade => upgrade.id == id);
 	}
 
+
+	public static Dictionary GetDictionary(List<TownUpgrade> appliedUpgrades)
+	{
+		Dictionary appliedUpgradeDict = new ();
+        
+		foreach (var appliedUpgrade in appliedUpgrades)
+		{
+			appliedUpgradeDict.Add(appliedUpgrade.id, appliedUpgrade.upgradeHeader);
+		}
+
+		return appliedUpgradeDict;
+	}
 }

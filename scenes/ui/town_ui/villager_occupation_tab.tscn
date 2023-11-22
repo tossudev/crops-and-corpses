@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/ui/town/VillagerOccupationTab.cs" id="1_wi0bj"]
 
 [node name="VillagerOccupationTab" type="ScrollContainer"]
-custom_minimum_size = Vector2(612, 192)
+custom_minimum_size = Vector2(612, 256)
 script = ExtResource("1_wi0bj")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

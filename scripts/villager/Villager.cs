@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public enum VillagerOccupation
 {
-	Unemployed,
+	Builder,
 	Farmer,
 	Soldier,
 	Woodcutter,
@@ -20,7 +20,6 @@ public partial class Villager : CharacterBody2D
 	Timer _timer;
 	Timer _gatheringTimer;
 
-	[Export] DialogueControl dialogueControl;
 	[Export] NavigationAgent2D navMeshAgent;
 	//[Export] NavigationRegion2D navRegionArea;
 	Plant _currentPlant;
@@ -66,7 +65,6 @@ public partial class Villager : CharacterBody2D
 		_villagerSprite = GetNode<Sprite2D>("Sprite2D");
 		_gatheringTimer = GetNode<Timer>("GatheringTimer");
 
-		dialogueControl.AssignVillager(this);
 		VillagerManager.instance.AddNewVillager(this, false);
 		
 		_timer = new Timer
@@ -106,7 +104,7 @@ public partial class Villager : CharacterBody2D
 	
 	public override void _PhysicsProcess(double delta)
 	{
-		if (!dialogueControl.Visible && GlobalPosition.DistanceTo(_targetPosition) > 5)
+		if (GlobalPosition.DistanceTo(_targetPosition) > 5)
 		{
 			Movement(_targetPosition);
 		}
@@ -184,10 +182,6 @@ public partial class Villager : CharacterBody2D
 			case VillagerState.ResqueQuest:
 				WaitingResque();
 				break;
-			
-			case VillagerState.GetHospitalized:
-				//TODO
-				break;
 
 			case VillagerState.FixFence:
 				//TODO
@@ -235,9 +229,8 @@ public partial class Villager : CharacterBody2D
 
 	public void OpenDialogue()
 	{
-		_info.Visible = true;
-		_info.UpdateStatus(_state);
-		dialogueControl.OpenDialogueWindow();
+		DialogueControl.instance.AssignVillager(this);
+		DialogueControl.instance.OpenDialogueWindow();
 	}
 
 	public void OpenResqueDialogue()
@@ -314,12 +307,11 @@ public partial class Villager : CharacterBody2D
 				break;
 			
 			default:
-				GD.Print("Villager Unemployed :(");
 				_state = VillagerState.RoamAround;
 				break;
 		}
 
-		dialogueControl.ExitDialogue();
+		DialogueControl.instance.ExitDialogue();
 	}
 	
 	public void ChangeOccupation(VillagerOccupation occupation)

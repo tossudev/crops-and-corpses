@@ -1,8 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsb8od2mcpg2x"]
+[gd_scene load_steps=8 format=3 uid="uid://bsb8od2mcpg2x"]
 
 [ext_resource type="Script" path="res://scripts/ui/inventory/PlayerInventoryController.cs" id="1_kcr62"]
+[ext_resource type="StyleBox" uid="uid://bfq7mg2htfllb" path="res://assets/resources/styles/inventory_style_box_texture.tres" id="2_6dwwa"]
+[ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory/inventory_slot.tscn" id="2_52evd"]
 [ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="2_pvric"]
-[ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory/inventory_slot.tscn" id="2_whfw6"]
+
+[sub_resource type="Gradient" id="Gradient_1ijah"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.765957, 0.928191, 1)
+colors = PackedColorArray(0, 0, 0, 0.588235, -0.0205245, -0.0153661, -0.0114939, 0.7449, 0.570499, 0.42323, 0.315232, 0.901961, 0, 0, 0, 0.901961)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dy6tw"]
+gradient = SubResource("Gradient_1ijah")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x68dm"]
+texture = SubResource("GradientTexture2D_dy6tw")
+texture_margin_left = 24.0
+texture_margin_top = 4.0
+texture_margin_right = 24.0
+texture_margin_bottom = 4.0
 
 [node name="PlayerInventory" type="Control" groups=["PlayerInventoryController"]]
 layout_mode = 3
@@ -18,9 +37,10 @@ script = ExtResource("1_kcr62")
 custom_minimum_size = Vector2(664, 344)
 layout_mode = 0
 offset_left = 640.0
-offset_top = 440.0
+offset_top = 600.0
 offset_right = 1304.0
-offset_bottom = 704.0
+offset_bottom = 944.0
+theme_override_styles/panel = ExtResource("2_6dwwa")
 
 [node name="InventoryGrid" type="GridContainer" parent="InventoryPanel" groups=["InventoryGrid"]]
 layout_mode = 0
@@ -32,142 +52,149 @@ theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 8
 
-[node name="InventorySlot" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot2" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot2" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot3" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot3" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot4" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot4" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot5" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot5" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot6" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot6" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot7" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot7" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot8" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot8" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot9" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot9" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot10" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot10" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot11" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot11" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot12" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot12" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot13" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot13" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot14" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot14" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot15" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot15" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot16" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot16" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot17" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot17" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot18" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot18" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot19" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot19" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot20" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot20" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot21" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot21" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot22" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot22" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot23" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot23" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot24" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot24" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot25" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot25" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot26" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot26" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot27" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot27" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot28" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot28" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot29" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot29" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot30" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot30" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot31" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot31" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot32" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot32" parent="InventoryPanel/InventoryGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
 [node name="HotbarPanel" type="Panel" parent="." groups=["HotbarPanel"]]
 custom_minimum_size = Vector2(664, 96)
 layout_mode = 0
 offset_left = 640.0
-offset_top = 936.0
+offset_top = 960.0
 offset_right = 1304.0
-offset_bottom = 1040.0
+offset_bottom = 1064.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_x68dm")
 
 [node name="HotbarGrid" type="GridContainer" parent="HotbarPanel" groups=["HotbarGrid"]]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 648.0
-offset_bottom = 88.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -316.0
+offset_top = -36.0
+offset_right = 316.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/h_separation = 8
-theme_override_constants/v_separation = 8
 columns = 8
 
-[node name="InventorySlot" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot2" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot2" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot3" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot3" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot4" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot4" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot5" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot5" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot6" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot6" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot7" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot7" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
-[node name="InventorySlot8" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_whfw6")]
+[node name="InventorySlot8" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
 layout_mode = 2
 
 [node name="SelectedItem" type="Control" parent="."]
@@ -202,7 +229,7 @@ vertical_alignment = 2
 [node name="HeldItemIndicator" type="Sprite2D" parent="."]
 self_modulate = Color(10, 10, 10, 1)
 z_index = -1
-position = Vector2(692, 988)
-scale = Vector2(0.7, 0.7)
+position = Vector2(688, 1008)
+scale = Vector2(0.65, 0.65)
 texture = ExtResource("2_pvric")
 offset = Vector2(4, 4)

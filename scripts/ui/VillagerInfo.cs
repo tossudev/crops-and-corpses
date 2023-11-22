@@ -17,8 +17,6 @@ public partial class VillagerInfo : Control
 	RichTextLabel _nameText;
 	RichTextLabel _loreText;
 	RichTextLabel _statusText;
-	Button _healButton;
-	Button _closeButton;
 	
 	
 	public override void _Ready()
@@ -29,8 +27,6 @@ public partial class VillagerInfo : Control
 		_nameText = GetNode<RichTextLabel>("ColorRect/NameText");
 		_loreText = GetNode<RichTextLabel>("ColorRect/LoreText");
 		_statusText = GetNode<RichTextLabel>("ColorRect/StatusText");
-		_healButton = GetNode<Button>("ColorRect/HealButton");
-		_closeButton = GetNode<Button>("ColorRect/CloseButton");
 
 		Visible = false;
 	}
@@ -52,7 +48,6 @@ public partial class VillagerInfo : Control
 
 
 	public void UpdateStatus(VillagerState villagerState){
-		_healButton.Visible=false;
 		switch(villagerState){
 			case VillagerState.RoamAround:
 				_statusText.Text = "Status: Healthy";
@@ -68,10 +63,6 @@ public partial class VillagerInfo : Control
 				break;
 			case VillagerState.FindShelter:
 				_statusText.Text = "Status: Finding Cover";
-				break;
-			case VillagerState.GetHospitalized:
-				_statusText.Text = "Status: Injured";
-				_healButton.Visible=true;
 				break;
 			case VillagerState.ChooseTask:
 				_statusText.Text = "Status: Healthy";
@@ -89,7 +80,13 @@ public partial class VillagerInfo : Control
 				break;
 		}
 	}
-	void CloseInfo(){
+	public void OpenInfo()
+	{
+		Visible = true;
+	}
+	
+	public void CloseInfo()
+	{
 		Visible = false;
 	}
 }

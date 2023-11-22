@@ -9,8 +9,8 @@ public partial class VillagerManager : Node
 	// Villager Lists
 	List<Villager> _allVillagers = new ();
 	
-	List<Villager> _unemployed = new ();
-	public List<Villager> unemployedVillagers => _unemployed;
+	List<Villager> _builder = new ();
+	public List<Villager> BuilderVillagers => _builder;
 	
 	List<Villager> _farmers = new ();
 	public List<Villager> farmerVillagers => _farmers;
@@ -73,7 +73,7 @@ public partial class VillagerManager : Node
 
 		villager.currentOccupationList = newOccupation switch
 		{
-			VillagerOccupation.Unemployed => _unemployed,
+			VillagerOccupation.Builder => _builder,
 			VillagerOccupation.Farmer => _farmers,
 			VillagerOccupation.Soldier => _soldiers,
 			VillagerOccupation.Woodcutter => _woodcutters,
@@ -99,7 +99,6 @@ public enum VillagerState
 	FindArcherTower,
 	FindShelter,
 	InShelter,
-	GetHospitalized,
 	ChooseTask,
 	FarmingTask,
 	FindWoodTask,

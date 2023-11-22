@@ -17,6 +17,9 @@ position = Vector2(736, -672)
 [node name="SpawnPoint3" type="Node2D" parent="."]
 position = Vector2(704, 536)
 
+[node name="SpawnPoint4" type="Node2D" parent="."]
+position = Vector2(704, 536)
+
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 

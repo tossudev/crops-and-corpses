@@ -2,11 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.IO;
-using Godot.NativeInterop;
 
 public partial class BuildingMenu : Control
 {
@@ -17,14 +14,16 @@ public partial class BuildingMenu : Control
 
     Node2D _ghostBuilding;
 
-    [Export]
 	Node2D _buildings;
+
     [Export]
     ScrollContainer _buildMenu;
     [Export]
     Control _buildMenuControl;
     [Export]
     VBoxContainer _vBoxContainer;
+    [Export]
+    Label _notEnoughResourcesLabel;
 
     [Export]
     PackedScene _farmPlotScene, _farmPlotGhostScene, _houseScene, _houseGhostScene, _archerTowerScene, _archerTowerGhostScene, _wellScene, _wellGhostScene;
@@ -34,11 +33,9 @@ public partial class BuildingMenu : Control
     CharacterBody2D _player;
 
     [Export]
-    Item _log;
+    public Item log;
     [Export]
-    Item _copper;
-
-	int _resources;
+    public Item copper;
 
     string _savePath, _fileName;
 
@@ -72,7 +69,7 @@ public partial class BuildingMenu : Control
         _archerTower = new Building(_archerTowerScene, _archerTowerGhostScene, 6, "Archer Tower", _archerTowerIcon);
         _buildingPrefabs.Add(_archerTower);
 
-        _resources = 500;
+        _notEnoughResourcesLabel.AddThemeFontSizeOverride("font_size", 32);
 
         CreateBuildMenu();
     }
@@ -102,6 +99,36 @@ public partial class BuildingMenu : Control
         _player.SetPhysicsProcess(false);
         _player.SetProcessUnhandledInput(false);
         _buildMenu.Show();
+
+        SetPriceLabelColor();
+    }
+
+    private void SetPriceLabelColor()
+    {
+        foreach (Button button in _vBoxContainer.GetChildren())
+        {
+            Label label;
+
+            if (button.GetChildCount() > 0)
+            {
+                label = button.GetChild(0).GetChild(0) as Label;
+            }
+            else
+            {
+                return;
+            }
+
+            int price = Int32.Parse(label.Text);
+
+            if (!PlayerInventoryData.ExistsInInventory(log.ID, price))
+            {
+                label.SelfModulate = Colors.Red;
+            }
+            else
+            {
+                label.SelfModulate = Colors.White;
+            }
+        }
     }
 
     public void CloseBuildMenu()
@@ -109,6 +136,7 @@ public partial class BuildingMenu : Control
         _player.SetPhysicsProcess(true);
         _player.SetProcessUnhandledInput(true);
         _buildMenu.Hide();
+        _notEnoughResourcesLabel.Visible = false;
     }
 
     private void CreateBuildMenu()
@@ -130,7 +158,7 @@ public partial class BuildingMenu : Control
 
             Sprite2D _sprite = new Sprite2D();
             _button.AddChild(_sprite);
-            _sprite.Texture = _log.IconTexture;
+            _sprite.Texture = log.IconTexture;
             _sprite.Scale = new Vector2(0.4f, 0.4f);
             _sprite.Position = new Vector2(540, 50);
 
@@ -281,23 +309,23 @@ public partial class BuildingMenu : Control
 
     private void OnButtonUp(Building building)
     {
+        if (!PlayerInventoryData.ExistsInInventory(log.ID, building.price))
+        {
+            _notEnoughResourcesLabel.Visible = true;
+            return;
+        }
+
         _currentBuilding = building;
         BuildingMode();
     }
 
     public async void Build()
     {
-        if (_resources < _currentBuilding.price)
-        {
-            Debug.WriteLine("You don't have enough resources");
-            return;
-        }
-
-        RawInventoryItem logs = new RawInventoryItem(_log.ID, _log.Name, _currentBuilding.price, _log.StackSize);
+        RawInventoryItem logs = new RawInventoryItem(log.ID, log.Name, _currentBuilding.price, log.StackSize);
 
         if (await PlayerInventoryController.RemoveItemFromInventory(logs) == false)
         {
-            GD.Print("Not enough resources!");
+            GD.Print("Not enough logs!");
             return;
         }
 
@@ -306,19 +334,19 @@ public partial class BuildingMenu : Control
         Node2D _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;
         _buildingScene.Position = _ghostBuilding.Position;
         _buildings.AddChild(_buildingScene);
-
-        _resources -= _currentBuilding.price;
     }
 
     private void BuildingMode()
 	{
-        _buildMenu.Hide();     
+        _buildMenu.Hide();
+        _notEnoughResourcesLabel.Visible = false;
 
         _ghostBuilding = _currentBuilding.buildingModeScene.Instantiate() as Node2D;
 
         BuildingMode _buildingMode;
         _buildingMode = _ghostBuilding as BuildingMode;
         _buildingMode.buildingMenu = this;
+        _buildingMode.buildingPriceLogs = _currentBuilding.price;
 
         _buildings.AddChild(_ghostBuilding);
 	}

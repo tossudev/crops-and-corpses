@@ -8,6 +8,8 @@ public partial class BuildingMode : Node2D
 
     public BuildingMenu buildingMenu;
 
+    public int buildingPriceLogs;
+
     int _tileSize;
 
     Fence _fence;
@@ -33,6 +35,16 @@ public partial class BuildingMode : Node2D
             buildingMenu.CloseBuildMenu();
         }
 
+        if(!PlayerInventoryData.ExistsInInventory(buildingMenu.log.ID, buildingPriceLogs))
+        {
+            Modulate = new Color(3, 1, 1, 1);
+
+            if (Input.IsActionJustPressed("Click"))
+            {
+                Debug.WriteLine("Not enough logs");
+            }
+            return;
+        }
 
         if (collisions > 0 || (Position.X > _fence.fenceLengthX * 64 || Position.X < -_fence.fenceLengthX * 64 || Position.Y > _fence.fenceLengthY * 64 || Position.Y < -_fence.fenceLengthY * 64))
         {

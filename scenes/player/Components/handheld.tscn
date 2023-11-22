@@ -1,9 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://3hlx66fdaruu"]
+[gd_scene load_steps=17 format=3 uid="uid://3hlx66fdaruu"]
 
 [ext_resource type="Script" path="res://scripts/player/HandheldController.cs" id="1_gwltb"]
 [ext_resource type="Resource" uid="uid://dsa6q3jkek4am" path="res://assets/resources/game_weapons/bow.tres" id="2_21emi"]
 [ext_resource type="PackedScene" uid="uid://dqmfwe15dtgat" path="res://scenes/Combat/projectile.tscn" id="2_agrd3"]
 [ext_resource type="Texture2D" uid="uid://8h4nv7s06ft5" path="res://TinoTests/Sprites/Swingbox.png" id="3_ha3no"]
+[ext_resource type="Texture2D" uid="uid://cmbhdum8ifm8c" path="res://animations/bow_span_frames/bow_span_2.png" id="4_22joh"]
+[ext_resource type="Texture2D" uid="uid://b16eb2s35wa0d" path="res://animations/bow_span_frames/bow_span_1.png" id="5_r2ewd"]
+[ext_resource type="Texture2D" uid="uid://dppdy80r0lu6t" path="res://animations/bow_span_frames/bow_span_3.png" id="6_u0y7g"]
+[ext_resource type="Texture2D" uid="uid://b43k1qhcyo47g" path="res://animations/bow_span_frames/bow_span_4.png" id="7_hrsw2"]
+[ext_resource type="Texture2D" uid="uid://ds4d0bkp8w0vx" path="res://assets/sprites/items/item_bow.png" id="8_dkmkf"]
 
 [sub_resource type="Animation" id="Animation_wryer"]
 tracks/0/type = "value"
@@ -17,6 +22,123 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_ocfbs"]
+resource_name = "bow_cd"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_dkmkf")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.727802, 2.2986, 0.727802]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(10, 9.65599e-06), Vector2(2.08165e-12, 10), Vector2(10, 9.65599e-06)]
+}
+
+[sub_resource type="Animation" id="Animation_1n3rr"]
+resource_name = "bow_draw"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333, 0.666, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_r2ewd"), ExtResource("4_22joh"), ExtResource("6_u0y7g"), ExtResource("7_hrsw2")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.727802]
+}
+
+[sub_resource type="Animation" id="Animation_npkmt"]
+resource_name = "bow_release"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333, 0.666, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("6_u0y7g"), ExtResource("4_22joh"), ExtResource("5_r2ewd"), ExtResource("8_dkmkf")]
 }
 
 [sub_resource type="Animation" id="Animation_v705w"]
@@ -64,6 +186,9 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_83chl"]
 _data = {
 "RESET": SubResource("Animation_wryer"),
+"bow_cd": SubResource("Animation_ocfbs"),
+"bow_draw": SubResource("Animation_1n3rr"),
+"bow_release": SubResource("Animation_npkmt"),
 "draw": SubResource("Animation_v705w"),
 "swing": SubResource("Animation_hjerq")
 }

@@ -18,7 +18,6 @@ public partial class LootController : StaticBody2D
 	[Export] private float _scaleVariation = 0f;
 
 	private List<Item> _items = new List<Item>();
-	private int animSpeed = 15;
 	RandomNumberGenerator rng;
 
 	public override void _Ready()
@@ -28,10 +27,7 @@ public partial class LootController : StaticBody2D
 		_timer = GetNodeOrNull<Timer>("Timer");
 
 		rng = new RandomNumberGenerator();
-		var x = (this.Position.X);
-		var y = (this.Position.Y);
-		// unique seed for each coordinate
-		rng.Seed = (ulong)((x + y) * (x + y + 1) / 2 + y);
+		rng.Seed = this.GetInstanceId();
 
 		Variations();
 
@@ -70,7 +66,7 @@ public partial class LootController : StaticBody2D
 		if (_items.Count > 1)
 			DropItems();
 
-		_animationPlayer.SpeedScale = animSpeed;
+		_animationPlayer.SpeedScale = 10;
 		_animationPlayer.Play("shake");
 
 		if (health <= 0)

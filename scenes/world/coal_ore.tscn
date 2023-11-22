@@ -72,3 +72,7 @@ shape = SubResource("CapsuleShape2D_wgg0g")
 libraries = {
 "": SubResource("AnimationLibrary_x8yya")
 }
+
+[node name="NavigationObstacleArea" type="Polygon2D" parent="." groups=["obstacle_area"]]
+color = Color(1, 1, 1, 0)
+polygon = PackedVector2Array(-64, 32, 112, -24, 144, -96, 120, -160, 48, -192, -128, -136, -160, -72, -136, 8)

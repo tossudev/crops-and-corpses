@@ -24,10 +24,13 @@ text = "Press 'E' to toggle inventory"
 
 [node name="DayCounterLabel" parent="." instance=ExtResource("3_bmooi")]
 
-[node name="HourCounterLabel" parent="." instance=ExtResource("3_bmooi")]
+[node name="HourCounterLabel" type="Label" parent="."]
 offset_left = 488.0
 offset_right = 1440.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 32
 text = "Hour: "
+horizontal_alignment = 1
 script = ExtResource("4_sv1al")
 
 [node name="BuildingMenu" parent="." instance=ExtResource("5_om3g0")]

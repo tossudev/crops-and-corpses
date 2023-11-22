@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c8bx46w1qix2q"]
+[gd_scene load_steps=32 format=3 uid="uid://c8bx46w1qix2q"]
 
 [ext_resource type="Script" path="res://scripts/player/PlayerController.cs" id="1_1gq73"]
 [ext_resource type="PackedScene" uid="uid://3hlx66fdaruu" path="res://scenes/player/Components/handheld.tscn" id="2_00eh7"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cfnyvrnyg6pk1" path="res://assets/placeholder/test_character/HandR.png" id="13_644b2"]
 [ext_resource type="Texture2D" uid="uid://bgp4wcx2fpky1" path="res://assets/placeholder/test_character/LegL.png" id="14_pxa3s"]
 [ext_resource type="Texture2D" uid="uid://dm80cnvcf6m5q" path="res://assets/placeholder/test_character/FootL.png" id="15_m13sc"]
+[ext_resource type="PackedScene" uid="uid://bu54axeet2w5" path="res://scenes/player/Components/stamina_component.tscn" id="15_owabl"]
 [ext_resource type="Texture2D" uid="uid://dtxvt7hf4w3m1" path="res://assets/placeholder/test_character/LegR.png" id="16_3ecwo"]
 [ext_resource type="PackedScene" uid="uid://csdmv5fy2tvqa" path="res://scenes/consumables/food/bread.tscn" id="16_patuu"]
 [ext_resource type="PackedScene" uid="uid://bcmw0lume6obc" path="res://scenes/consumables/food/potato.tscn" id="17_nh2gr"]
@@ -233,15 +234,15 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_yn8u1"]
 radius = 7.5
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_handheld", "_pickupArea", "_rig", "_healthComponent") groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_handheld", "_pickupArea", "_rig", "_healthComponent", "_staminaComponent") groups=["player"]]
 scale = Vector2(3.2, 3.2)
 script = ExtResource("1_1gq73")
 _handheld = NodePath("Handheld")
 _pickupArea = NodePath("SmallInteractionArea")
 _rig = NodePath("Skeleton2D")
 _healthComponent = NodePath("HealthComponent")
+_staminaComponent = NodePath("StaminaComponent")
 minZoom = 0.75
-_speed = 300
 
 [node name="InteractionArea" type="Area2D" parent="."]
 collision_layer = 2
@@ -388,6 +389,8 @@ autoplay = "walk"
 libraries = {
 "": SubResource("AnimationLibrary_uvgsj")
 }
+
+[node name="StaminaComponent" parent="." instance=ExtResource("15_owabl")]
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_wuvdk")]
 _parentScript = NodePath("..")

@@ -23,15 +23,20 @@ public partial class NavigationManager : Node2D {
 
 	void InitRegion() {
 		// Get all obstacles
+		int _index = 0;
 		foreach (Polygon2D _obstacleArea in GetTree().GetNodesInGroup(_obstacleGroupName)) {
 			Vector2[] polygonPoints = GetPolygonFromObject(_obstacleArea);
 			_obstacleAreas.Add(polygonPoints);
 			_region.AddOutline(polygonPoints);
+
+			_obstacleArea.Set("nodeIndex", _index);
+
+			_index ++;
 		}
 
 		// Update navigation region
 		_region.MakePolygonsFromOutlines();
-		UpdateObstacleIndexes();
+		// UpdateObstacleIndexes();
 	}
 
 
@@ -52,14 +57,19 @@ public partial class NavigationManager : Node2D {
 	void UpdateObstacleIndexes() {
 		int _index = 0;
 		foreach (Polygon2D _obstacleNode in GetTree().GetNodesInGroup(_obstacleGroupName)) {
-			_obstacleNode.Set("nodeIndex", _index); // TODO: this doesn't assign anything yet
+			_obstacleNode.Set("nodeIndex", _index);
+
+			_index ++;
 		}
 	}
 
 
 	public void RemoveArea(int nodeIndex) {
+		// GD.Print(nodeIndex);
+
 		// _region.RemoveOutline(nodeIndex);
-		_region.MakePolygonsFromOutlines();
+		_obstacleAreas.RemoveAt(nodeIndex);
+		// _region.MakePolygonsFromOutlines();
 
 		UpdateObstacleIndexes();
 	}

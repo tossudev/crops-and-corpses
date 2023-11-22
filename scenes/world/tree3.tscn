@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://du4tddxtyn51y"]
+[gd_scene load_steps=11 format=3 uid="uid://du4tddxtyn51y"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_k5454"]
 [ext_resource type="Resource" uid="uid://b7jgjk4165udm" path="res://TinoTests/Resources/tree.tres" id="2_tf5dk"]
 [ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="3_qrldr"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_508he"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_1o5tn"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_2m76p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_em0ef"]
 size = Vector2(80, 56)
@@ -68,3 +69,7 @@ shape = SubResource("RectangleShape2D_kxksx")
 libraries = {
 "": SubResource("AnimationLibrary_nedua")
 }
+
+[node name="NavigationObstacleArea" parent="." instance=ExtResource("6_2m76p")]
+polygon = PackedVector2Array(-40, 24, 40, 24, 40, -32, -40, -32)
+metadata/_edit_pinned_properties_ = [&"polygon"]

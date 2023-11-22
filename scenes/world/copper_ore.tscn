@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://btmwjcvssjjf7"]
+[gd_scene load_steps=11 format=3 uid="uid://btmwjcvssjjf7"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_15rhp"]
 [ext_resource type="Resource" uid="uid://bqdor0tg0upjq" path="res://TinoTests/Resources/iron_ore.tres" id="2_s1ecj"]
 [ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_6kr0x"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_isnin"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_kywjc"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_crfoj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pn142"]
 radius = 85.9731
@@ -73,6 +74,6 @@ libraries = {
 "": SubResource("AnimationLibrary_x8yya")
 }
 
-[node name="NavigationObstacleArea" type="Polygon2D" parent="." groups=["obstacle_area"]]
-color = Color(1, 1, 1, 0)
+[node name="NavigationObstacleArea" parent="." instance=ExtResource("6_crfoj")]
 polygon = PackedVector2Array(-64, 32, 112, -24, 144, -96, 120, -160, 48, -192, -128, -136, -160, -72, -136, 8)
+metadata/_edit_pinned_properties_ = [&"polygon"]

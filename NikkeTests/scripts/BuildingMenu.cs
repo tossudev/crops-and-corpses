@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.Json.Nodes;
 using System.IO;
+using System.Xml.Linq;
 
 public partial class BuildingMenu : Control
 {
@@ -205,6 +206,19 @@ public partial class BuildingMenu : Control
     {
         JsonArray _savedBuildings = new JsonArray();
 
+        GlobalTime globaltime = GetNode<GlobalTime>("/root/GlobalTime");
+        float time = globaltime.GetTime();
+
+        JsonObject jsonObjTime = new JsonObject
+        {
+            { "name", "globalTime" },
+            { "time", time }
+        };
+
+        _savedBuildings.Add(jsonObjTime);
+
+        int farmPlotCount = 0;
+
         foreach (Node2D node in _buildings.GetChildren())
         {
             string name = "null";
@@ -216,6 +230,43 @@ public partial class BuildingMenu : Control
             else if (node.IsInGroup("FarmPlot"))
             {
                 name = "FarmPlot";
+                string seedName = "null";
+                double growthTime = 0;
+                bool isGrowing = false;
+                bool isTendedTo = false;
+                bool isDead = false;
+
+                if (node.FindChild("plant_slot").GetChildCount() > 0)
+                {
+                    //plantName = node.FindChild("plant_slot").GetChild(0).Name;
+
+                    Plant plant = node.FindChild("plant_slot").GetChild(0) as Plant;
+                    growthTime = plant.currentGrowthTime;
+
+                    seedName = plant.seedName;
+                    isGrowing = plant.growthStarted;
+                    isTendedTo = plant.isTendedTo;
+                    if(plant.GetGrowthState() == GrowthState.IsDead)
+                    {
+                        isDead = true;
+                    }
+                }
+
+                JsonObject jsonObjPlant = new JsonObject
+                {
+                    { "name", name },
+                    { "x", Mathf.RoundToInt(node.Position.X) },
+                    { "y", Mathf.RoundToInt(node.Position.Y) },
+                    { "plant",  seedName},
+                    { "growthTime",  growthTime},
+                    { "isGrowing",  isGrowing},
+                    { "isTendedTo",  isTendedTo},
+                    { "isDead",  isDead}
+                };
+
+                _savedBuildings.Add(jsonObjPlant);
+
+                continue;
             } 
             else if (node.IsInGroup("ArcherTower"))
             {
@@ -227,11 +278,11 @@ public partial class BuildingMenu : Control
             }
             
             JsonObject jsonObj = new JsonObject
-        {
-            { "name", name },
-            { "x", Mathf.RoundToInt(node.Position.X)},
-            { "y", Mathf.RoundToInt(node.Position.Y) }
-        };
+            {
+                { "name", name },
+                { "x", Mathf.RoundToInt(node.Position.X) },
+                { "y", Mathf.RoundToInt(node.Position.Y) }
+            };
 
             _savedBuildings.Add(jsonObj);
         }
@@ -279,6 +330,8 @@ public partial class BuildingMenu : Control
 
     public void InstantiateBuildings(JsonArray loadedBuildings)
     {
+        float time = 0;
+
         foreach (Node2D node in _buildings.GetChildren())
         {
             node.QueueFree();
@@ -286,6 +339,12 @@ public partial class BuildingMenu : Control
 
         foreach (JsonObject jsonObject in loadedBuildings)
         {
+            if(jsonObject["name"].ToString() == "globalTime")
+            {
+                time = (float)jsonObject["time"];
+                continue;
+            }
+
             if(jsonObject["name"].ToString() == "null")
             {
                 continue;
@@ -305,7 +364,25 @@ public partial class BuildingMenu : Control
             Node2D _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;           
             _buildingScene.Position = new Vector2(x, y);
             _buildings.AddChild(_buildingScene);
+
+            if (jsonObject["name"].ToString() == "FarmPlot")
+            {
+                if(jsonObject["plant"].ToString() != "null")
+                {
+                    bool isGrowing = (bool)jsonObject["isGrowing"];
+                    bool isTendedTo = (bool)jsonObject["isTendedTo"];
+                    bool isDead = (bool)jsonObject["isDead"];
+
+                    Plant(jsonObject["plant"].ToString(), double.Parse(jsonObject["growthTime"].ToString()), time, _buildingScene, isGrowing, isTendedTo, isDead);
+                }
+            }
         }
+    }
+
+    public void Plant(string seedName, double growthTime, float globalTime, Node2D farmPlot, bool isGrowing, bool isTendedTo, bool isDead)
+    {
+        FieldHandler fieldHandler = farmPlot as FieldHandler;
+       fieldHandler.LoadPlant(seedName, growthTime, globalTime, isGrowing, isTendedTo, isDead); 
     }
 
     private void OnButtonUp(Building building)

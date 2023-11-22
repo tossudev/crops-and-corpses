@@ -361,6 +361,7 @@ public partial class Villager : CharacterBody2D
 	void CheckPlants()
 	{
 		_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
+		_currentPlant.isTendedTo = true;
 
 		if (_currentPlant.GetGrowthState() == GrowthState.IsWilting || _currentPlant.GetGrowthState() == GrowthState.WaitWatering ||
 			_currentPlant.GetGrowthState() == GrowthState.IsInfested)

@@ -176,6 +176,7 @@ public partial class UpgradeConfirmationPanel: Panel
                         craftingRequirement.item.ID,craftingRequirement.quantity)))
             {
                 SetUnlockButtonState(UnlockButtonState.Locked, _unlockButton, _unlockButtonTextLabel);
+                return;
             }
 			
             foreach (var craftingRequirement in _currentUpgrade.craftingRequirements)

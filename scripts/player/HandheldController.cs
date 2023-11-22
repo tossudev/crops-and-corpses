@@ -13,6 +13,7 @@ public partial class HandheldController : Node2D
     [Export] private Timer _timer;
     [Export] private PackedScene _projectilePrefab;
     [Export] private PlayerController _player;
+    [Export] private StaminaComponent _staminaComponent;
 
     private Attack _attack;
     private int _damage;
@@ -27,23 +28,19 @@ public partial class HandheldController : Node2D
     private float _drawTime;
     private Projectile _projectile;
 
-    private bool _isDrawing;
+    public bool isDrawing;
     private bool _actionHeld;
     private string _targetGroup;
 
-    private void Init()
+    public void Init()
     {
         if (PlayerInventoryController.heldItem != null)
         {
             _weapon = WeaponData.GetWeaponByItemId(PlayerInventoryController.heldItem.id);
         }
-        else
-        {
-            _weapon = null;
-        }
 
         if (_weapon == null)
-            return;
+            _weapon = _hand;
 
         _damage = _weapon.damage;
         _knockback = _weapon.knockback;
@@ -57,7 +54,16 @@ public partial class HandheldController : Node2D
         _drawTime = _weapon.drawTime;
         _projectile = _weapon.projectile;
 
-        _isDrawing = false;
+        if (_ranged)
+        {
+            _hitbox.Monitoring = false;
+        }
+        else
+        {
+            _hitbox.Monitoring = true;
+        }
+
+        isDrawing = false;
 
         switch (_targetType)
         {
@@ -92,19 +98,25 @@ public partial class HandheldController : Node2D
         }
 
         if (_timer.TimeLeft <= 0)
-            _player.SetPhysicsProcess(true);
+            _player.stopMovement = false;
 
         if (_actionHeld)
         {
             Use();
         }
+
+        if (isDrawing && _staminaComponent.currentStamina <= 0)
+        {
+            ReleaseDraw();
+        }
     }
 
     public void Use()
     {
-        Init();
+        if (_weapon == null)
+            Init();
 
-        if (_timer.TimeLeft > 0 || _isDrawing || _weapon == null)
+        if (_timer.TimeLeft > 0 || isDrawing || _weapon == null)
             return;
 
         if (_weapon.holdAction)
@@ -132,6 +144,9 @@ public partial class HandheldController : Node2D
 
     private void UseMelee()
     {
+        if (_staminaComponent.currentStamina < 5)
+            return;
+
         Vector2 direction = GetCursorVector();
         float angle = direction.Angle() * 180 / Mathf.Pi;
         angle = Mathf.Round(angle / 45) * 45;
@@ -155,8 +170,14 @@ public partial class HandheldController : Node2D
             return;
         }
 
-        if (!_isDrawing)
-            _isDrawing = true;
+        if (!isDrawing)
+            isDrawing = true;
+
+        _player.speedPercent = 0.5f;
+        _player.canRun = false;
+
+        _staminaComponent.canDrain = true;
+        _staminaComponent.drainRate = 0.5f;
 
         _animationPlayer.SpeedScale = 1 / _drawTime;
         _animationPlayer.Play("draw");
@@ -166,7 +187,9 @@ public partial class HandheldController : Node2D
     public void Release()
     {
         _actionHeld = false;
-        _player.SetPhysicsProcess(true);
+
+        _player.stopMovement = false;
+        _staminaComponent.canDrain = false;
 
         if (_ranged)
         {
@@ -176,10 +199,13 @@ public partial class HandheldController : Node2D
 
     public void ReleaseDraw()
     {
-        if (!_isDrawing)
+        if (!isDrawing)
             return;
 
-        _isDrawing = false;
+        isDrawing = false;
+
+        _player.canRun = true;
+        _player.speedPercent = 1;
 
         float elapsed = (float)_timer.TimeLeft;
         _timer.Stop();
@@ -208,7 +234,6 @@ public partial class HandheldController : Node2D
 
         projectile.Init();
 
-        // TODO: change this to be based on weapon reach or something
         projectile.GlobalPosition = this.GlobalPosition;
         projectile.GlobalRotation = _attack.direction.Angle();
 
@@ -222,7 +247,12 @@ public partial class HandheldController : Node2D
             if (body.IsInGroup(_targetGroup))
             {
                 hitbox.ApplyAttack(_attack);
-                _player.SetPhysicsProcess(false);
+                _staminaComponent.UseStamina(5);
+
+                if (_targetGroup != "enemy")
+                {
+                    _player.stopMovement = true;
+                }
             }
         }
     }

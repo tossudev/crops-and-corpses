@@ -21,14 +21,18 @@ public partial class PlayerController : CharacterBody2D
 	[Export] private float _runMultiplier = 1.5f;
 
 	private bool _canMelee = true;
-	private bool _canRun;
 	private bool _isDead = false;
-	private float _speedMultiplier = 1;
 	private Vector2 _knockback = Vector2.Zero;
+	private float speedMultiplier = 1;
+
+	public bool canRun;
+	public bool stopMovement;
+	public float speedPercent = 1;
 
 	public override void _Ready()
 	{
-		_canRun = true;
+		canRun = true;
+		stopMovement = false;
 	}
 
 	// to disable the player input, use:
@@ -44,12 +48,12 @@ public partial class PlayerController : CharacterBody2D
 			_handheld.Release();
 		}
 
-		if (@event.IsActionPressed("wheel_down"))
+		if (@event.IsActionPressed("wheel_up"))
 		{
 			if (_camera.Zoom.X < maxZoom)
 				CameraZoom(0.1f);
 		}
-		else if (@event.IsActionPressed("wheel_up"))
+		else if (@event.IsActionPressed("wheel_down"))
 		{
 			if (_camera.Zoom.X > minZoom)
 				CameraZoom(-0.1f);
@@ -69,6 +73,14 @@ public partial class PlayerController : CharacterBody2D
 			if (PlayerInventoryController.isItemSelected)
 			{
 				PlayerInventoryController.DropSelectedItem(GetGlobalMousePosition(), FindParent("Objects"));
+			}
+		}
+
+		for (int hotbarKey = 1; hotbarKey < 9; hotbarKey++)
+		{
+			if (@event.IsActionPressed("hotbar_" + hotbarKey.ToString()))
+			{
+				_handheld.Init();
 			}
 		}
 	}
@@ -99,33 +111,35 @@ public partial class PlayerController : CharacterBody2D
 
 	private void Movement()
 	{
-		if (Input.IsActionPressed("run"))
+		if (Input.IsActionPressed("run") && !_handheld.isDrawing)
 		{
-			if (Velocity != Vector2.Zero && _staminaComponent.currentStamina > 0 && _canRun)
+			if (Velocity != Vector2.Zero && _staminaComponent.currentStamina > 0 && canRun)
 			{
-				_speedMultiplier = _runMultiplier;
+				speedMultiplier = _runMultiplier;
 				_staminaComponent.drainRate = 0.3f;
 				_staminaComponent.canDrain = true;
 			}
 			else
 			{
-				_speedMultiplier = 1;
+				speedMultiplier = 1;
 				_staminaComponent.canDrain = false;
-			}
-
-			if (_staminaComponent.currentStamina <= 0)
-			{
-				_canRun = false;
+				canRun = false;
 			}
 		}
-		else if (Input.IsActionJustReleased("run"))
+		else if (Input.IsActionJustReleased("run") && !_handheld.isDrawing)
 		{
-			_speedMultiplier = 1;
+			speedMultiplier = 1;
 			_staminaComponent.canDrain = false;
-			_canRun = true;
+			canRun = true;
 		}
 
-		var movement = GetMovementInputVector() * _speed * _speedMultiplier;
+		var movement = GetMovementInputVector() * _speed * speedMultiplier * speedPercent;
+
+		if (stopMovement)
+		{
+			movement = Vector2.Zero;
+		}
+
 		Velocity = movement + _knockback;
 
 		_rig.UpdateSprite(movement);
@@ -157,6 +171,8 @@ public partial class PlayerController : CharacterBody2D
 	private void Respawn()
 	{
 		_healthComponent.SetHealth(_healthComponent.GetMaxHealth());
+		_staminaComponent.SetStamina(_staminaComponent.GetMaxStamina());
+
 		_isDead = false;
 
 		if (_respawnPoint == null)

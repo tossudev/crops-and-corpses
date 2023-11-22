@@ -262,10 +262,12 @@ position = Vector2(2.08165e-12, -5)
 shape = SubResource("CircleShape2D_1sqjf")
 disabled = true
 
-[node name="Handheld" parent="." node_paths=PackedStringArray("_player") instance=ExtResource("2_00eh7")]
+[node name="Handheld" parent="." node_paths=PackedStringArray("_player", "_staminaComponent") instance=ExtResource("2_00eh7")]
 position = Vector2(2.08165e-12, -12)
+_weapon = null
 _hand = ExtResource("3_mnp0k")
 _player = NodePath("..")
+_staminaComponent = NodePath("../StaminaComponent")
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
 position = Vector2(0, -7.5)

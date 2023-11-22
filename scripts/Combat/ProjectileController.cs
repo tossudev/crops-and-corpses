@@ -52,10 +52,18 @@ public partial class ProjectileController : Node2D
             if (body.IsInGroup(targetGroup))
             {
                 hitbox.ApplyAttack(attack);
+                QueueFree();
             }
         }
+    }
 
-        QueueFree();
-        // _lifetimeTimer.Start(_despawnTime);  // for non moving objects
+    private void OnObjectEntered(Node2D body)
+    {
+        if (!body.IsInGroup("player"))
+        {
+            this.GetNode<Area2D>("Hitbox").SetDeferred("monitoring", false);
+            _lifetimeTimer.Stop();
+            _lifetimeTimer.Start(_despawnTime);
+        }
     }
 }

@@ -24,7 +24,6 @@ public partial class Villager : CharacterBody2D
 	//[Export] NavigationRegion2D navRegionArea;
 	Plant _currentPlant;
 	Node2D _streetSign;
-	Node2D _forestScene;
 	Sprite2D _villagerSprite;
 	int _plantIndex = 0;
 	float _speed = 0;
@@ -35,7 +34,6 @@ public partial class Villager : CharacterBody2D
 	const string PLAYER_NODENAME = "%Player";
 	const string STREETSIGN_NODENAME = "%StreetSign";
 	const string FOREST_SCENE_NODENAME = "%ForestScene";
-	string _currentScene;
 	CharacterBody2D _player;
 	public bool needResque = false;
 
@@ -45,8 +43,7 @@ public partial class Villager : CharacterBody2D
 	VillagerRawData _rawData;
 	public VillagerRawData rawData => _rawData;
 
-	string _villagerName;
-	string _villagerInfoText;
+	bool _inTownScene;
 
     VillagerOccupation _currentOccupation;
     public VillagerOccupation currentOccupation => _currentOccupation;
@@ -57,16 +54,12 @@ public partial class Villager : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_currentScene = GetTree().CurrentScene.Name;
 		_player = GetParent().GetNodeOrNull<CharacterBody2D>(PLAYER_NODENAME);
 		_streetSign = GetParent().GetNodeOrNull<Node2D>(STREETSIGN_NODENAME);
-		_forestScene = GetParent().GetNodeOrNull<Node2D>(FOREST_SCENE_NODENAME);
 
 		_villagerSprite = GetNode<Sprite2D>("Sprite2D");
 		_gatheringTimer = GetNode<Timer>("GatheringTimer");
-
-		VillagerManager.instance.AddNewVillager(this, false);
-		
+        
 		_timer = new Timer
 		{
 			WaitTime = GD.RandRange(0.8f, 1.25f),
@@ -75,7 +68,9 @@ public partial class Villager : CharacterBody2D
 		AddChild(_timer);
 		_timer.Start();
 
-		if(_currentScene == "Forest" || _currentScene == "Ruins" || _currentScene == "Riverside")
+		_inTownScene = SceneManager.IsCurrentScene(this, Scene.Town);
+		
+		if(!_inTownScene)
 		{
 			needResque = true;
 			_state = VillagerState.ResqueQuest;
@@ -93,12 +88,11 @@ public partial class Villager : CharacterBody2D
 		
 		ChangeOccupation(data.currentOccupation);
 		_state = VillagerState.RoamAround;
-
-		_villagerName = data.name;
-		_villagerInfoText = data.lore;
-		_villagerSprite.Texture = VillagerManager.instance.GetVillagerData().texture;
+        
+		// TODO: This needs to be changed once the rig sprites are in place and saved
+		_villagerSprite.Texture = VillagerManager.instance.GetNewVillagerData().texture;
 		
-		_info.InitializeVillagerInfo(_villagerSprite.Texture, _villagerName, _villagerInfoText, _state);
+		_info.InitializeVillagerInfo(_villagerSprite.Texture, data.name, data.lore, _state);
 	}
 	
 	
@@ -134,7 +128,7 @@ public partial class Villager : CharacterBody2D
 	
 	void State()
 	{
-        if (!TimeManager.dayTime && _forestScene == null)
+        if (!TimeManager.dayTime && !_inTownScene)
         {
 	        switch (_currentOccupation)
 	        {
@@ -217,7 +211,7 @@ public partial class Villager : CharacterBody2D
 
 	public void _on_button_button_up()
 	{
-		if(_currentScene != "Town" && needResque == true)
+		if(!_inTownScene && needResque)
 		{
 			OpenResqueDialogue();
 		}

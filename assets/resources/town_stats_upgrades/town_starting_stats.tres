@@ -6,7 +6,11 @@
 script = ExtResource("1_ehs86")
 _totalExperience = 0
 _townHallLevel = 0
-_populationCap = 1
+_populationCap = 2
+_providedHomes = 0
+_isRuinsUnlocked = false
+_isMineshaftUnlocked = false
+_isCaveStalagmiteMined = false
 _soldierAttackSpeed = 1
 _soldierAccuracy = 50
 _farmerWalkSpeed = 1

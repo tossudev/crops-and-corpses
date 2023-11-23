@@ -4,7 +4,7 @@ using System;
 public partial class RoamingZombie : CharacterBody2D
 {
 	[Export] private AudioStreamPlayer2D _audioStreamPlayer2D;
-	private Sprite2D _sprite;
+	private Skeleton2D _sprite;
 	private CharacterBody2D _player;
 	private HitboxComponent[] _hitboxes;
 	private Attack _attack;
@@ -22,14 +22,16 @@ public partial class RoamingZombie : CharacterBody2D
 	private bool _fenceInRange = false;
 	private ulong entered;
 	private ulong exited;
+	AnimationPlayer animationPlayer;
 
 	public override void _Ready()
 	{
+		animationPlayer = GetNode<AnimationPlayer>("Skeleton2D/AnimationPlayer");
 		_hitboxes = new HitboxComponent[2];
 		instantiatedNPC = (PackedScene)GD.Load("res://scenes/villager/villager.tscn");
 		_rootNodePath = GetParent<Node2D>().GetPath();
 		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);
-		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
+		_sprite = GetNodeOrNull<Skeleton2D>("Sprite2D");
 		_timer = GetNodeOrNull<Timer>("AttackTimer");
 		_updateStatsTimer = GetNodeOrNull<Timer>("UpdateStatsTimer");
 		_healthBar = GetNodeOrNull<ProgressBar>("HealthBar");
@@ -47,20 +49,23 @@ public partial class RoamingZombie : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		animationPlayer.Play("zombieWalk");
 		Velocity += _knockback;
 		MoveAndSlide();
 
-		if (_sprite != null)
+		/* if (_sprite != null)
 		{
 			if (Velocity.X > 0)
 			{
-				_sprite.FlipH = false;
+				// Flip the character to face right
+				_sprite.Scale = new Vector2(1, 1);
 			}
 			else
 			{
-				_sprite.FlipH = true;
+				// Flip the character to face left
+				_sprite.Scale = new Vector2(-1, 1);
 			}
-		}
+		} */
 	}
 
 	private void AttackReceived(Attack attack)
@@ -200,20 +205,20 @@ public partial class RoamingZombie : CharacterBody2D
 		{
 			if (ZombieManager.type == ZombieManager.ZombieType.Weak)
 			{
-				mediumZombieSprite = GD.Load<CompressedTexture2D>("res://LilianTests/Sprites/zombie_placeholder.png");
-				_sprite.Texture = mediumZombieSprite;
+				//mediumZombieSprite = GD.Load<CompressedTexture2D>("res://LilianTests/Sprites/zombie_placeholder.png");
+				//_sprite.Texture = mediumZombieSprite;
 			}
 			else if (ZombieManager.type == ZombieManager.ZombieType.Medium)
 			{
-				mediumZombieSprite = GD.Load<CompressedTexture2D>("res://LilianTests/Sprites/zombie_placeholder.png");
-				_sprite.Texture = mediumZombieSprite;
+				//mediumZombieSprite = GD.Load<CompressedTexture2D>("res://LilianTests/Sprites/zombie_placeholder.png");
+				//_sprite.Texture = mediumZombieSprite;
 
 			}
 			else if (ZombieManager.type == ZombieManager.ZombieType.Strong)
 			{
-				GD.Print("Strong");
-				strongZombieSprite = GD.Load<CompressedTexture2D>("res://DaniTests/Sprites/strongZombie.png");
-				_sprite.Texture = strongZombieSprite;
+			//	GD.Print("Strong");
+			//	strongZombieSprite = GD.Load<CompressedTexture2D>("res://DaniTests/Sprites/strongZombie.png");
+			//	_sprite.Texture = strongZombieSprite;
 			}
 			_attack.damage = ZombieManager.damage;
 			_timer.WaitTime = ZombieManager.attackTime;

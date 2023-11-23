@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://NikkeTests/scripts/ArcherTower.cs" id="1_ce0vn"]
 [ext_resource type="PackedScene" uid="uid://dqmfwe15dtgat" path="res://scenes/Combat/projectile.tscn" id="2_151wa"]
 [ext_resource type="Texture2D" uid="uid://bljqq2o52y2uy" path="res://NikkeTests/images/archer_tower_bot.png" id="2_lwh2a"]
-[ext_resource type="Resource" path="res://TinoTests/Resources/arrow.tres" id="3_6ttkk"]
+[ext_resource type="Resource" uid="uid://crwemoqf3d5lp" path="res://TinoTests/Resources/tower_arrow.tres" id="3_pa3cy"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="6_hcsx8"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="7_u83t5"]
 
@@ -18,7 +18,7 @@ size = Vector2(122, 253)
 script = ExtResource("1_ce0vn")
 _attackTimer = NodePath("Timer")
 _projectilePrefab = ExtResource("2_151wa")
-_projectile = ExtResource("3_6ttkk")
+_projectile = ExtResource("3_pa3cy")
 _projectileStartPosition = NodePath("Node2D/projectileStartPosition")
 
 [node name="Node2D" type="Node2D" parent="."]

@@ -13,7 +13,7 @@ public partial class Plant : Node2D
 	[Export] int _maxCycles;
 
 	[Export] int _maxHarvestableAmount;
-	[Export] Texture2D _seedTexture;
+	[Export] Texture2D _deadTexture;
 	[Export] Texture2D _sproutTexture;
 	[Export] Texture2D _plantTexture;
 
@@ -44,9 +44,9 @@ public partial class Plant : Node2D
 		set {_description = value;}	
 	}
 
-	public Texture2D seedTexture{
-		get {return _seedTexture;}
-		set {_seedTexture = value;}	
+	public Texture2D deadTexture{
+		get {return _deadTexture;}
+		set {_deadTexture = value;}	
 	}
 
 	public Texture2D sproutTexture{
@@ -315,6 +315,7 @@ public partial class Plant : Node2D
         if (_plantType == PlantType.Lupine)
         {
             GetNode<TextureRect>("%TextureRect").ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
+			Position = new Vector2(0, -25);
         }
 
         GD.Print(plantName+" is fully grown and ready for harvest!");
@@ -345,7 +346,7 @@ public partial class Plant : Node2D
 		_progress.Hide();
 		_state = GrowthState.IsDead;
 		_warningSign.Texture = null;
-		trect.Modulate = new Color(0,0,0);
+		trect.Texture = deadTexture;
 		_growthTimer.Stop();
 	}
 

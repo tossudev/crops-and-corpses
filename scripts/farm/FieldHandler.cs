@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public partial class FieldHandler : Node2D
 {
 	[Export] CollisionObject2D _col;
-	int _currentPlants=0;
+	[Export] int _currentPlants=0;
 	int _maxPlantSlots=1;
 	Plant _plant = null;
 	[Export] NodePath  _nodePath;
@@ -64,7 +64,6 @@ public partial class FieldHandler : Node2D
 
         plantTexture.Visible = true;
         _currentPlants++;
-
 		if (!isGrowing)
 			return;
 
@@ -86,7 +85,7 @@ public partial class FieldHandler : Node2D
     }
 	
 	public void RemovePlant(){
-		_currentPlants--;
+		_currentPlants=0;
 		FarmManager.instance.RemovePlantedPlant(_plant);
 	}
 

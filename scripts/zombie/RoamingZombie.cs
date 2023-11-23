@@ -31,7 +31,7 @@ public partial class RoamingZombie : CharacterBody2D
 		instantiatedNPC = (PackedScene)GD.Load("res://scenes/villager/villager.tscn");
 		_rootNodePath = GetParent<Node2D>().GetPath();
 		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);
-		_sprite = GetNodeOrNull<Skeleton2D>("Sprite2D");
+		_sprite = GetNodeOrNull<Skeleton2D>("Skeleton2D");
 		_timer = GetNodeOrNull<Timer>("AttackTimer");
 		_updateStatsTimer = GetNodeOrNull<Timer>("UpdateStatsTimer");
 		_healthBar = GetNodeOrNull<ProgressBar>("HealthBar");
@@ -53,19 +53,19 @@ public partial class RoamingZombie : CharacterBody2D
 		Velocity += _knockback;
 		MoveAndSlide();
 
-		/* if (_sprite != null)
+		if (_sprite != null)
 		{
 			if (Velocity.X > 0)
 			{
 				// Flip the character to face right
-				_sprite.Scale = new Vector2(1, 1);
+				_sprite.Scale = new Vector2(0.382f, 0.382f);
 			}
 			else
 			{
 				// Flip the character to face left
-				_sprite.Scale = new Vector2(-1, 1);
+				_sprite.Scale = new Vector2(-0.382f, 0.382f);
 			}
-		} */
+		}
 	}
 
 	private void AttackReceived(Attack attack)

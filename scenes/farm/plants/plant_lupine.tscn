@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bbia6yxwghu3o"]
 
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_wuxn7"]
-[ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://assets/placeholder/J_Sprites/dirttemp.jpg" id="2_u7sct"]
+[ext_resource type="Texture2D" uid="uid://cyfgc82fwo01k" path="res://assets/sprites/foliage/mini_tree_dead.png" id="2_er81q"]
 [ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://assets/placeholder/J_Sprites/sprouttemp.png" id="3_6jifj"]
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://scenes/farm/shapes/plant_shape.tres" id="4_ph7au"]
 [ext_resource type="Texture2D" uid="uid://brllcegw86j6w" path="res://assets/sprites/foliage/mini_tree.png" id="4_uj1fy"]
@@ -15,7 +15,7 @@ _seedName = "lupine seed"
 _description = "Pretty"
 _maxCycles = 3
 _maxHarvestableAmount = 1
-_seedTexture = ExtResource("2_u7sct")
+_deadTexture = ExtResource("2_er81q")
 _sproutTexture = ExtResource("3_6jifj")
 _plantTexture = ExtResource("4_uj1fy")
 _col = NodePath("Area2D")

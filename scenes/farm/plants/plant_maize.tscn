@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://4awyyd7jsaqq"]
+[gd_scene load_steps=7 format=3 uid="uid://4awyyd7jsaqq"]
 
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_t4nyu"]
-[ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://assets/placeholder/J_Sprites/dirttemp.jpg" id="2_m0mit"]
 [ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://assets/placeholder/J_Sprites/sprouttemp.png" id="3_pxkxj"]
 [ext_resource type="Texture2D" uid="uid://dvhrkxcw50l7s" path="res://assets/placeholder/J_Sprites/wheattemp.png" id="4_w6k8m"]
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://scenes/farm/shapes/plant_shape.tres" id="5_2sl8h"]
@@ -15,7 +14,6 @@ _seedName = "maize seed"
 _description = "Popcorn?"
 _maxCycles = 3
 _maxHarvestableAmount = 4
-_seedTexture = ExtResource("2_m0mit")
 _sproutTexture = ExtResource("3_pxkxj")
 _plantTexture = ExtResource("4_w6k8m")
 _col = NodePath("Area2D")

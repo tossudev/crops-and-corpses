@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cb3o7u5viapx8"]
+[gd_scene load_steps=7 format=3 uid="uid://cb3o7u5viapx8"]
 
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_6sli3"]
-[ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://assets/placeholder/J_Sprites/dirttemp.jpg" id="2_p70tt"]
 [ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://assets/placeholder/J_Sprites/sprouttemp.png" id="3_wkide"]
 [ext_resource type="Texture2D" uid="uid://dvhrkxcw50l7s" path="res://assets/placeholder/J_Sprites/wheattemp.png" id="4_ylc87"]
 [ext_resource type="Resource" uid="uid://dt5r6o5ibel3e" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/107_wheat.tres" id="5_2mson"]
@@ -15,7 +14,6 @@ _seedName = "wheat seed"
 _description = "Basic ingredient for bread"
 _maxCycles = 3
 _maxHarvestableAmount = 8
-_seedTexture = ExtResource("2_p70tt")
 _sproutTexture = ExtResource("3_wkide")
 _plantTexture = ExtResource("4_ylc87")
 _col = NodePath("Area2D")

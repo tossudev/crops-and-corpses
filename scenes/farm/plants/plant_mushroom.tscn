@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bljea7oopk7tf"]
+[gd_scene load_steps=7 format=3 uid="uid://bljea7oopk7tf"]
 
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_8b2ii"]
-[ext_resource type="Texture2D" uid="uid://ivpbqnj87cwl" path="res://assets/placeholder/J_Sprites/dirttemp.jpg" id="2_u2f41"]
 [ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://assets/placeholder/J_Sprites/sprouttemp.png" id="3_ku8ep"]
 [ext_resource type="Texture2D" uid="uid://dvhrkxcw50l7s" path="res://assets/placeholder/J_Sprites/wheattemp.png" id="4_j8elg"]
 [ext_resource type="Resource" uid="uid://466kaxdtvhse" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/105_mushroom.tres" id="5_t30ux"]
@@ -15,7 +14,6 @@ _seedName = "mushroom seed"
 _description = "ShroOooms"
 _maxCycles = 3
 _maxHarvestableAmount = 3
-_seedTexture = ExtResource("2_u2f41")
 _sproutTexture = ExtResource("3_ku8ep")
 _plantTexture = ExtResource("4_j8elg")
 _col = NodePath("Area2D")

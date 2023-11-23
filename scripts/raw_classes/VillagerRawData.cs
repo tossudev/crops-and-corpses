@@ -22,13 +22,12 @@ public partial class VillagerRawData : GodotObject
     public VillagerState currentState;
     public int xCoord;
     public int yCoord;
-    //TODO
 
     public VillagerRawData() {}
 
     public VillagerRawData(string name, string lore, bool isTownPopulation)
     {
-        id = SaveData.allVillagers.Count;
+        id = SaveData.allVillagerData.Count;
         this.name = name;
         this.lore = lore;
         this.isTownPopulation = isTownPopulation;
@@ -57,9 +56,9 @@ public partial class VillagerRawData : GodotObject
     /// Reads all villager data from save data
     /// </summary>
     /// <param name="saveData"></param>
-    public static async Task ReadVillagerDataFromFile(Dictionary saveData, bool spawnAll = true)
+    public static async Task ReadVillagerDataFromFile(Dictionary saveData)
     {
-        SaveData.allVillagers.Clear();
+        SaveData.allVillagerData.Clear();
 
         if (saveData != null)
         {
@@ -78,12 +77,10 @@ public partial class VillagerRawData : GodotObject
                         (VillagerOccupation) (int) villagerDataDict[VILLAGER_CURRENT_OCCUPATION_KEY],
                         (VillagerState) (int) villagerDataDict[VILLAGER_CURRENT_STATE_KEY]);
                 
-                    SaveData.allVillagers.Add(convertedRawVillager);
+                    SaveData.allVillagerData.Add(convertedRawVillager);
                 }
             });
         }
-        
-        // TODO: spawn all town villagers
     }
 
 

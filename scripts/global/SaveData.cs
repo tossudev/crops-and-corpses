@@ -27,7 +27,7 @@ public partial class SaveData : Node
     public static RawTownStats townHallStats = new ();
     public static List<TownUpgrade> appliedUpgrades = new ();
     public static List<TownUnlock> appliedUnlocks = new ();
-    public static List<VillagerRawData> allVillagers = new ();
+    public static List<VillagerRawData> allVillagerData = new ();
     public static Array<RawInventoryItem> organizedPlayerInventory = new ();
     public static List<RawInventoryItem> totalInventoryItems = new ();
 
@@ -69,7 +69,7 @@ public partial class SaveData : Node
         {
             townStats = townHallStats,
             appliedUpgrades = appliedUpgrades,
-            allVillagers = allVillagers,
+            allVillagers = allVillagerData,
             inventoryItems = totalInventoryItems,
             organizedInventoryItems = organizedPlayerInventory
         };
@@ -127,22 +127,34 @@ public partial class SaveData : Node
         
         // Inventory Data
         await RawInventoryItem.ReadInventoryDataFromFile(saveData);
+        
+        // Villager Data
+        await VillagerRawData.ReadVillagerDataFromFile(saveData);
 
         firstLoadComplete = true;
     }
+
+    public static async void SyncAll()
+    {
+        await SyncInventory();
+    }
     
-    
-    public static async Task SyncInventory(bool doSync = true)
+    public static async Task SyncInventory(bool doSave = true)
     {
         await TaskExtensions.SuspendWhile(() => inventorySyncInProgress);
         inventorySyncInProgress = true;
         
         
-        await UpdateTotalItems(doSync);
+        await UpdateTotalItems(doSave);
         inventorySyncInProgress = false;
     }
 
     public static async Task SyncTownStats()
+    {
+        await Save();
+    }
+    
+    public static async Task SyncVillagers()
     {
         await Save();
     }

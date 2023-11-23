@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/ui/inventory/PlayerInventoryController.cs" id="1_kcr62"]
 [ext_resource type="StyleBox" uid="uid://bfq7mg2htfllb" path="res://assets/resources/styles/inventory_style_box_texture.tres" id="2_6dwwa"]
 [ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory/inventory_slot.tscn" id="2_52evd"]
-[ext_resource type="Texture2D" uid="uid://csrosqqqhkmxq" path="res://icon.svg" id="2_pvric"]
+[ext_resource type="Texture2D" uid="uid://dlrp82rd7h6bu" path="res://icon.svg" id="2_pvric"]
 
 [sub_resource type="Gradient" id="Gradient_1ijah"]
 interpolation_mode = 2

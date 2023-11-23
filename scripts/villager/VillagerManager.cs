@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class VillagerManager : Node
 {
@@ -24,42 +25,80 @@ public partial class VillagerManager : Node
 	List<Villager> _miners = new ();
 	public List<Villager> minerVillagers => _miners;
     
-	// Called when the node enters the scene tree for the first time.
 
 	[Export] AllVillagerData _allData;
+
+	const string VILLAGER_SCENE_PATH = "res://scenes/villager/villager.tscn";
+
+	Node2D _villagerParentNode;
+	const string VILLAGER_PARENT_NODEPATH = "%Villagers";
+	
 	public override void _Ready()
 	{
 		if(instance==null)instance=this;else QueueFree();
+
+		_villagerParentNode = GetNode<Node2D>(VILLAGER_PARENT_NODEPATH);
+		
+		if (SceneManager.IsCurrentScene(this, Scene.Town))
+		{
+			SpawnSavedVillagers();
+		}
 	}
 
-	public VillagerData GetVillagerData(){
-		VillagerData data = new VillagerData();
-		data.name = _allData.GetName();
-		data.info = _allData.GetInfo();
-		data.texture = _allData.GetTexture();
+	async void SpawnSavedVillagers()
+	{
+		await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete);
 
-		return data;
-
+		foreach (var villagerRawData in SaveData.allVillagerData)
+		{
+			AddExistingVillager(villagerRawData);
+		}
+		
+		bool test;
+		test = AddNewVillager();
+		test = AddNewVillager();
+	}
+	
+	public VillagerData GetNewVillagerData(){
+		
+		return new VillagerData
+		{
+			name = _allData.GetName(),
+			info = _allData.GetInfo(),
+			texture = _allData.GetTexture()
+		};
 	}
 
-	public bool AddNewVillager(Villager newVillager, bool intoTown = true)
+	public bool AddNewVillager(bool intoTown = true)
 	{
 		if (intoTown && _allVillagers.Count >= TownManager.currentTownStats.populationCap) return false;
 		
-		_allVillagers.Add(newVillager);
-
-		VillagerData newData = GetVillagerData();
+		Villager newVillager = GD.Load<PackedScene>(VILLAGER_SCENE_PATH).Instantiate<Villager>();
+        
+		VillagerData newData = GetNewVillagerData();
 		VillagerRawData newRawData = new VillagerRawData(newData.name, newData.info, intoTown);
 		
-		SaveData.allVillagers.Add(newRawData);
-		newVillager.InitializeVillager(newRawData);
+		SaveData.allVillagerData.Add(newRawData);
+		
+		RegisterAndInitVillager(newVillager, newRawData);
 		return true;
 	}
 
-	public void AddExistingVillager(Villager existingVillager, VillagerRawData data)
+	public void AddExistingVillager(VillagerRawData existingVillagerRawData)
 	{
-		_allVillagers.Add(existingVillager);
-		existingVillager.InitializeVillager(data);
+		RegisterAndInitVillager(
+			GD.Load<PackedScene>(VILLAGER_SCENE_PATH).Instantiate<Villager>(), existingVillagerRawData);
+	}
+
+	void RegisterAndInitVillager(Villager villagerToRegister, VillagerRawData data)
+	{
+		if (_allVillagers.All(villager => villager.rawData.id != data.id))
+		{
+			_allVillagers.Add(villagerToRegister);
+		}
+		
+		_villagerParentNode.AddChild(villagerToRegister);
+		villagerToRegister.InitializeVillager(data);
 	}
 
 	public void SetVillagerOccupation(Villager villager, VillagerOccupation newOccupation)
@@ -83,12 +122,12 @@ public partial class VillagerManager : Node
 		
 		villager.currentOccupationList.Add(villager);
 	}
+}
 
-	public struct VillagerData{
-		public string name;
-		public string info;
-		public Texture2D texture;
-	}
+public struct VillagerData{
+	public string name;
+	public string info;
+	public Texture2D texture;
 }
 
 public enum VillagerState

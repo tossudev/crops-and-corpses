@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://chw8bc0kxym0e"]
+
+[ext_resource type="Script" path="res://scripts/villager/VillagerManager.cs" id="1_lo0a5"]
+[ext_resource type="Script" path="res://scripts/global/AllVillagerData.cs" id="2_q4f2s"]
+[ext_resource type="Texture2D" uid="uid://c0iyfaellpf6m" path="res://assets/placeholder/test_character/character1.png" id="3_jsbg4"]
+[ext_resource type="Texture2D" uid="uid://cxqn4mwpjria2" path="res://assets/placeholder/test_character/character2.png" id="4_5c8m0"]
+[ext_resource type="Texture2D" uid="uid://bbei648d3eovx" path="res://assets/placeholder/test_character/character.png" id="5_ln85u"]
+
+[node name="VillagerManager" type="Node" node_paths=PackedStringArray("_allData")]
+script = ExtResource("1_lo0a5")
+_allData = NodePath("AllVillagerData")
+
+[node name="AllVillagerData" type="Node" parent="."]
+script = ExtResource("2_q4f2s")
+_villagerTextures = Array[Texture2D]([ExtResource("3_jsbg4"), ExtResource("4_5c8m0"), ExtResource("5_ln85u")])
+_villagerNames = PackedStringArray("Mikko", "Pekka", "Pirjo", "Martta", "Toope", "Nasse", "Kikke", "Tupu")
+_villagerInfos = PackedStringArray("Ei helvetti mitä tähänki kirjottais.", "Super positiviinen tyyppi ja hyvä farmaa.", "Kaikkien kaveri.", "Mersumies.", "Teletapeista tuttu.", "Entinen merimies. Yarr!", "Nyt kyl saa riittää nää. Hihhei!", "Kerta vielä kiellon päälle.", "Karpalon makuinen.")
+
+[node name="Villagers" type="Node2D" parent="."]
+unique_name_in_owner = true
+y_sort_enabled = true

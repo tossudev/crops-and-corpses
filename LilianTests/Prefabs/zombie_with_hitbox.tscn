@@ -27,70 +27,6 @@ height = 90.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_mytwi"]
 radius = 70.0
 
-[sub_resource type="Animation" id="Animation_djtgm"]
-resource_name = "zombieWalk"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TorsoBone/HeadBone:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.5, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-0.211938, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TorsoBone/RightArmBone:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [-2.70337, -3.25083, -2.70337]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("TorsoBone/LeftArmBone:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [2.5142, 3.11817]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("TorsoBone/LeftLegBone:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.5, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [2.30885, 3.63959]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("TorsoBone/RightLegBone:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-3.45959, -2.40878]
-}
-
 [sub_resource type="Animation" id="Animation_0yj4f"]
 length = 0.001
 tracks/0/type = "value"
@@ -218,6 +154,70 @@ tracks/4/keys = {
 "values": [-2.86417]
 }
 
+[sub_resource type="Animation" id="Animation_djtgm"]
+resource_name = "zombieWalk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TorsoBone/HeadBone:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.211938, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TorsoBone/RightArmBone:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-2.70337, -3.25083, -2.70337]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TorsoBone/LeftArmBone:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.5142, 3.11817]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TorsoBone/LeftLegBone:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.30885, 3.63959]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("TorsoBone/RightLegBone:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-3.45959, -2.40878]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ixc2g"]
 _data = {
 "RESET": SubResource("Animation_0yj4f"),
@@ -232,7 +232,6 @@ script = ExtResource("1_p77g8")
 _audioStreamPlayer2D = NodePath("ZombieNoise")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape2D_5h8wa")
 debug_color = Color(0, 0.6, 0.701961, 0.12549)
 
@@ -242,10 +241,10 @@ _parentScript = NodePath("..")
 [node name="HealthBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
 modulate = Color(0.2, 0.356863, 1, 1)
-offset_left = -26.0
-offset_top = -60.0
-offset_right = 104.0
-offset_bottom = -33.0
+offset_left = -24.0
+offset_top = -80.0
+offset_right = 106.0
+offset_bottom = -53.0
 scale = Vector2(0.4, 0.4)
 show_percentage = false
 
@@ -288,6 +287,7 @@ debug_color = Color(0.890196, 0.278431, 0.439216, 0.419608)
 process_callback = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1.90735e-06, -1.90735e-06)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_c41wj")
@@ -303,25 +303,24 @@ debug_enabled = true
 stream = ExtResource("9_t8tic")
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
-visible = false
 position = Vector2(0, 24)
-scale = Vector2(0.400661, 0.400661)
+scale = Vector2(0.382, 0.382)
 
 [node name="RightLegSprite" type="Sprite2D" parent="Skeleton2D"]
-position = Vector2(-35.7238, 79.8466)
-rotation = 0.197235
+position = Vector2(-23.5633, 77.7867)
+rotation = -0.398185
 scale = Vector2(1, 1)
 texture = ExtResource("10_g63w7")
 
 [node name="LeftLegSprite" type="Sprite2D" parent="Skeleton2D"]
-position = Vector2(31.6093, 75.1894)
-rotation = -0.133993
+position = Vector2(18.3764, 75.9817)
+rotation = 0.62517
 scale = Vector2(0.999999, 0.999999)
 texture = ExtResource("11_dg7uf")
 
 [node name="LeftArm" type="Sprite2D" parent="Skeleton2D"]
-position = Vector2(46.2442, -13.8348)
-rotation = -0.681758
+position = Vector2(46.2443, -13.8347)
+rotation = -0.681756
 scale = Vector2(1, 1)
 texture = ExtResource("12_hcjqn")
 
@@ -346,7 +345,6 @@ texture = ExtResource("14_brqfb")
 [node name="LeftArmBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
 position = Vector2(49.006, 32.991)
 rotation = 2.5142
-scale = Vector2(1, 1)
 rest = Transform2D(-0.809562, 0.587035, -0.587035, -0.809562, 49.006, 32.991)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Skeleton2D/TorsoBone/LeftArmBone"]
@@ -387,6 +385,7 @@ rotation = -1.65117
 remote_path = NodePath("../../../RightLegSprite")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Skeleton2D"]
+autoplay = "zombieWalk"
 libraries = {
 "": SubResource("AnimationLibrary_ixc2g")
 }

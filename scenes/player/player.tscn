@@ -1,8 +1,7 @@
-[gd_scene load_steps=32 format=3 uid="uid://c8bx46w1qix2q"]
+[gd_scene load_steps=31 format=3 uid="uid://c8bx46w1qix2q"]
 
 [ext_resource type="Script" path="res://scripts/player/PlayerController.cs" id="1_1gq73"]
 [ext_resource type="PackedScene" uid="uid://3hlx66fdaruu" path="res://scenes/player/Components/handheld.tscn" id="2_00eh7"]
-[ext_resource type="Resource" uid="uid://be8oyimariure" path="res://TinoTests/Resources/Hand.tres" id="3_mnp0k"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_wuvdk"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_sa7m5"]
 [ext_resource type="Script" path="res://scripts/player/PlayerSpriteController.cs" id="5_xyhkk"]
@@ -14,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cfnyvrnyg6pk1" path="res://assets/placeholder/test_character/HandR.png" id="13_644b2"]
 [ext_resource type="Texture2D" uid="uid://bgp4wcx2fpky1" path="res://assets/placeholder/test_character/LegL.png" id="14_pxa3s"]
 [ext_resource type="Texture2D" uid="uid://dm80cnvcf6m5q" path="res://assets/placeholder/test_character/FootL.png" id="15_m13sc"]
-[ext_resource type="PackedScene" uid="uid://bu54axeet2w5" path="res://scenes/player/Components/stamina_component.tscn" id="15_owabl"]
+[ext_resource type="PackedScene" path="res://scenes/player/Components/stamina_component.tscn" id="15_owabl"]
 [ext_resource type="Texture2D" uid="uid://dtxvt7hf4w3m1" path="res://assets/placeholder/test_character/LegR.png" id="16_3ecwo"]
 [ext_resource type="PackedScene" uid="uid://csdmv5fy2tvqa" path="res://scenes/consumables/food/bread.tscn" id="16_patuu"]
 [ext_resource type="PackedScene" uid="uid://bcmw0lume6obc" path="res://scenes/consumables/food/potato.tscn" id="17_nh2gr"]
@@ -265,7 +264,6 @@ disabled = true
 [node name="Handheld" parent="." node_paths=PackedStringArray("_player", "_staminaComponent") instance=ExtResource("2_00eh7")]
 position = Vector2(2.08165e-12, -12)
 _weapon = null
-_hand = ExtResource("3_mnp0k")
 _player = NodePath("..")
 _staminaComponent = NodePath("../StaminaComponent")
 
@@ -302,6 +300,7 @@ texture = ExtResource("15_m13sc")
 [node name="LegRBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
 position = Vector2(-19, -0.35)
 rotation = -0.462435
+scale = Vector2(1, 1)
 rest = Transform2D(0.999877, 0.0156808, -0.0156808, 0.999877, -19, -0.35)
 
 [node name="LegR" type="Sprite2D" parent="Skeleton2D/TorsoBone/LegRBone"]
@@ -328,6 +327,7 @@ rest = Transform2D(0.985399, -0.170258, 0.170258, 0.985399, 26.32, -45.85)
 [node name="ArmL" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
 position = Vector2(4.06, 13.3)
 rotation = -0.0131563
+scale = Vector2(1, 1)
 texture = ExtResource("10_6b7e2")
 
 [node name="HandLBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmLBone"]

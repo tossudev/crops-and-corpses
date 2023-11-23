@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="2_atu7v"]
 [ext_resource type="PackedScene" uid="uid://di5l0mrx44owj" path="res://scenes/buildings/town/town_hall/town_hall_menu.tscn" id="2_d0ykg"]
 [ext_resource type="PackedScene" uid="uid://c1r6la2nplhqp" path="res://scenes/ui/DayCounterLabel.tscn" id="3_bmooi"]
-[ext_resource type="Script" path="res://DaniTests/Scripts/HourCounter.cs" id="4_sv1al"]
-[ext_resource type="PackedScene" uid="uid://f5m7wypxd5t7" path="res://scenes/ui/building_menu.tscn" id="5_om3g0"]
-[ext_resource type="PackedScene" path="res://scenes/ui/minimap.tscn" id="6_khm13"]
+[ext_resource type="PackedScene" uid="uid://bsoen384q11gf" path="res://scenes/ui/building_menu.tscn" id="5_om3g0"]
+[ext_resource type="PackedScene" uid="uid://5agkiate7gox" path="res://scenes/ui/minimap.tscn" id="6_khm13"]
 [ext_resource type="PackedScene" uid="uid://b50blftb1dypc" path="res://scenes/ui/player/player_hud.tscn" id="7_hs5fm"]
+[ext_resource type="Script" path="res://scripts/ui/overlay/HourCounter.cs" id="8_6k6a4"]
 [ext_resource type="PackedScene" uid="uid://bp0j6co1k7bim" path="res://scenes/ui/villager_control_panel.tscn" id="10_d7eqe"]
 
 [node name="Overlay" type="CanvasLayer"]
@@ -84,7 +84,7 @@ grow_vertical = 2
 offset_left = 488.0
 offset_right = 1440.0
 text = "Hour: "
-script = ExtResource("4_sv1al")
+script = ExtResource("8_6k6a4")
 
 [node name="DayCounterLabel" parent="." instance=ExtResource("3_bmooi")]
 

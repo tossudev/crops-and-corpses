@@ -126,7 +126,7 @@ public partial class SaveData : Node
         TownManager.ReadTownDataFromFile(saveData, false);
         
         // Inventory Data
-        await RawInventoryItem.ReadInventoryDataFromFile(saveData);
+        await RawInventoryItem.ReadInventoryDataFromFile(saveData, false);
         
         // Villager Data
         await VillagerRawData.ReadVillagerDataFromFile(saveData);

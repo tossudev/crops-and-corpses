@@ -1,6 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b50blftb1dypc"]
 
-[ext_resource type="Script" path="res://scripts/ui/PlayerHud.cs" id="1_m40pp"]
+[ext_resource type="Script" path="res://scripts/ui/overlay/PlayerHud.cs" id="1_m40pp"]
+
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tqqpk"]
 bg_color = Color(0, 0, 0, 0.368627)

@@ -62,12 +62,12 @@ public partial class VillagerRawData : GodotObject
 
         if (saveData != null)
         {
-            Array rawVillagerVariants = (Array) saveData[SaveData.VILLAGER_DATA_KEY];
+            Dictionary rawVillagerVariants = (Dictionary) saveData[SaveData.VILLAGER_DATA_KEY];
             await Task.Run(() =>
             {
                 foreach (var rawVillagerVariant in rawVillagerVariants)
                 {
-                    Dictionary villagerDataDict = (Dictionary) rawVillagerVariant; 
+                    Dictionary villagerDataDict = (Dictionary) rawVillagerVariant.Value; 
                 
                     VillagerRawData convertedRawVillager = new VillagerRawData(
                         (int) villagerDataDict[VILLAGER_ID_KEY],

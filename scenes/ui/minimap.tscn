@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://5agkiate7gox"]
 
-[ext_resource type="Script" path="res://scripts/ui/Minimap.cs" id="1_5jotx"]
+[ext_resource type="Script" path="res://scripts/ui/overlay/Minimap.cs" id="1_5jotx"]
 [ext_resource type="Texture2D" uid="uid://bbei648d3eovx" path="res://assets/placeholder/test_character/character.png" id="2_sckxe"]
 
 [node name="Minimap" type="SubViewportContainer"]

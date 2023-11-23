@@ -3,15 +3,6 @@ using Godot;
 [GlobalClass, Icon("res://icon.svg")]
 public partial class TownStats : Resource
 {
-    public enum ExpGain {
-        
-        VerySmall = 10,
-        Small = 25,
-        Medium = 50,
-        Big = 75,
-        Large = 125,
-        Huge = 200
-    }
     
     // Town stats
     [Export] int _totalExperience;
@@ -75,4 +66,19 @@ public partial class TownStats : Resource
             
             houseHP: _houseHP);
     }
+}
+
+public enum ExpGain {
+        
+    HarvestCommon = 5,
+    HarvestRare = 10,
+    HarvestLegendary = 50,
+        
+        
+    VerySmall = 10,
+    Small = 25,
+    Medium = 50,
+    Big = 75,
+    Large = 125,
+    Huge = 200
 }

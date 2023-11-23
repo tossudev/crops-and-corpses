@@ -16,6 +16,8 @@ public partial class LootController : StaticBody2D
 	//should be between 0 and 1
 	[Export] private float _scaleVariation = 0f;
 
+	[Export] ExpGain _harvestExp;
+
 	private List<Item> _items = new List<Item>();
 	RandomNumberGenerator rng;
 

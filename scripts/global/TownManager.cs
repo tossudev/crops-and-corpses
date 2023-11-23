@@ -37,7 +37,7 @@ public partial class TownManager : Node2D
 		if (sync) await SaveData.SyncTownStats();
 	}
 
-	public static void GainExp(TownStats.ExpGain amount)
+	public static void GainExp(ExpGain amount)
 	{
 		SaveData.townHallStats.totalExperience += (int) amount;
 

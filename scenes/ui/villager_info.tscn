@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bmh424wu5k4gb"]
 
-[ext_resource type="Script" path="res://scripts/ui/VillagerInfo.cs" id="1_t72qs"]
+[ext_resource type="Script" path="res://scripts/ui/overlay/VillagerInfo.cs" id="1_t72qs"]
 [ext_resource type="Texture2D" uid="uid://c1sm88vok0oma" path="res://LilianTests/Sprites/zombie_placeholder.png" id="2_ediht"]
 
 [node name="VillagerInfo" type="Control"]

@@ -51,12 +51,12 @@ public partial class VillagerManager : Node
 
 		foreach (var villagerRawData in SaveData.allVillagerData)
 		{
-			AddExistingVillager(villagerRawData);
+			SpawnExistingVillager(villagerRawData);
 		}
 		
 		bool test;
-		test = AddNewVillager();
-		test = AddNewVillager();
+		test = SpawnNewVillager();
+		test = SpawnNewVillager();
 	}
 	
 	public VillagerData GetNewVillagerData(){
@@ -69,22 +69,27 @@ public partial class VillagerManager : Node
 		};
 	}
 
-	public bool AddNewVillager(bool intoTown = true)
+	public VillagerRawData AddNewVillagerRawData(bool intoTown = false)
 	{
-		if (intoTown && _allVillagers.Count >= TownManager.currentTownStats.populationCap) return false;
-		
-		Villager newVillager = GD.Load<PackedScene>(VILLAGER_SCENE_PATH).Instantiate<Villager>();
-        
 		VillagerData newData = GetNewVillagerData();
 		VillagerRawData newRawData = new VillagerRawData(newData.name, newData.info, intoTown);
-		
 		SaveData.allVillagerData.Add(newRawData);
+
+		return newRawData;
+	}
+	
+	public bool SpawnNewVillager(bool intoTown = true)
+	{
+		if (intoTown && _allVillagers.Count >= TownManager.currentTownStats.populationCap) return false;
+        
+		RegisterAndInitVillager(
+			GD.Load<PackedScene>(VILLAGER_SCENE_PATH).Instantiate<Villager>(),
+			AddNewVillagerRawData(intoTown));
 		
-		RegisterAndInitVillager(newVillager, newRawData);
 		return true;
 	}
 
-	public void AddExistingVillager(VillagerRawData existingVillagerRawData)
+	public void SpawnExistingVillager(VillagerRawData existingVillagerRawData)
 	{
 		RegisterAndInitVillager(
 			GD.Load<PackedScene>(VILLAGER_SCENE_PATH).Instantiate<Villager>(), existingVillagerRawData);

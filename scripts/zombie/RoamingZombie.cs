@@ -94,7 +94,17 @@ public partial class RoamingZombie : CharacterBody2D
 		if (_health <= 0)
 		{
 			SpawnScript.RemoveZombieFromList(this);
-			GD.Print("Check");
+
+			ExpGain expGained = ZombieManager.type switch
+			{
+				ZombieManager.ZombieType.Weak => ExpGain.Small,
+				ZombieManager.ZombieType.Medium => ExpGain.Small,
+				ZombieManager.ZombieType.Strong => ExpGain.Medium,
+				_ => throw new ArgumentOutOfRangeException()
+			};
+			
+			TownManager.GainExp(expGained);
+			
 			QueueFree();
 		}
 	}

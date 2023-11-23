@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsb8od2mcpg2x"]
+[gd_scene load_steps=9 format=3 uid="uid://bsb8od2mcpg2x"]
 
 [ext_resource type="Script" path="res://scripts/ui/inventory/PlayerInventoryController.cs" id="1_kcr62"]
 [ext_resource type="StyleBox" uid="uid://bfq7mg2htfllb" path="res://assets/resources/styles/inventory_style_box_texture.tres" id="2_6dwwa"]
 [ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory/inventory_slot.tscn" id="2_52evd"]
 [ext_resource type="Texture2D" uid="uid://dlrp82rd7h6bu" path="res://icon.svg" id="2_pvric"]
+[ext_resource type="Texture2D" uid="uid://da5cc5byv4p8n" path="res://assets/sprites/tiles/Cave_tile.png" id="5_q5ndh"]
 
 [sub_resource type="Gradient" id="Gradient_1ijah"]
 interpolation_mode = 2
@@ -231,5 +232,5 @@ self_modulate = Color(10, 10, 10, 1)
 z_index = -1
 position = Vector2(688, 1008)
 scale = Vector2(0.65, 0.65)
-texture = ExtResource("2_pvric")
-offset = Vector2(4, 4)
+texture = ExtResource("5_q5ndh")
+offset = Vector2(6, 6)

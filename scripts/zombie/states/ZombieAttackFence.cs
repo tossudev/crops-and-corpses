@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public partial class ZombieAttackFence : ZombieStates
 {
-	// todo: add health and hitbox components to fences
 	public bool inTown;
 	[Export] private CharacterBody2D _zombie;
 	[Export] private float _moveSpeed = 100.0f;

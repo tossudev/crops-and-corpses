@@ -228,6 +228,8 @@ _data = {
 [node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("_audioStreamPlayer2D")]
 collision_layer = 4
 collision_mask = 4
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_p77g8")
 _audioStreamPlayer2D = NodePath("ZombieNoise")
 
@@ -267,10 +269,14 @@ script = ExtResource("5_m256t")
 _zombie = NodePath("../..")
 animPlayer = NodePath("../../Skeleton2D/AnimationPlayer")
 
-[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie", "animPlayer")]
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie", "_navAgent", "animPlayer")]
 script = ExtResource("6_ch1pp")
 _zombie = NodePath("../..")
+_navAgent = NodePath("../../NavigationAgent2D")
 animPlayer = NodePath("../../Skeleton2D/AnimationPlayer")
+
+[node name="Timer" type="Timer" parent="StateMachine/Chase"]
+wait_time = 0.5
 
 [node name="AttackFence" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie", "_navAgent", "animPlayer")]
 script = ExtResource("7_m3vts")
@@ -311,14 +317,14 @@ position = Vector2(0, 24)
 scale = Vector2(0.382, 0.382)
 
 [node name="RightLegSprite" type="Sprite2D" parent="Skeleton2D"]
-position = Vector2(-23.5633, 77.7867)
-rotation = -0.398185
+position = Vector2(-35.724, 79.8464)
+rotation = 0.197235
 scale = Vector2(1, 1)
 texture = ExtResource("10_g63w7")
 
 [node name="LeftLegSprite" type="Sprite2D" parent="Skeleton2D"]
-position = Vector2(18.3764, 75.9817)
-rotation = 0.62517
+position = Vector2(31.6091, 75.1895)
+rotation = -0.13399
 scale = Vector2(0.999999, 0.999999)
 texture = ExtResource("11_dg7uf")
 
@@ -394,6 +400,7 @@ libraries = {
 "": SubResource("AnimationLibrary_ixc2g")
 }
 
+[connection signal="timeout" from="StateMachine/Chase/Timer" to="StateMachine/Chase" method="OnTimerTimeout"]
 [connection signal="body_entered" from="AttackBox" to="." method="OnAttackBoxEntered"]
 [connection signal="body_exited" from="AttackBox" to="." method="OnAttackBoxExited"]
 [connection signal="timeout" from="AttackTimer" to="." method="OnTimerTimeout"]

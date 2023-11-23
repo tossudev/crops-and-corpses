@@ -7,6 +7,7 @@ public partial class ZombieChase : ZombieStates
 	[Export] private float _moveSpeed = 150.0f;
 	private CharacterBody2D _player;
 	private Node2D _fences;
+	[Export]AnimationPlayer animPlayer;
 
     public override void Enter()
     {
@@ -32,6 +33,7 @@ public partial class ZombieChase : ZombieStates
 			if(playerDirection.Length() > 85)
 			{
 				_zombie.Velocity = playerDirection.Normalized() * _moveSpeed;
+				animPlayer.SpeedScale = 1*( _moveSpeed / 100 );
 			}
 			else 
 			{

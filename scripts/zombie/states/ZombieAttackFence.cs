@@ -17,6 +17,7 @@ public partial class ZombieAttackFence : ZombieStates
 	private static List<Node2D> _fenceList = new List<Node2D>();
 	private Node2D _fences;
 	private int _fenceCount;
+	[Export] AnimationPlayer animPlayer;
 
 	public Vector2 MovementTarget
     {

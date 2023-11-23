@@ -262,18 +262,21 @@ debug_color = Color(0.498039, 0.45098, 0.94902, 0.890196)
 script = ExtResource("4_e11dm")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie", "animPlayer")]
 script = ExtResource("5_m256t")
 _zombie = NodePath("../..")
+animPlayer = NodePath("../../Skeleton2D/AnimationPlayer")
 
-[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie")]
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie", "animPlayer")]
 script = ExtResource("6_ch1pp")
 _zombie = NodePath("../..")
+animPlayer = NodePath("../../Skeleton2D/AnimationPlayer")
 
-[node name="AttackFence" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie", "_navAgent")]
+[node name="AttackFence" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie", "_navAgent", "animPlayer")]
 script = ExtResource("7_m3vts")
 _zombie = NodePath("../..")
 _navAgent = NodePath("../../NavigationAgent2D")
+animPlayer = NodePath("../../Skeleton2D/AnimationPlayer")
 
 [node name="AttackBox" type="Area2D" parent="."]
 light_mask = 5
@@ -303,18 +306,19 @@ debug_enabled = true
 stream = ExtResource("9_t8tic")
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, 24)
 scale = Vector2(0.382, 0.382)
 
 [node name="RightLegSprite" type="Sprite2D" parent="Skeleton2D"]
-position = Vector2(-35.724, 79.8464)
-rotation = 0.197235
+position = Vector2(-23.5633, 77.7867)
+rotation = -0.398185
 scale = Vector2(1, 1)
 texture = ExtResource("10_g63w7")
 
 [node name="LeftLegSprite" type="Sprite2D" parent="Skeleton2D"]
-position = Vector2(31.6091, 75.1895)
-rotation = -0.13399
+position = Vector2(18.3764, 75.9817)
+rotation = 0.62517
 scale = Vector2(0.999999, 0.999999)
 texture = ExtResource("11_dg7uf")
 

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public partial class ZombieAttackFence : ZombieStates
 {
-	// todo: add health and hitbox components to fences
 	public bool inTown;
 	[Export] private CharacterBody2D _zombie;
 	[Export] private float _moveSpeed = 100.0f;
@@ -17,6 +16,7 @@ public partial class ZombieAttackFence : ZombieStates
 	private static List<Node2D> _fenceList = new List<Node2D>();
 	private Node2D _fences;
 	private int _fenceCount;
+	[Export] AnimationPlayer animPlayer;
 
 	public Vector2 MovementTarget
     {

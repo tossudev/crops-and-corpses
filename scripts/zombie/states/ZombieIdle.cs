@@ -10,9 +10,10 @@ public partial class ZombieIdle : ZombieStates
 	private double _roamTime;
 	private CharacterBody2D _player;
 	private Node2D _fences;
-	
+	[Export] AnimationPlayer animPlayer;
 	public override void Enter()
     {
+		animPlayer.Play("zombieIdle");
         _player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
 		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
 		RandomizeRoam();

@@ -14,6 +14,7 @@ public partial class HandheldController : Node2D
     [Export] private PackedScene _projectilePrefab;
     [Export] private PlayerController _player;
     [Export] private StaminaComponent _staminaComponent;
+    [Export] private Sprite2D _sprite;
 
     private Attack _attack;
     private int _damage;
@@ -31,6 +32,8 @@ public partial class HandheldController : Node2D
     public bool isDrawing;
     private bool _actionHeld;
     private string _targetGroup;
+    private string _attackAnim;
+    private string _cooldownAnim;
 
     public void Init()
     {
@@ -46,6 +49,8 @@ public partial class HandheldController : Node2D
         if (_weapon == null)
             _weapon = _hand;
 
+        _sprite.Texture = null;
+
         _damage = _weapon.damage;
         _knockback = _weapon.knockback;
         _cooldown = _weapon.cooldown;
@@ -57,6 +62,8 @@ public partial class HandheldController : Node2D
         _ranged = _weapon.ranged;
         _drawTime = _weapon.drawTime;
         _projectile = _weapon.projectile;
+        _attackAnim = _weapon.attackAnim;
+        _cooldownAnim = _weapon.CooldownAnim;
 
         if (_ranged)
         {
@@ -99,6 +106,15 @@ public partial class HandheldController : Node2D
         if (_ranged)
         {
             LookAt(GetGlobalMousePosition());
+            // flip the sprite if the mouse is on the left side of the player
+            if (GetGlobalMousePosition().X < GlobalPosition.X)
+            {
+                this.Scale = new Vector2(1, -1) * _reach;
+            }
+            else
+            {
+                this.Scale = Vector2.One * _reach;
+            }
         }
 
         if (_timer.TimeLeft <= 0)
@@ -159,6 +175,8 @@ public partial class HandheldController : Node2D
 
         this.RotationDegrees = angle;
 
+        _staminaComponent.UseStamina(5);
+
         _animationPlayer.SpeedScale = 1 / _cooldown;
         _animationPlayer.Play("swing");
         _timer.Start(_cooldown);
@@ -180,11 +198,11 @@ public partial class HandheldController : Node2D
         _player.speedPercent = 0.5f;
         _player.canRun = false;
 
-        _staminaComponent.canDrain = true;
         _staminaComponent.drainRate = 0.5f;
+        _staminaComponent.canDrain = true;
 
         _animationPlayer.SpeedScale = 1 / _drawTime;
-        _animationPlayer.Play("draw");
+        _animationPlayer.Play(_attackAnim);
         _timer.Start(_drawTime);
     }
 
@@ -208,8 +226,8 @@ public partial class HandheldController : Node2D
 
         isDrawing = false;
 
-        _player.canRun = true;
         _player.speedPercent = 1;
+        _player.canRun = true;
 
         float elapsed = (float)_timer.TimeLeft;
         _timer.Stop();
@@ -221,7 +239,7 @@ public partial class HandheldController : Node2D
         Shoot(power);
 
         _animationPlayer.SpeedScale = 1 / _cooldown;
-        _animationPlayer.Play("swing");
+        _animationPlayer.Play(_cooldownAnim);
         _timer.Start(_cooldown);
     }
 
@@ -251,7 +269,6 @@ public partial class HandheldController : Node2D
             if (body.IsInGroup(_targetGroup))
             {
                 hitbox.ApplyAttack(_attack);
-                _staminaComponent.UseStamina(5);
 
                 if (_targetGroup != "enemy")
                 {

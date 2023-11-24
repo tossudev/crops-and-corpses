@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6w8cr3rm5pu3"]
+[gd_scene load_steps=11 format=3 uid="uid://b6w8cr3rm5pu3"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_i45ep"]
+[ext_resource type="Resource" uid="uid://bs6otct5awtuy" path="res://TinoTests/Resources/rock.tres" id="2_1jb1k"]
 [ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_i6dnf"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_lv2gj"]
-[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="5_vty0u"]
+[ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="5_vty0u"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_yudbm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pn142"]
@@ -37,6 +38,7 @@ _data = {
 [node name="Rock" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer", "_sprite")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_i45ep")
+_loot = ExtResource("2_1jb1k")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite = NodePath("Sprite2D")
 

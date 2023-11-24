@@ -16,8 +16,6 @@ public partial class LootController : StaticBody2D
 	//should be between 0 and 1
 	[Export] private float _scaleVariation = 0f;
 
-	[Export] ExpGain _harvestExp;
-
 	private List<Item> _items = new List<Item>();
 	RandomNumberGenerator rng;
 
@@ -42,6 +40,18 @@ public partial class LootController : StaticBody2D
 			for (int i = 0; i < item.quantity; i++)
 			{
 				_items.Add(item.item);
+			}
+		}
+
+		if (GD.RandRange(0, 1) < 0.5f)
+		{
+			if (GD.RandRange(0, 1) > 0.5f)
+			{
+				_items.Add(_items[GD.RandRange(0, _items.Count - 1)]);
+			}
+			else
+			{
+				_items.RemoveAt(GD.RandRange(0, _items.Count - 1));
 			}
 		}
 	}

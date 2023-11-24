@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://3hlx66fdaruu"]
+[gd_scene load_steps=17 format=3 uid="uid://3hlx66fdaruu"]
 
 [ext_resource type="Script" path="res://scripts/player/HandheldController.cs" id="1_gwltb"]
 [ext_resource type="Resource" uid="uid://dsa6q3jkek4am" path="res://assets/resources/game_weapons/bow.tres" id="2_21emi"]
@@ -36,6 +36,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [1.5708]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
 
 [sub_resource type="Animation" id="Animation_ocfbs"]
 resource_name = "bow_cd"
@@ -66,26 +78,26 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/path = NodePath("Sprite2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.727802, 2.2986, 0.727802]
+"values": [Vector2(2.08165e-12, 2.08165e-12), Vector2(10, 2.08165e-12)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:position")
+tracks/3/path = NodePath("Sprite2D:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(10, 9.65599e-06), Vector2(2.08165e-12, 10), Vector2(10, 9.65599e-06)]
+"values": [0.785398]
 }
 
 [sub_resource type="Animation" id="Animation_1n3rr"]
@@ -117,29 +129,26 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/path = NodePath("Sprite2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.727802]
+"values": [Vector2(10, 2.08165e-12)]
 }
-
-[sub_resource type="Animation" id="Animation_npkmt"]
-resource_name = "bow_release"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.333, 0.666, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("6_u0y7g"), ExtResource("4_22joh"), ExtResource("5_r2ewd"), ExtResource("8_dkmkf")]
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.785398]
 }
 
 [sub_resource type="Animation" id="Animation_v705w"]
@@ -155,6 +164,42 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 0, 0, 0), Color(1, 0, 0, 0.498039)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ha3no")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 2.08165e-12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
 }
 
 [sub_resource type="Animation" id="Animation_hjerq"]
@@ -183,18 +228,53 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 0, 0, 0.498039), Color(1, 0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ha3no")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 2.08165e-12)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_83chl"]
 _data = {
 "RESET": SubResource("Animation_wryer"),
 "bow_cd": SubResource("Animation_ocfbs"),
 "bow_draw": SubResource("Animation_1n3rr"),
-"bow_release": SubResource("Animation_npkmt"),
 "draw": SubResource("Animation_v705w"),
 "swing": SubResource("Animation_hjerq")
 }
 
-[node name="HandHeld" type="Node2D" node_paths=PackedStringArray("_hitbox", "_animationPlayer", "_timer")]
+[node name="HandHeld" type="Node2D" node_paths=PackedStringArray("_hitbox", "_animationPlayer", "_timer", "_sprite")]
 script = ExtResource("1_gwltb")
 _weapon = ExtResource("2_21emi")
 _hand = ExtResource("3_yka1a")
@@ -202,6 +282,7 @@ _hitbox = NodePath("Hitbox")
 _animationPlayer = NodePath("AnimationPlayer")
 _timer = NodePath("Timer")
 _projectilePrefab = ExtResource("2_agrd3")
+_sprite = NodePath("Sprite2D")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -220,10 +301,9 @@ disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 0)
-position = Vector2(10, 9.65599e-06)
+position = Vector2(10, 2.08165e-12)
 rotation = 1.5708
 scale = Vector2(0.125, 0.124647)
-texture = ExtResource("3_ha3no")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

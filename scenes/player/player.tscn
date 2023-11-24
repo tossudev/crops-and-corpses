@@ -300,7 +300,6 @@ texture = ExtResource("15_m13sc")
 [node name="LegRBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
 position = Vector2(-19, -0.35)
 rotation = -0.462435
-scale = Vector2(1, 1)
 rest = Transform2D(0.999877, 0.0156808, -0.0156808, 0.999877, -19, -0.35)
 
 [node name="LegR" type="Sprite2D" parent="Skeleton2D/TorsoBone/LegRBone"]
@@ -327,7 +326,6 @@ rest = Transform2D(0.985399, -0.170258, 0.170258, 0.985399, 26.32, -45.85)
 [node name="ArmL" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
 position = Vector2(4.06, 13.3)
 rotation = -0.0131563
-scale = Vector2(1, 1)
 texture = ExtResource("10_6b7e2")
 
 [node name="HandLBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmLBone"]

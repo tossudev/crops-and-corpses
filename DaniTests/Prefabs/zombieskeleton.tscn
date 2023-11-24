@@ -277,6 +277,7 @@ texture = ExtResource("6_in1kr")
 [node name="RightLegBone" type="Bone2D" parent="TorsoBone"]
 position = Vector2(-59.006, -32.9892)
 rotation = -2.86417
+scale = Vector2(1, 1)
 rest = Transform2D(-0.961764, -0.27388, 0.27388, -0.961764, -59.006, -32.9892)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="TorsoBone/RightLegBone"]

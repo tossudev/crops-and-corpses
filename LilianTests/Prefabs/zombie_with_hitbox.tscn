@@ -319,7 +319,6 @@ scale = Vector2(0.382, 0.382)
 [node name="RightLegSprite" type="Sprite2D" parent="Skeleton2D"]
 position = Vector2(-35.724, 79.8464)
 rotation = 0.197235
-scale = Vector2(1, 1)
 texture = ExtResource("10_g63w7")
 
 [node name="LeftLegSprite" type="Sprite2D" parent="Skeleton2D"]
@@ -331,7 +330,6 @@ texture = ExtResource("11_dg7uf")
 [node name="LeftArm" type="Sprite2D" parent="Skeleton2D"]
 position = Vector2(46.2443, -13.8347)
 rotation = -0.681756
-scale = Vector2(1, 1)
 texture = ExtResource("12_hcjqn")
 
 [node name="TorsoBone" type="Bone2D" parent="Skeleton2D"]

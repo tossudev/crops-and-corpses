@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://db6xmvd5lkpgm"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_3ulw8"]
-[ext_resource type="Texture2D" uid="uid://mk8j3xus8h5p" path="res://assets/sprites/buildings/fences/fence_e.png" id="1_qhvqo"]
+[ext_resource type="Texture2D" path="res://assets/sprites/buildings/fences/fence_e.png" id="1_qhvqo"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_xrlmy"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_1xav7"]
-[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="5_n0jmf"]
+[ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="5_n0jmf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_638cj"]
 size = Vector2(2.625, 150)

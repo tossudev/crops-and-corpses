@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_quu4s")
 item = ExtResource("1_03101")
-airtime = 2.0
+airtime = 1.5
 despawnTime = 0.5
 objectCollision = false
 effect = 0

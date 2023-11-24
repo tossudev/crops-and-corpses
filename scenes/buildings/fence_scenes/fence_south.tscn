@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dxrco0upucsjx"]
 
+[ext_resource type="Texture2D" uid="uid://bfjpjx088kp1o" path="res://assets/sprites/buildings/fences/fence_s.png" id="1_h5tk6"]
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_sl1he"]
 [ext_resource type="Script" path="res://scripts/farm/FenceHealth.cs" id="1_torf7"]
-[ext_resource type="Texture2D" uid="uid://bfjpjx088kp1o" path="res://NikkeTests/images/fence_s.png" id="1_vyx5g"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_l2cro"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_5a3ey"]
 
@@ -17,7 +17,7 @@ size = Vector2(125, 62)
 [node name="FenceHighS" type="Sprite2D" parent="."]
 position = Vector2(-64, -128)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_vyx5g")
+texture = ExtResource("1_h5tk6")
 
 [node name="BuildingHealth" type="Node2D" parent="."]
 script = ExtResource("1_sl1he")

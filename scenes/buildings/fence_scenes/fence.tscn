@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://c1xqg6j0l6q2l"]
 
-[ext_resource type="Script" path="res://NikkeTests/scripts/Fences.cs" id="1_qj42a"]
+[ext_resource type="Script" path="res://scripts/Buildings/Fences.cs" id="1_qj42a"]
+
 
 [node name="Fences" type="Node2D" groups=["fences"]]
 y_sort_enabled = true

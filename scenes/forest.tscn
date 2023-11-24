@@ -481,7 +481,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="Objects" node_paths=PackedStringArray("_camera") instance=ExtResource("6_d65ob")]
 unique_name_in_owner = true
-position = Vector2(797, 1613)
+position = Vector2(836, 2326)
 _camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
@@ -1021,7 +1021,7 @@ texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
 [node name="Light6" type="PointLight2D" parent="Objects/Lights"]
-position = Vector2(537, 2190)
+position = Vector2(1071, 2192)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -1182,7 +1182,7 @@ texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
 [node name="Light30" type="PointLight2D" parent="Objects/Lights"]
-position = Vector2(699, 2445)
+position = Vector2(966, 2427)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -1323,8 +1323,10 @@ position = Vector2(-3083, 1736)
 texture = ExtResource("9_484hk")
 
 [node name="Trees" type="Node2D" parent="Objects"]
+y_sort_enabled = true
 
 [node name="SpruceTrees" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 
 [node name="SpruceTreeGroup" type="Node2D" parent="Objects/Trees/SpruceTrees"]
 position = Vector2(-3127, -3293)
@@ -1798,6 +1800,7 @@ position = Vector2(-27, 163)
 _animationPlayer = NodePath("../../../FillerTrees/Tree6/AnimationPlayer")
 
 [node name="FillerTrees" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-62, 18)
 
 [node name="Tree6" parent="Objects/Trees/FillerTrees" instance=ExtResource("11_r6rlm")]
@@ -1985,6 +1988,7 @@ position = Vector2(6147, -2386)
 _animationPlayer = NodePath("../Tree7/AnimationPlayer")
 
 [node name="TreeMix" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-1853, -1806)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2020,6 +2024,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix2" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-1667, -1164)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix2" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2055,6 +2060,7 @@ position = Vector2(695, -464)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix3" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-3140, -1811)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix3" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2090,6 +2096,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix4" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(132, 24)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix4" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2125,6 +2132,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix5" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-3117, 290)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix5" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2160,6 +2168,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix6" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-2206, 1715)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix6" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2195,6 +2204,7 @@ position = Vector2(-316, -221)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix7" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-3023, 1077)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix7" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2230,6 +2240,7 @@ position = Vector2(488, -172)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix8" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-138, 3222)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix8" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2265,6 +2276,7 @@ position = Vector2(592, -617)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix9" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-422, 1131)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix9" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2300,6 +2312,7 @@ position = Vector2(306, -433)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix10" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-294, 1986)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix10" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2335,6 +2348,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix11" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(548, 1274)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix11" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2370,6 +2384,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix12" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(1462, -2292)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix12" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2405,6 +2420,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix13" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-8064, -1282)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix13" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2440,6 +2456,7 @@ position = Vector2(227, -370)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix14" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-7959, 897)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix14" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2475,6 +2492,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix15" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-5714, -1244)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix15" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2510,6 +2528,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix16" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-8188, -2119)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix16" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2545,6 +2564,7 @@ position = Vector2(-25, -1141)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix17" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-6920, -2826)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix17" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2580,6 +2600,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix18" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-5484, -2878)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix18" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2615,6 +2636,7 @@ position = Vector2(227, -370)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix19" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-4664, -2244)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix19" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2650,6 +2672,7 @@ position = Vector2(289, -373)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix20" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-4629, -1510)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix20" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2685,6 +2708,7 @@ position = Vector2(227, -370)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix21" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-5142, 314)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix21" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2720,6 +2744,7 @@ position = Vector2(331, -373)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix22" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-6952, -462)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix22" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2755,6 +2780,7 @@ position = Vector2(163, 287)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix23" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-6681, -1503)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix23" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2790,6 +2816,7 @@ position = Vector2(-380, -1555)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix24" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-7896, 3254)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix24" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2825,6 +2852,7 @@ position = Vector2(227, -370)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix25" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-5680, 3350)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix25" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2860,6 +2888,7 @@ position = Vector2(227, -370)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix26" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-4936, 2758)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix26" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2895,6 +2924,7 @@ position = Vector2(227, -370)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix27" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-4904, 1262)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix27" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2930,6 +2960,7 @@ position = Vector2(794, -1075)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix28" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-6488, 1583)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix28" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2965,6 +2996,7 @@ position = Vector2(326, -393)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix29" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-6454, 2329)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix29" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3000,6 +3032,7 @@ position = Vector2(-304, -284)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix30" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-7768, 1598)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix30" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3035,6 +3068,7 @@ position = Vector2(227, -370)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix31" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-6883, 3254)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix31" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3070,6 +3104,7 @@ position = Vector2(227, -370)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix32" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-5934, 584)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix32" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3105,6 +3140,7 @@ position = Vector2(383, -357)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix33" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-4745, -651)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix33" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3140,6 +3176,7 @@ position = Vector2(257, -301)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix34" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(-1413, 1045)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix34" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3175,6 +3212,7 @@ position = Vector2(398, -416)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix35" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(3622, 788)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix35" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3210,6 +3248,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix36" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(4008, 1606)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix36" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3245,6 +3284,7 @@ position = Vector2(695, -464)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix37" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(2260, 762)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix37" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3280,6 +3320,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix38" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(4604, -1616)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix38" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3315,6 +3356,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix39" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(4762, -1000)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix39" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3350,6 +3392,7 @@ position = Vector2(695, -464)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix40" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(3249, -1299)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix40" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3385,6 +3428,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix41" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(3192, -2206)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix41" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3420,6 +3464,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix42" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(2449, 1389)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix42" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3455,6 +3500,7 @@ position = Vector2(695, -464)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix43" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(3361, -431)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix43" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3490,6 +3536,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix44" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(2526, 2105)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix44" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3525,6 +3572,7 @@ position = Vector2(695, -464)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix45" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(2049, -129)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix45" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3560,6 +3608,7 @@ position = Vector2(695, -464)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix46" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(5439, 1977)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix46" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3595,6 +3644,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix47" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(6211, 1160)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix47" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3630,6 +3680,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix48" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(5959, 321)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix48" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3665,6 +3716,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix49" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(3622, 788)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix49" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3700,6 +3752,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix50" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(4521, -2640)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix50" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3735,6 +3788,7 @@ position = Vector2(2722, -717)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix51" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(5851, -2976)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix51" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3770,6 +3824,7 @@ position = Vector2(717, -63)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix52" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(6538, -581)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix52" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3805,6 +3860,7 @@ position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix53" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(6666, 274)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix53" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -3840,6 +3896,7 @@ position = Vector2(479, -467)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="TreeMix54" type="Node2D" parent="Objects/Trees"]
+y_sort_enabled = true
 position = Vector2(4474, 171)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix54" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]

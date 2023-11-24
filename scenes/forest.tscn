@@ -1,5 +1,6 @@
-[gd_scene load_steps=111 format=3 uid="uid://cce2sygxgl033"]
+[gd_scene load_steps=113 format=3 uid="uid://cce2sygxgl033"]
 
+[ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="1_dfb2v"]
 [ext_resource type="Script" path="res://scripts/villager/VillagerManager.cs" id="1_r3xju"]
 [ext_resource type="Texture2D" uid="uid://ehsp5k83fvvb" path="res://assets/sprites/tiles/grass_flowers2_tile.png" id="1_sbei6"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/water.gdshader" id="2_3pryh"]
@@ -64,6 +65,11 @@
 [ext_resource type="Texture2D" uid="uid://bql3k2stmytly" path="res://assets/sprites/tiles/dirt_corner_tile3.png" id="34_4o5k3"]
 [ext_resource type="Texture2D" uid="uid://xtmcesfk1xmb" path="res://assets/sprites/tiles/cobblestone_corner_tile.png" id="39_uyldf"]
 [ext_resource type="Texture2D" uid="uid://c4qgf8271fu1f" path="res://assets/sprites/tiles/cobblestone_tile.png" id="40_lgl07"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_wki16"]
+vertices = PackedVector2Array(-7153, -2887, -6536, -2777, -6483, -1878, -7098, -1808)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-7153, -2887, -6536, -2777, -6483, -1878, -7098, -1808)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5o3xo"]
 texture = ExtResource("5_5m7lu")
@@ -401,6 +407,13 @@ fill_from = Vector2(0.5, 0.5)
 y_sort_enabled = true
 position = Vector2(-62, 18)
 
+[node name="NavigationManager" parent="." instance=ExtResource("1_dfb2v")]
+unique_name_in_owner = true
+
+[node name="Region" parent="NavigationManager" index="0"]
+position = Vector2(-968, 1738)
+navigation_polygon = SubResource("NavigationPolygon_wki16")
+
 [node name="ForestScene" type="Node2D" parent="."]
 unique_name_in_owner = true
 
@@ -468,7 +481,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="Objects" node_paths=PackedStringArray("_camera") instance=ExtResource("6_d65ob")]
 unique_name_in_owner = true
-position = Vector2(-7720, -2979)
+position = Vector2(797, 1613)
 _camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
@@ -476,7 +489,7 @@ position_smoothing_enabled = true
 position_smoothing_speed = 20.0
 
 [node name="TreeBridge" parent="Objects" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("12_0nbqh")]
-position = Vector2(1284, 2368)
+position = Vector2(1208, 2362)
 scale = Vector2(2.69943, 2.69943)
 _animationPlayer = NodePath("../Trees/FillerTrees/Tree7/AnimationPlayer")
 
@@ -490,6 +503,14 @@ scale = Vector2(0.6, 0.6)
 [node name="TreeBridge" type="Sprite2D" parent="Objects/Buildings"]
 z_index = -1
 position = Vector2(-3586.5, 1874.04)
+rotation = 1.55852
+scale = Vector2(0.501793, 1.89499)
+texture = ExtResource("19_dhclt")
+
+[node name="TreeBridge2" type="Sprite2D" parent="Objects/Buildings"]
+visible = false
+z_index = -1
+position = Vector2(1529, 2380)
 rotation = 1.55852
 scale = Vector2(0.501793, 1.89499)
 texture = ExtResource("19_dhclt")
@@ -542,7 +563,7 @@ _col = NodePath("../farm_plot/FarmPlot")
 [node name="IronOres" type="Node2D" parent="Objects"]
 
 [node name="Iron Ore" parent="Objects/IronOres" instance=ExtResource("22_4gs3r")]
-position = Vector2(-5918, -743)
+position = Vector2(-5961, -656)
 
 [node name="Iron Ore2" parent="Objects/IronOres" instance=ExtResource("22_4gs3r")]
 position = Vector2(-5652, -957)
@@ -566,13 +587,13 @@ position = Vector2(-6074, -2611)
 position = Vector2(-7840, -520)
 
 [node name="Iron Ore9" parent="Objects/IronOres" instance=ExtResource("22_4gs3r")]
-position = Vector2(-7664, 2087)
+position = Vector2(-7859, 2108)
 
 [node name="Iron Ore10" parent="Objects/IronOres" instance=ExtResource("22_4gs3r")]
-position = Vector2(-7393, 2520)
+position = Vector2(-7366, 2415)
 
 [node name="Iron Ore11" parent="Objects/IronOres" instance=ExtResource("22_4gs3r")]
-position = Vector2(-7716, 2306)
+position = Vector2(-7796, 2417)
 
 [node name="Iron Ore12" parent="Objects/IronOres" instance=ExtResource("22_4gs3r")]
 position = Vector2(-2350, -1518)
@@ -587,10 +608,10 @@ position = Vector2(-2877, -1219)
 position = Vector2(-457, -2146)
 
 [node name="Iron Ore16" parent="Objects/IronOres" instance=ExtResource("22_4gs3r")]
-position = Vector2(-553, -1988)
+position = Vector2(-700, -1898)
 
 [node name="Iron Ore17" parent="Objects/IronOres" instance=ExtResource("22_4gs3r")]
-position = Vector2(-1290, 3345)
+position = Vector2(-1221, 3122)
 
 [node name="Iron Ore18" parent="Objects/IronOres" instance=ExtResource("22_4gs3r")]
 position = Vector2(-1319, 3471)
@@ -606,7 +627,7 @@ position = Vector2(-5397, 1022)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
 [node name="Iron Ore22" parent="Objects/IronOres" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(-5054, 1187)
+position = Vector2(-5148, 1362)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
 [node name="Iron Ore23" parent="Objects/IronOres" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
@@ -642,7 +663,7 @@ position = Vector2(6870, -2636)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
 [node name="Iron Ore31" parent="Objects/IronOres" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(7149, -2255)
+position = Vector2(7094, -2174)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
 [node name="Iron Ore32" parent="Objects/IronOres" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
@@ -796,7 +817,7 @@ _col = NodePath("../plant_mushroom/Area2D")
 trect = NodePath("../plant_mushroom/TextureRect")
 
 [node name="plant_mushroom20" parent="Objects/Plants/Mushrooms" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("23_7l40m")]
-position = Vector2(-1038, 1986)
+position = Vector2(-917, 1945)
 _col = NodePath("../plant_mushroom/Area2D")
 trect = NodePath("../plant_mushroom/TextureRect")
 
@@ -972,7 +993,7 @@ texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
 [node name="Light2" type="PointLight2D" parent="Objects/Lights"]
-position = Vector2(241, -2548)
+position = Vector2(223, -2413)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -993,7 +1014,7 @@ texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
 [node name="Light5" type="PointLight2D" parent="Objects/Lights"]
-position = Vector2(749, -2555)
+position = Vector2(682, -2380)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -1014,14 +1035,14 @@ texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
 [node name="Light8" type="PointLight2D" parent="Objects/Lights"]
-position = Vector2(-3059, 1886)
+position = Vector2(-2838, 1945)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
 [node name="Light9" type="PointLight2D" parent="Objects/Lights"]
-position = Vector2(-1093, 2243)
+position = Vector2(-1704, 2304)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -1042,14 +1063,14 @@ texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
 [node name="Light13" type="PointLight2D" parent="Objects/Lights"]
-position = Vector2(-5900, -681)
+position = Vector2(-5457, -562)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
 [node name="Light14" type="PointLight2D" parent="Objects/Lights"]
-position = Vector2(-5459, -469)
+position = Vector2(-5337, -566)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -1063,14 +1084,14 @@ texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
 [node name="Light16" type="PointLight2D" parent="Objects/Lights"]
-position = Vector2(-7442, 2133)
+position = Vector2(-7449, 1915)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
 [node name="Light17" type="PointLight2D" parent="Objects/Lights"]
-position = Vector2(-5332, 1031)
+position = Vector2(-5754, 971)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -1091,14 +1112,14 @@ texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
 [node name="Light20" type="PointLight2D" parent="Objects/Lights"]
-position = Vector2(-354, -2166)
+position = Vector2(-52, -2107)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
 [node name="Light21" type="PointLight2D" parent="Objects/Lights"]
-position = Vector2(-490, -1736)
+position = Vector2(-357, -1508)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -1126,7 +1147,7 @@ texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
 [node name="Light25" type="PointLight2D" parent="Objects/Lights"]
-position = Vector2(-5484, -843)
+position = Vector2(-5833, -897)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -1286,7 +1307,7 @@ position = Vector2(-3950, 1477)
 texture = ExtResource("9_484hk")
 
 [node name="Bush9" type="Sprite2D" parent="Objects/Bushes"]
-position = Vector2(-5252, 1306)
+position = Vector2(-5105, 1793)
 texture = ExtResource("9_484hk")
 
 [node name="Bush11" type="Sprite2D" parent="Objects/Bushes"]
@@ -1431,7 +1452,7 @@ position = Vector2(189, -48)
 _animationPlayer = NodePath("../../../FillerTrees/Tree6/AnimationPlayer")
 
 [node name="Tree53" parent="Objects/Trees/SpruceTrees/SpruceTreeGroup7" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("11_r6rlm")]
-position = Vector2(-25, -114)
+position = Vector2(30, -115)
 _animationPlayer = NodePath("../../../FillerTrees/Tree6/AnimationPlayer")
 
 [node name="Tree54" parent="Objects/Trees/SpruceTrees/SpruceTreeGroup7" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("11_r6rlm")]
@@ -1773,7 +1794,7 @@ position = Vector2(-25, -114)
 _animationPlayer = NodePath("../../../FillerTrees/Tree6/AnimationPlayer")
 
 [node name="Tree54" parent="Objects/Trees/SpruceTrees/SpruceTreeGroup25" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("11_r6rlm")]
-position = Vector2(-68, 179)
+position = Vector2(-27, 163)
 _animationPlayer = NodePath("../../../FillerTrees/Tree6/AnimationPlayer")
 
 [node name="FillerTrees" type="Node2D" parent="Objects/Trees"]
@@ -2142,7 +2163,7 @@ _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 position = Vector2(-2206, 1715)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix6" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
-position = Vector2(-1066, 25)
+position = Vector2(-1013, 25)
 _animationPlayer = NodePath("../../FillerTrees/Tree/AnimationPlayer")
 
 [node name="Tree14" parent="Objects/Trees/TreeMix6" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
@@ -2193,7 +2214,7 @@ position = Vector2(-184, 243)
 _animationPlayer = NodePath("../../FillerTrees/Tree6/AnimationPlayer")
 
 [node name="Tree45" parent="Objects/Trees/TreeMix7" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("11_r6rlm")]
-position = Vector2(299, 792)
+position = Vector2(384, 795)
 _animationPlayer = NodePath("../../FillerTrees/Tree6/AnimationPlayer")
 
 [node name="Tree32" parent="Objects/Trees/TreeMix7" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("12_0nbqh")]
@@ -3025,7 +3046,7 @@ position = Vector2(668, -82)
 _animationPlayer = NodePath("../../FillerTrees/Tree/AnimationPlayer")
 
 [node name="Tree43" parent="Objects/Trees/TreeMix31" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("11_r6rlm")]
-position = Vector2(354, -45)
+position = Vector2(256, -24)
 _animationPlayer = NodePath("../../FillerTrees/Tree6/AnimationPlayer")
 
 [node name="Tree44" parent="Objects/Trees/TreeMix31" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("11_r6rlm")]
@@ -3087,11 +3108,11 @@ _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 position = Vector2(-4745, -651)
 
 [node name="Tree13" parent="Objects/Trees/TreeMix33" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
-position = Vector2(223, -484)
+position = Vector2(168, -560)
 _animationPlayer = NodePath("../../FillerTrees/Tree/AnimationPlayer")
 
 [node name="Tree14" parent="Objects/Trees/TreeMix33" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
-position = Vector2(668, -82)
+position = Vector2(644, -114)
 _animationPlayer = NodePath("../../FillerTrees/Tree/AnimationPlayer")
 
 [node name="Tree43" parent="Objects/Trees/TreeMix33" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("11_r6rlm")]
@@ -7225,5 +7246,6 @@ texture = ExtResource("21_tox2m")
 
 [node name="SunlightContainer" parent="." instance=ExtResource("18_j47l1")]
 
+[editable path="NavigationManager"]
 [editable path="Objects/Buildings/street_sign_post"]
 [editable path="Objects/Buildings/street_sign_post2"]

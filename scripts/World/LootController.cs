@@ -81,9 +81,24 @@ public partial class LootController : StaticBody2D
 
 		if (health <= 0)
 		{
-			DropItems(_items.Count);
-			QueueFree();
+			if (Name == "TreeBridge")
+			{
+				_animationPlayer.Play("fall");
+			}
+			else{
+				DropItems(_items.Count);
+				QueueFree();
+			}
+			
 		}
+	}
+
+	private void OnAnimationFinished(string animationName)
+	{    
+		if(animationName == "fall")
+		{
+			QueueFree(); 
+		}           
 	}
 
 	private void DropItems(int dropAmount = 1)

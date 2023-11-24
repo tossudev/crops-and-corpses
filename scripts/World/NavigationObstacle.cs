@@ -11,9 +11,9 @@ public partial class NavigationObstacle : Polygon2D
     public override void _EnterTree()
     {
         base._EnterTree();
-		Node scene = GetTree().CurrentScene;
 		debugText = GetNode<Label>("Label");
 
+		Node scene = GetTree().CurrentScene;
 		navManager = scene.GetNode<Node2D>("%NavigationManager") as NavigationManager;
     }
 

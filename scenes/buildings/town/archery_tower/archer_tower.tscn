@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://54li2rwv5ov5"]
+[gd_scene load_steps=12 format=3 uid="uid://54li2rwv5ov5"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/ArcherTower.cs" id="1_8yyo6"]
 [ext_resource type="PackedScene" uid="uid://dqmfwe15dtgat" path="res://scenes/Combat/projectile.tscn" id="2_151wa"]
 [ext_resource type="Resource" uid="uid://crwemoqf3d5lp" path="res://TinoTests/Resources/tower_arrow.tres" id="3_pa3cy"]
+[ext_resource type="PackedScene" uid="uid://cly04lvws81ml" path="res://animations/archer_tower/archer_tower/ArcherTower.tscn" id="4_71niy"]
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="5_sr0xp"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="6_hcsx8"]
 [ext_resource type="Texture2D" uid="uid://dxop7aeu2pnnr" path="res://assets/sprites/buildings/archery_tower.png" id="6_sglj4"]
@@ -17,8 +18,9 @@ size = Vector2(113.333, 118.406)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fuikt"]
 size = Vector2(122, 253)
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("_attackTimer", "_projectileStartPosition") groups=["ArcherTower"]]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("_animationsScene", "_attackTimer", "_projectileStartPosition") groups=["ArcherTower"]]
 script = ExtResource("1_8yyo6")
+_animationsScene = NodePath("Node2D/Animator")
 _attackTimer = NodePath("Timer")
 _projectilePrefab = ExtResource("2_151wa")
 _projectile = ExtResource("3_pa3cy")
@@ -28,12 +30,17 @@ _projectileStartPosition = NodePath("Node2D/projectileStartPosition")
 scale = Vector2(2, 2)
 
 [node name="projectileStartPosition" type="Node2D" parent="Node2D"]
-position = Vector2(-32, -100)
+position = Vector2(-21.095, -97.825)
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+z_index = -1
 position = Vector2(-32.02, -61)
 scale = Vector2(0.24, 0.24)
 texture = ExtResource("6_sglj4")
+
+[node name="Animator" parent="Node2D" instance=ExtResource("4_71niy")]
+position = Vector2(-61.5, -51)
+scale = Vector2(0.24, 0.24)
 
 [node name="BuildingHealth" type="Node2D" parent="."]
 script = ExtResource("5_sr0xp")

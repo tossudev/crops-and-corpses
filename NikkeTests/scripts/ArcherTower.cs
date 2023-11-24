@@ -24,16 +24,20 @@ public partial class ArcherTower : Node2D
     int _attackSpeed;
     int _accuracy;
 
+    public bool isBroken;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-        _speed = 800;
+        _speed = 16;
         _targetGroup = "enemy";
         _attackRange = _speed * (_projectile.airtime - _projectile.despawnTime);
 
+        isBroken = false;
+
         _attack = new Attack
         {
-            damage = 10,
+            damage = 20,
             knockback = 200,
             effect = 0
         };
@@ -56,6 +60,15 @@ public partial class ArcherTower : Node2D
         _attackTimer.Start();
     }
 
+    private void OnBreak()
+    {
+        isBroken = true;
+    }
+
+    private void OnFixed()
+    {
+        isBroken = false;
+    }
 
     public void ActivateTower()
     {
@@ -69,7 +82,7 @@ public partial class ArcherTower : Node2D
 
     public void OnShootTimerTimeout()
 	{
-        if (!FindTarget())
+        if (!FindTarget() || isBroken)
             return;
 
         if (_attackSpeed != TownManager.currentTownStats.soldierAttackSpeed && TownManager.currentTownStats.soldierAttackSpeed != 0)

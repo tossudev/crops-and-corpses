@@ -217,8 +217,6 @@ public partial class BuildingMenu : Control
 
         _savedBuildings.Add(jsonObjTime);
 
-        int farmPlotCount = 0;
-
         foreach (Node2D node in _buildings.GetChildren())
         {
             string name = "null";

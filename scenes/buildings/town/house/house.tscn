@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://3ct83j0jgteb"]
+[gd_scene load_steps=7 format=3 uid="uid://3ct83j0jgteb"]
 
 [ext_resource type="Texture2D" uid="uid://b5cv2b6w6tvm0" path="res://assets/sprites/buildings/housedesing2.png" id="1_soon6"]
+[ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_uikdl"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_driju"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_u5tml"]
 
@@ -12,6 +13,9 @@ size = Vector2(125.5, 125.5)
 
 [node name="House" type="Node2D" groups=["House"]]
 scale = Vector2(2, 2)
+
+[node name="BuildingHealth" type="Node2D" parent="."]
+script = ExtResource("1_uikdl")
 
 [node name="House" type="Sprite2D" parent="."]
 position = Vector2(-64, -80)
@@ -37,8 +41,9 @@ position = Vector2(-64, -64.375)
 scale = Vector2(1, 0.65)
 shape = SubResource("RectangleShape2D_kphka")
 
-[node name="HealthComponent" parent="." instance=ExtResource("2_driju")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("2_driju")]
 position = Vector2(-126, -75)
+_parentScript = NodePath("../BuildingHealth")
 _healItemPrefabs = Array[PackedScene]([])
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_u5tml")]

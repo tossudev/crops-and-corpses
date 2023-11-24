@@ -12,14 +12,14 @@ public partial class BuildingMode : Node2D
 
     int _tileSize;
 
-    Fence _fence;
+    Fences _fence;
 
     public override void _Ready()
     {
         _tileSize = 128;
 
         Node2D fences = GetNode("/root/Town/Fences") as Node2D;
-        _fence = fences as Fence;
+        _fence = fences as Fences;
     }
 
     public override void _PhysicsProcess(double delta)

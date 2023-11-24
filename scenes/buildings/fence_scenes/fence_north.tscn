@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://e58507ft315b"]
+[gd_scene load_steps=8 format=3 uid="uid://e58507ft315b"]
 
 [ext_resource type="Texture2D" uid="uid://dbfcw01ignddj" path="res://NikkeTests/images/fence_n.png" id="1_g7i1y"]
+[ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_jc86v"]
 [ext_resource type="Script" path="res://scripts/farm/FenceHealth.cs" id="1_whbvh"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_xy11f"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_rslnb"]
@@ -17,6 +18,9 @@ size = Vector2(126, 62)
 position = Vector2(-64, -128)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_g7i1y")
+
+[node name="BuildingHealth" type="Node2D" parent="."]
+script = ExtResource("1_jc86v")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-64, -64)
@@ -36,8 +40,7 @@ shape = SubResource("RectangleShape2D_asoab")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_xy11f")]
 position = Vector2(-64, -33)
-_parentScript = NodePath("")
-_hasHealthBar = true
+_parentScript = NodePath("../BuildingHealth")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
@@ -49,9 +52,8 @@ offset_bottom = -11.0
 scale = Vector2(0.4, 0.4)
 show_percentage = false
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("4_rslnb")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_rslnb")]
 position = Vector2(-64, -32)
-_parentScript = NodePath("")
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]

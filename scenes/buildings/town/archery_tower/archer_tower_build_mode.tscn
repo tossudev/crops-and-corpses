@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://1y1xpa0ldkye"]
+[gd_scene load_steps=4 format=3 uid="uid://1y1xpa0ldkye"]
 
 [ext_resource type="Script" path="res://NikkeTests/scripts/BuildingMode.cs" id="1_6tbwy"]
-[ext_resource type="Texture2D" uid="uid://cmyh3qeorleuc" path="res://NikkeTests/images/archer_tower_top.png" id="1_0827b"]
-[ext_resource type="Texture2D" uid="uid://bljqq2o52y2uy" path="res://NikkeTests/images/archer_tower_bot.png" id="2_x702e"]
+[ext_resource type="Texture2D" uid="uid://dxop7aeu2pnnr" path="res://assets/sprites/buildings/archery_tower.png" id="2_w8s8k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jggck"]
 size = Vector2(125, 255)
@@ -13,15 +12,10 @@ script = ExtResource("1_6tbwy")
 [node name="Node2D" type="Node2D" parent="."]
 scale = Vector2(2, 2)
 
-[node name="ArcherTowerTop" type="Sprite2D" parent="Node2D"]
-modulate = Color(1, 1, 1, 0.392157)
-position = Vector2(-32, -96)
-texture = ExtResource("1_0827b")
-
-[node name="ArcherTowerBot" type="Sprite2D" parent="Node2D"]
-modulate = Color(1, 1, 1, 0.392157)
-position = Vector2(-32, -32)
-texture = ExtResource("2_x702e")
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(-32.02, -61)
+scale = Vector2(0.24, 0.24)
+texture = ExtResource("2_w8s8k")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-64, -128)

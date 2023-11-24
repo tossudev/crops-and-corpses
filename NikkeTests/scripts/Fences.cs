@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-public partial class Fence : Node2D
+public partial class Fences : Node2D
 {
     [Export]
     public int fenceLengthY = 9;

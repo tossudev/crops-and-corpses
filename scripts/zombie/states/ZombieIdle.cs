@@ -13,7 +13,7 @@ public partial class ZombieIdle : ZombieStates
 	[Export] AnimationPlayer animPlayer;
 	public override void Enter()
     {
-		animPlayer.Play("zombieIdle");
+		
         _player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
 		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
 		RandomizeRoam();
@@ -54,6 +54,7 @@ public partial class ZombieIdle : ZombieStates
 	    
 		_moveSpeed = ZombieManager.idleSpeed;
 	    _zombie.Velocity = _moveDirection * _moveSpeed;
+		animPlayer.SpeedScale = _moveSpeed / 100;
 
 	    if (_player == null || !ZombieManager.playerAlive) return;
 	    

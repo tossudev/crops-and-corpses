@@ -16,8 +16,8 @@ public partial class RoamingZombie : CharacterBody2D
 	private NodePath _rootNodePath;
 	private Node2D rootNode;
 	PackedScene instantiatedNPC;
-	private CompressedTexture2D strongZombieSprite;
-	private CompressedTexture2D mediumZombieSprite;
+	//private CompressedTexture2D strongZombieSprite;
+	//private CompressedTexture2D mediumZombieSprite;
 	private bool _playerInRange = false;
 	private bool _fenceInRange = false;
 	private ulong entered;

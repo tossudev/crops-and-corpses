@@ -52,6 +52,7 @@ public partial class ZombieAttackFence : ZombieStates
 
         Vector2 newVelocity = (nextPathPosition - currentAgentPosition).Normalized();
         newVelocity *= _moveSpeed;
+		animPlayer.SpeedScale = _moveSpeed /100;
 		_zombie.Velocity = newVelocity;
 
 		//Vector2 fenceDirection = NearestFence();

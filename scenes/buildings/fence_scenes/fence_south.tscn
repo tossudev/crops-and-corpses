@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxrco0upucsjx"]
+[gd_scene load_steps=9 format=3 uid="uid://dxrco0upucsjx"]
 
-[ext_resource type="Texture2D" uid="uid://bfjpjx088kp1o" path="res://assets/sprites/buildings/fences/fence_s.png" id="1_h5tk6"]
+[ext_resource type="Texture2D" uid="uid://bpiynpy2xp7t6" path="res://assets/sprites/buildings/fences/fence_s.png" id="1_h5tk6"]
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_sl1he"]
 [ext_resource type="Script" path="res://scripts/farm/FenceHealth.cs" id="1_torf7"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_l2cro"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_5a3ey"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_uichf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_um4c4"]
 size = Vector2(126, 62)
@@ -62,3 +63,6 @@ offset_right = 42.0
 offset_bottom = -95.0
 scale = Vector2(0.4, 0.4)
 show_percentage = false
+
+[node name="NavigationObstacleArea" parent="." instance=ExtResource("6_uichf")]
+polygon = PackedVector2Array(-120, -144, -8, -144, -8, -96, -120, -96)

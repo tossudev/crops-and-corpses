@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="WallUpgrade" load_steps=6 format=3 uid="uid://pmdvrryoh4rc"]
+[gd_resource type="Resource" script_class="WallUpgrade" load_steps=5 format=3 uid="uid://pmdvrryoh4rc"]
 
 [ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="1_hgdci"]
-[ext_resource type="Texture2D" uid="uid://bfjpjx088kp1o" path="res://NikkeTests/images/fence_s.png" id="1_minhn"]
 [ext_resource type="Script" path="res://scripts/resource_classes/upgrades/WallUpgrade.cs" id="2_21ne1"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_qmdcx"]
 
@@ -15,7 +14,6 @@ script = ExtResource("2_21ne1")
 _wallHP = 15
 _spikyWalls = false
 _id = 41
-_upgradeIcon = ExtResource("1_minhn")
 _upgradeHeader = "Thicker Fence"
 _upgradeDescription = "Thicker fence line helps keep zombies out for longer..."
 _craftingRequirements = Array[Object]([SubResource("Resource_xl8sy")])

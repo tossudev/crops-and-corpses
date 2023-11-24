@@ -18,15 +18,16 @@ public partial class NavigationObstacle : Polygon2D
     }
 
 
-    public override void _Process(double delta)
-    {
-        base._Process(delta);
+    // If necessary, visualize all polygon indexes
+    // public override void _Process(double delta)
+    // {
+    //     base._Process(delta);
 
-		if (debugText == null) {
-			return;
-		}
-		debugText.Text = nodeIndex.ToString();
-    }
+	// 	if (debugText == null) {
+	// 		return;
+	// 	}
+	// 	debugText.Text = nodeIndex.ToString();
+    // }
 
 
     public override void _ExitTree() {

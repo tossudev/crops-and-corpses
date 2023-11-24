@@ -16,12 +16,18 @@ public partial class NavigationManager : Node2D {
     public override void _Ready() {
         _regionNode = GetNode<NavigationRegion2D>("Region");
 		_region = _regionNode.NavigationPolygon;
+    }
 
+
+    public override async void _EnterTree()
+    {
+        base._EnterTree();
+		await ToSignal(GetParent(), "ready");
 		InitRegion();
     }
 
 
-	void InitRegion() {
+    void InitRegion() {
 		// Get all obstacles
 		int _index = 0;
 		foreach (Polygon2D _obstacleNode in GetTree().GetNodesInGroup(_obstacleGroupName)) {

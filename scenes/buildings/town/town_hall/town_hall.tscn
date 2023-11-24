@@ -42,7 +42,7 @@ rotation = -3.14159
 shape = SubResource("RectangleShape2D_r4d4i")
 
 [node name="NavigationObstacleArea" parent="." instance=ExtResource("3_e0407")]
-polygon = PackedVector2Array(-576, 32, 376, 32, 376, -408, -576, -408)
+polygon = PackedVector2Array(-576, 32, 376, 32, 376, -272, -576, -272)
 metadata/_edit_pinned_properties_ = [&"polygon"]
 
 [connection signal="input_event" from="area 2d" to="." method="OnTownHallInput"]

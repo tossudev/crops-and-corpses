@@ -101,6 +101,9 @@ public partial class ArcherTower : Node2D
 
         await Task.Delay(delayTime);
 
+        if (isBroken)
+            return;
+
         FindTarget();
 
         if (_attackSpeedMultiplier != TownManager.currentTownStats.soldierAttackSpeed && TownManager.currentTownStats.soldierAttackSpeed != 0)

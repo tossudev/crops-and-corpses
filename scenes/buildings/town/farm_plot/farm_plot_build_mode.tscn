@@ -1,8 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c5f1jy5vlj4sd"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingMode.cs" id="1_cdgj4"]
-[ext_resource type="Texture2D" uid="uid://gx3rxc18ic1u" path="res://assets/sprites/buildings/farm_plot.jpg" id="1_smghy"]
-
+[ext_resource type="Texture2D" uid="uid://bsvydtv7ujwkm" path="res://assets/sprites/tiles/farm_tile.png" id="2_l77c4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iq8eo"]
 size = Vector2(62, 62)
@@ -15,7 +14,8 @@ script = ExtResource("1_cdgj4")
 [node name="FarmPlot" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.392157)
 position = Vector2(-32, -32)
-texture = ExtResource("1_smghy")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_l77c4")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-64, -64)

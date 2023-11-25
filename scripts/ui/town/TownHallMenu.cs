@@ -41,7 +41,7 @@ public partial class TownHallMenu : Control
 	{
 		if (menuInstance != null)
 		{
-			if (menuInstance.IsNodeReady())
+			if (!menuInstance.IsQueuedForDeletion())
 			{
 				menuInstance.QueueFree();
 			}
@@ -70,6 +70,12 @@ public partial class TownHallMenu : Control
 
 		
 		CloseAllPanels();
+	}
+
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		menuInstance = null;
 	}
 
 	void CloseAllPanels()

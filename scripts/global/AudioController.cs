@@ -10,7 +10,7 @@ public partial class AudioController : Node {
     AudioStreamPlayer _musicPlayer;
     AudioStreamPlayer _ambiencePlayer;
 
-    const string soundDirectory = "res://assets/Sounds/";
+    const string soundDirectory = "res://assets/sounds/";
 
 
     public override void _Ready() {

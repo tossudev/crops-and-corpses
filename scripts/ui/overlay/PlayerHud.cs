@@ -2,26 +2,21 @@ using Godot;
 using System;
 
 public partial class PlayerHud : Control {
-	
-	public CharacterBody2D player;
+    
+	string _tempLoseText = "You died";
 
-	string _tempLoseText = "get fucked looooll";
+    Label _hpText;
 
+    bool _initialized;
 
-    public override void _Ready() {
-		player = GetTree().GetNodesInGroup("player")[0] as CharacterBody2D;
-    }
+    void Init()
+	{
+		if (_initialized) return;
 
-
-    public override void _PhysicsProcess(double delta)
-    {
-	    base._PhysicsProcess(delta);
-	    
-	    _UpdateHud();
-    }
-
-
-    void _UpdateHud() {
-	    
+		_hpText = GetNode<Label>("%HealthText"); 
+		
+		_initialized = true;
 	}
+
+
 }

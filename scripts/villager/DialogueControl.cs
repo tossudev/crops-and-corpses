@@ -58,7 +58,7 @@ public  partial class DialogueControl : Control
 		
 		if (instance != null)
 		{
-			if (instance.IsNodeReady())
+			if (!instance.IsQueuedForDeletion())
 			{
 				instance.QueueFree();
 			}
@@ -104,6 +104,13 @@ public  partial class DialogueControl : Control
 		
 		ExitDialogue();
 	}
+
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		instance = null;
+	}
+
 
 	void SetNewOccupation(VillagerOccupation occupation)
 	{

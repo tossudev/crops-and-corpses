@@ -45,6 +45,12 @@ public partial class VillagerManager : Node
 		}
 	}
 
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		villagerManagerInstance = null;
+	}
+
 	async void SpawnSavedVillagers()
 	{
 		await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete);

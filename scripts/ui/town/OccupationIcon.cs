@@ -13,11 +13,14 @@ public partial class OccupationIcon : Control
 	[Export] VillagerOccupation _occupation;
 
 	bool initialized;
+	bool _initStarted;
 	
-	
-	void Initialize ()
+	async void Initialize ()
 	{
 		if (initialized) return;
+
+		_initStarted = true;
+		await TaskExtensions.SuspendWhile(() => VillagerManager.villagerManagerInstance == null, 100);
 		
 		_icon = GetNode<TextureRect>(ICON_NODENAME);
 		_icon.Texture = _iconSprite;
@@ -32,8 +35,15 @@ public partial class OccupationIcon : Control
 		base._PhysicsProcess(delta);
 
 		if (!Visible) return;
-		
-		if (!initialized) Initialize();
+
+		if (!initialized)
+		{
+			if (!_initStarted)
+			{
+				Initialize();
+			}
+			return;
+		}
         
 		int employeeAmount = _occupation switch
 		{

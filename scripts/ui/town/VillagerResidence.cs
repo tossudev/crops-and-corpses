@@ -39,8 +39,7 @@ public partial class VillagerResidence : Control
 
 	public void OpenVillagerDialoguePanel(Villager villager)
 	{
-		DialogueControl.instance.AssignVillager(villager);
-		DialogueControl.instance.OpenDialogueWindow();
+		DialogueControl.instance.OpenDialogueWindow(villager);
 	}
 
 	public void CloseDialoguePanel()

@@ -37,11 +37,11 @@ public partial class OccupationIcon : Control
         
 		int employeeAmount = _occupation switch
 		{
-			VillagerOccupation.Builder => VillagerManager.instance.BuilderVillagers.Count,
-			VillagerOccupation.Farmer => VillagerManager.instance.farmerVillagers.Count,
-			VillagerOccupation.Soldier => VillagerManager.instance.soldierVillagers.Count,
-			VillagerOccupation.Woodcutter => VillagerManager.instance.woodcutterVillagers.Count,
-			VillagerOccupation.Miner => VillagerManager.instance.minerVillagers.Count,
+			VillagerOccupation.Builder => VillagerManager.villagerManagerInstance.BuilderVillagers.Count,
+			VillagerOccupation.Farmer => VillagerManager.villagerManagerInstance.farmerVillagers.Count,
+			VillagerOccupation.Soldier => VillagerManager.villagerManagerInstance.soldierVillagers.Count,
+			VillagerOccupation.Woodcutter => VillagerManager.villagerManagerInstance.woodcutterVillagers.Count,
+			VillagerOccupation.Miner => VillagerManager.villagerManagerInstance.minerVillagers.Count,
 			_ => -1
 		};
 

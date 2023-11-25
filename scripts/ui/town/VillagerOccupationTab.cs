@@ -31,11 +31,11 @@ public partial class VillagerOccupationTab : ScrollContainer
 		
 		_occupationList = _occupation switch
 		{
-			VillagerOccupation.Builder => VillagerManager.instance.BuilderVillagers,
-			VillagerOccupation.Farmer => VillagerManager.instance.farmerVillagers,
-			VillagerOccupation.Soldier => VillagerManager.instance.soldierVillagers,
-			VillagerOccupation.Woodcutter => VillagerManager.instance.woodcutterVillagers,
-			VillagerOccupation.Miner => VillagerManager.instance.minerVillagers,
+			VillagerOccupation.Builder => VillagerManager.villagerManagerInstance.BuilderVillagers,
+			VillagerOccupation.Farmer => VillagerManager.villagerManagerInstance.farmerVillagers,
+			VillagerOccupation.Soldier => VillagerManager.villagerManagerInstance.soldierVillagers,
+			VillagerOccupation.Woodcutter => VillagerManager.villagerManagerInstance.woodcutterVillagers,
+			VillagerOccupation.Miner => VillagerManager.villagerManagerInstance.minerVillagers,
 			_ => null
 		};
 

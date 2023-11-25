@@ -3,90 +3,45 @@ using System;
 
 public partial class VillagerInfo : Control
 {
-	ColorRect _backgroundColor;
+	const string FARMER_HAT_RESPATH = "res://assets/sprites/character/hats/straw_hat.png";
+	const string SOLDIER_HAT_RESPATH = "res://assets/sprites/character/hats/bucket_helmet.png";
+	const string WOODCUTTER_HAT_RESPATH = "res://assets/sprites/character/hats/ushanka.png";
+	const string MINER_HAT_RESPATH = "res://assets/sprites/character/hats/mining_hat.png";
 	
-	TextureRect _villagerHatTextureRect;
+	
 	Texture2D _villagerHatTexture;
 	public Texture2D villagerHatTexture => _villagerHatTexture;
-	
-	TextureRect _villagerFaceTextureRect;
-	
-	Texture2D _villagerFaceTexture;
-	public Texture2D villagerFaceTexture => _villagerFaceTexture;
-	
-	RichTextLabel _nameText;
-	RichTextLabel _loreText;
-	RichTextLabel _statusText;
-	
-	
-	public override void _Ready()
+    
+	Texture2D _villagerHeadTexture;
+	public Texture2D villagerHeadTexture => _villagerHeadTexture;
+    
+
+	public void InitializeVillagerInfo(VillagerRawData data)
 	{
-		_backgroundColor = GetNode<ColorRect>("ColorRect");
-
-		_villagerFaceTextureRect = GetNode<TextureRect>("ColorRect/VillagerTexture");
-		_nameText = GetNode<RichTextLabel>("ColorRect/NameText");
-		_loreText = GetNode<RichTextLabel>("ColorRect/LoreText");
-		_statusText = GetNode<RichTextLabel>("ColorRect/StatusText");
-
-		Visible = false;
+		//Hat
+		ChangeHat(data.currentOccupation);
+		
+		_villagerHeadTexture = VillagerManager.villagerManagerInstance.GetTextureByType(
+			data.villagerType, BodyPartTextureType.Head);
 	}
 
-	public void InitializeVillagerInfo(Texture2D villagerFaceTexture, string villagerName, string villagerLore, VillagerState villagerState)
+	public void ChangeHat(VillagerOccupation occupation)
 	{
-		//TODO: Correct textures setter
-		// _villagerHatTexture = 
-		// _villagerHatTextureRect.Texture = _villagerHatTexture;
-		
-		_villagerFaceTexture = villagerFaceTexture;
-		_villagerFaceTextureRect.Texture = _villagerFaceTexture;
-		
-		_nameText.Text = villagerName;
-		_loreText.Text = villagerLore;
-		UpdateStatus(villagerState);
-		
-	}
-
-
-	public void UpdateStatus(VillagerState villagerState){
-		switch(villagerState){
-			case VillagerState.RoamAround:
-				_statusText.Text = "Status: Healthy";
-				break;
-			case VillagerState.FollowPlayer:
-				_statusText.Text = "Status: Following";
-				break;
-			case VillagerState.FixFence:
-				_statusText.Text = "Status: Repairing";
-				break;
-			case VillagerState.FindArcherTower:
-				_statusText.Text = "Status: Defending";
-				break;
-			case VillagerState.FindShelter:
-				_statusText.Text = "Status: Finding Cover";
-				break;
-			case VillagerState.ChooseTask:
-				_statusText.Text = "Status: Healthy";
-				break;
-			case VillagerState.FarmingTask:
-				_statusText.Text = "Status: Farming";
-				break;
-			
-			case VillagerState.FindWoodTask:
-				_statusText.Text = "Status: Cutting wood";
-				break;
-			
-			case VillagerState.FindStoneTask:
-				_statusText.Text = "Status: Mining stone";
-				break;
+		if (occupation == VillagerOccupation.Builder)
+		{
+			_villagerHatTexture = new Texture2D();
+			return;
 		}
-	}
-	public void OpenInfo()
-	{
-		Visible = true;
-	}
-	
-	public void CloseInfo()
-	{
-		Visible = false;
+		
+		string hatResourceString = occupation switch
+		{
+			VillagerOccupation.Farmer => FARMER_HAT_RESPATH,
+			VillagerOccupation.Soldier => SOLDIER_HAT_RESPATH,
+			VillagerOccupation.Woodcutter => WOODCUTTER_HAT_RESPATH,
+			VillagerOccupation.Miner => MINER_HAT_RESPATH,
+			_ => throw new ArgumentOutOfRangeException(nameof(occupation), occupation, null)
+		};
+
+		_villagerHatTexture = ResourceLoader.Load<Texture2D>(hatResourceString);
 	}
 }

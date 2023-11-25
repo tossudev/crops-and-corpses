@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmh424wu5k4gb"]
+[gd_scene load_steps=2 format=3 uid="uid://bmh424wu5k4gb"]
 
 [ext_resource type="Script" path="res://scripts/ui/overlay/VillagerInfo.cs" id="1_t72qs"]
-[ext_resource type="Texture2D" uid="uid://c1sm88vok0oma" path="res://assets/placeholder/zombie_placeholder.png" id="2_ediht"]
-
 
 [node name="VillagerInfo" type="Control"]
 visibility_layer = 512
@@ -19,54 +17,3 @@ offset_bottom = -372.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t72qs")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(168, 168)
-layout_mode = 0
-color = Color(0.486275, 0.403922, 0.317647, 1)
-
-[node name="VillagerTexture" type="TextureRect" parent="ColorRect"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-texture = ExtResource("2_ediht")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="NameText" type="RichTextLabel" parent="ColorRect"]
-unique_name_in_owner = true
-modulate = Color(0, 0, 0, 1)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.031
-anchor_right = 0.406
-anchor_bottom = 0.141
-offset_left = 58.792
-offset_top = 4.0
-offset_right = 85.042
-offset_bottom = 7.85
-grow_horizontal = 2
-text = "Npc name"
-
-[node name="LoreText" type="RichTextLabel" parent="ColorRect"]
-unique_name_in_owner = true
-modulate = Color(0, 0, 0, 1)
-clip_contents = false
-custom_minimum_size = Vector2(96, 72)
-layout_mode = 0
-offset_left = 68.0
-offset_top = 44.0
-offset_right = 164.0
-offset_bottom = 116.0
-text = "text here"
-
-[node name="StatusText" type="RichTextLabel" parent="ColorRect"]
-unique_name_in_owner = true
-modulate = Color(0, 0, 0, 1)
-clip_contents = false
-custom_minimum_size = Vector2(168, 48)
-layout_mode = 0
-offset_top = 116.0
-offset_right = 168.0
-offset_bottom = 164.0
-text = "Status: Injured"

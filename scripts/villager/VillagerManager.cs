@@ -5,7 +5,7 @@ using System.Linq;
 
 public partial class VillagerManager : Node
 {
-	public static VillagerManager instance;
+	public static VillagerManager villagerManagerInstance;
 	
 	// Villager Lists
 	List<Villager> _allVillagers = new ();
@@ -35,7 +35,7 @@ public partial class VillagerManager : Node
 	
 	public override void _Ready()
 	{
-		if(instance==null)instance=this;else QueueFree();
+		if(villagerManagerInstance==null)villagerManagerInstance=this;else QueueFree();
 
 		_villagerParentNode = GetNode<Node2D>(VILLAGER_PARENT_NODEPATH);
 		
@@ -126,6 +126,14 @@ public partial class VillagerManager : Node
 		};
 		
 		villager.currentOccupationList.Add(villager);
+
+		villager.rawData.currentOccupation = newOccupation;
+		villager.villagerInfo.ChangeHat(newOccupation);
+	}
+
+	public Texture2D GetTextureByType(VillagerType type, BodyPartTextureType part)
+	{
+		return _allData.GetTextureByType(type, part);
 	}
 }
 
@@ -133,6 +141,23 @@ public struct VillagerData{
 	public string name;
 	public string info;
 	public Texture2D texture;
+}
+
+public enum VillagerType
+{
+	Female1,
+	Female2,
+	Female3
+}
+
+public enum BodyPartTextureType
+{
+	Head,
+	Body,
+	LeftArm,
+	RightArm,
+	LeftFoot,
+	RightFoot
 }
 
 public enum VillagerState

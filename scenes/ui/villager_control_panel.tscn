@@ -1,17 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://bp0j6co1k7bim"]
+[gd_scene load_steps=11 format=3 uid="uid://bp0j6co1k7bim"]
 
 [ext_resource type="Script" path="res://scripts/villager/DialogueControl.cs" id="1_02ul8"]
-[ext_resource type="PackedScene" uid="uid://bmh424wu5k4gb" path="res://scenes/ui/villager_info.tscn" id="2_nfk07"]
+[ext_resource type="StyleBox" uid="uid://cekqcomecgkhn" path="res://assets/resources/styles/default_ui_style_box_texture.tres" id="2_a74se"]
+[ext_resource type="LabelSettings" uid="uid://cgpffxjx1da83" path="res://assets/resources/labelsettings/villager_name_label_settings.tres" id="3_cwpme"]
+[ext_resource type="StyleBox" uid="uid://4n1kln0dgyha" path="res://assets/resources/labelsettings/villager_mood_text_style_box_texture.tres" id="4_6d0qw"]
+[ext_resource type="LabelSettings" uid="uid://vgv4ruwo62re" path="res://assets/resources/labelsettings/villager_mood_text_label_settings.tres" id="4_bmerq"]
+[ext_resource type="Texture2D" uid="uid://bnd33hpfvrxau" path="res://assets/sprites/character/hats/ushanka.png" id="4_jefot"]
+[ext_resource type="Texture2D" uid="uid://vdrlnp0brkoy" path="res://assets/sprites/character/npc2/SVG/head.svg" id="5_oo0ry"]
+[ext_resource type="LabelSettings" uid="uid://c58omraid67fd" path="res://assets/resources/labelsettings/villager_occupations_header_label_settings.tres" id="6_kx0s4"]
+[ext_resource type="FontFile" uid="uid://doceug7kw76yx" path="res://assets/resources/labelsettings/base_ui_font.tres" id="6_pr2p0"]
+[ext_resource type="LabelSettings" uid="uid://bqcg7d7ahuyjg" path="res://assets/resources/labelsettings/villager_status_label_settings.tres" id="7_b3kd7"]
 
 [node name="VillagerControlPanel" type="Control"]
 visibility_layer = 512
+custom_minimum_size = Vector2(448, 576)
 layout_mode = 3
 anchors_preset = 0
-scale = Vector2(2, 2)
+offset_right = 360.0
+offset_bottom = 512.0
 script = ExtResource("1_02ul8")
 
 [node name="Panel" type="Panel" parent="."]
-custom_minimum_size = Vector2(200, 250)
+custom_minimum_size = Vector2(448, 576)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -20,77 +30,164 @@ offset_left = -100.0
 offset_right = 100.0
 offset_bottom = 250.0
 grow_horizontal = 2
+theme_override_styles/panel = ExtResource("2_a74se")
 
-[node name="OccupationsLabel" type="Label" parent="Panel"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(420, 256)
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 26.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+theme_override_constants/margin_left = 11
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="VillagerName" type="Label" parent="Panel/VBoxContainer2/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "John Doe"
+label_settings = ExtResource("3_cwpme")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(148, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer2/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+theme_override_constants/separation = -61
+
+[node name="VillagerHatTexture" type="TextureRect" parent="Panel/VBoxContainer2/HBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+z_index = 1
+custom_minimum_size = Vector2(96, 72)
+layout_mode = 2
+texture = ExtResource("4_jefot")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VillagerHeadTexture" type="TextureRect" parent="Panel/VBoxContainer2/HBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("5_oo0ry")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VillagerLore" type="RichTextLabel" parent="Panel/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_pr2p0")
+theme_override_font_sizes/normal_font_size = 18
+text = "Oman elämänsä kasvatti. syö pelkkää heinää joka päivä pysyäkseen terveenä"
+autowrap_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="Panel/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 8
+
+[node name="VillagerStatus" type="Label" parent="Panel/VBoxContainer2/MarginContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Status:  Waiting for sunrise"
+label_settings = ExtResource("7_b3kd7")
+vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="Panel/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_right = 8
+
+[node name="MoodPanel" type="Panel" parent="Panel/VBoxContainer2/MarginContainer3"]
+custom_minimum_size = Vector2(248, 64)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_6d0qw")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer2/MarginContainer3/MoodPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="MoodText" type="Label" parent="Panel/VBoxContainer2/MarginContainer3/MoodPanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "I hope there's not too much work in the morning!"
+label_settings = ExtResource("4_bmerq")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="OccupationsLabel" type="Label" parent="Panel/VBoxContainer2"]
+layout_mode = 2
 text = "Occupations"
+label_settings = ExtResource("6_kx0s4")
 horizontal_alignment = 1
 
-[node name="MoodText" type="RichTextLabel" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BuilderButton" type="Button" parent="Panel/VBoxContainer2/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-modulate = Color(0.235294, 0.796078, 0.94902, 1)
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 15.5
-offset_top = 35.5
-offset_right = 15.5
-offset_bottom = 72.5
-grow_horizontal = 2
-scale = Vector2(0.847, 1)
-text = "text here"
+visible = false
+layout_mode = 2
+text = "Become Builder"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -83.0
-offset_top = -171.0
-offset_right = 83.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="FarmerButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="FarmerButton" type="Button" parent="Panel/VBoxContainer2/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Become Farmer"
 
-[node name="SoldierButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="SoldierButton" type="Button" parent="Panel/VBoxContainer2/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Become Soldier"
 
-[node name="WoodcutterButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="WoodcutterButton" type="Button" parent="Panel/VBoxContainer2/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Become Woodcutter"
 
-[node name="MinerButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="MinerButton" type="Button" parent="Panel/VBoxContainer2/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Become Miner"
 
-[node name="DismissButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="DismissButton" type="Button" parent="Panel/VBoxContainer2/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Dismiss"
-
-[node name="ColorRect" type="ColorRect" parent="Panel/VBoxContainer"]
-visible = false
-layout_mode = 2
-color = Color(0.603922, 0.545098, 0.8, 1)
-
-[node name="VillagerInfo" parent="." instance=ExtResource("2_nfk07")]
-unique_name_in_owner = true
-layout_mode = 1
-offset_left = -100.0
-offset_top = -168.0
-offset_right = 68.0
-offset_bottom = 0.0

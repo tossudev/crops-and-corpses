@@ -14,7 +14,6 @@ public enum VillagerOccupation
 
 public partial class Villager : CharacterBody2D
 {
-	VillagerState _state;
 	//[Export] VillagerManager _villagerManager;
 	Vector2 _targetPosition;
 	Timer _timer;
@@ -45,9 +44,6 @@ public partial class Villager : CharacterBody2D
 
 	bool _inTownScene;
 
-    VillagerOccupation _currentOccupation;
-    public VillagerOccupation currentOccupation => _currentOccupation;
-
     public List<Villager> currentOccupationList;
 
     public VillagerResidence currentResidence;
@@ -67,34 +63,36 @@ public partial class Villager : CharacterBody2D
 		_timer.Timeout += State;
 		AddChild(_timer);
 		_timer.Start();
-
-		_inTownScene = SceneManager.IsCurrentScene(this, Scene.Town);
-		
-		if(!_inTownScene)
-		{
-			needResque = true;
-			_state = VillagerState.ResqueQuest;
-		}
-		else
-		{
-			needResque = false;
-			_state = VillagerState.RoamAround;
-		}
 	}
 
 	public void InitializeVillager(VillagerRawData data)
 	{
 		_rawData = data;
 		
-		ChangeOccupation(data.currentOccupation);
-		_state = VillagerState.RoamAround;
+		_info.InitializeVillagerInfo(data);
         
 		// TODO: This needs to be changed once the rig sprites are in place and saved
-		_villagerSprite.Texture = VillagerManager.instance.GetNewVillagerData().texture;
+		_villagerSprite.Texture = VillagerManager.villagerManagerInstance.GetNewVillagerData().texture;
 		
-		_info.InitializeVillagerInfo(_villagerSprite.Texture, data.name, data.lore, _state);
+		
+		_inTownScene = SceneManager.IsCurrentScene(this, Scene.Town);
+		
+		if(!_inTownScene)
+		{
+			needResque = true;
+			SetCurrentState(VillagerState.ResqueQuest);
+		}
+		else
+		{
+			needResque = false;
+			SetCurrentState(VillagerState.RoamAround);
+		}
 	}
-	
+
+	void SetCurrentState(VillagerState state)
+	{
+		rawData.currentState = state;
+	}
 	
 	public override void _PhysicsProcess(double delta)
 	{
@@ -108,21 +106,16 @@ public partial class Villager : CharacterBody2D
 		}
 	}
 
-	public VillagerState GetVillagerStates()
-	{
-		return _state;
-	}
-
 	public void EnterShelter()
 	{
-		_state = VillagerState.InShelter;
+		SetCurrentState(VillagerState.InShelter);
 		_targetPosition = GlobalPosition;
 		Visible = false;
 	}
 
 	public void ExitShelter()
 	{
-		_state = VillagerState.ChooseTask;
+		SetCurrentState(VillagerState.ChooseTask);
 		Visible = true;
 	}
 	
@@ -130,24 +123,24 @@ public partial class Villager : CharacterBody2D
 	{
         if (!TimeManager.dayTime && !_inTownScene)
         {
-	        switch (_currentOccupation)
+	        switch (_rawData.currentOccupation)
 	        {
 		        case VillagerOccupation.Soldier:
-			        _state = VillagerState.FindArcherTower;
+			        SetCurrentState(VillagerState.FindArcherTower);
 			        break;
 
 		        default:
 		        {
-			        if (_state != VillagerState.InShelter)
+			        if (rawData.currentState != VillagerState.InShelter)
 			        {
-				        _state = VillagerState.FindShelter;
+				        SetCurrentState(VillagerState.FindShelter);
 			        }
 			        break;
 		        }
 	        }
         }
 		
-        switch (_state)
+        switch (rawData.currentState)
 		{
 			case VillagerState.RoamAround:
 				RoamAround();
@@ -189,7 +182,7 @@ public partial class Villager : CharacterBody2D
 
 				if (TimeManager.dayTime)
 				{
-					_state = VillagerState.ChooseTask;
+					SetCurrentState(VillagerState.ChooseTask);;
 				}
 				else
 				{
@@ -223,15 +216,14 @@ public partial class Villager : CharacterBody2D
 
 	public void OpenDialogue()
 	{
-		DialogueControl.instance.AssignVillager(this);
-		DialogueControl.instance.OpenDialogueWindow();
+		DialogueControl.instance.OpenDialogueWindow(this);
 	}
 
 	public void OpenResqueDialogue()
 	{
 		GD.Print("You saved me");
 		// Tähä joku button tai joku ?????
-		_state = VillagerState.FollowPlayer;
+		SetCurrentState(VillagerState.FollowPlayer);
 	}
 
 	const string VILLAGER_RESIDENCE_NODENAME = "%TownHallMenu";
@@ -280,38 +272,49 @@ public partial class Villager : CharacterBody2D
 	
 	void ChooseTask()
 	{
-		switch (_currentOccupation)
+		VillagerState decision = VillagerState.ChooseTask;
+		
+		switch (_rawData.currentOccupation)
 		{
+			case VillagerOccupation.Builder:
+				decision = VillagerState.FixFence;
+				break;
+			
 			case VillagerOccupation.Farmer:
 				GD.Print("Farming task started");
-				_state = VillagerState.FarmingTask;
+				decision = VillagerState.FarmingTask;
 				break;
 			
 			case VillagerOccupation.Soldier:
+
+				if (TimeManager.dayTime)
+				{
+					decision = VillagerState.RoamAround;
+				}
+				else
+				{
+					//TODO: If there are free archery towers, enter one. Otherwise look for shelter
+				}
+				
 				break;
 			
 			case VillagerOccupation.Woodcutter:
 				GD.Print("Finding wood");
-				_state = VillagerState.FindWoodTask;
+				decision = VillagerState.FindWoodTask;
 				break;
 			
 			case VillagerOccupation.Miner:
 				GD.Print("Finding stone");
-				_state = VillagerState.FindStoneTask;
+				decision = VillagerState.FindStoneTask;
 				break;
+
 			
 			default:
-				_state = VillagerState.RoamAround;
+				decision = VillagerState.RoamAround;
 				break;
 		}
 
-		DialogueControl.instance.ExitDialogue();
-	}
-	
-	public void ChangeOccupation(VillagerOccupation occupation)
-	{
-		VillagerManager.instance.SetVillagerOccupation(this, occupation);
-		_currentOccupation = occupation;
+		SetCurrentState(decision);
 	}
 	
  	void GatherResources()
@@ -330,13 +333,13 @@ public partial class Villager : CharacterBody2D
 	{
 		Random rnd = new Random();
 		_villagerSprite.Visible = true;
-		if(_currentOccupation == VillagerOccupation.Miner)
+		if(_rawData.currentOccupation == VillagerOccupation.Miner)
 		{
 			int amount = rnd.Next(4, 21);
 			GD.Print("Found: " + amount + " stone");
 		}
 		
-		if(_currentOccupation == VillagerOccupation.Woodcutter)
+		if(_rawData.currentOccupation == VillagerOccupation.Woodcutter)
 		{
 			int amount = rnd.Next(4, 21);
 			GD.Print("Found: " + amount + " wood");
@@ -344,7 +347,7 @@ public partial class Villager : CharacterBody2D
 		
 		_taskStarted = false;
 		_resourceTaskCounter = 0;
-		_state = VillagerState.RoamAround;
+		ChooseTask();
 	}
 
 	void WaitingResque()
@@ -384,11 +387,9 @@ public partial class Villager : CharacterBody2D
 				}
 				return;
 			}
-			else
-			{
-				_state = VillagerState.RoamAround;
-				return;
-			}
+
+			SetCurrentState(VillagerState.RoamAround);
+			return;
 		}
 		if (GlobalPosition.DistanceTo(_currentPlant.GlobalPosition) < 5)
 		{

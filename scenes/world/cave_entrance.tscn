@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ca4ui8y2u11io"]
+
+[ext_resource type="Script" path="res://scripts/World/Portal.cs" id="1_fbumw"]
+[ext_resource type="Texture2D" uid="uid://dy1yfxvn4qrlf" path="res://assets/sprites/Farm sprites/cave enter.png" id="2_gv24c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t05ui"]
+size = Vector2(105, 87)
+
+[node name="cave_entrance" type="Node2D"]
+script = ExtResource("1_fbumw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_gv24c")
+offset = Vector2(0, -65.65)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-3.5, -26.5)
+shape = SubResource("RectangleShape2D_t05ui")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

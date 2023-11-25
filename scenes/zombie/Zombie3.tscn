@@ -7,14 +7,14 @@
 [ext_resource type="Script" path="res://scripts/zombie/states/ZombieIdle.cs" id="5_svqgf"]
 [ext_resource type="Script" path="res://scripts/zombie/states/ZombieChase.cs" id="6_splqn"]
 [ext_resource type="Script" path="res://scripts/zombie/states/ZombieAttackFence.cs" id="7_ud7o8"]
-[ext_resource type="Texture2D" uid="uid://cbe403j44jl6w" path="res://assets/placeholder/zombie_placeholder.png" id="8_gbfml"]
+[ext_resource type="Texture2D" uid="uid://c1sm88vok0oma" path="res://assets/placeholder/zombie_placeholder.png" id="8_gbfml"]
 [ext_resource type="AudioStream" uid="uid://b4giy84o2s7c5" path="res://assets/Sounds/zombies/zombie_hiss1.wav" id="9_0m1tw"]
-[ext_resource type="Texture2D" uid="uid://connybbalcxxb" path="res://assets/sprites/character/zombie2/2.2/1x/right leg.png" id="10_8edlh"]
-[ext_resource type="Texture2D" uid="uid://f087fflpsqy0" path="res://assets/sprites/character/zombie2/2.2/1x/left leg.png" id="11_xh3jb"]
-[ext_resource type="Texture2D" uid="uid://mth3lvgsp2h" path="res://assets/sprites/character/zombie2/2.2/1x/left hand.png" id="12_l0v6n"]
-[ext_resource type="Texture2D" uid="uid://c8ijp8o1wqaus" path="res://assets/sprites/character/zombie2/2.2/1x/torso.png" id="13_y8sor"]
-[ext_resource type="Texture2D" uid="uid://fjx7csh37uqq" path="res://assets/sprites/character/zombie2/2.2/1x/head.png" id="14_nev2c"]
-[ext_resource type="Texture2D" uid="uid://dd004u1ii1vov" path="res://assets/sprites/character/zombie2/2.2/1x/right hand.png" id="15_pb5q7"]
+[ext_resource type="Texture2D" uid="uid://624mvn0c463y" path="res://assets/sprites/character/zombie2/2.2/1x/right leg.png" id="10_8edlh"]
+[ext_resource type="Texture2D" uid="uid://cdrxl0o3fmjo8" path="res://assets/sprites/character/zombie2/2.2/1x/left leg.png" id="11_xh3jb"]
+[ext_resource type="Texture2D" uid="uid://bn6yykouj2mhr" path="res://assets/sprites/character/zombie2/2.2/1x/left hand.png" id="12_l0v6n"]
+[ext_resource type="Texture2D" uid="uid://ikauheit4l56" path="res://assets/sprites/character/zombie2/2.2/1x/torso.png" id="13_y8sor"]
+[ext_resource type="Texture2D" uid="uid://cumvcct74xofg" path="res://assets/sprites/character/zombie2/2.2/1x/head.png" id="14_nev2c"]
+[ext_resource type="Texture2D" uid="uid://bsstigqe644y5" path="res://assets/sprites/character/zombie2/2.2/1x/right hand.png" id="15_pb5q7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5h8wa"]
 radius = 27.0
@@ -306,7 +306,6 @@ offset = Vector2(0, -20)
 wait_time = 2.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="ZombieNoise" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_0m1tw")

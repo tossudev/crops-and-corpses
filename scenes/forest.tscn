@@ -1,6 +1,6 @@
-[gd_scene load_steps=112 format=3 uid="uid://cce2sygxgl033"]
+[gd_scene load_steps=113 format=3 uid="uid://cce2sygxgl033"]
 
-[ext_resource type="PackedScene" path="res://scenes/world/navigation_manager.tscn" id="1_dfb2v"]
+[ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="1_dfb2v"]
 [ext_resource type="Script" path="res://scripts/villager/VillagerManager.cs" id="1_r3xju"]
 [ext_resource type="Texture2D" uid="uid://ehsp5k83fvvb" path="res://assets/sprites/tiles/grass_flowers2_tile.png" id="1_sbei6"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/water.gdshader" id="2_3pryh"]
@@ -14,56 +14,57 @@
 [ext_resource type="Texture2D" uid="uid://b0dlu5nexmss2" path="res://assets/sprites/tiles/grass_tile.png" id="4_jql1j"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_5m7lu"]
 [ext_resource type="Texture2D" uid="uid://bbei648d3eovx" path="res://assets/placeholder/test_character/character.png" id="5_grghj"]
-[ext_resource type="Texture2D" uid="uid://dhsfjkifehqck" path="res://assets/sprites/tiles/Dirt_rocks_tile.png" id="6_5rtbt"]
+[ext_resource type="Texture2D" uid="uid://bf0kk4xsi7048" path="res://assets/sprites/tiles/Dirt_rocks_tile.png" id="6_5rtbt"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="6_d65ob"]
-[ext_resource type="Texture2D" uid="uid://bgtmbfodrwqhe" path="res://assets/sprites/tiles/dirt_corner_tile1.png" id="6_u3bux"]
-[ext_resource type="Texture2D" uid="uid://dp6pw63tcfrl1" path="res://assets/sprites/tiles/dirt_corner_tile5.png" id="7_3xb4g"]
+[ext_resource type="Texture2D" uid="uid://ciufpqpghmeav" path="res://assets/sprites/tiles/dirt_corner_tile1.png" id="6_u3bux"]
+[ext_resource type="Texture2D" uid="uid://dp4y2ymnnwv5x" path="res://assets/sprites/tiles/dirt_corner_tile5.png" id="7_3xb4g"]
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="7_jud20"]
-[ext_resource type="Texture2D" uid="uid://b3jbsssxfa5d0" path="res://assets/sprites/tiles/dirt_corner_tile6.png" id="8_682m5"]
+[ext_resource type="Texture2D" uid="uid://detsecq6dg2ji" path="res://assets/sprites/tiles/dirt_corner_tile6.png" id="8_682m5"]
 [ext_resource type="Texture2D" uid="uid://n8iftcgk0ti0" path="res://assets/sprites/tiles/Sand_tile.png" id="8_e4y30"]
-[ext_resource type="Texture2D" uid="uid://b1p5pr8rl5ao2" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="8_x823n"]
-[ext_resource type="Texture2D" uid="uid://cvrwsbcrk40ky" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="9_5rwtt"]
+[ext_resource type="Texture2D" uid="uid://bt1pgtletm2bp" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="8_x823n"]
+[ext_resource type="Texture2D" uid="uid://bhen5nf0nap5k" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="9_5rwtt"]
 [ext_resource type="Texture2D" uid="uid://bp0rwsioa22xs" path="res://assets/sprites/foliage/sprite_bush.png" id="9_484hk"]
-[ext_resource type="Texture2D" uid="uid://cu21gqkgemfyd" path="res://assets/sprites/tiles/dirt_corner_tile7.png" id="9_sudqa"]
-[ext_resource type="Texture2D" uid="uid://bm3t1j2epo8mh" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="10_o4kc8"]
-[ext_resource type="Texture2D" uid="uid://dl7glndmbkna3" path="res://assets/sprites/tiles/dirt_corner_tile8.png" id="10_rbg3b"]
-[ext_resource type="Texture2D" uid="uid://dpeka1n5kwv22" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="11_atcgv"]
+[ext_resource type="Texture2D" uid="uid://dh822ev4ed6xd" path="res://assets/sprites/tiles/dirt_corner_tile7.png" id="9_sudqa"]
+[ext_resource type="Texture2D" uid="uid://duolj84sp2sjx" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="10_o4kc8"]
+[ext_resource type="Texture2D" uid="uid://ccfsr35cmhnq8" path="res://assets/sprites/tiles/dirt_corner_tile8.png" id="10_rbg3b"]
+[ext_resource type="Texture2D" uid="uid://cu82aaaq0pb5r" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="11_atcgv"]
 [ext_resource type="PackedScene" uid="uid://bcoq8weob6f7g" path="res://scenes/world/tree2.tscn" id="11_r6rlm"]
-[ext_resource type="Texture2D" uid="uid://1l7oq7twd5ql" path="res://assets/sprites/tiles/grass_corner_tile1.png" id="11_x68fl"]
+[ext_resource type="Texture2D" uid="uid://cwhfnwiowk0u6" path="res://assets/sprites/tiles/grass_corner_tile1.png" id="11_x68fl"]
 [ext_resource type="PackedScene" uid="uid://du4tddxtyn51y" path="res://scenes/world/tree3.tscn" id="12_0nbqh"]
-[ext_resource type="Texture2D" uid="uid://tllxfsymq4vi" path="res://assets/sprites/tiles/grass_corner_tile2.png" id="12_xqhjk"]
-[ext_resource type="Texture2D" uid="uid://d1un4tlfdr3el" path="res://assets/sprites/tiles/grass_corner_tile3.png" id="13_c7wja"]
-[ext_resource type="Texture2D" uid="uid://y7rys8aqb4nm" path="res://assets/sprites/tiles/grass_corner_tile4.png" id="14_78vcf"]
-[ext_resource type="Texture2D" uid="uid://b8pq04xnqet8c" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="15_ie1vm"]
+[ext_resource type="Texture2D" uid="uid://556ehmvxj0lt" path="res://assets/sprites/tiles/grass_corner_tile2.png" id="12_xqhjk"]
+[ext_resource type="Texture2D" uid="uid://dis11gkqrkkso" path="res://assets/sprites/tiles/grass_corner_tile3.png" id="13_c7wja"]
+[ext_resource type="Texture2D" uid="uid://c6vfjuod286y6" path="res://assets/sprites/tiles/grass_corner_tile4.png" id="14_78vcf"]
+[ext_resource type="Texture2D" uid="uid://b13l88w6b2qh0" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="15_ie1vm"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="16_rit5n"]
 [ext_resource type="PackedScene" uid="uid://3ct83j0jgteb" path="res://scenes/buildings/town/house/house.tscn" id="16_tadus"]
-[ext_resource type="Texture2D" uid="uid://65vtecbdteyv" path="res://assets/sprites/tiles/grass_corner_tile6.png" id="17_0beee"]
+[ext_resource type="Texture2D" uid="uid://bi48utqac6akr" path="res://assets/sprites/tiles/grass_corner_tile6.png" id="17_0beee"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="17_ay1u5"]
-[ext_resource type="Texture2D" uid="uid://db6vx5gu2isqf" path="res://assets/sprites/tiles/grass_corner_tile7.png" id="18_8hjld"]
+[ext_resource type="Texture2D" uid="uid://d3svcqsb68vbq" path="res://assets/sprites/tiles/grass_corner_tile7.png" id="18_8hjld"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_g46xp"]
 [ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://scenes/world/SunlightContainer.tscn" id="18_j47l1"]
-[ext_resource type="Texture2D" uid="uid://d0p1n5y0uaenf" path="res://assets/sprites/ui/wooden_panel.png" id="19_dhclt"]
-[ext_resource type="Texture2D" uid="uid://do67fkvjtufsq" path="res://assets/sprites/tiles/grass_corner_tile8.png" id="19_j3eyx"]
-[ext_resource type="Texture2D" uid="uid://behp3phlg6aag" path="res://assets/sprites/tiles/Sand_corner_tile1.png" id="20_1e5by"]
+[ext_resource type="Texture2D" uid="uid://p0vefm8oo5l8" path="res://assets/sprites/ui/wooden_panel.png" id="19_dhclt"]
+[ext_resource type="Texture2D" uid="uid://b44jwe681onp5" path="res://assets/sprites/tiles/grass_corner_tile8.png" id="19_j3eyx"]
+[ext_resource type="Texture2D" uid="uid://cqfverwpt5y6q" path="res://assets/sprites/tiles/Sand_corner_tile1.png" id="20_1e5by"]
 [ext_resource type="Texture2D" uid="uid://brllcegw86j6w" path="res://assets/sprites/foliage/mini_tree.png" id="20_xwnol"]
 [ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://scenes/farm/farm_plot.tscn" id="21_3lgi7"]
 [ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="21_tox2m"]
-[ext_resource type="Texture2D" uid="uid://bnes8k2awanqv" path="res://assets/sprites/tiles/sand_corner_tile2.png" id="21_w6pde"]
+[ext_resource type="Texture2D" uid="uid://ns6o4wxlgaip" path="res://assets/sprites/tiles/sand_corner_tile2.png" id="21_w6pde"]
 [ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/iron_ore.tscn" id="22_4gs3r"]
-[ext_resource type="Texture2D" uid="uid://bohq7iyatfq48" path="res://assets/sprites/tiles/sand_corner_tile3.png" id="22_q34ae"]
+[ext_resource type="Texture2D" uid="uid://11mmp8wusubs" path="res://assets/sprites/tiles/sand_corner_tile3.png" id="22_q34ae"]
 [ext_resource type="Texture2D" uid="uid://q5wxg1if5hb8" path="res://assets/sprites/foliage/tree_2.png" id="22_r2sim"]
 [ext_resource type="PackedScene" uid="uid://bljea7oopk7tf" path="res://scenes/farm/plants/plant_mushroom.tscn" id="23_7l40m"]
-[ext_resource type="Texture2D" uid="uid://ct3ffcovobj5e" path="res://assets/sprites/tiles/sand_corner_tile4.png" id="23_uto3x"]
-[ext_resource type="Texture2D" uid="uid://bro7u46blu6wm" path="res://assets/sprites/tiles/sand_corner_tile5.png" id="24_7hyvp"]
+[ext_resource type="Texture2D" uid="uid://cnh3ckrtpierw" path="res://assets/sprites/tiles/sand_corner_tile4.png" id="23_uto3x"]
+[ext_resource type="Texture2D" uid="uid://ber4aj8tat8s2" path="res://assets/sprites/tiles/sand_corner_tile5.png" id="24_7hyvp"]
 [ext_resource type="Texture2D" uid="uid://dcyviqfhbqcay" path="res://assets/sprites/foliage/tree_1.png" id="25_bu01n"]
-[ext_resource type="Texture2D" uid="uid://co5228lwh0bm5" path="res://assets/sprites/tiles/sand_corner_tile6.png" id="25_lcfwp"]
-[ext_resource type="Texture2D" uid="uid://ci3pbhg4y1rwb" path="res://assets/sprites/tiles/sand_corner_tile7.png" id="26_8e1hi"]
-[ext_resource type="Texture2D" uid="uid://d2pwg0832cpmu" path="res://assets/sprites/tiles/sand_corner_tile8.png" id="28_h6bf1"]
-[ext_resource type="Texture2D" uid="uid://bujwkrdhtqjpu" path="res://assets/sprites/tiles/dirt_corner_tile4.png" id="32_50gts"]
-[ext_resource type="Texture2D" uid="uid://bnr1yts2w1epp" path="res://assets/sprites/tiles/dirt_corner_tile2.png" id="33_2sb2l"]
-[ext_resource type="Texture2D" uid="uid://w1ogvt7srgdn" path="res://assets/sprites/tiles/dirt_corner_tile3.png" id="34_4o5k3"]
-[ext_resource type="Texture2D" uid="uid://dhy1m73jobbac" path="res://assets/sprites/tiles/cobblestone_corner_tile.png" id="39_uyldf"]
-[ext_resource type="Texture2D" uid="uid://c1ovhsmmieuuk" path="res://assets/sprites/tiles/cobblestone_tile.png" id="40_lgl07"]
+[ext_resource type="Texture2D" uid="uid://1ds8j1x1xfau" path="res://assets/sprites/tiles/sand_corner_tile6.png" id="25_lcfwp"]
+[ext_resource type="Texture2D" uid="uid://dpud2x855pn1g" path="res://assets/sprites/tiles/sand_corner_tile7.png" id="26_8e1hi"]
+[ext_resource type="Texture2D" uid="uid://oyp5jj0k0q4b" path="res://assets/sprites/tiles/sand_corner_tile8.png" id="28_h6bf1"]
+[ext_resource type="Texture2D" uid="uid://distq4ydvqkma" path="res://assets/sprites/tiles/dirt_corner_tile4.png" id="32_50gts"]
+[ext_resource type="Texture2D" uid="uid://fwi0ooryswlk" path="res://assets/sprites/tiles/dirt_corner_tile2.png" id="33_2sb2l"]
+[ext_resource type="Texture2D" uid="uid://bql3k2stmytly" path="res://assets/sprites/tiles/dirt_corner_tile3.png" id="34_4o5k3"]
+[ext_resource type="Texture2D" uid="uid://xtmcesfk1xmb" path="res://assets/sprites/tiles/cobblestone_corner_tile.png" id="39_uyldf"]
+[ext_resource type="Texture2D" uid="uid://c4qgf8271fu1f" path="res://assets/sprites/tiles/cobblestone_tile.png" id="40_lgl07"]
+[ext_resource type="PackedScene" uid="uid://ca4ui8y2u11io" path="res://scenes/world/cave_entrance.tscn" id="49_ibfou"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_wki16"]
 vertices = PackedVector2Array(-7153, -2887, -6536, -2777, -6483, -1878, -7098, -1808)
@@ -488,6 +489,10 @@ position = Vector2(1208, 2362)
 scale = Vector2(2.69943, 2.69943)
 _animationPlayer = NodePath("../Trees/FillerTrees/Tree7/AnimationPlayer")
 
+[node name="cave_entrance" parent="Objects" instance=ExtResource("49_ibfou")]
+y_sort_enabled = true
+position = Vector2(6495, -2076)
+
 [node name="StreetSign" type="Node2D" parent="Objects"]
 unique_name_in_owner = true
 position = Vector2(-7878, -3011)
@@ -702,7 +707,7 @@ position = Vector2(3622, 1317)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
 [node name="Iron Ore42" parent="Objects/IronOres" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(3371, 3258)
+position = Vector2(3330, 3325)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
 [node name="Iron Ore43" parent="Objects/IronOres" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
@@ -1240,7 +1245,7 @@ texture = SubResource("GradientTexture2D_6w4tx")
 texture_scale = 4.0
 
 [node name="Light39" type="PointLight2D" parent="Objects/Lights"]
-position = Vector2(3262, 3053)
+position = Vector2(3198, 2898)
 color = Color(1, 0.921569, 0.631373, 1)
 energy = 0.65
 texture = SubResource("GradientTexture2D_6w4tx")
@@ -1711,7 +1716,7 @@ position = Vector2(606, 59)
 _animationPlayer = NodePath("../../../FillerTrees/Tree6/AnimationPlayer")
 
 [node name="Tree53" parent="Objects/Trees/SpruceTrees/SpruceTreeGroup21" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("11_r6rlm")]
-position = Vector2(-25, -114)
+position = Vector2(105, -203)
 _animationPlayer = NodePath("../../../FillerTrees/Tree6/AnimationPlayer")
 
 [node name="Tree54" parent="Objects/Trees/SpruceTrees/SpruceTreeGroup21" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("11_r6rlm")]
@@ -1783,7 +1788,8 @@ position = Vector2(-186, 31)
 _animationPlayer = NodePath("../../../FillerTrees/Tree6/AnimationPlayer")
 
 [node name="Tree52" parent="Objects/Trees/SpruceTrees/SpruceTreeGroup25" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("11_r6rlm")]
-position = Vector2(-1051, 644)
+position = Vector2(-1070, 660)
+rotation = -0.00734388
 _animationPlayer = NodePath("../../../FillerTrees/Tree6/AnimationPlayer")
 
 [node name="Tree53" parent="Objects/Trees/SpruceTrees/SpruceTreeGroup25" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("11_r6rlm")]

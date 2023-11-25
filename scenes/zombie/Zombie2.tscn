@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://c3abrbftrdo40" path="res://assets/sprites/character/All zombies/brown/SVG/head.svg" id="14_ufgth"]
 [ext_resource type="Texture2D" uid="uid://cuxivta7mnlfh" path="res://assets/sprites/character/All zombies/brown/SVG/right_arm.svg" id="15_bfasj"]
 
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5h8wa"]
 radius = 27.0
 height = 90.0
@@ -307,7 +306,6 @@ offset = Vector2(0, -20)
 wait_time = 2.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="ZombieNoise" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_ms5x0")

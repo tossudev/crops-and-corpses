@@ -20,8 +20,10 @@ public partial class RoamingZombie : CharacterBody2D
 	//private CompressedTexture2D mediumZombieSprite;
 	private bool _playerInRange = false;
 	private bool _fenceInRange = false;
-	private ulong entered;
-	private ulong exited;
+	private ulong _entered;
+	private ulong _exited;
+	private bool _inTown;
+
 	AnimationPlayer animationPlayer;
 
 	public override void _Ready()
@@ -66,6 +68,15 @@ public partial class RoamingZombie : CharacterBody2D
 				_sprite.Scale = new Vector2(-0.382f, 0.382f);
 			}
 		}
+	}
+	public bool IsInTown()
+	{
+		return _inTown;
+	}
+
+	public void SetInTown()
+	{
+		_inTown = true;
 	}
 
 	private void AttackReceived(Attack attack)
@@ -116,7 +127,6 @@ public partial class RoamingZombie : CharacterBody2D
 
 	private void OnAttackBoxEntered(Node2D body)
 	{
-		// GD.Print("Collision with: " + body.Name);
 		if (body.IsInGroup("player"))
 		{
 			_player = (CharacterBody2D)body;
@@ -145,7 +155,7 @@ public partial class RoamingZombie : CharacterBody2D
 		if (body.IsInGroup("fence") || body.IsInGroup("building"))
 		{
 			_fenceInRange = true;
-			entered = body.GetInstanceId();
+			_entered = body.GetInstanceId();
 
 			// direction from zombie to fence/building
 			Vector2 _direction = (body.GlobalPosition - this.GlobalPosition).Normalized();
@@ -169,7 +179,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 	private void OnAttackBoxExited(Node2D body)
 	{
-		exited = body.GetInstanceId();
+		_exited = body.GetInstanceId();
 		if (body.IsInGroup("player"))
 		{
 			_playerInRange = false;
@@ -177,7 +187,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 		if (body.IsInGroup("fence") || body.IsInGroup("building"))
 		{
-			if (entered == exited)
+			if (_entered == _exited)
 			{
 				_fenceInRange = false;
 			}

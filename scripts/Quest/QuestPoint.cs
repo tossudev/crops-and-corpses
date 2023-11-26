@@ -8,9 +8,13 @@ using System.Diagnostics;
 public partial class QuestPoint : Node2D
 {
     private QuestManager questManager;
+
+    VillagerManager villagerManager;
     private QuestController questController;
     private ZombieManager zombieManager;
     private Node2D spawnZombiePoint;
+
+    private Node2D villagerSpawnPoint;
     private PackedScene zombieScene;
     private PackedScene villagerScene;
     private Queue<CharacterBody2D> zombieQueue = new Queue<CharacterBody2D>();
@@ -21,6 +25,8 @@ public partial class QuestPoint : Node2D
 
     int CurrentDifficulty;
 
+
+
     public override void _Ready()
     {
         questManager = GetNode<QuestManager>("/root/QuestManager");
@@ -29,6 +35,7 @@ public partial class QuestPoint : Node2D
         spawnZombiePoint = GetNode<Node2D>("SpawnZombiePoint");
         zombieScene = (PackedScene)GD.Load("res://LilianTests/Prefabs/zombie_with_hitbox.tscn");
         villagerScene = (PackedScene)GD.Load("res://scenes/villager/villager.tscn");
+        villagerManager = GetNode<VillagerManager>("/root/VillagerManager");
 
         CurrentDifficulty = questManager.GetActiveQuest().Difficulty;
     }
@@ -54,12 +61,8 @@ public partial class QuestPoint : Node2D
     {
         if (isQuestPointActive)
         {
-            for (int i = 0; i < villagerAmount; i++)
-            {
-                CharacterBody2D villager = (CharacterBody2D)villagerScene.Instantiate();
-                villager.Position = spawnZombiePoint.Position;
-                GetTree().CurrentScene.AddChild(villager);
-            }
+           GD.Print("villagerSpawnes");
+           
         }
     }
 

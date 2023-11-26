@@ -1,7 +1,8 @@
 using Godot;
+using Godot.NativeInterop;
 using System;
 
-public partial class QuestBoardUi : Node2D
+public partial class QuestBoardUi : Panel
 {
 
 	CheckButton DifficultyButton1;
@@ -20,7 +21,11 @@ public partial class QuestBoardUi : Node2D
 	Button QuestButton3;
 	const string QuestButton3_BUTTON_NODENAME = "CaveLevel";
 
+	ButtonGroup DifficultyButtonGroup;
+
 	QuestManager questManager;
+	TownManager townManager;
+	VillagerManager villagerManager;
 
 	
 
@@ -36,56 +41,113 @@ public partial class QuestBoardUi : Node2D
 		QuestButton2 = GetNode<Button>(QuestButton2_BUTTON_NODENAME);
 		QuestButton3 = GetNode<Button>(QuestButton3_BUTTON_NODENAME);
 
+		DifficultyButtonGroup = GetNode<ButtonGroup>("DifficultyButtonGroup");
+
+		
+		
+
 
 		questManager = GetNode<QuestManager>("/root/QuestManager");
+		VillagerManager villagerManager = GetNode<VillagerManager>("/root/VillagerManager");
 	}
+
+
+private void OnDifficultyButton3Toggled(bool buttonPressed)
+    {
+		questManager.SetDifficulty(3);
 		
+		
+		
+    }
 
-	public void OnQuestButtonPressed1()
-	{
-		questManager.StartForrestQuest();
-		GD.Print(questManager.GetActiveQuest().Name);
-
-	}
-
-
-	public void OnQuestButtonPressed2()
-	{
-		questManager.StartRuinsQuest();
-		GD.Print(questManager.GetActiveQuest().Name);
-	}
-
-	public void OnQuestButtonPressed3()
-	{
-		questManager.StartCaveQuest();
-		GD.Print(questManager.GetActiveQuest().Name);
-	}
-
-	public void OnDifficultyButtonToggled1()
-	{
+    private void OnDifficultyButton2Toggled(bool buttonPressed)
+    {
+		questManager.SetDifficulty(2);
 		
 	}
 
+    private void OnDifficultyButton1Toggled(bool buttonPressed)
+    {
+		questManager.SetDifficulty(1);
+	
+		
+
+    }
+
+	private void OnQuestButton1Pressed()
+	{
+		if (questManager.GetActiveQuest() != null)
+		{
+			GD.Print("Quest already active");
+			
+			return;
+		}else
+		{
+			questManager.StartForrestQuest();
+			GD.Print("Forrest Quest Started");
+		}
+
+		
+		
+	
+	}
 	
 
-
-	// button set difficulty 
-	public void OnDifficultyButtonPressed1()
+	private void OnQuestButton2Pressed()
 	{
-		questManager.SetDifficulty(1);
-		GD.Print(questManager.GetActiveQuest().Difficulty);
+		if (questManager.GetActiveQuest() != null)
+		{
+			GD.Print("Quest already active");
+			SetvillagerstoQuest();
+			return;
+		}else
+		{
+			questManager.StartRuinsQuest();
+			SetvillagerstoQuest();
+			GD.Print("Ruins Quest Started");
+		}
 	}
 
-	public void OnDifficultyButtonPressed2()
+	private void OnQuestButton3Pressed()
 	{
-		questManager.SetDifficulty(2);
-			GD.Print(questManager.GetActiveQuest().Difficulty);
+		if (questManager.GetActiveQuest() != null)
+		{
+			GD.Print("Quest already active");
+			return;}
+		else
+		{
+			questManager.StartCaveQuest();
+			SetvillagerstoQuest();
+			GD.Print("Cave Quest Started");
+		}
 	}
 
-	public void OnDifficultyButtonPressed3()
+
+
+	public void SetvillagerstoQuest()
 	{
-		questManager.SetDifficulty(3);
-		GD.Print(questManager.GetActiveQuest().Difficulty);
+		
+
+		if ((int)questManager.GetDifficulty() == 1)
+		{
+			villagerManager.AddNewVillagerRawData();
+		}
+		else if ((int)questManager.GetDifficulty() == 2)
+		{
+			villagerManager.AddNewVillagerRawData();
+			villagerManager.AddNewVillagerRawData();
+		}
+		else if ((int)questManager.GetDifficulty() == 3)
+		{
+			villagerManager.AddNewVillagerRawData();
+			villagerManager.AddNewVillagerRawData();
+			villagerManager.AddNewVillagerRawData();
+		}
+		else
+		{
+			GD.Print("No Quest Active");
+		}
+		
 	}
 
 

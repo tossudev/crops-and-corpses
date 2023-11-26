@@ -13,6 +13,8 @@ public partial class QuestManager : Node
 	private Quest activeQuest;
 	GlobalTime globalTime;
 
+	int SelectedDifficulty = 1;
+
 	public override void _Ready()
 	{
 		GD.Print($"Current Scene: {GetTree().CurrentScene.Name}");
@@ -23,10 +25,6 @@ public partial class QuestManager : Node
 		globalTime = GetNode<GlobalTime>("/root/GlobalTime");
 		if (activeQuest == null)
 		{
-
-			
-		
-			StartForrestQuest();
 			
 			GD.Print($"Active quest: {activeQuest?.Name}");
 			GD.Print($"Active quest difficulty: {activeQuest?.Difficulty}");
@@ -37,10 +35,11 @@ public partial class QuestManager : Node
 		}
 	}
 
-	public void StartQuest(string questName, string questDescription, List<string> questStages, string questLocation)
+	public void StartQuest(string questName, string questDescription, List<string> questStages, string questLocation, int SelectedDifficulty)
 	{
 		int StartDay = globalTime.GetDay();
 		GD.Print($"Start day: {StartDay}");
+		
 		if (activeQuest == null && StartDay < globalTime.GetDay())
 		{
 			Quest newQuest = new Quest
@@ -48,7 +47,10 @@ public partial class QuestManager : Node
 				Name = questName,
 				Description = questDescription,
 				Stages = questStages,
-				Location = questLocation
+				Location = questLocation,
+				Difficulty = SelectedDifficulty
+				
+				
 			};
 			SetActiveQuest(newQuest);
 		}
@@ -61,7 +63,7 @@ public partial class QuestManager : Node
 	public void StartForrestQuest()
 	{
 		List<string> questStages = new List<string> { "Find", "Rescue", "Deliver" };
-		StartQuest("Forrest Quest", "Rescue Villager From Forrest", questStages, "Forrest");
+		StartQuest("Forrest Quest", "Rescue Villager From Forrest", questStages, "Forrest",SelectedDifficulty);
 		GD.Print("Forrest Quest Started");
 		GD.Print($"Active quest: {activeQuest?.Name}");
 	}
@@ -69,13 +71,13 @@ public partial class QuestManager : Node
 	public void StartRuinsQuest()
 	{
 		List<string> questStages = new List<string> { "Find", "Rescue", "Deliver" };
-		StartQuest("Ruins Quest", "Rescue Villager From Ruins", questStages, "Ruins");
+		StartQuest("Ruins Quest", "Rescue Villager From Ruins", questStages, "Ruins",SelectedDifficulty);
 	}
 
 	public void StartCaveQuest()
 	{
 		List<string> questStages = new List<string> { "Find", "Rescue", "Deliver" };
-		StartQuest("Cave Quest", "Rescue Villager From cave", questStages, "Cave");
+		StartQuest("Cave Quest", "Rescue Villager From cave", questStages, "Cave",SelectedDifficulty);
 	}
 
 	public void LoadQuest()
@@ -95,11 +97,7 @@ public partial class QuestManager : Node
 		GD.Print($"Active quest set: {quest?.Name}");
 	}
 
-	public int GetActiveQuestDifficulty()
-	{
-		return activeQuest?.Difficulty ?? 0;
-	}
-
+	
 	public void CompleteQuestStage(string stage)
 	{
 		activeQuest?.CompleteQuestStage(stage);
@@ -107,17 +105,27 @@ public partial class QuestManager : Node
 
    public void SetDifficulty(int difficulty)
 {
-	if (activeQuest != null)
-	{	
-		activeQuest.Difficulty = difficulty;
-		GD.Print($"Quest difficulty set to: {difficulty}");
-	}
-	else
-	{
-		GD.Print("No active quest to set difficulty for.");
-	}
+	SelectedDifficulty = difficulty;
+	GD.Print($"Selected difficulty: {SelectedDifficulty}");
 }
+
+
+
+
+internal object GetQuestName()
+{
+	return activeQuest?.Name;
 }
+
+    internal object GetDifficulty()
+    {
+		activeQuest.Difficulty = SelectedDifficulty;
+       return activeQuest?.Difficulty;
+    }
+
+}
+
+
 
 
 

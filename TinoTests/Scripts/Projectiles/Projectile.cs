@@ -7,5 +7,6 @@ public partial class Projectile : Resource
     [Export] public Item item { get; set; }
     [Export] public float airtime { get; set; } = 2;
     [Export] public float despawnTime { get; set; } = 0.5f;
+    [Export] public bool objectCollision { get; set; } = false;
     [Export] public EffectType effect { get; set; } = 0;
 }

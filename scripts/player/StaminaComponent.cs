@@ -81,16 +81,23 @@ public partial class StaminaComponent : Node2D
 		}
 	}
 
-	public void UseStamina(int amount)
+	public bool UseStamina(int amount)
 	{
-		currentStamina -= amount;
+		bool staminaUsed;
 
-		if (currentStamina < 0)
+		if (currentStamina - amount >= 0)
 		{
-			currentStamina = 0;
+			currentStamina -= amount;
+			staminaUsed = true;
+		}
+		else
+		{
+			staminaUsed = false;
 		}
 
 		UpdateStaminaBar();
+
+		return staminaUsed;
 	}
 
 	private void StaminaCooldown(float duration)
@@ -107,5 +114,16 @@ public partial class StaminaComponent : Node2D
 
 		_staminaBar.Value = currentStamina;
 		_staminaBar.GetNodeOrNull<Label>("Text").Text = currentStamina.ToString();
+	}
+
+	public int GetMaxStamina()
+	{
+		return _maxStamina;
+	}
+
+	public void SetStamina(int amount)
+	{
+		currentStamina = amount;
+		UpdateStaminaBar();
 	}
 }

@@ -1,7 +1,11 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://dajdby7nadxkd"]
+[gd_resource type="TileSet" load_steps=16 format=3 uid="uid://dajdby7nadxkd"]
 
-[ext_resource type="Texture2D" uid="uid://try021ljeoay" path="res://assets/sprites/tiles/grass_tile.png" id="1_8vy6i"]
+[ext_resource type="Texture2D" uid="uid://b0dlu5nexmss2" path="res://assets/sprites/tiles/grass_tile.png" id="1_8vy6i"]
+[ext_resource type="Texture2D" uid="uid://b2lompksqm4yr" path="res://assets/sprites/tiles/grass_corner_tile6.png" id="2_k4dor"]
+[ext_resource type="Texture2D" uid="uid://bn7env81bgx0u" path="res://assets/sprites/tiles/grass_corner_tile7.png" id="3_62ogh"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="3_fanbg"]
+[ext_resource type="Texture2D" uid="uid://b644tsyidu1bm" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="4_h6a7m"]
+[ext_resource type="Texture2D" uid="uid://cwjlgacud2xba" path="res://assets/sprites/tiles/grass_corner_tile8.png" id="5_deaio"]
 [ext_resource type="Texture2D" uid="uid://n8iftcgk0ti0" path="res://assets/sprites/tiles/Sand_tile.png" id="7_ll0no"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgoqj"]
@@ -14,6 +18,41 @@ texture_region_size = Vector2i(128, 128)
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r1cju"]
+texture = ExtResource("2_k4dor")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_64ni5"]
+texture = ExtResource("3_62ogh")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4x0wa"]
+texture = ExtResource("4_h6a7m")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ca4a8"]
+texture = ExtResource("3_62ogh")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b3osc"]
+texture = ExtResource("5_deaio")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ekkrr"]
 texture = ExtResource("7_ll0no")
@@ -47,3 +86,8 @@ terrain_set_0/terrain_2/color = Color(0.188235, 0.129412, 1, 1)
 sources/0 = SubResource("TileSetAtlasSource_hgoqj")
 sources/6 = SubResource("TileSetAtlasSource_ekkrr")
 sources/8 = SubResource("TileSetAtlasSource_83e41")
+sources/1 = SubResource("TileSetAtlasSource_r1cju")
+sources/2 = SubResource("TileSetAtlasSource_64ni5")
+sources/3 = SubResource("TileSetAtlasSource_4x0wa")
+sources/4 = SubResource("TileSetAtlasSource_ca4a8")
+sources/5 = SubResource("TileSetAtlasSource_b3osc")

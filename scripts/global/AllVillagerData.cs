@@ -26,4 +26,11 @@ public partial class AllVillagerData : Node
         int randomNumber = random.Next(0, _villagerInfos.Length);
 		return _villagerInfos[randomNumber];
 	}
+
+	public Texture2D GetTextureByType(VillagerType type, BodyPartTextureType part)
+	{
+		//Todo: this
+
+		return GetTexture();
+	}
 }

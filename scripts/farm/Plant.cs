@@ -1,6 +1,7 @@
 using Godot;
 using Godot.NativeInterop;
 using System;
+using System.Diagnostics;
 
 public partial class Plant : Node2D
 {
@@ -12,7 +13,7 @@ public partial class Plant : Node2D
 	[Export] int _maxCycles;
 
 	[Export] int _maxHarvestableAmount;
-	[Export] Texture2D _seedTexture;
+	[Export] Texture2D _deadTexture;
 	[Export] Texture2D _sproutTexture;
 	[Export] Texture2D _plantTexture;
 
@@ -21,8 +22,19 @@ public partial class Plant : Node2D
         get { return _plantType; }
 		set {_plantType = value;}	
     }
+	
+	public float growthCycleLength
+    {
+        get { return _growthCycleLength; }
+		set { _growthCycleLength = value;}	
+    }
+    public int maxCycles
+    {
+        get { return _maxCycles; }
+        set { _maxCycles = value; }
+    }
 
-	public string seedName{
+    public string seedName{
 		get  { return _seedName; }
 		set {_seedName = value;}	
 	}
@@ -32,9 +44,9 @@ public partial class Plant : Node2D
 		set {_description = value;}	
 	}
 
-	public Texture2D seedTexture{
-		get {return _seedTexture;}
-		set {_seedTexture = value;}	
+	public Texture2D deadTexture{
+		get {return _deadTexture;}
+		set {_deadTexture = value;}	
 	}
 
 	public Texture2D sproutTexture{
@@ -64,7 +76,9 @@ public partial class Plant : Node2D
 		get { return _myField;}
 		set { _myField = value;}
 	}
-	bool _growthStarted;
+	public bool growthStarted;
+
+	public bool isTendedTo;
 	
 	GrowthState _state;
 
@@ -139,7 +153,7 @@ public partial class Plant : Node2D
     public override void _PhysicsProcess(double delta)
     {
 		if(_state == GrowthState.IsWilting || _state == GrowthState.IsInfested || _state == GrowthState.IsDead || _state == GrowthState.IsHarvestable) return;
-		if(_growthStarted)
+		if(growthStarted)
 		{
 			_progressTimer += delta;
 			if(_progressTimer>= 1)
@@ -147,10 +161,26 @@ public partial class Plant : Node2D
 			_progress.Value += 1;
 			_progressTimer=0;
 			}
-		}
-		
-       
+		}     
     }
+
+	public void LoadPlant(double growthTime)
+	{
+		if(growthTime >= _progress.MaxValue)
+		{
+            _state = GrowthState.IsHarvestable;
+			growthStarted = true;
+            _warningSign.Texture = null;
+        }
+		
+
+        PlantState();
+
+		if (_plantType == PlantType.Lupine)
+		{
+			GetNode<TextureRect>("%TextureRect").ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
+		}
+	}
 
     void PlantState(){
 		GD.Print(currentGrowthTime);
@@ -244,7 +274,7 @@ public partial class Plant : Node2D
 	}
 	void StartGrowth(){
 		 GD.Print("Growing stage started for "+plantName);
-        _growthStarted=true;
+        growthStarted=true;
       	_growthTimer.WaitTime = _growthCycleLength;
     	_growthTimer.Start();
 	}
@@ -281,9 +311,16 @@ public partial class Plant : Node2D
 		PlantState();
 	}
 	void EvolvePlant(){
- 		
- 		GD.Print(plantName+" is fully grown and ready for harvest!");
-		_state = GrowthState.IsHarvestable;
+
+        if (_plantType == PlantType.Lupine)
+        {
+            GetNode<TextureRect>("%TextureRect").ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
+			Position = new Vector2(0, -25);
+        }
+
+        GD.Print(plantName+" is fully grown and ready for harvest!");
+        _progress.Hide();
+        _state = GrowthState.IsHarvestable;
 		_growthTimer.Stop();
 		trect.Texture = plantTexture;
 	}
@@ -304,11 +341,12 @@ public partial class Plant : Node2D
 		QueueFree();
 	}
 
-	void Die(){
+	public void Die(){
 		GD.Print("Dead: "+plantName);
+		_progress.Hide();
 		_state = GrowthState.IsDead;
 		_warningSign.Texture = null;
-		trect.Modulate = new Color(0,0,0);
+		trect.Texture = deadTexture;
 		_growthTimer.Stop();
 	}
 
@@ -323,6 +361,9 @@ public partial class Plant : Node2D
 	}
 
 	void ShowProgress(){
+		if(_state == GrowthState.IsDead || _state == GrowthState.IsHarvestable) 
+			return;
+
 		if(!_progress.Visible) _progress.Show();
 	}
 

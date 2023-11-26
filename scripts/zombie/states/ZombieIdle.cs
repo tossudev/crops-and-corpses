@@ -10,9 +10,9 @@ public partial class ZombieIdle : ZombieStates
 	private double _roamTime;
 	private CharacterBody2D _player;
 	private Node2D _fences;
-	
+	[Export] AnimationPlayer animPlayer;
 	public override void Enter()
-    {
+    {		
         _player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
 		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
 		RandomizeRoam();
@@ -53,6 +53,7 @@ public partial class ZombieIdle : ZombieStates
 	    
 		_moveSpeed = ZombieManager.idleSpeed;
 	    _zombie.Velocity = _moveDirection * _moveSpeed;
+		animPlayer.SpeedScale = _moveSpeed / 100;
 
 	    if (_player == null || !ZombieManager.playerAlive) return;
 	    
@@ -63,10 +64,15 @@ public partial class ZombieIdle : ZombieStates
 		{
 			EmitSignal("Transitioned", "chase");			
 		}
-		// else if (fenceDirection.Length() < 1500 || fenceDirection.Length() > 500)
-		// {
-		// 	EmitSignal("Transitioned", "attackfence");
-		// }
+		else if (fenceDirection.Length() < 1500 || !ZombieManager.dayMode)
+		{
+			if (!_zombie.HasMethod("IsInTown")) return;
+
+			if (!(bool)_zombie.Call("IsInTown"))
+			{
+				EmitSignal("Transitioned", "attackfence");
+			}			
+		}
     }
 
 	private void RandomizeRoam()

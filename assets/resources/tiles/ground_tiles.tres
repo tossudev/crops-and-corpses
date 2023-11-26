@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=33 format=3 uid="uid://c8hb8l070pv4u"]
+[gd_resource type="TileSet" load_steps=59 format=3 uid="uid://c8hb8l070pv4u"]
 
 [ext_resource type="Texture2D" uid="uid://try021ljeoay" path="res://assets/sprites/tiles/grass_tile.png" id="1_leq8e"]
 [ext_resource type="Texture2D" uid="uid://birifangogpjs" path="res://assets/sprites/tiles/grass_rocks_tile.png" id="2_ex64r"]
@@ -15,7 +15,20 @@
 [ext_resource type="Texture2D" uid="uid://c8xb0af08ypnv" path="res://assets/sprites/tiles/Sand_rocks_tile.png" id="8_5spgs"]
 [ext_resource type="Texture2D" uid="uid://b6u7xrihyu4l2" path="res://assets/sprites/tiles/Cave_tile_top_corner3.png" id="8_cu50m"]
 [ext_resource type="Texture2D" uid="uid://ctqelf6pcob2o" path="res://assets/sprites/tiles/Cave_tile_top_corner4.png" id="9_5uwk6"]
+[ext_resource type="Texture2D" uid="uid://c6lctv8mq0pke" path="res://assets/sprites/tiles/grass_corner_tile6.png" id="10_o5u0i"]
+[ext_resource type="Texture2D" uid="uid://b8lj85ea3qpt4" path="res://assets/sprites/tiles/grass_corner_tile7.png" id="11_l6kba"]
+[ext_resource type="Texture2D" uid="uid://0g287k64n37k" path="res://assets/sprites/tiles/grass_corner_tile8.png" id="12_6ya8b"]
+[ext_resource type="Texture2D" uid="uid://dd70s66ake22b" path="res://assets/sprites/tiles/farm_tile.png" id="14_615kk"]
+[ext_resource type="Texture2D" uid="uid://lclvdspfbs67" path="res://assets/sprites/tiles/dirt_corner_tile5.png" id="15_f5tif"]
+[ext_resource type="Texture2D" uid="uid://blrhd7vh7n1pa" path="res://assets/sprites/tiles/dirt_corner_tile6.png" id="16_hopnp"]
 [ext_resource type="Texture2D" uid="uid://dwbiyngdt8qfh" path="res://assets/sprites/tiles/Cave_tile.png" id="16_wwo6i"]
+[ext_resource type="Texture2D" uid="uid://butbegd0jf7vc" path="res://assets/sprites/tiles/dirt_corner_tile7.png" id="17_h3a7f"]
+[ext_resource type="Texture2D" uid="uid://brqgijhnor31f" path="res://assets/sprites/tiles/dirt_corner_tile8.png" id="18_wm420"]
+[ext_resource type="Texture2D" uid="uid://c3p6r4cohbsq8" path="res://assets/sprites/tiles/cobblestone_tile.png" id="19_ryb8u"]
+[ext_resource type="Texture2D" uid="uid://b5xlrdo71fr7r" path="res://assets/sprites/tiles/cobblestone_corner_tile.png" id="20_po0uv"]
+[ext_resource type="Texture2D" uid="uid://dcm1c8drk1fmu" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="20_tkemm"]
+[ext_resource type="Texture2D" uid="uid://blbe2fovodxp2" path="res://assets/sprites/tiles/Burnt_grass2_tile.png" id="21_fx6vv"]
+[ext_resource type="Texture2D" uid="uid://c8nbcusapp60r" path="res://assets/sprites/tiles/Burnt_grass_tile.png" id="22_ah463"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgoqj"]
 texture = ExtResource("1_leq8e")
@@ -91,12 +104,96 @@ texture_region_size = Vector2i(128, 128)
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ypmf"]
+texture = ExtResource("10_o5u0i")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s7qnb"]
+texture = ExtResource("11_l6kba")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6mt0c"]
+texture = ExtResource("12_6ya8b")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xxt5e"]
 texture = ExtResource("3_nt7yg")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dsway"]
+texture = ExtResource("14_615kk")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_woj28"]
+texture = ExtResource("15_f5tif")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h2n5o"]
+texture = ExtResource("16_hopnp")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xhcin"]
+texture = ExtResource("17_h3a7f")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c445a"]
+texture = ExtResource("18_wm420")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ggchb"]
+texture = ExtResource("19_ryb8u")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_keauy"]
+texture = ExtResource("20_po0uv")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_su43v"]
+texture = ExtResource("21_fx6vv")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lg2x0"]
+texture = ExtResource("22_ah463")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 
@@ -147,6 +244,13 @@ texture_region_size = Vector2i(128, 128)
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xm5me"]
+texture = ExtResource("20_tkemm")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bvnbr"]
 texture = ExtResource("16_wwo6i")
 texture_region_size = Vector2i(128, 128)
@@ -180,3 +284,16 @@ sources/13 = SubResource("TileSetAtlasSource_jpsiu")
 sources/14 = SubResource("TileSetAtlasSource_3gjxe")
 sources/15 = SubResource("TileSetAtlasSource_nownf")
 sources/16 = SubResource("TileSetAtlasSource_lgpgc")
+sources/8 = SubResource("TileSetAtlasSource_xm5me")
+sources/17 = SubResource("TileSetAtlasSource_5ypmf")
+sources/18 = SubResource("TileSetAtlasSource_s7qnb")
+sources/19 = SubResource("TileSetAtlasSource_6mt0c")
+sources/20 = SubResource("TileSetAtlasSource_dsway")
+sources/21 = SubResource("TileSetAtlasSource_woj28")
+sources/22 = SubResource("TileSetAtlasSource_h2n5o")
+sources/23 = SubResource("TileSetAtlasSource_xhcin")
+sources/24 = SubResource("TileSetAtlasSource_c445a")
+sources/25 = SubResource("TileSetAtlasSource_ggchb")
+sources/26 = SubResource("TileSetAtlasSource_keauy")
+sources/27 = SubResource("TileSetAtlasSource_su43v")
+sources/28 = SubResource("TileSetAtlasSource_lg2x0")

@@ -7,43 +7,79 @@ public partial class NavigationManager : Node2D {
 
 	string _obstacleGroupName = "obstacle_area";
 	NavigationRegion2D _regionNode;
-	NavigationPolygon _regionPolygon;
+	NavigationPolygon _region;
 
 	Godot.Collections.Array<Vector2[]> _obstacleAreas = new ();
-	[Export] public Vector2[] arrayTest;
+	NavigationObstacle _obstacle;
 
 
     public override void _Ready() {
         _regionNode = GetNode<NavigationRegion2D>("Region");
-		_regionPolygon = _regionNode.NavigationPolygon;
+		_region = _regionNode.NavigationPolygon;
+    }
 
+
+    public override async void _EnterTree()
+    {
+        base._EnterTree();
+		await ToSignal(GetParent(), "ready");
 		InitRegion();
     }
 
 
-	void InitRegion() {
+    void InitRegion() {
 		// Get all obstacles
-		foreach (Polygon2D _obstacleArea in GetTree().GetNodesInGroup(_obstacleGroupName)) {
-			Vector2[] polygonPoints = GetPolygonFromObject(_obstacleArea);
+		int _index = 0;
+		foreach (Polygon2D _obstacleNode in GetTree().GetNodesInGroup(_obstacleGroupName)) {
+			Vector2[] polygonPoints = GetPolygonFromObject(_obstacleNode);
 			_obstacleAreas.Add(polygonPoints);
-			_regionPolygon.AddOutline(polygonPoints);
+			_region.AddOutline(polygonPoints);
+
+			_index ++;
 		}
 
+		UpdateObstacleIndexes();
+
 		// Update navigation region
-		_regionPolygon.MakePolygonsFromOutlines();
+		_region.MakePolygonsFromOutlines();
 	}
 
 
-	static Vector2[] GetPolygonFromObject(Polygon2D _obstacleArea) {
-		Vector2[] _polygonPoints = (Vector2[]) _obstacleArea.Get("polygon");
+	static Vector2[] GetPolygonFromObject(Polygon2D _obstacleNode) {
+		Vector2[] _polygonPoints = (Vector2[]) _obstacleNode.Get("polygon");
 
 		// Adjust areas local position to global
 		int _posIndex = 0;
 		foreach (Vector2 pos in _polygonPoints) {
-			_polygonPoints[_posIndex] += _obstacleArea.GlobalPosition;
+			_polygonPoints[_posIndex] += _obstacleNode.GlobalPosition;
 			_posIndex ++;
 		}
 
 		return _polygonPoints;
+	}
+
+
+	void UpdateObstacleIndexes() {
+		int _index = 0;
+		foreach (Polygon2D _obstacleNode in GetTree().GetNodesInGroup(_obstacleGroupName)) {
+			_obstacleNode.Set("nodeIndex", _index);
+			// var test = _obstacleNode.Get("nodeIndex");
+			// GD.Print(test);
+
+			_index ++;
+		}
+	}
+
+
+	public async void RemoveArea(int nodeIndex) {
+		await ToSignal(GetTree().CreateTimer(0.1), "timeout");
+
+		_region.RemoveOutline(nodeIndex + 1);
+		_region.MakePolygonsFromOutlines();
+
+		_obstacleAreas.RemoveAt(nodeIndex);
+
+
+		UpdateObstacleIndexes();
 	}
 }

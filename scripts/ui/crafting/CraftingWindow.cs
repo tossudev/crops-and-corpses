@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+
 
 public partial class CraftingWindow : Control
 {
@@ -7,11 +9,12 @@ public partial class CraftingWindow : Control
 	bool _isOpen;
 
 	CraftPanel _craftPanel;
+	const string CRAFT_PANEL_NODENAME = "%CraftPanel";
 	
 	public override void _Ready()
 	{
 		_itemArea = GetNode<Panel>("ItemArea");
-		_craftPanel = (CraftPanel)GetTree().GetNodesInGroup(CraftPanel.GROUP_NAME)[0];
+		_craftPanel = GetNode<CraftPanel>(CRAFT_PANEL_NODENAME);
 		
 		_itemArea.Visible = false;
 		_isOpen = false;

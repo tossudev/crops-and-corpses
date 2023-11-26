@@ -12,6 +12,8 @@ public partial class Weapon : Resource
     [Export] public float cooldown { get; set; }
     [Export] public EffectType effect { get; set; }
     [Export] public TargetType targetType { get; set; }
+    [Export] public String attackAnim { get; set; }
+    [Export] public String CooldownAnim { get; set; }
 
     [ExportCategory("Melee")]
     [Export] public float reach { get; set; } = 1;

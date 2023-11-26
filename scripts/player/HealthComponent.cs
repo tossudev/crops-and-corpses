@@ -151,9 +151,9 @@ public partial class HealthComponent : Node2D
 			_healthBar.Visible = _health != _maxHealth;
 		}
 
-		if (GetParent().Name == "Player")
+		if (_isPlayer)
 		{
-			return;
+			_healthBar.GetNode<Label>("%HealthText").Text = _health.ToString();
 		}
 	}
 

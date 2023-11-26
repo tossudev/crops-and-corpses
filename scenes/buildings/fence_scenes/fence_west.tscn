@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://disyt3fuu77je"]
+[gd_scene load_steps=10 format=3 uid="uid://disyt3fuu77je"]
 
-[ext_resource type="Texture2D" uid="uid://dlq67503pdi34" path="res://NikkeTests/images/fence_w.png" id="1_lsfpb"]
+[ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_667uj"]
+[ext_resource type="Texture2D" uid="uid://x5tq60cyhwmg" path="res://assets/sprites/buildings/fences/fence_w.png" id="1_rypmg"]
 [ext_resource type="Script" path="res://scripts/farm/FenceHealth.cs" id="1_wari8"]
+[ext_resource type="Texture2D" uid="uid://djhyomtxb2qta" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="2_d27mr"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_xoojr"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_vkqwf"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_cet8m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_10v6f"]
 size = Vector2(2.625, 150)
@@ -14,9 +17,18 @@ size = Vector2(5, 151)
 [node name="Node2D" type="Node2D"]
 
 [node name="FenceHighW" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-64, -128)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_lsfpb")
+texture = ExtResource("1_rypmg")
+
+[node name="FenceHighE2" type="Sprite2D" parent="."]
+position = Vector2(-3.00002, -75)
+scale = Vector2(0.333333, 0.400538)
+texture = ExtResource("2_d27mr")
+
+[node name="BuildingHealth" type="Node2D" parent="."]
+script = ExtResource("1_667uj")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-64, -64)
@@ -36,12 +48,10 @@ shape = SubResource("RectangleShape2D_10v6f")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_xoojr")]
 position = Vector2(-3, -74)
-_parentScript = NodePath("")
-_hasHealthBar = true
+_parentScript = NodePath("../BuildingHealth")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") instance=ExtResource("4_vkqwf")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_vkqwf")]
 position = Vector2(-3, -75)
-_parentScript = NodePath("")
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
@@ -59,3 +69,6 @@ offset_right = 102.0
 offset_bottom = -50.0
 scale = Vector2(0.4, 0.4)
 show_percentage = false
+
+[node name="NavigationObstacleArea" parent="." instance=ExtResource("6_cet8m")]
+polygon = PackedVector2Array(-7, -151, -1, -151, 0, -64, -8, -64)

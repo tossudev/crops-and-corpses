@@ -4,8 +4,6 @@ using Godot;
 public partial class ZombieManager : Node
 {
 	public static  ZombieType type;
-	[Export] public Node2D _villageTarget;
-	public static Node2D moveTarget;
 	public static bool dayMode;
 	public static int damage;
 	public static double attackTime;
@@ -17,8 +15,7 @@ public partial class ZombieManager : Node
 	private Timer _timer;
 	public enum ZombieType {Weak,Medium,Strong};
 
-    static AudioController _audioController;
-	
+    static AudioController _audioController;	
 
 	public override void _Ready()
 	{
@@ -26,16 +23,13 @@ public partial class ZombieManager : Node
 		
 		_dayNightSpawnNode = GetParent().GetNodeOrNull<SpawnScript>("ZombieSpawn");
 		_timer = GetNodeOrNull<Timer>("Timer");
-		if(_villageTarget != null)
-		{
-			moveTarget = _villageTarget;
-		}
+
 		_timer.Start();
 	}
 	public override void _Process(double delta)
 	{
 		// true = day, false = night
-		dayMode = _dayNightSpawnNode.GetIsNightOrDay();			
+		dayMode = _dayNightSpawnNode.GetIsNightOrDay();		
 	}
 
 	public static void PlayZombieNoise(ZombieNoises noise)
@@ -95,9 +89,7 @@ public partial class ZombieManager : Node
 				break;
 			default:
 			break;
-		}
-	
-		
+		}		
 	}
 
 	private void OnTimerTimeout()

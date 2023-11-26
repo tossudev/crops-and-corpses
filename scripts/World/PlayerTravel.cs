@@ -7,14 +7,14 @@ public partial class PlayerTravel : Node
 	{
 		if (@event is InputEventMouseButton button && button.IsPressed() && button.ButtonIndex == MouseButton.Left)
 		{
-			GetTree().ChangeSceneToFile("res://scenes/town.tscn");
+			SceneManager.ChangeScene(this, Scene.Town);
 		}
 	}
 	void TravelCave(Node viewport, InputEvent @event, long shapeIdx)
 	{
 		if (@event is InputEventMouseButton button && button.IsPressed() && button.ButtonIndex == MouseButton.Left)
 		{
-			GetTree().ChangeSceneToFile("res://scenes/cave.tscn");
+			SceneManager.ChangeScene(this, Scene.Cave);
 		}
 	}
 
@@ -22,7 +22,7 @@ public partial class PlayerTravel : Node
 	{
 		if (@event is InputEventMouseButton button && button.IsPressed() && button.ButtonIndex == MouseButton.Left)
 		{
-			GetTree().ChangeSceneToFile("res://scenes/ruins.tscn");
+			SceneManager.ChangeScene(this, Scene.Ruins);
 		}
 	}
 
@@ -30,7 +30,7 @@ public partial class PlayerTravel : Node
 	{
 		if (@event is InputEventMouseButton button && button.IsPressed() && button.ButtonIndex == MouseButton.Left)
 		{
-			GetTree().ChangeSceneToFile("res://scenes/forest.tscn");
+			SceneManager.ChangeScene(this, Scene.Forest);
 		}
 	}
 }

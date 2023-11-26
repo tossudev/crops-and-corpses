@@ -8,7 +8,6 @@ public partial class LootController : StaticBody2D
 	[Export] private Loot _loot;
 	[Export] private AnimationPlayer _animationPlayer;
 	[Export] private Sprite2D _sprite;
-	[Export] private Timer _timer;
 	[Export] private Color _color;
 	//should be between 0 and 1
 	[Export] private float _minBrightness = 1f;
@@ -24,7 +23,6 @@ public partial class LootController : StaticBody2D
 	{
 		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
 		_animationPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
-		_timer = GetNodeOrNull<Timer>("Timer");
 
 		rng = new RandomNumberGenerator();
 		rng.Seed = this.GetInstanceId();
@@ -42,6 +40,18 @@ public partial class LootController : StaticBody2D
 			for (int i = 0; i < item.quantity; i++)
 			{
 				_items.Add(item.item);
+			}
+		}
+
+		if (GD.RandRange(0, 1) < 0.5f)
+		{
+			if (GD.RandRange(0, 1) > 0.5f)
+			{
+				_items.Add(_items[GD.RandRange(0, _items.Count - 1)]);
+			}
+			else
+			{
+				_items.RemoveAt(GD.RandRange(0, _items.Count - 1));
 			}
 		}
 	}
@@ -71,9 +81,24 @@ public partial class LootController : StaticBody2D
 
 		if (health <= 0)
 		{
-			DropItems(_items.Count);
-			QueueFree();
+			if (Name == "TreeBridge")
+			{
+				_animationPlayer.Play("fall");
+			}
+			else{
+				DropItems(_items.Count);
+				QueueFree();
+			}
+			
 		}
+	}
+
+	private void OnAnimationFinished(string animationName)
+	{    
+		if(animationName == "fall")
+		{
+			QueueFree(); 
+		}           
 	}
 
 	private void DropItems(int dropAmount = 1)

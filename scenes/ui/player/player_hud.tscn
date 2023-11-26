@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b50blftb1dypc"]
 
-[ext_resource type="Script" path="res://scripts/ui/PlayerHud.cs" id="1_m40pp"]
+[ext_resource type="Script" path="res://scripts/ui/overlay/PlayerHud.cs" id="1_m40pp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tqqpk"]
 bg_color = Color(0, 0, 0, 0.368627)
@@ -67,7 +67,8 @@ step = 1.0
 value = 100.0
 show_percentage = false
 
-[node name="Text" type="Label" parent="PlayerHealthBar"]
+[node name="HealthText" type="Label" parent="PlayerHealthBar"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0

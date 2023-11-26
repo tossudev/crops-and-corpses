@@ -17,11 +17,14 @@ public partial class VillagerOccupationTab : ScrollContainer
 
 	int _occupationCountLastTime;
 	bool initialized;
-	
-	void Initialize ()
+	bool _initStarted;
+	async void Initialize ()
 	{
 		if (initialized) return;
-        
+
+		_initStarted = true;
+		await TaskExtensions.SuspendWhile(() => VillagerManager.villagerManagerInstance == null, 120); 
+		
 		_villagerGrid = GetNode<GridContainer>(VILLAGER_GRID_NODENAME);
 
 		foreach (var child in _villagerGrid.GetChildren())
@@ -31,11 +34,11 @@ public partial class VillagerOccupationTab : ScrollContainer
 		
 		_occupationList = _occupation switch
 		{
-			VillagerOccupation.Unemployed => VillagerManager.instance.unemployedVillagers,
-			VillagerOccupation.Farmer => VillagerManager.instance.farmerVillagers,
-			VillagerOccupation.Soldier => VillagerManager.instance.soldierVillagers,
-			VillagerOccupation.Woodcutter => VillagerManager.instance.woodcutterVillagers,
-			VillagerOccupation.Miner => VillagerManager.instance.minerVillagers,
+			VillagerOccupation.Builder => VillagerManager.villagerManagerInstance.BuilderVillagers,
+			VillagerOccupation.Farmer => VillagerManager.villagerManagerInstance.farmerVillagers,
+			VillagerOccupation.Soldier => VillagerManager.villagerManagerInstance.soldierVillagers,
+			VillagerOccupation.Woodcutter => VillagerManager.villagerManagerInstance.woodcutterVillagers,
+			VillagerOccupation.Miner => VillagerManager.villagerManagerInstance.minerVillagers,
 			_ => null
 		};
 
@@ -49,8 +52,15 @@ public partial class VillagerOccupationTab : ScrollContainer
 		if (!Visible) return;
 		
 		if (TownManager.globalPhysicsTicks % TownManager.ONE_SECOND_IN_TICKS != 0) return;
-        
-		if (!initialized) Initialize();
+
+		if (!initialized)
+		{
+			if (!_initStarted)
+			{
+				Initialize();
+			}
+			return;
+		}
 
 		if (_occupationList.Count != _occupationCountLastTime)
 		{

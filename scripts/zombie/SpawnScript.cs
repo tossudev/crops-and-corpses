@@ -11,6 +11,8 @@ public partial class SpawnScript : Node2D
 	Timer spawnDelay;
 	Timer zombieDeleteDelay;
 	PackedScene packedScene;
+	PackedScene packedScene2;
+	PackedScene packedScene3;
 	NodePath rootPath;
 	Node2D rootNode;
 	bool isNightOrDay;
@@ -48,7 +50,9 @@ public partial class SpawnScript : Node2D
 			//GD.Print(spawnPoints[i]);
 		} */
 		
-		packedScene = (PackedScene)GD.Load("res://LilianTests/Prefabs/zombie_with_hitbox.tscn");
+		packedScene = (PackedScene)GD.Load("res://scenes/zombie/zombie_with_hitbox.tscn");
+		packedScene2 = (PackedScene)GD.Load("res://scenes/zombie/Zombie2.tscn");
+		packedScene3 = (PackedScene)GD.Load("res://scenes/zombie/Zombie3.tscn");
 		//dayTimeCheck = GetNode<TimeManager>("SunlightContainer");
 		spawnDelay.Start();
 	}
@@ -99,10 +103,31 @@ public partial class SpawnScript : Node2D
 		rootPath =  GetParent<Node2D>().GetPath();
 		//GD.Print(rootPath);
 		rootNode = GetNodeOrNull<Node2D>(rootPath);
-		CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
-		prefab.Position = spawnPoints[counter].Position;
-		rootNode.AddChild(prefab);
-		zombieList.Add(prefab);
+		int randomIndex = GD.RandRange(1,3);
+		if(randomIndex == 1)
+		{
+			CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
+			prefab.Position = spawnPoints[counter].Position;
+			rootNode.AddChild(prefab);
+			zombieList.Add(prefab);
+		}
+		else if(randomIndex == 2)
+		{
+			CharacterBody2D prefab = (CharacterBody2D)packedScene2.Instantiate();
+			prefab.Position = spawnPoints[counter].Position;
+			rootNode.AddChild(prefab);
+			zombieList.Add(prefab);
+
+		}
+		else
+		{
+			CharacterBody2D prefab = (CharacterBody2D)packedScene3.Instantiate();
+			prefab.Position = spawnPoints[counter].Position;
+			rootNode.AddChild(prefab);
+			zombieList.Add(prefab);
+		}
+		
+		
 		//GetNode<Node2D>("/root/Town").AddChild(prefab);
 		counter ++;
 		if(counter == spawnPoints.Count)

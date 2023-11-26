@@ -30,26 +30,23 @@ public partial class QuestPointManager : Node
 
     public override void _Process(double delta)
     {
-        // Check if the active quest has been completed
-        if (questManager.GetActiveQuest() != null && questManager.GetActiveQuest().IsCompleted)
-        {
-            // Deactivate the quest point
-            DeactivateQuestPoint(questManager.GetActiveQuest().QuestPoint);
-        }
+      
     }
-    public Vector2 GetRandomQuestPoint(string sceneName)
-    {
-        // Get a random quest point from the list of active quest points
-        QuestPoint QuestPoint = activeQuestPoints[GD.Randi() % activeQuestPoints.Count];
-        
-        Vector2 randomQuestPoint = QuestPoint.Position;
-         return randomQuestPoint;
-    }
+   
 
+   public Vector2 GetRandomQuestPoint(Node2D[] QuestPoint)
+    {
+        Random random = new Random();
+        int randomQuestPointIndex = random.Next(QuestPoint.Length);
+        Vector2 randomQuestPoint = QuestPoint[randomQuestPointIndex].Position;
+        return randomQuestPoint;
+    }
     public void ActivateQuestPointForScene(string sceneName)
     {
-        Vector2 randomQuestPoint = GetRandomQuestPoint(sceneName);
-
+        // Get a random quest point for the scene
+        Vector2 randomQuestPoint = GetRandomQuestPoint(QuestPoint);
+    
+    
         if (randomQuestPoint != Vector2.Zero && questManager.GetActiveQuest() == null)
         {
             // Load the PackedScene for the specific quest type
@@ -76,5 +73,7 @@ public partial class QuestPointManager : Node
         // Deactivate or perform other actions related to deactivation
         questPoint.QueueFree(); // Assuming QuestPoint is a Node2D, change as needed
         activeQuestPoints.Remove(questPoint);
+      
+    
     }
 }

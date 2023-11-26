@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://blc0ulydodwt3"]
 
 [ext_resource type="Script" path="res://scripts/ui/town/VillagerResidence.cs" id="1_7toh2"]
-[ext_resource type="LabelSettings" uid="uid://bhj71ihb5no6p" path="res://assets/resources/labelsettings/villager_grid_header_label_settings.tres" id="1_mtydf"]
-[ext_resource type="PackedScene" uid="uid://bp0j6co1k7bim" path="res://scenes/ui/villager_control_panel.tscn" id="3_nd2hx"]
+[ext_resource type="LabelSettings" path="res://assets/resources/labelsettings/villager_grid_header_label_settings.tres" id="1_mtydf"]
+[ext_resource type="PackedScene" path="res://scenes/ui/villager_control_panel.tscn" id="3_nd2hx"]
 
 [node name="Villager Grid" type="Control"]
 custom_minimum_size = Vector2(512, 112)

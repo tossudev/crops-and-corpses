@@ -1,0 +1,176 @@
+[gd_scene load_steps=5 format=3 uid="uid://m1jbo7fo5qh2"]
+
+[ext_resource type="StyleBox" path="res://assets/resources/styles/default_ui_style_box_texture.tres" id="1_2dbk0"]
+[ext_resource type="LabelSettings" path="res://assets/resources/labelsettings/town_hall_menu_Header_label_settings.tres" id="2_4fwef"]
+[ext_resource type="Script" path="res://scripts/Quest/QuestBoardUi.cs" id="2_30r88"]
+[ext_resource type="Texture2D" uid="uid://bx13h85ncr7ei" path="res://assets/sprites/ui/wooden_panel.png" id="3_i1f56"]
+
+[node name="QuestPanel" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_2dbk0")
+script = ExtResource("2_30r88")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 14.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Upper HBox" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+alignment = 1
+
+[node name="Header" type="Label" parent="VBoxContainer/Upper HBox"]
+layout_mode = 2
+text = "Quest
+"
+label_settings = ExtResource("2_4fwef")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Dif2" type="CheckButton" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 460.0
+offset_top = 162.0
+offset_right = 725.0
+offset_bottom = 425.0
+icon = ExtResource("3_i1f56")
+
+[node name="TextEdit" type="TextEdit" parent="Dif2"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 92.0
+offset_right = 145.0
+offset_bottom = 162.0
+text = "2"
+
+[node name="Dif3" type="CheckButton" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 798.0
+offset_top = 166.0
+offset_right = 1063.0
+offset_bottom = 429.0
+icon = ExtResource("3_i1f56")
+
+[node name="TextEdit" type="TextEdit" parent="Dif3"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 92.0
+offset_right = 145.0
+offset_bottom = 162.0
+text = "3"
+
+[node name="Dif1" type="CheckButton" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 98.0
+offset_top = 165.0
+offset_right = 363.0
+offset_bottom = 428.0
+icon = ExtResource("3_i1f56")
+
+[node name="TextEdit" type="TextEdit" parent="Dif1"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 92.0
+offset_right = 145.0
+offset_bottom = 162.0
+text = "1"
+
+[node name="ForrestLevel" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 101.0
+offset_top = 601.0
+offset_right = 366.0
+offset_bottom = 864.0
+icon = ExtResource("3_i1f56")
+
+[node name="TextEdit" type="TextEdit" parent="ForrestLevel"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 92.0
+offset_right = 169.0
+offset_bottom = 160.0
+text = "Forrest
+"
+
+[node name="RuinsLevel" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 452.0
+offset_top = 601.0
+offset_right = 717.0
+offset_bottom = 864.0
+icon = ExtResource("3_i1f56")
+
+[node name="TextEdit" type="TextEdit" parent="RuinsLevel"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 87.0
+offset_right = 169.0
+offset_bottom = 162.0
+text = "Ruins"
+
+[node name="CaveLevel" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 785.0
+offset_top = 601.0
+offset_right = 1050.0
+offset_bottom = 864.0
+icon = ExtResource("3_i1f56")
+
+[node name="TextEdit" type="TextEdit" parent="CaveLevel"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 92.0
+offset_right = 171.0
+offset_bottom = 186.0
+text = "cave"
+
+[node name="Header2" type="Label" parent="."]
+layout_mode = 2
+offset_left = 453.0
+offset_top = 86.0
+offset_right = 715.0
+offset_bottom = 154.0
+text = "Diffuclty
+"
+label_settings = ExtResource("2_4fwef")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Header3" type="Label" parent="."]
+layout_mode = 2
+offset_left = 364.0
+offset_top = 489.0
+offset_right = 761.0
+offset_bottom = 593.0
+text = "level
+
+"
+label_settings = ExtResource("2_4fwef")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[connection signal="toggled" from="Dif3" to="." method="_on_dif_3_toggled"]
+[connection signal="toggled" from="Dif1" to="." method="_on_dif_1_toggled"]
+[connection signal="pressed" from="ForrestLevel" to="." method="_on_forrest_level_pressed"]
+[connection signal="pressed" from="RuinsLevel" to="." method="_on_ruins_level_pressed"]
+[connection signal="pressed" from="CaveLevel" to="." method="_on_cave_level_pressed"]

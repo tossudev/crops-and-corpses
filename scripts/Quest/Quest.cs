@@ -36,7 +36,7 @@ public partial class Quest : Node2D
         {
             Stages.Remove(stage);
         }
-
+      
     
 
 

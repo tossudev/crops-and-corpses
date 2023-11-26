@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="1_46tua"]
 [ext_resource type="Script" path="res://scripts/zombie/RoamingZombie.cs" id="1_p77g8"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="2_lvwfs"]
-[ext_resource type="Texture2D" uid="uid://c1sm88vok0oma" path="res://assets/placeholder/zombie_placeholder.png" id="4_c41wj"]
+[ext_resource type="Texture2D" uid="uid://cbe403j44jl6w" path="res://assets/placeholder/zombie_placeholder.png" id="4_c41wj"]
 [ext_resource type="Script" path="res://scripts/zombie/StateMachine.cs" id="4_e11dm"]
 [ext_resource type="Script" path="res://scripts/zombie/states/ZombieIdle.cs" id="5_m256t"]
 [ext_resource type="Script" path="res://scripts/zombie/states/ZombieChase.cs" id="6_ch1pp"]
@@ -318,7 +318,6 @@ scale = Vector2(0.382, 0.382)
 [node name="RightLegSprite" type="Sprite2D" parent="Skeleton2D"]
 position = Vector2(-35.724, 79.8464)
 rotation = 0.197235
-scale = Vector2(1, 1)
 texture = ExtResource("10_g63w7")
 
 [node name="LeftLegSprite" type="Sprite2D" parent="Skeleton2D"]
@@ -330,7 +329,6 @@ texture = ExtResource("11_dg7uf")
 [node name="LeftArm" type="Sprite2D" parent="Skeleton2D"]
 position = Vector2(46.2443, -13.8347)
 rotation = -0.681756
-scale = Vector2(1, 1)
 texture = ExtResource("12_hcjqn")
 
 [node name="TorsoBone" type="Bone2D" parent="Skeleton2D"]

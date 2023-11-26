@@ -10,8 +10,8 @@ public partial class TimeManager : Node
     [Export] private Color nightTimeColor = new Color((float)0.5,(float) 0.5, (float)0.5);  // Set your desired nighttime color
     [Export] private Color dayTimeColor = new Color(1, 1, 1);    // Set your desired daytime color
     [Export] private float transitionDuration = 3f; // Set the duration of the transition
-    [Export] private float dayTimeLength = 600f;    // 10 min duration for day
-    [Export] private float nightTimeLength = 300f;  // 10 min duration for night
+    [Export] private float dayTimeLength = 60f;    // 10 min duration for day
+    [Export] private float nightTimeLength = 30f;  // 10 min duration for night
     private GlobalTime globalTime;
 
     private static bool isDayTime = true;
@@ -83,7 +83,7 @@ public partial class TimeManager : Node
             
         }
         globalTime.SetColor(sunlight.Color);
-        isDayTime = timeOfDay <= dayTimeLength + 100f; // 1s for delaying zombievawes
+        isDayTime = timeOfDay <= dayTimeLength + 10f; // 1s for delaying zombievawes
 
     }
 

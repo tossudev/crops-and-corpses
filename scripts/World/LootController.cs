@@ -38,7 +38,9 @@ public partial class LootController : StaticBody2D
 			_dropLoopParent = GetParent();
 
 		rng = new RandomNumberGenerator();
-		rng.Seed = this.GetInstanceId();
+		var x = (this.Position.X);
+		var y = (this.Position.Y);
+		rng.Seed = (ulong)((x + y) * (x + y + 1) / 2 + y);
 
 		Variations();
 

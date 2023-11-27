@@ -51,7 +51,7 @@ texture = ExtResource("3_6kr0x")
 _parentScript = NodePath("..")
 _hasHealthBar = false
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["tree"] instance=ExtResource("5_kywjc")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["rock"] instance=ExtResource("5_kywjc")]
 position = Vector2(-1, 0)
 collision_layer = 16
 collision_mask = 32

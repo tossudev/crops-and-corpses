@@ -16,13 +16,26 @@ public partial class LootController : StaticBody2D
 	//should be between 0 and 1
 	[Export] private float _scaleVariation = 0f;
 
+	[Export] private Node2D _dropLootPosition;
+	[Export] private Node _dropLoopParent;
+
 	private List<Item> _items = new List<Item>();
 	RandomNumberGenerator rng;
+	private int _meanDrop;
 
 	public override void _Ready()
 	{
 		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
 		_animationPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
+		_meanDrop = _loot.meanDrop;
+
+		if (_dropLootPosition == null)
+			_dropLootPosition = this;
+
+		_dropLoopParent = GetNodeOrNull("../../Objects");
+
+		if (_dropLoopParent == null)
+			_dropLoopParent = GetParent();
 
 		rng = new RandomNumberGenerator();
 		rng.Seed = this.GetInstanceId();
@@ -35,23 +48,20 @@ public partial class LootController : StaticBody2D
 			return;
 		}
 
-		foreach (var item in _loot.lootItems)
+		for (int i = 0; i < _meanDrop; i++)
 		{
-			for (int i = 0; i < item.quantity; i++)
-			{
-				_items.Add(item.item);
-			}
+			_items.Add(_loot.lootItems[GD.RandRange(0, _loot.lootItems.Count - 1)].item);
 		}
 
-		if (GD.RandRange(0, 1) < 0.5f)
+		if (GD.Randf() < 0.75f)
 		{
-			if (GD.RandRange(0, 1) > 0.5f)
+			if (GD.Randf() < 0.75f)
 			{
-				_items.Add(_items[GD.RandRange(0, _items.Count - 1)]);
+				_items.RemoveAt(GD.RandRange(0, _items.Count - 1));
 			}
 			else
 			{
-				_items.RemoveAt(GD.RandRange(0, _items.Count - 1));
+				_items.Add(_items[GD.RandRange(0, _items.Count - 1)]);
 			}
 		}
 	}
@@ -73,11 +83,14 @@ public partial class LootController : StaticBody2D
 
 	private void OnHealth(float health)
 	{
-		if (_items.Count > 1)
+		if (_items.Count - (_items.Count - _meanDrop) > 1)
 			DropItems();
 
-		_animationPlayer.SpeedScale = 10;
-		_animationPlayer.Play("shake");
+		if (_animationPlayer != null)
+		{
+			_animationPlayer.SpeedScale = 10;
+			_animationPlayer.Play("shake");
+		}
 
 		if (health <= 0)
 		{
@@ -85,20 +98,20 @@ public partial class LootController : StaticBody2D
 			{
 				_animationPlayer.Play("fall");
 			}
-			else{
+			else
+			{
 				DropItems(_items.Count);
 				QueueFree();
 			}
-			
 		}
 	}
 
 	private void OnAnimationFinished(string animationName)
-	{    
-		if(animationName == "fall")
+	{
+		if (animationName == "fall")
 		{
-			QueueFree(); 
-		}           
+			QueueFree();
+		}
 	}
 
 	private void DropItems(int dropAmount = 1)
@@ -109,7 +122,7 @@ public partial class LootController : StaticBody2D
 
 			RawInventoryItem dropItem = new RawInventoryItem(_items[randIndex].ID, _items[randIndex].Name, 1, _items[randIndex].StackSize);
 
-			Node2D droppedItem = PlayerInventoryController.CreateDroppedItem(dropItem, this.Position, GetParent());
+			Node2D droppedItem = PlayerInventoryController.CreateDroppedItem(dropItem, _dropLootPosition.Position, _dropLoopParent);
 
 			_items.RemoveAt(randIndex);
 

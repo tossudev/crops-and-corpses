@@ -21,15 +21,19 @@ public partial class Portal : Node2D
 				case SceneName.Town:
 					SceneManager.ChangeScene(this, Scene.Town);
 					break;
+
 				case SceneName.Cave:
 					SceneManager.ChangeScene(this, Scene.Cave);
 					break;
+
 				case SceneName.Forest:
 					SceneManager.ChangeScene(this, Scene.Forest);
 					break;
+
 				case SceneName.Ruins:
 					SceneManager.ChangeScene(this, Scene.Ruins);
 					break;
+
 				default:
 					GD.PrintErr("Unknown scene name: " + _targetScene);
 					break;

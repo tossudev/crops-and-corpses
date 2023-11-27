@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://bs6otct5awtuy" path="res://TinoTests/Resources/rock.tres" id="2_1jb1k"]
 [ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_i6dnf"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_lv2gj"]
-[ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="5_vty0u"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="5_vty0u"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_yudbm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pn142"]
@@ -50,7 +50,7 @@ texture = ExtResource("3_i6dnf")
 _parentScript = NodePath("..")
 _hasHealthBar = false
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["tree"] instance=ExtResource("5_yudbm")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["rock"] instance=ExtResource("5_yudbm")]
 position = Vector2(-1, 0)
 collision_layer = 16
 collision_mask = 32

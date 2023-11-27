@@ -101,7 +101,7 @@ text = "Cave
 "
 label_settings = ExtResource("2_er7mk")
 
-[node name="Dif1" type="Button" parent="."]
+[node name="dif1" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 327.0
@@ -111,7 +111,7 @@ offset_bottom = 400.0
 scale = Vector2(1.07942, 0.390251)
 icon = ExtResource("1_c5gvq")
 
-[node name="Label" type="Label" parent="Dif1"]
+[node name="Label" type="Label" parent="dif1"]
 layout_mode = 0
 offset_left = 98.0
 offset_top = 67.0
@@ -174,7 +174,7 @@ label_settings = ExtResource("2_er7mk")
 [node name="Cdif" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 190.0
-offset_top = 128.0
-offset_right = 230.0
-offset_bottom = 151.0
+offset_left = 112.0
+offset_top = 152.0
+offset_right = 186.0
+offset_bottom = 232.0

@@ -4,29 +4,70 @@ using System.Collections.Generic;
 
 public partial class Quest : Node
 {
-	 public string QuestName { get; set; }
-    public string Description { get; set; }
-    public string SceneName { get; set; }
-    public List<string> Stages { get; set; }
-    public string Location { get; set; }
+    public string QuestName { get; private set; }
+
+    public int difficulty { get; private set; }
+    public int startDay { get; private set; }
+
+    public string Description { get; private set; }
+    
+    public string SceneName { get; private set; }
+    public List<string> Stages { get; private set; }
+    public Scene.RootScene Location { get; }
+   
     public Vector2 Position { get; internal set; }
 
 
-    public void Initialize(string questName, string description, List<string> stages,  string location = "")
+    public Quest(string questName, int difficulty, int startDay, QuestType type, Scene.RootScene location)
     {
         QuestName = questName;
-        Description = description;
-        Stages = stages;
+        SetDesc(type, difficulty, location);
+        this.startDay = startDay;
+        SetStages(type);
+        
         Location = location;
     }
-  
 
+    void SetDesc(QuestType type, int difficulty, Scene.RootScene location)
+    {
+        switch (type)
+        {
+            case QuestType.Rescue:
 
+                string plural = difficulty > 1 ? "s" : "";
+                Description = $"Rescue {difficulty} villager{plural} from {location.Name}.";
+                break;
+            
+            case QuestType.BridgeBuild:
+                //TODO?
+                Description = "";
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
+        }
+    }
+    
+    void SetStages(QuestType type)
+    {
+        switch (type)
+        {
+            case QuestType.Rescue:
 
+                Stages = new List<string> { "Find", "Rescue", "Deliver" };
+                break;
+            
+            case QuestType.BridgeBuild:
+                //TODO?
+                Description = "";
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
+        }
+    }
+    
     public bool IsQuestComplete()
     {
         return Stages.Count == 0;
-        
     }
 
     public void CompleteQuestStage(string stage)
@@ -52,7 +93,7 @@ public partial class Quest : Node
         return Description;
     }
 
-    public string GetQuestLocation()
+    public Scene.RootScene GetQuestLocation()
     {
         return Location;
     }
@@ -61,11 +102,10 @@ public partial class Quest : Node
     {
         return Stages;
     }
+}
 
-
-
-
-  
-
-
+public enum QuestType
+{
+    Rescue,
+    BridgeBuild
 }

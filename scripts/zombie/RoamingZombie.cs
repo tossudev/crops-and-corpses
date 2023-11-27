@@ -4,6 +4,7 @@ using System;
 public partial class RoamingZombie : CharacterBody2D
 {
 	[Export] private AudioStreamPlayer2D _audioStreamPlayer2D;
+	[Export] private LootController _lootController;
 	private Skeleton2D _sprite;
 	private CharacterBody2D _player;
 	private HitboxComponent[] _hitboxes;
@@ -67,7 +68,7 @@ public partial class RoamingZombie : CharacterBody2D
 				// Flip the character to face left
 				_sprite.Scale = new Vector2(-0.382f, 0.382f);
 			}
-			if(Velocity.X == 0)
+			if (Velocity.X == 0)
 			{
 				animationPlayer.Play("zombieIdle");
 			}
@@ -122,11 +123,13 @@ public partial class RoamingZombie : CharacterBody2D
 				ZombieManager.ZombieType.Strong => ExpGain.Medium,
 				_ => throw new ArgumentOutOfRangeException()
 			};
-			
+
 			TownManager.GainExp(expGained);
-			
+
 			QueueFree();
 		}
+
+		_lootController.CallDeferred("OnHealth", _health);
 	}
 
 	private void OnAttackBoxEntered(Node2D body)
@@ -217,15 +220,15 @@ public partial class RoamingZombie : CharacterBody2D
 	private void OnUpdateStatsTimeout()
 	{
 		{
-			switch(ZombieManager.type)
+			switch (ZombieManager.type)
 			{
 				case ZombieManager.ZombieType.Weak:
-				break;
+					break;
 				case ZombieManager.ZombieType.Medium:
-				break;
+					break;
 				case ZombieManager.ZombieType.Strong:
 				default:
-				break;
+					break;
 			}
 
 			/* if (ZombieManager.type == ZombieManager.ZombieType.Weak)

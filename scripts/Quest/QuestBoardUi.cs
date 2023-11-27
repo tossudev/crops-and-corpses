@@ -7,14 +7,14 @@ public partial class QuestBoardUi : Control
 const string MenuButtonPath = "%DiffcultyButton";
 	MenuButton QuestButton;
 
-	const string button_forest =  "%ForestButton";
-	Button ForestButton;
+	const string BUTTON_FOREST_NODENAME =  "%ForestButton";
+	Button _forestButton;
 
-	const string button_ruins = "%RuinsButton";
-	Button RuinsButton;
+	const string BUTTON_RUINS_NODENAME = "%RuinsButton";
+	Button _ruinsButton;
 
-	const string button_Cave = "%CaveButton";
-	Button CaveButton;
+	const string BUTTON_CAVE_NODENAME = "%CaveButton";
+	Button _caveButton;
 
 
 	const string button_Dif1 = "%dif1";
@@ -30,15 +30,19 @@ const string MenuButtonPath = "%DiffcultyButton";
 	Label CDiffLabel;
 
 	QuestManager questManager;
+	int _selectedDiff;
 
-	VillagerManager villagerManager;
+	GlobalTime _globalTime;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		ForestButton = GetNode<Button>(button_forest);
-		RuinsButton = GetNode<Button>(button_ruins);
-		CaveButton = GetNode<Button>(button_Cave);
+		_globalTime = GetNodeOrNull<GlobalTime>("/root/GlobalTime");
+		questManager = GetNode<QuestManager>("/root/QuestManager");
+		
+		_forestButton = GetNode<Button>(BUTTON_FOREST_NODENAME);
+		_ruinsButton = GetNode<Button>(BUTTON_RUINS_NODENAME);
+		_caveButton = GetNode<Button>(BUTTON_CAVE_NODENAME);
 		Dif1Button = GetNode<Button>(button_Dif1);
 		Dif2Button = GetNode<Button>(button_Dif2);
 		Dif3Button = GetNode<Button>(button_Dif3);
@@ -46,43 +50,28 @@ const string MenuButtonPath = "%DiffcultyButton";
 		
 		
 		// Button mapping
-		ForestButton.Pressed += () => questManager.StartForestQuest();
-		RuinsButton.Pressed += () => questManager.StartRuinsQuest();
-		CaveButton.Pressed += () => questManager.StartCaveQuest();
+		_forestButton.Pressed += () => questManager.StartRescueQuest(Scene.Forest, _selectedDiff);
+		_ruinsButton.Pressed += () => questManager.StartRescueQuest(Scene.Ruins, _selectedDiff);
+		_caveButton.Pressed += () => questManager.StartRescueQuest(Scene.Cave, _selectedDiff);
 
 		Dif1Button.Pressed += () => SetQuestDifficulty(1);
 		Dif2Button.Pressed += () => SetQuestDifficulty(2);
 		Dif3Button.Pressed += () => SetQuestDifficulty(3);
 	}
-
-	public void _Process(double delta)
-	{
-		CDiffLabel.Text = questManager.SelectedDifficulty.ToString();
-	}
     
 
+
+	void CheckIfQuestStartedToday()
+	{
+		if (questManager.GetActiveQuest().startDay == _globalTime.GetDay())
+		{
+			// TODO: disable other ui. Display text that quest was started today
+		}
+	}
+	
 	void SetQuestDifficulty(int diff)
 	{
-		questManager.SelectedDifficulty = diff;
+		_selectedDiff = diff;
+		CDiffLabel.Text = diff.ToString();
 	}
-
-	public void addRawVillagers()
-	{
-		if(questManager.SelectedDifficulty == 1)
-		villagerManager.AddNewVillagerRawData();
-		else if(questManager.SelectedDifficulty == 2)
-		{
-		villagerManager.AddNewVillagerRawData();
-		villagerManager.AddNewVillagerRawData();
-		}
-	
-		else if(questManager.SelectedDifficulty == 3)
-		{
-		villagerManager.AddNewVillagerRawData();
-		villagerManager.AddNewVillagerRawData();
-		villagerManager.AddNewVillagerRawData();
-		}
-	}
-
-	
 }

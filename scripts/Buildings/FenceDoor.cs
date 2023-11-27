@@ -11,9 +11,20 @@ public partial class FenceDoor : Node2D
     [Export]
     CollisionShape2D _doorsCollisionOpen1, _doorsCollisionOpen2, _doorsCollision;
 
+    BuildingHealth _buildingHealth;
+
+    public override void _Ready()
+    {
+        _buildingHealth = GetNode("BuildingHealth") as BuildingHealth;
+    }
 
     void OnFenceDoorInput(Node viewport, InputEvent @event, int shapeIdx)
     {
+        if(_buildingHealth.isBroken)
+        {
+            return;
+        }
+
         if (@event is not InputEventMouseButton { Pressed: true } mouseEvent) return;
 
         if (mouseEvent.ButtonIndex == MouseButton.Left)

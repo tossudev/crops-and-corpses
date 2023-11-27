@@ -11,7 +11,7 @@ public partial class BuildingHealth : Node2D
     CollisionShape2D _collisionShape;
     Node2D _parent;
 
-    bool _isBroken;
+    public bool isBroken;
     
 	// Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -37,7 +37,7 @@ public partial class BuildingHealth : Node2D
 
     private void BreakBuilding()
     {
-        _isBroken = true;
+        isBroken = true;
         _collisionShape.Disabled = true;
         _parent.Modulate = new Color(1, 1, 1, 0.3f);
 
@@ -51,7 +51,7 @@ public partial class BuildingHealth : Node2D
 
     public void FixBuilding()
     {
-        _isBroken = false;
+        isBroken = false;
         _collisionShape.Disabled = false;
         _parent.Modulate = new Color(1, 1, 1, 1);
 

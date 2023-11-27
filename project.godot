@@ -21,6 +21,7 @@ SaveData="*res://scripts/global/SaveData.cs"
 GlobalTime="*res://scripts/global/GlobalTime.cs"
 Audio="*res://scenes/audio.tscn"
 TownManager="*res://scripts/global/TownManager.cs"
+QuestManager="*res://scripts/global/QuestManager.cs"
 
 [display]
 

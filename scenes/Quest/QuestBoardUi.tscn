@@ -1,0 +1,187 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmr1ik7ojfwn5"]
+
+[ext_resource type="Texture2D" uid="uid://baeufxm0dy8va" path="res://scenes/ui/general/button.png" id="1_c5gvq"]
+[ext_resource type="Script" path="res://scripts/Quest/QuestBoardUi.cs" id="1_q7a21"]
+[ext_resource type="LabelSettings" uid="uid://dv17cjn3uthox" path="res://assets/resources/labelsettings/crafting_panel_item_label_settings.tres" id="2_er7mk"]
+
+[node name="QuestBoardUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q7a21")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1928.0
+offset_bottom = 1089.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 355.0
+offset_top = 34.0
+offset_right = 395.0
+offset_bottom = 57.0
+scale = Vector2(2.47888, 1.54671)
+text = "Difficulty
+"
+label_settings = ExtResource("2_er7mk")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 850.0
+offset_top = 38.0
+offset_right = 920.0
+offset_bottom = 64.0
+scale = Vector2(2.47888, 1.54671)
+text = "location
+"
+label_settings = ExtResource("2_er7mk")
+
+[node name="ForrestButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 802.0
+offset_top = 150.0
+offset_right = 1063.0
+offset_bottom = 404.0
+scale = Vector2(1.07942, 0.390251)
+icon = ExtResource("1_c5gvq")
+
+[node name="Label" type="Label" parent="ForrestButton"]
+layout_mode = 0
+offset_left = 12.9699
+offset_top = 76.8736
+offset_right = 110.97
+offset_bottom = 139.874
+scale = Vector2(2.7057, 2.25505)
+text = "Forest"
+label_settings = ExtResource("2_er7mk")
+
+[node name="RuinsButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 800.0
+offset_top = 285.0
+offset_right = 1061.0
+offset_bottom = 539.0
+scale = Vector2(1.07942, 0.390251)
+icon = ExtResource("1_c5gvq")
+
+[node name="Label" type="Label" parent="RuinsButton"]
+layout_mode = 0
+offset_left = 25.9399
+offset_top = 87.1235
+offset_right = 102.94
+offset_bottom = 130.123
+scale = Vector2(2.7057, 2.25505)
+text = "Ruins"
+label_settings = ExtResource("2_er7mk")
+
+[node name="CaveButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 798.0
+offset_top = 416.0
+offset_right = 1059.0
+offset_bottom = 670.0
+scale = Vector2(1.07942, 0.390251)
+icon = ExtResource("1_c5gvq")
+
+[node name="Label" type="Label" parent="CaveButton"]
+layout_mode = 0
+offset_left = 41.689
+offset_top = 66.6238
+offset_right = 109.689
+offset_bottom = 109.624
+scale = Vector2(2.7057, 2.25505)
+text = "Cave
+"
+label_settings = ExtResource("2_er7mk")
+
+[node name="Dif1" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 327.0
+offset_top = 146.0
+offset_right = 588.0
+offset_bottom = 400.0
+scale = Vector2(1.07942, 0.390251)
+icon = ExtResource("1_c5gvq")
+
+[node name="Label" type="Label" parent="Dif1"]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 67.0
+offset_right = 118.0
+offset_bottom = 115.0
+scale = Vector2(2.7057, 2.25505)
+text = "1"
+label_settings = ExtResource("2_er7mk")
+
+[node name="dif2" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 329.0
+offset_top = 280.0
+offset_right = 590.0
+offset_bottom = 559.0
+scale = Vector2(1.07942, 0.390251)
+icon = ExtResource("1_c5gvq")
+
+[node name="Label" type="Label" parent="dif2"]
+layout_mode = 0
+offset_left = 91.7159
+offset_top = 112.748
+offset_right = 109.716
+offset_bottom = 160.748
+scale = Vector2(2.7057, 2.25505)
+text = "2"
+label_settings = ExtResource("2_er7mk")
+
+[node name="dif3" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 323.0
+offset_top = 411.0
+offset_right = 584.0
+offset_bottom = 693.0
+scale = Vector2(1.07942, 0.390251)
+icon = ExtResource("1_c5gvq")
+
+[node name="Label" type="Label" parent="dif3"]
+layout_mode = 0
+offset_left = 96.3481
+offset_top = 97.3732
+offset_right = 114.348
+offset_bottom = 145.373
+scale = Vector2(2.7057, 2.25505)
+text = "3
+"
+label_settings = ExtResource("2_er7mk")
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 94.0
+offset_right = 301.0
+offset_bottom = 137.0
+text = "Current Difficulty"
+label_settings = ExtResource("2_er7mk")
+
+[node name="Cdif" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 190.0
+offset_top = 128.0
+offset_right = 230.0
+offset_bottom = 151.0
+
+[connection signal="pressed" from="ForrestButton" to="." method="On_forrest_button_pressed"]
+[connection signal="pressed" from="RuinsButton" to="." method="On_RuinsButton_pressed"]
+[connection signal="pressed" from="CaveButton" to="." method="On_CaveButton_pressed"]
+[connection signal="pressed" from="Dif1" to="." method="On_dif1_pressed"]
+[connection signal="pressed" from="dif2" to="." method="On_dif2_pressed"]
+[connection signal="pressed" from="dif3" to="." method="On_dif3_pressed"]

@@ -108,7 +108,6 @@ public partial class Villager : CharacterBody2D
 		{
 			ResourceGatheringDone();
 		}
-		GD.Print(VillagerManager.villagerManagerInstance.GetArcherTowerList().Count);
 	}
 
 	public void EnterShelter()

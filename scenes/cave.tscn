@@ -33,14 +33,14 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="Rock" parent="Objects/Breakable" instance=ExtResource("3_flaay")]
-position = Vector2(-9557, 6957)
+position = Vector2(-9526, 7047)
 _color = Color(0.670588, 0.490196, 0.415686, 1)
 _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock2" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-8849, 7082)
+position = Vector2(-8806, 7181)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -49,7 +49,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock3" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-7991, 7960)
+position = Vector2(-7926, 8052)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -58,7 +58,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock4" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-8843, 7859)
+position = Vector2(-8917, 8059)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -67,7 +67,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock5" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-7376, 7205)
+position = Vector2(-7331, 7290)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -76,7 +76,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock6" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-6230, 7578)
+position = Vector2(-6172, 7679)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -85,7 +85,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock7" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-5472, 7212)
+position = Vector2(-5409, 7288)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -94,7 +94,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock8" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-5972, 6042)
+position = Vector2(-5925, 6123)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -103,7 +103,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock9" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-6157, 6817)
+position = Vector2(-6079, 6936)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -112,7 +112,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock10" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-5441, 5139)
+position = Vector2(-5423, 5231)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -121,7 +121,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock11" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-4844, 4272)
+position = Vector2(-4799, 4368)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -130,7 +130,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock12" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-5716, 3873)
+position = Vector2(-5676, 3974)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -139,7 +139,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock13" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-4501, 3497)
+position = Vector2(-4474, 3578)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -148,7 +148,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock14" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-3424, 4383)
+position = Vector2(-3361, 4502)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -157,7 +157,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock15" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-2452, 5281)
+position = Vector2(-2376, 5380)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -166,7 +166,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock16" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-2678, 6181)
+position = Vector2(-2642, 6293)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -175,7 +175,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock17" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-2090, 6055)
+position = Vector2(-2018, 6134)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -184,7 +184,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock18" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-3426, 6051)
+position = Vector2(-3350, 6134)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -193,7 +193,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock19" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-3979, 7214)
+position = Vector2(-3950, 7302)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -202,7 +202,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock20" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-369, 6946)
+position = Vector2(-326, 7045)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -211,7 +211,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock21" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-1467, 6939)
+position = Vector2(-1429, 7044)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -220,7 +220,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock22" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-86, 5926)
+position = Vector2(-25, 6007)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -229,7 +229,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock23" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(1360, 6183)
+position = Vector2(1427, 6275)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -238,7 +238,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock24" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(1604, 5567)
+position = Vector2(1694, 5623)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -247,7 +247,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock32" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(3125, 6038)
+position = Vector2(3170, 6152)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -256,7 +256,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock33" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(4189, 5557)
+position = Vector2(4250, 5642)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -265,7 +265,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock34" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(5824, 4764)
+position = Vector2(5869, 4867)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -274,7 +274,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock35" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(4544, 6690)
+position = Vector2(4571, 6784)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -283,7 +283,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock36" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(6877, 6445)
+position = Vector2(6890, 6485)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -292,7 +292,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock37" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(5716, 5970)
+position = Vector2(5801, 6046)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -301,7 +301,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock38" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(6910, 7057)
+position = Vector2(6948, 7185)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -310,7 +310,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock39" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(7859, 5893)
+position = Vector2(7863, 6030)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -319,7 +319,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock40" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(6855, 5020)
+position = Vector2(6947, 5119)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -328,7 +328,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock41" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(6022, 6753)
+position = Vector2(6332, 6787)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -337,7 +337,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock42" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(5508, 6306)
+position = Vector2(5560, 6398)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -346,7 +346,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock43" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(5088, 4398)
+position = Vector2(5178, 4486)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -355,7 +355,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock44" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(8279, 4919)
+position = Vector2(8351, 5013)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -364,7 +364,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock45" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(7835, 4153)
+position = Vector2(7893, 4220)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -373,7 +373,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock46" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(7004, 3006)
+position = Vector2(7022, 3089)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -382,7 +382,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock47" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(5913, 2716)
+position = Vector2(5958, 2806)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -391,7 +391,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock48" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(5151, 2846)
+position = Vector2(5198, 2947)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -400,7 +400,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock49" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(7750, 2503)
+position = Vector2(7844, 2575)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -409,7 +409,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock25" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(1755, 4773)
+position = Vector2(1820, 4876)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -418,7 +418,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock26" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(2089, 3348)
+position = Vector2(2150, 3447)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -427,7 +427,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock27" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(2661, 3659)
+position = Vector2(2663, 3773)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -436,7 +436,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock28" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(3027, 4278)
+position = Vector2(3090, 4363)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -445,7 +445,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock29" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(3257, 2600)
+position = Vector2(3322, 2681)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -454,7 +454,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock30" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(2978, 2725)
+position = Vector2(3043, 2813)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -463,7 +463,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock31" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(4444, 3376)
+position = Vector2(4505, 3457)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -472,7 +472,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock50" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(8117, 2023)
+position = Vector2(8216, 2077)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -481,7 +481,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock51" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(7948, 800)
+position = Vector2(8011, 905)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -490,7 +490,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock52" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(7777, 157)
+position = Vector2(7840, 240)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -499,7 +499,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock53" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(7066, 303)
+position = Vector2(7149, 413)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -508,7 +508,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock54" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(5248, 311)
+position = Vector2(5252, 403)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -517,7 +517,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock55" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(6242, 1066)
+position = Vector2(6296, 1151)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -526,7 +526,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock56" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(6362, -340)
+position = Vector2(6427, -244)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -535,7 +535,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock57" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(5224, 1682)
+position = Vector2(5260, 1803)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -544,7 +544,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock58" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(4287, 532)
+position = Vector2(4341, 637)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -553,7 +553,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock59" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(3187, 1442)
+position = Vector2(3212, 1536)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -562,7 +562,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock60" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(2144, 1069)
+position = Vector2(2196, 1152)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -571,7 +571,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock61" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-3535, -4070)
+position = Vector2(-3462, -3956)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -580,7 +580,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock62" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-2586, -2659)
+position = Vector2(-2536, -2564)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -589,7 +589,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock63" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-3409, -2915)
+position = Vector2(-3352, -2810)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -598,7 +598,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock64" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-2346, -3482)
+position = Vector2(-2264, -3427)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -607,7 +607,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock65" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-3247, -3513)
+position = Vector2(-3188, -3415)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -616,7 +616,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock66" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(3557, -6096)
+position = Vector2(3613, -6010)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -625,7 +625,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock67" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(3669, -4439)
+position = Vector2(3736, -4344)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -634,7 +634,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock68" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(2615, -5751)
+position = Vector2(2656, -5652)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -652,7 +652,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock70" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-1820, -7253)
+position = Vector2(-1763, -7167)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -661,7 +661,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock71" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-2497, -6379)
+position = Vector2(-2462, -6266)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -670,7 +670,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock72" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-6478, -5070)
+position = Vector2(-6429, -4994)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -679,7 +679,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock73" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-6042, -4304)
+position = Vector2(-5906, -4263)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -688,7 +688,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock74" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-7369, -4432)
+position = Vector2(-7332, -4371)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -697,7 +697,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock75" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-6826, -4038)
+position = Vector2(-6765, -4028)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -706,7 +706,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock76" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-3363, -1725)
+position = Vector2(-3297, -1648)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -715,7 +715,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock77" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-3924, 28)
+position = Vector2(-3873, 114)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -724,7 +724,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock78" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-3931, -1608)
+position = Vector2(-3858, -1533)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -733,7 +733,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock79" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-6830, 2338)
+position = Vector2(-6758, 2431)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -742,7 +742,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock80" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-8274, 2200)
+position = Vector2(-8227, 2301)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -751,7 +751,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock81" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-7465, 955)
+position = Vector2(-7397, 1020)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -760,7 +760,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock82" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-8771, 1040)
+position = Vector2(-8720, 1129)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -769,7 +769,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock83" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-7479, 1622)
+position = Vector2(-7407, 1725)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -778,7 +778,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock84" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-6564, 1448)
+position = Vector2(-6432, 1560)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)

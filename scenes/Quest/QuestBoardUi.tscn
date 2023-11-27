@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dmr1ik7ojfwn5"]
 
-[ext_resource type="Texture2D" uid="uid://baeufxm0dy8va" path="res://scenes/ui/general/button.png" id="1_c5gvq"]
+[ext_resource type="Texture2D" uid="uid://c6n0vrm0ae5c1" path="res://scenes/ui/general/button.png" id="1_c5gvq"]
 [ext_resource type="Script" path="res://scripts/Quest/QuestBoardUi.cs" id="1_q7a21"]
 [ext_resource type="LabelSettings" uid="uid://dv17cjn3uthox" path="res://assets/resources/labelsettings/crafting_panel_item_label_settings.tres" id="2_er7mk"]
 
@@ -40,7 +40,7 @@ text = "location
 "
 label_settings = ExtResource("2_er7mk")
 
-[node name="ForrestButton" type="Button" parent="."]
+[node name="ForestButton" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 802.0
@@ -50,7 +50,7 @@ offset_bottom = 404.0
 scale = Vector2(1.07942, 0.390251)
 icon = ExtResource("1_c5gvq")
 
-[node name="Label" type="Label" parent="ForrestButton"]
+[node name="Label" type="Label" parent="ForestButton"]
 layout_mode = 0
 offset_left = 12.9699
 offset_top = 76.8736
@@ -178,10 +178,3 @@ offset_left = 190.0
 offset_top = 128.0
 offset_right = 230.0
 offset_bottom = 151.0
-
-[connection signal="pressed" from="ForrestButton" to="." method="On_forrest_button_pressed"]
-[connection signal="pressed" from="RuinsButton" to="." method="On_RuinsButton_pressed"]
-[connection signal="pressed" from="CaveButton" to="." method="On_CaveButton_pressed"]
-[connection signal="pressed" from="Dif1" to="." method="On_dif1_pressed"]
-[connection signal="pressed" from="dif2" to="." method="On_dif2_pressed"]
-[connection signal="pressed" from="dif3" to="." method="On_dif3_pressed"]

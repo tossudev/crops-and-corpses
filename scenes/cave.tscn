@@ -13,6 +13,7 @@
 unique_name_in_owner = true
 
 [node name="Objects" type="Node2D" parent="."]
+unique_name_in_owner = true
 y_sort_enabled = true
 
 [node name="Player" parent="Objects" node_paths=PackedStringArray("_camera") instance=ExtResource("11_mechj")]
@@ -786,11 +787,74 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
+[node name="Rock85" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+position = Vector2(1579, -1281)
+_animationPlayer = NodePath("../Rock/AnimationPlayer")
+_sprite = NodePath("../Rock/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
+
+[node name="Rock86" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+position = Vector2(-178, -1182)
+_animationPlayer = NodePath("../Rock/AnimationPlayer")
+_sprite = NodePath("../Rock/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
+
+[node name="Rock87" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+position = Vector2(-487, 2183)
+_animationPlayer = NodePath("../Rock/AnimationPlayer")
+_sprite = NodePath("../Rock/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
+
+[node name="Rock88" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+position = Vector2(-1435, 2043)
+_animationPlayer = NodePath("../Rock/AnimationPlayer")
+_sprite = NodePath("../Rock/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
+
+[node name="Rock89" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+position = Vector2(1324, 1684)
+_animationPlayer = NodePath("../Rock/AnimationPlayer")
+_sprite = NodePath("../Rock/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
+
+[node name="Rock90" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+position = Vector2(668, -827)
+_animationPlayer = NodePath("../Rock/AnimationPlayer")
+_sprite = NodePath("../Rock/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
+
+[node name="Rock91" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+position = Vector2(-849, 1564)
+_animationPlayer = NodePath("../Rock/AnimationPlayer")
+_sprite = NodePath("../Rock/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
+
 [node name="Lights" type="Node2D" parent="Objects"]
 visible = false
 
 [node name="cave_portal" parent="Objects" instance=ExtResource("4_77818")]
-position = Vector2(-9730, 7404)
+position = Vector2(-9986, 7588)
 
 [node name="Enemies" type="Node2D" parent="."]
 visible = false

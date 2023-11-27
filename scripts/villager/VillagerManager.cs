@@ -100,10 +100,28 @@ public partial class VillagerManager : Node
 
 	public void SpawnExistingVillager(VillagerRawData existingVillagerRawData)
 	{
+		if (SaveData.allVillagerData.All(data => data.id != existingVillagerRawData.id))
+		{
+			GD.PushError("Villager data not found");
+			return;
+		}
+		
 		RegisterAndInitVillager(
 			GD.Load<PackedScene>(VILLAGER_SCENE_PATH).Instantiate<Villager>(), existingVillagerRawData);
 	}
 
+	public void SpawnQuestVillagers()
+	{
+		SaveData.allVillagerData.ForEach(data =>
+		{
+			if (!data.isTownPopulation)
+			{
+				SpawnExistingVillager(data);
+			}
+		});
+	}
+	
+	
 	void RegisterAndInitVillager(Villager villagerToRegister, VillagerRawData data)
 	{
 		if (_allVillagers.All(villager => villager.rawData.id != data.id))

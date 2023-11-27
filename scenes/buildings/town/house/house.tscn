@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://3ct83j0jgteb"]
 
-[ext_resource type="Texture2D" uid="uid://b5cv2b6w6tvm0" path="res://assets/sprites/buildings/housedesing2.png" id="1_soon6"]
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_uikdl"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_driju"]
+[ext_resource type="Texture2D" uid="uid://cg5j4xefc87sn" path="res://assets/sprites/buildings/smallhouse_color.png" id="2_dt56r"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_u5tml"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kphka"]
@@ -18,9 +18,9 @@ scale = Vector2(2, 2)
 script = ExtResource("1_uikdl")
 
 [node name="House" type="Sprite2D" parent="."]
-position = Vector2(-64, -80)
-scale = Vector2(0.08, 0.08)
-texture = ExtResource("1_soon6")
+position = Vector2(-64, -105.825)
+scale = Vector2(0.315, 0.315)
+texture = ExtResource("2_dt56r")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-63, -52)

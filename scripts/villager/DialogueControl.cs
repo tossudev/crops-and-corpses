@@ -152,7 +152,7 @@ public  partial class DialogueControl : Control
 		    VillagerState.FarmingTask => "Farming",
 		    VillagerState.FindWoodTask => "Cutting wood",
 		    VillagerState.FindStoneTask => "Mining stone",
-		    VillagerState.ResqueQuest => "Waiting to be rescued",
+		    VillagerState.RescueQuest => "Waiting to be rescued",
 		    _ => "error"
 	    };
         
@@ -186,7 +186,7 @@ public  partial class DialogueControl : Control
 		    
 		    VillagerState.FindStoneTask => "My pickaxe hand is tingling",
 		    
-		    VillagerState.ResqueQuest => "I need help!",
+		    VillagerState.RescueQuest => "I need help!",
 		    _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
 	    };
     }

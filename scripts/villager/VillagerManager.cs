@@ -24,6 +24,7 @@ public partial class VillagerManager : Node
 	
 	List<Villager> _miners = new ();
 	public List<Villager> minerVillagers => _miners;
+	public List<ArcherTower> archerTowerList = new List<ArcherTower>();
     
 
 	[Export] AllVillagerData _allData;
@@ -44,7 +45,6 @@ public partial class VillagerManager : Node
 			SpawnSavedVillagers();
 		}
 	}
-
 	public override void _ExitTree()
 	{
 		base._ExitTree();
@@ -57,7 +57,10 @@ public partial class VillagerManager : Node
 
 		foreach (var villagerRawData in SaveData.allVillagerData)
 		{
-			SpawnExistingVillager(villagerRawData);
+			if(villagerRawData.isTownPopulation)
+			{
+				SpawnExistingVillager(villagerRawData);
+			}
 		}
 		
 		bool test;
@@ -141,6 +144,14 @@ public partial class VillagerManager : Node
 	{
 		return _allData.GetTextureByType(type, part);
 	}
+	public void AddArcherTower(ArcherTower archerTower)
+	{
+		archerTowerList.Add(archerTower);
+	}
+	public List<ArcherTower> GetArcherTowerList()
+	{
+		return archerTowerList;
+	}
 }
 
 public struct VillagerData{
@@ -178,5 +189,5 @@ public enum VillagerState
 	FarmingTask,
 	FindWoodTask,
 	FindStoneTask,
-	ResqueQuest
+	RescueQuest
 }

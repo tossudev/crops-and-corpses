@@ -25,6 +25,7 @@ public partial class ArcherTower : Node2D
     int _attackSpeedMultiplier;
     float _attackSpeed;
     int _accuracy;
+    public bool isOccupied;
 
     public bool isBroken;
 
@@ -60,9 +61,7 @@ public partial class ArcherTower : Node2D
             _attackRange = _speed * (_projectile.airtime - _projectile.despawnTime);
         }
 
-
-        // Remove this when villager "jobs" are added
-        _attackTimer.Start();
+        VillagerManager.villagerManagerInstance.AddArcherTower(this);
     }
 
     private void OnBreak()
@@ -78,11 +77,13 @@ public partial class ArcherTower : Node2D
     public void ActivateTower()
     {
         _attackTimer.Start();
+        isOccupied = true;
     }
 
     public void DeactivateTower()
     {
         _attackTimer.Stop();
+        isOccupied = false;
     }
 
     async void OnShootTimerTimeout()

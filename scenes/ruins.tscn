@@ -99,7 +99,7 @@ scale = Vector2(1, 1)
 scale = Vector2(0.999998, 0.999998)
 
 [node name="ArmL" parent="Objects/Player/Skeleton2D/TorsoBone/ArmLBone" index="0"]
-position = Vector2(4.05988, 13.3003)
+position = Vector2(4.06, 13.2998)
 scale = Vector2(1, 1)
 
 [node name="HeadBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="4"]
@@ -251,12 +251,6 @@ position = Vector2(-1144, -2032)
 y_sort_enabled = true
 position = Vector2(417, -560)
 scale = Vector2(0.25, 0.25)
-
-[node name="HealthComponent" parent="Objects/Buildings/well" index="3"]
-visible = false
-
-[node name="HealthBar" parent="Objects/Buildings/well" index="5"]
-visible = false
 
 [node name="Enemies" type="Node2D" parent="Objects"]
 y_sort_enabled = true

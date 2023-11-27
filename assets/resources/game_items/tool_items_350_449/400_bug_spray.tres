@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=6 format=3 uid="uid://bpjwmo4fvwr48"]
 
-[ext_resource type="Texture2D" uid="uid://nssu7mse7xb2" path="res://assets/placeholder/J_Sprites/bugsign.png" id="1_ftkfa"]
+[ext_resource type="Texture2D" uid="uid://6ba4vw8n3lym" path="res://assets/sprites/Farm sprites/bug_spray.png" id="1_scqne"]
 [ext_resource type="Resource" uid="uid://bfbq2rwvxjb23" path="res://assets/resources/game_items/tool_items_350_449/406_bucket_water.tres" id="2_xw2up"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_j0mhx"]
 [ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="4_1eg0j"]
@@ -14,6 +14,6 @@ quantity = 1
 script = ExtResource("4_1eg0j")
 ID = 400
 Name = "Bug Spray"
-IconTexture = ExtResource("1_ftkfa")
+IconTexture = ExtResource("1_scqne")
 StackSize = 1
 craftingRequirements = Array[Object]([SubResource("Resource_ly63m")])

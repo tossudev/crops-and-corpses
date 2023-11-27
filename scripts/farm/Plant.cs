@@ -103,8 +103,6 @@ public partial class Plant : Node2D
 	{
 		InitializePlant();
 		if(FarmManager.instance!=null) FarmManager.instance.AddPlantedPlant(this);
-		
-		GD.Print(currentGrowthTime);
 	}
 
 	void InitializePlant(){
@@ -132,12 +130,12 @@ public partial class Plant : Node2D
 		_growthTimer.Timeout += GrowthCycle;	
 		
 		GetNode<TextureRect>("%TextureRect").Texture = _sproutTexture;
-		_warningSign.Scale = new Vector2(0.75f,0.75f);
-		_warningSign.Position = new Vector2(0, -115);
+		_warningSign.Scale = new Vector2(0.06f,0.06f);
+		_warningSign.Position = new Vector2(-10, 10);
 		AddChild(_warningSign);
 
-		_bugSignTexture = ResourceLoader.Load("res://assets/placeholder/J_Sprites/bugsign.png") as Texture2D;
-		_waterSignTexture = ResourceLoader.Load("res://assets/placeholder/J_Sprites/watersign.png") as Texture2D;
+		_bugSignTexture = ResourceLoader.Load("res://assets/sprites/Farm sprites/sign_bugplant.png") as Texture2D;
+		_waterSignTexture = ResourceLoader.Load("res://assets/sprites/Farm sprites/sign_waterplant.png") as Texture2D;
 
 		var scene = ResourceLoader.Load<PackedScene>("res://scenes/farm/plant_progress_bar.tscn").Instantiate();
      	_progress = scene as TextureProgressBar;   
@@ -257,7 +255,6 @@ public partial class Plant : Node2D
 			PlantState();
 			return;
 		}
-
 		// Else continue growth cycle, do lottery for random event
         Random random = new Random();
         int randomNumber = random.Next(1, 5);
@@ -270,25 +267,20 @@ public partial class Plant : Node2D
 			_state = GrowthState.IsInfested;
 			PlantState();
 		}
-		else GD.Print("No event this growth cycle.");
 	}
 	void StartGrowth(){
-		 GD.Print("Growing stage started for "+plantName);
         growthStarted=true;
       	_growthTimer.WaitTime = _growthCycleLength;
     	_growthTimer.Start();
 	}
 	void ContinueGrowth(){
-		 GD.Print(plantName+" is healthy again.");
 		 _growthTimer.Stop();
 		 _growthTimer.Start();
 	}
 	void StartDying(){
 		if(_state == GrowthState.IsWilting){
-			GD.Print("Plant is wilting: "+plantName);
 			_warningSign.Texture = _waterSignTexture;
 		}else if(_state == GrowthState.IsInfested){
-			GD.Print("Plant is infested: "+plantName);
 			_warningSign.Texture = _bugSignTexture;
 		}
 	}
@@ -300,8 +292,7 @@ public partial class Plant : Node2D
 			_state = GrowthState.StartGrowth;
 		else if(_state == GrowthState.IsWilting)
 			_state = GrowthState.ContinueGrowth;
-		
-			
+
 		PlantState();	
 	}
 	public void CurePlant(){
@@ -317,8 +308,6 @@ public partial class Plant : Node2D
             GetNode<TextureRect>("%TextureRect").ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
 			Position = new Vector2(0, -25);
         }
-
-        GD.Print(plantName+" is fully grown and ready for harvest!");
         _progress.Hide();
         _state = GrowthState.IsHarvestable;
 		_growthTimer.Stop();
@@ -342,7 +331,12 @@ public partial class Plant : Node2D
 	}
 
 	public void Die(){
-		GD.Print("Dead: "+plantName);
+
+		 if (_plantType == PlantType.Lupine)
+        {
+            GetNode<TextureRect>("%TextureRect").ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
+			Position = new Vector2(0, -25);
+        }
 		_progress.Hide();
 		_state = GrowthState.IsDead;
 		_warningSign.Texture = null;

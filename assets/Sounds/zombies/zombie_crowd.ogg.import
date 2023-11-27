@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://cy4nqvm48uqvm"
-path="res://.godot/imported/zombie_crowd.ogg-35030d498d9cd68570e7ca9f8d0b0cdd.oggvorbisstr"
+path="res://.godot/imported/zombie_crowd.ogg-b3ad4a8a0d8a7ae7f401592ff8af874d.oggvorbisstr"
 
 [deps]
 
-source_file="res://assets/Sounds/zombies/zombie_crowd.ogg"
-dest_files=["res://.godot/imported/zombie_crowd.ogg-35030d498d9cd68570e7ca9f8d0b0cdd.oggvorbisstr"]
+source_file="res://assets/sounds/zombies/zombie_crowd.ogg"
+dest_files=["res://.godot/imported/zombie_crowd.ogg-b3ad4a8a0d8a7ae7f401592ff8af874d.oggvorbisstr"]
 
 [params]
 

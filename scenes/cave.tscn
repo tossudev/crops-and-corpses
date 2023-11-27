@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bbvsfe4h2sph"]
+[gd_scene load_steps=7 format=3 uid="uid://bbvsfe4h2sph"]
 
 [ext_resource type="PackedScene" uid="uid://wy0dgop8pftu" path="res://scenes/world/cave_tilemap.tscn" id="1_yabqn"]
 [ext_resource type="PackedScene" uid="uid://b6w8cr3rm5pu3" path="res://scenes/world/rock.tscn" id="3_flaay"]
+[ext_resource type="PackedScene" uid="uid://clgxnh7i1qclh" path="res://scenes/world/cave_portal.tscn" id="4_77818"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="11_mechj"]
-[ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="19_0ed0p"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="20_wlbpj"]
 [ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://scenes/spawn/ZombieSpawn.tscn" id="21_qreku"]
-[ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="22_51o8v"]
 
 [node name="Cave" type="Node2D"]
 
@@ -21,10 +20,6 @@ position = Vector2(-9800, 7800)
 _camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
-limit_left = -9917
-limit_top = -8031
-limit_right = 9923
-limit_bottom = 7969
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
@@ -794,38 +789,15 @@ _scaleVariation = 0.25
 [node name="Lights" type="Node2D" parent="Objects"]
 visible = false
 
+[node name="cave_portal" parent="Objects" instance=ExtResource("4_77818")]
+position = Vector2(-9730, 7404)
+
 [node name="Enemies" type="Node2D" parent="."]
 visible = false
 y_sort_enabled = true
 position = Vector2(6.10352e-05, 6.10352e-05)
 
-[node name="street_sign_post" parent="." instance=ExtResource("19_0ed0p")]
-visible = false
-position = Vector2(-9797, 7571)
-
-[node name="Sprite2D" parent="street_sign_post" index="0"]
-offset = Vector2(0, -230)
-
-[node name="ruins_sign" parent="street_sign_post" index="1"]
-position = Vector2(63.3333, -350.333)
-
-[node name="town_sign" parent="street_sign_post" index="2"]
-position = Vector2(66.6666, -350.333)
-
-[node name="forest_sign" parent="street_sign_post" index="3"]
-position = Vector2(-66.6666, -329.667)
-
-[node name="riverside_sign" parent="street_sign_post" index="4"]
-visible = false
-position = Vector2(-66.6666, -360)
-
-[node name="StreetSignSpot" type="Node2D" parent="."]
-unique_name_in_owner = true
-visible = false
-position = Vector2(408, 0)
-
 [node name="ZombieManager" type="Node2D" parent="."]
-visible = false
 script = ExtResource("20_wlbpj")
 
 [node name="Timer" type="Timer" parent="ZombieManager"]
@@ -834,16 +806,4 @@ script = ExtResource("20_wlbpj")
 visible = false
 player = NodePath("../Objects/Player")
 
-[node name="SunlightContainer" type="Node" parent="."]
-script = ExtResource("22_51o8v")
-nightTimeColor = Color(0.501961, 0.501961, 0.501961, 1)
-dayTimeColor = Color(0.501961, 0.501961, 0.501961, 1)
-
-[node name="Sunlight" type="CanvasModulate" parent="SunlightContainer"]
-visible = false
-position = Vector2(-71, -4)
-
-[connection signal="input_event" from="street_sign_post/riverside_sign" to="street_sign_post" method="TravelCave"]
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
-
-[editable path="street_sign_post"]

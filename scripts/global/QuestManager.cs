@@ -5,9 +5,8 @@ public partial class QuestManager : Node
 {
     GlobalTime globalTime;
 
-    public int SelectedDifficulty = 1;
     private Quest activeQuest;
-
+    
     public override void _Ready()
     {
         globalTime = GetNodeOrNull<GlobalTime>("/root/GlobalTime");
@@ -20,23 +19,15 @@ public partial class QuestManager : Node
     }
 
 
-    public void StartQuest(string questName, string questDescription, List<string> questStages, string questLocation)
+    void StartQuest(string questName, int difficulty, QuestType type, Scene.RootScene questLocation)
     {
         int StartDay = globalTime.GetDay();
         GD.Print($"Start day: {StartDay}");
 
-        if (activeQuest == null && StartDay < globalTime.GetDay())
+        if (activeQuest == null)
         {
-            Quest newQuest = new Quest
-            {
-                Name = questName,
-
-                Description = questDescription,
-
-                Stages = questStages,
-
-                Location = questLocation
-            };
+            Quest newQuest = new Quest(questName, difficulty, StartDay, type, questLocation);
+            
             SetActiveQuest(newQuest);
         }
         else
@@ -44,28 +35,18 @@ public partial class QuestManager : Node
             GD.Print("Quest already active");
         }
     }
+    
 
-    public void StartForestQuest()
+    public void StartRescueQuest(Scene.RootScene location, int difficulty)
     {
-        List<string> questStages = new List<string> { "Find", "Rescue", "Deliver" };
-        StartQuest("Forest Quest", "Rescue Villager From Forest", questStages, "Forest");
-        GD.Print("Forest Quest Started");
+        StartQuest($"Rescue Quest: {location.Name}", difficulty, QuestType.Rescue, location);
     }
 
-    public void StartRuinsQuest()
+    public void CompleteQuest()
     {
-        List<string> questStages = new List<string> { "Find", "Rescue", "Deliver" };
-        StartQuest("Ruins Quest", "Rescue Villager From Ruins", questStages, "Ruins");
-        GD.Print("Ruins Quest Started");
+        SetActiveQuest(null);
     }
-
-    public void StartCaveQuest()
-    {
-        List<string> questStages = new List<string> { "Find", "Rescue", "Deliver" };
-        StartQuest("Cave Quest", "Rescue Villager From cave", questStages, "Cave");
-        GD.Print("Cave Quest Started");
-    }
-
+    
     public static void LoadQuest()
     {
         // Your implementation here
@@ -74,14 +55,12 @@ public partial class QuestManager : Node
 
     public Quest GetActiveQuest() => activeQuest;
 
-    public void SetActiveQuest(Quest quest) => activeQuest = quest;
+    public void SetActiveQuest(Quest quest)
+    { 
+        activeQuest = quest;
+    } 
 
 
     public void CompleteQuestStage(string stage) => activeQuest?.CompleteQuestStage(stage);
-
-
-    internal object GetQuestName()
-    {
-        return activeQuest?.Name;
-    }
+    
 }

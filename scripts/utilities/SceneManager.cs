@@ -8,6 +8,17 @@ public static class SceneManager
     static bool sceneChanged = true;
     static Node _currentRootScene;
     
+    
+    public static Scene.RootScene GetCurrentScene(Node caller)
+    {
+        if (sceneChanged) CacheCurrentScene(caller);
+
+        Scene.RootScene scene;
+
+    //TODO
+        return Scene.Town;
+    }
+    
     public static bool IsCurrentScene(Node caller, IEnumerable<Scene.RootScene> scenes)
     {
         return scenes.Any(scene => CompareCurrentSceneTo(caller, scene));

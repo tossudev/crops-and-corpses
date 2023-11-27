@@ -20,7 +20,7 @@ public partial class Fences : Node2D
 
     PackedScene _fenceNorth, _fenceSouth, _fenceWest, _fenceEast;
 
-    PackedScene _fenceDoorHorizontal, _fenceDoorEast, _fenceDoorWest;
+    PackedScene _fenceDoorSouth, _fenceDoorEast, _fenceDoorWest;
 	public override void _Ready()
 	{
         _fences = GetNode("Fences") as Node2D;
@@ -30,7 +30,7 @@ public partial class Fences : Node2D
         _fenceWest = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_west.tscn");
         _fenceEast = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_east.tscn");
 
-        _fenceDoorHorizontal = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_door_horizontal.tscn");
+        _fenceDoorSouth = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_door_south.tscn");
         _fenceDoorEast = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_door_east.tscn");
         _fenceDoorWest = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_door_west.tscn");
 
@@ -128,13 +128,13 @@ public partial class Fences : Node2D
             if (_southDoorSpot == i)
             {
                 //InstantiateDoor(x + 128, y + 90, _fenceEast, x, y, _fenceNorth);
-                InstantiateDoor(x, y, _fenceDoorHorizontal);
+                InstantiateDoor(x, y, _fenceDoorSouth);
                 continue;
             }
             else if (Math.Floor(fenceLengthX / 2f) == i && _southDoorSpot == -1)
             {
                 //InstantiateDoor(x + 128, y + 90, _fenceEast, x, y, _fenceNorth);
-                InstantiateDoor(x, y, _fenceDoorHorizontal);
+                InstantiateDoor(x, y, _fenceDoorSouth);
                 continue;
             }
 
@@ -160,9 +160,9 @@ public partial class Fences : Node2D
         _fenceDoorScene.Position = new Vector2(posX,posY);
         _fences.AddChild(_fenceDoorScene);
 
-        if(_fenceDoorScene.HasMethod("DoorsTopdown"))
+        if(_fenceDoorScene.HasMethod("DoorsOpen"))
         {
-            _fenceDoorScene.CallDeferred("Doors");
+            _fenceDoorScene.CallDeferred("DoorsOpen");
         }
     }
 }

@@ -6,6 +6,8 @@ using System.Security;
 public partial class BuildingHealth : Node2D
 {
 	HealthComponent _healthComponent;
+
+    [Export]
     CollisionShape2D _collisionShape;
     Node2D _parent;
 
@@ -17,7 +19,7 @@ public partial class BuildingHealth : Node2D
         _parent = GetParent() as Node2D;
 
 		_healthComponent = GetNode("../HealthComponent") as HealthComponent;
-        _collisionShape = GetNode("../StaticBody2D/CollisionShape2D") as CollisionShape2D;
+        //_collisionShape = GetNode("../StaticBody2D/CollisionShape2D") as CollisionShape2D;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

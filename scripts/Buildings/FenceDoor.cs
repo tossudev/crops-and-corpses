@@ -6,10 +6,10 @@ using System.Diagnostics.Contracts;
 public partial class FenceDoor : Node2D
 {
     [Export]
-    Node2D _doorsTopdown, _doors;
+    Node2D _doorsOpened, _doorsClosed;
 
     [Export]
-    CollisionShape2D _doorsTopdownCollisionLeft, _doorsTopdownCollisionRight, _doorsCollision;
+    CollisionShape2D _doorsCollisionOpen1, _doorsCollisionOpen2, _doorsCollision;
 
 
     void OnFenceDoorInput(Node viewport, InputEvent @event, int shapeIdx)
@@ -20,32 +20,32 @@ public partial class FenceDoor : Node2D
         {
             if(_doorsCollision.Disabled) 
             {
-                Doors();
+                DoorsClose();
             }
             else
             {
-                DoorsTopdown();
+                DoorsOpen();
             }
         }
     }
 
-    public void DoorsTopdown()
+    public void DoorsOpen()
     {
-        _doorsTopdown.Show();
-        _doorsTopdownCollisionRight.Disabled = false;
-        _doorsTopdownCollisionLeft.Disabled = false;
+        _doorsOpened.Show();
+        _doorsCollisionOpen2.Disabled = false;
+        _doorsCollisionOpen1.Disabled = false;
 
-        _doors.Hide();
+        _doorsClosed.Hide();
         _doorsCollision.Disabled = true;
     }
 
-    public void Doors()
+    public void DoorsClose()
     {
-        _doorsTopdownCollisionRight.Disabled = true;
-        _doorsTopdownCollisionLeft.Disabled = true;
-        _doorsTopdown.Hide();
+        _doorsCollisionOpen2.Disabled = true;
+        _doorsCollisionOpen1.Disabled = true;
+        _doorsOpened.Hide();
 
         _doorsCollision.Disabled = false;
-        _doors.Show();
+        _doorsClosed.Show();
     }
 }

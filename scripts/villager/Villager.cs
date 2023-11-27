@@ -19,13 +19,13 @@ public partial class Villager : CharacterBody2D
 	Timer _timer;
 	[Export] NavigationAgent2D navMeshAgent;
 	//[Export] NavigationRegion2D navRegionArea;
-	List<Node2D> _fenceList = new List<Node2D>();
+	//List<Node2D> _fenceList = new List<Node2D>();
 	Plant _currentPlant;
 	ArcherTower _archerTower;
 	HealthComponent _fenceHealth;
 	Node2D _buildings;
 	Node2D _fences;
-	Node2D _currentFence;
+	HealthComponent _currentFence;
 	Node2D _streetSign;
 	Sprite2D _villagerSprite;
 	int _plantIndex = 0;
@@ -479,8 +479,8 @@ public partial class Villager : CharacterBody2D
 		{
 			_fenceIndex = 0;
 		}
-	}
-	void CountFences()
+	} */
+/* 	void CountFences()
 	{
 		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
 
@@ -492,7 +492,7 @@ public partial class Villager : CharacterBody2D
 				_fenceList.Add(fence);
 			}
 		}
-	} */
+	}  */
 }
 
 

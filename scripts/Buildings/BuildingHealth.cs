@@ -6,9 +6,9 @@ using System.Security;
 public partial class BuildingHealth : Node2D
 {
 	HealthComponent _healthComponent;
-
-    [Export]
     CollisionShape2D _collisionShape;
+    const string HEALTH_COMPONENT_NODENAME = "%HealthComponent";
+    const string COLLISIONSHAPE2D_NODENAME = "%StaticCollisionShape2D";
     Node2D _parent;
 
     public bool isBroken;
@@ -16,10 +16,9 @@ public partial class BuildingHealth : Node2D
 	// Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+        _healthComponent = GetNode<HealthComponent>(HEALTH_COMPONENT_NODENAME);
+        _collisionShape = GetNode<CollisionShape2D>(COLLISIONSHAPE2D_NODENAME);
         _parent = GetParent() as Node2D;
-
-		_healthComponent = GetNode("../HealthComponent") as HealthComponent;
-        //_collisionShape = GetNode("../StaticBody2D/CollisionShape2D") as CollisionShape2D;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

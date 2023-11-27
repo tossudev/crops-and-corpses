@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://disyt3fuu77je"]
+[gd_scene load_steps=9 format=3 uid="uid://disyt3fuu77je"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_667uj"]
-[ext_resource type="Texture2D" uid="uid://x5tq60cyhwmg" path="res://assets/sprites/buildings/fences/fence_w.png" id="1_rypmg"]
 [ext_resource type="Script" path="res://scripts/farm/FenceHealth.cs" id="1_wari8"]
-[ext_resource type="Texture2D" uid="uid://djhyomtxb2qta" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="2_d27mr"]
+[ext_resource type="Texture2D" uid="uid://b8uuvbt0fpbw2" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="2_d27mr"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_xoojr"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_vkqwf"]
 [ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_cet8m"]
@@ -16,20 +15,14 @@ size = Vector2(5, 151)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="FenceHighW" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-64, -128)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_rypmg")
-
 [node name="FenceHighE2" type="Sprite2D" parent="."]
 position = Vector2(-3.00002, -75)
 scale = Vector2(0.333333, 0.400538)
 texture = ExtResource("2_d27mr")
 
-[node name="BuildingHealth" type="Node2D" parent="." node_paths=PackedStringArray("_collisionShape")]
+[node name="BuildingHealth" type="Node2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("1_667uj")
-_collisionShape = NodePath("../StaticBody2D/CollisionShape2D")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-64, -64)
@@ -43,11 +36,13 @@ collision_layer = 255
 collision_mask = 5
 script = ExtResource("1_wari8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="StaticCollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+unique_name_in_owner = true
 position = Vector2(-3, -75)
 shape = SubResource("RectangleShape2D_10v6f")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_xoojr")]
+unique_name_in_owner = true
 position = Vector2(-3, -74)
 _parentScript = NodePath("../BuildingHealth")
 

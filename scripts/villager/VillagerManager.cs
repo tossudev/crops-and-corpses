@@ -25,6 +25,7 @@ public partial class VillagerManager : Node
 	List<Villager> _miners = new ();
 	public List<Villager> minerVillagers => _miners;
 	public List<ArcherTower> archerTowerList = new List<ArcherTower>();
+	public List<BuildingHealth> _brokenFenceList = new List<BuildingHealth>();
     
 
 	[Export] AllVillagerData _allData;
@@ -151,6 +152,25 @@ public partial class VillagerManager : Node
 	public List<ArcherTower> GetArcherTowerList()
 	{
 		return archerTowerList;
+	}
+	void CountBrokenFencesInTown()
+	{
+		_brokenFenceList.Clear();
+		var _fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
+
+		foreach (Node2D fence in _fences.GetChild(0).GetChildren())
+		{
+			var fenceHealth = fence.GetNode<BuildingHealth>("%BuildingHealth");
+			if(fenceHealth.isBroken)
+			{
+				_brokenFenceList.Add(fenceHealth);
+			}
+		}
+	}
+	public List<BuildingHealth> GetFenceList()
+	{
+		CountBrokenFencesInTown();
+		return _brokenFenceList;
 	}
 }
 

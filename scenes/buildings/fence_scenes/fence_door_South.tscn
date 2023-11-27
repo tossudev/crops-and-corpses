@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dhn0ur8iecjd8"]
+[gd_scene load_steps=13 format=3 uid="uid://bslom2g3m4qky"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/FenceDoor.cs" id="1_qlejx"]
-[ext_resource type="Texture2D" uid="uid://c1mvwoenhyv3m" path="res://assets/sprites/Farm sprites/gate door.png" id="2_8uf1v"]
-[ext_resource type="Texture2D" uid="uid://djhyomtxb2qta" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="3_3m1xk"]
+[ext_resource type="Texture2D" uid="uid://rxs03awtm4s4" path="res://assets/sprites/Farm sprites/gate door.png" id="2_8uf1v"]
+[ext_resource type="Texture2D" uid="uid://b8uuvbt0fpbw2" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="3_3m1xk"]
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="4_ovuda"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="5_4xgdc"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="6_6vpgs"]
@@ -29,14 +29,15 @@ _doorsOpened = NodePath("DoorsTopdown")
 _doorsClosed = NodePath("Doors")
 _doorsCollisionOpen1 = NodePath("DoorsTopdown/StaticBody2D/CollisionShape2D")
 _doorsCollisionOpen2 = NodePath("DoorsTopdown/StaticBody2D/CollisionShape2D2")
-_doorsCollision = NodePath("StaticBody2D/CollisionShape2D")
+_doorsCollision = NodePath("StaticBody2D/StaticCollisionShape2D")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["fence"]]
 position = Vector2(-65, -1)
 collision_layer = 255
 collision_mask = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="StaticCollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+unique_name_in_owner = true
 position = Vector2(2, -31.28)
 shape = SubResource("RectangleShape2D_638cj")
 
@@ -96,12 +97,13 @@ shape = SubResource("RectangleShape2D_555mk")
 position = Vector2(-66, 24)
 shape = SubResource("RectangleShape2D_555mk")
 
-[node name="BuildingHealth" type="Node2D" parent="." node_paths=PackedStringArray("_collisionShape")]
+[node name="BuildingHealth" type="Node2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(-65, -1)
 script = ExtResource("4_ovuda")
-_collisionShape = NodePath("../StaticBody2D/CollisionShape2D")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("5_4xgdc")]
+unique_name_in_owner = true
 position = Vector2(-191, -76)
 _parentScript = NodePath("../BuildingHealth")
 _healItemPrefabs = Array[PackedScene]([])

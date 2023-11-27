@@ -16,60 +16,60 @@
 [ext_resource type="Texture2D" uid="uid://bbei648d3eovx" path="res://assets/placeholder/test_character/character.png" id="5_grghj"]
 [ext_resource type="Texture2D" uid="uid://bf0kk4xsi7048" path="res://assets/sprites/tiles/Dirt_rocks_tile.png" id="6_5rtbt"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="6_d65ob"]
-[ext_resource type="Texture2D" uid="uid://ciufpqpghmeav" path="res://assets/sprites/tiles/dirt_corner_tile1.png" id="6_u3bux"]
-[ext_resource type="Texture2D" uid="uid://dp4y2ymnnwv5x" path="res://assets/sprites/tiles/dirt_corner_tile5.png" id="7_3xb4g"]
+[ext_resource type="Texture2D" uid="uid://cs7rpgoc0ortd" path="res://assets/sprites/tiles/dirt_corner_tile1.png" id="6_u3bux"]
+[ext_resource type="Texture2D" uid="uid://mlb5d7mdehii" path="res://assets/sprites/tiles/dirt_corner_tile5.png" id="7_3xb4g"]
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="7_jud20"]
-[ext_resource type="Texture2D" uid="uid://detsecq6dg2ji" path="res://assets/sprites/tiles/dirt_corner_tile6.png" id="8_682m5"]
+[ext_resource type="Texture2D" uid="uid://ry1w1mhwshco" path="res://assets/sprites/tiles/dirt_corner_tile6.png" id="8_682m5"]
 [ext_resource type="Texture2D" uid="uid://n8iftcgk0ti0" path="res://assets/sprites/tiles/Sand_tile.png" id="8_e4y30"]
-[ext_resource type="Texture2D" uid="uid://bt1pgtletm2bp" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="8_x823n"]
-[ext_resource type="Texture2D" uid="uid://bhen5nf0nap5k" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="9_5rwtt"]
-[ext_resource type="Texture2D" uid="uid://dh822ev4ed6xd" path="res://assets/sprites/tiles/dirt_corner_tile7.png" id="9_sudqa"]
-[ext_resource type="Texture2D" uid="uid://duolj84sp2sjx" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="10_o4kc8"]
-[ext_resource type="Texture2D" uid="uid://ccfsr35cmhnq8" path="res://assets/sprites/tiles/dirt_corner_tile8.png" id="10_rbg3b"]
-[ext_resource type="Texture2D" uid="uid://cu82aaaq0pb5r" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="11_atcgv"]
+[ext_resource type="Texture2D" uid="uid://bm21le2yetin4" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="8_x823n"]
+[ext_resource type="Texture2D" uid="uid://nu40cmfh2oi2" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="9_5rwtt"]
+[ext_resource type="Texture2D" uid="uid://lm2w4jotv7y2" path="res://assets/sprites/tiles/dirt_corner_tile7.png" id="9_sudqa"]
+[ext_resource type="Texture2D" uid="uid://c4200mv7pvts3" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="10_o4kc8"]
+[ext_resource type="Texture2D" uid="uid://0ts5ewpf5xht" path="res://assets/sprites/tiles/dirt_corner_tile8.png" id="10_rbg3b"]
+[ext_resource type="Texture2D" uid="uid://dm0ac07r0lrg6" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="11_atcgv"]
 [ext_resource type="PackedScene" uid="uid://bcoq8weob6f7g" path="res://scenes/world/tree2.tscn" id="11_r6rlm"]
-[ext_resource type="Texture2D" uid="uid://cwhfnwiowk0u6" path="res://assets/sprites/tiles/grass_corner_tile1.png" id="11_x68fl"]
+[ext_resource type="Texture2D" uid="uid://dnlnxba32v5w4" path="res://assets/sprites/tiles/grass_corner_tile1.png" id="11_x68fl"]
 [ext_resource type="PackedScene" uid="uid://du4tddxtyn51y" path="res://scenes/world/tree3.tscn" id="12_0nbqh"]
-[ext_resource type="Texture2D" uid="uid://556ehmvxj0lt" path="res://assets/sprites/tiles/grass_corner_tile2.png" id="12_xqhjk"]
-[ext_resource type="Texture2D" uid="uid://dis11gkqrkkso" path="res://assets/sprites/tiles/grass_corner_tile3.png" id="13_c7wja"]
-[ext_resource type="Texture2D" uid="uid://c6vfjuod286y6" path="res://assets/sprites/tiles/grass_corner_tile4.png" id="14_78vcf"]
-[ext_resource type="Texture2D" uid="uid://b13l88w6b2qh0" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="15_ie1vm"]
+[ext_resource type="Texture2D" uid="uid://c4eb603j601a6" path="res://assets/sprites/tiles/grass_corner_tile2.png" id="12_xqhjk"]
+[ext_resource type="Texture2D" uid="uid://c0jt658cydq2m" path="res://assets/sprites/tiles/grass_corner_tile3.png" id="13_c7wja"]
+[ext_resource type="Texture2D" uid="uid://dvcm2wr0pfuib" path="res://assets/sprites/tiles/grass_corner_tile4.png" id="14_78vcf"]
+[ext_resource type="Texture2D" uid="uid://bi6h83c3blig7" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="15_ie1vm"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="16_rit5n"]
 [ext_resource type="PackedScene" uid="uid://3ct83j0jgteb" path="res://scenes/buildings/town/house/house.tscn" id="16_tadus"]
-[ext_resource type="Texture2D" uid="uid://bi48utqac6akr" path="res://assets/sprites/tiles/grass_corner_tile6.png" id="17_0beee"]
+[ext_resource type="Texture2D" uid="uid://dir2icya658ou" path="res://assets/sprites/tiles/grass_corner_tile6.png" id="17_0beee"]
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="17_ay1u5"]
-[ext_resource type="Texture2D" uid="uid://d3svcqsb68vbq" path="res://assets/sprites/tiles/grass_corner_tile7.png" id="18_8hjld"]
+[ext_resource type="Texture2D" uid="uid://cye7r4dinjg5v" path="res://assets/sprites/tiles/grass_corner_tile7.png" id="18_8hjld"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_g46xp"]
-[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://scenes/world/SunlightContainer.tscn" id="18_j47l1"]
-[ext_resource type="Texture2D" uid="uid://p0vefm8oo5l8" path="res://assets/sprites/ui/wooden_panel.png" id="19_dhclt"]
-[ext_resource type="Texture2D" uid="uid://b44jwe681onp5" path="res://assets/sprites/tiles/grass_corner_tile8.png" id="19_j3eyx"]
-[ext_resource type="Texture2D" uid="uid://cqfverwpt5y6q" path="res://assets/sprites/tiles/Sand_corner_tile1.png" id="20_1e5by"]
+[ext_resource type="PackedScene" path="res://scenes/world/SunlightContainer.tscn" id="18_j47l1"]
+[ext_resource type="Texture2D" uid="uid://dgnvxrl2u3poc" path="res://assets/sprites/ui/wooden_panel.png" id="19_dhclt"]
+[ext_resource type="Texture2D" uid="uid://dqstvibgfk8a" path="res://assets/sprites/tiles/grass_corner_tile8.png" id="19_j3eyx"]
+[ext_resource type="Texture2D" uid="uid://cmedkvrx7idi7" path="res://assets/sprites/tiles/Sand_corner_tile1.png" id="20_1e5by"]
 [ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://scenes/farm/farm_plot.tscn" id="21_3lgi7"]
 [ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="21_tox2m"]
-[ext_resource type="Texture2D" uid="uid://ns6o4wxlgaip" path="res://assets/sprites/tiles/sand_corner_tile2.png" id="21_w6pde"]
+[ext_resource type="Texture2D" uid="uid://cgguv5bpsth7i" path="res://assets/sprites/tiles/sand_corner_tile2.png" id="21_w6pde"]
 [ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/iron_ore.tscn" id="22_4gs3r"]
-[ext_resource type="Texture2D" uid="uid://11mmp8wusubs" path="res://assets/sprites/tiles/sand_corner_tile3.png" id="22_q34ae"]
+[ext_resource type="Texture2D" uid="uid://b11m7qg6kmpdy" path="res://assets/sprites/tiles/sand_corner_tile3.png" id="22_q34ae"]
 [ext_resource type="Texture2D" uid="uid://q5wxg1if5hb8" path="res://assets/sprites/foliage/tree_2.png" id="22_r2sim"]
 [ext_resource type="PackedScene" uid="uid://bljea7oopk7tf" path="res://scenes/farm/plants/plant_mushroom.tscn" id="23_7l40m"]
-[ext_resource type="Texture2D" uid="uid://cnh3ckrtpierw" path="res://assets/sprites/tiles/sand_corner_tile4.png" id="23_uto3x"]
-[ext_resource type="Texture2D" uid="uid://ber4aj8tat8s2" path="res://assets/sprites/tiles/sand_corner_tile5.png" id="24_7hyvp"]
+[ext_resource type="Texture2D" uid="uid://bdtiit7jv4t8b" path="res://assets/sprites/tiles/sand_corner_tile4.png" id="23_uto3x"]
+[ext_resource type="Texture2D" uid="uid://cun0dfohqado5" path="res://assets/sprites/tiles/sand_corner_tile5.png" id="24_7hyvp"]
 [ext_resource type="Texture2D" uid="uid://dcyviqfhbqcay" path="res://assets/sprites/foliage/tree_1.png" id="25_bu01n"]
-[ext_resource type="Texture2D" uid="uid://1ds8j1x1xfau" path="res://assets/sprites/tiles/sand_corner_tile6.png" id="25_lcfwp"]
-[ext_resource type="Texture2D" uid="uid://dpud2x855pn1g" path="res://assets/sprites/tiles/sand_corner_tile7.png" id="26_8e1hi"]
-[ext_resource type="Texture2D" uid="uid://oyp5jj0k0q4b" path="res://assets/sprites/tiles/sand_corner_tile8.png" id="28_h6bf1"]
-[ext_resource type="Texture2D" uid="uid://distq4ydvqkma" path="res://assets/sprites/tiles/dirt_corner_tile4.png" id="32_50gts"]
-[ext_resource type="Texture2D" uid="uid://fwi0ooryswlk" path="res://assets/sprites/tiles/dirt_corner_tile2.png" id="33_2sb2l"]
-[ext_resource type="Texture2D" uid="uid://bql3k2stmytly" path="res://assets/sprites/tiles/dirt_corner_tile3.png" id="34_4o5k3"]
-[ext_resource type="Texture2D" uid="uid://xtmcesfk1xmb" path="res://assets/sprites/tiles/cobblestone_corner_tile.png" id="39_uyldf"]
-[ext_resource type="Texture2D" uid="uid://c4qgf8271fu1f" path="res://assets/sprites/tiles/cobblestone_tile.png" id="40_lgl07"]
+[ext_resource type="Texture2D" uid="uid://dgpore8m23mon" path="res://assets/sprites/tiles/sand_corner_tile6.png" id="25_lcfwp"]
+[ext_resource type="Texture2D" uid="uid://1h6o83kuu0d" path="res://assets/sprites/tiles/sand_corner_tile7.png" id="26_8e1hi"]
+[ext_resource type="Texture2D" uid="uid://d3qavdyit56by" path="res://assets/sprites/tiles/sand_corner_tile8.png" id="28_h6bf1"]
+[ext_resource type="Texture2D" uid="uid://c3ltns2gy55y5" path="res://assets/sprites/tiles/dirt_corner_tile4.png" id="32_50gts"]
+[ext_resource type="Texture2D" uid="uid://b2owcx7l752fk" path="res://assets/sprites/tiles/dirt_corner_tile2.png" id="33_2sb2l"]
+[ext_resource type="Texture2D" uid="uid://b63rvr5qb3chs" path="res://assets/sprites/tiles/dirt_corner_tile3.png" id="34_4o5k3"]
+[ext_resource type="Texture2D" uid="uid://svv57qgywyoh" path="res://assets/sprites/tiles/cobblestone_corner_tile.png" id="39_uyldf"]
+[ext_resource type="Texture2D" uid="uid://ysuoong55lkf" path="res://assets/sprites/tiles/cobblestone_tile.png" id="40_lgl07"]
 [ext_resource type="PackedScene" uid="uid://ca4ui8y2u11io" path="res://scenes/world/cave_entrance.tscn" id="49_ibfou"]
-[ext_resource type="PackedScene" uid="uid://dyq3ksvy2gwvv" path="res://scenes/world/bush.tscn" id="58_m4acs"]
+[ext_resource type="PackedScene" path="res://scenes/world/bush.tscn" id="58_m4acs"]
 [ext_resource type="PackedScene" uid="uid://bbia6yxwghu3o" path="res://scenes/farm/plants/plant_lupine.tscn" id="66_p6d2a"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_wki16"]
-vertices = PackedVector2Array(-7153, -2887, -6536, -2777, -6483, -1878, -7098, -1808)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_dlrrq"]
+vertices = PackedVector2Array(-9019, -4233, 8204, -4197, 8204, 4297, -8983, 4226)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-7153, -2887, -6536, -2777, -6483, -1878, -7098, -1808)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-9019, -4233, 8204, -4197, 8204, 4297, -8983, 4226)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5o3xo"]
 texture = ExtResource("5_5m7lu")
@@ -405,14 +405,12 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="Forest" type="Node2D"]
 y_sort_enabled = true
-position = Vector2(-62, 18)
 
 [node name="NavigationManager" parent="." instance=ExtResource("1_dfb2v")]
 unique_name_in_owner = true
 
 [node name="Region" parent="NavigationManager" index="0"]
-position = Vector2(-968, 1738)
-navigation_polygon = SubResource("NavigationPolygon_wki16")
+navigation_polygon = SubResource("NavigationPolygon_dlrrq")
 
 [node name="ForestScene" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -3787,42 +3785,6 @@ position = Vector2(-126, 205)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 
 [node name="Tree34" parent="Objects/Trees/TreeMix48" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("12_0nbqh")]
-position = Vector2(311, -448)
-_animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
-
-[node name="TreeMix49" type="Node2D" parent="Objects/Trees"]
-y_sort_enabled = true
-position = Vector2(3622, 788)
-
-[node name="Tree13" parent="Objects/Trees/TreeMix49" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
-position = Vector2(115, -529)
-_animationPlayer = NodePath("../../FillerTrees/Tree/AnimationPlayer")
-
-[node name="Tree14" parent="Objects/Trees/TreeMix49" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("7_jud20")]
-position = Vector2(668, -82)
-_animationPlayer = NodePath("../../FillerTrees/Tree/AnimationPlayer")
-
-[node name="Tree43" parent="Objects/Trees/TreeMix49" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("11_r6rlm")]
-position = Vector2(378, -121)
-_animationPlayer = NodePath("../../FillerTrees/Tree6/AnimationPlayer")
-
-[node name="Tree44" parent="Objects/Trees/TreeMix49" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("11_r6rlm")]
-position = Vector2(-86, -433)
-_animationPlayer = NodePath("../../FillerTrees/Tree6/AnimationPlayer")
-
-[node name="Tree45" parent="Objects/Trees/TreeMix49" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("11_r6rlm")]
-position = Vector2(897, -322)
-_animationPlayer = NodePath("../../FillerTrees/Tree6/AnimationPlayer")
-
-[node name="Tree32" parent="Objects/Trees/TreeMix49" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("12_0nbqh")]
-position = Vector2(44, -105)
-_animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
-
-[node name="Tree33" parent="Objects/Trees/TreeMix49" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("12_0nbqh")]
-position = Vector2(-126, 205)
-_animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
-
-[node name="Tree34" parent="Objects/Trees/TreeMix49" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("12_0nbqh")]
 position = Vector2(311, -448)
 _animationPlayer = NodePath("../../FillerTrees/Tree7/AnimationPlayer")
 

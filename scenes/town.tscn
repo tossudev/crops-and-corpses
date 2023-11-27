@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="2_mph18"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_nnncm"]
-[ext_resource type="PackedScene" path="res://scenes/villager/villager_manager.tscn" id="2_yronx"]
+[ext_resource type="PackedScene" uid="uid://chw8bc0kxym0e" path="res://scenes/villager/villager_manager.tscn" id="2_yronx"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_ho2sg"]
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="5_tpvf0"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="6_3ler8"]
@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
 [ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="21_mo6ng"]
-[ext_resource type="PackedScene" path="res://scenes/world/navigation_manager.tscn" id="23_vb7um"]
+[ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="23_vb7um"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="26_e7msj"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="29_6j2s6"]
 
@@ -802,21 +802,8 @@ position = Vector2(6.10352e-05, 6.10352e-05)
 [node name="street_sign_post" parent="." instance=ExtResource("16_bojlm")]
 position = Vector2(408, 7.62939e-06)
 
-[node name="Sprite2D" parent="street_sign_post" index="0"]
-offset = Vector2(0, -230)
-
-[node name="ruins_sign" parent="street_sign_post" index="1"]
-position = Vector2(63.3333, -350.333)
-
 [node name="town_sign" parent="street_sign_post" index="2"]
 visible = false
-position = Vector2(66.6666, -350.333)
-
-[node name="forest_sign" parent="street_sign_post" index="3"]
-position = Vector2(-66.6666, -329.667)
-
-[node name="riverside_sign" parent="street_sign_post" index="4"]
-position = Vector2(-66.6666, -360)
 
 [node name="StreetSign" type="Node2D" parent="."]
 unique_name_in_owner = true

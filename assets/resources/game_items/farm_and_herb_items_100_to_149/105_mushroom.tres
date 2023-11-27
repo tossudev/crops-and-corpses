@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://466kaxdtvhse"]
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://466kaxdtvhse"]
 
 [ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="1_fwjrf"]
+[ext_resource type="Texture2D" uid="uid://ccbmt775ltjs4" path="res://assets/sprites/Farm sprites/mushroom.png" id="1_kfxx0"]
 
 [resource]
 script = ExtResource("1_fwjrf")
 ID = 105
 Name = "Mushroom"
+IconTexture = ExtResource("1_kfxx0")
 StackSize = 12
 craftingRequirements = Array[Object]([])

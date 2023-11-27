@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cb3o7u5viapx8"]
+[gd_scene load_steps=8 format=3 uid="uid://cb3o7u5viapx8"]
 
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_6sli3"]
-[ext_resource type="Texture2D" uid="uid://emb45j66h4m7" path="res://assets/placeholder/J_Sprites/sprouttemp.png" id="3_wkide"]
-[ext_resource type="Texture2D" uid="uid://dvhrkxcw50l7s" path="res://assets/placeholder/J_Sprites/wheattemp.png" id="4_ylc87"]
+[ext_resource type="Texture2D" uid="uid://1hy2fgku6jg4" path="res://assets/sprites/Farm sprites/hay_dead.png" id="2_vsc68"]
+[ext_resource type="Texture2D" uid="uid://bwusjd0q6j8fv" path="res://assets/sprites/Farm sprites/one hay.png" id="3_i7st1"]
+[ext_resource type="Texture2D" uid="uid://dq7uflhpf7wpd" path="res://assets/sprites/Farm sprites/hay.png" id="4_rwnoo"]
 [ext_resource type="Resource" uid="uid://dt5r6o5ibel3e" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/107_wheat.tres" id="5_2mson"]
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://scenes/farm/shapes/plant_shape.tres" id="5_gd24g"]
 [ext_resource type="Texture2D" uid="uid://dqgscu3bl0gng" path="res://assets/sprites/items/item_pumpkin.png" id="7_twm35"]
@@ -14,8 +15,9 @@ _seedName = "wheat seed"
 _description = "Basic ingredient for bread"
 _maxCycles = 3
 _maxHarvestableAmount = 8
-_sproutTexture = ExtResource("3_wkide")
-_plantTexture = ExtResource("4_ylc87")
+_deadTexture = ExtResource("2_vsc68")
+_sproutTexture = ExtResource("3_i7st1")
+_plantTexture = ExtResource("4_rwnoo")
 _col = NodePath("Area2D")
 trect = NodePath("TextureRect")
 _harvestablePlant = ExtResource("5_2mson")

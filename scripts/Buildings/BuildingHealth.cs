@@ -12,6 +12,8 @@ public partial class BuildingHealth : Node2D
     Node2D _parent;
 
     public bool isBroken;
+
+    public int buildingHealth;
     
 	// Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -19,6 +21,8 @@ public partial class BuildingHealth : Node2D
         _healthComponent = GetNode<HealthComponent>(HEALTH_COMPONENT_NODENAME);
         _collisionShape = GetNode<CollisionShape2D>(COLLISIONSHAPE2D_NODENAME);
         _parent = GetParent() as Node2D;
+
+        buildingHealth = _healthComponent.GetMaxHealth();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,6 +32,8 @@ public partial class BuildingHealth : Node2D
 
     private void OnHealth(float health)
     {
+        buildingHealth = Mathf.FloorToInt(health);
+
         if (health <= 0)
         {
             BreakBuilding();

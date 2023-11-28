@@ -219,14 +219,21 @@ public partial class BuildingMenu : Control
         foreach (Node2D node in _buildings.GetChildren())
         {
             string name = "null";
+            int buildingHealth = 100;
 
             if (node.IsInGroup("House"))
             {
                 name = "House";
+
+                BuildingHealth healthscript = node.GetNode("BuildingHealth") as BuildingHealth;
+                buildingHealth = healthscript.buildingHealth;
             }
             else if (node.IsInGroup("LargeHouse"))
             {
                 name = "LargeHouse";
+
+                BuildingHealth healthscript = node.GetNode("BuildingHealth") as BuildingHealth;
+                buildingHealth = healthscript.buildingHealth;
             }
             else if (node.IsInGroup("FarmPlot"))
             {
@@ -272,6 +279,9 @@ public partial class BuildingMenu : Control
             else if (node.IsInGroup("ArcherTower"))
             {
                 name = "ArcherTower";
+
+                BuildingHealth healthscript = node.GetNode("BuildingHealth") as BuildingHealth;
+                buildingHealth = healthscript.buildingHealth;
             }
             else if (node.IsInGroup("Well"))
             {
@@ -282,7 +292,8 @@ public partial class BuildingMenu : Control
             {
                 { "name", name },
                 { "x", Mathf.RoundToInt(node.Position.X) },
-                { "y", Mathf.RoundToInt(node.Position.Y) }
+                { "y", Mathf.RoundToInt(node.Position.Y) },
+                { "health", buildingHealth }
             };
 
             _savedBuildings.Add(jsonObj);
@@ -365,6 +376,17 @@ public partial class BuildingMenu : Control
             Node2D _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;           
             _buildingScene.Position = new Vector2(x, y);
             _buildings.AddChild(_buildingScene);
+
+            if (jsonObject["name"].ToString() == "House" || jsonObject["name"].ToString() == "LargeHouse" || jsonObject["name"].ToString() == "ArcherTower")
+            {
+                HealthComponent healthComponent = _buildingScene.GetNode("HealthComponent") as HealthComponent;
+                healthComponent.SetHealth((int)jsonObject["health"]);
+                healthComponent.UpdateHealthBar();
+
+
+                BuildingHealth healthscript = _buildingScene.GetNode("BuildingHealth") as BuildingHealth;
+                healthscript.buildingHealth = (int)jsonObject["health"];
+            }
 
             if (jsonObject["name"].ToString() == "FarmPlot")
             {

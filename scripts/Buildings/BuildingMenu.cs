@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 public partial class BuildingMenu : Control
 {
-	Building _farmPlot, _house, _archerTower, _well;
+	Building _farmPlot, _house, _archerTower, _well, _largeHouse;
 	Building _currentBuilding;
 
     List<Building> _buildingPrefabs;
@@ -27,9 +27,9 @@ public partial class BuildingMenu : Control
     Label _notEnoughResourcesLabel;
 
     [Export]
-    PackedScene _farmPlotScene, _farmPlotGhostScene, _houseScene, _houseGhostScene, _archerTowerScene, _archerTowerGhostScene, _wellScene, _wellGhostScene;
+    PackedScene _farmPlotScene, _farmPlotGhostScene, _houseScene, _houseGhostScene, _archerTowerScene, _archerTowerGhostScene, _wellScene, _wellGhostScene, _largeHouseScene, _largeHouseGhostScene;
     [Export]
-    Texture2D _farmPlotIcon, _houseIcon, _archerTowerIcon, _wellIcon;
+    Texture2D _farmPlotIcon, _houseIcon, _archerTowerIcon, _wellIcon, _largeHouseIcon;
 
     CharacterBody2D _player;
 
@@ -60,6 +60,9 @@ public partial class BuildingMenu : Control
 
         _house = new Building(_houseScene, _houseGhostScene, 4, "House", _houseIcon);
         _buildingPrefabs.Add(_house);
+
+        _largeHouse = new Building(_largeHouseScene, _largeHouseGhostScene, 6, "Large House", _largeHouseIcon);
+        _buildingPrefabs.Add(_largeHouse);
 
         _well = new Building(_wellScene, _wellGhostScene, 2, "Well", _wellIcon);
         _buildingPrefabs.Add(_well);
@@ -220,6 +223,10 @@ public partial class BuildingMenu : Control
             if (node.IsInGroup("House"))
             {
                 name = "House";
+            }
+            else if (node.IsInGroup("LargeHouse"))
+            {
+                name = "LargeHouse";
             }
             else if (node.IsInGroup("FarmPlot"))
             {

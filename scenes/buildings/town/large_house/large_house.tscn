@@ -1,38 +1,38 @@
-[gd_scene load_steps=8 format=3 uid="uid://3ct83j0jgteb"]
+[gd_scene load_steps=8 format=3 uid="uid://dr5dn7juefoha"]
 
-[ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_uikdl"]
-[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_driju"]
-[ext_resource type="Texture2D" uid="uid://bmn8ggt1kvsn7" path="res://assets/sprites/buildings/smallhouse_color.png" id="2_dt56r"]
-[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_u5tml"]
+[ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_gmjf4"]
+[ext_resource type="Texture2D" uid="uid://c5v773mk6tykk" path="res://assets/sprites/buildings/largehouse_color.png" id="2_uosje"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_ysaqf"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_2ldom"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1313"]
-size = Vector2(123.5, 144.512)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sekvv"]
+size = Vector2(255, 143.902)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_irxds"]
-size = Vector2(116, 440.385)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oi4v2"]
+size = Vector2(251, 378.846)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_24awm"]
 size = Vector2(125.5, 125.5)
 
-[node name="House" type="Node2D" groups=["House"]]
+[node name="House" type="Node2D" groups=["LargeHouse"]]
 scale = Vector2(2, 2)
 
 [node name="BuildingHealth" type="Node2D" parent="."]
 unique_name_in_owner = true
-script = ExtResource("1_uikdl")
+script = ExtResource("1_gmjf4")
 
 [node name="House" type="Sprite2D" parent="."]
-position = Vector2(-64, -105.825)
-scale = Vector2(0.315, 0.315)
-texture = ExtResource("2_dt56r")
+position = Vector2(-131.955, -149.5)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("2_uosje")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-63, -52)
 scale = Vector2(1, 0.82)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1.25, -11.8902)
-shape = SubResource("RectangleShape2D_e1313")
+position = Vector2(-71, -15.8537)
+shape = SubResource("RectangleShape2D_sekvv")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["building"]]
 position = Vector2(0, -8)
@@ -42,17 +42,17 @@ collision_mask = 7
 
 [node name="StaticCollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 unique_name_in_owner = true
-position = Vector2(-64, -153.125)
+position = Vector2(-133, -122.5)
 scale = Vector2(1, 0.65)
-shape = SubResource("RectangleShape2D_irxds")
+shape = SubResource("RectangleShape2D_oi4v2")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("2_driju")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_ysaqf")]
 unique_name_in_owner = true
 position = Vector2(-126, -75)
 _parentScript = NodePath("../BuildingHealth")
 _healItemPrefabs = Array[PackedScene]([])
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_u5tml")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_2ldom")]
 position = Vector2(-126, -75)
 _healthComponent = NodePath("../HealthComponent")
 

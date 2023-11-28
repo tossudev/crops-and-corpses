@@ -9,4 +9,5 @@ item = ExtResource("1_03101")
 airtime = 1.5
 despawnTime = 0.5
 objectCollision = false
+height = 1.5
 effect = 0

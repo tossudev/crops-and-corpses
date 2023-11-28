@@ -50,7 +50,7 @@ public partial class SpawnScript : Node2D
 			//GD.Print(spawnPoints[i]);
 		} */
 		
-		packedScene = (PackedScene)GD.Load("res://scenes/zombie/zombie_with_hitbox.tscn");
+		packedScene = (PackedScene)GD.Load("res://scenes/zombie/zombie1.tscn");
 		packedScene2 = (PackedScene)GD.Load("res://scenes/zombie/Zombie2.tscn");
 		packedScene3 = (PackedScene)GD.Load("res://scenes/zombie/Zombie3.tscn");
 		//dayTimeCheck = GetNode<TimeManager>("SunlightContainer");

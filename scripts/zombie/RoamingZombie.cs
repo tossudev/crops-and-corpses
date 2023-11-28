@@ -5,6 +5,8 @@ public partial class RoamingZombie : CharacterBody2D
 {
 	[Export] private AudioStreamPlayer2D _audioStreamPlayer2D;
 	[Export] private LootController _lootController;
+	private enum ZombieOccupation{Miner,Farmer,Soldier};
+	
 	private Skeleton2D _sprite;
 	private CharacterBody2D _player;
 	private HitboxComponent[] _hitboxes;
@@ -17,6 +19,9 @@ public partial class RoamingZombie : CharacterBody2D
 	private NodePath _rootNodePath;
 	private Node2D rootNode;
 	PackedScene instantiatedNPC;
+
+	[Export]Sprite2D[] zombieHats;
+	
 	//private CompressedTexture2D strongZombieSprite;
 	//private CompressedTexture2D mediumZombieSprite;
 	private bool _playerInRange = false;
@@ -29,6 +34,9 @@ public partial class RoamingZombie : CharacterBody2D
 
 	public override void _Ready()
 	{
+
+		zombieHats = new Sprite2D[3];
+
 		animationPlayer = GetNode<AnimationPlayer>("Skeleton2D/AnimationPlayer");
 		_hitboxes = new HitboxComponent[2];
 		instantiatedNPC = (PackedScene)GD.Load("res://scenes/villager/villager.tscn");
@@ -48,6 +56,18 @@ public partial class RoamingZombie : CharacterBody2D
 		};
 
 		_updateStatsTimer.Start();
+
+		int randomIndex = (int)GD.RandRange(1, 3);  // Assuming you have nodes named "zombieHat1", "zombieHat2", "zombieHat3"
+
+		// Make sure to check if the index is within bounds before accessing the array
+		if (randomIndex >= 1 && randomIndex <= 3)
+		{
+			var zombieHeadBonetNode = GetNode<Bone2D>("Skeleton2D/TorsoBone/HeadBone/"); //Skeleton2D/TorsoBone/HeadBone/ZombieHat1
+			var zombieHatNode  = zombieHeadBonetNode.GetNode<Sprite2D>("ZombieHat"+randomIndex);
+			zombieHatNode.Visible = true;
+		}
+		
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -101,6 +121,7 @@ public partial class RoamingZombie : CharacterBody2D
 				SpawnScript.RemoveZombieFromList(this);
 				Transform2D zombiePos = this.Transform;
 				CharacterBody2D spawnNPC = (CharacterBody2D)instantiatedNPC.Instantiate();
+				
 				spawnNPC.Transform = zombiePos;
 				rootNode.AddChild(spawnNPC);
 				spawnNPC.Scale = new Vector2(0.5f, 0.5f);

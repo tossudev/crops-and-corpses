@@ -80,21 +80,15 @@ public partial class NavigationManager : Node2D {
 		_region.RemoveOutline(nodeIndex + 1);
 		// _region.MakePolygonsFromOutlines();
 
-
 		await Task.Run(async () => {
 
 			_region = _regionNode.NavigationPolygon;
 			await Task.Delay(3000);
-            await ToSignal(_region.MakePolygonsFromOutlines(), "finished");
+            // await ToSignal(_region.MakePolygonsFromOutlines(), "finished");
 			_region.MakePolygonsFromOutlines();
-			await Task.Delay(3000);
         });
 
 		_obstacleAreas.RemoveAt(nodeIndex);
 		UpdateObstacleIndexes();
-	}
-
-	async void Test() {
-		_region.CallDeferred("make_polygons_from_outlines");
 	}
 }

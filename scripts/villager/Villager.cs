@@ -93,6 +93,12 @@ public partial class Villager : CharacterBody2D
 		}
 	}
 
+	public void Teleport(Vector2 coordinates)
+	{
+		GlobalPosition = coordinates;
+		SavePosition();
+	}
+	
 	void SetCurrentState(VillagerState state)
 	{
 		rawData.currentState = state;
@@ -253,6 +259,11 @@ public partial class Villager : CharacterBody2D
 		MoveAndSlide();
 	}
 
+	public void SavePosition()
+	{
+		rawData.SetCoordinates(GlobalPosition);
+	}
+	
 	void RoamAround()
 	{
 		_targetPosition = GlobalPosition + CreateOffsetVector2(-200, 200);
@@ -438,6 +449,7 @@ public partial class Villager : CharacterBody2D
 		_speed = 200;
 		_targetPosition = _player.GlobalPosition;
 	}
+    
 	void FindArcherTower()
 	{
 		_archerTower = VillagerManager.villagerManagerInstance.GetArcherTowerList()[_archerTowerIndex];

@@ -37,6 +37,11 @@ public partial class TownManager : Node2D
 		if (sync) await SaveData.SyncTownStats();
 	}
 
+	public static bool EveryXSecond(int second)
+	{
+		return globalPhysicsTicks % (ONE_SECOND_IN_TICKS * second) == 0;
+	}
+	
 	public static void GainExp(ExpGain amount)
 	{
 		SaveData.townHallStats.totalExperience += (int) amount;
@@ -210,4 +215,9 @@ public enum TownUnlock
 	RUINS_UNLOCK,
 	MINESHAFT_UNLOCK,
 	STALAGMITE_UNLOCK
+}
+
+public enum AutosaveIntervalSeconds
+{
+	VILLAGER_POSITION_INTERVAL = 30
 }

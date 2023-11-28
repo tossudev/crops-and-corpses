@@ -4,12 +4,12 @@
 [ext_resource type="StyleBox" uid="uid://bfq7mg2htfllb" path="res://assets/resources/styles/inventory_style_box_texture.tres" id="2_6dwwa"]
 [ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory/inventory_slot.tscn" id="2_52evd"]
 [ext_resource type="Texture2D" uid="uid://dlrp82rd7h6bu" path="res://icon.svg" id="2_pvric"]
-[ext_resource type="Texture2D" uid="uid://da5cc5byv4p8n" path="res://assets/sprites/tiles/Cave_tile.png" id="5_q5ndh"]
+[ext_resource type="Texture2D" uid="uid://cc700vknsb8sy" path="res://assets/sprites/ui/stone_button_hover.png" id="5_3dkit"]
 
 [sub_resource type="Gradient" id="Gradient_1ijah"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.765957, 0.928191, 1)
-colors = PackedColorArray(0, 0, 0, 0.588235, -0.0205245, -0.0153661, -0.0114939, 0.7449, 0.570499, 0.42323, 0.315232, 0.901961, 0, 0, 0, 0.901961)
+colors = PackedColorArray(0, 0, 0, 0.392157, 0, 0, 0, 0.392157, 0.570499, 0.42323, 0.315232, 0.901961, 0, 0, 0, 0.901961)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dy6tw"]
 gradient = SubResource("Gradient_1ijah")
@@ -231,6 +231,6 @@ vertical_alignment = 2
 self_modulate = Color(10, 10, 10, 1)
 z_index = -1
 position = Vector2(688, 1008)
-scale = Vector2(0.65, 0.65)
-texture = ExtResource("5_q5ndh")
-offset = Vector2(6, 6)
+scale = Vector2(0.335, 0.335)
+texture = ExtResource("5_3dkit")
+offset = Vector2(11, 11)

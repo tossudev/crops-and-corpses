@@ -1,6 +1,7 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bbwealwe8brh6"]
 
-[ext_resource type="Texture2D" uid="uid://c6n0vrm0ae5c1" path="res://scenes/ui/general/button.png" id="1_euqoi"]
+[ext_resource type="Texture2D" uid="uid://x54xlvlpueby" path="res://assets/sprites/ui/stone_button.png" id="1_dtaqe"]
 
 [resource]
-texture = ExtResource("1_euqoi")
+texture = ExtResource("1_dtaqe")
+modulate_color = Color(0.67451, 0.67451, 0.67451, 1)

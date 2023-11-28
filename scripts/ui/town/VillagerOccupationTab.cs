@@ -16,11 +16,11 @@ public partial class VillagerOccupationTab : ScrollContainer
 	readonly List<VillagerFaceButton> _currentFaceButtons = new ();
 
 	int _occupationCountLastTime;
-	bool initialized;
+	bool _initialized;
 	bool _initStarted;
 	async void Initialize ()
 	{
-		if (initialized) return;
+		if (_initialized || _initStarted) return;
 
 		_initStarted = true;
 		await TaskExtensions.SuspendWhile(() => VillagerManager.villagerManagerInstance == null, 120); 
@@ -41,8 +41,9 @@ public partial class VillagerOccupationTab : ScrollContainer
 			VillagerOccupation.Miner => VillagerManager.villagerManagerInstance.minerVillagers,
 			_ => null
 		};
-
-		initialized = true;
+        
+		_initialized = true;
+		UpdateVillagerFaceButtons();
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -50,29 +51,27 @@ public partial class VillagerOccupationTab : ScrollContainer
 		base._PhysicsProcess(delta);
 
 		if (!Visible) return;
-		
-		if (TownManager.globalPhysicsTicks % TownManager.ONE_SECOND_IN_TICKS != 0) return;
 
-		if (!initialized)
+		if (TownManager.EveryXSecond(1))
 		{
-			if (!_initStarted)
+			if (!_initialized)
 			{
 				Initialize();
+				return;
 			}
-			return;
-		}
 
-		if (_occupationList.Count != _occupationCountLastTime)
-		{
-			UpdateVillagerFaceButtons();
-		}
+			if (_occupationList.Count != _occupationCountLastTime)
+			{
+				UpdateVillagerFaceButtons();
+			}
 
-		_occupationCountLastTime = _occupationList.Count;
+			_occupationCountLastTime = _occupationList.Count;
+		}
 	}
 
 	void UpdateVillagerFaceButtons()
 	{
-		if (!initialized) Initialize();
+		if (!_initialized) Initialize();
 
 		List<int> occupationListIds = new();
 		

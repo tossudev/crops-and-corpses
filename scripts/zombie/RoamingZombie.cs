@@ -19,7 +19,6 @@ public partial class RoamingZombie : CharacterBody2D
 	private NodePath _rootNodePath;
 	private Node2D rootNode;
 	PackedScene instantiatedNPC;
-
 	
 	//private CompressedTexture2D strongZombieSprite;
 	//private CompressedTexture2D mediumZombieSprite;
@@ -86,8 +85,6 @@ public partial class RoamingZombie : CharacterBody2D
 			default:
 			break;
 		}
-		
-
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -98,16 +95,32 @@ public partial class RoamingZombie : CharacterBody2D
 
 		if (_sprite != null)
 		{
-			if (Velocity.X > 0.1f)
+			if (Mathf.Abs(Velocity.X) >= Mathf.Abs(Velocity.Y))
 			{
-				// Flip the character to face right
-				_sprite.Scale = new Vector2(0.382f, 0.382f);
+				if (Velocity.X > 0.1f)
+				{
+					// Flip the character to face right
+					_sprite.Scale = new Vector2(0.382f, 0.382f);
+				}
+				else
+				{					
+					// Flip the character to face left
+					_sprite.Scale = new Vector2(-0.382f, 0.382f);
+				}
 			}
-			else
-			{
-				// Flip the character to face left
-				_sprite.Scale = new Vector2(-0.382f, 0.382f);
+			else {
+				if (Velocity.Y > 0.1f)
+				{
+					// Flip the character to face right
+					_sprite.Scale = new Vector2(0.382f, 0.382f);
+				}
+				else
+				{					
+					// Flip the character to face left
+					_sprite.Scale = new Vector2(-0.382f, 0.382f);
+				}
 			}
+			
 			if (Velocity.X == 0.1f)
 			{
 				animationPlayer.Play("zombieIdle");

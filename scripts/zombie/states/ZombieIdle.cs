@@ -64,7 +64,7 @@ public partial class ZombieIdle : ZombieStates
 		{
 			EmitSignal("Transitioned", "chase");			
 		}
-		else if (fenceDirection.Length() < 1500 || !ZombieManager.dayMode)
+		else if (fenceDirection.Length() < 1500  && !ZombieManager.dayMode)
 		{
 			if (!_zombie.HasMethod("IsInTown")) return;
 

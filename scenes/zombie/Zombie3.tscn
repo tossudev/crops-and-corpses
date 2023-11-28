@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://0qbf3ee7f1b5"]
+[gd_scene load_steps=26 format=3 uid="uid://0qbf3ee7f1b5"]
 
 [ext_resource type="Script" path="res://scripts/zombie/RoamingZombie.cs" id="1_i0x8b"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_w80nd"]
@@ -7,14 +7,15 @@
 [ext_resource type="Script" path="res://scripts/zombie/states/ZombieIdle.cs" id="5_svqgf"]
 [ext_resource type="Script" path="res://scripts/zombie/states/ZombieChase.cs" id="6_splqn"]
 [ext_resource type="Script" path="res://scripts/zombie/states/ZombieAttackFence.cs" id="7_ud7o8"]
-[ext_resource type="Texture2D" uid="uid://i01ygbahovem" path="res://assets/placeholder/zombie_placeholder.png" id="8_gbfml"]
+[ext_resource type="Texture2D" uid="uid://cbe403j44jl6w" path="res://assets/placeholder/zombie_placeholder.png" id="8_gbfml"]
 [ext_resource type="AudioStream" uid="uid://b4giy84o2s7c5" path="res://assets/Sounds/zombies/zombie_hiss1.wav" id="9_0m1tw"]
-[ext_resource type="Texture2D" uid="uid://w35bpku8j0vd" path="res://assets/sprites/character/zombie2/2.2/1x/right leg.png" id="10_8edlh"]
-[ext_resource type="Texture2D" uid="uid://mqth6kpsbp15" path="res://assets/sprites/character/zombie2/2.2/1x/left leg.png" id="11_xh3jb"]
-[ext_resource type="Texture2D" uid="uid://d3t15eopwog4n" path="res://assets/sprites/character/zombie2/2.2/1x/left hand.png" id="12_l0v6n"]
-[ext_resource type="Texture2D" uid="uid://b1x1n0woxl4cg" path="res://assets/sprites/character/zombie2/2.2/1x/torso.png" id="13_y8sor"]
-[ext_resource type="Texture2D" uid="uid://bllhutnw0hrv6" path="res://assets/sprites/character/zombie2/2.2/1x/head.png" id="14_nev2c"]
-[ext_resource type="Texture2D" uid="uid://o2dpfsvsgwj4" path="res://assets/sprites/character/zombie2/2.2/1x/right hand.png" id="15_pb5q7"]
+[ext_resource type="Texture2D" uid="uid://connybbalcxxb" path="res://assets/sprites/character/zombie2/2.2/1x/right leg.png" id="10_8edlh"]
+[ext_resource type="Texture2D" uid="uid://f087fflpsqy0" path="res://assets/sprites/character/zombie2/2.2/1x/left leg.png" id="11_xh3jb"]
+[ext_resource type="Texture2D" uid="uid://mth3lvgsp2h" path="res://assets/sprites/character/zombie2/2.2/1x/left hand.png" id="12_l0v6n"]
+[ext_resource type="Texture2D" uid="uid://c8ijp8o1wqaus" path="res://assets/sprites/character/zombie2/2.2/1x/torso.png" id="13_y8sor"]
+[ext_resource type="Texture2D" uid="uid://fjx7csh37uqq" path="res://assets/sprites/character/zombie2/2.2/1x/head.png" id="14_nev2c"]
+[ext_resource type="Texture2D" uid="uid://c5p34ic1oo4gh" path="res://assets/sprites/character/hats/mining_hat.png" id="15_08cto"]
+[ext_resource type="Texture2D" uid="uid://dd004u1ii1vov" path="res://assets/sprites/character/zombie2/2.2/1x/right hand.png" id="15_pb5q7"]
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="16_mn44d"]
 [ext_resource type="Resource" uid="uid://khdsb508afg6" path="res://TinoTests/Resources/zombie_loot.tres" id="17_ogs7e"]
 
@@ -227,14 +228,13 @@ _data = {
 "zombieWalk": SubResource("Animation_djtgm")
 }
 
-[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController")]
+[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("_audioStreamPlayer2D")]
 collision_layer = 4
 collision_mask = 4
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_i0x8b")
 _audioStreamPlayer2D = NodePath("ZombieNoise")
-_lootController = NodePath("Backpack")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5h8wa")
@@ -327,7 +327,7 @@ texture = ExtResource("11_xh3jb")
 [node name="RightLegSprite" type="Sprite2D" parent="Skeleton2D"]
 position = Vector2(-35.724, 79.8464)
 rotation = 0.197235
-scale = Vector2(1, 1)
+scale = Vector2(1, 0.999999)
 texture = ExtResource("10_8edlh")
 
 [node name="LeftArm" type="Sprite2D" parent="Skeleton2D"]
@@ -354,10 +354,14 @@ position = Vector2(81.9978, -12.015)
 rotation = 1.5708
 texture = ExtResource("14_nev2c")
 
+[node name="Hat" type="Sprite2D" parent="Skeleton2D/TorsoBone/HeadBone"]
+position = Vector2(144.188, -2.26265)
+rotation = 1.5708
+texture = ExtResource("15_08cto")
+
 [node name="LeftArmBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
 position = Vector2(49.006, 32.991)
 rotation = 2.5142
-scale = Vector2(1, 1)
 rest = Transform2D(-0.809562, 0.587035, -0.587035, -0.809562, 49.006, 32.991)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Skeleton2D/TorsoBone/LeftArmBone"]
@@ -403,10 +407,9 @@ libraries = {
 "": SubResource("AnimationLibrary_ixc2g")
 }
 
-[node name="Backpack" type="StaticBody2D" parent="." node_paths=PackedStringArray("_dropLootPosition")]
+[node name="Backpack" type="StaticBody2D" parent="."]
 script = ExtResource("16_mn44d")
 _loot = ExtResource("17_ogs7e")
-_dropLootPosition = NodePath("..")
 
 [connection signal="timeout" from="StateMachine/Chase/Timer" to="StateMachine/Chase" method="OnTimerTimeout"]
 [connection signal="body_entered" from="AttackBox" to="." method="OnAttackBoxEntered"]

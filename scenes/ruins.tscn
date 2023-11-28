@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dcyviqfhbqcay" path="res://assets/sprites/foliage/tree_1.png" id="7_dpch5"]
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="7_et7tw"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="7_ms5xt"]
-[ext_resource type="PackedScene" uid="uid://bfgy4jnvcy7pk" path="res://scenes/zombie/zombie_with_hitbox.tscn" id="8_ovu31"]
+[ext_resource type="PackedScene" uid="uid://bfgy4jnvcy7pk" path="res://scenes/zombie/zombie1.tscn" id="8_ovu31"]
 [ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="8_pei51"]
 [ext_resource type="Texture2D" uid="uid://bp0rwsioa22xs" path="res://assets/sprites/foliage/sprite_bush.png" id="9_23ldn"]
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="10_4qh86"]

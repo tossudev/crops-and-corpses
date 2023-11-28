@@ -6,7 +6,7 @@ public partial class RoamingZombie : CharacterBody2D
 	[Export] private AudioStreamPlayer2D _audioStreamPlayer2D;
 	[Export] private LootController _lootController;
 	private enum ZombieOccupation{Miner,Farmer,Soldier};
-	
+	private ZombieOccupation zombieOccupation;
 	private Skeleton2D _sprite;
 	private CharacterBody2D _player;
 	private HitboxComponent[] _hitboxes;
@@ -57,14 +57,28 @@ public partial class RoamingZombie : CharacterBody2D
 
 		_updateStatsTimer.Start();
 
-		int randomIndex = (int)GD.RandRange(1, 3);  // Assuming you have nodes named "zombieHat1", "zombieHat2", "zombieHat3"
+		int randomIndex = (int)GD.RandRange(1, 3); 
 
-		// Make sure to check if the index is within bounds before accessing the array
+		
 		if (randomIndex >= 1 && randomIndex <= 3)
 		{
 			var zombieHeadBonetNode = GetNode<Bone2D>("Skeleton2D/TorsoBone/HeadBone/"); //Skeleton2D/TorsoBone/HeadBone/ZombieHat1
 			var zombieHatNode  = zombieHeadBonetNode.GetNode<Sprite2D>("ZombieHat"+randomIndex);
 			zombieHatNode.Visible = true;
+		}
+		switch(randomIndex)
+		{
+			case 1:
+			zombieOccupation=ZombieOccupation.Farmer;
+			break;
+			case 2:
+			zombieOccupation=ZombieOccupation.Soldier;
+			break;
+			case 3:
+			zombieOccupation=ZombieOccupation.Miner;
+			break;
+			default:
+			break;
 		}
 		
 
@@ -78,7 +92,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 		if (_sprite != null)
 		{
-			if (Velocity.X > 0)
+			if (Velocity.X > 0.1f)
 			{
 				// Flip the character to face right
 				_sprite.Scale = new Vector2(0.382f, 0.382f);
@@ -88,7 +102,7 @@ public partial class RoamingZombie : CharacterBody2D
 				// Flip the character to face left
 				_sprite.Scale = new Vector2(-0.382f, 0.382f);
 			}
-			if (Velocity.X == 0)
+			if (Velocity.X == 0.1f)
 			{
 				animationPlayer.Play("zombieIdle");
 			}
@@ -124,6 +138,8 @@ public partial class RoamingZombie : CharacterBody2D
 				
 				spawnNPC.Transform = zombiePos;
 				rootNode.AddChild(spawnNPC);
+				
+
 				spawnNPC.Scale = new Vector2(0.5f, 0.5f);
 				QueueFree();
 				break;

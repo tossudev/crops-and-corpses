@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://e58507ft315b"]
+[gd_scene load_steps=8 format=3 uid="uid://e58507ft315b"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_jc86v"]
-[ext_resource type="Script" path="res://scripts/farm/FenceHealth.cs" id="1_whbvh"]
-[ext_resource type="Texture2D" uid="uid://dusj5q4yojhxl" path="res://assets/sprites/Farm sprites/gate.png" id="2_xxu63"]
+[ext_resource type="Texture2D" uid="uid://bdvrnkj687l1l" path="res://assets/sprites/Farm sprites/gate.png" id="2_xxu63"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_xy11f"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_rslnb"]
-[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_0dlt1"]
+[ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_0dlt1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_asoab"]
 size = Vector2(126, 62)
@@ -34,7 +33,6 @@ shape = SubResource("RectangleShape2D_asoab")
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["fence"]]
 collision_layer = 255
 collision_mask = 5
-script = ExtResource("1_whbvh")
 
 [node name="StaticCollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 unique_name_in_owner = true
@@ -56,8 +54,10 @@ offset_bottom = -11.0
 scale = Vector2(0.4, 0.4)
 show_percentage = false
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_rslnb")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") groups=["building"] instance=ExtResource("4_rslnb")]
 position = Vector2(-64, -32)
+collision_layer = 16
+collision_mask = 32
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]

@@ -21,15 +21,28 @@ public partial class TownHallMenu : Control
 	const string UPGRADE_GRID_NODENAME = "%UpgradeGridContainer";
 	
 	// Main panel buttons
+	const string CLOSE_BUTTON_NODENAME = "%CloseButton";
+
+	Button _closeMainPanelButton;
+	const string MAIN_PANEL_CLOSE_BUTTON_CONTAINER_NODENAME = "%MainCloseButtonContainer";
 	
 	Button _upgradesButton;
 	const string UPGRADES_BUTTON_NODENAME = "%UpgradesButton";
+	Button _closeUpgradesPanelButton;
+	const string UPGRADES_PANEL_CLOSE_BUTTON_CONTAINER_NODENAME = "%UpgradesCloseButtonContainer";
+	
 	
 	Button _occupationsButton;
 	const string OCCUPATIONS_BUTTON_NODENAME = "%OccupationsButton";
+	Button _closeOccupationsPanelButton;
+	const string OCCUPATIONS_PANEL_CLOSE_BUTTON_CONTAINER_NODENAME = "%OccupationsCloseButtonContainer";
 	
 	Button _storageButton;
 	const string STORAGE_BUTTON_NODENAME = "%StorageButton";
+	Button _closeStoragePanelButton;
+	const string STORAGE_PANEL_CLOSE_BUTTON_CONTAINER_NODENAME = "%StorageCloseButtonContainer";
+	
+	
 
 	public VillagerResidence _villagerResidence;
 	const string VILLAGER_RESIDENCE_NODENAME = "%VillagerGrid";
@@ -59,15 +72,25 @@ public partial class TownHallMenu : Control
 		InitUpgradeList();
 
 		// Main Panel mappings
+		_closeMainPanelButton = GetCloseButton(MAIN_PANEL_CLOSE_BUTTON_CONTAINER_NODENAME);
+		_closeMainPanelButton.Pressed += CloseAllPanels;
+		
 		_upgradesButton = GetNode<Button>(UPGRADES_BUTTON_NODENAME);
 		_upgradesButton.Pressed += OpenUpgradePanel;
+		_closeUpgradesPanelButton = GetCloseButton(UPGRADES_PANEL_CLOSE_BUTTON_CONTAINER_NODENAME);
+		_closeUpgradesPanelButton.Pressed += OpenMainPanel;
+		
 		
 		_occupationsButton = GetNode<Button>(OCCUPATIONS_BUTTON_NODENAME);
 		_occupationsButton.Pressed += OpenOccupationsPanel;
-
+		_closeOccupationsPanelButton = GetCloseButton(OCCUPATIONS_PANEL_CLOSE_BUTTON_CONTAINER_NODENAME);
+		_closeOccupationsPanelButton.Pressed += OpenMainPanel;
+		
+		
 		_storageButton = GetNode<Button>(STORAGE_BUTTON_NODENAME);
 		_storageButton.Pressed += OpenStoragePanel;
-
+		_closeStoragePanelButton = GetCloseButton(STORAGE_PANEL_CLOSE_BUTTON_CONTAINER_NODENAME);
+		_closeStoragePanelButton.Pressed += OpenMainPanel;
 		
 		CloseAllPanels();
 	}
@@ -78,6 +101,11 @@ public partial class TownHallMenu : Control
 		menuInstance = null;
 	}
 
+	Button GetCloseButton(string containerNodePath)
+	{
+		return GetNodeOrNull(containerNodePath)?.GetNode<Button>(CLOSE_BUTTON_NODENAME);
+	}
+	
 	void CloseAllPanels()
 	{
 		_mainPanel.Visible = false;

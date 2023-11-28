@@ -6,12 +6,15 @@ using System.Security;
 public partial class BuildingHealth : Node2D
 {
 	HealthComponent _healthComponent;
-    CollisionShape2D _collisionShape;
     const string HEALTH_COMPONENT_NODENAME = "%HealthComponent";
+
+    
+    CollisionShape2D _collisionShape;
     const string COLLISIONSHAPE2D_NODENAME = "%StaticCollisionShape2D";
     Node2D _parent;
 
     public bool isBroken;
+    public bool isDamaged;
 
     public int buildingHealth;
     
@@ -19,16 +22,14 @@ public partial class BuildingHealth : Node2D
     public override void _Ready()
 	{
         _healthComponent = GetNode<HealthComponent>(HEALTH_COMPONENT_NODENAME);
+        _healthComponent.AssignBuilding(this);
+
         _collisionShape = GetNode<CollisionShape2D>(COLLISIONSHAPE2D_NODENAME);
         _parent = GetParent() as Node2D;
 
         buildingHealth = _healthComponent.GetMaxHealth();
 	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+    
 
     private void OnHealth(float health)
     {
@@ -37,6 +38,17 @@ public partial class BuildingHealth : Node2D
         if (health <= 0)
         {
             BreakBuilding();
+            return;
+        }
+        
+        if (isBroken && buildingHealth > 0)
+        {
+            FixBuilding();
+        }
+
+        if (isDamaged && buildingHealth == _healthComponent.GetMaxHealth())
+        {
+            isDamaged = false;
         }
     }
 
@@ -53,8 +65,8 @@ public partial class BuildingHealth : Node2D
 
         _parent.CallDeferred("OnBreak");
     }
-
-    public void FixBuilding()
+    
+    void FixBuilding()
     {
         isBroken = false;
         _collisionShape.Disabled = false;

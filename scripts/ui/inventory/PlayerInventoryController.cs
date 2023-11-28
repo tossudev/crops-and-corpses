@@ -302,8 +302,7 @@ public partial class PlayerInventoryController : Control {
 		{
 			if (index <= PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE - 1)
 			{
-				return await RemoveFromSlotUntilEmpty(
-					rawItem, rawItem.quantity, index, true) == 0;
+				return await RemoveFromSlotUntilEmpty(rawItem.quantity, index, true) == 0;
 			}
 			
 			GD.PrintErr("Index was greater than player inventory max size - 1");
@@ -341,7 +340,7 @@ public partial class PlayerInventoryController : Control {
 			
 			if (SaveData.organizedPlayerInventory[i].id == itemToRemove.id)
 			{
-				amountToRemove = await RemoveFromSlotUntilEmpty(itemToRemove, amountToRemove, i);
+				amountToRemove = await RemoveFromSlotUntilEmpty(amountToRemove, i);
 			}
 			
 			if (amountToRemove == 0) break;
@@ -353,11 +352,10 @@ public partial class PlayerInventoryController : Control {
 	/// <summary>
 	/// Removes items from inventory slot until all are removed OR slot's item quantity reaches 0.
 	/// </summary>
-	/// <param name="itemToRemove"> includes  </param>
 	/// <param name="index"> must be valid </param>
 	/// <param name="mustRemoveAll"> (optional) will not remove anything if itemToRemove.quantity is greater than quantity in slot. </param>
 	/// <returns> amount that couldn't be removed </returns>
-	static async Task<int> RemoveFromSlotUntilEmpty(RawInventoryItem itemToRemove, int amountToRemove, int index, bool mustRemoveAll = false)
+	static async Task<int> RemoveFromSlotUntilEmpty(int amountToRemove, int index, bool mustRemoveAll = false)
 	{
 		RawInventoryItem itemInSlot = SaveData.organizedPlayerInventory[index];
 				

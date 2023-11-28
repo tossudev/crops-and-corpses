@@ -26,6 +26,7 @@ public partial class UpgradeConfirmationPanel: Panel
     const string UPGRADE_NAME_LABEL_NODENAME = "%UpgradeNameLabel";
     
     Button _closeButton;
+    const string CLOSE_BUTTON_CONTAINER_NODENAME = "%CloseButtonContainer";
     const string CLOSE_BUTTON_NODENAME = "%CloseButton";
 
     RichTextLabel _upgradeDescLabel;
@@ -64,7 +65,7 @@ public partial class UpgradeConfirmationPanel: Panel
         
         _upgradeIconTextureRect = GetNode<TextureRect>(UPGRADE_ICON_NODENAME);
         _upgradeNameLabel = GetNode<Label>(UPGRADE_NAME_LABEL_NODENAME);
-        _closeButton = GetNode<Button>(CLOSE_BUTTON_NODENAME);
+        _closeButton = GetNode(CLOSE_BUTTON_CONTAINER_NODENAME).GetNode<Button>(CLOSE_BUTTON_NODENAME);
         _upgradeDescLabel = GetNode<RichTextLabel>(UPGRADE_DESCRIPTION_LABEL_NODENAME);
         _upgradeEffectLabel = GetNode<Label>(UPGRADE_EFFECT_LABEL_NODENAME);
         _unlockButton = GetNode<Button>(UNLOCK_BUTTON_NODENAME);

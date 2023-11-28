@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://disyt3fuu77je"]
+[gd_scene load_steps=8 format=3 uid="uid://disyt3fuu77je"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_667uj"]
-[ext_resource type="Script" path="res://scripts/farm/FenceHealth.cs" id="1_wari8"]
-[ext_resource type="Texture2D" uid="uid://b8uuvbt0fpbw2" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="2_d27mr"]
+[ext_resource type="Texture2D" uid="uid://cuwpylh2hqp0x" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="2_d27mr"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_xoojr"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_vkqwf"]
-[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_cet8m"]
+[ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_cet8m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_10v6f"]
 size = Vector2(2.625, 150)
@@ -34,7 +33,6 @@ shape = SubResource("RectangleShape2D_10v6f")
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["fence"]]
 collision_layer = 255
 collision_mask = 5
-script = ExtResource("1_wari8")
 
 [node name="StaticCollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 unique_name_in_owner = true
@@ -46,8 +44,10 @@ unique_name_in_owner = true
 position = Vector2(-3, -74)
 _parentScript = NodePath("../BuildingHealth")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_vkqwf")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") groups=["building"] instance=ExtResource("4_vkqwf")]
 position = Vector2(-3, -75)
+collision_layer = 16
+collision_mask = 32
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]

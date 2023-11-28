@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://dwo3h5ieew1yk"]
+
+[ext_resource type="Script" path="res://TinoTests/Scripts/Weapons/Weapon.cs" id="1_i1f21"]
+[ext_resource type="Resource" uid="uid://bo4slwmfeb3si" path="res://assets/resources/game_items/tool_items_350_449/370_boards_and_nails.tres" id="1_rxvdi"]
+
+[resource]
+script = ExtResource("1_i1f21")
+item = ExtResource("1_rxvdi")
+damage = 0
+knockback = 0.0
+cooldown = 0.5
+effect = 2
+targetType = 3
+attackAnim = ""
+CooldownAnim = ""
+reach = 1.0
+holdAction = false
+ranged = false
+speed = 0.0
+drawTime = 0.0

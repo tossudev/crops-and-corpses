@@ -30,7 +30,7 @@ public partial class VillagerRawData : GodotObject
 
     public VillagerRawData() {}
 
-    public VillagerRawData(string name, string lore, bool isTownPopulation)
+    public VillagerRawData(string name, string lore, bool isTownPopulation, Vector2 globalPositionVector2)
     {
         id = SaveData.allVillagerData.Count;
         this.name = name;
@@ -39,6 +39,7 @@ public partial class VillagerRawData : GodotObject
         SetType();
         SetOccupation();
         currentState = VillagerState.ChooseTask;
+        SetCoordinates(globalPositionVector2);
     }
 
     public VillagerRawData(
@@ -60,8 +61,7 @@ public partial class VillagerRawData : GodotObject
         this.currentOccupation = currentOccupation;
         this.currentState = currentState;
         
-        this.xCoord = xCoord;
-        this.yCoord = yCoord;
+        SetCoordinates(new Vector2(xCoord, yCoord));
     }
 
     void SetType()
@@ -74,6 +74,12 @@ public partial class VillagerRawData : GodotObject
         currentOccupation = GetRandomOccupation();
     }
 
+    public void SetCoordinates(Vector2 coordinates)
+    {
+        xCoord = Mathf.RoundToInt(coordinates.X);
+        yCoord = Mathf.RoundToInt(coordinates.Y);
+    }
+    
     public static VillagerOccupation GetRandomOccupation()
     {
         return (VillagerOccupation) (GD.Randi() % Enum.GetValues<VillagerOccupation>().Length);

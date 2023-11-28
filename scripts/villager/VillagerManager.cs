@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 public partial class VillagerManager : Node
 {
@@ -46,6 +47,17 @@ public partial class VillagerManager : Node
 			SpawnSavedVillagers();
 		}
 	}
+
+	public override void _PhysicsProcess(double delta)
+	{
+		base._PhysicsProcess(delta);
+
+		if (TownManager.EveryXSecond((int) AutosaveIntervalSeconds.VILLAGER_POSITION_INTERVAL))
+		{
+			SyncVillagerPositions();
+		}
+	}
+
 	public override void _ExitTree()
 	{
 		base._ExitTree();
@@ -65,8 +77,9 @@ public partial class VillagerManager : Node
 		}
 		
 		bool test;
-		test = SpawnNewVillager();
-		test = SpawnNewVillager();
+		Vector2 spawnCoordinates = new Vector2(0, 0);
+		test = SpawnNewVillager(spawnCoordinates);
+		test = SpawnNewVillager(spawnCoordinates);
 	}
 	
 	public VillagerData GetNewVillagerData(){
@@ -82,19 +95,21 @@ public partial class VillagerManager : Node
 	public VillagerRawData AddNewVillagerRawData(bool intoTown = false)
 	{
 		VillagerData newData = GetNewVillagerData();
-		VillagerRawData newRawData = new VillagerRawData(newData.name, newData.info, intoTown);
+		VillagerRawData newRawData = new VillagerRawData(newData.name, newData.info, intoTown, Vector2.Zero);
 		SaveData.allVillagerData.Add(newRawData);
 
 		return newRawData;
 	}
 	
-	public bool SpawnNewVillager(bool intoTown = true)
+	public bool SpawnNewVillager(Vector2 SpawnCoordinates, bool intoTown = true)
 	{
 		if (intoTown && _allVillagers.Count >= TownManager.currentTownStats.populationCap) return false;
         
 		RegisterAndInitVillager(
 			GD.Load<PackedScene>(VILLAGER_SCENE_PATH).Instantiate<Villager>(),
-			AddNewVillagerRawData(intoTown));
+			AddNewVillagerRawData(intoTown),
+			SpawnCoordinates
+			);
 		
 		return true;
 	}
@@ -108,7 +123,10 @@ public partial class VillagerManager : Node
 		}
 		
 		RegisterAndInitVillager(
-			GD.Load<PackedScene>(VILLAGER_SCENE_PATH).Instantiate<Villager>(), existingVillagerRawData);
+			GD.Load<PackedScene>(VILLAGER_SCENE_PATH).Instantiate<Villager>(),
+			existingVillagerRawData,
+			new Vector2(existingVillagerRawData.xCoord, existingVillagerRawData.yCoord)
+			);
 	}
 
 	public void SpawnQuestVillagers()
@@ -123,7 +141,7 @@ public partial class VillagerManager : Node
 	}
 	
 	
-	void RegisterAndInitVillager(Villager villagerToRegister, VillagerRawData data)
+	void RegisterAndInitVillager(Villager villagerToRegister, VillagerRawData data, Vector2 SpawnCoordinates)
 	{
 		if (_allVillagers.All(villager => villager.rawData.id != data.id))
 		{
@@ -132,8 +150,21 @@ public partial class VillagerManager : Node
 		
 		_villagerParentNode.AddChild(villagerToRegister);
 		villagerToRegister.InitializeVillager(data);
+		
+		SetVillagerOccupation(villagerToRegister, data.currentOccupation);
+		villagerToRegister.Teleport(SpawnCoordinates);
 	}
 
+    void SyncVillagerPositions()
+	{
+		foreach (var villager in _allVillagers)
+		{
+			villager.SavePosition();
+		}
+
+		Task save = SaveData.SyncVillagers();
+	}
+	
 	public void SetVillagerOccupation(Villager villager, VillagerOccupation newOccupation)
 	{
 		if (villager == null)
@@ -141,7 +172,11 @@ public partial class VillagerManager : Node
 			GD.PushError("Can't set occupation for null @VillagerManager");
 			return;
 		}
-		villager.currentOccupationList?.Remove(villager);
+
+		if (villager.currentOccupationList != null && villager.currentOccupationList.Contains(villager))
+		{
+			villager.currentOccupationList?.Remove(villager);
+		}
 
 		villager.currentOccupationList = newOccupation switch
 		{

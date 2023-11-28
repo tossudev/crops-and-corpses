@@ -66,7 +66,7 @@ public partial class QuestPoint : Node2D
 			isZombiesSpawned = true;
 		}
 		
-		if (TownManager.globalPhysicsTicks % TownManager.ONE_SECOND_IN_TICKS == 0)
+		if (TownManager.EveryXSecond(1))
 		{
 			CheckForRemainingZombies();
 		}

@@ -18,6 +18,7 @@ public partial class LootController : StaticBody2D
 
 	[Export] private Node2D _dropLootPosition;
 	[Export] private Node _dropLoopParent;
+	[Export] private Node2D _fallingTreeBridge;
 
 	private List<Item> _items = new List<Item>();
 	RandomNumberGenerator rng;
@@ -96,9 +97,9 @@ public partial class LootController : StaticBody2D
 
 		if (health <= 0)
 		{
-			if (Name == "TreeBridge")
+			if (Name == "FallingTree")
 			{
-				_animationPlayer.Play("fall");
+				_animationPlayer?.Play("fall");
 			}
 			else
 			{
@@ -112,6 +113,7 @@ public partial class LootController : StaticBody2D
 	{
 		if (animationName == "fall")
 		{
+			if(_fallingTreeBridge != null)	_fallingTreeBridge.Visible = true;
 			QueueFree();
 		}
 	}

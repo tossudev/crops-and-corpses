@@ -231,14 +231,13 @@ _data = {
 "zombieWalk": SubResource("Animation_djtgm")
 }
 
-[node name="Zombie2" type="CharacterBody2D" node_paths=PackedStringArray("_audioStreamPlayer2D", "zombieHats")]
+[node name="Zombie2" type="CharacterBody2D" node_paths=PackedStringArray("_audioStreamPlayer2D")]
 collision_layer = 4
 collision_mask = 4
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_pp2f7")
 _audioStreamPlayer2D = NodePath("ZombieNoise")
-zombieHats = [NodePath("Skeleton2D/TorsoBone/HeadBone/ZombieHat2"), NodePath("Skeleton2D/TorsoBone/HeadBone/ZombieHat1"), NodePath("Skeleton2D/TorsoBone/HeadBone/ZombieHat3")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5h8wa")

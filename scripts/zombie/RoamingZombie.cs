@@ -5,7 +5,7 @@ public partial class RoamingZombie : CharacterBody2D
 {
 	[Export] private AudioStreamPlayer2D _audioStreamPlayer2D;
 	[Export] private LootController _lootController;
-	private enum ZombieOccupation{Miner,Farmer,Soldier};
+	private enum ZombieOccupation{Miner,Farmer,Soldier,Woodcutter};
 	private ZombieOccupation zombieOccupation;
 	private Skeleton2D _sprite;
 	private CharacterBody2D _player;
@@ -35,7 +35,7 @@ public partial class RoamingZombie : CharacterBody2D
 	public override void _Ready()
 	{
 
-		zombieHats = new Sprite2D[3];
+		zombieHats = new Sprite2D[4];
 
 		animationPlayer = GetNode<AnimationPlayer>("Skeleton2D/AnimationPlayer");
 		_hitboxes = new HitboxComponent[2];
@@ -57,10 +57,10 @@ public partial class RoamingZombie : CharacterBody2D
 
 		_updateStatsTimer.Start();
 
-		int randomIndex = (int)GD.RandRange(1, 3); 
+		int randomIndex = (int)GD.RandRange(1, 4); 
 
 		
-		if (randomIndex >= 1 && randomIndex <= 3)
+		if (randomIndex >= 1 && randomIndex <= 4)
 		{
 			var zombieHeadBonetNode = GetNode<Bone2D>("Skeleton2D/TorsoBone/HeadBone/"); //Skeleton2D/TorsoBone/HeadBone/ZombieHat1
 			var zombieHatNode  = zombieHeadBonetNode.GetNode<Sprite2D>("ZombieHat"+randomIndex);
@@ -76,6 +76,9 @@ public partial class RoamingZombie : CharacterBody2D
 			break;
 			case 3:
 			zombieOccupation=ZombieOccupation.Miner;
+			break;
+			case 4:
+			zombieOccupation=ZombieOccupation.Woodcutter;
 			break;
 			default:
 			break;

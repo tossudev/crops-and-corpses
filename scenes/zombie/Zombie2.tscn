@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bynbnoulqmqah"]
+[gd_scene load_steps=29 format=3 uid="uid://bynbnoulqmqah"]
 
 [ext_resource type="Script" path="res://scripts/zombie/RoamingZombie.cs" id="1_oij60"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_6it8p"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cqanpk278c8dt" path="res://assets/sprites/character/hats/bucket_helmet.png" id="16_vmhde"]
 [ext_resource type="Texture2D" uid="uid://c5p34ic1oo4gh" path="res://assets/sprites/character/hats/mining_hat.png" id="17_5dxrq"]
 [ext_resource type="Resource" uid="uid://khdsb508afg6" path="res://TinoTests/Resources/zombie_loot.tres" id="17_lurkh"]
+[ext_resource type="Texture2D" uid="uid://bum44135w0d6f" path="res://assets/sprites/character/hats/ushanka.png" id="18_ucr28"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5h8wa"]
 radius = 27.0
@@ -374,6 +375,12 @@ visible = false
 position = Vector2(107.54, 2.97978)
 rotation = 1.5708
 texture = ExtResource("17_5dxrq")
+
+[node name="ZombieHat4" type="Sprite2D" parent="Skeleton2D/TorsoBone/HeadBone"]
+visible = false
+position = Vector2(86.5974, 2.98369)
+rotation = 1.5708
+texture = ExtResource("18_ucr28")
 
 [node name="LeftArmBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
 position = Vector2(49.006, 32.991)

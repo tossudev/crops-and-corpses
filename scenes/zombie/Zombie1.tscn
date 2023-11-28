@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bfgy4jnvcy7pk"]
+[gd_scene load_steps=29 format=3 uid="uid://bfgy4jnvcy7pk"]
 
 [ext_resource type="Script" path="res://scripts/zombie/RoamingZombie.cs" id="1_pp2f7"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_7prpc"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cqanpk278c8dt" path="res://assets/sprites/character/hats/bucket_helmet.png" id="15_uyfw0"]
 [ext_resource type="Texture2D" uid="uid://6lej2c1r0sbc" path="res://assets/sprites/character/hats/straw_hat.png" id="16_5y1ar"]
 [ext_resource type="Texture2D" uid="uid://c5p34ic1oo4gh" path="res://assets/sprites/character/hats/mining_hat.png" id="17_a4sus"]
+[ext_resource type="Texture2D" uid="uid://bum44135w0d6f" path="res://assets/sprites/character/hats/ushanka.png" id="18_h3eqx"]
 [ext_resource type="Texture2D" uid="uid://bg81feo6bco5o" path="res://assets/sprites/character/All zombies/blue/SVG/right_arm.svg" id="18_sr18v"]
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="19_07skw"]
 [ext_resource type="Resource" uid="uid://khdsb508afg6" path="res://TinoTests/Resources/zombie_loot.tres" id="20_poj8k"]
@@ -374,6 +375,13 @@ visible = false
 position = Vector2(128.478, -17.9665)
 rotation = 1.5708
 texture = ExtResource("17_a4sus")
+
+[node name="ZombieHat4" type="Sprite2D" parent="Skeleton2D/TorsoBone/HeadBone"]
+visible = false
+position = Vector2(86.5936, -17.9587)
+rotation = 1.5708
+scale = Vector2(1.12331, 1.12331)
+texture = ExtResource("18_h3eqx")
 
 [node name="LeftArmBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
 position = Vector2(49.006, 32.991)

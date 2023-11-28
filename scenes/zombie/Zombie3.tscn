@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://0qbf3ee7f1b5"]
+[gd_scene load_steps=28 format=3 uid="uid://0qbf3ee7f1b5"]
 
 [ext_resource type="Script" path="res://scripts/zombie/RoamingZombie.cs" id="1_i0x8b"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_w80nd"]
@@ -16,7 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://fjx7csh37uqq" path="res://assets/sprites/character/zombie2/2.2/1x/head.png" id="14_nev2c"]
 [ext_resource type="Texture2D" uid="uid://c5p34ic1oo4gh" path="res://assets/sprites/character/hats/mining_hat.png" id="15_08cto"]
 [ext_resource type="Texture2D" uid="uid://dd004u1ii1vov" path="res://assets/sprites/character/zombie2/2.2/1x/right hand.png" id="15_pb5q7"]
+[ext_resource type="Texture2D" uid="uid://cqanpk278c8dt" path="res://assets/sprites/character/hats/bucket_helmet.png" id="16_h8erh"]
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="16_mn44d"]
+[ext_resource type="Texture2D" uid="uid://6lej2c1r0sbc" path="res://assets/sprites/character/hats/straw_hat.png" id="17_bmxfu"]
 [ext_resource type="Resource" uid="uid://khdsb508afg6" path="res://TinoTests/Resources/zombie_loot.tres" id="17_ogs7e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5h8wa"]
@@ -228,13 +230,14 @@ _data = {
 "zombieWalk": SubResource("Animation_djtgm")
 }
 
-[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("_audioStreamPlayer2D")]
+[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("_audioStreamPlayer2D", "zombieHats")]
 collision_layer = 4
 collision_mask = 4
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_i0x8b")
 _audioStreamPlayer2D = NodePath("ZombieNoise")
+zombieHats = [NodePath("Skeleton2D/TorsoBone/HeadBone/ZombieHat2"), NodePath("Skeleton2D/TorsoBone/HeadBone/ZombieHat1"), NodePath("Skeleton2D/TorsoBone/HeadBone/ZombieHat3")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5h8wa")
@@ -354,10 +357,23 @@ position = Vector2(81.9978, -12.015)
 rotation = 1.5708
 texture = ExtResource("14_nev2c")
 
-[node name="Hat" type="Sprite2D" parent="Skeleton2D/TorsoBone/HeadBone"]
+[node name="ZombieHat3" type="Sprite2D" parent="Skeleton2D/TorsoBone/HeadBone"]
+visible = false
 position = Vector2(144.188, -2.26265)
 rotation = 1.5708
 texture = ExtResource("15_08cto")
+
+[node name="ZombieHat2" type="Sprite2D" parent="Skeleton2D/TorsoBone/HeadBone"]
+visible = false
+position = Vector2(144.188, -2.26265)
+rotation = 1.5708
+texture = ExtResource("16_h8erh")
+
+[node name="ZombieHat1" type="Sprite2D" parent="Skeleton2D/TorsoBone/HeadBone"]
+visible = false
+position = Vector2(144.188, -2.26265)
+rotation = 1.5708
+texture = ExtResource("17_bmxfu")
 
 [node name="LeftArmBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
 position = Vector2(49.006, 32.991)

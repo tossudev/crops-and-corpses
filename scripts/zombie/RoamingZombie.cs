@@ -235,7 +235,7 @@ public partial class RoamingZombie : CharacterBody2D
 			}
 			else
 			{
-				GD.Print("ZOMBIE: No hitbox found on fence/building. ");
+				// GD.Print("ZOMBIE: No hitbox found on fence/building. ");
 			}
 		}
 	}

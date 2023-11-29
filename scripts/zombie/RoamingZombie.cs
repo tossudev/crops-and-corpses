@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class RoamingZombie : CharacterBody2D
 {
@@ -18,23 +19,41 @@ public partial class RoamingZombie : CharacterBody2D
 	private HealthComponent _healthComponent;
 	private NodePath _rootNodePath;
 	private Node2D rootNode;
-	PackedScene instantiatedNPC;
 	
-	//private CompressedTexture2D strongZombieSprite;
-	//private CompressedTexture2D mediumZombieSprite;
 	private bool _playerInRange = false;
 	private bool _fenceInRange = false;
 	private ulong _entered;
 	private ulong _exited;
 	private bool _inTown;
-
-	AnimationPlayer animationPlayer;
-
+	//AnimationPlayer animationPlayer;
 	public override void _Ready()
 	{
-		animationPlayer = GetNode<AnimationPlayer>("Skeleton2D/AnimationPlayer");
+		
+		var zombieSkeleton1 = (PackedScene)GD.Load("res://scenes/zombie/Zombie1Skeleton.tscn");
+		var zombieSkeleton2 = (PackedScene)GD.Load("res://scenes/zombie/Zombie2Skeleton.tscn");
+		var zombieSkeleton3 = (PackedScene)GD.Load("res://scenes/zombie/Zombie3Skeleton.tscn");
+
+		int randomSkeletonIndex = (int)GD.RandRange(1, 3);
+		switch(randomSkeletonIndex)
+		{
+			case 1:
+			Skeleton2D temp1 =(Skeleton2D)zombieSkeleton1.Instantiate();
+			this.AddChild(temp1);
+				break;
+			case 2:
+			Skeleton2D temp2 =(Skeleton2D)zombieSkeleton2.Instantiate();
+			this.AddChild(temp2);
+				break;
+			case 3:
+			Skeleton2D temp3 = (Skeleton2D)zombieSkeleton3.Instantiate();
+			this.AddChild(temp3);
+				break;
+			default:
+				break;
+		}
+		//animationPlayer = GetNode<AnimationPlayer>("Skeleton2D/AnimationPlayer");
 		_hitboxes = new HitboxComponent[2];
-		instantiatedNPC = (PackedScene)GD.Load("res://scenes/villager/villager.tscn");
+	//	instantiatedNPC = (PackedScene)GD.Load("res://scenes/villager/villager.tscn");
 		_rootNodePath = GetParent<Node2D>().GetPath();
 		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);
 		_sprite = GetNodeOrNull<Skeleton2D>("Skeleton2D");
@@ -43,6 +62,7 @@ public partial class RoamingZombie : CharacterBody2D
 		_healthBar = GetNodeOrNull<ProgressBar>("HealthBar");
 		_healthComponent = GetNodeOrNull<HealthComponent>("HealthComponent");
 		_audioStreamPlayer2D = GetNodeOrNull<AudioStreamPlayer2D>("ZombieNoise");
+		
 
 		_attack = new Attack
 		{
@@ -89,7 +109,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		animationPlayer.Play("zombieWalk");
+		//animationPlayer.Play("zombieWalk");
 		Velocity += _knockback;
 		MoveAndSlide();
 
@@ -121,10 +141,10 @@ public partial class RoamingZombie : CharacterBody2D
 				}
 			}
 			
-			if (Velocity.X == 0.1f)
+			/* if (Velocity.X == 0.1f)
 			{
 				animationPlayer.Play("zombieIdle");
-			}
+			} */
 		}
 	}
 	public bool IsInTown()
@@ -150,16 +170,9 @@ public partial class RoamingZombie : CharacterBody2D
 		switch (attack.effect)
 		{
 			case EffectType.Cure:
-
 				SpawnScript.RemoveZombieFromList(this);
-				Transform2D zombiePos = this.Transform;
-				CharacterBody2D spawnNPC = (CharacterBody2D)instantiatedNPC.Instantiate();
-				
-				spawnNPC.Transform = zombiePos;
-				rootNode.AddChild(spawnNPC);
-				
-
-				spawnNPC.Scale = new Vector2(0.5f, 0.5f);
+				Vector2 zombiePos = this.Transform.Origin;
+				VillagerManager.villagerManagerInstance.SpawnNewVillager(zombiePos,true);
 				QueueFree();
 				break;
 			default:
@@ -286,16 +299,6 @@ public partial class RoamingZombie : CharacterBody2D
 				default:
 					break;
 			}
-
-			/* if (ZombieManager.type == ZombieManager.ZombieType.Weak)
-			{
-			}
-			else if (ZombieManager.type == ZombieManager.ZombieType.Medium)
-			{
-			}
-			else if (ZombieManager.type == ZombieManager.ZombieType.Strong)
-			{
-			} */
 			_attack.damage = ZombieManager.damage;
 			_timer.WaitTime = ZombieManager.attackTime;
 		}

@@ -1,0 +1,116 @@
+[gd_scene load_steps=15 format=3 uid="uid://bfgy4jnvcy7pk"]
+
+[ext_resource type="Script" path="res://scripts/zombie/RoamingZombie.cs" id="1_bgof4"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_77rad"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_2qvph"]
+[ext_resource type="Script" path="res://scripts/zombie/StateMachine.cs" id="4_0nu7y"]
+[ext_resource type="Script" path="res://scripts/zombie/states/ZombieIdle.cs" id="5_5tice"]
+[ext_resource type="Script" path="res://scripts/zombie/states/ZombieChase.cs" id="6_7qls5"]
+[ext_resource type="Script" path="res://scripts/zombie/states/ZombieAttackFence.cs" id="7_fw24w"]
+[ext_resource type="Texture2D" uid="uid://cbe403j44jl6w" path="res://assets/placeholder/zombie_placeholder.png" id="8_4yfg2"]
+[ext_resource type="AudioStream" uid="uid://b4giy84o2s7c5" path="res://assets/Sounds/zombies/zombie_hiss1.wav" id="9_fqsw8"]
+[ext_resource type="Script" path="res://scripts/World/LootController.cs" id="10_86eqm"]
+[ext_resource type="Resource" uid="uid://khdsb508afg6" path="res://TinoTests/Resources/zombie_loot.tres" id="11_xvxhc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5h8wa"]
+radius = 27.0
+height = 90.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_64jqc"]
+radius = 27.0
+height = 90.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mytwi"]
+radius = 70.0
+
+[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("_audioStreamPlayer2D")]
+collision_layer = 4
+collision_mask = 4
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_bgof4")
+_audioStreamPlayer2D = NodePath("ZombieNoise")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_5h8wa")
+debug_color = Color(0, 0.6, 0.701961, 0.12549)
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("2_77rad")]
+_parentScript = NodePath("..")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.2, 0.356863, 1, 1)
+offset_left = -24.0
+offset_top = -80.0
+offset_right = 106.0
+offset_bottom = -53.0
+scale = Vector2(0.4, 0.4)
+show_percentage = false
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["enemy"] instance=ExtResource("3_2qvph")]
+collision_layer = 4
+collision_mask = 32
+_parentScript = NodePath("..")
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CapsuleShape2D_64jqc")
+debug_color = Color(0.498039, 0.45098, 0.94902, 0.890196)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_0nu7y")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie")]
+script = ExtResource("5_5tice")
+_zombie = NodePath("../..")
+
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie", "_navAgent")]
+script = ExtResource("6_7qls5")
+_zombie = NodePath("../..")
+_navAgent = NodePath("../../NavigationAgent2D")
+
+[node name="Timer" type="Timer" parent="StateMachine/Chase"]
+wait_time = 0.5
+
+[node name="AttackFence" type="Node" parent="StateMachine" node_paths=PackedStringArray("_zombie", "_navAgent")]
+script = ExtResource("7_fw24w")
+_zombie = NodePath("../..")
+_navAgent = NodePath("../../NavigationAgent2D")
+
+[node name="AttackBox" type="Area2D" parent="."]
+light_mask = 5
+visibility_layer = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+shape = SubResource("CircleShape2D_mytwi")
+debug_color = Color(0.890196, 0.278431, 0.439216, 0.419608)
+
+[node name="AttackTimer" type="Timer" parent="."]
+process_callback = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1.90735e-06, -1.90735e-06)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("8_4yfg2")
+offset = Vector2(0, -20)
+
+[node name="UpdateStatsTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="ZombieNoise" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_fqsw8")
+
+[node name="Backpack" type="StaticBody2D" parent="."]
+script = ExtResource("10_86eqm")
+_loot = ExtResource("11_xvxhc")
+
+[connection signal="timeout" from="StateMachine/Chase/Timer" to="StateMachine/Chase" method="OnTimerTimeout"]
+[connection signal="body_entered" from="AttackBox" to="." method="OnAttackBoxEntered"]
+[connection signal="body_exited" from="AttackBox" to="." method="OnAttackBoxExited"]
+[connection signal="timeout" from="AttackTimer" to="." method="OnTimerTimeout"]
+[connection signal="timeout" from="UpdateStatsTimer" to="." method="OnUpdateStatsTimeout"]

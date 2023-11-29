@@ -21,12 +21,22 @@ public partial class TownManager : Node2D
 	static Vector2 _townHallPosition;
 	public static Vector2 townHallPosition => _townHallPosition;
 
-	public override void _Ready()
+	
+	const string TOWN_STREET_SIGN_GROUP = "StreetSign";
+
+	static PlayerTravel _townPlayerTravel;
+	public static PlayerTravel GetTownPlayerTravel (Node caller)
 	{
-		base._Ready();
+		return _townPlayerTravel ??= (PlayerTravel) caller.GetTree().GetFirstNodeInGroup(TOWN_STREET_SIGN_GROUP);;
+	}
+    
+	public override void _EnterTree()
+	{
+		base._EnterTree();
+		
 		_townHallPosition = GlobalPosition - new Vector2(13,13);
 	}
-
+	
 	public static async void ReadTownDataFromFile(Dictionary saveData, bool sync = true)
 	{
 		if (await RawTownStats.AssignStatsDataFromDictionary(saveData, sync)) return;

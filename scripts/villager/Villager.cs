@@ -16,7 +16,8 @@ public partial class Villager : CharacterBody2D
 {
 	//[Export] VillagerManager _villagerManager;
 	Vector2 _targetPosition;
-	Timer _timer;
+	Timer _taskTimer;
+	Timer _chooseTaskTimer;
 	[Export] NavigationAgent2D navMeshAgent;
 	//[Export] NavigationRegion2D navRegionArea;
 	//List<Node2D> _fenceList = new List<Node2D>();
@@ -26,14 +27,12 @@ public partial class Villager : CharacterBody2D
 	Node2D _buildings;
 	Node2D _fences;
 	HealthComponent _currentFence;
-	Node2D _streetSign;
 	Sprite2D _villagerSprite;
 	int _plantIndex = 0;
 	int _archerTowerIndex = 0;
 	int _fenceIndex = 0;
 	float _speed = 0;
 	bool collision = false;
-	bool _timerStopped = false;
 	bool _taskStarted = false;
 	int _resourceTaskCounter = 0;
 	const string PLAYER_NODENAME = "%Player";
@@ -56,17 +55,16 @@ public partial class Villager : CharacterBody2D
 	public override void _Ready()
 	{
 		_player = GetParent().GetNodeOrNull<CharacterBody2D>(PLAYER_NODENAME);
-		_streetSign = GetParent().GetNodeOrNull<Node2D>(STREETSIGN_NODENAME);
 		_villagerSprite = GetNode<Sprite2D>("Sprite2D");
 		_buildings = (Node2D)GetTree().GetFirstNodeInGroup("buildings");
 
-		_timer = new Timer
+		_taskTimer = new Timer
 		{
-			WaitTime = GD.RandRange(0.8f, 1.25f),
+			WaitTime = GD.RandRange(0.8f, 1.25f)
 		};
-		_timer.Timeout += State;
-		AddChild(_timer);
-		_timer.Start();
+		_taskTimer.Timeout += State;
+		AddChild(_taskTimer);
+		_taskTimer.Start();
 	}
 
 	public void InitializeVillager(VillagerRawData data)
@@ -89,7 +87,6 @@ public partial class Villager : CharacterBody2D
 		else
 		{
 			needRescue = false;
-			SetCurrentState(VillagerState.RoamAround);
 		}
 	}
 
@@ -267,6 +264,19 @@ public partial class Villager : CharacterBody2D
 	void RoamAround()
 	{
 		_targetPosition = GlobalPosition + CreateOffsetVector2(-200, 200);
+
+		if (_chooseTaskTimer == null)
+		{
+			_chooseTaskTimer = new Timer
+			{
+				WaitTime = GD.RandRange(2, 5f),
+				Autostart = true
+			};
+			
+			_chooseTaskTimer.Timeout += ChooseTask;
+			
+			AddChild(_chooseTaskTimer);
+		}
 	}
 
 	void FindShelter()
@@ -287,7 +297,14 @@ public partial class Villager : CharacterBody2D
 
 	void ChooseTask()
 	{
-		VillagerState decision = VillagerState.ChooseTask;
+		if (_chooseTaskTimer != null)
+		{
+			_chooseTaskTimer.Paused = true;
+			_chooseTaskTimer.QueueFree();
+			_chooseTaskTimer = null;
+		}
+		
+		VillagerState decision;
 
 		switch (_rawData.currentOccupation)
 		{
@@ -302,7 +319,7 @@ public partial class Villager : CharacterBody2D
 			case VillagerOccupation.Soldier:
 				if (TimeManager.dayTime)
 				{
-					_archerTower.DeactivateTower();
+					_archerTower?.DeactivateTower();
 					Visible = true;
 					decision = VillagerState.RoamAround;
 				}
@@ -348,10 +365,9 @@ public partial class Villager : CharacterBody2D
 
 	void GatherResources()
 	{
-		_targetPosition = _streetSign.GlobalPosition;
+		_targetPosition = TownManager.GetTownPlayerTravel(this).GlobalPosition;
 		if (GlobalPosition.DistanceTo(_targetPosition) < 5)
 		{
-			_info.Visible = false;
 			_taskStarted = true;
 			_villagerSprite.Visible = false;
 			_resourceTaskCounter++;
@@ -386,7 +402,18 @@ public partial class Villager : CharacterBody2D
 
 	void CheckPlants()
 	{
-		_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
+		var plants = FarmManager.instance.GetPlantedPlants();
+
+		_currentPlant = plants.Count > 0
+			? plants[_plantIndex]
+			: null;
+		
+		if (_currentPlant == null)
+        {
+	        SetCurrentState(VillagerState.RoamAround);
+			return;
+		}
+		
 		_currentPlant.isTendedTo = true;
 
 		if (_currentPlant.GetGrowthState() == GrowthState.IsWilting || _currentPlant.GetGrowthState() == GrowthState.WaitWatering ||

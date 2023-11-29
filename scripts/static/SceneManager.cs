@@ -12,11 +12,8 @@ public static class SceneManager
     public static Scene.RootScene GetCurrentScene(Node caller)
     {
         if (sceneChanged) CacheCurrentScene(caller);
-
-        Scene.RootScene scene;
-
-    //TODO
-        return Scene.Town;
+        
+        return Scene.allRootScenes.Find(rootScene => rootScene.Name == _currentRootScene.Name);
     }
     
     public static bool IsCurrentScene(Node caller, IEnumerable<Scene.RootScene> scenes)

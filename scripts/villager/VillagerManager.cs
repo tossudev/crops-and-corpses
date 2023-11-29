@@ -35,6 +35,8 @@ public partial class VillagerManager : Node
 
 	Node2D _villagerParentNode;
 	const string VILLAGER_PARENT_NODEPATH = "%Villagers";
+
+	
 	
 	public override void _Ready()
 	{
@@ -101,14 +103,14 @@ public partial class VillagerManager : Node
 		return newRawData;
 	}
 	
-	public bool SpawnNewVillager(Vector2 SpawnCoordinates, bool intoTown = true)
+	public bool SpawnNewVillager(Vector2 spawnCoordinates, bool intoTown = true)
 	{
 		if (intoTown && _allVillagers.Count >= TownManager.currentTownStats.populationCap) return false;
         
 		RegisterAndInitVillager(
 			GD.Load<PackedScene>(VILLAGER_SCENE_PATH).Instantiate<Villager>(),
 			AddNewVillagerRawData(intoTown),
-			SpawnCoordinates
+			spawnCoordinates
 			);
 		
 		return true;
@@ -121,6 +123,8 @@ public partial class VillagerManager : Node
 			GD.PushError("Villager data not found");
 			return;
 		}
+		
+		
 		
 		RegisterAndInitVillager(
 			GD.Load<PackedScene>(VILLAGER_SCENE_PATH).Instantiate<Villager>(),
@@ -141,7 +145,7 @@ public partial class VillagerManager : Node
 	}
 	
 	
-	void RegisterAndInitVillager(Villager villagerToRegister, VillagerRawData data, Vector2 SpawnCoordinates)
+	void RegisterAndInitVillager(Villager villagerToRegister, VillagerRawData data, Vector2 spawnCoordinates)
 	{
 		if (_allVillagers.All(villager => villager.rawData.id != data.id))
 		{
@@ -152,7 +156,7 @@ public partial class VillagerManager : Node
 		villagerToRegister.InitializeVillager(data);
 		
 		SetVillagerOccupation(villagerToRegister, data.currentOccupation);
-		villagerToRegister.Teleport(SpawnCoordinates);
+		villagerToRegister.Teleport(spawnCoordinates);
 	}
 
     void SyncVillagerPositions()
@@ -191,6 +195,8 @@ public partial class VillagerManager : Node
 		villager.currentOccupationList.Add(villager);
 
 		villager.rawData.currentOccupation = newOccupation;
+		villager.rawData.currentState = VillagerState.ChooseTask;
+		
 		villager.villagerInfo.ChangeHat(newOccupation);
 	}
 

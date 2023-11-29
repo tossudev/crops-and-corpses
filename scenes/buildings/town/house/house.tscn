@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_uikdl"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_driju"]
-[ext_resource type="Texture2D" uid="uid://cg5j4xefc87sn" path="res://assets/sprites/buildings/smallhouse_color.png" id="2_dt56r"]
+[ext_resource type="Texture2D" uid="uid://bmn8ggt1kvsn7" path="res://assets/sprites/buildings/smallhouse_color.png" id="2_dt56r"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_u5tml"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1313"]
@@ -14,7 +14,8 @@ size = Vector2(116, 440.385)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_24awm"]
 size = Vector2(125.5, 125.5)
 
-[node name="House" type="Node2D" groups=["House"]]
+[node name="House2" type="Node2D" groups=["House"]]
+y_sort_enabled = true
 scale = Vector2(2, 2)
 
 [node name="BuildingHealth" type="Node2D" parent="."]
@@ -52,10 +53,8 @@ position = Vector2(-126, -75)
 _parentScript = NodePath("../BuildingHealth")
 _healItemPrefabs = Array[PackedScene]([])
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") groups=["building"] instance=ExtResource("3_u5tml")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_u5tml")]
 position = Vector2(-126, -75)
-collision_layer = 16
-collision_mask = 32
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]

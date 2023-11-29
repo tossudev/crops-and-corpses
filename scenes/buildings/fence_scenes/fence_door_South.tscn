@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=3 uid="uid://bslom2g3m4qky"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/FenceDoor.cs" id="1_qlejx"]
-[ext_resource type="Texture2D" uid="uid://yvyahxkq53y3" path="res://assets/sprites/Farm sprites/gate door.png" id="2_8uf1v"]
-[ext_resource type="Texture2D" uid="uid://cuwpylh2hqp0x" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="3_3m1xk"]
+[ext_resource type="Texture2D" uid="uid://c1mvwoenhyv3m" path="res://assets/sprites/Farm sprites/gate door.png" id="2_8uf1v"]
+[ext_resource type="Texture2D" uid="uid://cf37fqo557vpg" path="res://scenes/buildings/fence_scenes/fence door topdown view.png" id="3_6iurx"]
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="4_ovuda"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="5_4xgdc"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="6_6vpgs"]
-[ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="7_0jjsr"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="7_0jjsr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_638cj"]
 size = Vector2(119.656, 62)
@@ -62,22 +62,26 @@ position = Vector2(64.5, 17)
 shape = SubResource("RectangleShape2D_s8gej")
 
 [node name="DoorsTopdown" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -25.475)
 
-[node name="FenceDoorTopdown2" type="Sprite2D" parent="DoorsTopdown"]
-position = Vector2(-131, 22.62)
-scale = Vector2(0.416667, 0.228495)
-texture = ExtResource("3_3m1xk")
+[node name="FenceDoorTopdown4" type="Sprite2D" parent="DoorsTopdown"]
+position = Vector2(3, 25.1622)
+rotation = 1.5708
+scale = Vector2(0.461547, 0.35)
+texture = ExtResource("3_6iurx")
 
-[node name="FenceDoorTopdown3" type="Sprite2D" parent="DoorsTopdown"]
-position = Vector2(4, 24.5)
-scale = Vector2(0.416667, 0.228495)
-texture = ExtResource("3_3m1xk")
+[node name="FenceDoorTopdown5" type="Sprite2D" parent="DoorsTopdown"]
+position = Vector2(-132, 27.107)
+rotation = 1.5708
+scale = Vector2(0.453511, 0.35)
+texture = ExtResource("3_6iurx")
 
 [node name="Area2D" type="Area2D" parent="DoorsTopdown"]
 position = Vector2(-129, -65)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorsTopdown/Area2D"]
-position = Vector2(-2, 88)
+position = Vector2(-2.93, 91.572)
 shape = SubResource("RectangleShape2D_0v57a")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DoorsTopdown/Area2D"]
@@ -94,7 +98,7 @@ position = Vector2(68.5, 26.5)
 shape = SubResource("RectangleShape2D_555mk")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DoorsTopdown/StaticBody2D"]
-position = Vector2(-66, 24)
+position = Vector2(-67.015, 27.107)
 shape = SubResource("RectangleShape2D_555mk")
 
 [node name="BuildingHealth" type="Node2D" parent="."]

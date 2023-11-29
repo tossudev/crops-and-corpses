@@ -1,20 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://e58507ft315b"]
+[gd_scene load_steps=9 format=3 uid="uid://e58507ft315b"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_jc86v"]
-[ext_resource type="Texture2D" uid="uid://bdvrnkj687l1l" path="res://assets/sprites/Farm sprites/gate.png" id="2_xxu63"]
+[ext_resource type="Texture2D" uid="uid://dhno17fjkegb0" path="res://assets/sprites/Farm sprites/gate.png" id="2_xxu63"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_xy11f"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_rslnb"]
-[ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_0dlt1"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_0dlt1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xqnct"]
+size = Vector2(125, 58)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_asoab"]
-size = Vector2(126, 62)
+size = Vector2(126, 21)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fnxi"]
 size = Vector2(126, 62)
 
 [node name="Node2D2" type="Node2D"]
+y_sort_enabled = true
 
 [node name="FenceHighN2" type="Sprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(-64, -32)
 scale = Vector2(0.358543, 0.328042)
 texture = ExtResource("2_xxu63")
@@ -27,8 +32,9 @@ script = ExtResource("1_jc86v")
 position = Vector2(-64, -64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 32)
-shape = SubResource("RectangleShape2D_asoab")
+y_sort_enabled = true
+position = Vector2(0.5, 34)
+shape = SubResource("RectangleShape2D_xqnct")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["fence"]]
 collision_layer = 255
@@ -36,7 +42,7 @@ collision_mask = 5
 
 [node name="StaticCollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 unique_name_in_owner = true
-position = Vector2(-64, -32)
+position = Vector2(-64, -11.5)
 shape = SubResource("RectangleShape2D_asoab")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_xy11f")]

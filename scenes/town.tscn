@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b40hqfagems1h" path="res://scenes/farm/well.tscn" id="15_y8o5s"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
 [ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="21_mo6ng"]
-[ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="23_vb7um"]
+[ext_resource type="PackedScene" path="res://scenes/world/navigation_manager.tscn" id="23_vb7um"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="26_e7msj"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="29_6j2s6"]
 
@@ -137,9 +137,6 @@ scale = Vector2(0.999997, 0.999997)
 [node name="ArmRBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="5"]
 scale = Vector2(0.999999, 1)
 
-[node name="PlayerOverlay" parent="Objects/Player" index="9"]
-visible = false
-
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
@@ -156,441 +153,281 @@ y_sort_enabled = true
 y_sort_enabled = true
 position = Vector2(704, -1264)
 
-[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix" instance=ExtResource("5_tpvf0")]
 position = Vector2(115, -529)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix" instance=ExtResource("5_tpvf0")]
 position = Vector2(668, -82)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix" instance=ExtResource("9_wtibd")]
 position = Vector2(378, -121)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix" instance=ExtResource("9_wtibd")]
 position = Vector2(-86, -433)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix" instance=ExtResource("9_wtibd")]
 position = Vector2(897, -322)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix" instance=ExtResource("10_dpa4y")]
 position = Vector2(44, -105)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix" instance=ExtResource("10_dpa4y")]
 position = Vector2(-198, 93)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix" instance=ExtResource("10_dpa4y")]
 position = Vector2(311, -448)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
 [node name="TreeMix2" type="Node2D" parent="Objects/Breakable/Trees"]
 y_sort_enabled = true
 position = Vector2(-584, -1296)
 
-[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix2" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix2" instance=ExtResource("5_tpvf0")]
 position = Vector2(115, -529)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix2" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix2" instance=ExtResource("5_tpvf0")]
 position = Vector2(668, -82)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix2" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix2" instance=ExtResource("9_wtibd")]
 position = Vector2(344, -303)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix2" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix2" instance=ExtResource("9_wtibd")]
 position = Vector2(-86, -433)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix2" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix2" instance=ExtResource("9_wtibd")]
 position = Vector2(493, 46)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix2" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix2" instance=ExtResource("10_dpa4y")]
 position = Vector2(44, -105)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix2" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix2" instance=ExtResource("10_dpa4y")]
 position = Vector2(-198, 93)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix2" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix2" instance=ExtResource("10_dpa4y")]
 position = Vector2(695, -464)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
 [node name="TreeMix3" type="Node2D" parent="Objects/Breakable/Trees"]
 y_sort_enabled = true
 position = Vector2(-1856, -1272)
 
-[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix3" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix3" instance=ExtResource("5_tpvf0")]
 position = Vector2(115, -529)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix3" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix3" instance=ExtResource("5_tpvf0")]
 position = Vector2(668, -82)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix3" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix3" instance=ExtResource("9_wtibd")]
 position = Vector2(378, -121)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix3" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix3" instance=ExtResource("9_wtibd")]
 position = Vector2(-86, -433)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix3" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix3" instance=ExtResource("9_wtibd")]
 position = Vector2(493, 46)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix3" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix3" instance=ExtResource("10_dpa4y")]
 position = Vector2(44, -105)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix3" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix3" instance=ExtResource("10_dpa4y")]
 position = Vector2(-198, 93)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix3" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix3" instance=ExtResource("10_dpa4y")]
 position = Vector2(311, -448)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
 [node name="TreeMix4" type="Node2D" parent="Objects/Breakable/Trees"]
 y_sort_enabled = true
 position = Vector2(-2968, 920)
 
-[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix4" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix4" instance=ExtResource("5_tpvf0")]
 position = Vector2(115, -529)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix4" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix4" instance=ExtResource("5_tpvf0")]
 position = Vector2(668, -82)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix4" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix4" instance=ExtResource("9_wtibd")]
 position = Vector2(378, -121)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix4" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix4" instance=ExtResource("9_wtibd")]
 position = Vector2(-86, -433)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix4" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix4" instance=ExtResource("9_wtibd")]
 position = Vector2(493, 46)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix4" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix4" instance=ExtResource("10_dpa4y")]
 position = Vector2(-399, 323)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix4" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix4" instance=ExtResource("10_dpa4y")]
 position = Vector2(-198, 93)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix4" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix4" instance=ExtResource("10_dpa4y")]
 position = Vector2(311, -448)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
 [node name="TreeMix5" type="Node2D" parent="Objects/Breakable/Trees"]
 y_sort_enabled = true
 position = Vector2(-2768, -608)
 
-[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix5" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix5" instance=ExtResource("5_tpvf0")]
 position = Vector2(115, -529)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix5" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix5" instance=ExtResource("5_tpvf0")]
 position = Vector2(668, -82)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix5" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix5" instance=ExtResource("9_wtibd")]
 position = Vector2(378, -121)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix5" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix5" instance=ExtResource("9_wtibd")]
 position = Vector2(-86, -433)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix5" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix5" instance=ExtResource("9_wtibd")]
 position = Vector2(493, 46)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix5" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix5" instance=ExtResource("10_dpa4y")]
 position = Vector2(44, -105)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix5" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix5" instance=ExtResource("10_dpa4y")]
 position = Vector2(-198, 93)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix5" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix5" instance=ExtResource("10_dpa4y")]
 position = Vector2(311, -448)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
 [node name="TreeMix6" type="Node2D" parent="Objects/Breakable/Trees"]
 y_sort_enabled = true
 position = Vector2(-1320, 1512)
 
-[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix6" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix6" instance=ExtResource("5_tpvf0")]
 position = Vector2(-1013, 25)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix6" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix6" instance=ExtResource("5_tpvf0")]
 position = Vector2(793, -182)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix6" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix6" instance=ExtResource("9_wtibd")]
 position = Vector2(410, -49)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix6" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix6" instance=ExtResource("9_wtibd")]
 position = Vector2(-625, 86)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix6" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix6" instance=ExtResource("9_wtibd")]
 position = Vector2(584, 81)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix6" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix6" instance=ExtResource("10_dpa4y")]
 position = Vector2(39, -62)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix6" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix6" instance=ExtResource("10_dpa4y")]
 position = Vector2(-201, 180)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix6" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix6" instance=ExtResource("10_dpa4y")]
 position = Vector2(-316, -221)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
 [node name="TreeMix7" type="Node2D" parent="Objects/Breakable/Trees"]
 y_sort_enabled = true
 position = Vector2(464, 1512)
 
-[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix7" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix7" instance=ExtResource("5_tpvf0")]
 position = Vector2(326, -261)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix7" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix7" instance=ExtResource("5_tpvf0")]
 position = Vector2(285, 472)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix7" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix7" instance=ExtResource("9_wtibd")]
 position = Vector2(-2, 508)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix7" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix7" instance=ExtResource("9_wtibd")]
 position = Vector2(-184, 243)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix7" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix7" instance=ExtResource("9_wtibd")]
 position = Vector2(384, 795)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix7" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix7" instance=ExtResource("10_dpa4y")]
 position = Vector2(175, 1448)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix7" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix7" instance=ExtResource("10_dpa4y")]
 position = Vector2(679, 1681)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix7" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix7" instance=ExtResource("10_dpa4y")]
 position = Vector2(488, -172)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
 [node name="TreeMix8" type="Node2D" parent="Objects/Breakable/Trees"]
 y_sort_enabled = true
 position = Vector2(2080, -664)
 
-[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix8" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix8" instance=ExtResource("5_tpvf0")]
 position = Vector2(-223, -560)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix8" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix8" instance=ExtResource("5_tpvf0")]
 position = Vector2(670, -218)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix8" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix8" instance=ExtResource("9_wtibd")]
 position = Vector2(1054, -466)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix8" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix8" instance=ExtResource("9_wtibd")]
 position = Vector2(-93, -394)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix8" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix8" instance=ExtResource("9_wtibd")]
 position = Vector2(923, -370)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix8" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix8" instance=ExtResource("10_dpa4y")]
 position = Vector2(309, 59)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix8" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix8" instance=ExtResource("10_dpa4y")]
 position = Vector2(90, -329)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix8" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix8" instance=ExtResource("10_dpa4y")]
 position = Vector2(592, -617)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
 [node name="TreeMix9" type="Node2D" parent="Objects/Breakable/Trees"]
 y_sort_enabled = true
 position = Vector2(2328, 1344)
 
-[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix9" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix9" instance=ExtResource("5_tpvf0")]
 position = Vector2(-91, -488)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix9" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix9" instance=ExtResource("5_tpvf0")]
 position = Vector2(668, -82)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix9" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix9" instance=ExtResource("9_wtibd")]
 position = Vector2(378, -121)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix9" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix9" instance=ExtResource("9_wtibd")]
 position = Vector2(-188, -238)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix9" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix9" instance=ExtResource("9_wtibd")]
 position = Vector2(493, 46)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix9" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix9" instance=ExtResource("10_dpa4y")]
 position = Vector2(-316, -107)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix9" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix9" instance=ExtResource("10_dpa4y")]
 position = Vector2(-427, 184)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix9" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix9" instance=ExtResource("10_dpa4y")]
 position = Vector2(306, -433)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
 [node name="TreeMix10" type="Node2D" parent="Objects/Breakable/Trees"]
 y_sort_enabled = true
 position = Vector2(2160, 2176)
 
-[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix10" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree13" parent="Objects/Breakable/Trees/TreeMix10" instance=ExtResource("5_tpvf0")]
 position = Vector2(115, -529)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix10" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_tpvf0")]
+[node name="Tree14" parent="Objects/Breakable/Trees/TreeMix10" instance=ExtResource("5_tpvf0")]
 position = Vector2(956, 153)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix10" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree43" parent="Objects/Breakable/Trees/TreeMix10" instance=ExtResource("9_wtibd")]
 position = Vector2(407, 178)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix10" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree44" parent="Objects/Breakable/Trees/TreeMix10" instance=ExtResource("9_wtibd")]
 position = Vector2(-450, -113)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix10" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("9_wtibd")]
+[node name="Tree45" parent="Objects/Breakable/Trees/TreeMix10" instance=ExtResource("9_wtibd")]
 position = Vector2(301, 259)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix10" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree32" parent="Objects/Breakable/Trees/TreeMix10" instance=ExtResource("10_dpa4y")]
 position = Vector2(-475, 134)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix10" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree33" parent="Objects/Breakable/Trees/TreeMix10" instance=ExtResource("10_dpa4y")]
 position = Vector2(-766, -62)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
-[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix10" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("10_dpa4y")]
+[node name="Tree34" parent="Objects/Breakable/Trees/TreeMix10" instance=ExtResource("10_dpa4y")]
 position = Vector2(311, -448)
-_animationPlayer = NodePath("")
-_sprite = NodePath("")
 
 [node name="Rocks" type="Node2D" parent="Objects/Breakable"]
 

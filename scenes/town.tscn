@@ -3,16 +3,16 @@
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="2_mph18"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_nnncm"]
 [ext_resource type="PackedScene" uid="uid://chw8bc0kxym0e" path="res://scenes/villager/villager_manager.tscn" id="2_yronx"]
-[ext_resource type="Texture2D" uid="uid://di77p0biuu8no" path="res://assets/sprites/tiles/Water_tile_copy_donotdelete.png" id="3_ui0sk"]
-[ext_resource type="Texture2D" uid="uid://xbq4hvtodvgo" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp_copyDoNotDelete.png" id="4_87olk"]
+[ext_resource type="Texture2D" uid="uid://0hhkfe0l3h7p" path="res://assets/sprites/tiles/Water_tile_copy_donotdelete.png" id="3_ui0sk"]
+[ext_resource type="Texture2D" uid="uid://bqff8g4bg4gjr" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp_copyDoNotDelete.png" id="4_87olk"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_ho2sg"]
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="5_tpvf0"]
-[ext_resource type="Texture2D" uid="uid://c3qgdt3akj6c3" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="5_x7rje"]
+[ext_resource type="Texture2D" uid="uid://b1p5pr8rl5ao2" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="5_x7rje"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="6_3ler8"]
-[ext_resource type="Texture2D" uid="uid://c7h8wkbc6mat2" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="6_jb6x6"]
-[ext_resource type="Texture2D" uid="uid://dokmiu680kpvh" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="7_t3t4h"]
+[ext_resource type="Texture2D" uid="uid://cvrwsbcrk40ky" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="6_jb6x6"]
+[ext_resource type="Texture2D" uid="uid://bm3t1j2epo8mh" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="7_t3t4h"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/water.gdshader" id="7_vli6y"]
-[ext_resource type="Texture2D" uid="uid://bpwa1f16y5w4x" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="8_u4ryb"]
+[ext_resource type="Texture2D" uid="uid://dpeka1n5kwv22" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="8_u4ryb"]
 [ext_resource type="Texture2D" uid="uid://dks6iqnb0a6gx" path="res://assets/resources/shaders/water_noise_texture.tres" id="8_up80f"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
 [ext_resource type="PackedScene" uid="uid://bcoq8weob6f7g" path="res://scenes/world/tree2.tscn" id="9_wtibd"]
@@ -567,15 +567,11 @@ position = Vector2(6.10352e-05, 6.10352e-05)
 
 [node name="farm_manager" parent="." instance=ExtResource("8_v8hay")]
 
-[node name="street_sign_post" parent="." instance=ExtResource("16_bojlm")]
+[node name="street_sign_post" parent="." groups=["StreetSign"] instance=ExtResource("16_bojlm")]
 position = Vector2(224, -144)
 
 [node name="town_sign" parent="street_sign_post" index="2"]
 visible = false
-
-[node name="StreetSign" type="Node2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(224, -144)
 
 [node name="ZombieManager" type="Node2D" parent="."]
 script = ExtResource("26_e7msj")

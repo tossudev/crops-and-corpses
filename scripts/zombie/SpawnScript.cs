@@ -47,6 +47,10 @@ public partial class SpawnScript : Node2D
 	  public override void _Process(double delta)
     {
 	   isNightOrDay = TimeManager.dayTime;
+	   if(GetParent<Node2D>().Name == "Cave")
+	   {	//Set zombiespawning continuously inside cave
+			isNightOrDay = false;
+	   }
         if (!spawnDelay.IsStopped() && isNightOrDay)
         {
             spawnDelay.Start();

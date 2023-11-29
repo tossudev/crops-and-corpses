@@ -25,7 +25,7 @@ public partial class RoamingZombie : CharacterBody2D
 	private ulong _entered;
 	private ulong _exited;
 	private bool _inTown;
-	AnimationPlayer animationPlayer;
+	//AnimationPlayer animationPlayer;
 	public override void _Ready()
 	{
 		
@@ -51,7 +51,7 @@ public partial class RoamingZombie : CharacterBody2D
 			default:
 				break;
 		}
-		animationPlayer = GetNode<AnimationPlayer>("Skeleton2D/AnimationPlayer");
+		//animationPlayer = GetNode<AnimationPlayer>("Skeleton2D/AnimationPlayer");
 		_hitboxes = new HitboxComponent[2];
 	//	instantiatedNPC = (PackedScene)GD.Load("res://scenes/villager/villager.tscn");
 		_rootNodePath = GetParent<Node2D>().GetPath();
@@ -109,7 +109,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		animationPlayer.Play("zombieWalk");
+		//animationPlayer.Play("zombieWalk");
 		Velocity += _knockback;
 		MoveAndSlide();
 
@@ -141,10 +141,10 @@ public partial class RoamingZombie : CharacterBody2D
 				}
 			}
 			
-			if (Velocity.X == 0.1f)
+			/* if (Velocity.X == 0.1f)
 			{
 				animationPlayer.Play("zombieIdle");
-			}
+			} */
 		}
 	}
 	public bool IsInTown()

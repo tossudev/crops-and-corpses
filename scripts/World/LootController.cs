@@ -15,6 +15,7 @@ public partial class LootController : StaticBody2D
 	[Export] private int _rotationVariation = 0;
 	//should be between 0 and 1
 	[Export] private float _scaleVariation = 0f;
+	[Export] private bool _flipVariation = true;
 
 	[Export] private Node2D _dropLootPosition;
 	[Export] private Node _dropLoopParent;
@@ -76,7 +77,7 @@ public partial class LootController : StaticBody2D
 		if (_color != new Color(0, 0, 0, 0))
 			_sprite.Modulate = new Color(_color.R * brightness, _color.G * brightness, _color.B * brightness, 1);
 
-		if (rng.RandfRange(0, 1) > 0.5f)
+		if (_flipVariation && rng.RandfRange(0, 1) > 0.5f)
 			this.Scale = new Vector2(-Scale.X, Scale.Y);
 
 		this.Scale *= rng.RandfRange(1 - _scaleVariation, 1f);
@@ -113,7 +114,7 @@ public partial class LootController : StaticBody2D
 	{
 		if (animationName == "fall")
 		{
-			if(_fallingTreeBridge != null)	_fallingTreeBridge.Visible = true;
+			if (_fallingTreeBridge != null) _fallingTreeBridge.Visible = true;
 			QueueFree();
 		}
 	}

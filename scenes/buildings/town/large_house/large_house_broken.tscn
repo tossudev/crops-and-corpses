@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://ci1gujwgui8qr"]
+
+[ext_resource type="Texture2D" uid="uid://dfw3xwl1saxn4" path="res://assets/sprites/buildings/broken_largehouse.png" id="1_qo6kr"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_bteqr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sekvv"]
+size = Vector2(255, 143.902)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oi4v2"]
+size = Vector2(251, 378.846)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24awm"]
+size = Vector2(125.5, 125.5)
+
+[node name="Large_House_Broken" type="Node2D" groups=["LargeHouse"]]
+scale = Vector2(2, 2)
+
+[node name="House" type="Sprite2D" parent="."]
+position = Vector2(-131.955, -149.5)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("1_qo6kr")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-63, -52)
+scale = Vector2(1, 0.82)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-71, -15.8537)
+shape = SubResource("RectangleShape2D_sekvv")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["building"]]
+position = Vector2(0, -8)
+scale = Vector2(1, 0.4)
+collision_layer = 7
+collision_mask = 7
+
+[node name="StaticCollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+unique_name_in_owner = true
+position = Vector2(-133, -122.5)
+scale = Vector2(1, 0.65)
+shape = SubResource("RectangleShape2D_oi4v2")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") groups=["building"] instance=ExtResource("4_bteqr")]
+position = Vector2(-126, -75)
+collision_layer = 16
+collision_mask = 32
+_healthComponent = NodePath("")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
+position = Vector2(61.75, 10.25)
+shape = SubResource("RectangleShape2D_24awm")
+debug_color = Color(0.898039, 0.117647, 0.137255, 0.431373)

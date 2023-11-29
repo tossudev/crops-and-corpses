@@ -38,9 +38,12 @@ public partial class SpawnScript : Node2D
 			if(node is Node2D spawnPoint && node.Name.ToString().Contains("SpawnPoint"))
 			{
 				spawnPoints.Add(new SpawnPoint{Node = spawnPoint,IsActive = true});
+				spawnPointCount +=1;
+				
 			//	GD.Print(spawnPoint);
 			}
 		}
+		GD.Print(spawnPointCount);
 		spawnDelay =GetNode<Timer>("Timer");
 		zombieDeleteDelay = GetNode<Timer>("ZombieDeletionTimer");
 		packedScene = (PackedScene)GD.Load("res://scenes/zombie/Zombie.tscn");
@@ -147,7 +150,10 @@ public partial class SpawnScript : Node2D
 	{	
 		for(int i = 0; i <= spawnAmount ; i++)
 		{
-			ZombieSpawn();
+			for(int y = 0; y < spawnPointCount; y++)
+			{
+				ZombieSpawn();
+			}
 		}
 	}
 }

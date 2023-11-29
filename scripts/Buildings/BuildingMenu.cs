@@ -379,13 +379,8 @@ public partial class BuildingMenu : Control
 
             if (jsonObject["name"].ToString() == "House" || jsonObject["name"].ToString() == "LargeHouse" || jsonObject["name"].ToString() == "ArcherTower")
             {
-                HealthComponent healthComponent = _buildingScene.GetNode("HealthComponent") as HealthComponent;
-                healthComponent.SetHealth((int)jsonObject["health"]);
-                healthComponent.UpdateHealthBar();
-
-
                 BuildingHealth healthscript = _buildingScene.GetNode("BuildingHealth") as BuildingHealth;
-                healthscript.buildingHealth = (int)jsonObject["health"];
+                healthscript.LoadBuildingHealth((int)jsonObject["health"]);
             }
 
             if (jsonObject["name"].ToString() == "FarmPlot")

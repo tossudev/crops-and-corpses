@@ -52,6 +52,18 @@ public partial class BuildingHealth : Node2D
         }
     }
 
+    public void LoadBuildingHealth(int loadedHealth)
+    {
+        _healthComponent.SetHealth(loadedHealth);
+        _healthComponent.UpdateHealthBar();
+        buildingHealth = loadedHealth;
+
+        if (buildingHealth <= 0)
+        {
+            BreakBuilding();
+        }
+    }
+
     private void BreakBuilding()
     {
         isBroken = true;

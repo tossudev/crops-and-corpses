@@ -15,6 +15,8 @@ public partial class CraftPanel : Control
 		25,
 		100
 	};
+
+	int _amountToCraft;
 	
 	Label _itemLabel;
 	const string CRAFT_ITEM_LABEL_NODENAME = "%CraftItemLabel";
@@ -48,18 +50,19 @@ public partial class CraftPanel : Control
 
 	    _itemLabel = GetNode<Label>(CRAFT_ITEM_LABEL_NODENAME);
 	    _itemImage = GetNode<TextureRect>(CRAFT_ITEM_IMAGE_NODENAME);
-	    _amountToCraftDropdown = GetNode<OptionButton>(AMOUNT_DROPDOWN_NODENAME);
 	    _errorMsgLabel = GetNode<Label>(ERROR_LABEL_NODENAME);
 	    _craftButton = GetNode<Button>(CRAFT_BUTTON_NODENAME);
-
 	    _craftButton.Pressed += OnCraftButtonPressed;
 	    
+	    _amountToCraftDropdown = GetNode<OptionButton>(AMOUNT_DROPDOWN_NODENAME);
 	    foreach (var amount in craftableAmounts)
 	    {
 		    _amountToCraftDropdown.AddItem(amount.ToString());
 	    }
-	    
+	    _amountToCraftDropdown.ItemSelected += (id) => UpdateRequirements();
+
 	    _amountToCraftDropdown.Select(0);
+
     }
 
 	public void OpenPanel(Item craftItem)
@@ -73,27 +76,7 @@ public partial class CraftPanel : Control
 		_itemLabel.Text = craftedItem.Name.ToUpper();
 		_itemImage.Texture = craftedItem.IconTexture;
 
-		for (int i = 0; i < _requiredResSlots.Length; i++)
-		{
-			if (i > craftedItem.craftingRequirements.Length - 1)
-			{
-				_requiredResSlots[i].Visible = false;
-				continue;
-			}
-			_requiredResSlots[i].InitiateSlot(-1);
-			_requiredResSlots[i].Visible = true;
-
-			CraftingRequirement requirement = craftedItem.craftingRequirements[i];
-
-
-
-			RawInventoryItem requiredAsRaw = new RawInventoryItem(
-				requirement.item.ID, requirement.item.Name, requirement.quantity, requirement.item.StackSize);
-			
-			_requiredResSlots[i].icon.Texture = requirement.item.IconTexture;
-			_requiredResSlots[i].slotItem = requiredAsRaw;
-			_requiredResSlots[i].quantityLabel.Text = requirement.quantity.ToString();
-		}
+		UpdateRequirements();
 	}
 
 	public void ClosePanel()
@@ -103,21 +86,7 @@ public partial class CraftPanel : Control
 
     async void OnCraftButtonPressed()
 	{
-		int amountToCraft = 0;
-		
-		try
-		{
-			amountToCraft = int.Parse(_amountToCraftDropdown.Text);
-		}
-		catch (Exception e)
-		{
-			GD.PrintErr("Not a valid number of items to craft", e.Message);
-			
-			_errorMsgLabel.Visible = true;
-			_errorMsgLabel.Text = "Enter a valid number";
-		}
-
-		if (!await TryCraft(Mathf.Max(1, amountToCraft)))
+        if (!await TryCraft(Mathf.Max(1, _amountToCraft)))
 		{
 			_errorMsgLabel.Visible = true;
 			_errorMsgLabel.Text = "Not enough resources";
@@ -128,6 +97,33 @@ public partial class CraftPanel : Control
 		}
 	}
 
+    void UpdateRequirements()
+    {
+	    _amountToCraft = int.Parse(_amountToCraftDropdown.Text);
+	    
+	    for (int i = 0; i < _requiredResSlots.Length; i++)
+	    {
+		    if (i > craftedItem.craftingRequirements.Length - 1)
+		    {
+			    _requiredResSlots[i].Visible = false;
+			    continue;
+		    }
+		    _requiredResSlots[i].InitiateSlot(-1);
+		    _requiredResSlots[i].Visible = true;
+
+		    CraftingRequirement requirement = craftedItem.craftingRequirements[i];
+
+
+
+		    RawInventoryItem requiredAsRaw = new RawInventoryItem(
+			    requirement.item.ID, requirement.item.Name, requirement.quantity * _amountToCraft, requirement.item.StackSize);
+			
+		    _requiredResSlots[i].icon.Texture = requirement.item.IconTexture;
+		    _requiredResSlots[i].slotItem = requiredAsRaw;
+		    _requiredResSlots[i].quantityLabel.Text = (requirement.quantity * _amountToCraft).ToString();
+	    }
+    }
+    
 	async Task<bool> TryCraft(int amountToCraft)
 	{
 		try

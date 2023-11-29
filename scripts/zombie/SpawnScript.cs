@@ -24,14 +24,12 @@ public partial class SpawnScript : Node2D
 	[Export] public CharacterBody2D player;
 	private static List<CharacterBody2D> zombieList = new List<CharacterBody2D>();
 	public GlobalTime globalTime;
+
 	public override void _Ready()
 	{
-
 		globalTime = GetNode<GlobalTime>("/root/GlobalTime");
 		zombieList.Clear();
 		counter = 0;
-		//spawnPoints = new Node2D[4];
-
 		foreach (Node node in GetChildren())
 		{
 			if(node is Node2D spawnPoint && node.Name.ToString().Contains("SpawnPoint"))
@@ -42,27 +40,17 @@ public partial class SpawnScript : Node2D
 		}
 		spawnDelay =GetNode<Timer>("Timer");
 		zombieDeleteDelay = GetNode<Timer>("ZombieDeletionTimer");
-		
-		
-	/* 	for(int i = 0; i < spawnPoints.Length; i++)
-		{
-			spawnPoints[i] = GetNode<Node2D>("SpawnPoint"+i);
-			//GD.Print(spawnPoints[i]);
-		} */
-		
-		packedScene = (PackedScene)GD.Load("res://scenes/zombie/zombie1.tscn");
-		packedScene2 = (PackedScene)GD.Load("res://scenes/zombie/Zombie2.tscn");
-		packedScene3 = (PackedScene)GD.Load("res://scenes/zombie/Zombie3.tscn");
-		//dayTimeCheck = GetNode<TimeManager>("SunlightContainer");
+		packedScene = (PackedScene)GD.Load("res://scenes/zombie/Zombie.tscn");
 		spawnDelay.Start();
 	}
   
 	  public override void _Process(double delta)
     {
-       
 	   isNightOrDay = TimeManager.dayTime;
-	   
-        
+	   if(GetParent<Node2D>().Name == "Cave")
+	   {	//Set zombiespawning continuously inside cave
+			isNightOrDay = false;
+	   }
         if (!spawnDelay.IsStopped() && isNightOrDay)
         {
             spawnDelay.Start();
@@ -98,36 +86,15 @@ public partial class SpawnScript : Node2D
 		//if(player.IsQueuedForDeletion()){zombieDeleteDelay.Stop();}
 		zombieDelayBool = true;
 	}
-	private void ZombieSpawn()
+	public void ZombieSpawn()
 	{
 		rootPath =  GetParent<Node2D>().GetPath();
-		//GD.Print(rootPath);
 		rootNode = GetNodeOrNull<Node2D>(rootPath);
-		int randomIndex = GD.RandRange(1,3);
-		if(randomIndex == 1)
-		{
-			CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
-			prefab.Position = spawnPoints[counter].Position;
-			rootNode.AddChild(prefab);
-			zombieList.Add(prefab);
-		}
-		else if(randomIndex == 2)
-		{
-			CharacterBody2D prefab = (CharacterBody2D)packedScene2.Instantiate();
-			prefab.Position = spawnPoints[counter].Position;
-			rootNode.AddChild(prefab);
-			zombieList.Add(prefab);
-
-		}
-		else
-		{
-			CharacterBody2D prefab = (CharacterBody2D)packedScene3.Instantiate();
-			prefab.Position = spawnPoints[counter].Position;
-			rootNode.AddChild(prefab);
-			zombieList.Add(prefab);
-		}
-		
-		
+		CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
+		prefab.Position = spawnPoints[counter].Position;
+		rootNode.AddChild(prefab);
+		//prefab.AddChild
+		zombieList.Add(prefab);
 		//GetNode<Node2D>("/root/Town").AddChild(prefab);
 		counter ++;
 		if(counter == spawnPoints.Count)

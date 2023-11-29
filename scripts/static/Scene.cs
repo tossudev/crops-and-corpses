@@ -21,7 +21,7 @@ public static class Scene
     public static readonly RootScene Ruins = new("res://scenes/ruins.tscn", "Ruins");
     public static readonly RootScene Cave = new("res://scenes/cave.tscn", "Cave");
     
-    public static List<RootScene> allScenes = new()
+    public static List<RootScene> allRootScenes = new()
     {
         Town,
         Forest,

@@ -13,7 +13,7 @@ public partial class ZombieAttackFence : ZombieStates
 	private Vector2 _moveDirection = Vector2.Zero;
 	private CharacterBody2D _player;
 	private Node2D _fences;
-	[Export] AnimationPlayer animPlayer;
+	//AnimationPlayer animPlayer;
 
 	public Vector2 MovementTarget
     {
@@ -52,7 +52,7 @@ public partial class ZombieAttackFence : ZombieStates
 
         Vector2 newVelocity = (nextPathPosition - currentAgentPosition).Normalized();
         newVelocity *= _moveSpeed;
-		animPlayer.SpeedScale = _moveSpeed /100;
+		//animPlayer.SpeedScale = _moveSpeed /100;
 		_zombie.Velocity = newVelocity;
 
 		Vector2 playerDirection = _player.GlobalPosition - _zombie.GlobalPosition;

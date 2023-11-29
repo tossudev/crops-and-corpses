@@ -13,7 +13,7 @@ public partial class ZombieManager : Node
 	private SpawnScript _dayNightSpawnNode;
 	private Timer _timer;
 	public enum ZombieType {Weak,Medium,Strong};
-
+	public static float zombieKillCount;
     static AudioController _audioController;	
 
 	public override void _Ready()
@@ -50,6 +50,11 @@ public partial class ZombieManager : Node
 
 	private void UpdateStats()
 	{
+		if(zombieKillCount > 0)
+		{
+			// Decreasing kill count by 0.5 every second
+			zombieKillCount -= 0.5f;
+		}	
 		if (dayMode)
 		{
 			type= ZombieType.Weak;
@@ -65,10 +70,10 @@ public partial class ZombieManager : Node
 				type = ZombieType.Medium;
 			}
 		}
+
 		switch(type)
 		{	
 			case ZombieType.Strong:
-				
 				damage = 15;
 				attackTime = 0.5;
 				idleSpeed = 200;
@@ -88,11 +93,43 @@ public partial class ZombieManager : Node
 				break;
 			default:
 			break;
-		}		
+		}
+		AddTownLevelZombieUpgrades();
 	}
 
 	private void OnTimerTimeout()
 	{
 		UpdateStats();	
+	}
+	private void AddTownLevelZombieUpgrades()
+	{
+		var townStats = TownManager.currentTownStats;
+		int currentTownLevel = townStats.townHallLevel;
+		switch(currentTownLevel)
+		{
+			case 1:
+			//Level 1 no buffs
+				break;
+			case 2:
+				damage += 3;
+				attackTime += 0.1;
+				idleSpeed += 30;
+				chaseSpeed += 30;
+				break;
+			case 3:
+				damage += 5;
+				attackTime += 0.3;
+				idleSpeed += 40;
+				chaseSpeed += 40;
+				break;
+			case 4:
+				damage += 7;
+				attackTime += 0.5;
+				idleSpeed +=50;
+				chaseSpeed +=50;
+				break;
+			default:
+				break;
+		}	
 	}
 }

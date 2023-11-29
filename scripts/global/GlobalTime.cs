@@ -48,15 +48,6 @@ public partial class GlobalTime : Node
 		
 	}
 
-
-  /*   public float GetHour()
-    {
-        return globalhour;
-    }
-    public void SetHour(float hour)
-    {
-        globalhour = hour;
-    } */
     public float GetTime()
     {
         return globalTime;

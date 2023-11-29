@@ -47,10 +47,7 @@ public partial class SpawnScript : Node2D
 	  public override void _Process(double delta)
     {
 	   isNightOrDay = TimeManager.dayTime;
-	   if(GetParent<Node2D>().Name == "Cave")
-	   {	//Set zombiespawning continuously inside cave
-			isNightOrDay = false;
-	   }
+	   CheckIfInsideCave();
         if (!spawnDelay.IsStopped() && isNightOrDay)
         {
             spawnDelay.Start();
@@ -59,10 +56,7 @@ public partial class SpawnScript : Node2D
         {
             spawnDelay.Stop();
         }
-		if(globalTime.HasTownBeenDestroyed())
-		{
-			spawnDelay.Stop();
-		}
+		CheckIfTownDestroyed();
 		if(zombieList.Count > 0 && zombieDelayBool)
 		{
 			Vector2 playerPos = player.Position;
@@ -81,10 +75,25 @@ public partial class SpawnScript : Node2D
 			}
 		}
     }
+	private void CheckIfTownDestroyed()
+	{
+		if(globalTime.HasTownBeenDestroyed())
+		{
+			spawnDelay.Stop();
+		}
+	}
 	private void DeleteZombieDelay()
 	{
 		//if(player.IsQueuedForDeletion()){zombieDeleteDelay.Stop();}
 		zombieDelayBool = true;
+	}
+	private void CheckIfInsideCave()
+	{
+		if(GetParent<Node2D>().Name == "Cave")
+	   {	
+			isNightOrDay = false;
+	   }
+	 
 	}
 	public void ZombieSpawn()
 	{
@@ -93,9 +102,7 @@ public partial class SpawnScript : Node2D
 		CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
 		prefab.Position = spawnPoints[counter].Position;
 		rootNode.AddChild(prefab);
-		//prefab.AddChild
 		zombieList.Add(prefab);
-		//GetNode<Node2D>("/root/Town").AddChild(prefab);
 		counter ++;
 		if(counter == spawnPoints.Count)
 		{

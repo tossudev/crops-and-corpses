@@ -194,7 +194,7 @@ public partial class RoamingZombie : CharacterBody2D
 			};
 
 			TownManager.GainExp(expGained);
-
+			ZombieManager.zombieKillCount +=1f;
 			QueueFree();
 		}
 
@@ -211,9 +211,7 @@ public partial class RoamingZombie : CharacterBody2D
 			// direction from zombie to player
 			Vector2 _direction = (_player.GlobalPosition - this.GlobalPosition).Normalized();
 			_attack.direction = _direction;
-
 			_hitboxes[0] = _player.GetNodeOrNull<HitboxComponent>("HitboxComponent");
-
 			if (_hitboxes[0] != null)
 			{
 				//_hitbox.ApplyAttack(_attack);

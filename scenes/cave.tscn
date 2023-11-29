@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbvsfe4h2sph"]
+[gd_scene load_steps=14 format=3 uid="uid://bbvsfe4h2sph"]
 
 [ext_resource type="PackedScene" path="res://scenes/world/navigation_manager.tscn" id="1_imhy7"]
 [ext_resource type="PackedScene" uid="uid://wy0dgop8pftu" path="res://scenes/world/cave_tilemap.tscn" id="1_yabqn"]
 [ext_resource type="PackedScene" uid="uid://b6w8cr3rm5pu3" path="res://scenes/world/rock.tscn" id="3_flaay"]
 [ext_resource type="PackedScene" uid="uid://ca4ui8y2u11io" path="res://scenes/world/cave_entrance.tscn" id="4_xu51x"]
+[ext_resource type="PackedScene" uid="uid://bbi4wvs2sck5f" path="res://scenes/world/support_beam.tscn" id="5_d6lea"]
 [ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="7_somas"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="11_mechj"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="20_wlbpj"]
@@ -26,7 +27,7 @@ fill_from = Vector2(0.5, 0.5)
 metadata/_snap_enabled = true
 
 [sub_resource type="Gradient" id="Gradient_pwesi"]
-offsets = PackedFloat32Array(0, 0.558065)
+interpolation_mode = 2
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ws8i3"]
@@ -35,6 +36,7 @@ width = 256
 height = 256
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.791284, 0.240826)
 
 [node name="Cave" type="Node2D"]
 
@@ -64,7 +66,7 @@ editor_draw_limits = true
 
 [node name="Light" type="PointLight2D" parent="Objects/Player"]
 scale = Vector2(0.8, 0.8)
-energy = 0.75
+energy = 0.5
 blend_mode = 2
 texture = SubResource("GradientTexture2D_3c8f4")
 texture_scale = 4.0
@@ -76,14 +78,17 @@ y_sort_enabled = true
 [node name="Breakable" type="Node2D" parent="Objects"]
 y_sort_enabled = true
 
-[node name="Rock" parent="Objects/Breakable" instance=ExtResource("3_flaay")]
+[node name="Rocks" type="Node2D" parent="Objects/Breakable"]
+y_sort_enabled = true
+
+[node name="Rock" parent="Objects/Breakable/Rocks" instance=ExtResource("3_flaay")]
 position = Vector2(-9744, 7152)
 _color = Color(0.670588, 0.490196, 0.415686, 1)
 _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock2" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock2" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-8806, 7181)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -92,7 +97,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock3" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock3" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-7926, 8052)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -101,7 +106,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock4" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock4" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-8917, 8059)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -110,7 +115,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock5" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock5" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-7331, 7290)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -119,7 +124,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock6" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock6" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-6172, 7679)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -128,7 +133,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock7" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock7" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-5409, 7288)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -137,7 +142,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock8" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock8" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-5925, 6123)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -146,7 +151,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock9" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock9" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-6079, 6936)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -155,7 +160,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock10" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock10" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-5423, 5231)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -164,7 +169,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock11" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock11" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-4799, 4368)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -173,7 +178,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock12" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock12" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-5676, 3974)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -182,7 +187,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock13" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock13" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-4474, 3578)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -191,7 +196,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock14" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock14" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-3361, 4502)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -200,7 +205,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock15" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock15" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-2376, 5380)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -209,7 +214,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock16" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock16" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-2642, 6293)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -218,7 +223,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock17" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock17" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-2018, 6134)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -227,7 +232,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock18" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock18" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-3350, 6134)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -236,7 +241,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock19" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock19" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-3950, 7302)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -245,7 +250,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock20" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock20" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-326, 7045)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -254,7 +259,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock21" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock21" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-1429, 7044)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -263,7 +268,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock22" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock22" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-25, 6007)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -272,7 +277,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock23" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock23" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(1427, 6275)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -281,7 +286,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock24" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock24" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(1694, 5623)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -290,7 +295,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock32" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock32" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(3170, 6152)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -299,7 +304,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock33" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock33" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(4250, 5642)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -308,7 +313,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock34" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock34" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(5869, 4867)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -317,7 +322,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock35" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock35" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(4571, 6784)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -326,7 +331,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock36" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock36" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(6890, 6485)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -335,7 +340,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock37" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock37" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(5801, 6046)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -344,7 +349,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock38" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock38" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(6948, 7185)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -353,7 +358,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock39" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock39" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(7863, 6030)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -362,7 +367,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock40" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock40" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(6947, 5119)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -371,7 +376,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock41" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock41" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(6332, 6787)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -380,7 +385,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock42" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock42" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(5560, 6398)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -389,7 +394,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock43" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock43" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(5178, 4486)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -398,7 +403,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock44" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock44" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(8351, 5013)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -407,7 +412,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock45" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock45" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(7893, 4220)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -416,7 +421,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock46" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock46" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(7022, 3089)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -425,7 +430,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock47" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock47" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(5958, 2806)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -434,7 +439,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock48" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock48" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(5198, 2947)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -443,7 +448,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock49" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock49" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(7844, 2575)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -452,7 +457,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock25" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock25" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(1820, 4876)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -461,7 +466,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock26" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock26" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(2150, 3447)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -470,7 +475,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock27" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock27" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(2663, 3773)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -479,7 +484,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock28" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock28" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(3090, 4363)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -488,7 +493,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock29" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock29" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(3322, 2681)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -497,7 +502,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock30" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock30" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(3043, 2813)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -506,7 +511,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock31" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock31" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(4505, 3457)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -515,7 +520,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock50" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock50" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(8216, 2077)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -524,7 +529,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock51" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock51" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(8011, 905)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -533,7 +538,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock52" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock52" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(7840, 240)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -542,7 +547,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock53" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock53" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(7149, 413)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -551,7 +556,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock54" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock54" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(5252, 403)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -560,7 +565,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock55" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock55" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(6296, 1151)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -569,7 +574,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock56" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock56" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(6427, -244)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -578,7 +583,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock57" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock57" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(5260, 1803)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -587,7 +592,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock58" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock58" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(4341, 637)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -596,7 +601,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock59" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock59" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(3212, 1536)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -605,7 +610,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock60" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock60" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(2196, 1152)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -614,7 +619,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock61" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock61" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-3462, -3956)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -623,7 +628,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock62" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock62" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-2536, -2564)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -632,7 +637,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock63" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock63" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-3352, -2810)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -641,7 +646,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock64" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock64" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-2264, -3427)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -650,7 +655,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock65" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock65" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-3188, -3415)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -659,7 +664,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock66" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock66" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(3613, -6010)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -668,7 +673,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock67" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock67" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(3736, -4344)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -677,7 +682,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock68" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock68" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(2656, -5652)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -686,7 +691,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock69" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock69" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(3710, -5192)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -695,7 +700,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock70" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock70" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-1763, -7167)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -704,7 +709,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock71" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock71" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-2462, -6266)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -713,7 +718,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock72" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock72" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-6429, -4994)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -722,7 +727,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock73" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock73" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-5906, -4263)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -731,7 +736,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock74" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock74" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-7332, -4371)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -740,7 +745,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock75" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock75" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-6765, -4028)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -749,7 +754,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock76" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock76" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-3297, -1648)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -758,7 +763,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock77" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock77" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-3873, 114)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -767,7 +772,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock78" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock78" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-3858, -1533)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -776,7 +781,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock79" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock79" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-6758, 2431)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -785,7 +790,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock80" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock80" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-8227, 2301)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -794,7 +799,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock81" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock81" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-7397, 1020)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -803,7 +808,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock82" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock82" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-8720, 1129)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -812,7 +817,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock83" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock83" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-7407, 1725)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -821,7 +826,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock84" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock84" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-6432, 1560)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -830,7 +835,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock85" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock85" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(1579, -1281)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -839,7 +844,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock86" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock86" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-178, -1182)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -848,7 +853,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock87" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock87" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-487, 2183)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -857,7 +862,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock88" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock88" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-1435, 2043)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -866,7 +871,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock89" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock89" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(1324, 1684)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -875,7 +880,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock90" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock90" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(668, -827)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -884,7 +889,7 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
-[node name="Rock91" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+[node name="Rock91" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(-849, 1564)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
@@ -893,14 +898,460 @@ _minBrightness = 0.5
 _rotationVariation = 5
 _scaleVariation = 0.25
 
+[node name="Beams" type="Node2D" parent="Objects/Breakable"]
+y_sort_enabled = true
+
+[node name="Support Beam" parent="Objects/Breakable/Beams" instance=ExtResource("5_d6lea")]
+position = Vector2(-9219, -8392)
+
+[node name="Support Beam2" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-8746, -8392)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam3" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-8746, -7761)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam5" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-9795, -7820)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam6" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-9867, -6968)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam4" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-8749, -7084)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam7" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-7973, -7243)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam8" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-6532, -6963)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam9" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-5230, -7243)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam10" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-4797, -6287)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam11" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-5391, -5831)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam12" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-6296, -6219)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam13" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-7505, -5813)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam14" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-8132, -6215)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam15" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-8681, -5812)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam16" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-9041, -5044)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam17" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-8914, -4206)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam89" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-8135, -4131)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam18" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-7866, -4790)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam19" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-7101, -5347)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam20" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-8274, -3509)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam21" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-7488, -3664)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam22" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-6720, -3138)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam23" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-7234, -2753)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam24" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-7709, -2242)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam25" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-8508, -2505)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam26" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-9029, -2663)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam27" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-8768, -3521)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam28" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-8650, -1660)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam29" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-8375, -1217)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam30" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-7778, -1476)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam31" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-7054, -1344)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam32" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-6351, -1729)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam86" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-5193, -1222)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam87" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-4941, -1955)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam88" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-6253, -792)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam33" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-5949, -2365)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam34" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-5962, -3701)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam35" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-5194, -3541)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam36" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-5427, -4518)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam37" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-4804, -5357)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam38" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-7470, -6859)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam39" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-5253, -2618)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam40" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-4537, -2263)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam41" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-4171, -1581)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam42" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-4404, -1108)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam43" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-4548, -568)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam44" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-5195, -196)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam45" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-5718, -661)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam46" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-5598, 567)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam47" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-6496, 321)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam48" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-6835, 995)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam49" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-8497, 746)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam50" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-8140, 314)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam51" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-7989, -290)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam52" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-7625, -907)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam53" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-3862, -5819)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam54" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-3169, -5567)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam55" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-3019, -6118)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam56" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-2252, -5814)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam57" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-1763, -5189)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam58" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-807, -5188)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam59" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-1436, -5433)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam60" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-1229, -6727)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam61" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-451, -6318)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam62" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-68, -6094)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam63" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-216, -5546)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam64" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(808, -5929)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam65" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(580, -4940)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam66" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(2500, -4758)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam67" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(1458, -5037)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam68" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(824, -3946)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam69" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-305, -3998)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam70" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-113, -3082)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam71" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(1787, -3105)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam72" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(706, -2750)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam73" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(2056, -3885)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam74" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(2858, -3980)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam75" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-890, -2622)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam76" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-1441, -3664)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam77" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-1974, -2644)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam78" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-1609, -1415)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam79" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(526, -1594)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam80" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(1020, -1594)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam81" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(1034, -648)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam82" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(96, -857)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam83" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-937, -900)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Support Beam85" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-576, 62)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+_color = Color(0.243137, 0.243137, 0.243137, 1)
+
+[node name="Support Beam84" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
+position = Vector2(-1657, -280)
+_animationPlayer = NodePath("../Support Beam/AnimationPlayer")
+_sprite = NodePath("../Support Beam/Sprite2D")
+
 [node name="Lights" type="Node2D" parent="Objects"]
 
 [node name="Light" type="PointLight2D" parent="Objects/Lights"]
-visible = false
-position = Vector2(-101.018, 128.444)
-rotation = -0.12536
-scale = Vector2(6.20227, 2.16776)
-energy = 2.0
+position = Vector2(-38, 159)
+rotation = -0.133376
+scale = Vector2(8.49305, 1.17687)
+energy = 1.5
 texture = SubResource("GradientTexture2D_ws8i3")
 texture_scale = 4.24
 
@@ -916,7 +1367,6 @@ _targetScene = 3
 position = Vector2(776, -1688)
 
 [node name="Enemies" type="Node2D" parent="."]
-visible = false
 y_sort_enabled = true
 position = Vector2(6.10352e-05, 6.10352e-05)
 
@@ -969,7 +1419,7 @@ autostart = true
 autostart = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0, 0, 0, 1)
+color = Color(0.121569, 0.121569, 0.121569, 1)
 
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
 [connection signal="timeout" from="ZombieSpawn/Timer" to="ZombieSpawn" method="ZombieSpawn" flags=18]

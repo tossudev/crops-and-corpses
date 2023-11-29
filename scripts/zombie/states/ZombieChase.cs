@@ -10,7 +10,7 @@ public partial class ZombieChase : ZombieStates
 	private Timer _timer;
 	private CharacterBody2D _player;
 	private Node2D _fences;
-	[Export]AnimationPlayer animPlayer;
+	AnimationPlayer animPlayer;
 
 	public Vector2 MovementTarget
     {
@@ -19,6 +19,8 @@ public partial class ZombieChase : ZombieStates
     }
     public override void Enter()
     {
+		
+		animPlayer =GetParent().GetParent().GetNode<Skeleton2D>("Skeleton2D").GetNode<AnimationPlayer>("AnimationPlayer");
 		_player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
 		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");		
 		_timer = GetNodeOrNull<Timer>("Timer");

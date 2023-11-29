@@ -20,9 +20,6 @@ public partial class RoamingZombie : CharacterBody2D
 	private NodePath _rootNodePath;
 	private Node2D rootNode;
 	
-	
-	//private CompressedTexture2D strongZombieSprite;
-	//private CompressedTexture2D mediumZombieSprite;
 	private bool _playerInRange = false;
 	private bool _fenceInRange = false;
 	private ulong _entered;
@@ -173,17 +170,9 @@ public partial class RoamingZombie : CharacterBody2D
 		switch (attack.effect)
 		{
 			case EffectType.Cure:
-
 				SpawnScript.RemoveZombieFromList(this);
 				Vector2 zombiePos = this.Transform.Origin;
-				//CharacterBody2D spawnNPC = (CharacterBody2D)instantiatedNPC.Instantiate();
-				//Vector2 npcPosition = zombiePos.X+zombiePos.Y;
-				//spawnNPC.Transform = zombiePos;
-				//rootNode.AddChild(spawnNPC);
-
 				VillagerManager.villagerManagerInstance.SpawnNewVillager(zombiePos,true);
-
-			//	spawnNPC.Scale = new Vector2(0.5f, 0.5f);
 				QueueFree();
 				break;
 			default:

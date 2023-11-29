@@ -231,6 +231,7 @@ texture = ExtResource("2_iunsu")
 [node name="LeftArm" type="Sprite2D" parent="."]
 position = Vector2(46.2443, -13.8347)
 rotation = -0.681756
+scale = Vector2(1, 1)
 texture = ExtResource("3_65j4u")
 
 [node name="TorsoBone" type="Bone2D" parent="."]

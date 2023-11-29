@@ -1,14 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://v4f1lin8ijcx"]
+[gd_scene load_steps=2 format=3 uid="uid://taq2r1l2jsyx"]
 
 [ext_resource type="Script" path="res://scripts/ui/overlay/HourCounter.cs" id="1_xev0p"]
 
 [node name="HourCounterLabel" type="Label"]
-offset_left = 192.0
-offset_right = 1144.0
-offset_bottom = 96.0
+custom_minimum_size = Vector2(128, 48)
+offset_right = 128.0
+offset_bottom = 48.0
 theme_override_font_sizes/font_size = 32
 text = "Hour: "
-horizontal_alignment = 1
 script = ExtResource("1_xev0p")
 
 [node name="Timer" type="Timer" parent="."]

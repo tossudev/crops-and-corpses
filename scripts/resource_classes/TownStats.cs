@@ -70,15 +70,15 @@ public partial class TownStats : Resource
 
 public enum ExpGain {
         
-    HarvestCommon = 5,
-    HarvestRare = 10,
-    HarvestLegendary = 50,
+    HARVEST_COMMON = 5,
+    HARVEST_RARE = 10,
+    HARVEST_LEGENDARY = 50,
         
         
-    VerySmall = 10,
-    Small = 25,
-    Medium = 50,
-    Big = 75,
-    Large = 125,
-    Huge = 200
+    VERY_SMALL = 10,
+    SMALL = 25,
+    MEDIUM = 50,
+    BIG = 75,
+    VERY_BIG = 125,
+    HUGE = 200
 }

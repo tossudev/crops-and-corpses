@@ -26,7 +26,7 @@ public partial class FloatingButtonName: PanelContainer
     }
     
     
-    public void OnMouseEntered()
+    void OnMouseEntered()
     {
         if (!_nameInitiated) return;
         if (string.IsNullOrWhiteSpace(_itemNameLabel.Text)) return;
@@ -35,7 +35,7 @@ public partial class FloatingButtonName: PanelContainer
         _nameFollowMouse = true;
     }
     
-    public void OnMouseExited()
+    void OnMouseExited()
     {
         if (!_nameInitiated) return;
 

@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://316u70sd3www"]
+
+[ext_resource type="Texture2D" uid="uid://cc700vknsb8sy" path="res://assets/sprites/ui/stone_button_hover.png" id="1_d5l14"]
+
+[resource]
+texture = ExtResource("1_d5l14")
+expand_margin_left = 8.0
+expand_margin_top = 4.0
+expand_margin_right = 8.0
+expand_margin_bottom = 4.0
+modulate_color = Color(0.352941, 0.352941, 0.431373, 1)

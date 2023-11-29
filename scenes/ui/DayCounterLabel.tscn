@@ -3,10 +3,9 @@
 [ext_resource type="Script" path="res://scripts/ui/overlay/DayCounter.cs" id="1_t3fr0"]
 
 [node name="DayCounterLabel" type="Label"]
-offset_left = 336.0
-offset_right = 1288.0
-offset_bottom = 96.0
+custom_minimum_size = Vector2(128, 48)
+offset_right = 76.0
+offset_bottom = 48.0
 theme_override_font_sizes/font_size = 32
 text = "Day: "
-horizontal_alignment = 1
 script = ExtResource("1_t3fr0")

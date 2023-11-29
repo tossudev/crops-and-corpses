@@ -94,8 +94,29 @@ public partial class TownManager : Node2D
 				SaveData.townHallStats.townHallLevel = 1;
 				break;
 		}
+		
+		TownHallStatsPanel._thStatsPanelInstance?.UpdateExpBar();
 	}
+    
+	public static int GetLevelRequiredExp(bool nextLevel)
+	{
+		var requiredExpLastLevel = 0;
+		
+		foreach (var requirement in Enum.GetValues<TownHallLevelExpRequirement>())
+		{
+			var requiredExp = (int) requirement;
 
+			if (currentTownStats.totalExperience < requiredExp)
+			{
+				return nextLevel ? requiredExp : requiredExpLastLevel;
+			}
+
+			requiredExpLastLevel = requiredExp;
+		}
+
+		return (int) Enum.GetValues<TownHallLevelExpRequirement>().Last();
+	}
+	
 	public static void ApplyUnlock(TownUnlock unlock)
 	{
 		if (SaveData.appliedUnlocks.Contains(unlock)) return;
@@ -139,6 +160,7 @@ public partial class TownManager : Node2D
 		}
 		
 		SaveData.appliedUnlocks.Add(unlock);
+		TownHallStatsPanel._thStatsPanelInstance.UpdateAllStats();
 		Task sync = SaveData.SyncTownStats();
 	}
 	
@@ -184,6 +206,8 @@ public partial class TownManager : Node2D
 		}
 		
 		SaveData.appliedUpgrades.Add(upgrade);
+		TownHallStatsPanel._thStatsPanelInstance.UpdateAllStats();
+
 		Task sync = SaveData.SyncTownStats();
 	}
 
@@ -208,11 +232,11 @@ public partial class TownManager : Node2D
 
 public enum TownHallLevelExpRequirement
 {
-	LEVEL_1 = 1000,
-	LEVEL_2 = 2500,
-	LEVEL_3 = 5000,
-	LEVEL_4 = 10000,
-	LEVEL_5 = 15000
+	LEVEL_1 = 500,
+	LEVEL_2 = 1500,
+	LEVEL_3 = 3000,
+	LEVEL_4 = 5000,
+	LEVEL_5 = 10000
 }
 
 public enum TownUnlock

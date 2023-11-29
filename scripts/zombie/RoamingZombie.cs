@@ -187,9 +187,9 @@ public partial class RoamingZombie : CharacterBody2D
 
 			ExpGain expGained = ZombieManager.type switch
 			{
-				ZombieManager.ZombieType.Weak => ExpGain.Small,
-				ZombieManager.ZombieType.Medium => ExpGain.Small,
-				ZombieManager.ZombieType.Strong => ExpGain.Medium,
+				ZombieManager.ZombieType.Weak => ExpGain.MEDIUM,
+				ZombieManager.ZombieType.Medium => ExpGain.VERY_BIG,
+				ZombieManager.ZombieType.Strong => ExpGain.BIG,
 				_ => throw new ArgumentOutOfRangeException()
 			};
 

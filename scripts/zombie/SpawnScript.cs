@@ -7,12 +7,15 @@ using System.Linq;
 
 public partial class SpawnScript : Node2D
 {
-	List<Node2D> spawnPoints = new List<Node2D>();
+	private partial class SpawnPoint : Node2D
+	{
+		public Node2D Node { get; set; }
+        public bool IsActive { get; set; }
+	}
+	List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
 	Timer spawnDelay;
 	Timer zombieDeleteDelay;
 	PackedScene packedScene;
-	PackedScene packedScene2;
-	PackedScene packedScene3;
 	NodePath rootPath;
 	Node2D rootNode;
 	bool isNightOrDay;
@@ -20,7 +23,7 @@ public partial class SpawnScript : Node2D
 	private int counter;
 	private int spawnPointCount;
 	private bool zombieDelayBool=false;
-	[Export]private float maxDistance=1500f;
+	[Export]private float maxDistance=2000f;
 	[Export] public CharacterBody2D player;
 	private static List<CharacterBody2D> zombieList = new List<CharacterBody2D>();
 	public GlobalTime globalTime;
@@ -34,7 +37,7 @@ public partial class SpawnScript : Node2D
 		{
 			if(node is Node2D spawnPoint && node.Name.ToString().Contains("SpawnPoint"))
 			{
-				spawnPoints.Add(spawnPoint);
+				spawnPoints.Add(new SpawnPoint{Node = spawnPoint,IsActive = true});
 			//	GD.Print(spawnPoint);
 			}
 		}
@@ -99,15 +102,37 @@ public partial class SpawnScript : Node2D
 	{
 		rootPath =  GetParent<Node2D>().GetPath();
 		rootNode = GetNodeOrNull<Node2D>(rootPath);
-		CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
-		prefab.Position = spawnPoints[counter].Position;
-		rootNode.AddChild(prefab);
-		zombieList.Add(prefab);
-		counter ++;
-		if(counter == spawnPoints.Count)
+
+		SpawnPoint activeSpawnPoint = spawnPoints.FirstOrDefault(sp => sp.IsActive);
+		if(activeSpawnPoint !=null)
 		{
-			counter = 0;
+			Vector2 spawnPointPos = activeSpawnPoint.Node.Position;
+			Vector2 playerPos = player.Position;
+
+			float distance = spawnPointPos.DistanceTo(playerPos);
+
+			if(distance <= maxDistance)
+			{
+				CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
+				prefab.Position = spawnPointPos;
+				rootNode.AddChild(prefab);
+				zombieList.Add(prefab);
+				activeSpawnPoint.IsActive = false;
+			}
+			else
+			{
+				GD.Print("SpawnPoint too far away deactivating");
+			}
 		}
+
+		if(spawnPoints.All(sp => !sp.IsActive))
+		{
+			foreach (SpawnPoint sp in spawnPoints)
+			{
+				sp.IsActive = true;
+			}
+		}
+		
 	}
 	public static void RemoveZombieFromList(CharacterBody2D zombie)
 	{
@@ -117,5 +142,12 @@ public partial class SpawnScript : Node2D
 	public bool GetIsNightOrDay()
 	{
 		return isNightOrDay;
+	}
+	public void QuestZombieSpawn(int spawnAmount)
+	{	
+		for(int i = 0; i <= spawnAmount ; i++)
+		{
+			ZombieSpawn();
+		}
 	}
 }

@@ -50,7 +50,7 @@ public partial class ZombieManager : Node
 
 	private void UpdateStats()
 	{
-		if(zombieKillCount > 0)
+		if(zombieKillCount >= 0)
 		{
 			// Decreasing kill count by 0.5 every second
 			zombieKillCount -= 0.5f;
@@ -103,9 +103,8 @@ public partial class ZombieManager : Node
 	}
 	private void AddTownLevelZombieUpgrades()
 	{
-		var townStats = TownManager.currentTownStats;
-		int currentTownLevel = townStats.townHallLevel;
-		switch(currentTownLevel)
+		int townStats = TownManager.currentTownStats.townHallLevel;
+		switch(townStats )
 		{
 			case 1:
 			//Level 1 no buffs

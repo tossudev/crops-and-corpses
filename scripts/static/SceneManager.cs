@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Godot;
 
@@ -40,6 +41,14 @@ public static class SceneManager
     
     public static void ChangeScene(Node caller, Scene.RootScene scene)
     {
+        if (IsCurrentScene(caller, Scene.Town))
+        {
+            BuildingMenu buildMenu;
+            buildMenu = caller.GetTree().GetFirstNodeInGroup("buildmenu") as BuildingMenu;
+            buildMenu.SaveBuildings(buildMenu.savePath, buildMenu.fileName);
+        }
+
+
         SaveData.SyncAll();
         caller.GetTree().ChangeSceneToFile(scene.Path);
         sceneChanged = true;

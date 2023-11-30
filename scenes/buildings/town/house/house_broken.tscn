@@ -20,13 +20,14 @@ scale = Vector2(2, 2)
 position = Vector2(-64, -105.825)
 scale = Vector2(0.315, 0.315)
 texture = ExtResource("1_tl0nq")
+offset = Vector2(0, -300)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-63, -52)
 scale = Vector2(1, 0.82)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1.25, -11.8902)
+position = Vector2(-1, -126.829)
 shape = SubResource("RectangleShape2D_e1313")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["building"]]
@@ -37,13 +38,12 @@ collision_mask = 7
 
 [node name="StaticCollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 unique_name_in_owner = true
-position = Vector2(-64, -153.125)
+position = Vector2(-64, -370)
 scale = Vector2(1, 0.65)
 shape = SubResource("RectangleShape2D_irxds")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_3816n")]
+[node name="HitboxComponent" parent="." instance=ExtResource("4_3816n")]
 position = Vector2(-126, -75)
-_healthComponent = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 visible = false

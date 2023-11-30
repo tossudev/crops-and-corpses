@@ -13,19 +13,22 @@ size = Vector2(251, 378.846)
 size = Vector2(125.5, 125.5)
 
 [node name="Large_House_Broken" type="Node2D" groups=["LargeHouse"]]
+y_sort_enabled = true
 scale = Vector2(2, 2)
 
 [node name="House" type="Sprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(-131.955, -149.5)
 scale = Vector2(0.43, 0.43)
 texture = ExtResource("1_qo6kr")
+offset = Vector2(0, -300)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-63, -52)
 scale = Vector2(1, 0.82)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-71, -15.8537)
+position = Vector2(-71, -165.854)
 shape = SubResource("RectangleShape2D_sekvv")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["building"]]
@@ -36,15 +39,14 @@ collision_mask = 7
 
 [node name="StaticCollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 unique_name_in_owner = true
-position = Vector2(-133, -122.5)
+position = Vector2(-134, -450)
 scale = Vector2(1, 0.65)
 shape = SubResource("RectangleShape2D_oi4v2")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") groups=["building"] instance=ExtResource("4_bteqr")]
+[node name="HitboxComponent" parent="." groups=["building"] instance=ExtResource("4_bteqr")]
 position = Vector2(-126, -75)
 collision_layer = 16
 collision_mask = 32
-_healthComponent = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 visible = false

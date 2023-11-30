@@ -10,7 +10,8 @@ scale = Vector2(0.3, 0.3)
 
 [node name="Cross" type="Sprite2D" parent="."]
 texture = ExtResource("1_w5y5h")
+offset = Vector2(0, -170)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(13.3333, 173.333)
+position = Vector2(13.3333, 0)
 shape = SubResource("RectangleShape2D_bvkgn")

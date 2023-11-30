@@ -181,6 +181,10 @@ run={
 2d_physics/layer_6="weapon"
 2d_physics/layer_7="pickupable"
 
+[navigation]
+
+2d/default_edge_connection_margin=64
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

@@ -7,8 +7,8 @@ public partial class ZombieManager : Node
 	public static bool dayMode;
 	public static int damage;
 	public static double attackTime = 1;
-	public static float idleSpeed;
-	public static float chaseSpeed;
+	public static float idleSpeed = 100f;
+	public static float chaseSpeed = 150f;
 	private CharacterBody2D _player;
 	public static bool playerAlive = true; 
 	private SpawnScript _dayNightSpawnNode;

@@ -65,7 +65,7 @@ public partial class ZombieIdle : ZombieStates
 		{
 			EmitSignal("Transitioned", "chase");			
 		}
-		else if (fenceDirection.Length() < 1500  && !ZombieManager.dayMode)
+		else if (fenceDirection.Length() < 1500  && !ZombieManager.dayMode && GetTree().CurrentScene.Name == "Town")
 		{
 			if (!_zombie.HasMethod("IsInTown")) return;
 
@@ -85,6 +85,6 @@ public partial class ZombieIdle : ZombieStates
 
 		_roamTime = (float)(GD.RandRange(3000, 5001)) / 1000; // random range 3, 5
 
-		//GD.Print("MOVE_DIR: " + _moveDirection + "\nROAM_TIME: " + _roamTime);
+		// GD.Print("MOVE_DIR: " + _moveDirection + "\nROAM_TIME: " + _roamTime + " MOVE SPEED: " + _moveSpeed);
 	}
 }

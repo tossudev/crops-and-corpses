@@ -14,7 +14,8 @@ public partial class ZombieIdle : ZombieStates
 	public override void Enter()
     {		
         _player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
-		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
+		if(GetTree().CurrentScene.Name == "Town")	_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
+
 		RandomizeRoam();
 
 		if (_zombie != null)

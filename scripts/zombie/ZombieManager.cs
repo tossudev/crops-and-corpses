@@ -5,7 +5,7 @@ public partial class ZombieManager : Node
 	public static  ZombieType type;
 	public static bool dayMode;
 	public static int damage;
-	public static double attackTime;
+	public static double attackTime = 1;
 	public static float idleSpeed;
 	public static float chaseSpeed;
 	private CharacterBody2D _player;

@@ -26,7 +26,13 @@ public partial class ZombieAttackFence : ZombieStates
         _player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
 		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
 
-		_movementTargetPos = _fences.GlobalPosition;
+		if (_fences != null)
+		{
+			_movementTargetPos = _fences.GlobalPosition;
+		} 
+		else {
+			EmitSignal("Transitioned", "idle");
+		}
 
 		_navAgent.PathDesiredDistance = 300.0f;
 		_navAgent.TargetDesiredDistance = 4.0f;

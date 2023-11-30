@@ -16,10 +16,8 @@ size = Vector2(127, 21)
 size = Vector2(125, 62)
 
 [node name="Node2D2" type="Node2D"]
-y_sort_enabled = true
 
 [node name="FenceHighN2" type="Sprite2D" parent="."]
-y_sort_enabled = true
 position = Vector2(-64, -118.5)
 scale = Vector2(0.358543, 0.333333)
 texture = ExtResource("2_rgxi5")

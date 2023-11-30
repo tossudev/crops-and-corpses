@@ -173,7 +173,6 @@ layer_2/tile_data = PackedInt32Array(-196611, 4, 0, -196610, 4, 0, -196609, 4, 0
 
 [node name="Fences" parent="." instance=ExtResource("2_mph18")]
 unique_name_in_owner = true
-z_index = -2
 fenceLengthY = 15
 fenceLengthX = 30
 
@@ -192,7 +191,6 @@ scale = Vector2(0.999998, 0.999998)
 
 [node name="ArmL" parent="Objects/Player/Skeleton2D/TorsoBone/ArmLBone" index="0"]
 position = Vector2(4.06, 13.3)
-scale = Vector2(1, 1)
 
 [node name="HeadBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="4"]
 scale = Vector2(0.999997, 0.999997)

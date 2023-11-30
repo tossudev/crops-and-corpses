@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dxop7aeu2pnnr" path="res://assets/sprites/buildings/archery_tower.png" id="12_e25jc"]
 [ext_resource type="Texture2D" uid="uid://c5v773mk6tykk" path="res://assets/sprites/buildings/largehouse_color.png" id="16_p0h0c"]
 
-[node name="Control" type="Control" node_paths=PackedStringArray("_buildMenu", "_buildMenuControl", "_vBoxContainer", "_notEnoughResourcesLabel")]
+[node name="Control" type="Control" node_paths=PackedStringArray("_buildMenu", "_buildMenuControl", "_vBoxContainer", "_notEnoughResourcesLabel") groups=["buildmenu"]]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5

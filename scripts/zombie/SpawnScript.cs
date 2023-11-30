@@ -16,8 +16,8 @@ public partial class SpawnScript : Node2D
 	Timer spawnDelay;
 	Timer zombieDeleteDelay;
 	PackedScene packedScene;
-	NodePath rootPath;
-	Node2D rootNode;
+
+	Node2D enemiesNode;
 	bool isNightOrDay;
 	string isNightOrDayString;
 	private int counter;
@@ -43,11 +43,12 @@ public partial class SpawnScript : Node2D
 			//	GD.Print(spawnPoint);
 			}
 		}
-		GD.Print(spawnPointCount);
+		//GD.Print(spawnPointCount);
 		spawnDelay =GetNode<Timer>("Timer");
 		zombieDeleteDelay = GetNode<Timer>("ZombieDeletionTimer");
 		packedScene = (PackedScene)GD.Load("res://scenes/zombie/Zombie.tscn");
 		spawnDelay.Start();
+		
 	}
   
 	  public override void _Process(double delta)
@@ -92,6 +93,7 @@ public partial class SpawnScript : Node2D
 	{
 		//if(player.IsQueuedForDeletion()){zombieDeleteDelay.Stop();}
 		zombieDelayBool = true;
+
 	}
 	private void CheckIfInsideCave()
 	{
@@ -103,8 +105,7 @@ public partial class SpawnScript : Node2D
 	}
 	public void ZombieSpawn()
 	{
-		rootPath =  GetParent<Node2D>().GetPath();
-		rootNode = GetNodeOrNull<Node2D>(rootPath);
+		enemiesNode = GetNode<Node2D>("%Enemies");
 
 		SpawnPoint closestSpawnPoint = FindClosestActiveSpawnPoint();
 		if(closestSpawnPoint !=null)
@@ -118,7 +119,7 @@ public partial class SpawnScript : Node2D
 			{
 				CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
 				prefab.Position = spawnPointPos;
-				rootNode.AddChild(prefab);
+				enemiesNode.AddChild(prefab);
 				zombieList.Add(prefab);
 				closestSpawnPoint.IsActive = false;
 			}
@@ -165,12 +166,9 @@ public partial class SpawnScript : Node2D
 	}
 	public void QuestZombieSpawn(int spawnAmount)
 	{	
-		for(int i = 0; i <= spawnAmount ; i++)
+		for(int y = 0; y < spawnPointCount; y++)
 		{
-			for(int y = 0; y < spawnPointCount; y++)
-			{
-				ZombieSpawn();
-			}
+			ZombieSpawn();
 		}
 	}
 }

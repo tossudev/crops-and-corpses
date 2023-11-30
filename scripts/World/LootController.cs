@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public partial class LootController : StaticBody2D
 {
-	[Export] private Loot _loot;
+	[Export] public Loot loot;
 	[Export] private AnimationPlayer _animationPlayer;
 	[Export] private Sprite2D _sprite;
 	[Export] private Color _color;
@@ -27,9 +27,26 @@ public partial class LootController : StaticBody2D
 
 	public override void _Ready()
 	{
+		if (loot == null)
+		{
+			GD.PrintErr("LootController: Loot is null");
+			return;
+		}
+
+		Init();
+	}
+
+	public void Init()
+	{
+		if (loot == null)
+		{
+			GD.PrintErr("LootController: Loot is null");
+			return;
+		}
+
 		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
 		_animationPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
-		_meanDrop = _loot.meanDrop;
+		_meanDrop = loot.meanDrop;
 
 		if (_dropLootPosition == null)
 			_dropLootPosition = this;
@@ -46,15 +63,9 @@ public partial class LootController : StaticBody2D
 
 		Variations();
 
-		if (_loot == null)
-		{
-			GD.PrintErr("LootController: Loot is null");
-			return;
-		}
-
 		for (int i = 0; i < _meanDrop; i++)
 		{
-			_items.Add(_loot.lootItems[GD.RandRange(0, _loot.lootItems.Count - 1)].item);
+			_items.Add(loot.lootItems[GD.RandRange(0, loot.lootItems.Count - 1)].item);
 		}
 
 		if (GD.Randf() < 0.75f)
@@ -68,6 +79,8 @@ public partial class LootController : StaticBody2D
 				_items.Add(_items[GD.RandRange(0, _items.Count - 1)]);
 			}
 		}
+
+		GD.Print(GetParent().Name + " " + _items.Count);
 	}
 
 	private void Variations()
@@ -102,6 +115,10 @@ public partial class LootController : StaticBody2D
 			{
 				_animationPlayer?.Play("fall");
 			}
+			else if (Name == "FallingStalamite")
+			{
+				_animationPlayer?.Play("fallingStalamite");
+			}
 			else
 			{
 				DropItems(_items.Count);
@@ -112,7 +129,7 @@ public partial class LootController : StaticBody2D
 
 	private void OnAnimationFinished(string animationName)
 	{
-		if (animationName == "fall")
+		if (animationName == "fall" || animationName == "fallingStalamite")
 		{
 			if (_fallingTreeBridge != null) _fallingTreeBridge.Visible = true;
 			QueueFree();

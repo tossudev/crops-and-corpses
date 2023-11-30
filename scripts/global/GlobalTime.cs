@@ -45,7 +45,6 @@ public partial class GlobalTime : Node
 			SaveData();
 			GetTree().Quit(); // default behavior
 		}
-		
 	}
 
     public float GetTime()
@@ -96,8 +95,6 @@ public partial class GlobalTime : Node
     public void LoadData()
     {
         string saveFile = Path.Join(_savePath + _fileName);
-		
-
         if (File.Exists(saveFile))
         {
             ConfigFile config = new ConfigFile();
@@ -137,7 +134,6 @@ public partial class GlobalTime : Node
         config.SetValue("GlobalTime", "sunlight_g", sunlight.G);
         config.SetValue("GlobalTime", "sunlight_b", sunlight.B);
         config.SetValue("GlobalTime", "day", day);
-
         var savePath = "user://saves/Time.cfg";
         config.Save(savePath);
     }

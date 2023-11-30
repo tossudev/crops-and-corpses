@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dxrco0upucsjx"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_sl1he"]
-[ext_resource type="Texture2D" uid="uid://dhno17fjkegb0" path="res://assets/sprites/Farm sprites/gate.png" id="2_rgxi5"]
+[ext_resource type="Texture2D" uid="uid://dxkn5da3jycda" path="res://assets/sprites/Farm sprites/gate.png" id="2_rgxi5"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_l2cro"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_5a3ey"]
 [ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_uichf"]
@@ -15,11 +15,9 @@ size = Vector2(127, 21)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66lty"]
 size = Vector2(125, 62)
 
-[node name="Node2D2" type="Node2D"]
-y_sort_enabled = true
+[node name="Node2D2" type="Node2D" groups=["fence"]]
 
 [node name="FenceHighN2" type="Sprite2D" parent="."]
-y_sort_enabled = true
 position = Vector2(-64, -118.5)
 scale = Vector2(0.358543, 0.333333)
 texture = ExtResource("2_rgxi5")

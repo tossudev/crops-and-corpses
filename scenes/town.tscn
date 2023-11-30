@@ -3,16 +3,16 @@
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="2_mph18"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_nnncm"]
 [ext_resource type="PackedScene" uid="uid://chw8bc0kxym0e" path="res://scenes/villager/villager_manager.tscn" id="2_yronx"]
-[ext_resource type="Texture2D" uid="uid://di77p0biuu8no" path="res://assets/sprites/tiles/Water_tile_copy_donotdelete.png" id="3_ui0sk"]
-[ext_resource type="Texture2D" uid="uid://xbq4hvtodvgo" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp_copyDoNotDelete.png" id="4_87olk"]
+[ext_resource type="Texture2D" uid="uid://b0bwuw75iarx6" path="res://assets/sprites/tiles/Water_tile_copy_donotdelete.png" id="3_ui0sk"]
+[ext_resource type="Texture2D" uid="uid://dtw8yo8a7d5df" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp_copyDoNotDelete.png" id="4_87olk"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_ho2sg"]
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="5_tpvf0"]
-[ext_resource type="Texture2D" uid="uid://c3qgdt3akj6c3" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="5_x7rje"]
+[ext_resource type="Texture2D" uid="uid://bpe33j45oj7is" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="5_x7rje"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="6_3ler8"]
-[ext_resource type="Texture2D" uid="uid://c7h8wkbc6mat2" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="6_jb6x6"]
-[ext_resource type="Texture2D" uid="uid://dokmiu680kpvh" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="7_t3t4h"]
+[ext_resource type="Texture2D" uid="uid://dv80aatxqft1k" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="6_jb6x6"]
+[ext_resource type="Texture2D" uid="uid://cr8fc5pc8s4f1" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="7_t3t4h"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/water.gdshader" id="7_vli6y"]
-[ext_resource type="Texture2D" uid="uid://bpwa1f16y5w4x" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="8_u4ryb"]
+[ext_resource type="Texture2D" uid="uid://mnyogk2730an" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="8_u4ryb"]
 [ext_resource type="Texture2D" uid="uid://dks6iqnb0a6gx" path="res://assets/resources/shaders/water_noise_texture.tres" id="8_up80f"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
 [ext_resource type="PackedScene" uid="uid://bcoq8weob6f7g" path="res://scenes/world/tree2.tscn" id="9_wtibd"]
@@ -28,9 +28,9 @@
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="29_6j2s6"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_02qf6"]
-vertices = PackedVector2Array(-5032, -3904, 4360, -4288, 4800, 3440, -5424, 4952)
+vertices = PackedVector2Array(-6648, -3776, 3968, -3904, 6640, 3872, -5768, 5704)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-5032, -3904, 4360, -4288, 4800, 3440, -5424, 4952)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-6648, -3776, 3968, -3904, 6640, 3872, -5768, 5704)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5o3xo"]
 texture = ExtResource("5_ho2sg")
@@ -121,7 +121,6 @@ y_sort_enabled = true
 
 [node name="NavigationManager" parent="." instance=ExtResource("23_vb7um")]
 unique_name_in_owner = true
-visible = false
 
 [node name="Region" parent="NavigationManager" index="0"]
 navigation_polygon = SubResource("NavigationPolygon_02qf6")
@@ -173,7 +172,6 @@ layer_2/tile_data = PackedInt32Array(-196611, 4, 0, -196610, 4, 0, -196609, 4, 0
 
 [node name="Fences" parent="." instance=ExtResource("2_mph18")]
 unique_name_in_owner = true
-z_index = -2
 fenceLengthY = 15
 fenceLengthX = 30
 
@@ -192,7 +190,6 @@ scale = Vector2(0.999998, 0.999998)
 
 [node name="ArmL" parent="Objects/Player/Skeleton2D/TorsoBone/ArmLBone" index="0"]
 position = Vector2(4.06, 13.3)
-scale = Vector2(1, 1)
 
 [node name="HeadBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="4"]
 scale = Vector2(0.999997, 0.999997)
@@ -1504,6 +1501,7 @@ y_sort_enabled = true
 position = Vector2(-6.10352e-05, -6.10352e-05)
 
 [node name="Enemies" type="Node2D" parent="."]
+unique_name_in_owner = true
 y_sort_enabled = true
 position = Vector2(6.10352e-05, 6.10352e-05)
 

@@ -38,7 +38,7 @@ _data = {
 [node name="Rock" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer", "_sprite")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_i45ep")
-_loot = ExtResource("2_1jb1k")
+loot = ExtResource("2_1jb1k")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite = NodePath("Sprite2D")
 

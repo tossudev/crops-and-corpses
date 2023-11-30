@@ -37,7 +37,7 @@ _data = {
 position = Vector2(2.08165e-12, 2.08165e-12)
 collision_layer = 5
 script = ExtResource("1_hvnxh")
-_loot = ExtResource("2_7mwtb")
+loot = ExtResource("2_7mwtb")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite = NodePath("Sprite2D")
 

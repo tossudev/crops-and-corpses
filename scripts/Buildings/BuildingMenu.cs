@@ -36,7 +36,7 @@ public partial class BuildingMenu : Control
     public Item log;
     public Item copper;
 
-    string _savePath, _fileName;
+    public string savePath, fileName;
 
     public override void _Ready()
     {
@@ -47,8 +47,8 @@ public partial class BuildingMenu : Control
         }
 
 
-        _savePath = ProjectSettings.GlobalizePath("user://saves/");
-        _fileName = "buildings.txt";
+        savePath = ProjectSettings.GlobalizePath("user://saves/");
+        fileName = "buildings.txt";
 
         _player = GetParent().GetParent() as CharacterBody2D;
 
@@ -75,13 +75,16 @@ public partial class BuildingMenu : Control
         
         CreateBuildMenu();
 
-        LoadBuildings(_savePath, _fileName);
+        LoadBuildings(savePath, fileName);
     }
 
     // TODO, might be buggy
     public override void _ExitTree()
     {
-        SaveBuildings(_savePath, _fileName);
+        if (SceneManager.IsCurrentScene(this, Scene.Town))
+        {
+            SaveBuildings(savePath, fileName);
+        }
     }
 
     public override void _Input(InputEvent @event) {
@@ -199,18 +202,18 @@ public partial class BuildingMenu : Control
         _hBoxContainer.AddChild(_saveButton);
         _saveButton.Text = "Save";
         _saveButton.AddThemeFontSizeOverride("font_size", 40);
-        _saveButton.ButtonUp += () => SaveBuildings(_savePath, _fileName);
+        _saveButton.ButtonUp += () => SaveBuildings(savePath, fileName);
 
         Button _loadButton = new Button();
         _hBoxContainer.AddChild(_loadButton);
         _loadButton.Text = "Load";
         _loadButton.AddThemeFontSizeOverride("font_size", 40);
-        _loadButton.ButtonUp += () => LoadBuildings(_savePath, _fileName);
+        _loadButton.ButtonUp += () => LoadBuildings(savePath, fileName);
 
         _buildMenuControl.CustomMinimumSize = new Vector2(_buildMenuControl.CustomMinimumSize.X, _vBoxContainer.GetMinimumSize().Y + 20);
     }
 
-    public JsonArray GetBuildings()
+    private JsonArray GetBuildings()
     {
         JsonArray _savedBuildings = new JsonArray();
 

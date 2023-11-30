@@ -1,12 +1,16 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using Godot.Collections;
 
 public partial class RoamingZombie : CharacterBody2D
 {
 	[Export] private AudioStreamPlayer2D _audioStreamPlayer2D;
 	[Export] private LootController _lootController;
-	private enum ZombieOccupation{Miner,Farmer,Soldier,Woodcutter,Builder};
+	[Export] Array<Loot> _lootList;
+	private enum ZombieOccupation { Miner, Farmer, Soldier, Woodcutter, Builder };
+	private enum ZombieReward{Small,Medium,Big};
+	private ZombieReward reward;
 	private ZombieOccupation zombieOccupation;
 	private Skeleton2D _sprite;
 	private CharacterBody2D _player;
@@ -19,41 +23,44 @@ public partial class RoamingZombie : CharacterBody2D
 	private HealthComponent _healthComponent;
 	private NodePath _rootNodePath;
 	private Node2D rootNode;
-	
+
 	private bool _playerInRange = false;
 	private bool _fenceInRange = false;
 	private ulong _entered;
 	private ulong _exited;
 	private bool _inTown;
 	//AnimationPlayer animationPlayer;
+
 	public override void _Ready()
 	{
-		
+		_lootController.loot = _lootList[0];
+		_lootController.Init();
+
 		var zombieSkeleton1 = (PackedScene)GD.Load("res://scenes/zombie/Zombie1Skeleton.tscn");
 		var zombieSkeleton2 = (PackedScene)GD.Load("res://scenes/zombie/Zombie2Skeleton.tscn");
 		var zombieSkeleton3 = (PackedScene)GD.Load("res://scenes/zombie/Zombie3Skeleton.tscn");
 
 		int randomSkeletonIndex = (int)GD.RandRange(1, 3);
-		switch(randomSkeletonIndex)
+		switch (randomSkeletonIndex)
 		{
 			case 1:
-			Skeleton2D temp1 =(Skeleton2D)zombieSkeleton1.Instantiate();
-			this.AddChild(temp1);
+				Skeleton2D temp1 = (Skeleton2D)zombieSkeleton1.Instantiate();
+				this.AddChild(temp1);
 				break;
 			case 2:
-			Skeleton2D temp2 =(Skeleton2D)zombieSkeleton2.Instantiate();
-			this.AddChild(temp2);
+				Skeleton2D temp2 = (Skeleton2D)zombieSkeleton2.Instantiate();
+				this.AddChild(temp2);
 				break;
 			case 3:
-			Skeleton2D temp3 = (Skeleton2D)zombieSkeleton3.Instantiate();
-			this.AddChild(temp3);
+				Skeleton2D temp3 = (Skeleton2D)zombieSkeleton3.Instantiate();
+				this.AddChild(temp3);
 				break;
 			default:
 				break;
 		}
 		//animationPlayer = GetNode<AnimationPlayer>("Skeleton2D/AnimationPlayer");
 		_hitboxes = new HitboxComponent[2];
-	//	instantiatedNPC = (PackedScene)GD.Load("res://scenes/villager/villager.tscn");
+		//	instantiatedNPC = (PackedScene)GD.Load("res://scenes/villager/villager.tscn");
 		_rootNodePath = GetParent<Node2D>().GetPath();
 		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);
 		_sprite = GetNodeOrNull<Skeleton2D>("Skeleton2D");
@@ -62,7 +69,7 @@ public partial class RoamingZombie : CharacterBody2D
 		_healthBar = GetNodeOrNull<ProgressBar>("HealthBar");
 		_healthComponent = GetNodeOrNull<HealthComponent>("HealthComponent");
 		_audioStreamPlayer2D = GetNodeOrNull<AudioStreamPlayer2D>("ZombieNoise");
-		
+
 
 		_attack = new Attack
 		{
@@ -72,38 +79,38 @@ public partial class RoamingZombie : CharacterBody2D
 
 		_updateStatsTimer.Start();
 
-		int randomIndex = (int)GD.RandRange(1, 5); 
+		int randomIndex = (int)GD.RandRange(1, 5);
 
-		
+
 		if (randomIndex >= 1 && randomIndex <= 4)
 		{
 			var zombieHeadBonetNode = GetNode<Bone2D>("Skeleton2D/TorsoBone/HeadBone/"); //Skeleton2D/TorsoBone/HeadBone/ZombieHat1
-			var zombieHatNode  = zombieHeadBonetNode.GetNode<Sprite2D>("ZombieHat"+randomIndex);
+			var zombieHatNode = zombieHeadBonetNode.GetNode<Sprite2D>("ZombieHat" + randomIndex);
 			zombieHatNode.Visible = true;
 		}
 		else
 		{
 			return;
 		}
-		switch(randomIndex)
+		switch (randomIndex)
 		{
 			case 1:
-			zombieOccupation=ZombieOccupation.Farmer;
-			break;
+				zombieOccupation = ZombieOccupation.Farmer;
+				break;
 			case 2:
-			zombieOccupation=ZombieOccupation.Soldier;
-			break;
+				zombieOccupation = ZombieOccupation.Soldier;
+				break;
 			case 3:
-			zombieOccupation=ZombieOccupation.Miner;
-			break;
+				zombieOccupation = ZombieOccupation.Miner;
+				break;
 			case 4:
-			zombieOccupation=ZombieOccupation.Woodcutter;
-			break;
+				zombieOccupation = ZombieOccupation.Woodcutter;
+				break;
 			case 5:
-			zombieOccupation=ZombieOccupation.Builder;
-			break;
+				zombieOccupation = ZombieOccupation.Builder;
+				break;
 			default:
-			break;
+				break;
 		}
 	}
 
@@ -123,24 +130,25 @@ public partial class RoamingZombie : CharacterBody2D
 					_sprite.Scale = new Vector2(0.382f, 0.382f);
 				}
 				else
-				{					
+				{
 					// Flip the character to face left
 					_sprite.Scale = new Vector2(-0.382f, 0.382f);
 				}
 			}
-			else {
+			else
+			{
 				if (Velocity.Y > 0.1f)
 				{
 					// Flip the character to face right
 					_sprite.Scale = new Vector2(0.382f, 0.382f);
 				}
 				else
-				{					
+				{
 					// Flip the character to face left
 					_sprite.Scale = new Vector2(-0.382f, 0.382f);
 				}
 			}
-			
+
 			/* if (Velocity.X == 0.1f)
 			{
 				animationPlayer.Play("zombieIdle");
@@ -172,7 +180,7 @@ public partial class RoamingZombie : CharacterBody2D
 			case EffectType.Cure:
 				SpawnScript.RemoveZombieFromList(this);
 				Vector2 zombiePos = this.Transform.Origin;
-				VillagerManager.villagerManagerInstance.SpawnNewVillager(zombiePos,true);
+				VillagerManager.villagerManagerInstance.SpawnNewVillager(zombiePos, true);
 				QueueFree();
 				break;
 			default:
@@ -194,7 +202,7 @@ public partial class RoamingZombie : CharacterBody2D
 			};
 
 			TownManager.GainExp(expGained);
-			ZombieManager.zombieKillCount +=1f;
+			ZombieManager.zombieKillCount += 1f;
 			QueueFree();
 		}
 
@@ -287,16 +295,23 @@ public partial class RoamingZombie : CharacterBody2D
 	private void OnUpdateStatsTimeout()
 	{
 		{
+			
 			switch (ZombieManager.type)
 			{
 				case ZombieManager.ZombieType.Weak:
+					reward = ZombieReward.Small;
 					break;
 				case ZombieManager.ZombieType.Medium:
+					reward = ZombieReward.Medium;
 					break;
 				case ZombieManager.ZombieType.Strong:
+					reward = ZombieReward.Big;
+					break;
 				default:
 					break;
 			}
+			int rewardIndex = (int)reward;
+			_lootController.loot = _lootList[rewardIndex];
 			_attack.damage = ZombieManager.damage;
 			_timer.WaitTime = ZombieManager.attackTime;
 		}

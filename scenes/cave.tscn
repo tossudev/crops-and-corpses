@@ -1,18 +1,25 @@
-[gd_scene load_steps=14 format=3 uid="uid://bbvsfe4h2sph"]
+[gd_scene load_steps=31 format=3 uid="uid://bbvsfe4h2sph"]
 
-[ext_resource type="PackedScene" path="res://scenes/world/navigation_manager.tscn" id="1_imhy7"]
 [ext_resource type="PackedScene" uid="uid://wy0dgop8pftu" path="res://scenes/world/cave_tilemap.tscn" id="1_yabqn"]
 [ext_resource type="PackedScene" uid="uid://b6w8cr3rm5pu3" path="res://scenes/world/rock.tscn" id="3_flaay"]
+[ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/iron_ore.tscn" id="4_4kwxv"]
 [ext_resource type="PackedScene" uid="uid://ca4ui8y2u11io" path="res://scenes/world/cave_entrance.tscn" id="4_xu51x"]
+[ext_resource type="PackedScene" uid="uid://00rfo2muvu4s" path="res://scenes/world/coal_ore.tscn" id="5_0tasm"]
 [ext_resource type="PackedScene" uid="uid://bbi4wvs2sck5f" path="res://scenes/world/support_beam.tscn" id="5_d6lea"]
+[ext_resource type="PackedScene" uid="uid://btmwjcvssjjf7" path="res://scenes/world/copper_ore.tscn" id="6_7ms7p"]
+[ext_resource type="PackedScene" uid="uid://cloo50csdagnm" path="res://scenes/world/stalagmite.tscn" id="6_x2vbr"]
+[ext_resource type="PackedScene" uid="uid://ih0n4u2okucu" path="res://scenes/world/stalagmite2.tscn" id="7_ecfe8"]
 [ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="7_somas"]
+[ext_resource type="Script" path="res://scripts/World/LootController.cs" id="8_pa72b"]
+[ext_resource type="Texture2D" uid="uid://dkjbgvrnc6r7" path="res://assets/sprites/tiles/stalagmate_two.png" id="10_gfyjh"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="11_mechj"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="11_ufcgq"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="12_p8hl2"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="13_66y4m"]
+[ext_resource type="Texture2D" uid="uid://xcn7cih418ht" path="res://assets/sprites/tiles/stalagmate_drop.png" id="14_jaj2c"]
+[ext_resource type="Texture2D" uid="uid://dj3tsl8mk8qbe" path="res://assets/sprites/tiles/stalagmate_drop_two.png" id="15_rbqxh"]
+[ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="19_w0jgf"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="20_wlbpj"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_h2dry"]
-vertices = PackedVector2Array(-10448, -9304, 7608, -5760, 9648, 6992, -10320, 8688)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-10448, -9304, 7608, -5760, 9648, 6992, -10320, 8688)])
 
 [sub_resource type="Gradient" id="Gradient_ksvwj"]
 offsets = PackedFloat32Array(0.187097, 0.364516, 0.396774, 1)
@@ -25,6 +32,63 @@ height = 256
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 metadata/_snap_enabled = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_idkut"]
+size = Vector2(211, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wx7i"]
+size = Vector2(187, 64)
+
+[sub_resource type="Animation" id="Animation_3c58v"]
+resource_name = "fallingStalagmite"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.14159, 5.41052]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-5, -90), Vector2(120, 120)]
+}
+
+[sub_resource type="Animation" id="Animation_ir0ao"]
+resource_name = "shake"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-5, -90), Vector2(5, -90), Vector2(-5, -90)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x8yya"]
+_data = {
+"fallingStalagmite": SubResource("Animation_3c58v"),
+"shake": SubResource("Animation_ir0ao")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_foprt"]
+size = Vector2(274.75, 163.5)
 
 [sub_resource type="Gradient" id="Gradient_pwesi"]
 interpolation_mode = 2
@@ -39,13 +103,6 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.791284, 0.240826)
 
 [node name="Cave" type="Node2D"]
-
-[node name="NavigationManager" parent="." instance=ExtResource("1_imhy7")]
-unique_name_in_owner = true
-visible = false
-
-[node name="Region" parent="NavigationManager" index="0"]
-navigation_polygon = SubResource("NavigationPolygon_h2dry")
 
 [node name="Tilemap" parent="." instance=ExtResource("1_yabqn")]
 unique_name_in_owner = true
@@ -77,6 +134,101 @@ y_sort_enabled = true
 
 [node name="Breakable" type="Node2D" parent="Objects"]
 y_sort_enabled = true
+
+[node name="Iron Ore" type="Node2D" parent="Objects/Breakable"]
+
+[node name="Iron Ore3" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
+position = Vector2(-475, -371)
+
+[node name="Iron Ore4" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
+position = Vector2(-475, -371)
+
+[node name="Iron Ore5" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
+position = Vector2(-475, -371)
+
+[node name="Iron Ore6" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
+position = Vector2(-475, -371)
+
+[node name="Iron Ore7" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
+position = Vector2(-475, -371)
+
+[node name="Iron Ore8" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
+position = Vector2(-475, -371)
+
+[node name="Coal Ore" type="Node2D" parent="Objects/Breakable"]
+
+[node name="Coal Ore" parent="Objects/Breakable/Coal Ore" instance=ExtResource("5_0tasm")]
+position = Vector2(332, -421)
+
+[node name="Coal Ore2" parent="Objects/Breakable/Coal Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_0tasm")]
+position = Vector2(332, -421)
+_animationPlayer = NodePath("../Coal Ore/AnimationPlayer")
+_sprite = NodePath("../Coal Ore/Sprite2D")
+
+[node name="Coal Ore3" parent="Objects/Breakable/Coal Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_0tasm")]
+position = Vector2(332, -421)
+_animationPlayer = NodePath("../Coal Ore/AnimationPlayer")
+_sprite = NodePath("../Coal Ore/Sprite2D")
+
+[node name="Coal Ore4" parent="Objects/Breakable/Coal Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_0tasm")]
+position = Vector2(332, -421)
+_animationPlayer = NodePath("../Coal Ore/AnimationPlayer")
+_sprite = NodePath("../Coal Ore/Sprite2D")
+
+[node name="Coal Ore5" parent="Objects/Breakable/Coal Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_0tasm")]
+position = Vector2(332, -421)
+_animationPlayer = NodePath("../Coal Ore/AnimationPlayer")
+_sprite = NodePath("../Coal Ore/Sprite2D")
+
+[node name="Coal Ore6" parent="Objects/Breakable/Coal Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_0tasm")]
+position = Vector2(332, -421)
+_animationPlayer = NodePath("../Coal Ore/AnimationPlayer")
+_sprite = NodePath("../Coal Ore/Sprite2D")
+
+[node name="Coal Ore7" parent="Objects/Breakable/Coal Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_0tasm")]
+position = Vector2(332, -421)
+_animationPlayer = NodePath("../Coal Ore/AnimationPlayer")
+_sprite = NodePath("../Coal Ore/Sprite2D")
+
+[node name="Copper Ore" type="Node2D" parent="Objects/Breakable"]
+
+[node name="Copper Ore" parent="Objects/Breakable/Copper Ore" instance=ExtResource("6_7ms7p")]
+position = Vector2(-64, -432)
+
+[node name="Copper Ore2" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
+position = Vector2(-64, -432)
+_animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
+_sprite = NodePath("../Copper Ore/Sprite2D")
+
+[node name="Copper Ore3" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
+position = Vector2(-64, -432)
+_animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
+_sprite = NodePath("../Copper Ore/Sprite2D")
+
+[node name="Copper Ore4" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
+position = Vector2(-64, -432)
+_animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
+_sprite = NodePath("../Copper Ore/Sprite2D")
+
+[node name="Copper Ore5" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
+position = Vector2(-64, -432)
+_animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
+_sprite = NodePath("../Copper Ore/Sprite2D")
+
+[node name="Copper Ore6" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
+position = Vector2(-64, -432)
+_animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
+_sprite = NodePath("../Copper Ore/Sprite2D")
+
+[node name="Copper Ore7" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
+position = Vector2(-64, -432)
+_animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
+_sprite = NodePath("../Copper Ore/Sprite2D")
+
+[node name="Copper Ore8" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
+position = Vector2(-64, -432)
+_animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
+_sprite = NodePath("../Copper Ore/Sprite2D")
 
 [node name="Rocks" type="Node2D" parent="Objects/Breakable"]
 y_sort_enabled = true
@@ -350,7 +502,25 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock38" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(6948, 7185)
+position = Vector2(6926, 7125)
+_animationPlayer = NodePath("../Rock/AnimationPlayer")
+_sprite = NodePath("../Rock/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
+
+[node name="Rock96" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+position = Vector2(6401, 7271)
+_animationPlayer = NodePath("../Rock/AnimationPlayer")
+_sprite = NodePath("../Rock/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
+
+[node name="Rock97" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+position = Vector2(6409, 7439)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -674,7 +844,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock67" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(3736, -4344)
+position = Vector2(3708, -4358)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -693,6 +863,24 @@ _scaleVariation = 0.25
 
 [node name="Rock69" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
 position = Vector2(3710, -5192)
+_animationPlayer = NodePath("../Rock/AnimationPlayer")
+_sprite = NodePath("../Rock/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
+
+[node name="Rock94" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+position = Vector2(4209, -5132)
+_animationPlayer = NodePath("../Rock/AnimationPlayer")
+_sprite = NodePath("../Rock/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
+
+[node name="Rock95" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+position = Vector2(4142, -5012)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -782,7 +970,25 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock79" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-6758, 2431)
+position = Vector2(-6677, 2270)
+_animationPlayer = NodePath("../Rock/AnimationPlayer")
+_sprite = NodePath("../Rock/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
+
+[node name="Rock92" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+position = Vector2(-7155, 2525)
+_animationPlayer = NodePath("../Rock/AnimationPlayer")
+_sprite = NodePath("../Rock/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
+
+[node name="Rock93" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
+position = Vector2(-7156, 2704)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -827,7 +1033,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock84" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(-6432, 1560)
+position = Vector2(-6532, 1573)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -872,7 +1078,7 @@ _rotationVariation = 5
 _scaleVariation = 0.25
 
 [node name="Rock89" parent="Objects/Breakable/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("3_flaay")]
-position = Vector2(1324, 1684)
+position = Vector2(1283, 1624)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
 _color = Color(0.670588, 0.490196, 0.415686, 1)
@@ -1338,12 +1544,153 @@ _sprite = NodePath("../Support Beam/Sprite2D")
 position = Vector2(-576, 62)
 _animationPlayer = NodePath("../Support Beam/AnimationPlayer")
 _sprite = NodePath("../Support Beam/Sprite2D")
-_color = Color(0.243137, 0.243137, 0.243137, 1)
+_color = Color(0.321569, 0.321569, 0.321569, 1)
+_minBrightness = 1.0
 
 [node name="Support Beam84" parent="Objects/Breakable/Beams" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_d6lea")]
 position = Vector2(-1657, -280)
 _animationPlayer = NodePath("../Support Beam/AnimationPlayer")
 _sprite = NodePath("../Support Beam/Sprite2D")
+
+[node name="Stalagmites" type="Node2D" parent="Objects/Breakable"]
+y_sort_enabled = true
+
+[node name="Stalagmite2" parent="Objects/Breakable/Stalagmites" instance=ExtResource("6_x2vbr")]
+position = Vector2(-9690, 7804)
+
+[node name="Stalagmite3" parent="Objects/Breakable/Stalagmites" instance=ExtResource("6_x2vbr")]
+position = Vector2(-9758, 7996)
+
+[node name="Stalagmite4" parent="Objects/Breakable/Stalagmites" instance=ExtResource("6_x2vbr")]
+position = Vector2(-5105, 4815)
+
+[node name="Stalagmite7" parent="Objects/Breakable/Stalagmites" instance=ExtResource("6_x2vbr")]
+position = Vector2(182, 6874)
+
+[node name="Stalagmite9" parent="Objects/Breakable/Stalagmites" instance=ExtResource("6_x2vbr")]
+position = Vector2(2584, 4258)
+
+[node name="Stalagmite10" parent="Objects/Breakable/Stalagmites" instance=ExtResource("6_x2vbr")]
+position = Vector2(2730, 4078)
+_minBrightness = 0.8
+
+[node name="Stalagmite11" parent="Objects/Breakable/Stalagmites" instance=ExtResource("6_x2vbr")]
+position = Vector2(7334, 6548)
+
+[node name="Stalagmite12" parent="Objects/Breakable/Stalagmites" instance=ExtResource("6_x2vbr")]
+position = Vector2(4955, 1261)
+
+[node name="Stalagmite13" parent="Objects/Breakable/Stalagmites" instance=ExtResource("6_x2vbr")]
+position = Vector2(-1467, 1125)
+
+[node name="Stalagmite14" parent="Objects/Breakable/Stalagmites" instance=ExtResource("6_x2vbr")]
+position = Vector2(-1360, 1461)
+
+[node name="Stalagmite16" parent="Objects/Breakable/Stalagmites" instance=ExtResource("6_x2vbr")]
+position = Vector2(402, 1512)
+
+[node name="Stalagmite17" parent="Objects/Breakable/Stalagmites" instance=ExtResource("6_x2vbr")]
+position = Vector2(878, 1349)
+
+[node name="Stalagmite18" parent="Objects/Breakable/Stalagmites" instance=ExtResource("6_x2vbr")]
+position = Vector2(-379, 1764)
+
+[node name="Stalagmite19" parent="Objects/Breakable/Stalagmites" instance=ExtResource("7_ecfe8")]
+position = Vector2(-1116, 1268)
+
+[node name="Stalagmite20" parent="Objects/Breakable/Stalagmites" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("7_ecfe8")]
+position = Vector2(560, 1261)
+_animationPlayer = NodePath("../Stalagmite19/AnimationPlayer")
+_sprite = NodePath("../Stalagmite19/Sprite2D")
+
+[node name="Stalagmite21" parent="Objects/Breakable/Stalagmites" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("7_ecfe8")]
+position = Vector2(-9428, 7944)
+_animationPlayer = NodePath("../Stalagmite19/AnimationPlayer")
+_sprite = NodePath("../Stalagmite19/Sprite2D")
+
+[node name="Stalagmite22" parent="Objects/Breakable/Stalagmites" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("7_ecfe8")]
+position = Vector2(-5118, 4973)
+_animationPlayer = NodePath("../Stalagmite19/AnimationPlayer")
+_sprite = NodePath("../Stalagmite19/Sprite2D")
+
+[node name="Stalagmite23" parent="Objects/Breakable/Stalagmites" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("7_ecfe8")]
+position = Vector2(253, 6664)
+_animationPlayer = NodePath("../Stalagmite19/AnimationPlayer")
+_sprite = NodePath("../Stalagmite19/Sprite2D")
+
+[node name="BridgeStalagmite" type="StaticBody2D" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite", "_fallingTreeBridge")]
+position = Vector2(-1260, 166)
+script = ExtResource("8_pa72b")
+_animationPlayer = NodePath("AnimationPlayer")
+_sprite = NodePath("Sprite2D")
+_color = Color(0.596078, 0.639216, 0.733333, 1)
+_minBrightness = 0.75
+_scaleVariation = -0.2
+_flipVariation = false
+_fallingTreeBridge = NodePath("../Bridge")
+
+[node name="Sprite2D" type="Sprite2D" parent="Objects/Breakable/BridgeStalagmite"]
+position = Vector2(-5, -90)
+rotation = 3.14159
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("10_gfyjh")
+
+[node name="HealthComponent" parent="Objects/Breakable/BridgeStalagmite" node_paths=PackedStringArray("_parentScript") instance=ExtResource("11_ufcgq")]
+_parentScript = NodePath("..")
+_hasHealthBar = false
+
+[node name="HitboxComponent" parent="Objects/Breakable/BridgeStalagmite" node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["rock"] instance=ExtResource("12_p8hl2")]
+position = Vector2(-1, 0)
+collision_layer = 16
+collision_mask = 32
+_parentScript = NodePath("..")
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Breakable/BridgeStalagmite/HitboxComponent"]
+position = Vector2(-7.5, 28)
+shape = SubResource("RectangleShape2D_idkut")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Breakable/BridgeStalagmite"]
+position = Vector2(-8, 27)
+shape = SubResource("RectangleShape2D_0wx7i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Objects/Breakable/BridgeStalagmite"]
+libraries = {
+"": SubResource("AnimationLibrary_x8yya")
+}
+
+[node name="NavigationObstacleArea" parent="Objects/Breakable/BridgeStalagmite" instance=ExtResource("13_66y4m")]
+position = Vector2(-130, -9)
+offset = Vector2(125, 115)
+polygon = PackedVector2Array(103, -34, 102, -121, -110, -122, -111, -34)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Objects/Breakable/BridgeStalagmite"]
+position = Vector2(85, 249)
+shape = SubResource("RectangleShape2D_foprt")
+
+[node name="Bridge" type="Node2D" parent="Objects/Breakable"]
+visible = false
+position = Vector2(-1260, 166)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Objects/Breakable/Bridge"]
+modulate = Color(0.596078, 0.639216, 0.733333, 1)
+position = Vector2(90, 218)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("14_jaj2c")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Objects/Breakable/Bridge"]
+modulate = Color(0.596078, 0.639216, 0.733333, 1)
+position = Vector2(136, 292)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("15_rbqxh")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Objects/Breakable/Bridge"]
+modulate = Color(0.596078, 0.639216, 0.733333, 1)
+position = Vector2(66, 141)
+rotation = -3.14159
+scale = Vector2(0.5, -0.5)
+texture = ExtResource("15_rbqxh")
 
 [node name="Lights" type="Node2D" parent="Objects"]
 
@@ -1367,6 +1714,7 @@ _targetScene = 3
 position = Vector2(776, -1688)
 
 [node name="Enemies" type="Node2D" parent="."]
+unique_name_in_owner = true
 y_sort_enabled = true
 position = Vector2(6.10352e-05, 6.10352e-05)
 
@@ -1421,8 +1769,13 @@ autostart = true
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.121569, 0.121569, 0.121569, 1)
 
+[node name="SunlightContainer" type="Node" parent="."]
+script = ExtResource("19_w0jgf")
+
+[node name="Sunlight" type="CanvasModulate" parent="SunlightContainer"]
+visible = false
+position = Vector2(-71, -4)
+
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
 [connection signal="timeout" from="ZombieSpawn/Timer" to="ZombieSpawn" method="ZombieSpawn" flags=18]
 [connection signal="timeout" from="ZombieSpawn/ZombieDeletionTimer" to="ZombieSpawn" method="DeleteZombieDelay" flags=18]
-
-[editable path="NavigationManager"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://c0o7irtwrvayp"]
+[gd_scene load_steps=53 format=3 uid="uid://c0o7irtwrvayp"]
 
 [ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_qt5pe"]
 [ext_resource type="PackedScene" uid="uid://b2gv07xesl7qm" path="res://scenes/buildings/town/house/house_broken.tscn" id="4_nfdnl"]
@@ -12,11 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://fd4b7o1o24sd" path="res://scenes/buildings/town/town_hall/town_hall_broken.tscn" id="7_kakyg"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="7_ms5xt"]
 [ext_resource type="PackedScene" uid="uid://ci1gujwgui8qr" path="res://scenes/buildings/town/large_house/large_house_broken.tscn" id="8_gaa8h"]
-[ext_resource type="PackedScene" uid="uid://bfgy4jnvcy7pk" path="res://scenes/zombie/Zombie1.tscn" id="8_ovu31"]
+[ext_resource type="PackedScene" uid="uid://bfgy4jnvcy7pk" path="res://scenes/zombie/Zombie.tscn" id="8_ovu31"]
 [ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="8_pei51"]
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="10_4qh86"]
 [ext_resource type="PackedScene" uid="uid://b4fyxjshjenvv" path="res://scenes/farm/plants/plant_potato.tscn" id="10_c8c0f"]
 [ext_resource type="PackedScene" uid="uid://disyt3fuu77je" path="res://scenes/buildings/fence_scenes/fence_west.tscn" id="11_3dwxc"]
+[ext_resource type="PackedScene" uid="uid://c5347glm0d040" path="res://scenes/world/gravecross.tscn" id="11_ho833"]
 [ext_resource type="PackedScene" uid="uid://bljea7oopk7tf" path="res://scenes/farm/plants/plant_mushroom.tscn" id="11_koiqo"]
 [ext_resource type="PackedScene" uid="uid://b6w8cr3rm5pu3" path="res://scenes/world/rock.tscn" id="12_0gurk"]
 [ext_resource type="PackedScene" uid="uid://e58507ft315b" path="res://scenes/buildings/fence_scenes/fence_north.tscn" id="12_moe38"]
@@ -36,6 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://bfn22gqwoaqbt" path="res://assets/sprites/tiles/farm_tile.png" id="26_adjto"]
 [ext_resource type="Texture2D" uid="uid://b0dlu5nexmss2" path="res://assets/sprites/tiles/grass_tile.png" id="27_4ir3q"]
 [ext_resource type="Texture2D" uid="uid://b644tsyidu1bm" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="28_w6780"]
+[ext_resource type="PackedScene" uid="uid://ca4ui8y2u11io" path="res://scenes/world/cave_entrance.tscn" id="31_ekk8c"]
 [ext_resource type="Texture2D" uid="uid://dbgwlhprokvwi" path="res://assets/sprites/tiles/Dirt_tile.png" id="33_f0032"]
 [ext_resource type="Texture2D" uid="uid://cyfgc82fwo01k" path="res://assets/sprites/foliage/mini_tree_dead.png" id="34_guo8f"]
 [ext_resource type="Texture2D" uid="uid://lcg5swlsccjt" path="res://assets/sprites/tiles/Burnt_grass2_tile.png" id="37_dijnp"]
@@ -263,8 +265,208 @@ position = Vector2(3096, 1461)
 [node name="Large_House_Broken3" parent="Objects/Buildings" instance=ExtResource("8_gaa8h")]
 position = Vector2(-1456, 103)
 
-[node name="Large_House_Broken4" parent="Objects/Buildings" instance=ExtResource("8_gaa8h")]
+[node name="Cemetery2" type="Node2D" parent="Objects"]
+position = Vector2(6.10352e-05, 6.10352e-05)
+
+[node name="Large_House_Broken4" parent="Objects/Cemetery2" instance=ExtResource("8_gaa8h")]
+z_index = 1
+y_sort_enabled = true
 position = Vector2(-3191, -631)
+
+[node name="CemeteryFence" type="Node2D" parent="Objects/Cemetery2"]
+y_sort_enabled = true
+
+[node name="North" type="Node2D" parent="Objects/Cemetery2/CemeteryFence"]
+y_sort_enabled = true
+
+[node name="Node2D2" parent="Objects/Cemetery2/CemeteryFence/North" instance=ExtResource("12_moe38")]
+position = Vector2(-3128, -936)
+
+[node name="Node2D7" parent="Objects/Cemetery2/CemeteryFence/North" instance=ExtResource("12_moe38")]
+position = Vector2(-3256, -936)
+
+[node name="Node2D8" parent="Objects/Cemetery2/CemeteryFence/North" instance=ExtResource("12_moe38")]
+position = Vector2(-3384, -936)
+
+[node name="Node2D9" parent="Objects/Cemetery2/CemeteryFence/North" instance=ExtResource("12_moe38")]
+position = Vector2(-3512, -936)
+
+[node name="Node2D10" parent="Objects/Cemetery2/CemeteryFence/North" instance=ExtResource("12_moe38")]
+position = Vector2(-3640, -936)
+
+[node name="Node2D11" parent="Objects/Cemetery2/CemeteryFence/North" instance=ExtResource("12_moe38")]
+position = Vector2(-3768, -936)
+
+[node name="Node2D12" parent="Objects/Cemetery2/CemeteryFence/North" instance=ExtResource("12_moe38")]
+position = Vector2(-3896, -936)
+
+[node name="Node2D13" parent="Objects/Cemetery2/CemeteryFence/North" instance=ExtResource("12_moe38")]
+position = Vector2(-4024, -936)
+
+[node name="Node2D14" parent="Objects/Cemetery2/CemeteryFence/North" instance=ExtResource("12_moe38")]
+position = Vector2(-4152, -936)
+
+[node name="Node2D3" parent="Objects/Cemetery2/CemeteryFence/North" instance=ExtResource("12_moe38")]
+position = Vector2(-3001, -937)
+
+[node name="Node2D4" parent="Objects/Cemetery2/CemeteryFence/North" instance=ExtResource("12_moe38")]
+position = Vector2(-2872, -936)
+
+[node name="Node2D5" parent="Objects/Cemetery2/CemeteryFence/North" instance=ExtResource("12_moe38")]
+position = Vector2(-2752, -936)
+
+[node name="Node2D6" parent="Objects/Cemetery2/CemeteryFence/North" instance=ExtResource("12_moe38")]
+position = Vector2(-2624, -936)
+
+[node name="South" type="Node2D" parent="Objects/Cemetery2/CemeteryFence"]
+y_sort_enabled = true
+
+[node name="Node2D15" parent="Objects/Cemetery2/CemeteryFence/South" instance=ExtResource("12_moe38")]
+position = Vector2(-3128, 344)
+
+[node name="Node2D18" parent="Objects/Cemetery2/CemeteryFence/South" instance=ExtResource("12_moe38")]
+position = Vector2(-3512, 344)
+
+[node name="Node2D19" parent="Objects/Cemetery2/CemeteryFence/South" instance=ExtResource("12_moe38")]
+position = Vector2(-3640, 344)
+
+[node name="Node2D20" parent="Objects/Cemetery2/CemeteryFence/South" instance=ExtResource("12_moe38")]
+position = Vector2(-3768, 344)
+
+[node name="Node2D21" parent="Objects/Cemetery2/CemeteryFence/South" instance=ExtResource("12_moe38")]
+position = Vector2(-3896, 344)
+
+[node name="Node2D22" parent="Objects/Cemetery2/CemeteryFence/South" instance=ExtResource("12_moe38")]
+position = Vector2(-4024, 344)
+
+[node name="Node2D23" parent="Objects/Cemetery2/CemeteryFence/South" instance=ExtResource("12_moe38")]
+position = Vector2(-4152, 344)
+
+[node name="Node2D24" parent="Objects/Cemetery2/CemeteryFence/South" instance=ExtResource("12_moe38")]
+position = Vector2(-3000, 344)
+
+[node name="Node2D25" parent="Objects/Cemetery2/CemeteryFence/South" instance=ExtResource("12_moe38")]
+position = Vector2(-2872, 344)
+
+[node name="Node2D26" parent="Objects/Cemetery2/CemeteryFence/South" instance=ExtResource("12_moe38")]
+position = Vector2(-2752, 344)
+
+[node name="Node2D27" parent="Objects/Cemetery2/CemeteryFence/South" instance=ExtResource("12_moe38")]
+position = Vector2(-2624, 344)
+
+[node name="West" type="Node2D" parent="Objects/Cemetery2/CemeteryFence"]
+z_index = -1
+
+[node name="Node2D" parent="Objects/Cemetery2/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
+position = Vector2(-4272, -784)
+
+[node name="Node2D2" parent="Objects/Cemetery2/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
+position = Vector2(-4272, -632)
+
+[node name="Node2D3" parent="Objects/Cemetery2/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
+position = Vector2(-4272, -480)
+
+[node name="Node2D4" parent="Objects/Cemetery2/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
+position = Vector2(-4272, -328)
+
+[node name="Node2D5" parent="Objects/Cemetery2/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
+position = Vector2(-4272, -176)
+
+[node name="Node2D6" parent="Objects/Cemetery2/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
+position = Vector2(-4272, -24)
+
+[node name="Node2D7" parent="Objects/Cemetery2/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
+position = Vector2(-4272, 128)
+
+[node name="Node2D8" parent="Objects/Cemetery2/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
+position = Vector2(-4272, 280)
+
+[node name="East" type="Node2D" parent="Objects/Cemetery2/CemeteryFence"]
+z_index = -1
+
+[node name="Node2D" parent="Objects/Cemetery2/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
+position = Vector2(-2624, -792)
+
+[node name="Node2D2" parent="Objects/Cemetery2/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
+position = Vector2(-2624, -640)
+
+[node name="Node2D3" parent="Objects/Cemetery2/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
+position = Vector2(-2624, -488)
+
+[node name="Node2D4" parent="Objects/Cemetery2/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
+position = Vector2(-2624, -336)
+
+[node name="Node2D5" parent="Objects/Cemetery2/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
+position = Vector2(-2624, -184)
+
+[node name="Node2D6" parent="Objects/Cemetery2/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
+position = Vector2(-2624, -32)
+
+[node name="Node2D7" parent="Objects/Cemetery2/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
+position = Vector2(-2624, 120)
+
+[node name="Node2D8" parent="Objects/Cemetery2/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
+position = Vector2(-2624, 272)
+
+[node name="gravecross" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+y_sort_enabled = true
+position = Vector2(-4032, -800)
+
+[node name="gravecross2" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+y_sort_enabled = true
+position = Vector2(-4160, -542)
+
+[node name="gravecross4" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+y_sort_enabled = true
+position = Vector2(-3776, -671)
+
+[node name="gravecross5" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+y_sort_enabled = true
+position = Vector2(-3648, -285)
+
+[node name="gravecross17" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+y_sort_enabled = true
+position = Vector2(-3904, -410)
+
+[node name="gravecross6" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+y_sort_enabled = true
+position = Vector2(-3136, -542)
+
+[node name="gravecross7" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+y_sort_enabled = true
+position = Vector2(-3134, -792)
+
+[node name="gravecross8" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+y_sort_enabled = true
+position = Vector2(-2880, -799)
+
+[node name="gravecross9" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+y_sort_enabled = true
+position = Vector2(-2752, -545)
+
+[node name="gravecross10" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+y_sort_enabled = true
+position = Vector2(-3009, -290)
+
+[node name="gravecross11" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+y_sort_enabled = true
+position = Vector2(-2752, -288)
+
+[node name="gravecross12" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+y_sort_enabled = true
+position = Vector2(-2880, -24)
+
+[node name="gravecross13" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+position = Vector2(-3136, -30)
+
+[node name="gravecross14" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+position = Vector2(-3779, -32)
+
+[node name="gravecross15" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+position = Vector2(-4032, -152)
+
+[node name="gravecross16" parent="Objects/Cemetery2" instance=ExtResource("11_ho833")]
+position = Vector2(-4160, 104)
 
 [node name="Enemies" type="Node2D" parent="Objects"]
 y_sort_enabled = true
@@ -289,141 +491,6 @@ script = ExtResource("7_ms5xt")
 
 [node name="Zombie" parent="Objects/Enemies" instance=ExtResource("8_ovu31")]
 position = Vector2(-88.0001, 624)
-
-[node name="CemeteryFence" type="Node2D" parent="Objects"]
-y_sort_enabled = true
-
-[node name="North" type="Node2D" parent="Objects/CemeteryFence"]
-y_sort_enabled = true
-
-[node name="Node2D2" parent="Objects/CemeteryFence/North" instance=ExtResource("12_moe38")]
-position = Vector2(-3128, -936)
-
-[node name="Node2D7" parent="Objects/CemeteryFence/North" instance=ExtResource("12_moe38")]
-position = Vector2(-3256, -936)
-
-[node name="Node2D8" parent="Objects/CemeteryFence/North" instance=ExtResource("12_moe38")]
-position = Vector2(-3384, -936)
-
-[node name="Node2D9" parent="Objects/CemeteryFence/North" instance=ExtResource("12_moe38")]
-position = Vector2(-3512, -936)
-
-[node name="Node2D10" parent="Objects/CemeteryFence/North" instance=ExtResource("12_moe38")]
-position = Vector2(-3640, -936)
-
-[node name="Node2D11" parent="Objects/CemeteryFence/North" instance=ExtResource("12_moe38")]
-position = Vector2(-3768, -936)
-
-[node name="Node2D12" parent="Objects/CemeteryFence/North" instance=ExtResource("12_moe38")]
-position = Vector2(-3896, -936)
-
-[node name="Node2D13" parent="Objects/CemeteryFence/North" instance=ExtResource("12_moe38")]
-position = Vector2(-4024, -936)
-
-[node name="Node2D14" parent="Objects/CemeteryFence/North" instance=ExtResource("12_moe38")]
-position = Vector2(-4152, -936)
-
-[node name="Node2D3" parent="Objects/CemeteryFence/North" instance=ExtResource("12_moe38")]
-position = Vector2(-3001, -937)
-
-[node name="Node2D4" parent="Objects/CemeteryFence/North" instance=ExtResource("12_moe38")]
-position = Vector2(-2872, -936)
-
-[node name="Node2D5" parent="Objects/CemeteryFence/North" instance=ExtResource("12_moe38")]
-position = Vector2(-2752, -936)
-
-[node name="Node2D6" parent="Objects/CemeteryFence/North" instance=ExtResource("12_moe38")]
-position = Vector2(-2624, -936)
-
-[node name="South" type="Node2D" parent="Objects/CemeteryFence"]
-y_sort_enabled = true
-
-[node name="Node2D15" parent="Objects/CemeteryFence/South" instance=ExtResource("12_moe38")]
-position = Vector2(-3128, 344)
-
-[node name="Node2D18" parent="Objects/CemeteryFence/South" instance=ExtResource("12_moe38")]
-position = Vector2(-3512, 344)
-
-[node name="Node2D19" parent="Objects/CemeteryFence/South" instance=ExtResource("12_moe38")]
-position = Vector2(-3640, 344)
-
-[node name="Node2D20" parent="Objects/CemeteryFence/South" instance=ExtResource("12_moe38")]
-position = Vector2(-3768, 344)
-
-[node name="Node2D21" parent="Objects/CemeteryFence/South" instance=ExtResource("12_moe38")]
-position = Vector2(-3896, 344)
-
-[node name="Node2D22" parent="Objects/CemeteryFence/South" instance=ExtResource("12_moe38")]
-position = Vector2(-4024, 344)
-
-[node name="Node2D23" parent="Objects/CemeteryFence/South" instance=ExtResource("12_moe38")]
-position = Vector2(-4152, 344)
-
-[node name="Node2D24" parent="Objects/CemeteryFence/South" instance=ExtResource("12_moe38")]
-position = Vector2(-3000, 344)
-
-[node name="Node2D25" parent="Objects/CemeteryFence/South" instance=ExtResource("12_moe38")]
-position = Vector2(-2872, 344)
-
-[node name="Node2D26" parent="Objects/CemeteryFence/South" instance=ExtResource("12_moe38")]
-position = Vector2(-2752, 344)
-
-[node name="Node2D27" parent="Objects/CemeteryFence/South" instance=ExtResource("12_moe38")]
-position = Vector2(-2624, 344)
-
-[node name="West" type="Node2D" parent="Objects/CemeteryFence"]
-z_index = -1
-
-[node name="Node2D" parent="Objects/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
-position = Vector2(-4272, -784)
-
-[node name="Node2D2" parent="Objects/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
-position = Vector2(-4272, -632)
-
-[node name="Node2D3" parent="Objects/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
-position = Vector2(-4272, -480)
-
-[node name="Node2D4" parent="Objects/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
-position = Vector2(-4272, -328)
-
-[node name="Node2D5" parent="Objects/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
-position = Vector2(-4272, -176)
-
-[node name="Node2D6" parent="Objects/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
-position = Vector2(-4272, -24)
-
-[node name="Node2D7" parent="Objects/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
-position = Vector2(-4272, 128)
-
-[node name="Node2D8" parent="Objects/CemeteryFence/West" instance=ExtResource("11_3dwxc")]
-position = Vector2(-4272, 280)
-
-[node name="East" type="Node2D" parent="Objects/CemeteryFence"]
-z_index = -1
-
-[node name="Node2D" parent="Objects/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
-position = Vector2(-2624, -792)
-
-[node name="Node2D2" parent="Objects/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
-position = Vector2(-2624, -640)
-
-[node name="Node2D3" parent="Objects/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
-position = Vector2(-2624, -488)
-
-[node name="Node2D4" parent="Objects/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
-position = Vector2(-2624, -336)
-
-[node name="Node2D5" parent="Objects/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
-position = Vector2(-2624, -184)
-
-[node name="Node2D6" parent="Objects/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
-position = Vector2(-2624, -32)
-
-[node name="Node2D7" parent="Objects/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
-position = Vector2(-2624, 120)
-
-[node name="Node2D8" parent="Objects/CemeteryFence/East" instance=ExtResource("11_3dwxc")]
-position = Vector2(-2624, 272)
 
 [node name="Foliage" type="Node2D" parent="Objects"]
 y_sort_enabled = true
@@ -1174,6 +1241,49 @@ _sprite = NodePath("../Rock5/Sprite2D")
 position = Vector2(-6440, 3336)
 _animationPlayer = NodePath("../Rock5/AnimationPlayer")
 _sprite = NodePath("../Rock5/Sprite2D")
+
+[node name="Cave" type="Node2D" parent="Objects/Foliage"]
+y_sort_enabled = true
+
+[node name="cave_entrance" parent="Objects/Foliage/Cave" instance=ExtResource("31_ekk8c")]
+position = Vector2(-7504, -3167)
+_targetScene = 1
+
+[node name="Rock13" parent="Objects/Foliage/Cave" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("12_0gurk")]
+position = Vector2(-7416, -3088)
+_animationPlayer = NodePath("../../Rocks/Rock5/AnimationPlayer")
+_sprite = NodePath("../../Rocks/Rock5/Sprite2D")
+
+[node name="Rock14" parent="Objects/Foliage/Cave" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("12_0gurk")]
+position = Vector2(-7536, -3104)
+_animationPlayer = NodePath("../../Rocks/Rock5/AnimationPlayer")
+_sprite = NodePath("../../Rocks/Rock5/Sprite2D")
+
+[node name="Rock15" parent="Objects/Foliage/Cave" instance=ExtResource("12_0gurk")]
+y_sort_enabled = true
+position = Vector2(-7520, -3176)
+scale = Vector2(5, 5)
+script = null
+
+[node name="Sprite2D" parent="Objects/Foliage/Cave/Rock15" index="0"]
+modulate = Color(0.443137, 0.388235, 0.262745, 1)
+
+[node name="HealthComponent" parent="Objects/Foliage/Cave/Rock15" index="1" node_paths=PackedStringArray("_parentScript")]
+_parentScript = NodePath("../../../Rocks/Rock5")
+
+[node name="HitboxComponent" parent="Objects/Foliage/Cave/Rock15" index="2" node_paths=PackedStringArray("_parentScript", "_healthComponent")]
+_parentScript = NodePath("../../../Rocks/Rock5")
+_healthComponent = NodePath("../../../Rocks/Rock5/HealthComponent")
+
+[node name="CollisionShape2D" parent="Objects/Foliage/Cave/Rock15/HitboxComponent" index="0"]
+position = Vector2(-14.9996, -80)
+
+[node name="CollisionShape2D" parent="Objects/Foliage/Cave/Rock15" index="3"]
+position = Vector2(0.000366211, -60.3999)
+
+[node name="NavigationObstacleArea" parent="Objects/Foliage/Cave/Rock15" index="5"]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(-64, 32, 112, -24, 134, -97.6, 120, -160, 48, -192, -128, -136, -160, -72, -136, 8)
 
 [node name="Collectables" type="Node2D" parent="Objects/Foliage"]
 y_sort_enabled = true
@@ -2011,12 +2121,6 @@ flip_h = true
 modulate = Color(0.619608, 0.619608, 0.619608, 1)
 position = Vector2(-8575, -3137)
 texture = ExtResource("6_rt25r")
-
-[node name="Sprite2D20" type="Sprite2D" parent="Objects/Foliage/TreeBorder/West/Spruces"]
-modulate = Color(0.843137, 0.843137, 0.843137, 1)
-position = Vector2(-8598, -5296.5)
-texture = ExtResource("6_rt25r")
-flip_h = true
 
 [node name="Sprite2D27" type="Sprite2D" parent="Objects/Foliage/TreeBorder/West/Spruces"]
 modulate = Color(0.823529, 0.823529, 0.823529, 1)
@@ -2977,18 +3081,6 @@ modulate = Color(0.529412, 0.529412, 0.796078, 1)
 position = Vector2(-7232, 117)
 texture = ExtResource("6_rt25r")
 
-[node name="Spruce55" type="Sprite2D" parent="Objects/Foliage/TreeBorder/North/Spruces"]
-modulate = Color(0.529412, 0.529412, 0.796078, 1)
-z_index = 1
-position = Vector2(-8021, 22)
-texture = ExtResource("6_rt25r")
-flip_h = true
-
-[node name="Spruce56" type="Sprite2D" parent="Objects/Foliage/TreeBorder/North/Spruces"]
-modulate = Color(0.729412, 0.686275, 0.917647, 1)
-position = Vector2(-7877, -26)
-texture = ExtResource("6_rt25r")
-
 [node name="Spruce57" type="Sprite2D" parent="Objects/Foliage/TreeBorder/North/Spruces"]
 modulate = Color(0.529412, 0.529412, 0.796078, 1)
 position = Vector2(-8312, 55)
@@ -3249,15 +3341,6 @@ modulate = Color(0.627451, 0.627451, 0.627451, 1)
 position = Vector2(-12042, -3733)
 texture = ExtResource("8_pei51")
 
-[node name="Sprite2D45" type="Sprite2D" parent="Objects/Foliage/TreeBorder/North/Birches"]
-modulate = Color(0.619608, 0.619608, 0.619608, 1)
-position = Vector2(-11330, -3734)
-texture = ExtResource("8_pei51")
-
-[node name="Sprite2D46" type="Sprite2D" parent="Objects/Foliage/TreeBorder/North/Birches"]
-position = Vector2(-11550, -3874)
-texture = ExtResource("8_pei51")
-
 [node name="Sprite2D47" type="Sprite2D" parent="Objects/Foliage/TreeBorder/North/Birches"]
 modulate = Color(0.619608, 0.619608, 0.619608, 1)
 position = Vector2(-11070, -3817)
@@ -3275,7 +3358,8 @@ position = Vector2(-10412, -3710)
 texture = ExtResource("8_pei51")
 
 [node name="Sprite2D50" type="Sprite2D" parent="Objects/Foliage/TreeBorder/North/Birches"]
-position = Vector2(-10899, -3721)
+y_sort_enabled = true
+position = Vector2(-10828, -3721)
 texture = ExtResource("8_pei51")
 
 [node name="Sprite2D51" type="Sprite2D" parent="Objects/Foliage/TreeBorder/North/Birches"]
@@ -3383,4 +3467,5 @@ position = Vector2(-584, 3424)
 [editable path="Objects/Player"]
 [editable path="Objects/Buildings/well"]
 [editable path="Objects/Enemies/ZombieSpawn"]
+[editable path="Objects/Foliage/Cave/Rock15"]
 [editable path="street_sign_post"]

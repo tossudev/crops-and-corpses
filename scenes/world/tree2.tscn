@@ -36,7 +36,7 @@ _data = {
 [node name="Tree2" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer", "_sprite")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_bnnfg")
-_loot = ExtResource("2_d74pb")
+loot = ExtResource("2_d74pb")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite = NodePath("Sprite2D")
 

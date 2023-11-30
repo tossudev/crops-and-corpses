@@ -1,6 +1,5 @@
-[gd_scene load_steps=33 format=3 uid="uid://bbvsfe4h2sph"]
+[gd_scene load_steps=31 format=3 uid="uid://bbvsfe4h2sph"]
 
-[ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="1_imhy7"]
 [ext_resource type="PackedScene" uid="uid://wy0dgop8pftu" path="res://scenes/world/cave_tilemap.tscn" id="1_yabqn"]
 [ext_resource type="PackedScene" uid="uid://b6w8cr3rm5pu3" path="res://scenes/world/rock.tscn" id="3_flaay"]
 [ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/iron_ore.tscn" id="4_4kwxv"]
@@ -21,11 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://dj3tsl8mk8qbe" path="res://assets/sprites/tiles/stalagmate_drop_two.png" id="15_rbqxh"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="19_w0jgf"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="20_wlbpj"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_h2dry"]
-vertices = PackedVector2Array(-10448, -9304, 7608, -5760, 9648, 6992, -10320, 8688)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-10448, -9304, 7608, -5760, 9648, 6992, -10320, 8688)])
 
 [sub_resource type="Gradient" id="Gradient_ksvwj"]
 offsets = PackedFloat32Array(0.187097, 0.364516, 0.396774, 1)
@@ -110,12 +104,6 @@ fill_to = Vector2(0.791284, 0.240826)
 
 [node name="Cave" type="Node2D"]
 
-[node name="NavigationManager" parent="." instance=ExtResource("1_imhy7")]
-unique_name_in_owner = true
-
-[node name="Region" parent="NavigationManager" index="0"]
-navigation_polygon = SubResource("NavigationPolygon_h2dry")
-
 [node name="Tilemap" parent="." instance=ExtResource("1_yabqn")]
 unique_name_in_owner = true
 
@@ -149,29 +137,23 @@ y_sort_enabled = true
 
 [node name="Iron Ore" type="Node2D" parent="Objects/Breakable"]
 
-[node name="Iron Ore3" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_4kwxv")]
+[node name="Iron Ore3" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
 position = Vector2(-475, -371)
-_animationPlayer = NodePath("")
 
-[node name="Iron Ore4" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_4kwxv")]
+[node name="Iron Ore4" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
 position = Vector2(-475, -371)
-_animationPlayer = NodePath("")
 
-[node name="Iron Ore5" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_4kwxv")]
+[node name="Iron Ore5" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
 position = Vector2(-475, -371)
-_animationPlayer = NodePath("")
 
-[node name="Iron Ore6" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_4kwxv")]
+[node name="Iron Ore6" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
 position = Vector2(-475, -371)
-_animationPlayer = NodePath("")
 
-[node name="Iron Ore7" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_4kwxv")]
+[node name="Iron Ore7" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
 position = Vector2(-475, -371)
-_animationPlayer = NodePath("")
 
-[node name="Iron Ore8" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_4kwxv")]
+[node name="Iron Ore8" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
 position = Vector2(-475, -371)
-_animationPlayer = NodePath("")
 
 [node name="Coal Ore" type="Node2D" parent="Objects/Breakable"]
 
@@ -1785,7 +1767,6 @@ autostart = true
 autostart = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0.121569, 0.121569, 0.121569, 1)
 
 [node name="SunlightContainer" type="Node" parent="."]
@@ -1795,11 +1776,6 @@ script = ExtResource("19_w0jgf")
 visible = false
 position = Vector2(-71, -4)
 
-[node name="Iron Ore" parent="." instance=ExtResource("4_4kwxv")]
-position = Vector2(-5248, 3732)
-
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
 [connection signal="timeout" from="ZombieSpawn/Timer" to="ZombieSpawn" method="ZombieSpawn" flags=18]
 [connection signal="timeout" from="ZombieSpawn/ZombieDeletionTimer" to="ZombieSpawn" method="DeleteZombieDelay" flags=18]
-
-[editable path="NavigationManager"]

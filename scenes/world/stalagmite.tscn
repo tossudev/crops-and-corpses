@@ -36,7 +36,7 @@ _data = {
 [node name="Stalagmite" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer", "_sprite")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_kfu33")
-_loot = ExtResource("2_0515l")
+loot = ExtResource("2_0515l")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite = NodePath("Sprite2D")
 _color = Color(0.596078, 0.639216, 0.733333, 1)

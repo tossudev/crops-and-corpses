@@ -27,6 +27,23 @@ public partial class LootController : StaticBody2D
 
 	public override void _Ready()
 	{
+		if (loot == null)
+		{
+			GD.PrintErr("LootController: Loot is null");
+			return;
+		}
+
+		Init();
+	}
+
+	public void Init()
+	{
+		if (loot == null)
+		{
+			GD.PrintErr("LootController: Loot is null");
+			return;
+		}
+
 		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
 		_animationPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
 		_meanDrop = loot.meanDrop;
@@ -46,12 +63,6 @@ public partial class LootController : StaticBody2D
 
 		Variations();
 
-		if (loot == null)
-		{
-			GD.PrintErr("LootController: Loot is null");
-			return;
-		}
-
 		for (int i = 0; i < _meanDrop; i++)
 		{
 			_items.Add(loot.lootItems[GD.RandRange(0, loot.lootItems.Count - 1)].item);
@@ -68,6 +79,8 @@ public partial class LootController : StaticBody2D
 				_items.Add(_items[GD.RandRange(0, _items.Count - 1)]);
 			}
 		}
+
+		GD.Print(GetParent().Name + " " + _items.Count);
 	}
 
 	private void Variations()
@@ -102,6 +115,10 @@ public partial class LootController : StaticBody2D
 			{
 				_animationPlayer?.Play("fall");
 			}
+			else if (Name == "FallingStalamite")
+			{
+				_animationPlayer?.Play("fallingStalamite");
+			}
 			else
 			{
 				DropItems(_items.Count);
@@ -112,7 +129,7 @@ public partial class LootController : StaticBody2D
 
 	private void OnAnimationFinished(string animationName)
 	{
-		if (animationName == "fall")
+		if (animationName == "fall" || animationName == "fallingStalamite")
 		{
 			if (_fallingTreeBridge != null) _fallingTreeBridge.Visible = true;
 			QueueFree();

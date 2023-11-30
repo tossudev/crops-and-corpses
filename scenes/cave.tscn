@@ -1367,6 +1367,7 @@ _targetScene = 3
 position = Vector2(776, -1688)
 
 [node name="Enemies" type="Node2D" parent="."]
+unique_name_in_owner = true
 y_sort_enabled = true
 position = Vector2(6.10352e-05, 6.10352e-05)
 

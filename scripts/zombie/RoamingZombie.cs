@@ -1,11 +1,13 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using Godot.Collections;
 
 public partial class RoamingZombie : CharacterBody2D
 {
 	[Export] private AudioStreamPlayer2D _audioStreamPlayer2D;
 	[Export] private LootController _lootController;
+	[Export] Array<Loot> _lootList;
 	private enum ZombieOccupation{Miner,Farmer,Soldier,Woodcutter,Builder};
 	private ZombieOccupation zombieOccupation;
 	private Skeleton2D _sprite;
@@ -26,6 +28,7 @@ public partial class RoamingZombie : CharacterBody2D
 	private ulong _exited;
 	private bool _inTown;
 	//AnimationPlayer animationPlayer;
+
 	public override void _Ready()
 	{
 		
@@ -290,10 +293,14 @@ public partial class RoamingZombie : CharacterBody2D
 			switch (ZombieManager.type)
 			{
 				case ZombieManager.ZombieType.Weak:
+					_lootController.loot = _lootList[0];
 					break;
 				case ZombieManager.ZombieType.Medium:
+					_lootController.loot = _lootList[1];
 					break;
 				case ZombieManager.ZombieType.Strong:
+					_lootController.loot = _lootList[2];
+					break;
 				default:
 					break;
 			}

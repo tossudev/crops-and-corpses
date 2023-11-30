@@ -3,6 +3,7 @@ using Godot;
 public partial class ZombieManager : Node
 {
 	public static  ZombieType type;
+	
 	public static bool dayMode;
 	public static int damage;
 	public static double attackTime = 1;
@@ -13,6 +14,7 @@ public partial class ZombieManager : Node
 	private SpawnScript _dayNightSpawnNode;
 	private Timer _timer;
 	public enum ZombieType {Weak,Medium,Strong};
+
 	public static float zombieKillCount;
     static AudioController _audioController;	
 
@@ -94,17 +96,18 @@ public partial class ZombieManager : Node
 			default:
 			break;
 		}
-		AddTownLevelZombieUpgrades();
+		AddZombieKillCountUpgrades();
+		AddZombieTownLevelUpgrades();
 	}
 
 	private void OnTimerTimeout()
 	{
 		UpdateStats();	
 	}
-	private void AddTownLevelZombieUpgrades()
+	private void AddZombieTownLevelUpgrades()
 	{
 		int townStats = TownManager.currentTownStats.townHallLevel;
-		switch(townStats )
+		switch(townStats)
 		{
 			case 1:
 			//Level 1 no buffs
@@ -130,5 +133,15 @@ public partial class ZombieManager : Node
 			default:
 				break;
 		}	
+	}
+	private void AddZombieKillCountUpgrades()
+	{
+		if(zombieKillCount > 10)
+		{
+				damage += 20;
+				attackTime += 1;
+				idleSpeed +=30;
+				chaseSpeed +=30;
+		}
 	}
 }

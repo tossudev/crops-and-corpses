@@ -9,6 +9,8 @@ public partial class RoamingZombie : CharacterBody2D
 	[Export] private LootController _lootController;
 	[Export] Array<Loot> _lootList;
 	private enum ZombieOccupation { Miner, Farmer, Soldier, Woodcutter, Builder };
+	private enum ZombieReward{Small,Medium,Big};
+	private ZombieReward reward;
 	private ZombieOccupation zombieOccupation;
 	private Skeleton2D _sprite;
 	private CharacterBody2D _player;
@@ -293,20 +295,23 @@ public partial class RoamingZombie : CharacterBody2D
 	private void OnUpdateStatsTimeout()
 	{
 		{
+			
 			switch (ZombieManager.type)
 			{
 				case ZombieManager.ZombieType.Weak:
-					_lootController.loot = _lootList[0];
+					reward = ZombieReward.Small;
 					break;
 				case ZombieManager.ZombieType.Medium:
-					_lootController.loot = _lootList[1];
+					reward = ZombieReward.Medium;
 					break;
 				case ZombieManager.ZombieType.Strong:
-					_lootController.loot = _lootList[2];
+					reward = ZombieReward.Big;
 					break;
 				default:
 					break;
 			}
+			int rewardIndex = (int)reward;
+			_lootController.loot = _lootList[rewardIndex];
 			_attack.damage = ZombieManager.damage;
 			_timer.WaitTime = ZombieManager.attackTime;
 		}

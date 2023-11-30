@@ -30,7 +30,6 @@ size = Vector2(9, 169)
 size = Vector2(5.5, 166.5)
 
 [node name="FenceDoorWest" type="Node2D" node_paths=PackedStringArray("_doorsOpened", "_doorsClosed", "_doorsCollisionOpen1", "_doorsCollisionOpen2", "_doorsCollision")]
-y_sort_enabled = true
 script = ExtResource("1_yjk0s")
 _doorsOpened = NodePath("Doors")
 _doorsClosed = NodePath("DoorsTopdown")
@@ -146,7 +145,7 @@ metadata/_edit_use_anchors_ = true
 [node name="NavigationObstacleArea" parent="." instance=ExtResource("7_2f011")]
 position = Vector2(-112, 43)
 scale = Vector2(0.110236, 0.684783)
-polygon = PackedVector2Array(-177, -157, -183, -309.587, -56, -306.667, -58, -155, -57, -65, -177, -65)
+polygon = PackedVector2Array(-177, -157, -145.143, -299.365, -90.7145, -299.365, -58, -155, -72.5717, -71.5555, -145.143, -71.5555)
 
 [connection signal="input_event" from="Doors/Area2D" to="." method="OnFenceDoorInput"]
 [connection signal="input_event" from="DoorsTopdown/Area2D" to="." method="OnFenceDoorInput"]

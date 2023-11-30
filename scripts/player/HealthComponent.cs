@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 
 public partial class HealthComponent : Node2D
 {
@@ -51,6 +52,11 @@ public partial class HealthComponent : Node2D
 			_healthBar.MaxValue = _maxHealth;
 			_healthBar.Value = _health;
 			UpdateHealthBar();
+		}
+
+		if (_isBuilding)
+		{
+			_building.LoadBuildingHealth(_building.loadedHealth);
 		}
 	}
 
@@ -201,7 +207,7 @@ public partial class HealthComponent : Node2D
 			_healthBar.Visible = _health != _maxHealth;
 		}
 
-		if (_isPlayer)
+        if (_isPlayer)
 		{
 			_healthBar.GetNode<Label>("%HealthText").Text = _health.ToString();
 		}

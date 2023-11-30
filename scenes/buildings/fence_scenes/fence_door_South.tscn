@@ -138,7 +138,7 @@ metadata/_edit_use_anchors_ = true
 [node name="NavigationObstacleArea" parent="." instance=ExtResource("7_0jjsr")]
 position = Vector2(53, 41.5109)
 scale = Vector2(1, 0.684783)
-polygon = PackedVector2Array(-177, -157, -58, -155, -57, -65, -177, -65)
+polygon = PackedVector2Array(-173, -157, -61, -155.54, -61, -69.381, -173, -66.4603)
 
 [connection signal="input_event" from="Doors/Area2D" to="." method="OnFenceDoorInput"]
 [connection signal="input_event" from="DoorsTopdown/Area2D" to="." method="OnFenceDoorInput"]

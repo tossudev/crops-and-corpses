@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cly04lvws81ml" path="res://animations/archer_tower/archer_tower/ArcherTower.tscn" id="4_71niy"]
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="5_sr0xp"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="6_hcsx8"]
-[ext_resource type="Texture2D" uid="uid://cgrn8ma6au6" path="res://assets/sprites/buildings/archery_tower.png" id="6_sglj4"]
+[ext_resource type="Texture2D" uid="uid://dxop7aeu2pnnr" path="res://assets/sprites/buildings/archery_tower.png" id="6_sglj4"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="7_u83t5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jggck"]

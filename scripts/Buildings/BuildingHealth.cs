@@ -17,6 +17,7 @@ public partial class BuildingHealth : Node2D
     public bool isDamaged;
 
     public int buildingHealth;
+    public int loadedHealth = 100;
     
 	// Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -54,9 +55,14 @@ public partial class BuildingHealth : Node2D
 
     public void LoadBuildingHealth(int loadedHealth)
     {
-        _healthComponent.SetHealth(loadedHealth);
-        _healthComponent.UpdateHealthBar();
+        // add fences
+        if (!_collisionShape.GetParent().IsInGroup("building"))
+        {
+            return;
+        }
+
         buildingHealth = loadedHealth;
+        _healthComponent.SetHealth(loadedHealth);    
 
         if (buildingHealth <= 0)
         {

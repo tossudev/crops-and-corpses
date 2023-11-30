@@ -147,7 +147,7 @@ scale = Vector2(1, 1)
 scale = Vector2(0.999998, 0.999998)
 
 [node name="ArmL" parent="Objects/Player/Skeleton2D/TorsoBone/ArmLBone" index="0"]
-position = Vector2(4.06, 13.3003)
+position = Vector2(4.06, 13.2998)
 scale = Vector2(1, 1)
 
 [node name="HeadBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="4"]
@@ -612,6 +612,7 @@ position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_3lwm8")
 
 [node name="Enemies" type="Node2D" parent="Objects"]
+unique_name_in_owner = true
 y_sort_enabled = true
 position = Vector2(6.10352e-05, 6.10352e-05)
 

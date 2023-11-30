@@ -39,6 +39,8 @@ script = ExtResource("1_o8dep")
 _loot = ExtResource("2_74vp7")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite = NodePath("Sprite2D")
+_color = Color(1, 1, 1, 1)
+_minBrightness = 0.75
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(8, -128)

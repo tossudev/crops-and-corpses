@@ -75,7 +75,7 @@ public partial class ProjectileController : Node2D
 
     private void OnObjectEntered(Node2D body)
     {
-        if (!body.IsInGroup("player") && _objectCollision)
+        if (!body.IsInGroup("player") && !body.IsInGroup("fence") && _objectCollision)
         {
             this.GetNode<Area2D>("Hitbox").SetDeferred("monitoring", false);
             _lifetimeTimer.Stop();

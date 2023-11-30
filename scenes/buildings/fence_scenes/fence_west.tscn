@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://disyt3fuu77je"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_667uj"]
-[ext_resource type="Texture2D" uid="uid://djhyomtxb2qta" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="2_d27mr"]
+[ext_resource type="Texture2D" uid="uid://dkyrcjhsjmsrv" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="2_d27mr"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_xoojr"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_vkqwf"]
 [ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_cet8m"]
@@ -12,7 +12,7 @@ size = Vector2(2.625, 150)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8al56"]
 size = Vector2(5, 151)
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" groups=["fence"]]
 y_sort_enabled = true
 
 [node name="FenceHighE2" type="Sprite2D" parent="."]

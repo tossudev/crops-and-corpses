@@ -46,6 +46,7 @@ public partial class BuildingMenu : Control
             return;
         }
 
+
         _savePath = ProjectSettings.GlobalizePath("user://saves/");
         _fileName = "buildings.txt";
 
@@ -73,8 +74,16 @@ public partial class BuildingMenu : Control
         _notEnoughResourcesLabel.AddThemeFontSizeOverride("font_size", 32);
         
         CreateBuildMenu();
+
+        LoadBuildings(_savePath, _fileName);
     }
-    
+
+    // TODO, might be buggy
+    public override void _ExitTree()
+    {
+        SaveBuildings(_savePath, _fileName);
+    }
+
     public override void _Input(InputEvent @event) {
         if (@event.IsActionPressed("open_build_menu")) {
             if(_buildMenu.Visible == false)
@@ -302,7 +311,7 @@ public partial class BuildingMenu : Control
         return _savedBuildings;
     }
 
-    private void SaveBuildings(string path, string fileName)
+    public void SaveBuildings(string path, string fileName)
     {
         try
         {
@@ -380,7 +389,7 @@ public partial class BuildingMenu : Control
             if (jsonObject["name"].ToString() == "House" || jsonObject["name"].ToString() == "LargeHouse" || jsonObject["name"].ToString() == "ArcherTower")
             {
                 BuildingHealth healthscript = _buildingScene.GetNode("BuildingHealth") as BuildingHealth;
-                healthscript.LoadBuildingHealth((int)jsonObject["health"]);
+                healthscript.loadedHealth = (int)jsonObject["health"];
             }
 
             if (jsonObject["name"].ToString() == "FarmPlot")

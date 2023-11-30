@@ -52,26 +52,11 @@ public partial class ZombieManager : Node
 
 	private void UpdateStats()
 	{
-		if(zombieKillCount >= 0)
-		{
-			// Decreasing kill count by 0.5 every second
-			zombieKillCount -= 0.5f;
-		}	
-		if (dayMode)
-		{
-			type= ZombieType.Weak;
-		}
-		else {
-			float random = (float)GD.RandRange(0.0,1.0);
-			if(random < 0.3f)
-			{
-				type=ZombieType.Strong;
-			}
-			else
-			{
-				type = ZombieType.Medium;
-			}
-		}
+		int townStats = TownManager.currentTownStats.townHallLevel;
+		if(zombieKillCount >= 0) zombieKillCount -= 0.5f; // Decreasing kill count by 0.5 every second
+
+		if (dayMode)type= ZombieType.Weak;
+		else type = ZombieType.Medium;	
 
 		switch(type)
 		{	
@@ -97,16 +82,15 @@ public partial class ZombieManager : Node
 			break;
 		}
 		AddZombieKillCountUpgrades();
-		AddZombieTownLevelUpgrades();
+		AddZombieTownLevelUpgrades(townStats);
 	}
 
 	private void OnTimerTimeout()
 	{
 		UpdateStats();	
 	}
-	private void AddZombieTownLevelUpgrades()
+	private void AddZombieTownLevelUpgrades(int townStats)
 	{
-		int townStats = TownManager.currentTownStats.townHallLevel;
 		switch(townStats)
 		{
 			case 1:

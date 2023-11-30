@@ -295,7 +295,6 @@ public partial class RoamingZombie : CharacterBody2D
 	private void OnUpdateStatsTimeout()
 	{
 		{
-			
 			switch (ZombieManager.type)
 			{
 				case ZombieManager.ZombieType.Weak:

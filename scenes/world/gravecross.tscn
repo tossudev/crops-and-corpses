@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5347glm0d040"]
+
+[ext_resource type="Texture2D" uid="uid://bb6ik5w6lvg46" path="res://assets/sprites/items/cross.png" id="1_w5y5h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bvkgn"]
+size = Vector2(80, 133.333)
+
+[node name="gravecross" type="StaticBody2D"]
+scale = Vector2(0.3, 0.3)
+
+[node name="Cross" type="Sprite2D" parent="."]
+texture = ExtResource("1_w5y5h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(13.3333, 173.333)
+shape = SubResource("RectangleShape2D_bvkgn")

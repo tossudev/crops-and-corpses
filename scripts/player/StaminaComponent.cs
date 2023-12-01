@@ -13,18 +13,15 @@ public partial class StaminaComponent : Node2D
 	public float regenRate = 0.15f;
 	public float drainRate = 0.25f;
 
-	public override void _Ready()
+	public override async void _Ready()
 	{
 		_staminaBar = GetTree().GetFirstNodeInGroup("PlayerStaminaBar") as ProgressBar;
 		_staminaBar.MaxValue = _maxStamina;
 		currentStamina = _maxStamina;
-		UpdateStaminaBar();
 				
-		PlayerInfo.GetStamina().ContinueWith(task =>
-		{
-			currentStamina = task.Result;
-			UpdateStaminaBar();
-		});
+		currentStamina = await PlayerInfo.GetStamina();
+		if (currentStamina <= 0) currentStamina = _maxStamina;
+		UpdateStaminaBar();
 	}
 
 	public override void _Process(double delta)

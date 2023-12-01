@@ -22,6 +22,7 @@ public partial class SaveData : Node
     public const string INVENTORY_ITEMS_KEY = "inventoryItems";
     public const string ORGANIZED_INVENTORY_ITEMS_KEY = "organizedInventoryItems";
     public const string PLAYER_INFO_KEY = "playerInfo";
+    public const string SCENE_INFO_KEY = "sceneInfo";
 
     //---------Modifiable at runtime----------------------
 
@@ -32,6 +33,7 @@ public partial class SaveData : Node
     public static Array<RawInventoryItem> organizedPlayerInventory = new();
     public static List<RawInventoryItem> totalInventoryItems = new();
     public static Dictionary playerInfo = new();
+    public static Dictionary sceneInfo = new();
 
     public static bool savingInProgress = false;
     public static bool firstLoadComplete = false;
@@ -74,7 +76,8 @@ public partial class SaveData : Node
             allVillagers = allVillagerData,
             inventoryItems = totalInventoryItems,
             organizedInventoryItems = organizedPlayerInventory,
-            playerInfo = playerInfo
+            playerInfo = playerInfo,
+            sceneInfo = sceneInfo
         };
 
         Dictionary saveDictionary = rawSaveData.GetFullDataDictionary();
@@ -136,6 +139,9 @@ public partial class SaveData : Node
 
         // Player Info
         PlayerInfo.LoadPlayerInfo(saveData);
+
+        // Scene Info
+        SceneInfo.LoadSceneInfo(saveData);
 
         firstLoadComplete = true;
     }

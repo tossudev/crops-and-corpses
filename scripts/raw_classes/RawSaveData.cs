@@ -12,6 +12,7 @@ public partial class RawSaveData : GodotObject
     public List<RawInventoryItem> inventoryItems = new ();
     public Array<RawInventoryItem> organizedInventoryItems = new ();
     public Dictionary playerInfo = new ();
+    public Dictionary sceneInfo = new ();
 
     public Dictionary GetFullDataDictionary()
     {
@@ -41,6 +42,9 @@ public partial class RawSaveData : GodotObject
 
         // Player info
         fullDictionary.Add(SaveData.PLAYER_INFO_KEY, PlayerInfo.GetDictionary());
+
+        // Scene info
+        fullDictionary.Add(SaveData.SCENE_INFO_KEY, SceneInfo.GetDictionary());
 
 
         return fullDictionary;

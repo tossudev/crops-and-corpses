@@ -10,15 +10,12 @@ public static class PlayerInfo
 	public static int stamina { get; set; }
 	public static PortalID travelID { get; set; }
 
-	private static bool _isInitialized = false;
-
 	public static Dictionary GetDictionary()
 	{
 		Dictionary playerInfo = new Dictionary
 		{
 			{ "health", health },
-			{ "stamina", stamina },
-			{ "travelID", (int)travelID }
+			{ "stamina", stamina }
 		};
 
 		return playerInfo;
@@ -36,14 +33,11 @@ public static class PlayerInfo
 
 		health = (int)playerInfo["health"];
 		stamina = (int)playerInfo["stamina"];
-		travelID = (PortalID)Enum.ToObject(typeof(PortalID), (int)playerInfo["travelID"]);
-
-		_isInitialized = true;
 	}
 
 	public static async Task<int> GetHealth()
 	{
-		if (!_isInitialized)
+		if (!SaveData.firstLoadComplete)
 		{
 			await Task.Delay(100);
 			return await GetHealth();
@@ -54,7 +48,7 @@ public static class PlayerInfo
 
 	public static async Task<int> GetStamina()
 	{
-		if (!_isInitialized)
+		if (!SaveData.firstLoadComplete)
 		{
 			await Task.Delay(100);
 			return await GetStamina();

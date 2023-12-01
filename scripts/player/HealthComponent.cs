@@ -28,24 +28,13 @@ public partial class HealthComponent : Node2D
 
 	int _count = 0;
 
-	public override void _Ready()
+	public override async void _Ready()
 	{
 		if (_parentScript != null && _parentScript.Name == "Player")
 		{
 			_isPlayer = true;
 		}
 		InitializeHealItems();
-
-		_health = _maxHealth;
-		
-		if (_isPlayer)
-		{
-			PlayerInfo.GetHealth().ContinueWith(task =>
-			{
-				_health = task.Result;
-				UpdateHealthBar();
-			});
-		}
 
 		if (_hasHealthBar)
 		{
@@ -66,6 +55,13 @@ public partial class HealthComponent : Node2D
 		if (_isBuilding)
 		{
 			_building.LoadBuildingHealth(_building.loadedHealth);
+		}
+
+		if (_isPlayer)
+		{
+			_health = await PlayerInfo.GetHealth();
+			if (_health <= 0) _health = _maxHealth;
+			UpdateHealthBar();
 		}
 	}
 

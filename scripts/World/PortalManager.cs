@@ -14,6 +14,8 @@ public partial class PortalManager : Node2D
 		{
 			if (child is Portal)
 			{
+				GD.Print(((Portal)child).id);
+				GD.Print(PlayerInfo.travelID);
 				if (((Portal)child).id == PlayerInfo.travelID)
 				{
 					_player.Position = ((Portal)child).exitPosition.GlobalPosition;

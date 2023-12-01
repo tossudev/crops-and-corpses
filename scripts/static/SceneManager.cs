@@ -8,20 +8,20 @@ public static class SceneManager
 {
     static bool sceneChanged = true;
     static Node _currentRootScene;
-    
-    
+
+
     public static Scene.RootScene GetCurrentScene(Node caller)
     {
         if (sceneChanged) CacheCurrentScene(caller);
-        
+
         return Scene.allRootScenes.Find(rootScene => rootScene.Name == _currentRootScene.Name);
     }
-    
+
     public static bool IsCurrentScene(Node caller, IEnumerable<Scene.RootScene> scenes)
     {
         return scenes.Any(scene => CompareCurrentSceneTo(caller, scene));
     }
-    
+
     public static bool IsCurrentScene(Node caller, Scene.RootScene scene)
     {
         return CompareCurrentSceneTo(caller, scene);
@@ -30,7 +30,7 @@ public static class SceneManager
     static bool CompareCurrentSceneTo(Node caller, Scene.RootScene scene)
     {
         if (sceneChanged) CacheCurrentScene(caller);
-        
+
         return _currentRootScene.Name == scene.Name;
     }
 
@@ -38,7 +38,7 @@ public static class SceneManager
     {
         _currentRootScene = caller.GetTree().CurrentScene;
     }
-    
+
     public static void ChangeScene(Node caller, Scene.RootScene scene)
     {
         if (IsCurrentScene(caller, Scene.Town))
@@ -48,6 +48,9 @@ public static class SceneManager
             buildMenu.SaveBuildings(buildMenu.savePath, buildMenu.fileName);
         }
 
+        PlayerController player;
+        player = caller.GetTree().GetFirstNodeInGroup("player") as PlayerController;
+        player.SaveState();
 
         SaveData.SyncAll();
         caller.GetTree().ChangeSceneToFile(scene.Path);

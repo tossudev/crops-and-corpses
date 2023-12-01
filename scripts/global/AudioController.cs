@@ -16,7 +16,7 @@ public partial class AudioController : Node {
     public override void _Ready() {
         _sfxPlayer = GetNode<AudioStreamPlayer>("GeneralSFX");
         _sfxPlayback = _sfxPlayer.GetStreamPlayback() as AudioStreamPlaybackPolyphonic;
-        _musicPlayer = GetNode<AudioStreamPlayer>("Music");
+        _musicPlayer = GetNode<AudioStreamPlayer>("Music"); 
         _ambiencePlayer = GetNode<AudioStreamPlayer>("Ambience");
 
         
@@ -37,14 +37,25 @@ public partial class AudioController : Node {
         _ambiencePlayer.Play();
     }
     
-    public void PlayEffect(string soundFile)
-    {
-        _sfxPlayback.PlayStream(GetAudioFromFile(soundFile));
+    public async void PlayEffect(string soundFile) {
+        Node mainPlayer = _sfxPlayer as Node;
+        AudioStreamPlayer playerDuplicate = mainPlayer.Duplicate() as AudioStreamPlayer;
+
+        AddChild(playerDuplicate);
+        AudioStreamPlaybackPolyphonic duplicatePlayback = playerDuplicate.GetStreamPlayback() as AudioStreamPlaybackPolyphonic;
+        
+        duplicatePlayback.PlayStream(GetAudioFromFile(soundFile));
+
+        await ToSignal(GetTree().CreateTimer(15.0), "timeout");
+
+        if (playerDuplicate != null) {
+            playerDuplicate.QueueFree();
+        }
     }
 
 
     AudioStream GetAudioFromFile(string soundFile) {
-        string fullPath = soundDirectory + soundFile;
+        string fullPath = soundFile;
             
         AudioStream audio = (AudioStream) FileLoader.LoadCustomResource(fullPath);
 
@@ -58,10 +69,10 @@ public class ZombieNoises
 
     public string Value { get; }
 
-    public static ZombieNoises ZOMBIE_HISS_1 => new("zombies/zombie_hiss1.wav");
-    public static ZombieNoises ZOMBIE_HISS_2 => new("zombies/zombie_hiss2.wav");
-    public static ZombieNoises ZOMBIE_GROWL => new("zombies/zombie_growl.wav");
-    public static ZombieNoises ZOMBIE_BREATH => new("zombies/zombie_breath.wav");
+    public static ZombieNoises ZOMBIE_HISS_1 => new("res://assets/Sounds/zombies/zombie_hiss1.wav");
+    public static ZombieNoises ZOMBIE_HISS_2 => new("res://assets/Sounds/zombies/zombie_hiss2.wav");
+    public static ZombieNoises ZOMBIE_GROWL => new("res://assets/Sounds/zombies/zombie_growl.wav");
+    public static ZombieNoises ZOMBIE_BREATH => new("res://assets/Sounds/zombies/zombie_breath.wav");
 
     public override string ToString()
     {

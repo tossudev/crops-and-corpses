@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bbvsfe4h2sph"]
+[gd_scene load_steps=34 format=3 uid="uid://bbvsfe4h2sph"]
 
 [ext_resource type="PackedScene" uid="uid://wy0dgop8pftu" path="res://scenes/world/cave_tilemap.tscn" id="1_yabqn"]
 [ext_resource type="PackedScene" uid="uid://b6w8cr3rm5pu3" path="res://scenes/world/rock.tscn" id="3_flaay"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="13_nie8h"]
 [ext_resource type="Texture2D" uid="uid://xcn7cih418ht" path="res://assets/sprites/tiles/stalagmate_drop.png" id="14_jaj2c"]
 [ext_resource type="Texture2D" uid="uid://dj3tsl8mk8qbe" path="res://assets/sprites/tiles/stalagmate_drop_two.png" id="15_rbqxh"]
+[ext_resource type="Script" path="res://scripts/World/PortalManager.cs" id="19_ml5be"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="19_w0jgf"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="20_wlbpj"]
 
@@ -1724,16 +1725,23 @@ energy = 1.5
 texture = SubResource("GradientTexture2D_ws8i3")
 texture_scale = 4.24
 
-[node name="cave_entrance" parent="Objects" instance=ExtResource("4_xu51x")]
+[node name="Cave Entrances" type="Node2D" parent="Objects" node_paths=PackedStringArray("_player")]
+y_sort_enabled = true
+script = ExtResource("19_ml5be")
+_sceneID = 1
+_player = NodePath("../Player")
+
+[node name="cave_entrance" parent="Objects/Cave Entrances" instance=ExtResource("4_xu51x")]
 position = Vector2(-9360, 6888)
-_targetScene = 2
+id = 2
 
-[node name="cave_entrance2" parent="Objects" instance=ExtResource("4_xu51x")]
+[node name="cave_entrance2" parent="Objects/Cave Entrances" instance=ExtResource("4_xu51x")]
 position = Vector2(-8976, -8472)
-_targetScene = 3
+id = 3
 
-[node name="cave_entrance3" parent="Objects" instance=ExtResource("4_xu51x")]
+[node name="cave_entrance3" parent="Objects/Cave Entrances" instance=ExtResource("4_xu51x")]
 position = Vector2(776, -1688)
+id = 2
 
 [node name="Enemies" type="Node2D" parent="."]
 unique_name_in_owner = true

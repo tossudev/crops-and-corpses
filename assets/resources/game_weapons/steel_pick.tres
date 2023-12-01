@@ -6,11 +6,13 @@
 [resource]
 script = ExtResource("2_nspnc")
 item = ExtResource("1_tm7x5")
-damage = 50.0
+damage = 50
 knockback = 2.08165e-12
 cooldown = 0.5
-effect = 0
+effect = 3
 targetType = 2
+attackAnim = ""
+CooldownAnim = ""
 reach = 2.0
 holdAction = true
 ranged = false

@@ -22,16 +22,112 @@ public partial class QuestPointManager : Node
     {
         base._Ready();
 
-        questManager = GetNode<QuestManager>("/root/QuestManager");
         
+
+     
+      
+
+        questManager = GetNode<QuestManager>("/root/QuestManager");
+
         // If the current quest location is the same as the current scene, activate the quest point for that scene
         if (SceneManager.IsCurrentScene(this, questManager.GetActiveQuest().Location))
         {
-            ActivateQuestPointForScene(SceneManager.GetCurrentScene(this));
+          
+            GetRandomQuestPoint(QuestPoint);
+            //ActivateQuestPointForScene(SceneManager.GetCurrentScene(this));
         }
     }
 
+    
+
+  // lets chose a random quest point from the array and use the  bool from that questpoint
+
+  public void GetRandomQuestPoint(Node2D[] activeQuestPoints)
+  {
+       Random random = new Random();
+    int randomQuestPointIndex = random.Next(activeQuestPoints.Length);
+    Vector2 randomQuestPoint = QuestPoint[randomQuestPointIndex].Position;
+
+    // Check if the QuestPoint node exists before trying to get it
+    if (QuestPoint[randomQuestPointIndex].HasNode("QuestPoint"))
+    {
+        QuestPoint[randomQuestPointIndex].GetNode<QuestPoint>("QuestPoint").isQuestPointActive = true;
+        GD.Print(QuestPoint[randomQuestPointIndex].GetNode<QuestPoint>("QuestPoint").isQuestPointActive);
+    }
+    else
+    {
+        GD.Print("QuestPoint node does not exist");
+        // Handle the case when the QuestPoint node does not exist
+        // You can throw an exception or log a message, depending on your needs
+    }
+  }
+
+  
+
+
+
+
+    
+
+/*
     public Vector2 GetRandomQuestPoint(Node2D[] QuestPoint)
+    {
+        Random random = new Random();
+        int randomQuestPointIndex = random.Next(QuestPoint.Length);
+        Vector2 randomQuestPoint = QuestPoint[randomQuestPointIndex].Position;
+        return randomQuestPoint;
+    }
+
+    public void changePackedScene(Scene.RootScene rootScene)
+    {
+        if (rootScene == Scene.Forest)
+        {
+            InThisSceneQuestScene = forestQuestScene;
+        }
+        else if (rootScene == Scene.Ruins)
+        {
+            InThisSceneQuestScene = ruinsQuestScene;
+        }
+        else if (rootScene == Scene.Cave)
+        {
+            InThisSceneQuestScene = caveQuestScene;
+        }
+    }
+
+    // Example method to deactivate a specific quest point
+    public void DeactivateQuestPoint(QuestPoint questPoint)
+    {
+        // Deactivate or perform other actions related to deactivation
+        questPoint.QueueFree(); // Assuming QuestPoint is a Node2D, change as needed
+        activeQuestPoints.Remove(questPoint);
+    }
+
+    // Example method to deactivate all quest points
+    public void DeactivateAllQuestPoints()
+    {
+        foreach (QuestPoint questPoint in activeQuestPoints)
+        {
+            questPoint.QueueFree(); // Assuming QuestPoint is a Node2D, change as needed
+        }
+        activeQuestPoints.Clear();
+    }
+
+    // Example method to deactivate all quest points in a specific scene
+    public void DeactivateAllQuestPointsInScene(Scene.RootScene scene)
+    {
+        foreach (QuestPoint questPoint in activeQuestPoints)
+        {
+            if (SceneManager.IsCurrentScene(questPoint, scene))
+            {
+                questPoint.QueueFree(); // Assuming QuestPoint is a Node2D, change as needed
+            }
+        }
+        activeQuestPoints.RemoveAll(questPoint => SceneManager.IsCurrentScene(questPoint, scene));
+    }
+
+    // Example method
+
+   /* public Vector2 GetRandomQuestPoint(Node2D[] QuestPoint)
     {
         Random random = new Random();
         int randomQuestPointIndex = random.Next(QuestPoint.Length);
@@ -80,4 +176,6 @@ public partial class QuestPointManager : Node
       
     
     }
+
+*/
 }

@@ -2,5 +2,6 @@
 
 [ext_resource type="Script" path="res://scripts/Quest/QuestPointManager.cs" id="1_nq8hn"]
 
-[node name="QuestPointManager" type="Node2D"]
+[node name="QuestPointManager" type="Node2D" node_paths=PackedStringArray("QuestPoint")]
 script = ExtResource("1_nq8hn")
+QuestPoint = []

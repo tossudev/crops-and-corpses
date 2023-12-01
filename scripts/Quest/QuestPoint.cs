@@ -12,10 +12,7 @@ public partial class QuestPoint : Node2D
 
 	VillagerManager villagerManager;
 
-	const string Node2D_questController = "";
-	private ZombieManager zombieManager;
-
-	  
+	
 	const string Node2D_ZombiePoint = "%ZombieSpawn";
 	private Node2D spawnZombiePoint;
 
@@ -33,7 +30,7 @@ public partial class QuestPoint : Node2D
 
 	private int zombieAmount = 4;
 	private int villagerAmount = 1;
-	private bool isQuestPointActive = false;
+	public bool isQuestPointActive = false;
 
 	int playerDistanceToQuestPoint;
 	int SpawnRange = 100;
@@ -46,9 +43,10 @@ public partial class QuestPoint : Node2D
 
 	public override void _Ready()
 	{
-		zombieManager = GetNode<ZombieManager>("/root/ZombieManager");
-		spawnZombiePoint = GetNode<Node2D>("SpawnZombiePoint");
-		zombieScene = (PackedScene)GD.Load("res://LilianTests/Prefabs/zombie_with_hitbox.tscn");
+		
+		spawnZombiePoint = GetNode<Node2D>(Node2D_ZombiePoint);
+		villagerSpawnPoint = GetNode<Node2D>(Node2D_VillagerPoint);
+		zombieScene = (PackedScene)GD.Load("res://scenes/zombie/Zombie.tscn");
 		villagerScene = (PackedScene)GD.Load("res://scenes/villager/villager.tscn");
 		playerController = (PlayerController) GetTree().GetFirstNodeInGroup("player");
 		
@@ -58,6 +56,12 @@ public partial class QuestPoint : Node2D
 	{
 		base._PhysicsProcess(delta);
 
+		if(isQuestPointActive == true)
+		{
+
+			GD.Print("QuestPoint is active");
+
+		
 		playerDistanceToQuestPoint = (int)playerController.GlobalPosition.DistanceTo(GlobalPosition);
 		if (isQuestPointActive && !isZombiesSpawned && playerDistanceToQuestPoint < SpawnRange)
 		{
@@ -70,6 +74,10 @@ public partial class QuestPoint : Node2D
 		{
 			CheckForRemainingZombies();
 		}
+			
+		}
+
+	
 	}
 
 	void CheckForRemainingZombies()
@@ -122,6 +130,11 @@ public partial class QuestPoint : Node2D
 	{
 		
 	}
+
+    public void ActivateQuestPoint()
+    {
+		isQuestPointActive = true;
+    }
 }
 
 

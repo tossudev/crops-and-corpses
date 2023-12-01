@@ -105,9 +105,11 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.791284, 0.240826)
 
 [node name="Cave" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Tilemap" parent="." instance=ExtResource("1_yabqn")]
 unique_name_in_owner = true
+z_index = -10
 
 [node name="Objects" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -138,6 +140,7 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="Iron Ore" type="Node2D" parent="Objects/Breakable"]
+y_sort_enabled = true
 
 [node name="Iron Ore3" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
 position = Vector2(-475, -371)
@@ -158,6 +161,7 @@ position = Vector2(-475, -371)
 position = Vector2(-475, -371)
 
 [node name="Coal Ore" type="Node2D" parent="Objects/Breakable"]
+y_sort_enabled = true
 
 [node name="Coal Ore" parent="Objects/Breakable/Coal Ore" instance=ExtResource("5_0tasm")]
 position = Vector2(332, -421)
@@ -193,6 +197,7 @@ _animationPlayer = NodePath("../Coal Ore/AnimationPlayer")
 _sprite = NodePath("../Coal Ore/Sprite2D")
 
 [node name="Copper Ore" type="Node2D" parent="Objects/Breakable"]
+y_sort_enabled = true
 
 [node name="Copper Ore" parent="Objects/Breakable/Copper Ore" instance=ExtResource("6_7ms7p")]
 position = Vector2(-64, -432)

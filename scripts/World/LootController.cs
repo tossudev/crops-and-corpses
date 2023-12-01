@@ -18,7 +18,6 @@ public partial class LootController : StaticBody2D
 	[Export] private bool _flipVariation = true;
 
 	[Export] private Node2D _dropLootPosition;
-	[Export] private Node _dropLoopParent;
 	[Export] private Node2D _fallingTreeBridge;
 
 	private List<Item> _items = new List<Item>();
@@ -28,10 +27,7 @@ public partial class LootController : StaticBody2D
 	public override void _Ready()
 	{
 		if (loot == null)
-		{
-			GD.PrintErr("LootController: Loot is null");
 			return;
-		}
 
 		Init();
 	}
@@ -50,11 +46,6 @@ public partial class LootController : StaticBody2D
 
 		if (_dropLootPosition == null)
 			_dropLootPosition = this;
-
-		_dropLoopParent = GetNodeOrNull("../../Objects");
-
-		if (_dropLoopParent == null)
-			_dropLoopParent = GetParent();
 
 		rng = new RandomNumberGenerator();
 		var x = (this.Position.X);
@@ -79,8 +70,6 @@ public partial class LootController : StaticBody2D
 				_items.Add(_items[GD.RandRange(0, _items.Count - 1)]);
 			}
 		}
-
-		GD.Print(GetParent().Name + " " + _items.Count);
 	}
 
 	private void Variations()
@@ -132,7 +121,6 @@ public partial class LootController : StaticBody2D
 	{
 		if (animationName == "fall" || animationName == "fallingStalagmite")
 		{
-			GD.Print("falling");
 			if (_fallingTreeBridge != null) _fallingTreeBridge.Visible = true;
 			QueueFree();
 		}
@@ -146,7 +134,7 @@ public partial class LootController : StaticBody2D
 
 			RawInventoryItem dropItem = new RawInventoryItem(_items[randIndex].ID, _items[randIndex].Name, 1, _items[randIndex].StackSize);
 
-			Node2D droppedItem = PlayerInventoryController.CreateDroppedItem(dropItem, _dropLootPosition.Position, _dropLoopParent);
+			Node2D droppedItem = PlayerInventoryController.CreateDroppedItem(dropItem, _dropLootPosition.GlobalPosition, GetParent().GetParent());
 
 			_items.RemoveAt(randIndex);
 

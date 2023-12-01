@@ -1,6 +1,9 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Text.Json.Nodes;
 
 public partial class Fences : Node2D
 {
@@ -21,11 +24,16 @@ public partial class Fences : Node2D
     PackedScene _fenceNorth, _fenceSouth, _fenceWest, _fenceEast;
 
     PackedScene _fenceDoorSouth, _fenceDoorEast, _fenceDoorWest;
-	public override void _Ready()
-	{
-        _fences = GetNode("Fences") as Node2D;
 
-		_fenceNorth = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_north.tscn");
+    string _savePath, _fileName;
+
+    List<int> _fencesList = new List<int>();
+
+    int _fenceIndex = 0;
+
+    public override void _Ready()
+    {
+        _fenceNorth = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_north.tscn");
         _fenceSouth = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_south.tscn");
         _fenceWest = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_west.tscn");
         _fenceEast = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_east.tscn");
@@ -34,7 +42,47 @@ public partial class Fences : Node2D
         _fenceDoorEast = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_door_east.tscn");
         _fenceDoorWest = ResourceLoader.Load<PackedScene>("res://scenes/buildings/fence_scenes/fence_door_west.tscn");
 
+        _savePath = ProjectSettings.GlobalizePath("user://saves/");
+        _fileName = "buildings.txt";
+
+        if(SceneManager.IsCurrentScene(this, Scene.Town))
+        {
+            _fences = GetNode("Fences") as Node2D;
+            LoadBuildings(_savePath, _fileName);
+        }
+
 		InstantiateFences();
+    }
+
+    private void LoadBuildings(string path, string fileName)
+    {
+        path = Path.Join(path, fileName);
+
+        if (!File.Exists(path))
+        {
+            return;
+        }
+
+        try
+        {
+            JsonArray _loadedBuildings = (JsonArray)JsonArray.Parse(File.ReadAllText(path));
+            GetFences(_loadedBuildings);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
+    }
+
+    public void GetFences(JsonArray loadedBuildings)
+    {
+        foreach (JsonObject jsonObject in loadedBuildings)
+        {
+            if (jsonObject["name"] == null)
+            {
+                _fencesList.Add((int)jsonObject["health"]);
+            }
+        }
     }
 
     public void InstantiateFences()
@@ -104,6 +152,8 @@ public partial class Fences : Node2D
                 y -= 128;
             }
 
+            // North fence door commented out
+
             //if (_northDoorSpot == i)
             //{
             //    InstantiateDoor(x, y, _fenceWest);
@@ -152,6 +202,14 @@ public partial class Fences : Node2D
         Node2D _fenceScene = fenceScene.Instantiate() as Node2D;
         _fenceScene.Position = new Vector2(posX, posY);
         _fences.AddChild(_fenceScene);
+
+        if (SceneManager.IsCurrentScene(this, Scene.Town) && _fenceIndex < _fencesList.Count)
+        {
+            BuildingHealth healthscript = _fenceScene.GetNode("BuildingHealth") as BuildingHealth;
+            healthscript.loadedHealth = _fencesList[_fenceIndex];
+            healthscript.LoadBuildingHealth(_fencesList[_fenceIndex]);
+            _fenceIndex++;
+        }
     }
 
     private void InstantiateDoor(float posX, float posY, PackedScene door)
@@ -160,7 +218,16 @@ public partial class Fences : Node2D
         _fenceDoorScene.Position = new Vector2(posX,posY);
         _fences.AddChild(_fenceDoorScene);
 
-        if(_fenceDoorScene.HasMethod("DoorsOpen"))
+        if (SceneManager.IsCurrentScene(this, Scene.Town) && _fenceIndex < _fencesList.Count)
+        {
+            BuildingHealth healthscript = _fenceDoorScene.GetNode("BuildingHealth") as BuildingHealth;
+            healthscript.loadedHealth = _fencesList[_fenceIndex];
+            healthscript.LoadBuildingHealth(_fencesList[_fenceIndex]);
+            _fenceIndex++;
+        }
+        
+
+        if (_fenceDoorScene.HasMethod("DoorsOpen"))
         {
             _fenceDoorScene.CallDeferred("DoorsOpen");
         }

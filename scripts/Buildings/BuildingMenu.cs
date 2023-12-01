@@ -17,6 +17,8 @@ public partial class BuildingMenu : Control
 
 	Node2D _buildings;
 
+    Node2D _fences;
+
     BuildingDemolishMenu _demolishMenu;
     const string BUILDING_DEMOLISH_MENU_NODENAME = "%BuildingDemolishMenu";
 
@@ -56,6 +58,8 @@ public partial class BuildingMenu : Control
         _player = GetParent().GetParent() as CharacterBody2D;
 
         _buildings = GetNode("/root/Town/Buildings/SaveableBuildings") as Node2D;
+
+        _fences = GetNode("/root/Town/Fences") as Node2D;
 
         _buildingPrefabs = new List<Building>();
 
@@ -314,6 +318,27 @@ public partial class BuildingMenu : Control
             _savedBuildings.Add(jsonObj);
         }
 
+        int fenceHealth = 100;
+        int i = 0;
+
+        foreach (Node2D fence in _fences.GetChild(0).GetChildren())
+        {
+            BuildingHealth healthscript = fence.GetNode("%BuildingHealth") as BuildingHealth;
+            fenceHealth = healthscript.buildingHealth;
+
+
+            JsonObject fenceObj = new JsonObject
+            {
+                { "index", i },
+                { "health", fenceHealth }
+            };
+
+            i++;
+            _savedBuildings.Add(fenceObj);
+        }
+
+
+
         return _savedBuildings;
     }
 
@@ -366,7 +391,12 @@ public partial class BuildingMenu : Control
 
         foreach (JsonObject jsonObject in loadedBuildings)
         {
-            if(jsonObject["name"].ToString() == "globalTime")
+            if (jsonObject["name"] == null)
+            {
+                break;
+            }
+
+            if (jsonObject["name"].ToString() == "globalTime")
             {
                 time = (float)jsonObject["time"];
                 continue;

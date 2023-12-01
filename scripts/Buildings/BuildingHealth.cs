@@ -55,12 +55,6 @@ public partial class BuildingHealth : Node2D
 
     public void LoadBuildingHealth(int loadedHealth)
     {
-        // add fences
-        if (!_collisionShape.GetParent().IsInGroup("building"))
-        {
-            return;
-        }
-
         buildingHealth = loadedHealth;
         _healthComponent.SetHealth(loadedHealth);    
 

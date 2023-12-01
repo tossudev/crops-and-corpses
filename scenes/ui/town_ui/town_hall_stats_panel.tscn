@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/ui/overlay/TownHallStatsPanel.cs" id="1_frtpl"]
 [ext_resource type="StyleBox" uid="uid://316u70sd3www" path="res://assets/resources/styles/stone_panel_style_box_texture.tres" id="2_8q7tg"]
 [ext_resource type="StyleBox" uid="uid://dq7huk8ldgecf" path="res://assets/resources/styles/town_hall_exp_background_style_box_flat.tres" id="2_f1va5"]
-[ext_resource type="Texture2D" uid="uid://cl2us6n4fnxbi" path="res://assets/sprites/buildings/townhall_color.png" id="2_pnnkn"]
+[ext_resource type="Texture2D" uid="uid://cxe11gsabi2td" path="res://assets/sprites/buildings/townhall_color.png" id="2_pnnkn"]
 [ext_resource type="StyleBox" uid="uid://b5w7b7xxhnm7s" path="res://assets/resources/styles/town_hall_exp_foreground_style_box_flat.tres" id="3_526cg"]
 [ext_resource type="PackedScene" uid="uid://cptclaw016axb" path="res://scenes/ui/town_ui/town_stat_ui_container.tscn" id="6_dlt0n"]
 

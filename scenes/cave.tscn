@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bbvsfe4h2sph"]
+[gd_scene load_steps=33 format=3 uid="uid://bbvsfe4h2sph"]
 
 [ext_resource type="PackedScene" uid="uid://wy0dgop8pftu" path="res://scenes/world/cave_tilemap.tscn" id="1_yabqn"]
 [ext_resource type="PackedScene" uid="uid://b6w8cr3rm5pu3" path="res://scenes/world/rock.tscn" id="3_flaay"]
@@ -12,10 +12,12 @@
 [ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="7_somas"]
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="8_pa72b"]
 [ext_resource type="Texture2D" uid="uid://dkjbgvrnc6r7" path="res://assets/sprites/tiles/stalagmate_two.png" id="10_gfyjh"]
+[ext_resource type="Resource" uid="uid://bs6otct5awtuy" path="res://TinoTests/Resources/rock.tres" id="11_c0w2f"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="11_mechj"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="11_ufcgq"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="12_p8hl2"]
 [ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="13_66y4m"]
+[ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="13_nie8h"]
 [ext_resource type="Texture2D" uid="uid://xcn7cih418ht" path="res://assets/sprites/tiles/stalagmate_drop.png" id="14_jaj2c"]
 [ext_resource type="Texture2D" uid="uid://dj3tsl8mk8qbe" path="res://assets/sprites/tiles/stalagmate_drop_two.png" id="15_rbqxh"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="19_w0jgf"]
@@ -63,7 +65,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-5, -90), Vector2(120, 120)]
+"values": [Vector2(2.08165e-12, 2.08165e-12), Vector2(2.08165e-12, 120)]
 }
 
 [sub_resource type="Animation" id="Animation_ir0ao"]
@@ -78,7 +80,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-5, -90), Vector2(5, -90), Vector2(-5, -90)]
+"values": [Vector2(-5, 2.08165e-12), Vector2(5, 2.08165e-12), Vector2(-5, 2.08165e-12)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x8yya"]
@@ -88,7 +90,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_foprt"]
-size = Vector2(274.75, 163.5)
+size = Vector2(276.375, 164.75)
 
 [sub_resource type="Gradient" id="Gradient_pwesi"]
 interpolation_mode = 2
@@ -1619,21 +1621,28 @@ _animationPlayer = NodePath("../Stalagmite19/AnimationPlayer")
 _sprite = NodePath("../Stalagmite19/Sprite2D")
 
 [node name="BridgeStalagmite" type="StaticBody2D" parent="Objects/Breakable" node_paths=PackedStringArray("_animationPlayer", "_sprite", "_fallingTreeBridge")]
-position = Vector2(-1260, 166)
+position = Vector2(-1260, 175)
 script = ExtResource("8_pa72b")
+loot = ExtResource("11_c0w2f")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite = NodePath("Sprite2D")
 _color = Color(0.596078, 0.639216, 0.733333, 1)
 _minBrightness = 0.75
-_scaleVariation = -0.2
 _flipVariation = false
 _fallingTreeBridge = NodePath("../Bridge")
 
 [node name="Sprite2D" type="Sprite2D" parent="Objects/Breakable/BridgeStalagmite"]
-position = Vector2(-5, -90)
 rotation = 3.14159
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.636183, 0.75)
 texture = ExtResource("10_gfyjh")
+offset = Vector2(2.08165e-12, 160)
+
+[node name="Shadow" type="Sprite2D" parent="Objects/Breakable/BridgeStalagmite/Sprite2D"]
+modulate = Color(1, 1, 1, 0.615686)
+position = Vector2(-6.28735, -46.6667)
+rotation = -3.14159
+scale = Vector2(6.24383, 2.88889)
+texture = ExtResource("13_nie8h")
 
 [node name="HealthComponent" parent="Objects/Breakable/BridgeStalagmite" node_paths=PackedStringArray("_parentScript") instance=ExtResource("11_ufcgq")]
 _parentScript = NodePath("..")
@@ -1647,11 +1656,13 @@ _parentScript = NodePath("..")
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Breakable/BridgeStalagmite/HitboxComponent"]
+visible = false
 position = Vector2(-7.5, 28)
 shape = SubResource("RectangleShape2D_idkut")
 debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Breakable/BridgeStalagmite"]
+visible = false
 position = Vector2(-8, 27)
 shape = SubResource("RectangleShape2D_0wx7i")
 
@@ -1666,7 +1677,7 @@ offset = Vector2(125, 115)
 polygon = PackedVector2Array(103, -34, 102, -121, -110, -122, -111, -34)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Objects/Breakable/BridgeStalagmite"]
-position = Vector2(85, 249)
+position = Vector2(97.8125, 254.625)
 shape = SubResource("RectangleShape2D_foprt")
 
 [node name="Bridge" type="Node2D" parent="Objects/Breakable"]
@@ -1674,20 +1685,26 @@ visible = false
 position = Vector2(-1260, 166)
 
 [node name="Sprite2D2" type="Sprite2D" parent="Objects/Breakable/Bridge"]
-modulate = Color(0.596078, 0.639216, 0.733333, 1)
+modulate = Color(0.529412, 0.368627, 0.337255, 1)
 position = Vector2(90, 218)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("14_jaj2c")
 
+[node name="Sprite2D5" type="Sprite2D" parent="Objects/Breakable/Bridge"]
+modulate = Color(0.415686, 0.313726, 0.317647, 1)
+position = Vector2(156.8, 142.8)
+scale = Vector2(0.294339, 0.359574)
+texture = ExtResource("14_jaj2c")
+
 [node name="Sprite2D3" type="Sprite2D" parent="Objects/Breakable/Bridge"]
-modulate = Color(0.596078, 0.639216, 0.733333, 1)
-position = Vector2(136, 292)
-scale = Vector2(0.5, 0.5)
+modulate = Color(0.435294, 0.32549, 0.337255, 1)
+position = Vector2(108, 293)
+scale = Vector2(0.543939, 0.5)
 texture = ExtResource("15_rbqxh")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Objects/Breakable/Bridge"]
-modulate = Color(0.596078, 0.639216, 0.733333, 1)
-position = Vector2(66, 141)
+modulate = Color(0.333333, 0.239216, 0.227451, 1)
+position = Vector2(1, 141)
 rotation = -3.14159
 scale = Vector2(0.5, -0.5)
 texture = ExtResource("15_rbqxh")
@@ -1695,7 +1712,7 @@ texture = ExtResource("15_rbqxh")
 [node name="Lights" type="Node2D" parent="Objects"]
 
 [node name="Light" type="PointLight2D" parent="Objects/Lights"]
-position = Vector2(-38, 159)
+position = Vector2(-55, 160)
 rotation = -0.133376
 scale = Vector2(8.49305, 1.17687)
 energy = 1.5
@@ -1776,6 +1793,7 @@ script = ExtResource("19_w0jgf")
 visible = false
 position = Vector2(-71, -4)
 
+[connection signal="animation_finished" from="Objects/Breakable/BridgeStalagmite/AnimationPlayer" to="Objects/Breakable/BridgeStalagmite" method="OnAnimationFinished"]
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
 [connection signal="timeout" from="ZombieSpawn/Timer" to="ZombieSpawn" method="ZombieSpawn" flags=18]
 [connection signal="timeout" from="ZombieSpawn/ZombieDeletionTimer" to="ZombieSpawn" method="DeleteZombieDelay" flags=18]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://ih0n4u2okucu"]
+[gd_scene load_steps=13 format=3 uid="uid://ih0n4u2okucu"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_eb84s"]
 [ext_resource type="Resource" uid="uid://bs6otct5awtuy" path="res://TinoTests/Resources/rock.tres" id="2_yjkcf"]
+[ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="3_6nvf8"]
 [ext_resource type="Texture2D" uid="uid://dkjbgvrnc6r7" path="res://assets/sprites/tiles/stalagmate_two.png" id="3_568sm"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_jtcdk"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_5e7l3"]
@@ -52,7 +53,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-5, -90), Vector2(5, -90), Vector2(-5, -90)]
+"values": [Vector2(-7, -119), Vector2(3, -119), Vector2(-7, -119)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x8yya"]
@@ -71,8 +72,14 @@ _color = Color(0.596078, 0.639216, 0.733333, 1)
 _minBrightness = 0.75
 _scaleVariation = 0.5
 
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.615686)
+position = Vector2(-6, 41)
+scale = Vector2(4.29167, 2.4)
+texture = ExtResource("3_6nvf8")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-5, -90)
+position = Vector2(-7, -119)
 rotation = 3.14159
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_568sm")

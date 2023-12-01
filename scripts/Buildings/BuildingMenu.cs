@@ -17,6 +17,9 @@ public partial class BuildingMenu : Control
 
 	Node2D _buildings;
 
+    BuildingDemolishMenu _demolishMenu;
+    const string BUILDING_DEMOLISH_MENU_NODENAME = "%BuildingDemolishMenu";
+
     [Export]
     ScrollContainer _buildMenu;
     [Export]
@@ -389,6 +392,16 @@ public partial class BuildingMenu : Control
             _buildingScene.Position = new Vector2(x, y);
             _buildings.AddChild(_buildingScene);
 
+            if(_currentBuilding.name == "House" || _currentBuilding.name == "Large House" || _currentBuilding.name == "Archer Tower")
+            {
+                _demolishMenu = _buildingScene.GetNode<BuildingDemolishMenu>(BUILDING_DEMOLISH_MENU_NODENAME);
+                _demolishMenu.buildingName = _currentBuilding.name;
+                if(_demolishMenu.buildingNameLabel != null)
+                {
+                    _demolishMenu.SetBuildingName();
+                }
+            }
+
             if (jsonObject["name"].ToString() == "House" || jsonObject["name"].ToString() == "LargeHouse" || jsonObject["name"].ToString() == "ArcherTower")
             {
                 BuildingHealth healthscript = _buildingScene.GetNode("BuildingHealth") as BuildingHealth;
@@ -437,11 +450,19 @@ public partial class BuildingMenu : Control
             return;
         }
 
-
-
         Node2D _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;
         _buildingScene.Position = _ghostBuilding.Position;
         _buildings.AddChild(_buildingScene);
+
+        if (_currentBuilding.name == "House" || _currentBuilding.name == "Large House" || _currentBuilding.name == "Archer Tower")
+        {
+            _demolishMenu = _buildingScene.GetNode<BuildingDemolishMenu>(BUILDING_DEMOLISH_MENU_NODENAME);
+            _demolishMenu.buildingName = _currentBuilding.name;
+            if (_demolishMenu.buildingNameLabel != null)
+            {
+                _demolishMenu.SetBuildingName();
+            }
+        }
     }
 
     private void BuildingMode()

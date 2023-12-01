@@ -1,0 +1,103 @@
+[gd_scene load_steps=9 format=3 uid="uid://2v1aodyd0p4b"]
+
+[ext_resource type="Script" path="res://scripts/Buildings/BuildingDemolishMenu.cs" id="1_qpu6l"]
+[ext_resource type="StyleBox" path="res://assets/resources/styles/default_ui_style_box_texture.tres" id="2_rdpcq"]
+[ext_resource type="LabelSettings" path="res://assets/resources/labelsettings/town_hall_menu_Header_label_settings.tres" id="3_o8csu"]
+[ext_resource type="StyleBox" path="res://assets/resources/styles/default_button_style_box.tres" id="4_o2l8s"]
+[ext_resource type="StyleBox" path="res://assets/resources/styles/default_button_hover_style_box.tres" id="5_jdppl"]
+[ext_resource type="StyleBox" path="res://assets/resources/styles/default_button_pressed_style_box.tres" id="6_s0ntp"]
+[ext_resource type="LabelSettings" uid="uid://b7lsomeboc5fi" path="res://assets/resources/labelsettings/demolish_menu_buttons_label_settings.tres" id="7_nuinx"]
+[ext_resource type="PackedScene" uid="uid://b018nrwq1ghiv" path="res://scenes/ui/town_ui/close_button_container.tscn" id="9_qa0ux"]
+
+[node name="BuildingDemolishMenu" type="Control"]
+z_index = 100
+custom_minimum_size = Vector2(360, 256)
+layout_mode = 3
+anchors_preset = 0
+offset_top = 2.0
+offset_right = 587.0
+offset_bottom = 508.0
+scale = Vector2(0.7, 0.7)
+mouse_filter = 2
+script = ExtResource("1_qpu6l")
+
+[node name="MainPanel" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.801
+anchor_bottom = 0.599
+offset_right = -0.187042
+offset_bottom = -0.0940247
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_rdpcq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Upper HBox" type="HBoxContainer" parent="MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+alignment = 1
+
+[node name="Header" type="Label" parent="MainPanel/VBoxContainer/Upper HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = ExtResource("3_o8csu")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Spacer2" type="Control" parent="MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Buttons HBox" type="HBoxContainer" parent="MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="DemolishButton" type="Button" parent="MainPanel/VBoxContainer/Buttons HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(196, 128)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("4_o2l8s")
+theme_override_styles/hover = ExtResource("5_jdppl")
+theme_override_styles/pressed = ExtResource("6_s0ntp")
+
+[node name="Label" type="Label" parent="MainPanel/VBoxContainer/Buttons HBox/DemolishButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Demolish"
+label_settings = ExtResource("7_nuinx")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MainCloseButtonContainer" parent="MainPanel" instance=ExtResource("9_qa0ux")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -113.92
+offset_right = -1.92001
+grow_horizontal = 0
+
+[editable path="MainPanel/MainCloseButtonContainer"]

@@ -53,7 +53,6 @@ public partial class SpawnScript : Node2D
   
 	  public override void _Process(double delta)
     {
-	   isNightOrDay = TimeManager.dayTime;
 	   CheckIfInsideCave();
         if (!spawnDelay.IsStopped() && isNightOrDay)
         {
@@ -61,7 +60,7 @@ public partial class SpawnScript : Node2D
         }
         else if (spawnDelay.IsStopped() && !isNightOrDay)
         {
-            spawnDelay.Stop();
+			spawnDelay.Stop();
         }
 		CheckIfTownDestroyed();
 		if(zombieList.Count > 0 && zombieDelayBool)
@@ -86,7 +85,8 @@ public partial class SpawnScript : Node2D
 	{
 		if(globalTime.HasTownBeenDestroyed())
 		{
-			spawnDelay.Stop();
+			if(GetParent<Node2D>().Name != "Cave") spawnDelay.Stop();
+			
 		}
 	}
 	private void DeleteZombieDelay()
@@ -97,10 +97,14 @@ public partial class SpawnScript : Node2D
 	}
 	private void CheckIfInsideCave()
 	{
-		if(GetParent<Node2D>().Name == "Cave")
-	   {	
+		if (GetParent<Node2D>().Name != "Cave")
+		{
+			isNightOrDay = TimeManager.dayTime;
+		}
+		else
+		{
 			isNightOrDay = false;
-	   }
+		}
 	 
 	}
 	public void ZombieSpawn()
@@ -108,13 +112,13 @@ public partial class SpawnScript : Node2D
 		enemiesNode = GetNode<Node2D>("%Enemies");
 
 		SpawnPoint closestSpawnPoint = FindClosestActiveSpawnPoint();
-		if(closestSpawnPoint !=null)
+		if(closestSpawnPoint !=null )
 		{
 			Vector2 spawnPointPos = closestSpawnPoint.Node.Position;
 			Vector2 playerPos = player.Position;
 
 			float distance = spawnPointPos.DistanceTo(playerPos);
-
+			// GD.Print("Spawn Attempt - Distance:", distance, " Max Distance:", maxDistance);
 			if(distance <= maxDistance)
 			{
 				CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
@@ -127,6 +131,8 @@ public partial class SpawnScript : Node2D
 			{
 				GD.Print("Spawn point too far away, skipping spawn.");
 			}
+			 closestSpawnPoint.IsActive = true;
+
 		}
 
 		if(spawnPoints.All(sp => !sp.IsActive))

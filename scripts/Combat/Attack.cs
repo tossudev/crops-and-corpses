@@ -14,5 +14,6 @@ public enum EffectType
 {
 	None,
 	Cure,
-	Repair
+	Repair,
+	CaveEntrance,
 }

@@ -4,48 +4,30 @@ using System.Runtime.CompilerServices;
 
 public partial class Portal : Node2D
 {
-	[Export] private SceneName _targetScene;
+	[Export] public PortalID id;
+	[Export] public Node2D exitPosition;
 
-	public override void _PhysicsProcess(double delta)
+	private PortalManager _portalManager;
+
+	public override void _Ready()
 	{
-
+		_portalManager = GetParent<PortalManager>();
 	}
 
 	public void OnBodyEntered(Node body)
 	{
 		if (body is PlayerController)
 		{
-			var player = body as PlayerController;
-			switch (_targetScene)
-			{
-				case SceneName.Town:
-					SceneManager.ChangeScene(this, Scene.Town);
-					break;
-
-				case SceneName.Cave:
-					SceneManager.ChangeScene(this, Scene.Cave);
-					break;
-
-				case SceneName.Forest:
-					SceneManager.ChangeScene(this, Scene.Forest);
-					break;
-
-				case SceneName.Ruins:
-					SceneManager.ChangeScene(this, Scene.Ruins);
-					break;
-
-				default:
-					GD.PrintErr("Unknown scene name: " + _targetScene);
-					break;
-			}
+			_portalManager.PortalTo(id);
 		}
 	}
 }
 
-enum SceneName
+public enum PortalID
 {
-	Town,
+	None,
 	Cave,
 	Forest,
-	Ruins
+	Ruins,
+	Town,
 }

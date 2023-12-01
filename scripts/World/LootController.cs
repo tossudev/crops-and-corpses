@@ -59,16 +59,13 @@ public partial class LootController : StaticBody2D
 			_items.Add(loot.lootItems[GD.RandRange(0, loot.lootItems.Count - 1)].item);
 		}
 
-		if (GD.Randf() < 0.75f)
+		if (GD.Randf() < 0.8f)
 		{
-			if (GD.Randf() < 0.75f)
-			{
-				_items.RemoveAt(GD.RandRange(0, _items.Count - 1));
-			}
-			else
-			{
-				_items.Add(_items[GD.RandRange(0, _items.Count - 1)]);
-			}
+			_items.RemoveAt(GD.RandRange(0, _items.Count - 1));
+		}
+		else if (GD.Randf() > 0.95f)
+		{
+			_items.Add(_items[GD.RandRange(0, _items.Count - 1)]);
 		}
 	}
 

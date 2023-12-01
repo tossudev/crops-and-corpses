@@ -31,6 +31,17 @@ public partial class PlayerController : CharacterBody2D
 
 	public override void _Ready()
 	{
+		if (_isDead)
+		{
+			Position = _respawnPoint.Position;
+			_isDead = false;
+		}
+		else
+		{
+			_healthComponent.SetHealth(PlayerInfo.health);
+			_staminaComponent.SetStamina(PlayerInfo.stamina);
+		}
+
 		canRun = true;
 		stopMovement = false;
 	}
@@ -170,18 +181,11 @@ public partial class PlayerController : CharacterBody2D
 
 	private void Respawn()
 	{
+		PlayerInfo.travelID = PortalID.Town;
 		_healthComponent.SetHealth(_healthComponent.GetMaxHealth());
 		_staminaComponent.SetStamina(_staminaComponent.GetMaxStamina());
 
-		_isDead = false;
-
-		if (_respawnPoint == null)
-		{
-			GD.Print("Move to town scene spawn point");
-			return;
-		}
-
-		Position = _respawnPoint.Position;
+		SceneManager.ChangeScene(this, Scene.Town);
 	}
 
 	void OnPickupAreaEntered(Area2D body)
@@ -193,5 +197,11 @@ public partial class PlayerController : CharacterBody2D
 		DroppedItem itemScript = parent as DroppedItem;
 
 		itemScript?.Pickup();
+	}
+
+	public void SaveState()
+	{
+		PlayerInfo.health = _healthComponent.GetHealth();
+		PlayerInfo.stamina = _staminaComponent.GetStamina();
 	}
 }

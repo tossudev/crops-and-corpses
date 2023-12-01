@@ -17,7 +17,7 @@ public partial class StaminaComponent : Node2D
 	{
 		_staminaBar = GetTree().GetFirstNodeInGroup("PlayerStaminaBar") as ProgressBar;
 		_staminaBar.MaxValue = _maxStamina;
-		currentStamina = _maxStamina;
+		currentStamina = PlayerInfo.stamina;
 		UpdateStaminaBar();
 	}
 
@@ -105,7 +105,7 @@ public partial class StaminaComponent : Node2D
 		_regenTimer.Start(duration);
 	}
 
-	private void UpdateStaminaBar()
+	public void UpdateStaminaBar()
 	{
 		if (_staminaBar == null)
 		{
@@ -125,5 +125,10 @@ public partial class StaminaComponent : Node2D
 	{
 		currentStamina = amount;
 		UpdateStaminaBar();
+	}
+
+	public int GetStamina()
+	{
+		return currentStamina;
 	}
 }

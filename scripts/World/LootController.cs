@@ -115,9 +115,10 @@ public partial class LootController : StaticBody2D
 			{
 				_animationPlayer?.Play("fall");
 			}
-			else if (Name == "FallingStalamite")
+			else if (Name == "BridgeStalagmite")
 			{
-				_animationPlayer?.Play("fallingStalamite");
+				_animationPlayer.SpeedScale = 2;
+				_animationPlayer?.Play("fallingStalagmite");
 			}
 			else
 			{
@@ -129,8 +130,9 @@ public partial class LootController : StaticBody2D
 
 	private void OnAnimationFinished(string animationName)
 	{
-		if (animationName == "fall" || animationName == "fallingStalamite")
+		if (animationName == "fall" || animationName == "fallingStalagmite")
 		{
+			GD.Print("falling");
 			if (_fallingTreeBridge != null) _fallingTreeBridge.Visible = true;
 			QueueFree();
 		}

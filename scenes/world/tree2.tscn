@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bcoq8weob6f7g"]
+[gd_scene load_steps=12 format=3 uid="uid://bcoq8weob6f7g"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_bnnfg"]
 [ext_resource type="Resource" uid="uid://b7jgjk4165udm" path="res://TinoTests/Resources/tree.tres" id="2_d74pb"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_tuq8w"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_noskx"]
 [ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_txja1"]
+[ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="7_3qb0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ljv8c"]
 size = Vector2(90, 52)
@@ -39,6 +40,11 @@ script = ExtResource("1_bnnfg")
 loot = ExtResource("2_d74pb")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite = NodePath("Sprite2D")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+scale = Vector2(2.7, 2)
+texture = ExtResource("7_3qb0r")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(8, -128)

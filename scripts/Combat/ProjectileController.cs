@@ -6,6 +6,7 @@ public partial class ProjectileController : Node2D
 {
     [Export] private Timer _lifetimeTimer;
     [Export] private Sprite2D _sprite;
+    [Export] private Sprite2D _shadow;
 
     public Attack attack;
     public Projectile projectile;
@@ -14,6 +15,7 @@ public partial class ProjectileController : Node2D
     private float _airtime;
     private float _despawnTime;
     private bool _objectCollision;
+    private float _height;
 
     public void Init()
     {
@@ -21,10 +23,16 @@ public partial class ProjectileController : Node2D
         _airtime = projectile.airtime;
         _despawnTime = projectile.despawnTime;
         _objectCollision = projectile.objectCollision;
+        _height = projectile.height;
 
         if (projectile.effect != EffectType.None)
         {
             attack.effect = projectile.effect;
+        }
+
+        if (attack.direction.X < 0)
+        {
+            this.Scale *= new Vector2(1, -1);
         }
 
         this.TopLevel = true;
@@ -36,6 +44,11 @@ public partial class ProjectileController : Node2D
         if (_lifetimeTimer.TimeLeft > _despawnTime)
         {
             this.Position += attack.direction * (float)delta * speed;
+
+            if (_shadow != null)
+            {
+                _shadow.Position = new Vector2(_shadow.Position.X, _height * (float)_lifetimeTimer.TimeLeft);
+            }
         }
         else if (_lifetimeTimer.TimeLeft <= 0)
         {
@@ -44,6 +57,7 @@ public partial class ProjectileController : Node2D
         else
         {
             this.GetNode<Area2D>("Hitbox").SetDeferred("monitoring", false);
+            _shadow.Visible = false;
         }
     }
 
@@ -61,7 +75,7 @@ public partial class ProjectileController : Node2D
 
     private void OnObjectEntered(Node2D body)
     {
-        if (!body.IsInGroup("player") && _objectCollision)
+        if (!body.IsInGroup("player") && !body.IsInGroup("fence") && _objectCollision)
         {
             this.GetNode<Area2D>("Hitbox").SetDeferred("monitoring", false);
             _lifetimeTimer.Stop();

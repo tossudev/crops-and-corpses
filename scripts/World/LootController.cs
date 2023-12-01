@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public partial class LootController : StaticBody2D
 {
-	[Export] private Loot _loot;
+	[Export] public Loot loot;
 	[Export] private AnimationPlayer _animationPlayer;
 	[Export] private Sprite2D _sprite;
 	[Export] private Color _color;
@@ -15,43 +15,59 @@ public partial class LootController : StaticBody2D
 	[Export] private int _rotationVariation = 0;
 	//should be between 0 and 1
 	[Export] private float _scaleVariation = 0f;
+	[Export] private bool _flipVariation = true;
+
+	[Export] private Node2D _dropLootPosition;
+	[Export] private Node2D _fallingTreeBridge;
 
 	private List<Item> _items = new List<Item>();
 	RandomNumberGenerator rng;
+	private int _meanDrop;
 
 	public override void _Ready()
 	{
-		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
-		_animationPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
+		if (loot == null)
+			return;
 
-		rng = new RandomNumberGenerator();
-		rng.Seed = this.GetInstanceId();
+		Init();
+	}
 
-		Variations();
-
-		if (_loot == null)
+	public void Init()
+	{
+		if (loot == null)
 		{
 			GD.PrintErr("LootController: Loot is null");
 			return;
 		}
 
-		foreach (var item in _loot.lootItems)
+		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
+		_animationPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
+		_meanDrop = loot.meanDrop;
+
+		if (_dropLootPosition == null)
+			_dropLootPosition = this;
+
+		rng = new RandomNumberGenerator();
+		var x = (this.Position.X);
+		var y = (this.Position.Y);
+		rng.Seed = (ulong)((x + y) * (x + y + 1) / 2 + y);
+
+		Variations();
+
+		for (int i = 0; i < _meanDrop; i++)
 		{
-			for (int i = 0; i < item.quantity; i++)
-			{
-				_items.Add(item.item);
-			}
+			_items.Add(loot.lootItems[GD.RandRange(0, loot.lootItems.Count - 1)].item);
 		}
 
-		if (GD.RandRange(0, 1) < 0.5f)
+		if (GD.Randf() < 0.75f)
 		{
-			if (GD.RandRange(0, 1) > 0.5f)
+			if (GD.Randf() < 0.75f)
 			{
-				_items.Add(_items[GD.RandRange(0, _items.Count - 1)]);
+				_items.RemoveAt(GD.RandRange(0, _items.Count - 1));
 			}
 			else
 			{
-				_items.RemoveAt(GD.RandRange(0, _items.Count - 1));
+				_items.Add(_items[GD.RandRange(0, _items.Count - 1)]);
 			}
 		}
 	}
@@ -63,7 +79,7 @@ public partial class LootController : StaticBody2D
 		if (_color != new Color(0, 0, 0, 0))
 			_sprite.Modulate = new Color(_color.R * brightness, _color.G * brightness, _color.B * brightness, 1);
 
-		if (rng.RandfRange(0, 1) > 0.5f)
+		if (_flipVariation && rng.RandfRange(0, 1) > 0.5f)
 			this.Scale = new Vector2(-Scale.X, Scale.Y);
 
 		this.Scale *= rng.RandfRange(1 - _scaleVariation, 1f);
@@ -73,32 +89,41 @@ public partial class LootController : StaticBody2D
 
 	private void OnHealth(float health)
 	{
-		if (_items.Count > 1)
+		if (_items.Count - (_items.Count - _meanDrop) > 1)
 			DropItems();
 
-		_animationPlayer.SpeedScale = 10;
-		_animationPlayer.Play("shake");
+		if (_animationPlayer != null)
+		{
+			_animationPlayer.SpeedScale = 10;
+			_animationPlayer.Play("shake");
+		}
 
 		if (health <= 0)
 		{
-			if (Name == "TreeBridge")
+			if (Name == "FallingTree")
 			{
-				_animationPlayer.Play("fall");
+				_animationPlayer?.Play("fall");
 			}
-			else{
+			else if (Name == "BridgeStalagmite")
+			{
+				_animationPlayer.SpeedScale = 2;
+				_animationPlayer?.Play("fallingStalagmite");
+			}
+			else
+			{
 				DropItems(_items.Count);
 				QueueFree();
 			}
-			
 		}
 	}
 
 	private void OnAnimationFinished(string animationName)
-	{    
-		if(animationName == "fall")
+	{
+		if (animationName == "fall" || animationName == "fallingStalagmite")
 		{
-			QueueFree(); 
-		}           
+			if (_fallingTreeBridge != null) _fallingTreeBridge.Visible = true;
+			QueueFree();
+		}
 	}
 
 	private void DropItems(int dropAmount = 1)
@@ -109,7 +134,7 @@ public partial class LootController : StaticBody2D
 
 			RawInventoryItem dropItem = new RawInventoryItem(_items[randIndex].ID, _items[randIndex].Name, 1, _items[randIndex].StackSize);
 
-			Node2D droppedItem = PlayerInventoryController.CreateDroppedItem(dropItem, this.Position, GetParent());
+			Node2D droppedItem = PlayerInventoryController.CreateDroppedItem(dropItem, _dropLootPosition.GlobalPosition, GetParent().GetParent());
 
 			_items.RemoveAt(randIndex);
 

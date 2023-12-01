@@ -14,7 +14,15 @@ public partial class HitboxComponent : Area2D
 			return;
 		}
 
-		_healthComponent.TakeDamage(attack);
+		if (attack.effect == EffectType.Repair)
+		{
+			_healthComponent.TryHealWithRepairItem();
+			return;
+		}
+		else
+		{
+			_healthComponent.TakeDamage(attack);
+		}
 
 		if (_parentScript == null || !_parentScript.HasMethod("AttackReceived"))
 		{

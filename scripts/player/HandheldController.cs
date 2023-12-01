@@ -87,6 +87,9 @@ public partial class HandheldController : Node2D
             case TargetType.Rock:
                 _targetGroup = "rock";
                 break;
+            case TargetType.Building:
+                _targetGroup = "building";
+                break;
             default:
                 return;
         }

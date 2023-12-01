@@ -16,25 +16,29 @@ public partial class Villager : CharacterBody2D
 {
 	//[Export] VillagerManager _villagerManager;
 	Vector2 _targetPosition;
-	Timer _timer;
-	Timer _gatheringTimer;
-
+	Timer _taskTimer;
+	Timer _chooseTaskTimer;
 	[Export] NavigationAgent2D navMeshAgent;
 	//[Export] NavigationRegion2D navRegionArea;
+	//List<Node2D> _fenceList = new List<Node2D>();
 	Plant _currentPlant;
-	Node2D _streetSign;
+	ArcherTower _archerTower;
+	HealthComponent _fenceHealth;
+	Node2D _buildings;
+	Node2D _fences;
+	HealthComponent _currentFence;
 	Sprite2D _villagerSprite;
 	int _plantIndex = 0;
+	int _archerTowerIndex = 0;
+	int _fenceIndex = 0;
 	float _speed = 0;
 	bool collision = false;
-	bool _timerStopped = false;
 	bool _taskStarted = false;
 	int _resourceTaskCounter = 0;
 	const string PLAYER_NODENAME = "%Player";
 	const string STREETSIGN_NODENAME = "%StreetSign";
-	const string FOREST_SCENE_NODENAME = "%ForestScene";
 	CharacterBody2D _player;
-	public bool needResque = false;
+	public bool needRescue = false;
 
 	[Export] VillagerInfo _info;
 	public VillagerInfo villagerInfo => _info;
@@ -44,63 +48,66 @@ public partial class Villager : CharacterBody2D
 
 	bool _inTownScene;
 
-    public List<Villager> currentOccupationList;
+	public List<Villager> currentOccupationList;
 
-    public VillagerResidence currentResidence;
+	public VillagerResidence currentResidence;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_player = GetParent().GetNodeOrNull<CharacterBody2D>(PLAYER_NODENAME);
-		_streetSign = GetParent().GetNodeOrNull<Node2D>(STREETSIGN_NODENAME);
-
 		_villagerSprite = GetNode<Sprite2D>("Sprite2D");
-		_gatheringTimer = GetNode<Timer>("GatheringTimer");
-        
-		_timer = new Timer
+		_buildings = (Node2D)GetTree().GetFirstNodeInGroup("buildings");
+
+		_taskTimer = new Timer
 		{
-			WaitTime = GD.RandRange(0.8f, 1.25f),
+			WaitTime = GD.RandRange(0.8f, 1.25f)
 		};
-		_timer.Timeout += State;
-		AddChild(_timer);
-		_timer.Start();
+		_taskTimer.Timeout += State;
+		AddChild(_taskTimer);
+		_taskTimer.Start();
 	}
 
 	public void InitializeVillager(VillagerRawData data)
 	{
 		_rawData = data;
-		
+
 		_info.InitializeVillagerInfo(data);
-        
+
 		// TODO: This needs to be changed once the rig sprites are in place and saved
 		_villagerSprite.Texture = VillagerManager.villagerManagerInstance.GetNewVillagerData().texture;
-		
-		
+
+
 		_inTownScene = SceneManager.IsCurrentScene(this, Scene.Town);
-		
-		if(!_inTownScene)
+
+		if (!_inTownScene)
 		{
-			needResque = true;
-			SetCurrentState(VillagerState.ResqueQuest);
+			needRescue = true;
+			SetCurrentState(VillagerState.RescueQuest);
 		}
 		else
 		{
-			needResque = false;
-			SetCurrentState(VillagerState.RoamAround);
+			needRescue = false;
 		}
 	}
 
+	public void Teleport(Vector2 coordinates)
+	{
+		GlobalPosition = coordinates;
+		SavePosition();
+	}
+	
 	void SetCurrentState(VillagerState state)
 	{
 		rawData.currentState = state;
 	}
-	
+
 	public override void _PhysicsProcess(double delta)
 	{
 		if (GlobalPosition.DistanceTo(_targetPosition) > 5)
 		{
 			Movement(_targetPosition);
 		}
-		if(_taskStarted && _resourceTaskCounter == 5)
+		if (_taskStarted && _resourceTaskCounter == 5)
 		{
 			ResourceGatheringDone();
 		}
@@ -118,29 +125,29 @@ public partial class Villager : CharacterBody2D
 		SetCurrentState(VillagerState.ChooseTask);
 		Visible = true;
 	}
-	
+
 	void State()
 	{
-        if (!TimeManager.dayTime && !_inTownScene)
-        {
-	        switch (_rawData.currentOccupation)
-	        {
-		        case VillagerOccupation.Soldier:
-			        SetCurrentState(VillagerState.FindArcherTower);
-			        break;
+		if (!TimeManager.dayTime && !_inTownScene)
+		{
+			switch (_rawData.currentOccupation)
+			{
+				case VillagerOccupation.Soldier:
+					SetCurrentState(VillagerState.FindArcherTower);
+					break;
 
-		        default:
-		        {
-			        if (rawData.currentState != VillagerState.InShelter)
-			        {
-				        SetCurrentState(VillagerState.FindShelter);
-			        }
-			        break;
-		        }
-	        }
-        }
-		
-        switch (rawData.currentState)
+				default:
+					{
+						if (rawData.currentState != VillagerState.InShelter)
+						{
+							SetCurrentState(VillagerState.FindShelter);
+						}
+						break;
+					}
+			}
+		}
+
+		switch (rawData.currentState)
 		{
 			case VillagerState.RoamAround:
 				RoamAround();
@@ -166,36 +173,36 @@ public partial class Villager : CharacterBody2D
 				GatherResources();
 				break;
 
-			case VillagerState.ResqueQuest:
-				WaitingResque();
+			case VillagerState.RescueQuest:
+				WaitingRescue();
 				break;
 
 			case VillagerState.FixFence:
-				//TODO
+				//FixBrokenFence();
 				break;
 
 			case VillagerState.FindArcherTower:
-				//TODO
+				FindArcherTower();
 				break;
 
 			case VillagerState.FindShelter:
 
 				if (TimeManager.dayTime)
 				{
-					SetCurrentState(VillagerState.ChooseTask);;
+					SetCurrentState(VillagerState.ChooseTask);
 				}
 				else
 				{
 					FindShelter();
 				}
-				
+
 				break;
-			
+
 			case VillagerState.InShelter when TimeManager.dayTime:
 				currentResidence.VillagerExitBuilding(this);
 				break;
 
-			default: 
+			default:
 				GD.Print("State not found");
 				break;
 		}
@@ -204,14 +211,14 @@ public partial class Villager : CharacterBody2D
 
 	public void _on_button_button_up()
 	{
-		if(!_inTownScene && needResque)
+		if (!_inTownScene && needRescue)
 		{
-			OpenResqueDialogue();
+			OpenRescueDialogue();
 		}
 		else
 		{
 			OpenDialogue();
-		}	
+		}
 	}
 
 	public void OpenDialogue()
@@ -219,7 +226,7 @@ public partial class Villager : CharacterBody2D
 		DialogueControl.instance.OpenDialogueWindow(this);
 	}
 
-	public void OpenResqueDialogue()
+	public void OpenRescueDialogue()
 	{
 		GD.Print("You saved me");
 		// Tähä joku button tai joku ?????
@@ -249,9 +256,27 @@ public partial class Villager : CharacterBody2D
 		MoveAndSlide();
 	}
 
+	public void SavePosition()
+	{
+		rawData.SetCoordinates(GlobalPosition);
+	}
+	
 	void RoamAround()
 	{
 		_targetPosition = GlobalPosition + CreateOffsetVector2(-200, 200);
+
+		if (_chooseTaskTimer == null)
+		{
+			_chooseTaskTimer = new Timer
+			{
+				WaitTime = GD.RandRange(2, 5f),
+				Autostart = true
+			};
+			
+			_chooseTaskTimer.Timeout += ChooseTask;
+			
+			AddChild(_chooseTaskTimer);
+		}
 	}
 
 	void FindShelter()
@@ -262,53 +287,74 @@ public partial class Villager : CharacterBody2D
 	Vector2 CreateOffsetVector2(double min, double max)
 	{
 		GD.Randomize();
-		float x = (float) GD.RandRange(min, max);
-			
+		float x = (float)GD.RandRange(min, max);
+
 		GD.Randomize();
-		float y = (float) GD.RandRange(min, max);
-		
+		float y = (float)GD.RandRange(min, max);
+
 		return new Vector2(x, y);
 	}
-	
+
 	void ChooseTask()
 	{
-		VillagerState decision = VillagerState.ChooseTask;
+		if (_chooseTaskTimer != null)
+		{
+			_chooseTaskTimer.Paused = true;
+			_chooseTaskTimer.QueueFree();
+			_chooseTaskTimer = null;
+		}
 		
+		VillagerState decision;
+
 		switch (_rawData.currentOccupation)
 		{
 			case VillagerOccupation.Builder:
 				decision = VillagerState.FixFence;
 				break;
-			
+
 			case VillagerOccupation.Farmer:
-				GD.Print("Farming task started");
 				decision = VillagerState.FarmingTask;
 				break;
-			
-			case VillagerOccupation.Soldier:
 
+			case VillagerOccupation.Soldier:
 				if (TimeManager.dayTime)
 				{
+					_archerTower?.DeactivateTower();
+					Visible = true;
 					decision = VillagerState.RoamAround;
 				}
 				else
 				{
-					//TODO: If there are free archery towers, enter one. Otherwise look for shelter
-				}
-				
+					bool freeArcherTowerFound = false;
+					foreach(ArcherTower archerTower in VillagerManager.villagerManagerInstance.GetArcherTowerList())
+					{
+						GD.Print("looking for archer towers");
+						if(!archerTower.isOccupied)
+						{
+							freeArcherTowerFound = true;
+							break;
+						}
+					}
+					if(freeArcherTowerFound)
+					{
+						decision = VillagerState.FindArcherTower;
+					}
+					else
+					{
+						decision = VillagerState.FindShelter;
+					}	
+				} 
 				break;
-			
+
 			case VillagerOccupation.Woodcutter:
-				GD.Print("Finding wood");
 				decision = VillagerState.FindWoodTask;
 				break;
-			
+
 			case VillagerOccupation.Miner:
-				GD.Print("Finding stone");
 				decision = VillagerState.FindStoneTask;
 				break;
 
-			
+
 			default:
 				decision = VillagerState.RoamAround;
 				break;
@@ -316,16 +362,15 @@ public partial class Villager : CharacterBody2D
 
 		SetCurrentState(decision);
 	}
-	
- 	void GatherResources()
+
+	void GatherResources()
 	{
-		_targetPosition = _streetSign.GlobalPosition;
+		_targetPosition = TownManager.GetTownPlayerTravel(this).GlobalPosition;
 		if (GlobalPosition.DistanceTo(_targetPosition) < 5)
 		{
-			_info.Visible = false;
 			_taskStarted = true;
 			_villagerSprite.Visible = false;
-			_resourceTaskCounter ++;
+			_resourceTaskCounter++;
 		}
 	}
 
@@ -333,31 +378,42 @@ public partial class Villager : CharacterBody2D
 	{
 		Random rnd = new Random();
 		_villagerSprite.Visible = true;
-		if(_rawData.currentOccupation == VillagerOccupation.Miner)
+		if (_rawData.currentOccupation == VillagerOccupation.Miner)
 		{
 			int amount = rnd.Next(4, 21);
 			GD.Print("Found: " + amount + " stone");
 		}
-		
-		if(_rawData.currentOccupation == VillagerOccupation.Woodcutter)
+
+		if (_rawData.currentOccupation == VillagerOccupation.Woodcutter)
 		{
 			int amount = rnd.Next(4, 21);
 			GD.Print("Found: " + amount + " wood");
 		}
-		
+
 		_taskStarted = false;
 		_resourceTaskCounter = 0;
 		ChooseTask();
 	}
 
-	void WaitingResque()
+	void WaitingRescue()
 	{
 		_targetPosition = GlobalPosition + CreateOffsetVector2(-10, 10);
 	}
 
 	void CheckPlants()
 	{
-		_currentPlant = FarmManager.instance.GetPlantedPlants()[_plantIndex];
+		var plants = FarmManager.instance.GetPlantedPlants();
+
+		_currentPlant = plants.Count > 0
+			? plants[_plantIndex]
+			: null;
+		
+		if (_currentPlant == null)
+        {
+	        SetCurrentState(VillagerState.RoamAround);
+			return;
+		}
+		
 		_currentPlant.isTendedTo = true;
 
 		if (_currentPlant.GetGrowthState() == GrowthState.IsWilting || _currentPlant.GetGrowthState() == GrowthState.WaitWatering ||
@@ -368,12 +424,12 @@ public partial class Villager : CharacterBody2D
 		else
 		{
 			bool _allHarvestable = true;
-			
+
 			for (int i = 0; i < FarmManager.instance.GetPlantedPlants().Count; i++)
-			{	
+			{
 				if (FarmManager.instance.GetPlantedPlants()[i].GetGrowthState() != GrowthState.IsHarvestable &&
 					FarmManager.instance.GetPlantedPlants()[i].GetGrowthState() != GrowthState.IsDead)
-				{	
+				{
 					_allHarvestable = false;
 					break;
 				}
@@ -420,6 +476,62 @@ public partial class Villager : CharacterBody2D
 		_speed = 200;
 		_targetPosition = _player.GlobalPosition;
 	}
+    
+	void FindArcherTower()
+	{
+		_archerTower = VillagerManager.villagerManagerInstance.GetArcherTowerList()[_archerTowerIndex];
+		if (_archerTower.isOccupied)
+		{
+			_archerTowerIndex++;
+			if (_archerTowerIndex == VillagerManager.villagerManagerInstance.GetArcherTowerList().Count)
+			{
+				_archerTowerIndex = 0;
+			}
+			return;
+		}
+
+		_targetPosition = _archerTower.GlobalPosition;
+		if (GlobalPosition.DistanceTo(_archerTower.GlobalPosition) < 200)
+		{
+			GD.Print("Aktivoidaan archer tower");
+			Visible = false;
+			_archerTower.ActivateTower();
+		}
+	}
+
+/* 	void FixBrokenFence()
+	{
+		CountFences();
+		_currentFence = _fenceList[_fenceIndex];
+		_targetPosition = _currentFence.GlobalPosition;
+		ProgressBar fenceHealth = _currentFence.GetChild<ProgressBar>(7);
+		if (fenceHealth.Value < 100)
+		{
+			_targetPosition = _currentFence.GlobalPosition;
+			if (GlobalPosition.DistanceTo(_currentFence.GlobalPosition) < 5)
+			{
+				fenceHealth.Value = 100;
+				_fenceIndex++;
+			}
+		}
+		if (_fenceIndex == _fenceList.Count)
+		{
+			_fenceIndex = 0;
+		}
+	} */
+/* 	void CountFences()
+	{
+		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
+
+		foreach (Node2D fence in _fences.GetChild(0).GetChildren())
+		{
+			ProgressBar fenceHealth = fence.GetChild<ProgressBar>(7);
+			if (fenceHealth.Value < 100)
+			{
+				_fenceList.Add(fence);
+			}
+		}
+	}  */
 }
 
 

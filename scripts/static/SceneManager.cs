@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Godot;
 
@@ -7,6 +8,14 @@ public static class SceneManager
 {
     static bool sceneChanged = true;
     static Node _currentRootScene;
+    
+    
+    public static Scene.RootScene GetCurrentScene(Node caller)
+    {
+        if (sceneChanged) CacheCurrentScene(caller);
+        
+        return Scene.allRootScenes.Find(rootScene => rootScene.Name == _currentRootScene.Name);
+    }
     
     public static bool IsCurrentScene(Node caller, IEnumerable<Scene.RootScene> scenes)
     {
@@ -32,6 +41,14 @@ public static class SceneManager
     
     public static void ChangeScene(Node caller, Scene.RootScene scene)
     {
+        if (IsCurrentScene(caller, Scene.Town))
+        {
+            BuildingMenu buildMenu;
+            buildMenu = caller.GetTree().GetFirstNodeInGroup("buildmenu") as BuildingMenu;
+            buildMenu.SaveBuildings(buildMenu.savePath, buildMenu.fileName);
+        }
+
+
         SaveData.SyncAll();
         caller.GetTree().ChangeSceneToFile(scene.Path);
         sceneChanged = true;

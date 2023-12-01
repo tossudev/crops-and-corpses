@@ -13,7 +13,7 @@ public partial class ZombieAttackFence : ZombieStates
 	private Vector2 _moveDirection = Vector2.Zero;
 	private CharacterBody2D _player;
 	private Node2D _fences;
-	[Export] AnimationPlayer animPlayer;
+	//AnimationPlayer animPlayer;
 
 	public Vector2 MovementTarget
     {
@@ -26,7 +26,13 @@ public partial class ZombieAttackFence : ZombieStates
         _player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
 		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
 
-		_movementTargetPos = _fences.GlobalPosition;
+		if (_fences != null)
+		{
+			_movementTargetPos = _fences.GlobalPosition;
+		} 
+		else {
+			EmitSignal("Transitioned", "idle");
+		}
 
 		_navAgent.PathDesiredDistance = 300.0f;
 		_navAgent.TargetDesiredDistance = 4.0f;
@@ -52,7 +58,7 @@ public partial class ZombieAttackFence : ZombieStates
 
         Vector2 newVelocity = (nextPathPosition - currentAgentPosition).Normalized();
         newVelocity *= _moveSpeed;
-		animPlayer.SpeedScale = _moveSpeed /100;
+		//animPlayer.SpeedScale = _moveSpeed /100;
 		_zombie.Velocity = newVelocity;
 
 		Vector2 playerDirection = _player.GlobalPosition - _zombie.GlobalPosition;

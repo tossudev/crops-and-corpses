@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://di5l0mrx44owj"]
+[gd_scene load_steps=27 format=3 uid="uid://di5l0mrx44owj"]
 
 [ext_resource type="Script" path="res://scripts/ui/town/TownHallMenu.cs" id="1_8dpyt"]
 [ext_resource type="LabelSettings" uid="uid://djab4esbcqs0l" path="res://assets/resources/labelsettings/town_hall_menu_Header_label_settings.tres" id="1_dqf6y"]
@@ -15,6 +15,7 @@
 [ext_resource type="FontFile" uid="uid://doceug7kw76yx" path="res://assets/resources/labelsettings/base_ui_font.tres" id="8_q7o4c"]
 [ext_resource type="PackedScene" uid="uid://2wht6mkjuojy" path="res://scenes/ui/town_ui/occupation_icon.tscn" id="8_ta5mm"]
 [ext_resource type="Texture2D" uid="uid://kjimq4t0wnvv" path="res://assets/sprites/character/hats/straw_hat.png" id="9_485m0"]
+[ext_resource type="PackedScene" uid="uid://kuv6vwvcsqo5" path="res://scenes/ui/town_ui/close_button_container.tscn" id="9_dldyl"]
 [ext_resource type="StyleBox" uid="uid://ddenh15clg401" path="res://assets/resources/styles/default_tab_container_unselected_tab_style.tres" id="9_ggc6j"]
 [ext_resource type="Texture2D" uid="uid://dvrpluxm42nf4" path="res://assets/sprites/character/hats/bucket_helmet.png" id="10_1vu63"]
 [ext_resource type="StyleBox" uid="uid://bjrxs66a6rkm7" path="res://assets/resources/styles/default_tab_container_panel_style.tres" id="10_r4bd2"]
@@ -23,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://bakys00o3rkly" path="res://assets/sprites/character/hats/mining_hat.png" id="12_7e7qn"]
 [ext_resource type="Script" path="res://scripts/ui/town/TownStorage.cs" id="18_ugm6s"]
 [ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory/inventory_slot.tscn" id="19_2cmba"]
+[ext_resource type="StyleBox" uid="uid://cphnvuxh1r71q" path="res://assets/resources/styles/default_tab_container_hovered_tab_style.tres" id="19_rmd0d"]
 [ext_resource type="StyleBox" uid="uid://bfq7mg2htfllb" path="res://assets/resources/styles/inventory_style_box_texture.tres" id="22_u1bpq"]
 
 [node name="Town Hall Menu" type="Control"]
@@ -53,7 +55,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Upper HBox" type="HBoxContainer" parent="MainPanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
 alignment = 1
 
@@ -65,7 +67,7 @@ horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="Spacer2" type="Control" parent="MainPanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
 [node name="Buttons HBox" type="HBoxContainer" parent="MainPanel/VBoxContainer"]
@@ -147,6 +149,16 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="MainCloseButtonContainer" parent="MainPanel" instance=ExtResource("9_dldyl")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_right = -16.0
+grow_horizontal = 0
+
 [node name="UpgradePanel" type="Panel" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -166,25 +178,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Spacer3" type="Control" parent="UpgradePanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 4)
-layout_mode = 2
-
 [node name="Upper HBox" type="HBoxContainer" parent="UpgradePanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 alignment = 1
 
 [node name="Header" type="Label" parent="UpgradePanel/VBoxContainer/Upper HBox"]
+custom_minimum_size = Vector2(0, 51.355)
 layout_mode = 2
 text = "Upgrades"
 label_settings = ExtResource("1_dqf6y")
 horizontal_alignment = 1
 vertical_alignment = 2
-
-[node name="Spacer2" type="Control" parent="UpgradePanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
 
 [node name="Buttons ScrollContainer" type="ScrollContainer" parent="UpgradePanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 360)
@@ -220,6 +225,16 @@ layout_mode = 2
 light_mask = 1
 visibility_layer = 1
 layout_mode = 2
+
+[node name="UpgradesCloseButtonContainer" parent="UpgradePanel" instance=ExtResource("9_dldyl")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_right = -16.0
+grow_horizontal = 0
 
 [node name="Upgrade Confirmation Panel" parent="UpgradePanel" instance=ExtResource("6_r3fm0")]
 visible = false
@@ -307,6 +322,7 @@ theme_override_constants/side_margin = 6
 theme_override_fonts/font = ExtResource("8_q7o4c")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/tab_selected = ExtResource("8_4h6ko")
+theme_override_styles/tab_hovered = ExtResource("19_rmd0d")
 theme_override_styles/tab_unselected = ExtResource("9_ggc6j")
 theme_override_styles/panel = ExtResource("10_r4bd2")
 
@@ -333,6 +349,16 @@ visible = false
 layout_mode = 2
 _occupation = 4
 
+[node name="OccupationsCloseButtonContainer" parent="OccupationsPanel" instance=ExtResource("9_dldyl")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_right = -16.0
+grow_horizontal = 0
+
 [node name="StoragePanel" type="Panel" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -351,14 +377,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 0
-
-[node name="spacer" type="Control" parent="StoragePanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 8)
-layout_mode = 2
+theme_override_constants/separation = 17
 
 [node name="Upper HBox" type="HBoxContainer" parent="StoragePanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
 alignment = 1
 
@@ -372,11 +394,10 @@ vertical_alignment = 2
 [node name="MarginContainer" type="MarginContainer" parent="StoragePanel/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
+theme_override_constants/margin_right = 15
 
 [node name="InventoryPanel" type="Panel" parent="StoragePanel/VBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(664, 420)
+custom_minimum_size = Vector2(664, 380)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("22_u1bpq")
 script = ExtResource("18_ugm6s")
@@ -544,3 +565,15 @@ layout_mode = 2
 
 [node name="InventorySlot48" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/InventoryGrid" instance=ExtResource("19_2cmba")]
 layout_mode = 2
+
+[node name="StorageCloseButtonContainer" parent="StoragePanel" instance=ExtResource("9_dldyl")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_right = -16.0
+grow_horizontal = 0
+
+[editable path="MainPanel/MainCloseButtonContainer"]

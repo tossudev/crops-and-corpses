@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public static class Scene
 {
     public class RootScene
@@ -12,8 +14,18 @@ public static class Scene
         }
     }
 
+     
+    
     public static readonly RootScene Town = new("res://scenes/town.tscn", "Town");
     public static readonly RootScene Forest = new("res://scenes/forest.tscn", "Forest");
     public static readonly RootScene Ruins = new("res://scenes/ruins.tscn", "Ruins");
     public static readonly RootScene Cave = new("res://scenes/cave.tscn", "Cave");
+    
+    public static List<RootScene> allRootScenes = new()
+    {
+        Town,
+        Forest,
+        Ruins,
+        Cave
+    }; 
 }

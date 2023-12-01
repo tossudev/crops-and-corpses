@@ -5,23 +5,23 @@
 [ext_resource type="Shape2D" uid="uid://cexw2rv4qd6l6" path="res://scenes/farm/shapes/well_shape.tres" id="3_emjl7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jifx"]
-size = Vector2(370, 551.429)
+size = Vector2(368.167, 385.714)
 
-[node name="well" type="Node2D" groups=["Well"]]
-scale = Vector2(0.15, 0.15)
+[node name="Well" type="Node2D" groups=["Well"]]
+scale = Vector2(0.25, 0.25)
 script = ExtResource("1_yeq5k")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-426.667, -470)
+position = Vector2(-489, -464)
 texture = ExtResource("3_7hhxw")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(-32, -32)
+position = Vector2(-94.333, -26)
 collision_layer = 9
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-393, -396.542)
+position = Vector2(-393, -224.542)
 scale = Vector2(2, 2)
 shape = ExtResource("3_emjl7")
 
@@ -32,7 +32,7 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-426.667, -442.666)
+position = Vector2(-484.167, -253.333)
 scale = Vector2(2, 0.933333)
 shape = SubResource("RectangleShape2D_8jifx")
 

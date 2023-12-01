@@ -1,29 +1,24 @@
-[gd_scene load_steps=15 format=3 uid="uid://c8ndg5vww0u33"]
+[gd_scene load_steps=14 format=3 uid="uid://c8ndg5vww0u33"]
 
 [ext_resource type="Texture2D" uid="uid://dbx7qsqbkgp03" path="res://assets/sprites/buildings/housedesing.png" id="1_cb1s0"]
+[ext_resource type="StyleBox" uid="uid://cekqcomecgkhn" path="res://assets/resources/styles/default_ui_style_box_texture.tres" id="1_m4llm"]
 [ext_resource type="Script" path="res://scripts/ui/town/UpgradeConfirmationPanel.cs" id="1_pokwd"]
 [ext_resource type="StyleBox" uid="uid://bun7qqvr1xbqk" path="res://assets/resources/styles/insufficient_resources.tres" id="3_jq201"]
 [ext_resource type="LabelSettings" uid="uid://2tbwafe4j8sj" path="res://assets/resources/labelsettings/upgrade_confirmation_panel_name_label_settings.tres" id="3_ki02g"]
 [ext_resource type="StyleBox" uid="uid://7mvoa5a3l8wl" path="res://assets/resources/styles/unlocked.tres" id="4_av26e"]
-[ext_resource type="Texture2D" uid="uid://dha0ys5o7lb1b" path="res://assets/sprites/ui/cross_1024.png" id="4_d38y6"]
 [ext_resource type="FontFile" uid="uid://doceug7kw76yx" path="res://assets/resources/labelsettings/base_ui_font.tres" id="4_gnwmg"]
 [ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory/inventory_slot.tscn" id="4_wcmnq"]
 [ext_resource type="LabelSettings" uid="uid://c3l0ydh3x0ik6" path="res://assets/resources/labelsettings/upgrade_confirmation_panel_requirements_label_settings.tres" id="5_grq2p"]
 [ext_resource type="LabelSettings" uid="uid://lvu6fo67dm7g" path="res://assets/resources/labelsettings/upgrade_confirmation_panel_effect_description_label_settings.tres" id="6_x8csp"]
 [ext_resource type="LabelSettings" uid="uid://5pnd5oina3m6" path="res://assets/resources/labelsettings/upgrade_confirmation_panel_unlock_button_label_settings.tres" id="7_jarur"]
+[ext_resource type="PackedScene" uid="uid://kuv6vwvcsqo5" path="res://scenes/ui/town_ui/close_button_container.tscn" id="8_gnyug"]
 [ext_resource type="StyleBox" uid="uid://ragn8mdynlox" path="res://assets/resources/styles/unlock_possible.tres" id="8_vm8ul"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_s1tv5"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sdllh"]
-texture = SubResource("CanvasTexture_s1tv5")
-modulate_color = Color(0, 0, 0, 0.941176)
 
 [node name="Upgrade Confirmation Panel" type="Panel"]
 custom_minimum_size = Vector2(640, 480)
 offset_right = 480.0
 offset_bottom = 408.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_sdllh")
+theme_override_styles/panel = ExtResource("1_m4llm")
 script = ExtResource("1_pokwd")
 unlockPossibleStyle = ExtResource("8_vm8ul")
 unlockImpossibleStyle = ExtResource("3_jq201")
@@ -41,12 +36,11 @@ theme_override_constants/separation = 0
 [node name="Upper HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(640, 48)
 layout_mode = 2
-theme_override_constants/separation = 8
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Upper HBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 0
 
 [node name="UpgradeIcon" type="TextureRect" parent="VBoxContainer/Upper HBoxContainer/MarginContainer"]
@@ -55,45 +49,31 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("1_cb1s0")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="UpgradeNameLabel" type="Label" parent="VBoxContainer/Upper HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(480, 72)
+custom_minimum_size = Vector2(428, 72)
 layout_mode = 2
 text = "Stronger Foundations"
 label_settings = ExtResource("3_ki02g")
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/Upper HBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_top = 8
-
-[node name="CloseButton" type="Button" parent="VBoxContainer/Upper HBoxContainer/MarginContainer2"]
+[node name="CloseButtonContainer" parent="VBoxContainer/Upper HBoxContainer" instance=ExtResource("8_gnyug")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Upper HBoxContainer/MarginContainer2/CloseButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_d38y6")
-expand_mode = 1
 
 [node name="Margin Container" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 theme_override_constants/margin_left = 96
-theme_override_constants/margin_top = 40
+theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 72
 
 [node name="UpgradeDescriptionLabel" type="RichTextLabel" parent="VBoxContainer/Margin Container"]
 unique_name_in_owner = true
 clip_contents = false
-custom_minimum_size = Vector2(0, 156)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("4_gnwmg")
 theme_override_font_sizes/normal_font_size = 20

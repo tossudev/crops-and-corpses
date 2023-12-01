@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 public partial class VillagerManager : Node
 {
@@ -24,6 +25,8 @@ public partial class VillagerManager : Node
 	
 	List<Villager> _miners = new ();
 	public List<Villager> minerVillagers => _miners;
+	public List<ArcherTower> archerTowerList = new List<ArcherTower>();
+	public List<BuildingHealth> _brokenFenceList = new List<BuildingHealth>();
     
 
 	[Export] AllVillagerData _allData;
@@ -32,6 +35,8 @@ public partial class VillagerManager : Node
 
 	Node2D _villagerParentNode;
 	const string VILLAGER_PARENT_NODEPATH = "%Villagers";
+
+	
 	
 	public override void _Ready()
 	{
@@ -42,6 +47,16 @@ public partial class VillagerManager : Node
 		if (SceneManager.IsCurrentScene(this, Scene.Town))
 		{
 			SpawnSavedVillagers();
+		}
+	}
+
+	public override void _PhysicsProcess(double delta)
+	{
+		base._PhysicsProcess(delta);
+
+		if (TownManager.EveryXSecond((int) AutosaveIntervalSeconds.VILLAGER_POSITION_INTERVAL))
+		{
+			SyncVillagerPositions();
 		}
 	}
 
@@ -57,12 +72,16 @@ public partial class VillagerManager : Node
 
 		foreach (var villagerRawData in SaveData.allVillagerData)
 		{
-			SpawnExistingVillager(villagerRawData);
+			if(villagerRawData.isTownPopulation)
+			{
+				SpawnExistingVillager(villagerRawData);
+			}
 		}
 		
 		bool test;
-		test = SpawnNewVillager();
-		test = SpawnNewVillager();
+		Vector2 spawnCoordinates = new Vector2(0, 0);
+		test = SpawnNewVillager(spawnCoordinates);
+		test = SpawnNewVillager(spawnCoordinates);
 	}
 	
 	public VillagerData GetNewVillagerData(){
@@ -78,30 +97,55 @@ public partial class VillagerManager : Node
 	public VillagerRawData AddNewVillagerRawData(bool intoTown = false)
 	{
 		VillagerData newData = GetNewVillagerData();
-		VillagerRawData newRawData = new VillagerRawData(newData.name, newData.info, intoTown);
+		VillagerRawData newRawData = new VillagerRawData(newData.name, newData.info, intoTown, Vector2.Zero);
 		SaveData.allVillagerData.Add(newRawData);
 
 		return newRawData;
 	}
 	
-	public bool SpawnNewVillager(bool intoTown = true)
+	public bool SpawnNewVillager(Vector2 spawnCoordinates, bool intoTown = true)
 	{
 		if (intoTown && _allVillagers.Count >= TownManager.currentTownStats.populationCap) return false;
         
 		RegisterAndInitVillager(
 			GD.Load<PackedScene>(VILLAGER_SCENE_PATH).Instantiate<Villager>(),
-			AddNewVillagerRawData(intoTown));
+			AddNewVillagerRawData(intoTown),
+			spawnCoordinates
+			);
 		
 		return true;
 	}
 
 	public void SpawnExistingVillager(VillagerRawData existingVillagerRawData)
 	{
+		if (SaveData.allVillagerData.All(data => data.id != existingVillagerRawData.id))
+		{
+			GD.PushError("Villager data not found");
+			return;
+		}
+		
+		
+		
 		RegisterAndInitVillager(
-			GD.Load<PackedScene>(VILLAGER_SCENE_PATH).Instantiate<Villager>(), existingVillagerRawData);
+			GD.Load<PackedScene>(VILLAGER_SCENE_PATH).Instantiate<Villager>(),
+			existingVillagerRawData,
+			new Vector2(existingVillagerRawData.xCoord, existingVillagerRawData.yCoord)
+			);
 	}
 
-	void RegisterAndInitVillager(Villager villagerToRegister, VillagerRawData data)
+	public void SpawnQuestVillagers()
+	{
+		SaveData.allVillagerData.ForEach(data =>
+		{
+			if (!data.isTownPopulation)
+			{
+				SpawnExistingVillager(data);
+			}
+		});
+	}
+	
+	
+	void RegisterAndInitVillager(Villager villagerToRegister, VillagerRawData data, Vector2 spawnCoordinates)
 	{
 		if (_allVillagers.All(villager => villager.rawData.id != data.id))
 		{
@@ -110,8 +154,21 @@ public partial class VillagerManager : Node
 		
 		_villagerParentNode.AddChild(villagerToRegister);
 		villagerToRegister.InitializeVillager(data);
+		
+		SetVillagerOccupation(villagerToRegister, data.currentOccupation);
+		villagerToRegister.Teleport(spawnCoordinates);
 	}
 
+    void SyncVillagerPositions()
+	{
+		foreach (var villager in _allVillagers)
+		{
+			villager.SavePosition();
+		}
+
+		Task save = SaveData.SyncVillagers();
+	}
+	
 	public void SetVillagerOccupation(Villager villager, VillagerOccupation newOccupation)
 	{
 		if (villager == null)
@@ -119,7 +176,11 @@ public partial class VillagerManager : Node
 			GD.PushError("Can't set occupation for null @VillagerManager");
 			return;
 		}
-		villager.currentOccupationList?.Remove(villager);
+
+		if (villager.currentOccupationList != null && villager.currentOccupationList.Contains(villager))
+		{
+			villager.currentOccupationList?.Remove(villager);
+		}
 
 		villager.currentOccupationList = newOccupation switch
 		{
@@ -134,12 +195,41 @@ public partial class VillagerManager : Node
 		villager.currentOccupationList.Add(villager);
 
 		villager.rawData.currentOccupation = newOccupation;
+		villager.rawData.currentState = VillagerState.ChooseTask;
+		
 		villager.villagerInfo.ChangeHat(newOccupation);
 	}
 
 	public Texture2D GetTextureByType(VillagerType type, BodyPartTextureType part)
 	{
 		return _allData.GetTextureByType(type, part);
+	}
+	public void AddArcherTower(ArcherTower archerTower)
+	{
+		archerTowerList.Add(archerTower);
+	}
+	public List<ArcherTower> GetArcherTowerList()
+	{
+		return archerTowerList;
+	}
+	void CountBrokenFencesInTown()
+	{
+		_brokenFenceList.Clear();
+		var _fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
+
+		foreach (Node2D fence in _fences.GetChild(0).GetChildren())
+		{
+			var fenceHealth = fence.GetNode<BuildingHealth>("%BuildingHealth");
+			if(fenceHealth.isBroken)
+			{
+				_brokenFenceList.Add(fenceHealth);
+			}
+		}
+	}
+	public List<BuildingHealth> GetFenceList()
+	{
+		CountBrokenFencesInTown();
+		return _brokenFenceList;
 	}
 }
 
@@ -178,5 +268,5 @@ public enum VillagerState
 	FarmingTask,
 	FindWoodTask,
 	FindStoneTask,
-	ResqueQuest
+	RescueQuest
 }

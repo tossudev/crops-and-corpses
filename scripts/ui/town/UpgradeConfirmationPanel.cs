@@ -26,6 +26,7 @@ public partial class UpgradeConfirmationPanel: Panel
     const string UPGRADE_NAME_LABEL_NODENAME = "%UpgradeNameLabel";
     
     Button _closeButton;
+    const string CLOSE_BUTTON_CONTAINER_NODENAME = "%CloseButtonContainer";
     const string CLOSE_BUTTON_NODENAME = "%CloseButton";
 
     RichTextLabel _upgradeDescLabel;
@@ -52,19 +53,12 @@ public partial class UpgradeConfirmationPanel: Panel
     {
         base._Ready();
         
-        if (instance is null)
-        {
-            instance = this;
-        }
-        else
-        {
-            GD.PushError("2 instances of Upgrade confirmation panel, destroying newest");
-            QueueFree();
-        }
+        instance?.QueueFree();
+        instance = this;
         
         _upgradeIconTextureRect = GetNode<TextureRect>(UPGRADE_ICON_NODENAME);
         _upgradeNameLabel = GetNode<Label>(UPGRADE_NAME_LABEL_NODENAME);
-        _closeButton = GetNode<Button>(CLOSE_BUTTON_NODENAME);
+        _closeButton = GetNode(CLOSE_BUTTON_CONTAINER_NODENAME).GetNode<Button>(CLOSE_BUTTON_NODENAME);
         _upgradeDescLabel = GetNode<RichTextLabel>(UPGRADE_DESCRIPTION_LABEL_NODENAME);
         _upgradeEffectLabel = GetNode<Label>(UPGRADE_EFFECT_LABEL_NODENAME);
         _unlockButton = GetNode<Button>(UNLOCK_BUTTON_NODENAME);
@@ -80,7 +74,13 @@ public partial class UpgradeConfirmationPanel: Panel
 
         _unlockButton.Pressed += UnlockUpgrade;
     }
-    
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        instance = null;
+    }
+
     public void OpenPanel(TownUpgrade upgrade, TownUpgradeButton caller)
     {
         if (upgrade == null)

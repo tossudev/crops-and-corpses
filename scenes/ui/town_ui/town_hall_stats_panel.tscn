@@ -1,0 +1,159 @@
+[gd_scene load_steps=9 format=3 uid="uid://cimpx303d7npd"]
+
+[ext_resource type="Script" path="res://scripts/ui/overlay/TownHallStatsPanel.cs" id="1_frtpl"]
+[ext_resource type="StyleBox" uid="uid://316u70sd3www" path="res://assets/resources/styles/stone_panel_style_box_texture.tres" id="2_8q7tg"]
+[ext_resource type="StyleBox" uid="uid://dq7huk8ldgecf" path="res://assets/resources/styles/town_hall_exp_background_style_box_flat.tres" id="2_f1va5"]
+[ext_resource type="Texture2D" uid="uid://cxe11gsabi2td" path="res://assets/sprites/buildings/townhall_color.png" id="2_pnnkn"]
+[ext_resource type="StyleBox" uid="uid://b5w7b7xxhnm7s" path="res://assets/resources/styles/town_hall_exp_foreground_style_box_flat.tres" id="3_526cg"]
+[ext_resource type="PackedScene" uid="uid://cptclaw016axb" path="res://scenes/ui/town_ui/town_stat_ui_container.tscn" id="6_dlt0n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxlwd"]
+bg_color = Color(0.337255, 0.819608, 0, 1)
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_jxk7l"]
+font_size = 34
+font_color = Color(1, 0, 0, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.588235)
+
+[node name="TownHallStatsPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_frtpl")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(580, 148)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -288.0
+offset_top = 48.0
+offset_right = 292.0
+offset_bottom = 196.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("2_8q7tg")
+
+[node name="ProgressMargin" type="MarginContainer" parent="Panel"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -6.0
+offset_top = 8.0
+offset_right = -6.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+
+[node name="ExpProgressBar" type="ProgressBar" parent="Panel/ProgressMargin"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_styles/background = ExtResource("2_f1va5")
+theme_override_styles/fill = ExtResource("3_526cg")
+value = 60.0
+rounded = true
+show_percentage = false
+
+[node name="IconMargin" type="MarginContainer" parent="Panel"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -56.0
+offset_top = -48.0
+offset_right = 56.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme_override_constants/margin_right = -70
+theme_override_constants/margin_bottom = 5
+
+[node name="TownHallImage" type="TextureRect" parent="Panel/IconMargin"]
+layout_mode = 2
+texture = ExtResource("2_pnnkn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/IconMargin/TownHallImage"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 47.0
+offset_right = 80.0
+offset_bottom = 95.0
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 6
+
+[node name="TextureRect" type="Panel" parent="Panel/IconMargin/TownHallImage/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yxlwd")
+
+[node name="LevelLabel" type="Label" parent="Panel/IconMargin/TownHallImage/MarginContainer/TextureRect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -26.0
+offset_right = 16.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_jxk7l")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+custom_minimum_size = Vector2(512, 64)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = -84.0
+offset_right = -34.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 8
+
+[node name="StatContainers" type="HBoxContainer" parent="Panel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TownStatUiContainer" parent="Panel/MarginContainer/StatContainers" instance=ExtResource("6_dlt0n")]
+layout_mode = 2
+
+[node name="TownStatUiContainer2" parent="Panel/MarginContainer/StatContainers" instance=ExtResource("6_dlt0n")]
+layout_mode = 2
+
+[node name="TownStatUiContainer3" parent="Panel/MarginContainer/StatContainers" instance=ExtResource("6_dlt0n")]
+layout_mode = 2
+
+[node name="TownStatUiContainer4" parent="Panel/MarginContainer/StatContainers" instance=ExtResource("6_dlt0n")]
+layout_mode = 2

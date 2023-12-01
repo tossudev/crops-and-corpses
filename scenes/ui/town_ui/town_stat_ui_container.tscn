@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=3 uid="uid://cptclaw016axb"]
+
+[ext_resource type="Script" path="res://scripts/ui/town/TownStatUiContainer.cs" id="1_1jd76"]
+[ext_resource type="Texture2D" uid="uid://cg5j4xefc87sn" path="res://assets/sprites/buildings/smallhouse_color.png" id="1_hxcnb"]
+[ext_resource type="PackedScene" uid="uid://cdi621xg0nv2g" path="res://scenes/ui/general/floating_button_name_panel.tscn" id="2_05ti6"]
+
+[sub_resource type="Gradient" id="Gradient_fk4ly"]
+offsets = PackedFloat32Array(0, 0.443137, 0.713726, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.784314, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ontly"]
+gradient = SubResource("Gradient_fk4ly")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kpd3r"]
+
+[node name="TownStatUiContainer" type="Control"]
+custom_minimum_size = Vector2(112, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_1jd76")
+
+[node name="FloatingButtonNamePanel" parent="." instance=ExtResource("2_05ti6")]
+unique_name_in_owner = true
+layout_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(96, 48)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -14
+
+[node name="TownStatImage" type="TextureRect" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("1_hxcnb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+
+[node name="LabelBackPanel" type="TextureRect" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_ontly")
+
+[node name="TownStatText" type="Label" parent="HBoxContainer/MarginContainer/LabelBackPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -13.0
+offset_right = 20.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "6/50"
+label_settings = SubResource("LabelSettings_kpd3r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="HBoxContainer/TownStatImage" to="FloatingButtonNamePanel" method="OnMouseEntered"]
+[connection signal="mouse_exited" from="HBoxContainer/TownStatImage" to="FloatingButtonNamePanel" method="OnMouseExited"]

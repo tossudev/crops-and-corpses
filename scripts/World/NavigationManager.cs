@@ -2,6 +2,9 @@ using Godot;
 using Godot.NativeInterop;
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 
 public partial class NavigationManager : Node2D {
 
@@ -75,11 +78,17 @@ public partial class NavigationManager : Node2D {
 		await ToSignal(GetTree().CreateTimer(0.1), "timeout");
 
 		_region.RemoveOutline(nodeIndex + 1);
-		_region.MakePolygonsFromOutlines();
+		// _region.MakePolygonsFromOutlines();
+
+		await Task.Run(async () => {
+
+			_region = _regionNode.NavigationPolygon;
+			await Task.Delay(3000);
+            // await ToSignal(_region.MakePolygonsFromOutlines(), "finished");
+			_region.MakePolygonsFromOutlines();
+        });
 
 		_obstacleAreas.RemoveAt(nodeIndex);
-
-
 		UpdateObstacleIndexes();
 	}
 }

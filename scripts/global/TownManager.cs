@@ -21,12 +21,22 @@ public partial class TownManager : Node2D
 	static Vector2 _townHallPosition;
 	public static Vector2 townHallPosition => _townHallPosition;
 
-	public override void _Ready()
+	
+	const string TOWN_STREET_SIGN_GROUP = "StreetSign";
+
+	static PlayerTravel _townPlayerTravel;
+	public static PlayerTravel GetTownPlayerTravel (Node caller)
 	{
-		base._Ready();
+		return _townPlayerTravel ??= (PlayerTravel) caller.GetTree().GetFirstNodeInGroup(TOWN_STREET_SIGN_GROUP);;
+	}
+    
+	public override void _EnterTree()
+	{
+		base._EnterTree();
+		
 		_townHallPosition = GlobalPosition - new Vector2(13,13);
 	}
-
+	
 	public static async void ReadTownDataFromFile(Dictionary saveData, bool sync = true)
 	{
 		if (await RawTownStats.AssignStatsDataFromDictionary(saveData, sync)) return;
@@ -37,6 +47,11 @@ public partial class TownManager : Node2D
 		if (sync) await SaveData.SyncTownStats();
 	}
 
+	public static bool EveryXSecond(int second)
+	{
+		return globalPhysicsTicks % (ONE_SECOND_IN_TICKS * second) == 0;
+	}
+	
 	public static void GainExp(ExpGain amount)
 	{
 		SaveData.townHallStats.totalExperience += (int) amount;
@@ -79,8 +94,29 @@ public partial class TownManager : Node2D
 				SaveData.townHallStats.townHallLevel = 1;
 				break;
 		}
+		
+		TownHallStatsPanel._thStatsPanelInstance?.UpdateExpBar();
 	}
+    
+	public static int GetLevelRequiredExp(bool nextLevel)
+	{
+		var requiredExpLastLevel = 0;
+		
+		foreach (var requirement in Enum.GetValues<TownHallLevelExpRequirement>())
+		{
+			var requiredExp = (int) requirement;
 
+			if (currentTownStats.totalExperience < requiredExp)
+			{
+				return nextLevel ? requiredExp : requiredExpLastLevel;
+			}
+
+			requiredExpLastLevel = requiredExp;
+		}
+
+		return (int) Enum.GetValues<TownHallLevelExpRequirement>().Last();
+	}
+	
 	public static void ApplyUnlock(TownUnlock unlock)
 	{
 		if (SaveData.appliedUnlocks.Contains(unlock)) return;
@@ -124,6 +160,7 @@ public partial class TownManager : Node2D
 		}
 		
 		SaveData.appliedUnlocks.Add(unlock);
+		TownHallStatsPanel._thStatsPanelInstance.UpdateAllStats();
 		Task sync = SaveData.SyncTownStats();
 	}
 	
@@ -169,6 +206,8 @@ public partial class TownManager : Node2D
 		}
 		
 		SaveData.appliedUpgrades.Add(upgrade);
+		TownHallStatsPanel._thStatsPanelInstance.UpdateAllStats();
+
 		Task sync = SaveData.SyncTownStats();
 	}
 
@@ -193,11 +232,11 @@ public partial class TownManager : Node2D
 
 public enum TownHallLevelExpRequirement
 {
-	LEVEL_1 = 1000,
-	LEVEL_2 = 2500,
-	LEVEL_3 = 5000,
-	LEVEL_4 = 10000,
-	LEVEL_5 = 15000
+	LEVEL_1 = 500,
+	LEVEL_2 = 1500,
+	LEVEL_3 = 3000,
+	LEVEL_4 = 5000,
+	LEVEL_5 = 10000
 }
 
 public enum TownUnlock
@@ -210,4 +249,9 @@ public enum TownUnlock
 	RUINS_UNLOCK,
 	MINESHAFT_UNLOCK,
 	STALAGMITE_UNLOCK
+}
+
+public enum AutosaveIntervalSeconds
+{
+	VILLAGER_POSITION_INTERVAL = 30
 }

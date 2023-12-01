@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 public partial class BuildingMenu : Control
 {
-	Building _farmPlot, _house, _archerTower, _well;
+	Building _farmPlot, _house, _archerTower, _well, _largeHouse;
 	Building _currentBuilding;
 
     List<Building> _buildingPrefabs;
@@ -16,6 +16,11 @@ public partial class BuildingMenu : Control
     Node2D _ghostBuilding;
 
 	Node2D _buildings;
+
+    Node2D _fences;
+
+    BuildingDemolishMenu _demolishMenu;
+    const string BUILDING_DEMOLISH_MENU_NODENAME = "%BuildingDemolishMenu";
 
     [Export]
     ScrollContainer _buildMenu;
@@ -27,16 +32,16 @@ public partial class BuildingMenu : Control
     Label _notEnoughResourcesLabel;
 
     [Export]
-    PackedScene _farmPlotScene, _farmPlotGhostScene, _houseScene, _houseGhostScene, _archerTowerScene, _archerTowerGhostScene, _wellScene, _wellGhostScene;
+    PackedScene _farmPlotScene, _farmPlotGhostScene, _houseScene, _houseGhostScene, _archerTowerScene, _archerTowerGhostScene, _wellScene, _wellGhostScene, _largeHouseScene, _largeHouseGhostScene;
     [Export]
-    Texture2D _farmPlotIcon, _houseIcon, _archerTowerIcon, _wellIcon;
+    Texture2D _farmPlotIcon, _houseIcon, _archerTowerIcon, _wellIcon, _largeHouseIcon;
 
     CharacterBody2D _player;
 
     public Item log;
     public Item copper;
 
-    string _savePath, _fileName;
+    public string savePath, fileName;
 
     public override void _Ready()
     {
@@ -46,12 +51,15 @@ public partial class BuildingMenu : Control
             return;
         }
 
-        _savePath = ProjectSettings.GlobalizePath("user://saves/");
-        _fileName = "buildings.txt";
+
+        savePath = ProjectSettings.GlobalizePath("user://saves/");
+        fileName = "buildings.txt";
 
         _player = GetParent().GetParent() as CharacterBody2D;
 
         _buildings = GetNode("/root/Town/Buildings/SaveableBuildings") as Node2D;
+
+        _fences = GetNode("/root/Town/Fences") as Node2D;
 
         _buildingPrefabs = new List<Building>();
 
@@ -60,6 +68,9 @@ public partial class BuildingMenu : Control
 
         _house = new Building(_houseScene, _houseGhostScene, 4, "House", _houseIcon);
         _buildingPrefabs.Add(_house);
+
+        _largeHouse = new Building(_largeHouseScene, _largeHouseGhostScene, 6, "Large House", _largeHouseIcon);
+        _buildingPrefabs.Add(_largeHouse);
 
         _well = new Building(_wellScene, _wellGhostScene, 2, "Well", _wellIcon);
         _buildingPrefabs.Add(_well);
@@ -70,8 +81,19 @@ public partial class BuildingMenu : Control
         _notEnoughResourcesLabel.AddThemeFontSizeOverride("font_size", 32);
         
         CreateBuildMenu();
+
+        LoadBuildings(savePath, fileName);
     }
-    
+
+    // TODO, might be buggy
+    public override void _ExitTree()
+    {
+        if (SceneManager.IsCurrentScene(this, Scene.Town))
+        {
+            SaveBuildings(savePath, fileName);
+        }
+    }
+
     public override void _Input(InputEvent @event) {
         if (@event.IsActionPressed("open_build_menu")) {
             if(_buildMenu.Visible == false)
@@ -187,18 +209,18 @@ public partial class BuildingMenu : Control
         _hBoxContainer.AddChild(_saveButton);
         _saveButton.Text = "Save";
         _saveButton.AddThemeFontSizeOverride("font_size", 40);
-        _saveButton.ButtonUp += () => SaveBuildings(_savePath, _fileName);
+        _saveButton.ButtonUp += () => SaveBuildings(savePath, fileName);
 
         Button _loadButton = new Button();
         _hBoxContainer.AddChild(_loadButton);
         _loadButton.Text = "Load";
         _loadButton.AddThemeFontSizeOverride("font_size", 40);
-        _loadButton.ButtonUp += () => LoadBuildings(_savePath, _fileName);
+        _loadButton.ButtonUp += () => LoadBuildings(savePath, fileName);
 
         _buildMenuControl.CustomMinimumSize = new Vector2(_buildMenuControl.CustomMinimumSize.X, _vBoxContainer.GetMinimumSize().Y + 20);
     }
 
-    public JsonArray GetBuildings()
+    private JsonArray GetBuildings()
     {
         JsonArray _savedBuildings = new JsonArray();
 
@@ -216,10 +238,21 @@ public partial class BuildingMenu : Control
         foreach (Node2D node in _buildings.GetChildren())
         {
             string name = "null";
+            int buildingHealth = 100;
 
             if (node.IsInGroup("House"))
             {
                 name = "House";
+
+                BuildingHealth healthscript = node.GetNode("BuildingHealth") as BuildingHealth;
+                buildingHealth = healthscript.buildingHealth;
+            }
+            else if (node.IsInGroup("LargeHouse"))
+            {
+                name = "LargeHouse";
+
+                BuildingHealth healthscript = node.GetNode("BuildingHealth") as BuildingHealth;
+                buildingHealth = healthscript.buildingHealth;
             }
             else if (node.IsInGroup("FarmPlot"))
             {
@@ -265,6 +298,9 @@ public partial class BuildingMenu : Control
             else if (node.IsInGroup("ArcherTower"))
             {
                 name = "ArcherTower";
+
+                BuildingHealth healthscript = node.GetNode("BuildingHealth") as BuildingHealth;
+                buildingHealth = healthscript.buildingHealth;
             }
             else if (node.IsInGroup("Well"))
             {
@@ -275,16 +311,38 @@ public partial class BuildingMenu : Control
             {
                 { "name", name },
                 { "x", Mathf.RoundToInt(node.Position.X) },
-                { "y", Mathf.RoundToInt(node.Position.Y) }
+                { "y", Mathf.RoundToInt(node.Position.Y) },
+                { "health", buildingHealth }
             };
 
             _savedBuildings.Add(jsonObj);
         }
 
+        int fenceHealth = 100;
+        int i = 0;
+
+        foreach (Node2D fence in _fences.GetChild(0).GetChildren())
+        {
+            BuildingHealth healthscript = fence.GetNode("%BuildingHealth") as BuildingHealth;
+            fenceHealth = healthscript.buildingHealth;
+
+
+            JsonObject fenceObj = new JsonObject
+            {
+                { "index", i },
+                { "health", fenceHealth }
+            };
+
+            i++;
+            _savedBuildings.Add(fenceObj);
+        }
+
+
+
         return _savedBuildings;
     }
 
-    private void SaveBuildings(string path, string fileName)
+    public void SaveBuildings(string path, string fileName)
     {
         try
         {
@@ -333,7 +391,12 @@ public partial class BuildingMenu : Control
 
         foreach (JsonObject jsonObject in loadedBuildings)
         {
-            if(jsonObject["name"].ToString() == "globalTime")
+            if (jsonObject["name"] == null)
+            {
+                break;
+            }
+
+            if (jsonObject["name"].ToString() == "globalTime")
             {
                 time = (float)jsonObject["time"];
                 continue;
@@ -358,6 +421,22 @@ public partial class BuildingMenu : Control
             Node2D _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;           
             _buildingScene.Position = new Vector2(x, y);
             _buildings.AddChild(_buildingScene);
+
+            if(_currentBuilding.name == "House" || _currentBuilding.name == "Large House" || _currentBuilding.name == "Archer Tower")
+            {
+                _demolishMenu = _buildingScene.GetNode<BuildingDemolishMenu>(BUILDING_DEMOLISH_MENU_NODENAME);
+                _demolishMenu.buildingName = _currentBuilding.name;
+                if(_demolishMenu.buildingNameLabel != null)
+                {
+                    _demolishMenu.SetBuildingName();
+                }
+            }
+
+            if (jsonObject["name"].ToString() == "House" || jsonObject["name"].ToString() == "LargeHouse" || jsonObject["name"].ToString() == "ArcherTower")
+            {
+                BuildingHealth healthscript = _buildingScene.GetNode("BuildingHealth") as BuildingHealth;
+                healthscript.loadedHealth = (int)jsonObject["health"];
+            }
 
             if (jsonObject["name"].ToString() == "FarmPlot")
             {
@@ -401,11 +480,19 @@ public partial class BuildingMenu : Control
             return;
         }
 
-
-
         Node2D _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;
         _buildingScene.Position = _ghostBuilding.Position;
         _buildings.AddChild(_buildingScene);
+
+        if (_currentBuilding.name == "House" || _currentBuilding.name == "Large House" || _currentBuilding.name == "Archer Tower")
+        {
+            _demolishMenu = _buildingScene.GetNode<BuildingDemolishMenu>(BUILDING_DEMOLISH_MENU_NODENAME);
+            _demolishMenu.buildingName = _currentBuilding.name;
+            if (_demolishMenu.buildingNameLabel != null)
+            {
+                _demolishMenu.SetBuildingName();
+            }
+        }
     }
 
     private void BuildingMode()

@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=3 uid="uid://cloo50csdagnm"]
+
+[ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_kfu33"]
+[ext_resource type="Resource" uid="uid://bs6otct5awtuy" path="res://TinoTests/Resources/rock.tres" id="2_0515l"]
+[ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="3_0fq7s"]
+[ext_resource type="Texture2D" uid="uid://ck5ivm5143vvk" path="res://assets/sprites/tiles/stalagmate.png" id="3_2g2fo"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_ha4hh"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_c7052"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_i444o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_idkut"]
+size = Vector2(380, 87)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wx7i"]
+size = Vector2(358, 65)
+
+[sub_resource type="Animation" id="Animation_ir0ao"]
+resource_name = "shake"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-6, -123), Vector2(4, -123), Vector2(-6, -123)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x8yya"]
+_data = {
+"shake": SubResource("Animation_ir0ao")
+}
+
+[node name="Stalagmite" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer", "_sprite")]
+position = Vector2(2.08165e-12, 2.08165e-12)
+script = ExtResource("1_kfu33")
+loot = ExtResource("2_0515l")
+_animationPlayer = NodePath("AnimationPlayer")
+_sprite = NodePath("Sprite2D")
+_color = Color(0.596078, 0.639216, 0.733333, 1)
+_minBrightness = 0.75
+_scaleVariation = 0.5
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.615686)
+position = Vector2(-6, 10)
+scale = Vector2(7, 2.4)
+texture = ExtResource("3_0fq7s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-6, -123)
+rotation = 3.14159
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_2g2fo")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("4_ha4hh")]
+_parentScript = NodePath("..")
+_hasHealthBar = false
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["rock"] instance=ExtResource("5_c7052")]
+position = Vector2(-1, 0)
+collision_layer = 16
+collision_mask = 32
+_parentScript = NodePath("..")
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(-9, -2.5)
+shape = SubResource("RectangleShape2D_idkut")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-10, -2)
+shape = SubResource("RectangleShape2D_0wx7i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x8yya")
+}
+
+[node name="NavigationObstacleArea" parent="." instance=ExtResource("6_i444o")]
+position = Vector2(1, -36)
+polygon = PackedVector2Array(-200, 77, 180, 78, 178, -10, -200, -11)
+metadata/_edit_pinned_properties_ = [&"polygon"]

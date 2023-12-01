@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ceal2xj0w1t17"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingMode.cs" id="1_s0glh"]
-[ext_resource type="Texture2D" uid="uid://b5cv2b6w6tvm0" path="res://assets/sprites/buildings/housedesing2.png" id="2_8tlj8"]
+[ext_resource type="Texture2D" uid="uid://bmn8ggt1kvsn7" path="res://assets/sprites/buildings/smallhouse_color.png" id="2_oiigf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gcdqn"]
 size = Vector2(126, 126)
@@ -11,11 +11,11 @@ top_level = true
 scale = Vector2(2, 2)
 script = ExtResource("1_s0glh")
 
-[node name="House" type="Sprite2D" parent="."]
+[node name="House2" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.392157)
-position = Vector2(-64, -80)
-scale = Vector2(0.08, 0.08)
-texture = ExtResource("2_8tlj8")
+position = Vector2(-64, -105.825)
+scale = Vector2(0.315, 0.315)
+texture = ExtResource("2_oiigf")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-64, -64)

@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://dr5dn7juefoha"]
+
+[ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_gmjf4"]
+[ext_resource type="Texture2D" uid="uid://c5v773mk6tykk" path="res://assets/sprites/buildings/largehouse_color.png" id="2_uosje"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_ysaqf"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_2ldom"]
+[ext_resource type="PackedScene" uid="uid://2v1aodyd0p4b" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_72uur"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sekvv"]
+size = Vector2(255, 143.902)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oi4v2"]
+size = Vector2(251, 378.846)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24awm"]
+size = Vector2(125.5, 125.5)
+
+[node name="House" type="Node2D" groups=["LargeHouse"]]
+scale = Vector2(2, 2)
+
+[node name="BuildingHealth" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_gmjf4")
+
+[node name="House" type="Sprite2D" parent="."]
+position = Vector2(-131.955, -149.5)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("2_uosje")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-63, -52)
+scale = Vector2(1, 0.82)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-71, -15.8537)
+shape = SubResource("RectangleShape2D_sekvv")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["building"]]
+position = Vector2(0, -8)
+scale = Vector2(1, 0.4)
+collision_layer = 7
+collision_mask = 7
+
+[node name="StaticCollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+unique_name_in_owner = true
+position = Vector2(-133, -122.5)
+scale = Vector2(1, 0.65)
+shape = SubResource("RectangleShape2D_oi4v2")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_ysaqf")]
+unique_name_in_owner = true
+position = Vector2(-126, -75)
+_parentScript = NodePath("../BuildingHealth")
+_healItemPrefabs = Array[PackedScene]([])
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") groups=["building"] instance=ExtResource("4_2ldom")]
+position = Vector2(-126, -75)
+collision_layer = 16
+collision_mask = 32
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
+position = Vector2(61.75, 10.25)
+shape = SubResource("RectangleShape2D_24awm")
+debug_color = Color(0.898039, 0.117647, 0.137255, 0.431373)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.2, 0.356863, 1, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.5
+offset_top = -147.5
+offset_right = 39.5
+offset_bottom = -120.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+show_percentage = false
+
+[node name="BuildingDemolishMenu" parent="." instance=ExtResource("5_72uur")]
+unique_name_in_owner = true
+offset_left = -204.0
+offset_top = -141.0
+offset_right = 383.0
+offset_bottom = 365.0
+scale = Vector2(0.35, 0.35)
+
+[connection signal="input_event" from="Area2D" to="BuildingDemolishMenu" method="OnBuildingInput"]

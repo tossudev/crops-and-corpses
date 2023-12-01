@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 
 public partial class HealthComponent : Node2D
 {
@@ -18,6 +19,9 @@ public partial class HealthComponent : Node2D
 	const string OVERLAY_NODENAME = "%PlayerOverlay";
 
 
+	BuildingHealth _building;
+	bool _isBuilding;
+	
 	[Export] PackedScene[] _healItemPrefabs;
 	List<Heal> _heal = new List<Heal>();
 	bool _isPlayer = false;
@@ -31,8 +35,8 @@ public partial class HealthComponent : Node2D
 		if (_parentScript != null && _parentScript.Name == "Player")
 		{
 			_isPlayer = true;
-			InitializeHealItems();
 		}
+		InitializeHealItems();
 
 		if (_hasHealthBar)
 		{
@@ -49,14 +53,21 @@ public partial class HealthComponent : Node2D
 			_healthBar.Value = _health;
 			UpdateHealthBar();
 		}
+
+		if (_isBuilding)
+		{
+			_building.LoadBuildingHealth(_building.loadedHealth);
+		}
 	}
 
 
 	void InitializeHealItems()
 	{
+		if (_healItemPrefabs == null) return;
+		
 		foreach (var packedScene in _healItemPrefabs)
 		{
-			var scene = ResourceLoader.Load<PackedScene>(packedScene.ResourcePath).Instantiate();
+			var scene = ((PackedScene) FileLoader.LoadCustomResource(packedScene.ResourcePath)).Instantiate();
 
 			if (scene is Heal _newHeal)
 			{
@@ -71,9 +82,15 @@ public partial class HealthComponent : Node2D
 		}
 	}
 
+	public void AssignBuilding(BuildingHealth building)
+	{
+		_building = building;
+		_isBuilding = true;
+	}
+
 	public override void _PhysicsProcess(double delta)
 	{
-		if (!_isPlayer || PlayerInventoryController.selectedItem == null)
+		if (PlayerInventoryController.selectedItem == null)
 		{
 			_count = 0;
 			return;
@@ -83,7 +100,7 @@ public partial class HealthComponent : Node2D
 			_count++;
 			if (_count == 2)
 			{
-				TryHeal();
+				TryHealWithItem();
 			}
 
 		}
@@ -109,24 +126,63 @@ public partial class HealthComponent : Node2D
 		return _maxHealth;
 	}
 
-	async void Heal(int amount)
+    void Heal(int amount)
 	{
 		_health += amount;
-		UpdateHealthBar();
 		if (_health > _maxHealth) _health = _maxHealth;
-		await PlayerInventoryController.RemoveItemFromInventory(new RawInventoryItem(
-			PlayerInventoryController.selectedItem.id,
-			PlayerInventoryController.selectedItem.name,
-			1,
-			PlayerInventoryController.selectedItem.stackSize));
+		UpdateHealthBar();
 	}
-	void TryHeal()
+
+    public async void TryHealWithRepairItem()
+    {
+	    if (!_isBuilding) return;
+	    
+	    RawInventoryItem itemToRemove = null;
+	    if (PlayerInventoryController.isItemSelected)
+	    {
+		    itemToRemove = PlayerInventoryController.selectedItem;
+	    }
+	    else if (PlayerInventoryController.heldItem != null)
+	    {
+		    itemToRemove = PlayerInventoryController.heldItem;
+		    if (itemToRemove.quantity == 0) return;
+	    }
+
+	    if (itemToRemove == null)
+	    {
+		    GD.PushError("Can't heal with null item");
+		    return;
+	    }
+	    
+	    if (_health == _maxHealth) return;
+	    
+	    Heal(_maxHealth / 2);
+	    
+	    await PlayerInventoryController.RemoveItemFromInventory(new RawInventoryItem(
+		    itemToRemove.id,
+		    itemToRemove.name,
+		    1,
+		    itemToRemove.stackSize),
+		    itemToRemove.indexInOrganizedInventory);
+	    
+	    _parentScript.CallDeferred("OnHealth", _health);
+    }
+    
+    
+	public async void TryHealWithItem()
 	{
 		foreach (Heal h in _heal)
 		{
 			if (h._healItem.Name == PlayerInventoryController.selectedItem.name)
 			{
 				Heal(h._healAmount);
+				
+				await PlayerInventoryController.RemoveItemFromInventory(new RawInventoryItem(
+					PlayerInventoryController.selectedItem.id,
+					PlayerInventoryController.selectedItem.name,
+					1,
+					PlayerInventoryController.selectedItem.stackSize));
+				
 				GD.Print(h._healMessage);
 				_count = 0;
 				return;
@@ -151,7 +207,7 @@ public partial class HealthComponent : Node2D
 			_healthBar.Visible = _health != _maxHealth;
 		}
 
-		if (_isPlayer)
+        if (_isPlayer)
 		{
 			_healthBar.GetNode<Label>("%HealthText").Text = _health.ToString();
 		}

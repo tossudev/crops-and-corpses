@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://fd4b7o1o24sd"]
+
+[ext_resource type="Script" path="res://scripts/ui/town/TownHallControl.cs" id="1_757xi"]
+[ext_resource type="Texture2D" uid="uid://iojvcjhmel0t" path="res://assets/sprites/buildings/broken_townhall.png" id="1_vtxo5"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="3_ohbcr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4d4i"]
+size = Vector2(952.001, 343.998)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubi7p"]
+size = Vector2(320, 95.9996)
+
+[node name="TownHall_Broken" type="Node2D"]
+script = ExtResource("1_757xi")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 63)
+collision_layer = 5
+collision_mask = 16
+
+[node name="TownHall" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-96, -431)
+texture = ExtResource("1_vtxo5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-100, -244)
+rotation = -3.14159
+shape = SubResource("RectangleShape2D_r4d4i")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-96.0001, -47.9998)
+rotation = -3.14159
+shape = SubResource("RectangleShape2D_ubi7p")
+
+[node name="area 2d" type="Area2D" parent="."]
+collision_layer = 25
+collision_mask = 24
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area 2d"]
+position = Vector2(-104, -240)
+rotation = -3.14159
+shape = SubResource("RectangleShape2D_r4d4i")
+
+[node name="NavigationObstacleArea" parent="." instance=ExtResource("3_ohbcr")]
+polygon = PackedVector2Array(-576, 32, 376, 32, 376, -272, -576, -272)
+metadata/_edit_pinned_properties_ = [&"polygon"]
+
+[connection signal="input_event" from="area 2d" to="." method="OnTownHallInput"]

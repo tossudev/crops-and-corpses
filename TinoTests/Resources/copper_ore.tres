@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Loot" load_steps=7 format=3 uid="uid://k4e0ailiic3x"]
+
+[ext_resource type="Resource" uid="uid://bofkpec0ir7h3" path="res://assets/resources/game_items/resource_items_0_to_99/2_copper.tres" id="1_v0feu"]
+[ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_cliof"]
+[ext_resource type="Resource" uid="uid://bv7vupb8k6yua" path="res://assets/resources/game_items/resource_items_0_to_99/5_stone.tres" id="3_cwf8w"]
+[ext_resource type="Script" path="res://scripts/World/Loot.cs" id="4_5hvbo"]
+
+[sub_resource type="Resource" id="Resource_jxoe4"]
+script = ExtResource("2_cliof")
+item = ExtResource("1_v0feu")
+quantity = 2
+
+[sub_resource type="Resource" id="Resource_qty7m"]
+script = ExtResource("2_cliof")
+item = ExtResource("3_cwf8w")
+quantity = 3
+
+[resource]
+script = ExtResource("4_5hvbo")
+lootItems = [SubResource("Resource_jxoe4"), SubResource("Resource_qty7m")]
+meanDrop = 5

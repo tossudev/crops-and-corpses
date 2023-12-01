@@ -10,11 +10,12 @@ public partial class ZombieIdle : ZombieStates
 	private double _roamTime;
 	private CharacterBody2D _player;
 	private Node2D _fences;
-	[Export] AnimationPlayer animPlayer;
+	//AnimationPlayer animPlayer;
 	public override void Enter()
     {		
         _player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
-		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
+		if(GetTree().CurrentScene.Name == "Town")	_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
+
 		RandomizeRoam();
 
 		if (_zombie != null)
@@ -53,7 +54,7 @@ public partial class ZombieIdle : ZombieStates
 	    
 		_moveSpeed = ZombieManager.idleSpeed;
 	    _zombie.Velocity = _moveDirection * _moveSpeed;
-		animPlayer.SpeedScale = _moveSpeed / 100;
+		//animPlayer.SpeedScale = _moveSpeed / 100;
 
 	    if (_player == null || !ZombieManager.playerAlive) return;
 	    
@@ -64,7 +65,7 @@ public partial class ZombieIdle : ZombieStates
 		{
 			EmitSignal("Transitioned", "chase");			
 		}
-		else if (fenceDirection.Length() < 1500 || !ZombieManager.dayMode)
+		else if (fenceDirection.Length() < 1500  && !ZombieManager.dayMode && GetTree().CurrentScene.Name == "Town")
 		{
 			if (!_zombie.HasMethod("IsInTown")) return;
 
@@ -84,6 +85,6 @@ public partial class ZombieIdle : ZombieStates
 
 		_roamTime = (float)(GD.RandRange(3000, 5001)) / 1000; // random range 3, 5
 
-		//GD.Print("MOVE_DIR: " + _moveDirection + "\nROAM_TIME: " + _roamTime);
+		// GD.Print("MOVE_DIR: " + _moveDirection + "\nROAM_TIME: " + _roamTime + " MOVE SPEED: " + _moveSpeed);
 	}
 }

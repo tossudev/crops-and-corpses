@@ -1,30 +1,70 @@
-using System.Collections.Generic;
 using Godot;
+using System;
+using System.Collections.Generic;
 
-
-
-public partial class Quest : Node2D
+public partial class Quest : Node
 {
-   
-    public string QuestName { get; set; }
-    public string Description { get; set; }
-    
-    public string SceneName { get; set; }
-    public List<string> Stages { get; set; }
-    
-    public int Difficulty { get; set; }
-    public string Location { get; internal set; }
+    public string QuestName { get; private set; }
 
-    public void Initialize(string questName, string description, List<string> stages, string sceneName, int difficulty = 1, string location = "")
+    public int difficulty { get; private set; }
+    public int startDay { get; private set; }
+
+    public string Description { get; private set; }
+    
+    public string SceneName { get; private set; }
+    public List<string> Stages { get; private set; }
+    public Scene.RootScene Location { get; }
+   
+    public Vector2 Position { get; internal set; }
+
+
+    public Quest(string questName, int difficulty, int startDay, QuestType type, Scene.RootScene location)
     {
         QuestName = questName;
-        Description = description;
-        Stages = stages;
-        SceneName = sceneName;
-        Difficulty = difficulty;
+        SetDesc(type, difficulty, location);
+        this.startDay = startDay;
+        SetStages(type);
+        
         Location = location;
     }
 
+    void SetDesc(QuestType type, int difficulty, Scene.RootScene location)
+    {
+        switch (type)
+        {
+            case QuestType.Rescue:
+
+                string plural = difficulty > 1 ? "s" : "";
+                Description = $"Rescue {difficulty} villager{plural} from {location.Name}.";
+                break;
+            
+            case QuestType.BridgeBuild:
+                //TODO?
+                Description = "";
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
+        }
+    }
+    
+    void SetStages(QuestType type)
+    {
+        switch (type)
+        {
+            case QuestType.Rescue:
+
+                Stages = new List<string> { "Find", "Rescue", "Deliver" };
+                break;
+            
+            case QuestType.BridgeBuild:
+                //TODO?
+                Description = "";
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
+        }
+    }
+    
     public bool IsQuestComplete()
     {
         return Stages.Count == 0;
@@ -36,39 +76,36 @@ public partial class Quest : Node2D
         {
             Stages.Remove(stage);
         }
-      
-    
-
-
     }
 
-   
-
-
-
-    public void PrintQuestInfo()
+    public string GetQuestStage()
     {
-        GD.Print($"Quest name: {QuestName}");
-        GD.Print($"Quest description: {Description}");
-        GD.Print($"Quest stages: {string.Join(", ", Stages)}");
-        GD.Print($"Quest scene: {SceneName}");
+        return Stages[0];
     }
 
-    public void PrintQuestStatus()
+    public string GetQuestName()
     {
-        if (IsQuestComplete())
-        {
-            GD.Print("Quest complete!");
-        }
-        else
-        {
-            GD.Print($"Quest incomplete. Remaining stages: {string.Join(", ", Stages)}");
-        }
+        return QuestName;
     }
 
+    public string GetQuestDescription()
+    {
+        return Description;
+    }
 
+    public Scene.RootScene GetQuestLocation()
+    {
+        return Location;
+    }
 
+    public List<string> GetQuestStages()
+    {
+        return Stages;
+    }
 }
 
-
-
+public enum QuestType
+{
+    Rescue,
+    BridgeBuild
+}

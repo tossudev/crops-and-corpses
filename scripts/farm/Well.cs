@@ -9,7 +9,6 @@ public partial class Well : Node2D
 	{
 		if(@event is InputEventMouseButton button && _isPlayerNearby && button.IsPressed() && button.ButtonIndex == MouseButton.Left)
 		{	
-			GD.Print("Interacting with well");
 			FarmManager.instance.FillWaterBucket();
 		}
 		

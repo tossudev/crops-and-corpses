@@ -31,4 +31,5 @@ public enum TargetType
     Enemy,
     Tree,
     Rock,
+    Building
 }

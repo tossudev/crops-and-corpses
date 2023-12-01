@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://54li2rwv5ov5"]
+[gd_scene load_steps=13 format=3 uid="uid://54li2rwv5ov5"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/ArcherTower.cs" id="1_8yyo6"]
 [ext_resource type="PackedScene" uid="uid://dqmfwe15dtgat" path="res://scenes/Combat/projectile.tscn" id="2_151wa"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="6_hcsx8"]
 [ext_resource type="Texture2D" uid="uid://dxop7aeu2pnnr" path="res://assets/sprites/buildings/archery_tower.png" id="6_sglj4"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="7_u83t5"]
+[ext_resource type="PackedScene" uid="uid://2v1aodyd0p4b" path="res://scenes/buildings/building_demolish_menu.tscn" id="9_ln84s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jggck"]
 size = Vector2(128, 254.495)
@@ -43,6 +44,7 @@ position = Vector2(-61.5, -51)
 scale = Vector2(0.24, 0.24)
 
 [node name="BuildingHealth" type="Node2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("5_sr0xp")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -56,7 +58,8 @@ position = Vector2(-64, -128)
 collision_layer = 7
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="StaticCollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+unique_name_in_owner = true
 position = Vector2(0, 71.2827)
 scale = Vector2(0.9, 0.9)
 shape = SubResource("RectangleShape2D_0u7of")
@@ -65,12 +68,15 @@ shape = SubResource("RectangleShape2D_0u7of")
 wait_time = 2.0
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("6_hcsx8")]
+unique_name_in_owner = true
 position = Vector2(-126, -75)
 _parentScript = NodePath("../BuildingHealth")
 _healItemPrefabs = Array[PackedScene]([])
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("7_u83t5")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") groups=["building"] instance=ExtResource("7_u83t5")]
 position = Vector2(-126, -75)
+collision_layer = 16
+collision_mask = 32
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
@@ -96,4 +102,12 @@ grow_vertical = 2
 scale = Vector2(0.4, 0.4)
 show_percentage = false
 
+[node name="BuildingDemolishMenu" parent="." instance=ExtResource("9_ln84s")]
+unique_name_in_owner = true
+offset_left = -235.0
+offset_top = -230.0
+offset_right = 352.0
+offset_bottom = 276.0
+
+[connection signal="input_event" from="Area2D" to="BuildingDemolishMenu" method="OnBuildingInput"]
 [connection signal="timeout" from="Timer" to="." method="OnShootTimerTimeout"]

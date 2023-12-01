@@ -10,7 +10,8 @@ public partial class ZombieChase : ZombieStates
 	private Timer _timer;
 	private CharacterBody2D _player;
 	private Node2D _fences;
-	[Export]AnimationPlayer animPlayer;
+	AnimationPlayer animPlayer;
+	
 
 	public Vector2 MovementTarget
     {
@@ -19,6 +20,8 @@ public partial class ZombieChase : ZombieStates
     }
     public override void Enter()
     {
+		
+		animPlayer =GetParent().GetParent().GetNodeOrNull<Skeleton2D>("Skeleton2D").GetNodeOrNull<AnimationPlayer>("AnimationPlayer"); // Need help
 		_player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
 		_fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");		
 		_timer = GetNodeOrNull<Timer>("Timer");
@@ -74,10 +77,8 @@ public partial class ZombieChase : ZombieStates
 	{
 		Vector2 currentAgentPosition = _zombie.GlobalPosition;
 		Vector2 nextPathPosition = _navAgent.GetNextPathPosition();
-
 		Vector2 newVelocity = (nextPathPosition - currentAgentPosition).Normalized();
 		_zombie.Velocity = newVelocity * _moveSpeed;
-		
 		animPlayer.SpeedScale = 1*( _moveSpeed / 100 );
 	}
 

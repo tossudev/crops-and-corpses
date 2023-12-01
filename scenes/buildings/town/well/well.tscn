@@ -5,10 +5,9 @@
 [ext_resource type="Shape2D" uid="uid://cexw2rv4qd6l6" path="res://scenes/farm/shapes/well_shape.tres" id="3_emjl7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jifx"]
-size = Vector2(370, 551.429)
+size = Vector2(368.167, 385.714)
 
 [node name="Well" type="Node2D" groups=["Well"]]
-y_sort_enabled = true
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_yeq5k")
 
@@ -33,7 +32,7 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-482.333, -236.667)
+position = Vector2(-484.167, -253.333)
 scale = Vector2(2, 0.933333)
 shape = SubResource("RectangleShape2D_8jifx")
 

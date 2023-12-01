@@ -9,6 +9,7 @@ public partial class LootController : StaticBody2D
 	[Export] private AnimationPlayer _animationPlayer;
 	[Export] private Sprite2D _sprite;
 	[Export] private Color _color;
+	[Export] private AudioStream _audio;
 	//should be between 0 and 1
 	[Export] private float _minBrightness = 1f;
 	// should be between 0 and 180
@@ -23,12 +24,15 @@ public partial class LootController : StaticBody2D
 	private List<Item> _items = new List<Item>();
 	RandomNumberGenerator rng;
 	private int _meanDrop;
+	static AudioController _audioController;
+
 
 	public override void _Ready()
 	{
 		if (loot == null)
 			return;
 
+		_audioController = GetNode<AudioController>("/root/Audio");
 		Init();
 	}
 
@@ -93,6 +97,11 @@ public partial class LootController : StaticBody2D
 		{
 			_animationPlayer.SpeedScale = 10;
 			_animationPlayer.Play("shake");
+		}
+
+		if (_audio != null) {
+			GD.Print(_audio.ResourcePath.ToString());
+			_audioController.PlayEffect(_audio.ResourcePath.ToString());
 		}
 
 		if (health <= 0)

@@ -36,13 +36,15 @@ public partial class HealthComponent : Node2D
 		}
 		InitializeHealItems();
 
+		_health = _maxHealth;
+		
 		if (_isPlayer)
 		{
-			_health = PlayerInfo.health;
-		}
-		else
-		{
-			_health = _maxHealth;
+			PlayerInfo.GetHealth().ContinueWith(task =>
+			{
+				_health = task.Result;
+				UpdateHealthBar();
+			});
 		}
 
 		if (_hasHealthBar)
@@ -66,7 +68,6 @@ public partial class HealthComponent : Node2D
 			_building.LoadBuildingHealth(_building.loadedHealth);
 		}
 	}
-
 
 	void InitializeHealItems()
 	{

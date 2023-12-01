@@ -17,8 +17,14 @@ public partial class StaminaComponent : Node2D
 	{
 		_staminaBar = GetTree().GetFirstNodeInGroup("PlayerStaminaBar") as ProgressBar;
 		_staminaBar.MaxValue = _maxStamina;
-		currentStamina = PlayerInfo.stamina;
+		currentStamina = _maxStamina;
 		UpdateStaminaBar();
+				
+		PlayerInfo.GetStamina().ContinueWith(task =>
+		{
+			currentStamina = task.Result;
+			UpdateStaminaBar();
+		});
 	}
 
 	public override void _Process(double delta)

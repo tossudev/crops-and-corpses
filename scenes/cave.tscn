@@ -1818,7 +1818,6 @@ autostart = true
 autostart = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0.121569, 0.121569, 0.121569, 1)
 
 [node name="SunlightContainer" type="Node" parent="."]

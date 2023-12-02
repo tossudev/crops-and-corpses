@@ -107,7 +107,7 @@ public partial class LootController : StaticBody2D
 		if (!_canBeDestroyed)
 			return;
 
-		if (_items.Count - (_items.Count - _meanDrop) > 1)
+		if (_items.Count > 1)
 			DropItems();
 
 		if (_animationPlayer != null)

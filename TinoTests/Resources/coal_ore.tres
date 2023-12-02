@@ -13,9 +13,9 @@ quantity = 2
 [sub_resource type="Resource" id="Resource_qty7m"]
 script = ExtResource("2_pvd2t")
 item = ExtResource("3_gcp1w")
-quantity = 3
+quantity = 1
 
 [resource]
 script = ExtResource("4_qx5x8")
 lootItems = [SubResource("Resource_jxoe4"), SubResource("Resource_qty7m")]
-meanDrop = 5
+meanDrop = 3

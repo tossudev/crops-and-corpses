@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://wy0dgop8pftu" path="res://scenes/world/cave_tilemap.tscn" id="1_yabqn"]
 [ext_resource type="Script" path="res://scripts/cave.cs" id="1_yjxwb"]
 [ext_resource type="PackedScene" uid="uid://b6w8cr3rm5pu3" path="res://scenes/world/rock.tscn" id="3_flaay"]
-[ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/iron_ore.tscn" id="4_4kwxv"]
+[ext_resource type="PackedScene" uid="uid://dn2v4uxpv2gx6" path="res://scenes/world/iron_ore.tscn" id="4_7yixc"]
 [ext_resource type="PackedScene" uid="uid://ca4ui8y2u11io" path="res://scenes/world/cave_entrance.tscn" id="4_xu51x"]
 [ext_resource type="PackedScene" uid="uid://00rfo2muvu4s" path="res://scenes/world/coal_ore.tscn" id="5_0tasm"]
 [ext_resource type="PackedScene" uid="uid://bbi4wvs2sck5f" path="res://scenes/world/support_beam.tscn" id="5_d6lea"]
@@ -121,7 +121,7 @@ unique_name_in_owner = true
 y_sort_enabled = true
 
 [node name="Player" parent="Objects" node_paths=PackedStringArray("_camera") instance=ExtResource("11_mechj")]
-position = Vector2(779, -1405)
+position = Vector2(776, -1400)
 _camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
@@ -147,98 +147,116 @@ y_sort_enabled = true
 [node name="Iron Ore" type="Node2D" parent="Objects/Breakable"]
 y_sort_enabled = true
 
-[node name="Iron Ore3" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
-position = Vector2(-475, -371)
+[node name="Iron Ore" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
 
-[node name="Iron Ore4" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
-position = Vector2(-475, -371)
+[node name="Iron Ore2" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
+_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
-[node name="Iron Ore5" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
-position = Vector2(-475, -371)
+[node name="Iron Ore3" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
+_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
-[node name="Iron Ore6" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
-position = Vector2(-475, -371)
+[node name="Iron Ore4" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
+_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
-[node name="Iron Ore7" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
-position = Vector2(-475, -371)
+[node name="Iron Ore5" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
+_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
-[node name="Iron Ore8" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
-position = Vector2(-475, -371)
+[node name="Iron Ore6" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
+_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+
+[node name="Iron Ore7" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
+_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+
+[node name="Iron Ore8" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
+_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
 [node name="Coal Ore" type="Node2D" parent="Objects/Breakable"]
 y_sort_enabled = true
 
 [node name="Coal Ore" parent="Objects/Breakable/Coal Ore" instance=ExtResource("5_0tasm")]
-position = Vector2(332, -421)
+position = Vector2(-1079, 1978)
+_minBrightness = 0.8
+_rotationVariation = 5
+_scaleVariation = 0.75
 
 [node name="Coal Ore2" parent="Objects/Breakable/Coal Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_0tasm")]
-position = Vector2(332, -421)
+position = Vector2(-869, 1934)
 _animationPlayer = NodePath("../Coal Ore/AnimationPlayer")
 _sprite = NodePath("../Coal Ore/Sprite2D")
+_minBrightness = 0.8
+_rotationVariation = 5
+_scaleVariation = 0.75
 
 [node name="Coal Ore3" parent="Objects/Breakable/Coal Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_0tasm")]
-position = Vector2(332, -421)
+position = Vector2(-947, 2082)
 _animationPlayer = NodePath("../Coal Ore/AnimationPlayer")
 _sprite = NodePath("../Coal Ore/Sprite2D")
+_minBrightness = 0.8
+_rotationVariation = 5
+_scaleVariation = 0.75
 
 [node name="Coal Ore4" parent="Objects/Breakable/Coal Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_0tasm")]
-position = Vector2(332, -421)
+position = Vector2(-1764, 840)
 _animationPlayer = NodePath("../Coal Ore/AnimationPlayer")
 _sprite = NodePath("../Coal Ore/Sprite2D")
+_minBrightness = 0.8
+_rotationVariation = 5
+_scaleVariation = 0.75
 
 [node name="Coal Ore5" parent="Objects/Breakable/Coal Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_0tasm")]
-position = Vector2(332, -421)
+position = Vector2(765, 1589)
 _animationPlayer = NodePath("../Coal Ore/AnimationPlayer")
 _sprite = NodePath("../Coal Ore/Sprite2D")
-
-[node name="Coal Ore6" parent="Objects/Breakable/Coal Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_0tasm")]
-position = Vector2(332, -421)
-_animationPlayer = NodePath("../Coal Ore/AnimationPlayer")
-_sprite = NodePath("../Coal Ore/Sprite2D")
-
-[node name="Coal Ore7" parent="Objects/Breakable/Coal Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("5_0tasm")]
-position = Vector2(332, -421)
-_animationPlayer = NodePath("../Coal Ore/AnimationPlayer")
-_sprite = NodePath("../Coal Ore/Sprite2D")
+_minBrightness = 0.8
+_rotationVariation = 5
+_scaleVariation = 0.75
 
 [node name="Copper Ore" type="Node2D" parent="Objects/Breakable"]
 y_sort_enabled = true
 
 [node name="Copper Ore" parent="Objects/Breakable/Copper Ore" instance=ExtResource("6_7ms7p")]
-position = Vector2(-64, -432)
+position = Vector2(-134, 835)
 
 [node name="Copper Ore2" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
-position = Vector2(-64, -432)
+position = Vector2(-134, 835)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
 [node name="Copper Ore3" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
-position = Vector2(-64, -432)
+position = Vector2(-134, 835)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
 [node name="Copper Ore4" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
-position = Vector2(-64, -432)
+position = Vector2(-134, 835)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
 [node name="Copper Ore5" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
-position = Vector2(-64, -432)
+position = Vector2(-134, 835)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
 [node name="Copper Ore6" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
-position = Vector2(-64, -432)
+position = Vector2(-134, 835)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
 [node name="Copper Ore7" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
-position = Vector2(-64, -432)
+position = Vector2(-134, 835)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
 [node name="Copper Ore8" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
-position = Vector2(-64, -432)
+position = Vector2(-134, 835)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
@@ -1735,17 +1753,29 @@ script = ExtResource("19_ml5be")
 _sceneID = 1
 _player = NodePath("../Player")
 
-[node name="cave_entrance" parent="Objects/Cave Entrances" instance=ExtResource("4_xu51x")]
+[node name="cave_entrance" parent="Objects/Cave Entrances" node_paths=PackedStringArray("exitPosition") instance=ExtResource("4_xu51x")]
 position = Vector2(-9360, 6888)
 id = 2
+exitPosition = NodePath("Exit")
 
-[node name="cave_entrance2" parent="Objects/Cave Entrances" instance=ExtResource("4_xu51x")]
+[node name="Exit" type="Node2D" parent="Objects/Cave Entrances/cave_entrance"]
+position = Vector2(-16, 142)
+
+[node name="cave_entrance2" parent="Objects/Cave Entrances" node_paths=PackedStringArray("exitPosition") instance=ExtResource("4_xu51x")]
 position = Vector2(-8976, -8472)
 id = 3
+exitPosition = NodePath("Exit")
 
-[node name="cave_entrance3" parent="Objects/Cave Entrances" instance=ExtResource("4_xu51x")]
+[node name="Exit" type="Node2D" parent="Objects/Cave Entrances/cave_entrance2"]
+position = Vector2(-16, 142)
+
+[node name="cave_entrance3" parent="Objects/Cave Entrances" node_paths=PackedStringArray("exitPosition") instance=ExtResource("4_xu51x")]
 position = Vector2(776, -1688)
 id = 2
+exitPosition = NodePath("Exit")
+
+[node name="Exit" type="Node2D" parent="Objects/Cave Entrances/cave_entrance3"]
+position = Vector2(-16, 142)
 
 [node name="Enemies" type="Node2D" parent="."]
 unique_name_in_owner = true

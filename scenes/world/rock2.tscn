@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://btmwjcvssjjf7"]
+[gd_scene load_steps=12 format=3 uid="uid://neenh87kgx15"]
 
-[ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_15rhp"]
-[ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_6kr0x"]
-[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_isnin"]
-[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_kywjc"]
-[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_crfoj"]
+[ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_bon0e"]
+[ext_resource type="Resource" uid="uid://bs6otct5awtuy" path="res://TinoTests/Resources/rock.tres" id="2_evkv4"]
+[ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="3_de28r"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_kqi3m"]
+[ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_wq47n"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_o6xgg"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_14wrb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pn142"]
 radius = 85.9731
@@ -34,22 +36,29 @@ _data = {
 "shake": SubResource("Animation_ir0ao")
 }
 
-[node name="Copper Ore" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer", "_sprite")]
+[node name="Rock2" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 collision_layer = 5
-script = ExtResource("1_15rhp")
+script = ExtResource("1_bon0e")
+loot = ExtResource("2_evkv4")
 _animationPlayer = NodePath("AnimationPlayer")
-_sprite = NodePath("Sprite2D")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.615686)
+position = Vector2(-1.39566, -43.2337)
+rotation = 2.87979
+scale = Vector2(5.00348, 2.35276)
+texture = ExtResource("3_de28r")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-5, -90)
-texture = ExtResource("3_6kr0x")
+texture = ExtResource("3_wq47n")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("4_isnin")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_kqi3m")]
 _parentScript = NodePath("..")
 _hasHealthBar = false
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["rock"] instance=ExtResource("5_kywjc")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["rock"] instance=ExtResource("4_o6xgg")]
 position = Vector2(-1, 0)
 collision_layer = 16
 collision_mask = 32
@@ -72,6 +81,6 @@ libraries = {
 "": SubResource("AnimationLibrary_x8yya")
 }
 
-[node name="NavigationObstacleArea" parent="." instance=ExtResource("6_crfoj")]
+[node name="NavigationObstacleArea" parent="." instance=ExtResource("6_14wrb")]
 polygon = PackedVector2Array(-64, 32, 112, -24, 144, -96, 120, -160, 48, -192, -128, -136, -160, -72, -136, 8)
 metadata/_edit_pinned_properties_ = [&"polygon"]

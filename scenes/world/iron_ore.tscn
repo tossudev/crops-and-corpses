@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://neenh87kgx15"]
+[gd_scene load_steps=11 format=3 uid="uid://dn2v4uxpv2gx6"]
 
-[ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_bon0e"]
-[ext_resource type="Resource" uid="uid://bqdor0tg0upjq" path="res://TinoTests/Resources/iron_ore.tres" id="2_8s4jw"]
-[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_kqi3m"]
-[ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_wq47n"]
-[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_o6xgg"]
-[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_14wrb"]
+[ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_5m8pk"]
+[ext_resource type="Resource" uid="uid://bqdor0tg0upjq" path="res://TinoTests/Resources/iron_ore.tres" id="2_x8kij"]
+[ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_yp0f4"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_a0d06"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_yemw3"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_tlo3i"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pn142"]
 radius = 85.9731
@@ -38,19 +38,19 @@ _data = {
 [node name="Iron Ore" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 collision_layer = 5
-script = ExtResource("1_bon0e")
-_loot = ExtResource("2_8s4jw")
+script = ExtResource("1_5m8pk")
+loot = ExtResource("2_x8kij")
 _animationPlayer = NodePath("AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-5, -90)
-texture = ExtResource("3_wq47n")
+texture = ExtResource("3_yp0f4")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("3_kqi3m")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("4_a0d06")]
 _parentScript = NodePath("..")
 _hasHealthBar = false
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["rock"] instance=ExtResource("4_o6xgg")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["rock"] instance=ExtResource("5_yemw3")]
 position = Vector2(-1, 0)
 collision_layer = 16
 collision_mask = 32
@@ -73,6 +73,6 @@ libraries = {
 "": SubResource("AnimationLibrary_x8yya")
 }
 
-[node name="NavigationObstacleArea" parent="." instance=ExtResource("6_14wrb")]
+[node name="NavigationObstacleArea" parent="." instance=ExtResource("6_tlo3i")]
 polygon = PackedVector2Array(-64, 32, 112, -24, 144, -96, 120, -160, 48, -192, -128, -136, -160, -72, -136, 8)
 metadata/_edit_pinned_properties_ = [&"polygon"]

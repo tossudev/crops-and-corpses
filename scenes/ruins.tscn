@@ -1,9 +1,9 @@
-[gd_scene load_steps=62 format=3 uid="uid://c0o7irtwrvayp"]
+[gd_scene load_steps=63 format=3 uid="uid://c0o7irtwrvayp"]
 
-[ext_resource type="Script" path="res://scripts/global/TownManager.cs" id="1_qt5pe"]
-[ext_resource type="PackedScene" uid="uid://dpdpfs2c2kwi5" path="res://scenes/world/lantern.tscn" id="4_61dbj"]
+[ext_resource type="Script" path="res://scripts/ruins.cs" id="1_7gyha"]
+[ext_resource type="PackedScene" path="res://scenes/world/lantern.tscn" id="4_61dbj"]
 [ext_resource type="PackedScene" uid="uid://b2gv07xesl7qm" path="res://scenes/buildings/town/house/house_broken.tscn" id="4_nfdnl"]
-[ext_resource type="Texture2D" uid="uid://bpff0i3txuqnq" path="res://assets/sprites/items/lantern.png" id="5_x4a6q"]
+[ext_resource type="Texture2D" uid="uid://cbf7wx6skn70u" path="res://assets/sprites/items/lantern.png" id="5_x4a6q"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_xoqnb"]
 [ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://scenes/spawn/ZombieSpawn.tscn" id="6_moakj"]
 [ext_resource type="Texture2D" uid="uid://q5wxg1if5hb8" path="res://assets/sprites/foliage/tree_2.png" id="6_rt25r"]
@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://ci1gujwgui8qr" path="res://scenes/buildings/town/large_house/large_house_broken.tscn" id="8_gaa8h"]
 [ext_resource type="PackedScene" uid="uid://bfgy4jnvcy7pk" path="res://scenes/zombie/Zombie.tscn" id="8_ovu31"]
 [ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="8_pei51"]
-[ext_resource type="Texture2D" uid="uid://mnytodt7v2vt" path="res://assets/sprites/items/cross_church.png" id="9_lqrkj"]
+[ext_resource type="Texture2D" uid="uid://7idfs0eyme85" path="res://assets/sprites/items/cross_church.png" id="9_lqrkj"]
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="10_4qh86"]
 [ext_resource type="PackedScene" uid="uid://b4fyxjshjenvv" path="res://scenes/farm/plants/plant_potato.tscn" id="10_c8c0f"]
 [ext_resource type="PackedScene" uid="uid://disyt3fuu77je" path="res://scenes/buildings/fence_scenes/fence_west.tscn" id="11_3dwxc"]
@@ -25,25 +25,26 @@
 [ext_resource type="PackedScene" uid="uid://e58507ft315b" path="res://scenes/buildings/fence_scenes/fence_north.tscn" id="12_moe38"]
 [ext_resource type="PackedScene" uid="uid://luqdfx7qh2jl" path="res://scenes/farm/plants/plant_pumpkin.tscn" id="12_w0m5s"]
 [ext_resource type="TileSet" uid="uid://dajdby7nadxkd" path="res://assets/resources/tiles/ruins_collision_tiles.tres" id="14_yfo2u"]
-[ext_resource type="Texture2D" uid="uid://bnmhntukcdbp7" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="15_0ox1s"]
+[ext_resource type="Texture2D" uid="uid://dkyrcjhsjmsrv" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="15_0ox1s"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="16_pefaa"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="16_s7swj"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_xu2jk"]
 [ext_resource type="PackedScene" uid="uid://du4tddxtyn51y" path="res://scenes/world/tree3.tscn" id="19_08txa"]
 [ext_resource type="PackedScene" uid="uid://dt4impfdusiy" path="res://scenes/farm/plants/plant_poppy.tscn" id="19_ukssx"]
-[ext_resource type="Texture2D" uid="uid://cs3htm8cw52im" path="res://assets/sprites/items/item_poppy_dead.png" id="20_1wvwg"]
+[ext_resource type="Texture2D" uid="uid://2hxv708lschl" path="res://assets/sprites/items/item_poppy_dead.png" id="20_1wvwg"]
 [ext_resource type="PackedScene" uid="uid://7m8c0ty0xcd0" path="res://scenes/buildings/town/well/well.tscn" id="20_jm3gc"]
-[ext_resource type="Texture2D" uid="uid://cwold4o2q74t8" path="res://assets/sprites/items/item_pumpkin_dead.png" id="21_wawgo"]
+[ext_resource type="Texture2D" uid="uid://dmckn72pppsk8" path="res://assets/sprites/items/item_pumpkin_dead.png" id="21_wawgo"]
+[ext_resource type="Script" path="res://scripts/World/PortalManager.cs" id="22_30gdq"]
 [ext_resource type="PackedScene" uid="uid://cb3o7u5viapx8" path="res://scenes/farm/plants/plant_wheat.tscn" id="22_i4jq8"]
-[ext_resource type="Texture2D" uid="uid://voyo1usb16uc" path="res://assets/sprites/items/item_potato_dead.png" id="22_q6anl"]
+[ext_resource type="Texture2D" uid="uid://dmyin6d6q7ieb" path="res://assets/sprites/items/item_potato_dead.png" id="22_q6anl"]
 [ext_resource type="PackedScene" uid="uid://dyq3ksvy2gwvv" path="res://scenes/world/bush.tscn" id="22_wxiqh"]
 [ext_resource type="PackedScene" uid="uid://bbia6yxwghu3o" path="res://scenes/farm/plants/plant_lupine.tscn" id="23_5yyo7"]
-[ext_resource type="Texture2D" uid="uid://bfn22gqwoaqbt" path="res://assets/sprites/tiles/farm_tile.png" id="26_adjto"]
+[ext_resource type="Texture2D" uid="uid://balyagv7w54i" path="res://assets/sprites/tiles/farm_tile.png" id="26_adjto"]
 [ext_resource type="Texture2D" uid="uid://b0dlu5nexmss2" path="res://assets/sprites/tiles/grass_tile.png" id="27_4ir3q"]
-[ext_resource type="Texture2D" uid="uid://b644tsyidu1bm" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="28_w6780"]
+[ext_resource type="Texture2D" uid="uid://buwuhhccbw584" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="28_w6780"]
 [ext_resource type="PackedScene" uid="uid://ca4ui8y2u11io" path="res://scenes/world/cave_entrance.tscn" id="31_ekk8c"]
 [ext_resource type="Texture2D" uid="uid://dbgwlhprokvwi" path="res://assets/sprites/tiles/Dirt_tile.png" id="33_f0032"]
-[ext_resource type="Texture2D" uid="uid://cyfgc82fwo01k" path="res://assets/sprites/foliage/mini_tree_dead.png" id="34_guo8f"]
+[ext_resource type="Texture2D" uid="uid://cjblamfdkgg2n" path="res://assets/sprites/foliage/mini_tree_dead.png" id="34_guo8f"]
 [ext_resource type="Texture2D" uid="uid://lcg5swlsccjt" path="res://assets/sprites/tiles/Burnt_grass2_tile.png" id="37_dijnp"]
 [ext_resource type="Texture2D" uid="uid://by8gdsj0sfnja" path="res://assets/sprites/tiles/Burnt_grass_tile.png" id="38_fuoah"]
 [ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="44_kwisk"]
@@ -118,9 +119,10 @@ sources/5 = SubResource("TileSetAtlasSource_wcqjc")
 sources/6 = SubResource("TileSetAtlasSource_xockb")
 sources/7 = SubResource("TileSetAtlasSource_g02b5")
 
-[node name="Ruins" type="Node2D"]
+[node name="Ruins" type="Node2D" node_paths=PackedStringArray("_caveBlockage")]
 y_sort_enabled = true
-script = ExtResource("1_qt5pe")
+script = ExtResource("1_7gyha")
+_caveBlockage = NodePath("Objects/Foliage/Cave/CaveBlockage")
 
 [node name="NavigationManager" parent="." instance=ExtResource("44_kwisk")]
 unique_name_in_owner = true
@@ -147,17 +149,13 @@ scale = Vector2(1, 1)
 scale = Vector2(0.999998, 0.999998)
 
 [node name="ArmL" parent="Objects/Player/Skeleton2D/TorsoBone/ArmLBone" index="0"]
-position = Vector2(4.06, 13.2998)
-scale = Vector2(1, 1)
+position = Vector2(4.05988, 13.2998)
 
 [node name="HeadBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="4"]
 scale = Vector2(0.999997, 0.999997)
 
 [node name="ArmRBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="5"]
-scale = Vector2(1, 1)
-
-[node name="PlayerOverlay" parent="Objects/Player" index="9"]
-visible = false
+scale = Vector2(0.999999, 1)
 
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
 limit_left = -8100
@@ -2332,26 +2330,41 @@ _sprite = NodePath("../Rock5/Sprite2D")
 _color = Color(0.388235, 0.388235, 0.388235, 0)
 _minBrightness = 0.5
 
-[node name="Cave" type="Node2D" parent="Objects/Foliage"]
+[node name="Cave" type="Node2D" parent="Objects/Foliage" node_paths=PackedStringArray("_player")]
+y_sort_enabled = true
+script = ExtResource("22_30gdq")
+_sceneID = 3
+_player = NodePath("../../Player")
+
+[node name="cave_entrance" parent="Objects/Foliage/Cave" node_paths=PackedStringArray("exitPosition") instance=ExtResource("31_ekk8c")]
+position = Vector2(-7504, -3167)
+id = 1
+exitPosition = NodePath("Exit")
+
+[node name="Exit" type="Node2D" parent="Objects/Foliage/Cave/cave_entrance"]
+position = Vector2(-16, 142)
+
+[node name="CaveBlockage" type="Node2D" parent="Objects/Foliage/Cave"]
 y_sort_enabled = true
 
-[node name="cave_entrance" parent="Objects/Foliage/Cave" instance=ExtResource("31_ekk8c")]
-position = Vector2(-7504, -3167)
-_targetScene = 1
-
-[node name="Rock13" parent="Objects/Foliage/Cave" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("12_0gurk")]
+[node name="Rock13" parent="Objects/Foliage/Cave/CaveBlockage" node_paths=PackedStringArray("_animationPlayer", "_sprite", "_fallingTreeBridge") instance=ExtResource("12_0gurk")]
 position = Vector2(-7416, -3088)
-_animationPlayer = NodePath("../../Rocks/Rock5/AnimationPlayer")
-_sprite = NodePath("../../Rocks/Rock5/Sprite2D")
+_requiredEffect = 3
+_animationPlayer = NodePath("../../../Rocks/Rock5/AnimationPlayer")
+_sprite = NodePath("../../../Rocks/Rock5/Sprite2D")
 _color = Color(0.517647, 0.517647, 0.517647, 0)
 _minBrightness = 0.5
+_fallingTreeBridge = NodePath("..")
 
-[node name="Rock14" parent="Objects/Foliage/Cave" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("12_0gurk")]
-position = Vector2(-7536, -3104)
-_animationPlayer = NodePath("../../Rocks/Rock5/AnimationPlayer")
-_sprite = NodePath("../../Rocks/Rock5/Sprite2D")
+[node name="Rock14" parent="Objects/Foliage/Cave/CaveBlockage" node_paths=PackedStringArray("_animationPlayer", "_sprite", "_fallingTreeBridge") instance=ExtResource("12_0gurk")]
+y_sort_enabled = true
+position = Vector2(-7550, -3068)
+_requiredEffect = 3
+_animationPlayer = NodePath("../../../Rocks/Rock5/AnimationPlayer")
+_sprite = NodePath("../../../Rocks/Rock5/Sprite2D")
 _color = Color(0.517647, 0.517647, 0.517647, 0)
 _minBrightness = 0.5
+_fallingTreeBridge = NodePath("..")
 
 [node name="Rock15" parent="Objects/Foliage/Cave" instance=ExtResource("12_0gurk")]
 y_sort_enabled = true
@@ -2359,23 +2372,23 @@ position = Vector2(-7520, -3176)
 scale = Vector2(5, 5)
 script = null
 
-[node name="Sprite2D" parent="Objects/Foliage/Cave/Rock15" index="0"]
+[node name="Sprite2D" parent="Objects/Foliage/Cave/Rock15" index="1"]
 modulate = Color(0.443137, 0.388235, 0.262745, 1)
 
-[node name="HealthComponent" parent="Objects/Foliage/Cave/Rock15" index="1" node_paths=PackedStringArray("_parentScript")]
+[node name="HealthComponent" parent="Objects/Foliage/Cave/Rock15" index="2" node_paths=PackedStringArray("_parentScript")]
 _parentScript = NodePath("../../../Rocks/Rock5")
 
-[node name="HitboxComponent" parent="Objects/Foliage/Cave/Rock15" index="2" node_paths=PackedStringArray("_parentScript", "_healthComponent")]
+[node name="HitboxComponent" parent="Objects/Foliage/Cave/Rock15" index="3" node_paths=PackedStringArray("_parentScript", "_healthComponent")]
 _parentScript = NodePath("../../../Rocks/Rock5")
 _healthComponent = NodePath("../../../Rocks/Rock5/HealthComponent")
 
 [node name="CollisionShape2D" parent="Objects/Foliage/Cave/Rock15/HitboxComponent" index="0"]
 position = Vector2(-14.9996, -80)
 
-[node name="CollisionShape2D" parent="Objects/Foliage/Cave/Rock15" index="3"]
+[node name="CollisionShape2D" parent="Objects/Foliage/Cave/Rock15" index="4"]
 position = Vector2(0.000366211, -60.3999)
 
-[node name="NavigationObstacleArea" parent="Objects/Foliage/Cave/Rock15" index="5"]
+[node name="NavigationObstacleArea" parent="Objects/Foliage/Cave/Rock15" index="6"]
 position = Vector2(2, 0)
 polygon = PackedVector2Array(-64, 32, 112, -24, 134, -97.6, 120, -160, 48, -192, -128, -136, -160, -72, -136, 8)
 

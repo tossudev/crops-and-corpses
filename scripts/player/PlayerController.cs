@@ -199,10 +199,4 @@ public partial class PlayerController : CharacterBody2D
 		PlayerInfo.health = _healthComponent.GetHealth();
 		PlayerInfo.stamina = _staminaComponent.GetStamina();
 	}
-
-	public void LoadState()
-	{
-		_healthComponent.SetHealth(PlayerInfo.health);
-		_staminaComponent.SetStamina(PlayerInfo.stamina);
-	}
 }

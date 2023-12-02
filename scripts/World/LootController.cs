@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public partial class LootController : StaticBody2D
 {
 	[Export] public Loot loot;
+	[Export] private EffectType _requiredEffect = EffectType.None;
 	[Export] private AnimationPlayer _animationPlayer;
 	[Export] private Sprite2D _sprite;
 	[Export] private Color _color;
@@ -25,6 +26,7 @@ public partial class LootController : StaticBody2D
 	RandomNumberGenerator rng;
 	private int _meanDrop;
 	static AudioController _audioController;
+	private bool _canBeDestroyed = false;
 
 
 	public override void _Ready()
@@ -51,13 +53,9 @@ public partial class LootController : StaticBody2D
 		if (_dropLootPosition == null)
 			_dropLootPosition = this;
 
-		rng = new RandomNumberGenerator();
-		var x = (this.Position.X);
-		var y = (this.Position.Y);
-		rng.Seed = (ulong)((x + y) * (x + y + 1) / 2 + y);
-
 		Variations();
 
+		_items.Clear();
 		for (int i = 0; i < _meanDrop; i++)
 		{
 			_items.Add(loot.lootItems[GD.RandRange(0, loot.lootItems.Count - 1)].item);
@@ -75,6 +73,11 @@ public partial class LootController : StaticBody2D
 
 	private void Variations()
 	{
+		rng = new RandomNumberGenerator();
+		var x = (this.Position.X);
+		var y = (this.Position.Y);
+		rng.Seed = (ulong)((x + y) * (x + y + 1) / 2 + y);
+		
 		float brightness = rng.RandfRange(_minBrightness, 1f);
 
 		if (_color != new Color(0, 0, 0, 0))
@@ -88,9 +91,24 @@ public partial class LootController : StaticBody2D
 		this.RotationDegrees += rng.RandfRange(-_rotationVariation, _rotationVariation);
 	}
 
+	private void AttackReceived(Attack attack)
+	{
+		if (attack.effect == _requiredEffect || _requiredEffect == EffectType.None || Name == "Backpack")
+		{
+			_canBeDestroyed = true;
+		}
+		else
+		{
+			_canBeDestroyed = false;
+		}
+	}
+
 	private void OnHealth(float health)
 	{
-		if (_items.Count - (_items.Count - _meanDrop) > 1)
+		if (!_canBeDestroyed)
+			return;
+
+		if (_items.Count > 1)
 			DropItems();
 
 		if (_animationPlayer != null)
@@ -116,6 +134,12 @@ public partial class LootController : StaticBody2D
 				_animationPlayer.SpeedScale = 2;
 				_animationPlayer?.Play("fallingStalagmite");
 				SceneInfo.caveBridgeOpen = true;
+			}
+			else if (_fallingTreeBridge?.Name == "CaveBlockage")
+			{
+				SceneInfo.ruinsCaveOpen = true;
+				DropItems(_items.Count);
+				QueueFree();
 			}
 			else
 			{

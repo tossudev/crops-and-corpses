@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Item" load_steps=8 format=3 uid="uid://b0wqidoebr4r8"]
 
-[ext_resource type="Texture2D" uid="uid://b5w4ofxa2ivwg" path="res://assets/sprites/items/item_axe.png" id="1_cbnos"]
+[ext_resource type="Texture2D" uid="uid://b2s2jlvmtitoq" path="res://assets/sprites/items/item_pickaxe.png" id="1_nlen4"]
 [ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="2_ed21v"]
 [ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="2_eobb6"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_5n85v"]
-[ext_resource type="Resource" path="res://assets/resources/game_items/resource_items_0_to_99/2_copper.tres" id="4_0c0dy"]
+[ext_resource type="Resource" uid="uid://bofkpec0ir7h3" path="res://assets/resources/game_items/resource_items_0_to_99/2_copper.tres" id="4_0c0dy"]
 
 [sub_resource type="Resource" id="Resource_k4nbh"]
 script = ExtResource("3_5n85v")
@@ -20,6 +20,6 @@ quantity = 2
 script = ExtResource("2_eobb6")
 ID = 360
 Name = "Copper Pick"
-IconTexture = ExtResource("1_cbnos")
+IconTexture = ExtResource("1_nlen4")
 StackSize = 1
 craftingRequirements = Array[Object]([SubResource("Resource_k4nbh"), SubResource("Resource_b26dl")])

@@ -36,6 +36,8 @@ public partial class HealthComponent : Node2D
 		}
 		InitializeHealItems();
 
+		_health = _maxHealth;
+
 		if (_hasHealthBar)
 		{
 			_healthBar = _isPlayer

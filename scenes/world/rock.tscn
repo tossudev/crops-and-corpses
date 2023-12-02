@@ -66,14 +66,12 @@ _parentScript = NodePath("..")
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-visible = false
 position = Vector2(-7, -80)
 rotation = 1.25664
 shape = SubResource("CapsuleShape2D_pn142")
 debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-8, -72)
 rotation = 1.25664
 shape = SubResource("CapsuleShape2D_wgg0g")

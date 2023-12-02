@@ -12,6 +12,8 @@ public partial class QuestManager : Node
 		
 
 		globalTime = GetNodeOrNull<GlobalTime>("/root/GlobalTime");
+
+	
 		StartRescueQuest(Scene.Forest, 1);
 		if (globalTime == null)
 		{

@@ -1,12 +1,17 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 
 public partial class QuestPointManager : Node
 {
-	
-    private List<QuestPoint> activeQuestPoints = new List<QuestPoint>();
-    private QuestManager questManager;
+   
+
+
+    public List<QuestPoint> activeQuestPoints = new List<QuestPoint>();
+
+
+     QuestManager questManager;
 
     PackedScene forestQuestScene = (PackedScene)GD.Load("res://scenes/quest/forest_quest_scene.tscn");
     PackedScene caveQuestScene = (PackedScene)GD.Load("res://scenes/quest/cave_quest_scene.tscn");
@@ -14,168 +19,137 @@ public partial class QuestPointManager : Node
 
     PackedScene InThisSceneQuestScene;
 
-    [Export]
-    public Node2D[] QuestPoint;
-
+   
 
     public override void _Ready()
     {
         base._Ready();
 
-        
+        // Add all quest points to the list of active quest points
+        foreach (Node node in GetChildren())
+        {
+            if (node is QuestPoint questPoint)
+            {
+                activeQuestPoints.Add(questPoint);
+            }
+        }
+         GD.Print("Active quest points count: " + activeQuestPoints.Count);
 
-     
-      
 
         questManager = GetNode<QuestManager>("/root/QuestManager");
+        
+
 
         // If the current quest location is the same as the current scene, activate the quest point for that scene
         if (SceneManager.IsCurrentScene(this, questManager.GetActiveQuest().Location))
         {
+
+            GetRandomQuestPoint().isQuestPointActive = true;
           
-            GetRandomQuestPoint(QuestPoint);
+        
             //ActivateQuestPointForScene(SceneManager.GetCurrentScene(this));
         }
     }
-
     
 
-  // lets chose a random quest point from the array and use the  bool from that questpoint
-
-  public void GetRandomQuestPoint(Node2D[] activeQuestPoints)
-  {
-       Random random = new Random();
-    int randomQuestPointIndex = random.Next(activeQuestPoints.Length);
-    Vector2 randomQuestPoint = QuestPoint[randomQuestPointIndex].Position;
-
-    // Check if the QuestPoint node exists before trying to get it
-    if (QuestPoint[randomQuestPointIndex].HasNode("QuestPoint"))
+    public QuestPoint GetRandomQuestPoint()
+{
+    if (activeQuestPoints.Count > 0)
     {
-        QuestPoint[randomQuestPointIndex].GetNode<QuestPoint>("QuestPoint").isQuestPointActive = true;
-        GD.Print(QuestPoint[randomQuestPointIndex].GetNode<QuestPoint>("QuestPoint").isQuestPointActive);
+        Random random = new Random();
+        int index = random.Next(activeQuestPoints.Count);
+        QuestPoint randomQuestPoint = activeQuestPoints[index];
+        return randomQuestPoint;
     }
     else
     {
-        GD.Print("QuestPoint node does not exist");
-        // Handle the case when the QuestPoint node does not exist
-        // You can throw an exception or log a message, depending on your needs
+        GD.Print("No active quest points");
+        return null;
     }
-  }
 
-  
+}
+
+
+// set bool in questpoint to true
+
+
+
+
+
 
 
 
 
     
 
-/*
-    public Vector2 GetRandomQuestPoint(Node2D[] QuestPoint)
-    {
-        Random random = new Random();
-        int randomQuestPointIndex = random.Next(QuestPoint.Length);
-        Vector2 randomQuestPoint = QuestPoint[randomQuestPointIndex].Position;
-        return randomQuestPoint;
-    }
 
-    public void changePackedScene(Scene.RootScene rootScene)
-    {
-        if (rootScene == Scene.Forest)
-        {
-            InThisSceneQuestScene = forestQuestScene;
-        }
-        else if (rootScene == Scene.Ruins)
-        {
-            InThisSceneQuestScene = ruinsQuestScene;
-        }
-        else if (rootScene == Scene.Cave)
-        {
-            InThisSceneQuestScene = caveQuestScene;
-        }
-    }
 
-    // Example method to deactivate a specific quest point
-    public void DeactivateQuestPoint(QuestPoint questPoint)
-    {
-        // Deactivate or perform other actions related to deactivation
-        questPoint.QueueFree(); // Assuming QuestPoint is a Node2D, change as needed
-        activeQuestPoints.Remove(questPoint);
-    }
 
-    // Example method to deactivate all quest points
-    public void DeactivateAllQuestPoints()
-    {
-        foreach (QuestPoint questPoint in activeQuestPoints)
+
+
+
+
+
+    
+       /* public Vector2 GetRandomQuestPoint(Node2D[] QuestPoint)
         {
+            Random random = new Random();
+            int randomQuestPointIndex = random.Next(QuestPoint.Length);
+            Vector2 randomQuestPoint = QuestPoint[randomQuestPointIndex].Position;
+            return randomQuestPoint;
+        }
+
+        public void changePackedScene(Scene.RootScene rootScene)
+        {
+            if (rootScene == Scene.Forest)
+            {
+                InThisSceneQuestScene = forestQuestScene;
+            }
+            else if (rootScene == Scene.Ruins)
+            {
+                InThisSceneQuestScene = ruinsQuestScene;
+            }
+            else if (rootScene == Scene.Cave)
+            {
+                InThisSceneQuestScene = caveQuestScene;
+            }
+        }
+
+        // Example method to deactivate a specific quest point
+        public void DeactivateQuestPoint(QuestPoint questPoint)
+        {
+            // Deactivate or perform other actions related to deactivation
             questPoint.QueueFree(); // Assuming QuestPoint is a Node2D, change as needed
+            activeQuestPoints.Remove(questPoint);
         }
-        activeQuestPoints.Clear();
-    }
 
-    // Example method to deactivate all quest points in a specific scene
-    public void DeactivateAllQuestPointsInScene(Scene.RootScene scene)
-    {
-        foreach (QuestPoint questPoint in activeQuestPoints)
+        // Example method to deactivate all quest points
+        public void DeactivateAllQuestPoints()
         {
-            if (SceneManager.IsCurrentScene(questPoint, scene))
+            foreach (QuestPoint questPoint in activeQuestPoints)
             {
                 questPoint.QueueFree(); // Assuming QuestPoint is a Node2D, change as needed
             }
+            activeQuestPoints.Clear();
         }
-        activeQuestPoints.RemoveAll(questPoint => SceneManager.IsCurrentScene(questPoint, scene));
-    }
 
-    // Example method
-
-   /* public Vector2 GetRandomQuestPoint(Node2D[] QuestPoint)
-    {
-        Random random = new Random();
-        int randomQuestPointIndex = random.Next(QuestPoint.Length);
-        Vector2 randomQuestPoint = QuestPoint[randomQuestPointIndex].Position;
-        return randomQuestPoint;
-    }
-   
-    public void ActivateQuestPointForScene(Scene.RootScene scene)
-    {
-        GetRandomQuestPoint(QuestPoint);
-        changePackedScene(scene);
-        QuestPoint questPoint = (QuestPoint)InThisSceneQuestScene.Instantiate();
-        questPoint.Position = GetRandomQuestPoint(QuestPoint);
-        activeQuestPoints.Add(questPoint);
-        GetTree().Root.AddChild(questPoint);
-
-        
-    
-    }
-
-
-    public void changePackedScene(Scene.RootScene rootScene)
-    {
-        if (rootScene == Scene.Forest)
+        // Example method to deactivate all quest points in a specific scene
+        public void DeactivateAllQuestPointsInScene(Scene.RootScene scene)
         {
-            InThisSceneQuestScene = forestQuestScene;
+            foreach (QuestPoint questPoint in activeQuestPoints)
+            {
+                if (SceneManager.IsCurrentScene(questPoint, scene))
+                {
+                    questPoint.QueueFree(); // Assuming QuestPoint is a Node2D, change as needed
+                }
+            }
+            activeQuestPoints.RemoveAll(questPoint => SceneManager.IsCurrentScene(questPoint, scene));
         }
-        else if (rootScene == Scene.Ruins)
-        {
-            InThisSceneQuestScene = ruinsQuestScene;
-        }
-        else if (rootScene == Scene.Cave)
-        {
-            InThisSceneQuestScene = caveQuestScene;
-        }
-    }
 
-
-
-    // Example method to deactivate a specific quest point
-    public void DeactivateQuestPoint(QuestPoint questPoint)
-    {
-        // Deactivate or perform other actions related to deactivation
-        questPoint.QueueFree(); // Assuming QuestPoint is a Node2D, change as needed
-        activeQuestPoints.Remove(questPoint);
-      
-    
-    }
-
-*/
+        */
 }
+
+
+
+
+   

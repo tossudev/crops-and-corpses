@@ -53,13 +53,9 @@ public partial class LootController : StaticBody2D
 		if (_dropLootPosition == null)
 			_dropLootPosition = this;
 
-		rng = new RandomNumberGenerator();
-		var x = (this.Position.X);
-		var y = (this.Position.Y);
-		rng.Seed = (ulong)((x + y) * (x + y + 1) / 2 + y);
-
 		Variations();
 
+		_items.Clear();
 		for (int i = 0; i < _meanDrop; i++)
 		{
 			_items.Add(loot.lootItems[GD.RandRange(0, loot.lootItems.Count - 1)].item);
@@ -77,6 +73,11 @@ public partial class LootController : StaticBody2D
 
 	private void Variations()
 	{
+		rng = new RandomNumberGenerator();
+		var x = (this.Position.X);
+		var y = (this.Position.Y);
+		rng.Seed = (ulong)((x + y) * (x + y + 1) / 2 + y);
+		
 		float brightness = rng.RandfRange(_minBrightness, 1f);
 
 		if (_color != new Color(0, 0, 0, 0))

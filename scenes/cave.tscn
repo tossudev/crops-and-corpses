@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://wy0dgop8pftu" path="res://scenes/world/cave_tilemap.tscn" id="1_yabqn"]
 [ext_resource type="Script" path="res://scripts/cave.cs" id="1_yjxwb"]
 [ext_resource type="PackedScene" uid="uid://b6w8cr3rm5pu3" path="res://scenes/world/rock.tscn" id="3_flaay"]
-[ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/rock2.tscn" id="4_4kwxv"]
+[ext_resource type="PackedScene" uid="uid://dn2v4uxpv2gx6" path="res://scenes/world/iron_ore.tscn" id="4_7yixc"]
 [ext_resource type="PackedScene" uid="uid://ca4ui8y2u11io" path="res://scenes/world/cave_entrance.tscn" id="4_xu51x"]
 [ext_resource type="PackedScene" uid="uid://00rfo2muvu4s" path="res://scenes/world/coal_ore.tscn" id="5_0tasm"]
 [ext_resource type="PackedScene" uid="uid://bbi4wvs2sck5f" path="res://scenes/world/support_beam.tscn" id="5_d6lea"]
@@ -147,23 +147,36 @@ y_sort_enabled = true
 [node name="Iron Ore" type="Node2D" parent="Objects/Breakable"]
 y_sort_enabled = true
 
-[node name="Iron Ore3" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
-position = Vector2(-416, 708)
+[node name="Iron Ore" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
 
-[node name="Iron Ore4" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
-position = Vector2(-416, 708)
+[node name="Iron Ore2" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
+_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
-[node name="Iron Ore5" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
-position = Vector2(-416, 708)
+[node name="Iron Ore3" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
+_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
-[node name="Iron Ore6" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
-position = Vector2(-416, 708)
+[node name="Iron Ore4" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
+_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
-[node name="Iron Ore7" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
-position = Vector2(-416, 708)
+[node name="Iron Ore5" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
+_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
-[node name="Iron Ore8" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_4kwxv")]
-position = Vector2(-416, 708)
+[node name="Iron Ore6" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
+_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+
+[node name="Iron Ore7" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
+_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+
+[node name="Iron Ore8" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
+position = Vector2(-577, 833)
+_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
 [node name="Coal Ore" type="Node2D" parent="Objects/Breakable"]
 y_sort_enabled = true

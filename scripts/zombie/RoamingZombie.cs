@@ -313,6 +313,7 @@ public partial class RoamingZombie : CharacterBody2D
 			}
 			int rewardIndex = (int)reward;
 			_lootController.loot = _lootList[rewardIndex];
+			_lootController.Init();
 			_attack.damage = ZombieManager.damage;
 			_timer.WaitTime = ZombieManager.attackTime;
 		}

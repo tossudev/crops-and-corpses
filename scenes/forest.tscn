@@ -1,6 +1,7 @@
-[gd_scene load_steps=136 format=3 uid="uid://cce2sygxgl033"]
+[gd_scene load_steps=137 format=3 uid="uid://cce2sygxgl033"]
 
 [ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="1_dfb2v"]
+[ext_resource type="Script" path="res://scripts/forest.cs" id="1_h2vq7"]
 [ext_resource type="Texture2D" uid="uid://ehsp5k83fvvb" path="res://assets/sprites/tiles/grass_flowers2_tile.png" id="1_sbei6"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/water.gdshader" id="2_3pryh"]
 [ext_resource type="Texture2D" uid="uid://wx026lyp8qku" path="res://assets/sprites/tiles/grass_flowers_tile.png" id="2_5tcwd"]
@@ -43,7 +44,7 @@
 [ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://scenes/farm/farm_plot.tscn" id="21_3lgi7"]
 [ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="21_tox2m"]
 [ext_resource type="Texture2D" uid="uid://6rq37pexrl74" path="res://assets/sprites/tiles/sand_corner_tile2.png" id="21_w6pde"]
-[ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/iron_ore.tscn" id="22_4gs3r"]
+[ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/rock2.tscn" id="22_4gs3r"]
 [ext_resource type="Texture2D" uid="uid://di6t8xgjo3k35" path="res://assets/sprites/tiles/sand_corner_tile3.png" id="22_q34ae"]
 [ext_resource type="Texture2D" uid="uid://q5wxg1if5hb8" path="res://assets/sprites/foliage/tree_2.png" id="22_r2sim"]
 [ext_resource type="PackedScene" uid="uid://bljea7oopk7tf" path="res://scenes/farm/plants/plant_mushroom.tscn" id="23_7l40m"]
@@ -572,8 +573,11 @@ height = 256
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="Forest" type="Node2D"]
+[node name="Forest" type="Node2D" node_paths=PackedStringArray("_bridge", "_fallingTree")]
 y_sort_enabled = true
+script = ExtResource("1_h2vq7")
+_bridge = NodePath("Objects/FallingTreeBridge")
+_fallingTree = NodePath("Objects/FallingTree")
 
 [node name="NavigationManager" parent="." instance=ExtResource("1_dfb2v")]
 unique_name_in_owner = true
@@ -8341,9 +8345,13 @@ script = ExtResource("69_35sbn")
 _sceneID = 2
 _player = NodePath("../Player")
 
-[node name="cave_entrance" parent="Objects/Cave Entrances" instance=ExtResource("49_ibfou")]
+[node name="cave_entrance" parent="Objects/Cave Entrances" node_paths=PackedStringArray("exitPosition") instance=ExtResource("49_ibfou")]
 position = Vector2(6540, -2066)
 id = 1
+exitPosition = NodePath("Exit")
+
+[node name="Exit" type="Node2D" parent="Objects/Cave Entrances/cave_entrance"]
+position = Vector2(-16, 142)
 
 [node name="farm_manager" parent="." instance=ExtResource("16_rit5n")]
 

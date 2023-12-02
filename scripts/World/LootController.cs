@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public partial class LootController : StaticBody2D
 {
 	[Export] public Loot loot;
+	[Export] private EffectType _requiredEffect = EffectType.None;
 	[Export] private AnimationPlayer _animationPlayer;
 	[Export] private Sprite2D _sprite;
 	[Export] private Color _color;
@@ -25,6 +26,7 @@ public partial class LootController : StaticBody2D
 	RandomNumberGenerator rng;
 	private int _meanDrop;
 	static AudioController _audioController;
+	private bool _canBeDestroyed = false;
 
 
 	public override void _Ready()
@@ -88,8 +90,23 @@ public partial class LootController : StaticBody2D
 		this.RotationDegrees += rng.RandfRange(-_rotationVariation, _rotationVariation);
 	}
 
+	private void AttackReceived(Attack attack)
+	{
+		if (attack.effect == _requiredEffect || _requiredEffect == EffectType.None)
+		{
+			_canBeDestroyed = true;
+		}
+		else
+		{
+			_canBeDestroyed = false;
+		}
+	}
+
 	private void OnHealth(float health)
 	{
+		if (!_canBeDestroyed)
+			return;
+
 		if (_items.Count - (_items.Count - _meanDrop) > 1)
 			DropItems();
 
@@ -116,6 +133,12 @@ public partial class LootController : StaticBody2D
 				_animationPlayer.SpeedScale = 2;
 				_animationPlayer?.Play("fallingStalagmite");
 				SceneInfo.caveBridgeOpen = true;
+			}
+			else if (_fallingTreeBridge?.Name == "CaveBlockage")
+			{
+				SceneInfo.ruinsCaveOpen = true;
+				DropItems(_items.Count);
+				QueueFree();
 			}
 			else
 			{

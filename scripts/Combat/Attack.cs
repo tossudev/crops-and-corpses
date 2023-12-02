@@ -15,5 +15,5 @@ public enum EffectType
 	None,
 	Cure,
 	Repair,
-	CaveEntrance,
+	SteelPick
 }

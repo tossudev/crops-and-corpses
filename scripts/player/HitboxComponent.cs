@@ -14,16 +14,6 @@ public partial class HitboxComponent : Area2D
 			return;
 		}
 
-		if (attack.effect == EffectType.Repair)
-		{
-			_healthComponent.TryHealWithRepairItem();
-			return;
-		}
-		else
-		{
-			_healthComponent.TakeDamage(attack);
-		}
-
 		if (_parentScript == null || !_parentScript.HasMethod("AttackReceived"))
 		{
 			// GD.Print("HitboxComponent: No method or parent script found");
@@ -37,5 +27,15 @@ public partial class HitboxComponent : Area2D
 		}
 
 		_parentScript.CallDeferred("AttackReceived", attack);
+
+		if (attack.effect == EffectType.Repair)
+		{
+			_healthComponent.TryHealWithRepairItem();
+			return;
+		}
+		else
+		{
+			_healthComponent.TakeDamage(attack);
+		}
 	}
 }

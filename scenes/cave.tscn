@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://wy0dgop8pftu" path="res://scenes/world/cave_tilemap.tscn" id="1_yabqn"]
 [ext_resource type="Script" path="res://scripts/cave.cs" id="1_yjxwb"]
 [ext_resource type="PackedScene" uid="uid://b6w8cr3rm5pu3" path="res://scenes/world/rock.tscn" id="3_flaay"]
-[ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/iron_ore.tscn" id="4_4kwxv"]
+[ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/rock2.tscn" id="4_4kwxv"]
 [ext_resource type="PackedScene" uid="uid://ca4ui8y2u11io" path="res://scenes/world/cave_entrance.tscn" id="4_xu51x"]
 [ext_resource type="PackedScene" uid="uid://00rfo2muvu4s" path="res://scenes/world/coal_ore.tscn" id="5_0tasm"]
 [ext_resource type="PackedScene" uid="uid://bbi4wvs2sck5f" path="res://scenes/world/support_beam.tscn" id="5_d6lea"]
@@ -121,7 +121,7 @@ unique_name_in_owner = true
 y_sort_enabled = true
 
 [node name="Player" parent="Objects" node_paths=PackedStringArray("_camera") instance=ExtResource("11_mechj")]
-position = Vector2(779, -1405)
+position = Vector2(776, -1400)
 _camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
@@ -1735,17 +1735,29 @@ script = ExtResource("19_ml5be")
 _sceneID = 1
 _player = NodePath("../Player")
 
-[node name="cave_entrance" parent="Objects/Cave Entrances" instance=ExtResource("4_xu51x")]
+[node name="cave_entrance" parent="Objects/Cave Entrances" node_paths=PackedStringArray("exitPosition") instance=ExtResource("4_xu51x")]
 position = Vector2(-9360, 6888)
 id = 2
+exitPosition = NodePath("Exit")
 
-[node name="cave_entrance2" parent="Objects/Cave Entrances" instance=ExtResource("4_xu51x")]
+[node name="Exit" type="Node2D" parent="Objects/Cave Entrances/cave_entrance"]
+position = Vector2(-16, 142)
+
+[node name="cave_entrance2" parent="Objects/Cave Entrances" node_paths=PackedStringArray("exitPosition") instance=ExtResource("4_xu51x")]
 position = Vector2(-8976, -8472)
 id = 3
+exitPosition = NodePath("Exit")
 
-[node name="cave_entrance3" parent="Objects/Cave Entrances" instance=ExtResource("4_xu51x")]
+[node name="Exit" type="Node2D" parent="Objects/Cave Entrances/cave_entrance2"]
+position = Vector2(-16, 142)
+
+[node name="cave_entrance3" parent="Objects/Cave Entrances" node_paths=PackedStringArray("exitPosition") instance=ExtResource("4_xu51x")]
 position = Vector2(776, -1688)
 id = 2
+exitPosition = NodePath("Exit")
+
+[node name="Exit" type="Node2D" parent="Objects/Cave Entrances/cave_entrance3"]
+position = Vector2(-16, 142)
 
 [node name="Enemies" type="Node2D" parent="."]
 unique_name_in_owner = true

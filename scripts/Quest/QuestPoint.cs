@@ -12,13 +12,17 @@ public partial class QuestPoint : Node2D
 
 	VillagerManager villagerManager;
 
+
+	const string Node2D_ZombieSpawn = "%ZombieSpawn";
+	private Node2D zombieSpawn;
+
 	
-	const string Node2D_ZombiePoint = "%ZombieSpawn";
+	const string Node2D_QuestZombieSpawn = "%QuestZombieSpawn";
 	private Node2D spawnZombiePoint;
 
 
 	const string Node2D_QuestZombies = "%QuestZombies";
-	private Node2D[] QuestZombies;
+	private Node2D QuestZombies;
 
 	  
 		
@@ -44,33 +48,59 @@ public partial class QuestPoint : Node2D
 	int villagerSpawnRange = 50;
 
 	int CurrentDifficulty;
+
+	
 	bool isZombiesSpawned = false;
 
 
 	public override void _Ready()
 	{
+		base._Ready();
+		QuestZombies = GetNode<Node2D>(Node2D_QuestZombies);
+	
+
 		questManager = GetNode<QuestManager>("/root/QuestManager");
 
-		QuestZombies = GetNode<Node2D[]>(Node2D_QuestZombies); 
-		spawnZombiePoint = GetNode<Node2D>(Node2D_ZombiePoint);
-		villagerSpawnPoint = GetNode<Node2D>(Node2D_VillagerPoint);
-		playerController = (PlayerController)GetTree().GetFirstNodeInGroup("player");
+		zombieScene = (PackedScene)ResourceLoader.Load("res://scenes/zombie/Zombie.tscn");
+		spawnZombiePoint = GetNode<Node2D>(Node2D_QuestZombieSpawn);
+
+		zombieSpawn = GetNode<Node2D>(Node2D_ZombieSpawn);
+	
+
+		
+
+		
+
+ 
+
+	
+
+	playerController = (PlayerController)GetTree().GetFirstNodeInGroup("player");
+	if (playerController == null)
+	
+		
+	
+		questManager.StartRescueQuest(Scene.Cave, 1);
+		GD.Print(questManager.GetActiveQuest().difficulty);
+	
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
+	
 
 		if(isQuestPointActive == true)
 		{
 		playerDistanceToQuestPoint = (int)playerController.GlobalPosition.DistanceTo(GlobalPosition);
 
-		GD.Print("Distance to quest point: " + playerDistanceToQuestPoint);
+	
 		if (isQuestPointActive && !isZombiesSpawned && playerDistanceToQuestPoint < SpawnRange)
 		{
-			SpawendZombieAmount();
+			
 			SpawnZombies();
 			SpawnVillagers();
+	
 			isZombiesSpawned = true;
 		}
 		
@@ -91,20 +121,10 @@ public partial class QuestPoint : Node2D
 
 	public void SpawnZombies()
 	{
-		zombieScene = (PackedScene) ResourceLoader.Load("res://scenes/zombie/Zombie.tscn");
-		
 
-		for (int i = 0; i < zombieAmount; i++)
-		{
-			CharacterBody2D zombie = (CharacterBody2D) zombieScene.Instantiate();
-			zombie.GlobalPosition = spawnZombiePoint.GlobalPosition + new Vector2(GD.RandRange(-SpawnRange, SpawnRange), GD.RandRange(-SpawnRange, SpawnRange));
-			QuestZombies[i].AddChild(zombie);
-
-
-		}
-
-
+		GD.Print("SpawnZombies");
 	}
+
 
 	private void SpawendZombieAmount(){
 	   CurrentDifficulty = questManager.GetActiveQuest().difficulty;

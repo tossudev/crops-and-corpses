@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://7r2mskqdc0va"]
+
+[ext_resource type="Script" path="res://scripts/Quest/QuestPoint.cs" id="1_w3pmn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qcjyh"]
+radius = 250.282
+
+[node name="QuestPoint" type="Node2D"]
+script = ExtResource("1_w3pmn")
+
+[node name="ZombieArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZombieArea"]
+shape = SubResource("CircleShape2D_qcjyh")
+
+[node name="QuestZombieSpawn" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-128, -49)
+
+[node name="VillagerSpawn" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(194, 9)

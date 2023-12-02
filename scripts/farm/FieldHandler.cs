@@ -58,31 +58,31 @@ public partial class FieldHandler : Node2D
 	{
 		SetPlant(seedName);
 
-        TextureRect plantTexture = GetNode<TextureRect>(_nodePath);
-        _plant.myField = this;
-        plantTexture.AddChild(_plant);
+		TextureRect plantTexture = GetNode<TextureRect>(_nodePath);
+		_plant.myField = this;
+		plantTexture.AddChild(_plant);
 
-        plantTexture.Visible = true;
-        _currentPlants++;
+		plantTexture.Visible = true;
+		_currentPlants++;
 		if (!isGrowing)
 			return;
 
-        GlobalTime globaltime = GetNode<GlobalTime>("/root/GlobalTime");
+		GlobalTime globaltime = GetNode<GlobalTime>("/root/GlobalTime");
 
 		double difference = globaltime.GetTime() - savedTime;
 
 		double currentGrowthTime = growthTime + difference;
 
-        if (((!isTendedTo && difference > _plant.growthCycleLength) || isDead) && growthTime < _plant.growthCycleLength * _plant.maxCycles)
-        {
+		if (((!isTendedTo && difference > _plant.growthCycleLength) || isDead) && growthTime < _plant.growthCycleLength * _plant.maxCycles)
+		{
 			_plant.Die();
 			return;
-        }
+		}
 
-        _plant.currentGrowthTime = currentGrowthTime;
+		_plant.currentGrowthTime = currentGrowthTime;
 
 		_plant.LoadPlant(currentGrowthTime);
-    }
+	}
 	
 	public void RemovePlant(){
 		_currentPlants=0;

@@ -1,7 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://wiqniyx1q16m"]
+[gd_scene load_steps=3 format=3 uid="uid://wwf7rdwowll5"]
 
 [ext_resource type="Script" path="res://scripts/Quest/QuestPointManager.cs" id="1_nq8hn"]
+[ext_resource type="PackedScene" uid="uid://7r2mskqdc0va" path="res://scenes/Quest/QuestPoint.tscn" id="2_nplq4"]
 
-[node name="QuestPointManager" type="Node2D" node_paths=PackedStringArray("QuestPoint")]
+[node name="QuestPointManager" type="Node2D"]
 script = ExtResource("1_nq8hn")
-QuestPoint = []
+
+[node name="QuestPoint" parent="." instance=ExtResource("2_nplq4")]
+
+[node name="QuestPoint2" parent="." instance=ExtResource("2_nplq4")]
+position = Vector2(1076.93, 874.63)
+
+[node name="QuestPoint3" parent="." instance=ExtResource("2_nplq4")]
+position = Vector2(-481.9, 484.13)
+
+[node name="QuestPoint4" parent="." instance=ExtResource("2_nplq4")]
+position = Vector2(1070.58, -211.152)
+
+[editable path="QuestPoint"]

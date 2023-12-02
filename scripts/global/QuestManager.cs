@@ -14,7 +14,7 @@ public partial class QuestManager : Node
 		globalTime = GetNodeOrNull<GlobalTime>("/root/GlobalTime");
 
 	
-		StartRescueQuest(Scene.Forest, 1);
+		StartRescueQuest(Scene.Cave,1);
 		if (globalTime == null)
 		{
 			GD.PrintErr("GlobalTime not found or not initialized.");

@@ -144,6 +144,15 @@ public partial class SpawnScript : Node2D
 		}
 		
 	}
+	public void SpawnZombieAtPoint(Vector2 spawnPointPos)
+{
+    CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
+    prefab.Position = spawnPointPos;
+    enemiesNode.AddChild(prefab);
+    zombieList.Add(prefab);
+}
+
+
 	private SpawnPoint FindClosestActiveSpawnPoint()
     {
         SpawnPoint closestSpawnPoint = null;

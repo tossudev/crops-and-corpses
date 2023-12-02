@@ -1,64 +1,61 @@
 using Godot;
 using System;
 
-public partial class QuestJournal : Node2D
+public partial class QuestJournal : Control
 {
-
 	QuestManager questManager;
 
-
-	
-	const string TextEditPath = "QuestJournalText";
-	TextEdit questJournalText;
-
-	bool questJournalOpen = false;
+	const string TEXTLABEL_QUESTTEXT = "%QuestText";
+	Label QuestTextLabel;
 
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-	
-		UpdateQuestJournal();
 		questManager = GetNode<QuestManager>("/root/QuestManager");
-		questJournalText = GetNodeOrNull<TextEdit>(TextEditPath);
-		
-
-	}
-
-	
-	public override void _Process(double delta)
-	{
+		QuestTextLabel = GetNode<Label>(TEXTLABEL_QUESTTEXT);
+		QuestTextLabel.Visible = true;
 		UpdateQuestJournal();
 
-		
-		
+
 	}
 
 	public void UpdateQuestJournal()
 	{
-		if(questManager.GetActiveQuest() == null)
+		if (questManager.GetActiveQuest != null)
 		{
-			questJournalText.Text = "No Active Quest";
+			QuestTextLabel.Text = questManager.GetActiveQuest().GetQuestDescription().ToString();
 
-			return;
-
-		}
-		questJournalText = GetNode<TextEdit>("QuestJournalText");
-		questJournalText.Text = questManager.GetActiveQuest().Description;
-	}
-
-	public void _on_QuestJournalButton_pressed()
-	{
-		if (questJournalOpen == false)
-		{
-			questJournalOpen = true;
-			questJournalText.Visible = true;
+	
 		}
 		else
 		{
-			questJournalOpen = false;
-			questJournalText.Visible = false;
+			QuestTextLabel.Text = "Go to the quest board to start a quest.";
 		}
 	}
- 
+
+	void toggleQuestJournal()
+	{
+		UpdateQuestJournal();
+		if (Visible == true)
+		{
+			QuestTextLabel.Visible = false;
+		}
+		else
+		{
+			QuestTextLabel.Visible = true;
+		}
+	}
+
+    public override void _Input(InputEvent @event)
+    {
+        base._Input(@event);
+		if (@event.IsActionPressed("Toggel_QuestJournal"))
+		{
+			toggleQuestJournal();
+			
+			
+		}
+    }
+
+
 }

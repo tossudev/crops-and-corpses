@@ -36,11 +36,6 @@ public partial class PlayerController : CharacterBody2D
 			Position = _respawnPoint.Position;
 			_isDead = false;
 		}
-		else
-		{
-			_healthComponent.SetHealth(PlayerInfo.health);
-			_staminaComponent.SetStamina(PlayerInfo.stamina);
-		}
 
 		canRun = true;
 		stopMovement = false;
@@ -203,5 +198,11 @@ public partial class PlayerController : CharacterBody2D
 	{
 		PlayerInfo.health = _healthComponent.GetHealth();
 		PlayerInfo.stamina = _staminaComponent.GetStamina();
+	}
+
+	public void LoadState()
+	{
+		_healthComponent.SetHealth(PlayerInfo.health);
+		_staminaComponent.SetStamina(PlayerInfo.stamina);
 	}
 }

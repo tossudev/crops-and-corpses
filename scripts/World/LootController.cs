@@ -109,11 +109,13 @@ public partial class LootController : StaticBody2D
 			if (Name == "FallingTree")
 			{
 				_animationPlayer?.Play("fall");
+				SceneInfo.forestBridgeOpen = true;
 			}
 			else if (Name == "BridgeStalagmite")
 			{
 				_animationPlayer.SpeedScale = 2;
 				_animationPlayer?.Play("fallingStalagmite");
+				SceneInfo.caveBridgeOpen = true;
 			}
 			else
 			{

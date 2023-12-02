@@ -14,22 +14,26 @@ public partial class SaveData : Node
     const string SAVEFILENAME = "PlayerData.txt";
     static string directoryPath = "";
     static string fullPath = "";
-    
+
     public const string TOWN_STATS_KEY = "townStats";
     public const string APPLIED_TOWN_UPGRADES_KEY = "appliedTownUpgrades";
     public const string APPLIED_TOWN_UNLOCKS_KEY = "appliedTownUnlocks";
     public const string VILLAGER_DATA_KEY = "allVillagers";
     public const string INVENTORY_ITEMS_KEY = "inventoryItems";
     public const string ORGANIZED_INVENTORY_ITEMS_KEY = "organizedInventoryItems";
-    
+    public const string PLAYER_INFO_KEY = "playerInfo";
+    public const string SCENE_INFO_KEY = "sceneInfo";
+
     //---------Modifiable at runtime----------------------
-    
-    public static RawTownStats townHallStats = new ();
-    public static List<TownUpgrade> appliedUpgrades = new ();
-    public static List<TownUnlock> appliedUnlocks = new ();
-    public static List<VillagerRawData> allVillagerData = new ();
-    public static Array<RawInventoryItem> organizedPlayerInventory = new ();
-    public static List<RawInventoryItem> totalInventoryItems = new ();
+
+    public static RawTownStats townHallStats = new();
+    public static List<TownUpgrade> appliedUpgrades = new();
+    public static List<TownUnlock> appliedUnlocks = new();
+    public static List<VillagerRawData> allVillagerData = new();
+    public static Array<RawInventoryItem> organizedPlayerInventory = new();
+    public static List<RawInventoryItem> totalInventoryItems = new();
+    public static Dictionary playerInfo = new();
+    public static Dictionary sceneInfo = new();
 
     public static bool savingInProgress = false;
     public static bool firstLoadComplete = false;
@@ -41,15 +45,15 @@ public partial class SaveData : Node
         base._Ready();
         directoryPath = ProjectSettings.GlobalizePath($"user://{SAVEFOLDERNAME}");
         fullPath = directoryPath.PathJoin(SAVEFILENAME);
-        
+
         ItemData.InitiateItemData();
         WeaponData.InitiateWeaponData();
         LoadSaveDataIntoMemory();
         PlayerInventoryData.AddDefaultResourcesToInventoryIfEmpty();
     }
 
-        
-    
+
+
     static async Task Save()
     {
         savingInProgress = true;
@@ -64,21 +68,23 @@ public partial class SaveData : Node
         {
             Directory.CreateDirectory(directoryPath);
         }
-        
+
         var rawSaveData = new RawSaveData()
         {
             townStats = townHallStats,
             appliedUpgrades = appliedUpgrades,
             allVillagers = allVillagerData,
             inventoryItems = totalInventoryItems,
-            organizedInventoryItems = organizedPlayerInventory
+            organizedInventoryItems = organizedPlayerInventory,
+            playerInfo = playerInfo,
+            sceneInfo = sceneInfo
         };
-        
+
         Dictionary saveDictionary = rawSaveData.GetFullDataDictionary();
-        
+
         string json = Json.Stringify(saveDictionary, "\t");
 
-        
+
         try
         {
             await File.WriteAllTextAsync(fullPath, json);
@@ -90,15 +96,15 @@ public partial class SaveData : Node
 
         savingInProgress = false;
     }
-    
+
     public static async Task<Dictionary> LoadData()
     {
         if (!File.Exists(fullPath)) return null;
 
         await TaskExtensions.SuspendWhile(() => savingInProgress);
-        
+
         string data = "";
-        
+
         try
         {
             data = await File.ReadAllTextAsync(fullPath);
@@ -109,11 +115,11 @@ public partial class SaveData : Node
         }
 
         Json loadedJson = new();
-        
+
         Error error = loadedJson.Parse(data);
 
         if (error == Error.Ok) return (Dictionary)loadedJson.Data;
-        
+
         GD.PrintErr(error, ": SaveData Load");
         return null;
     }
@@ -121,15 +127,21 @@ public partial class SaveData : Node
     static async void LoadSaveDataIntoMemory()
     {
         Dictionary saveData = await LoadData();
-        
+
         // Town stats
         TownManager.ReadTownDataFromFile(saveData, false);
-        
+
         // Inventory Data
         await RawInventoryItem.ReadInventoryDataFromFile(saveData, false);
-        
+
         // Villager Data
         await VillagerRawData.ReadVillagerDataFromFile(saveData);
+
+        // Player Info
+        PlayerInfo.LoadPlayerInfo(saveData);
+
+        // Scene Info
+        SceneInfo.LoadSceneInfo(saveData);
 
         firstLoadComplete = true;
     }
@@ -138,13 +150,13 @@ public partial class SaveData : Node
     {
         await SyncInventory();
     }
-    
+
     public static async Task SyncInventory(bool doSave = true)
     {
         await TaskExtensions.SuspendWhile(() => inventorySyncInProgress);
         inventorySyncInProgress = true;
-        
-        
+
+
         await UpdateTotalItems(doSave);
         inventorySyncInProgress = false;
     }
@@ -153,7 +165,7 @@ public partial class SaveData : Node
     {
         await Save();
     }
-    
+
     public static async Task SyncVillagers()
     {
         await Save();
@@ -168,7 +180,7 @@ public partial class SaveData : Node
             foreach (RawInventoryItem item in organizedPlayerInventory)
             {
                 if (item == null) continue; //Empty inv slot
-            
+
                 PlayerInventoryData.AddItemToTotalItems(item.id, item.quantity);
             }
         }
@@ -184,7 +196,7 @@ public partial class SaveData : Node
                      await TaskExtensions.SuspendWhile(
                          () => savingInProgress, GD.Randi() % 200 + 50)+  " ms");
         }
-        
+
         if (doSync) await Save();
     }
 }

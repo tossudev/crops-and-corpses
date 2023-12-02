@@ -1,6 +1,7 @@
-[gd_scene load_steps=34 format=3 uid="uid://bbvsfe4h2sph"]
+[gd_scene load_steps=35 format=3 uid="uid://bbvsfe4h2sph"]
 
 [ext_resource type="PackedScene" uid="uid://wy0dgop8pftu" path="res://scenes/world/cave_tilemap.tscn" id="1_yabqn"]
+[ext_resource type="Script" path="res://scripts/cave.cs" id="1_yjxwb"]
 [ext_resource type="PackedScene" uid="uid://b6w8cr3rm5pu3" path="res://scenes/world/rock.tscn" id="3_flaay"]
 [ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/iron_ore.tscn" id="4_4kwxv"]
 [ext_resource type="PackedScene" uid="uid://ca4ui8y2u11io" path="res://scenes/world/cave_entrance.tscn" id="4_xu51x"]
@@ -105,8 +106,11 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.791284, 0.240826)
 
-[node name="Cave" type="Node2D"]
+[node name="Cave" type="Node2D" node_paths=PackedStringArray("_bridge", "_stalagmite")]
 y_sort_enabled = true
+script = ExtResource("1_yjxwb")
+_bridge = NodePath("Objects/Breakable/Bridge")
+_stalagmite = NodePath("Objects/Breakable/BridgeStalagmite")
 
 [node name="Tilemap" parent="." instance=ExtResource("1_yabqn")]
 unique_name_in_owner = true

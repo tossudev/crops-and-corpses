@@ -43,7 +43,7 @@
 [ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://scenes/farm/farm_plot.tscn" id="21_3lgi7"]
 [ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="21_tox2m"]
 [ext_resource type="Texture2D" uid="uid://6rq37pexrl74" path="res://assets/sprites/tiles/sand_corner_tile2.png" id="21_w6pde"]
-[ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/rock2.tscn" id="22_4gs3r"]
+[ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/iron_ore.tscn" id="22_4gs3r"]
 [ext_resource type="Texture2D" uid="uid://di6t8xgjo3k35" path="res://assets/sprites/tiles/sand_corner_tile3.png" id="22_q34ae"]
 [ext_resource type="Texture2D" uid="uid://q5wxg1if5hb8" path="res://assets/sprites/foliage/tree_2.png" id="22_r2sim"]
 [ext_resource type="PackedScene" uid="uid://bljea7oopk7tf" path="res://scenes/farm/plants/plant_mushroom.tscn" id="23_7l40m"]

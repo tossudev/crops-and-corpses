@@ -186,6 +186,8 @@ public partial class RoamingZombie : CharacterBody2D
 			default:
 				break;
 		}
+
+		_lootController.CallDeferred("AttackReceived", attack);
 	}
 	private void OnHealth(float _health)
 	{

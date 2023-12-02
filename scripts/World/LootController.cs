@@ -92,7 +92,7 @@ public partial class LootController : StaticBody2D
 
 	private void AttackReceived(Attack attack)
 	{
-		if (attack.effect == _requiredEffect || _requiredEffect == EffectType.None)
+		if (attack.effect == _requiredEffect || _requiredEffect == EffectType.None || Name == "Backpack")
 		{
 			_canBeDestroyed = true;
 		}

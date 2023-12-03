@@ -25,7 +25,7 @@ public partial class QuestBoardUi : Control
     const string button_Dif3 = "%dif3";
     Button Dif3Button;
 
-    const string BUTTON_CLOSE_NODENAME = "%MainCloseButtonContainer/CloseButton";
+    const string BUTTON_CLOSE_CONTAINER_NODENAME = "%CloseButtonContainer";
     Button _closeButton;
 
     const string LABEL_QUESTTATUSTEXT_NODENAME = "%QuestStatusText";
@@ -44,7 +44,7 @@ public partial class QuestBoardUi : Control
     {
         _globalTime = GetNodeOrNull<GlobalTime>("/root/GlobalTime");
         questManager = GetNode<QuestManager>("/root/QuestManager");
-        _closeButton = GetNode<Button>(BUTTON_CLOSE_NODENAME);
+        _closeButton = GetNode(BUTTON_CLOSE_CONTAINER_NODENAME).GetNode<Button>("%CloseButton");
 
         _forestButton = GetNode<Button>(BUTTON_FOREST_NODENAME);
         _ruinsButton = GetNode<Button>(BUTTON_RUINS_NODENAME);

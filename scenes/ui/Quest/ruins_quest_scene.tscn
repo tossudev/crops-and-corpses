@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8x2kbemf1l8n"]
-
-[ext_resource type="Script" path="res://scripts/Quest/QuestPointManager.cs" id="1_gc6kn"]
-
-[node name="ruins_quest_scene" type="Node2D" node_paths=PackedStringArray("CaveFullQuestPoints")]
-script = ExtResource("1_gc6kn")
-CaveFullQuestPoints = []

@@ -128,12 +128,13 @@ layout_mode = 2
 text = "Ruins"
 
 [node name="CaveButton" parent="Panel/HBoxContainer/MarginContainer2/VBoxContainer" instance=ExtResource("6_rui5t")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Label2" parent="Panel/HBoxContainer/MarginContainer2/VBoxContainer/CaveButton" index="0"]
 text = "Cave"
 
-[node name="MainCloseButtonContainer" type="MarginContainer" parent="Panel"]
+[node name="CloseButtonContainer" type="MarginContainer" parent="Panel"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
@@ -149,7 +150,7 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="CloseButton" type="Button" parent="Panel/MainCloseButtonContainer"]
+[node name="CloseButton" type="Button" parent="Panel/CloseButtonContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
@@ -157,7 +158,7 @@ theme_override_styles/normal = ExtResource("4_dbqua")
 theme_override_styles/hover = ExtResource("4_dbqua")
 theme_override_styles/pressed = ExtResource("5_4p6gx")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MainCloseButtonContainer/CloseButton"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/CloseButtonContainer/CloseButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -169,7 +170,7 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="TextureRect" type="TextureRect" parent="Panel/MainCloseButtonContainer/CloseButton/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="Panel/CloseButtonContainer/CloseButton/MarginContainer"]
 layout_mode = 2
 texture = ExtResource("4_emc8o")
 expand_mode = 1
@@ -188,6 +189,7 @@ vertical_alignment = 1
 
 [node name="StatusHeader" type="Label" parent="Panel"]
 custom_minimum_size = Vector2(300, 64)
+layout_mode = 0
 offset_left = 202.386
 offset_top = 531.166
 offset_right = 502.386
@@ -199,6 +201,7 @@ autowrap_mode = 3
 
 [node name="StatusPanel" type="Panel" parent="Panel"]
 custom_minimum_size = Vector2(512, 96)
+layout_mode = 0
 offset_left = 101.193
 offset_top = 578.734
 offset_right = 613.193
@@ -215,7 +218,7 @@ grow_vertical = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_right = 32
 
-[node name="QuestStatus" type="Label" parent="Panel/StatusPanel/MarginContainer"]
+[node name="QuestStatusText" type="Label" parent="Panel/StatusPanel/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Forest rescue quest"

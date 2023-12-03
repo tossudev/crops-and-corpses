@@ -17,7 +17,7 @@ public partial class DroppedItem : Node2D
 
 	public async void Pickup()
 	{
-		int addedItems = await PlayerInventoryController.AddItem(_containedRawItem, -1, true, false);
+		int addedItems = await PlayerInventoryController.AddItemToInventory(_containedRawItem, -1, true, false);
 
 		if (addedItems > 0) return;
 		

@@ -2,23 +2,9 @@ using Godot;
 using System;
 using System.Threading.Tasks;
 
-public partial class InventorySlot : Control {
+public partial class InventorySlot : StorageSlot {
 	
-	public TextureRect icon;
-	const string ICON_TEXTURE_NODENAME = "%ItemIcon";
-
-	public Label quantityLabel;
-	const string QUANTITY_LABEL_NODENAME = "%ItemQuantityLabel";
 	
-	public RawInventoryItem slotItem;
-	[Export] public bool isCraftingSlot;
-	bool slotHasItem;
-	public bool slotInitiated;
-    int _slotIndex;
-	public int slotIndex => _slotIndex;
-
-
-	FloatingButtonName _floatingNamePanel;
 	
     void OnButtonGuiInput(InputEvent @event)
 	{
@@ -35,20 +21,19 @@ public partial class InventorySlot : Control {
 	}
 
 
-    async void ClickLeft()
+    protected override void ClickLeft()
     {
 	    switch (PlayerInventoryController.isItemSelected)
 	    {
 		    // Player selects new item
 		    case false when slotHasItem:
-			    PlayerInventoryController.SelectItem(slotItem);
+			    PlayerInventoryController.SelectNewItem(slotItem);
 			    ToggleVisuals(false);
 			    break;
 		    
 		    // Player deselected item from hand
 		    case true when !slotHasItem:
-                await PlayerInventoryController.AddItem(PlayerInventoryController.selectedItem, slotIndex, true);
-                
+                AddItemToInventory();
 				break;
 		    
 		    // Player has item a slot with item
@@ -56,15 +41,16 @@ public partial class InventorySlot : Control {
 		    {
 			    var selectedItem = PlayerInventoryController.selectedItem;
 			    
-			    if (selectedItem.isValidIndex &&
-			        slotIndex == selectedItem.indexInOrganizedInventory)
+			    if (selectedItem.HasValidIndexInArray(SaveData.organizedPlayerInventory) &&
+			        slotIndex == selectedItem.indexInStorage)
 			    {
-				    await UpdateSlot(selectedItem);
+				    StorageSlotController.UpdateSlot(this, SaveData.organizedPlayerInventory, PlayerInventoryController.selectedItem);
 				    PlayerInventoryController.DeselectItem();
 			    }
 
-			    else if (slotItem.id == selectedItem.id) {
-				    await PlayerInventoryController.AddItem(selectedItem, slotIndex, true);
+			    else if (slotItem.id == selectedItem.id)
+			    {
+				    AddItemToInventory();
 			    }
 
 			    else {
@@ -77,90 +63,23 @@ public partial class InventorySlot : Control {
     }
 
 
-    void ClickRight() {
+    protected override void ClickRight() {
 		// Player takes one item from stack
 		if (!PlayerInventoryController.isItemSelected && slotHasItem) {
+			
 			PlayerInventoryController.SelectSingleItem(slotItem, slotIndex);
 		}
 	}
 
 
-    public void ToggleVisuals(bool isOn)
+    async void AddItemToInventory()
     {
-	    icon.Visible = isOn;
-	    quantityLabel.Visible = isOn;
+	    await PlayerInventoryController.AddItemToInventory(PlayerInventoryController.selectedItem, slotIndex, true);
     }
     
-    
-    public void InitiateSlot(int index)
+    public override void ToggleVisuals(bool on)
     {
-	    icon = GetNode<TextureRect>(ICON_TEXTURE_NODENAME);
-	    quantityLabel = GetNode<Label>(QUANTITY_LABEL_NODENAME);
-	    _floatingNamePanel = GetNode<FloatingButtonName>(FloatingButtonName.FLOATING_NAME_NODENAME);
-	    
-	    _slotIndex = index;
-
-	    slotInitiated = true;
+	    icon.Visible = on;
+	    quantityLabel.Visible = on;
     }
-    
-	public async Task UpdateSlot(RawInventoryItem rawItem, bool doSync = true)
-	{
-		await TaskExtensions.SuspendWhile(() => !slotInitiated);
-		
-		ToggleVisuals(true);
-
-		slotItem = (rawItem != null)
-			? new RawInventoryItem(rawItem.id, rawItem.name, rawItem.quantity, rawItem.stackSize, slotIndex)
-			: null;
-        
-		if (SaveData.organizedPlayerInventory.Count > slotIndex)
-		{
-			SaveData.organizedPlayerInventory[slotIndex] = slotItem;
-		}
-		else
-		{
-			SaveData.organizedPlayerInventory.Add(slotItem);
-		}
-		
-		if (PlayerInventoryController.isItemSelected)
-		{
-			if (PlayerInventoryController.selectedItem.indexInOrganizedInventory == slotIndex)
-			{
-				if (slotItem == null)
-				{
-					PlayerInventoryController.DeselectItem();
-				}
-				else
-				{
-					PlayerInventoryController.SelectItem(slotItem);
-				}
-			}
-		}
-        
-		if (doSync)
-		{
-			Task sync = SaveData.SyncInventory();
-		}
-		
-		if (slotItem == null) {
-			slotHasItem = false;
-
-			icon.Texture = null;
-			quantityLabel.Text = "";
-			_floatingNamePanel.UpdateName("");
-			return;
-		}
-
-		slotHasItem = true;
-		
-		Item itemResource = ItemData.GetItemById(rawItem.id);
-
-		Texture2D iconTexture = itemResource.IconTexture;
-		icon.Texture = iconTexture;
-
-		quantityLabel.Visible = itemResource.StackSize > 1;
-		quantityLabel.Text = rawItem.quantity.ToString();
-		
-		_floatingNamePanel.UpdateName(rawItem.name);
-	}
 }

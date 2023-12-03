@@ -9,15 +9,37 @@ public partial class RawSaveData : GodotObject
     public List<TownUpgrade> appliedUpgrades = new ();
     public List<TownUnlock> appliedUnlocks = new ();
     public List<VillagerRawData> allVillagers = new ();
-    public List<RawInventoryItem> inventoryItems = new ();
     public Array<RawInventoryItem> organizedInventoryItems = new ();
+    public Array<RawInventoryItem> townStorageItems = new ();
     public Dictionary playerInfo = new ();
     public Dictionary sceneInfo = new ();
+
+    public RawSaveData()
+    {
+    }
+
+    public RawSaveData(RawTownStats townStats, 
+        List<TownUpgrade> appliedUpgrades, 
+        List<TownUnlock> appliedUnlocks,
+        List<VillagerRawData> allVillagers,
+        Array<RawInventoryItem> organizedInventoryItems,
+        Array<RawInventoryItem> townStorageItems,
+        Dictionary playerInfo,
+        Dictionary sceneInfo)
+    {
+        this.townStats = townStats;
+        this.appliedUpgrades = appliedUpgrades;
+        this.appliedUnlocks = appliedUnlocks;
+        this.allVillagers = allVillagers;
+        this.organizedInventoryItems = organizedInventoryItems;
+        this.townStorageItems = townStorageItems;
+        this.playerInfo = playerInfo;
+        this.sceneInfo = sceneInfo;
+    }
 
     public Dictionary GetFullDataDictionary()
     {
         Dictionary fullDictionary = new();
-
 
         // Town stats
         fullDictionary.Add(SaveData.TOWN_STATS_KEY, RawTownStats.GetDictionary(townStats));
@@ -33,8 +55,8 @@ public partial class RawSaveData : GodotObject
 
 
 
-        // All items in inventory
-        fullDictionary.Add(SaveData.INVENTORY_ITEMS_KEY, RawInventoryItem.GetAllItemsDict(inventoryItems));
+        // Town Storage Items
+        fullDictionary.Add(SaveData.TOWN_STORAGE_ITEMS_KEY, RawInventoryItem.GetOrganizedItemsArray(townStorageItems));
 
         // Organized inventory
         fullDictionary.Add(

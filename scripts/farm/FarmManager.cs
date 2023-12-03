@@ -87,7 +87,7 @@ public partial class FarmManager : Node
 		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bucket of Water"){
 			Item emptyB = ResourceLoader.Load("res://assets/resources/game_items/tool_items_350_449/405_bucket.tres") as Item;
 			RawInventoryItem bucket = new RawInventoryItem(emptyB.ID, emptyB.Name, 1, emptyB.StackSize);
-			PlayerInventoryController.SwapItems(bucket, PlayerInventoryController.selectedItem.indexInOrganizedInventory);		
+			PlayerInventoryController.SwapItems(bucket, PlayerInventoryController.selectedItem.indexInStorage);		
 		}else{
 			GD.Print("Water bucket not selected");
 		}
@@ -96,9 +96,9 @@ public partial class FarmManager : Node
 		if(PlayerInventoryController.selectedItem != null && PlayerInventoryController.selectedItem.name=="Bucket"){
 			Item waterB = ResourceLoader.Load("res://assets/resources/game_items/tool_items_350_449/406_bucket_water.tres") as Item;
 			RawInventoryItem waterBucket = new RawInventoryItem(waterB.ID, waterB.Name, 1, waterB.StackSize);
-			PlayerInventoryController.SwapItems(waterBucket, PlayerInventoryController.selectedItem.indexInOrganizedInventory);		
+			PlayerInventoryController.SwapItems(waterBucket, PlayerInventoryController.selectedItem.indexInStorage);		
 
-			int index = PlayerInventoryController.selectedItem.indexInOrganizedInventory;
+			int index = PlayerInventoryController.selectedItem.indexInStorage;
 
 			//PlayerInventoryController.RemoveItemFromInventory(PlayerInventoryController.selectedItem);
 

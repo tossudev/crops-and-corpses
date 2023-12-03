@@ -11,41 +11,43 @@ public partial class RawInventoryItem : GodotObject
     public const string ITEM_NAME_KEY = "name";
     public const string ITEM_QUANTITY_KEY = "quantity";
     public const string ITEM_STACKSIZE_KEY = "stackSize";
-    public const string ITEM_ORGANIZED_INDEX_KEY = "indexInOrganizedInventory";
+    public const string ITEM_ORGANIZED_INDEX_KEY = "indexInStorage";
     
     public int id;
     public string name;
     public int quantity;
     public int stackSize;
-    public int indexInOrganizedInventory;
+    public int indexInStorage;
 
-    public RawInventoryItem(int id, string name, int quantity, int stackSize, int indexInOrganizedInventory = -1)
+    public RawInventoryItem(int id, string name, int quantity, int stackSize, int indexInStorage = -1)
     {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.stackSize = stackSize;
-        this.indexInOrganizedInventory = indexInOrganizedInventory;
+        this.indexInStorage = indexInStorage;
     }
 
     public int SpaceRemainingInStack => stackSize - quantity;
 
-    public bool isValidIndex => (indexInOrganizedInventory >= 0 &&
-                                 indexInOrganizedInventory < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE);
+    public bool HasValidIndexInArray(Array<RawInventoryItem> array)
+    {
+        return indexInStorage >= 0 && indexInStorage > array.Count - 1;
+    }
     
     
     /// <summary>
     /// Reads inventory data from save data
     /// </summary>
     /// <param name="saveData"></param>
-    public static async Task ReadInventoryDataFromFile(Dictionary saveData, bool sync = true)
+    public static async Task ReadInventoryDataFromFile(Dictionary saveData)
     {
         SaveData.organizedPlayerInventory.Clear();
         
-        if (SaveData.organizedPlayerInventory.Count < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE)
+        if (SaveData.organizedPlayerInventory.Count < StorageData.PLAYER_INVENTORY_MAX_SIZE)
         {
             // Init inventory array with null values
-            for (int i = 0; i < PlayerInventoryData.PLAYER_INVENTORY_MAX_SIZE; i++)
+            for (int i = 0; i < StorageData.PLAYER_INVENTORY_MAX_SIZE; i++)
             {
                 SaveData.organizedPlayerInventory.Add(null);
             }
@@ -67,13 +69,11 @@ public partial class RawInventoryItem : GodotObject
                         (int) itemDataDict[ITEM_STACKSIZE_KEY],
                         (int) itemDataDict[ITEM_ORGANIZED_INDEX_KEY]);
                 
-                    SaveData.organizedPlayerInventory[convertedRawItem.indexInOrganizedInventory] = convertedRawItem;
+                    SaveData.organizedPlayerInventory[convertedRawItem.indexInStorage] = convertedRawItem;
                 }
 
             });
         }
-        
-        await SaveData.SyncInventory(sync);
     }
 
 
@@ -107,7 +107,7 @@ public partial class RawInventoryItem : GodotObject
                 { ITEM_NAME_KEY, rawInventoryItem.name },
                 { ITEM_QUANTITY_KEY, rawInventoryItem.quantity },
                 { ITEM_STACKSIZE_KEY, rawInventoryItem.stackSize},
-                { ITEM_ORGANIZED_INDEX_KEY, rawInventoryItem.indexInOrganizedInventory}
+                { ITEM_ORGANIZED_INDEX_KEY, rawInventoryItem.indexInStorage}
             });
         }
 

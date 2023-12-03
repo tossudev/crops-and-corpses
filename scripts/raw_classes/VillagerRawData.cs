@@ -30,7 +30,7 @@ public partial class VillagerRawData : GodotObject
     public int yCoord;
     
     // NOT part of saving
-    public ulong homeId;
+    public int homeId;
 
     public VillagerRawData() {}
 

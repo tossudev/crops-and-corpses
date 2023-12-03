@@ -1,9 +1,10 @@
 using System.Linq;
 using Godot;
 using System.Threading.Tasks;
+using Godot.Collections;
 
 
-public static class PlayerInventoryData
+public static class StorageData
 {
     public const int PLAYER_INVENTORY_MAX_SIZE = 40;
     
@@ -15,51 +16,35 @@ public static class PlayerInventoryData
         if (SaveData.organizedPlayerInventory.Any(item => item != null)) return;
         
         Item log = ItemData.GetItemById(0);
-        await PlayerInventoryController.AddItem(
+        await PlayerInventoryController.AddItemToInventory(
             new RawInventoryItem(log.ID, log.Name, 20, log.StackSize));
         
         
         Item iron = ItemData.GetItemById(1);
-        await PlayerInventoryController.AddItem(
+        await PlayerInventoryController.AddItemToInventory(
             new RawInventoryItem(iron.ID, iron.Name, 20, iron.StackSize));
         
         Item curePotion = ItemData.GetItemById(300);
-        await PlayerInventoryController.AddItem(
+        await PlayerInventoryController.AddItemToInventory(
             new RawInventoryItem(curePotion.ID, curePotion.Name, 15, curePotion.StackSize));
     }
 
-    public static bool AddItemToTotalItems(int itemId, int amount)
+    public static bool ExistsInStorage(Array<RawInventoryItem> rawArray, int itemId, int amountRequired)
     {
-        Item itemToAdd = ItemData.GetItemById(itemId);
-        
-        if (itemToAdd == null) return false;
-        
-        if (SaveData.totalInventoryItems.Exists(rawItem => rawItem.id == itemId))
-        {
-            SaveData.totalInventoryItems.Find(rawItem => rawItem.id == itemId)
-                .quantity += amount;
-        }
-        else
-        {
-            SaveData.totalInventoryItems.Add(
-                new RawInventoryItem(itemId, itemToAdd.Name, amount, itemToAdd.StackSize));
-        }
-        return true;
+        int amountFound = rawArray.Where(rawItem => rawItem.id == itemId).Sum(rawItem => rawItem.quantity);
+
+        return amountFound >= amountRequired;
     }
 
-    public static bool ExistsInInventory(int itemId, int amount)
-    {
-        return SaveData.totalInventoryItems.Exists(item => item.id == itemId && item.quantity >= amount);
-    }
-    
+    /// <param name="rawArray"></param>
     /// <param name="itemId"> ID of item to search for </param>
     /// <param name="mustNotBeFull"> (optional) Item stack must contain space for at least 1 more item </param>
     /// <returns> index of first item in organized player inventory that matches the conditions OR 0 </returns>
-    public static int GetFirstStackIndexOfItem(int itemId, bool mustNotBeFull = false)
+    public static int GetFirstStackIndexOfItem(Array<RawInventoryItem> rawArray, int itemId, bool mustNotBeFull = false)
     {
         int indexToReturn = 0;
         
-        foreach (var rawInventoryItem in SaveData.organizedPlayerInventory)
+        foreach (var rawInventoryItem in rawArray)
         {
             if (rawInventoryItem == null) continue;
 
@@ -68,7 +53,7 @@ public static class PlayerInventoryData
             if (mustNotBeFull && rawInventoryItem.quantity >= rawInventoryItem.stackSize) continue;
             
             
-            indexToReturn = rawInventoryItem.indexInOrganizedInventory;
+            indexToReturn = rawInventoryItem.indexInStorage;
             break;
         }
         

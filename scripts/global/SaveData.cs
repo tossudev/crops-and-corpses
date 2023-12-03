@@ -19,8 +19,8 @@ public partial class SaveData : Node
     public const string APPLIED_TOWN_UPGRADES_KEY = "appliedTownUpgrades";
     public const string APPLIED_TOWN_UNLOCKS_KEY = "appliedTownUnlocks";
     public const string VILLAGER_DATA_KEY = "allVillagers";
-    public const string INVENTORY_ITEMS_KEY = "inventoryItems";
     public const string ORGANIZED_INVENTORY_ITEMS_KEY = "organizedInventoryItems";
+    public const string TOWN_STORAGE_ITEMS_KEY = "townStorageItems";
     public const string PLAYER_INFO_KEY = "playerInfo";
     public const string SCENE_INFO_KEY = "sceneInfo";
 
@@ -31,7 +31,7 @@ public partial class SaveData : Node
     public static List<TownUnlock> appliedUnlocks = new();
     public static List<VillagerRawData> allVillagerData = new();
     public static Array<RawInventoryItem> organizedPlayerInventory = new();
-    public static List<RawInventoryItem> totalInventoryItems = new();
+    public static Array<RawInventoryItem> townStorageItems = new();
     public static Dictionary playerInfo = new();
     public static Dictionary sceneInfo = new();
 
@@ -49,7 +49,7 @@ public partial class SaveData : Node
         ItemData.InitiateItemData();
         WeaponData.InitiateWeaponData();
         LoadSaveDataIntoMemory();
-        PlayerInventoryData.AddDefaultResourcesToInventoryIfEmpty();
+        StorageData.AddDefaultResourcesToInventoryIfEmpty();
     }
 
 
@@ -69,16 +69,14 @@ public partial class SaveData : Node
             Directory.CreateDirectory(directoryPath);
         }
 
-        var rawSaveData = new RawSaveData()
-        {
-            townStats = townHallStats,
-            appliedUpgrades = appliedUpgrades,
-            allVillagers = allVillagerData,
-            inventoryItems = totalInventoryItems,
-            organizedInventoryItems = organizedPlayerInventory,
-            playerInfo = playerInfo,
-            sceneInfo = sceneInfo
-        };
+        var rawSaveData = new RawSaveData(townHallStats,
+            appliedUpgrades,
+            appliedUnlocks,
+            allVillagerData,
+            organizedPlayerInventory,
+            townStorageItems,
+            playerInfo,
+            sceneInfo);
 
         Dictionary saveDictionary = rawSaveData.GetFullDataDictionary();
 
@@ -132,7 +130,7 @@ public partial class SaveData : Node
         TownManager.ReadTownDataFromFile(saveData, false);
 
         // Inventory Data
-        await RawInventoryItem.ReadInventoryDataFromFile(saveData, false);
+        await RawInventoryItem.ReadInventoryDataFromFile(saveData);
 
         // Villager Data
         await VillagerRawData.ReadVillagerDataFromFile(saveData);
@@ -151,14 +149,9 @@ public partial class SaveData : Node
         await SyncInventory();
     }
 
-    public static async Task SyncInventory(bool doSave = true)
+    public static async Task SyncInventory()
     {
-        await TaskExtensions.SuspendWhile(() => inventorySyncInProgress);
-        inventorySyncInProgress = true;
-
-
-        await UpdateTotalItems(doSave);
-        inventorySyncInProgress = false;
+        await Save();
     }
 
     public static async Task SyncTownStats()
@@ -169,34 +162,5 @@ public partial class SaveData : Node
     public static async Task SyncVillagers()
     {
         await Save();
-    }
-
-    static async Task UpdateTotalItems(bool doSync = true)
-    {
-        totalInventoryItems.Clear();
-
-        try
-        {
-            foreach (RawInventoryItem item in organizedPlayerInventory)
-            {
-                if (item == null) continue; //Empty inv slot
-
-                PlayerInventoryData.AddItemToTotalItems(item.id, item.quantity);
-            }
-        }
-        catch (Exception e)
-        {
-            GD.PrintErr(e.Message);
-        }
-
-
-        if (savingInProgress)
-        {
-            GD.Print("Saving was queued for " +
-                     await TaskExtensions.SuspendWhile(
-                         () => savingInProgress, GD.Randi() % 200 + 50)+  " ms");
-        }
-
-        if (doSync) await Save();
     }
 }

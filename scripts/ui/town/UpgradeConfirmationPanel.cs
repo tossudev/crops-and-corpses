@@ -111,9 +111,9 @@ public partial class UpgradeConfirmationPanel: Panel
             if (i < _currentUpgrade.craftingRequirements.Length)
             {
                 
-                if (!_inventorySlotContainer[i].slotInitiated)
+                if (!_inventorySlotContainer[i].slotInitialized)
                 {
-                    _inventorySlotContainer[i].InitiateSlot(-1);
+                    _inventorySlotContainer[i].InitializeSlot(-1);
                 }
 				
                 Item itemResource = ItemData.GetItemById(_currentUpgrade.craftingRequirements[i].item.ID);
@@ -172,7 +172,8 @@ public partial class UpgradeConfirmationPanel: Panel
         try
         {
             if (_currentUpgrade.craftingRequirements.Any(
-                    craftingRequirement => !PlayerInventoryData.ExistsInInventory(
+                    craftingRequirement => !StorageData.ExistsInStorage(
+                        SaveData.organizedPlayerInventory,
                         craftingRequirement.item.ID,craftingRequirement.quantity)))
             {
                 SetUnlockButtonState(UnlockButtonState.Locked, _unlockButton, _unlockButtonTextLabel);

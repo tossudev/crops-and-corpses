@@ -170,10 +170,14 @@ public partial class Villager : CharacterBody2D
 				FindShelter();
 				break;
 
-			case VillagerState.InShelter when TimeManager.dayTime:
-				currentResidence.VillagerExitBuilding(this);
+			case VillagerState.InShelter:
+				BeInShelter();
 				break;
 
+			case VillagerState.Homeless:
+				FindShelter();
+				break;
+			
 			default:
 				GD.Print("State not found");
 				break;
@@ -249,13 +253,18 @@ public partial class Villager : CharacterBody2D
 
 	void FindShelter()
 	{
+		_targetPosition = rawData.homeId == 0
+			? TownManager.townHallPosition - GlobalPosition + CreateOffsetVector2(-100, 100)
+			: VillagerManager.villagerManagerInstance.FindResidenceById(rawData.homeId).GlobalPosition;
+	}
+
+	void BeInShelter()
+	{
+		if (rawData.currentState == VillagerState.Homeless) return;
+		
 		if (TimeManager.dayTime)
 		{
-			SetCurrentState(VillagerState.ChooseTask);
-		}
-		else
-		{
-			_targetPosition = TownManager.townHallPosition - GlobalPosition + CreateOffsetVector2(-100, 100);
+			currentResidence.VillagerExitBuilding(this);
 		}
 	}
 

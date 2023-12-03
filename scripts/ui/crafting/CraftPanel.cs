@@ -108,7 +108,7 @@ public partial class CraftPanel : Control
 			    _requiredResSlots[i].Visible = false;
 			    continue;
 		    }
-		    _requiredResSlots[i].InitiateSlot(-1);
+		    _requiredResSlots[i].InitializeSlot(-1);
 		    _requiredResSlots[i].Visible = true;
 
 		    CraftingRequirement requirement = craftedItem.craftingRequirements[i];
@@ -129,7 +129,8 @@ public partial class CraftPanel : Control
 		try
 		{
 			if (craftedItem.craftingRequirements.Any(
-				    craftingRequirement => !PlayerInventoryData.ExistsInInventory(
+				    craftingRequirement => !StorageData.ExistsInStorage(
+                    SaveData.organizedPlayerInventory,
 				    craftingRequirement.item.ID,craftingRequirement.quantity * amountToCraft)))
 			{
 				return false;
@@ -146,7 +147,7 @@ public partial class CraftPanel : Control
 				}
 			}
 
-			await PlayerInventoryController.AddItem(
+			await PlayerInventoryController.AddItemToInventory(
 				new RawInventoryItem(craftedItem.ID, craftedItem.Name, amountToCraft, craftedItem.StackSize));
 			
 			return true;

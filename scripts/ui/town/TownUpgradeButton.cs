@@ -37,7 +37,7 @@ public partial class TownUpgradeButton : Button
 		{
 			if (node is not InventorySlot slot) return;
 			_inventorySlotContainer.Add(slot);
-			slot.InitiateSlot(-1);
+			slot.InitializeSlot(-1);
 		}
 		
 		_currentUpgrade = upgrade;

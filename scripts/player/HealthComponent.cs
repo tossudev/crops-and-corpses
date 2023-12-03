@@ -222,6 +222,7 @@ public partial class HealthComponent : Node2D
 	public void SetHealth(int health)
 	{
 		_health = health;
+		_parentScript.CallDeferred("OnHealth", _health);
 		UpdateHealthBar();
 	}
 

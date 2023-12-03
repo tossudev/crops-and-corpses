@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/Quest/QuestBoardUi.cs" id="1_q7a21"]
 [ext_resource type="StyleBox" uid="uid://cekqcomecgkhn" path="res://assets/resources/styles/default_ui_style_box_texture.tres" id="2_76tps"]
 [ext_resource type="LabelSettings" uid="uid://dv17cjn3uthox" path="res://assets/resources/labelsettings/crafting_panel_item_label_settings.tres" id="2_er7mk"]
-[ext_resource type="StyleBox" uid="uid://cphnvuxh1r71q" path="res://assets/resources/styles/default_tab_container_hovered_tab_style.tres" id="4_dbqua"]
+[ext_resource type="StyleBox" path="res://assets/resources/styles/default_tab_container_hovered_tab_style.tres" id="4_dbqua"]
 [ext_resource type="Texture2D" uid="uid://dha0ys5o7lb1b" path="res://assets/sprites/ui/cross_1024.png" id="4_emc8o"]
 [ext_resource type="StyleBox" uid="uid://bjrxs66a6rkm7" path="res://assets/resources/styles/default_tab_container_panel_style.tres" id="5_4p6gx"]
 [ext_resource type="PackedScene" uid="uid://bodxywqjv8hxl" path="res://scenes/ui/Quest/questBoardBtn.tscn" id="6_rui5t"]
@@ -41,6 +41,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.02774, 1.0091)
+mouse_filter = 2
 script = ExtResource("1_q7a21")
 
 [node name="Panel" type="Panel" parent="."]

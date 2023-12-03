@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cyk44y2mntxd0"]
+[gd_scene load_steps=7 format=3 uid="uid://cyk44y2mntxd0"]
 
 [ext_resource type="Script" path="res://scripts/ui/town/TownHallControl.cs" id="1_cq4gd"]
-[ext_resource type="Texture2D" uid="uid://c3wnl2mlufquq" path="res://assets/sprites/buildings/townhall_color.png" id="1_ylbb2"]
-[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="3_e0407"]
+[ext_resource type="Texture2D" uid="uid://cl2us6n4fnxbi" path="res://assets/sprites/buildings/townhall_color.png" id="1_ylbb2"]
+[ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="3_e0407"]
+[ext_resource type="PackedScene" uid="uid://dune6txyuwmm2" path="res://scenes/buildings/town/villager_residence_component.tscn" id="4_e4bxi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r4d4i"]
 size = Vector2(952.001, 343.998)
@@ -44,5 +45,8 @@ shape = SubResource("RectangleShape2D_r4d4i")
 [node name="NavigationObstacleArea" parent="." instance=ExtResource("3_e0407")]
 polygon = PackedVector2Array(-576, 32, 376, 32, 376, -272, -576, -272)
 metadata/_edit_pinned_properties_ = [&"polygon"]
+
+[node name="VillagerResidenceComponent" parent="." instance=ExtResource("4_e4bxi")]
+_isTownHall = true
 
 [connection signal="input_event" from="area 2d" to="." method="OnTownHallInput"]

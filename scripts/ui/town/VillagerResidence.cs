@@ -4,20 +4,34 @@ using Godot.Collections;
 
 public partial class VillagerResidence : Control
 {
-	
-	//TODO: Get villagers to enter and execute appropriate functions
-	
 	public const string VILLAGER_FACE_BUTTON_FILEPATH = "res://scenes/ui/town_ui/villager_face_button.tscn";
 	
 	GridContainer _villagerFaceButtonParentGrid;
 	const string VILLAGER_GRID_NODENAME = "%VillagerParentGrid";
+
+	public int id { get; private set; }
+	public bool isBroken { get; private set; }
+
+	
+	[Export] int _housingCapacity;
+	Array<VillagerRawData> _allResidents = new ();
+	Array<int> _currentResidentIds = new ();
+
+	[Export] bool _isTownHall;
+	public bool hasRoomForMoreVillagers => _isTownHall || _allResidents.Count < _housingCapacity;
+	
 	
 	public override void _Ready()
 	{
 		_villagerFaceButtonParentGrid = GetNode<GridContainer>(VILLAGER_GRID_NODENAME);
-    }
+
+		id = _isTownHall
+			? 0
+			: VillagerManager.villagerManagerInstance.allVillagerResidences.Count + 1;
+		
+		VillagerManager.villagerManagerInstance.AddNewResidence(this);
+	}
 	
-	Array<int> _currentResidents = new ();
 	public void VillagerEnterBuilding(Villager newVillager)
 	{
 		if (newVillager == null)
@@ -27,7 +41,7 @@ public partial class VillagerResidence : Control
 		}
 			
 		newVillager.EnterShelter();
-		_currentResidents.Add(newVillager.rawData.id);
+		_currentResidentIds.Add(newVillager.rawData.id);
 		
 		VillagerFaceButton villagerFaceButton = 
 			(VillagerFaceButton) GD.Load<PackedScene>(VILLAGER_FACE_BUTTON_FILEPATH).Instantiate<Control>();
@@ -36,24 +50,14 @@ public partial class VillagerResidence : Control
 		
 		_villagerFaceButtonParentGrid.AddChild(villagerFaceButton);
     }
-
-	public void OpenVillagerDialoguePanel(Villager villager)
-	{
-		DialogueControl.instance.OpenDialogueWindow(villager);
-	}
-
-	public void CloseDialoguePanel()
-	{
-		DialogueControl.instance.ExitDialogue();
-	}
 	
 	public void VillagerExitBuilding (Villager leavingVillager)
 	{
 		int villagerInstanceId = leavingVillager.rawData.id;
 		
-		if (_currentResidents.Contains(villagerInstanceId))
+		if (_currentResidentIds.Contains(villagerInstanceId))
 		{
-			_currentResidents.Remove(villagerInstanceId);
+			_currentResidentIds.Remove(villagerInstanceId);
 
 			foreach (var node in _villagerFaceButtonParentGrid.GetChildren())
 			{
@@ -70,5 +74,35 @@ public partial class VillagerResidence : Control
 			GD.PushError("Leaving villager was not in currentResidents Array");
 		}
 	}
+
+	/// <summary>
+	/// Adds a resident to 
+	/// </summary>
+	/// <param name="villager"></param>
+	/// <returns></returns>
+	public ulong AddResident(VillagerRawData data)
+	{
+		_allResidents.Add(data);
+		return GetInstanceId();
+	}
+    
+	public void OnBreak()
+	{
+		isBroken = true;
+		ReassignAllResidents();
+		_allResidents.Clear();
+	}
 	
+	public void OnFixed()
+	{
+		isBroken = false;
+	}
+
+	void ReassignAllResidents()
+	{
+		foreach (var villagerRawData in _allResidents)
+		{
+			villagerRawData.TrySetHome();
+		}
+	}
 }

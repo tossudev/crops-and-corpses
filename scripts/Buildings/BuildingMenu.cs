@@ -8,6 +8,8 @@ using System.Xml.Linq;
 
 public partial class BuildingMenu : Control
 {
+    public static BuildingMenu buildMenu;
+    
 	Building _farmPlot, _house, _archerTower, _well, _largeHouse;
 	Building _currentBuilding;
 
@@ -41,7 +43,8 @@ public partial class BuildingMenu : Control
     public Item log;
     public Item copper;
 
-    public string savePath, fileName;
+    public string savePath;
+    const string FILE_NAME = "buildings.txt";
 
     public override void _Ready()
     {
@@ -51,9 +54,10 @@ public partial class BuildingMenu : Control
             return;
         }
 
+        buildMenu?.QueueFree();
+        buildMenu = this;
 
         savePath = ProjectSettings.GlobalizePath("user://saves/");
-        fileName = "buildings.txt";
 
         _player = GetParent().GetParent() as CharacterBody2D;
 
@@ -82,15 +86,14 @@ public partial class BuildingMenu : Control
         
         CreateBuildMenu();
 
-        LoadBuildings(savePath, fileName);
+        LoadBuildings();
     }
 
-    // TODO, might be buggy
     public override void _ExitTree()
     {
-        if (SceneManager.IsCurrentScene(this, Scene.Town))
+        if (buildMenu != null && buildMenu == this)
         {
-            SaveBuildings(savePath, fileName);
+            buildMenu = null;
         }
     }
 
@@ -209,13 +212,13 @@ public partial class BuildingMenu : Control
         _hBoxContainer.AddChild(_saveButton);
         _saveButton.Text = "Save";
         _saveButton.AddThemeFontSizeOverride("font_size", 40);
-        _saveButton.ButtonUp += () => SaveBuildings(savePath, fileName);
+        _saveButton.ButtonUp += () => SaveBuildings();
 
         Button _loadButton = new Button();
         _hBoxContainer.AddChild(_loadButton);
         _loadButton.Text = "Load";
         _loadButton.AddThemeFontSizeOverride("font_size", 40);
-        _loadButton.ButtonUp += () => LoadBuildings(savePath, fileName);
+        _loadButton.ButtonUp += () => LoadBuildings();
 
         _buildMenuControl.CustomMinimumSize = new Vector2(_buildMenuControl.CustomMinimumSize.X, _vBoxContainer.GetMinimumSize().Y + 20);
     }
@@ -342,16 +345,16 @@ public partial class BuildingMenu : Control
         return _savedBuildings;
     }
 
-    public void SaveBuildings(string path, string fileName)
+    public void SaveBuildings()
     {
         try
         {
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(savePath))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(savePath);
             }
 
-            path = Path.Join(path, fileName);
+            string path = Path.Join(savePath, FILE_NAME);
             File.WriteAllText(path, GetBuildings().ToString());
         }
         catch (Exception ex)
@@ -360,9 +363,9 @@ public partial class BuildingMenu : Control
         }
     }
 
-    private void LoadBuildings(string path, string fileName)
+    private void LoadBuildings()
     {
-        path = Path.Join(path, fileName);
+        string path = Path.Join(savePath, FILE_NAME);
 
         if (!File.Exists(path))
         {

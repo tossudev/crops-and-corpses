@@ -16,7 +16,8 @@ public static class TaskExtensions
     /// <example> await SuspendWhile(() => taskQueue.Count > 0) </example>
     /// <returns> Elapsed waiting time in milliseconds </returns>
         
-    public static async Task<int> SuspendWhile(Func<bool> predicate, uint pollFrequencyMS = 5)
+    public static async Task<int> SuspendWhile(
+        Func<bool> predicate, uint pollFrequencyMS = 5, bool waitIndefinitely = false, int timeOutS = 5)
     {
         int elapsedTimeMS = 0;
         int pollFrequency = (int)pollFrequencyMS;
@@ -25,6 +26,10 @@ public static class TaskExtensions
         {
             await Task.Delay(pollFrequency);
             elapsedTimeMS += pollFrequency;
+
+            if (waitIndefinitely) continue;
+            
+            if (elapsedTimeMS / 1000 > timeOutS) break;
         }
 
         return elapsedTimeMS;

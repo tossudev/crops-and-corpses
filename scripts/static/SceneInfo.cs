@@ -39,34 +39,19 @@ public static class SceneInfo
 
 	public static async Task<bool> GetCaveBridgeOpen()
 	{
-		if (!SaveData.firstLoadComplete)
-		{
-			await Task.Delay(100);
-			return await GetCaveBridgeOpen();
-		}
-
+		await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete);
 		return caveBridgeOpen;
 	}
 
 	public static async Task<bool> GetRuinsCaveOpen()
 	{
-		if (!SaveData.firstLoadComplete)
-		{
-			await Task.Delay(100);
-			return await GetRuinsCaveOpen();
-		}
-
+		await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete);
 		return ruinsCaveOpen;
 	}
 
 	public static async Task<bool> GetForestBridgeOpen()
 	{
-		if (!SaveData.firstLoadComplete)
-		{
-			await Task.Delay(100);
-			return await GetForestBridgeOpen();
-		}
-
+		await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete);
 		return forestBridgeOpen;
 	}
 }

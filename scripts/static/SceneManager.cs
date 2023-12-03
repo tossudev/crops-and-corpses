@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -43,9 +44,7 @@ public static class SceneManager
     {
         if (IsCurrentScene(caller, Scene.Town))
         {
-            BuildingMenu buildMenu;
-            buildMenu = caller.GetTree().GetFirstNodeInGroup("buildmenu") as BuildingMenu;
-            buildMenu.SaveBuildings(buildMenu.savePath, buildMenu.fileName);
+            BuildingMenu.buildMenu?.SaveBuildings();
         }
 
         PlayerController player;

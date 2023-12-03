@@ -23,8 +23,16 @@ public partial class VillagerResidence : Control
 	
 	public override void _Ready()
 	{
+		if (_isTownHall) return;
+		
 		_villagerFaceButtonParentGrid = GetNode<GridContainer>(VILLAGER_GRID_NODENAME);
+	}
 
+	async void RegisterResidence()
+	{
+		await TaskExtensions.SuspendWhile(() =>
+			VillagerManager.villagerManagerInstance == null || !SaveData.firstLoadComplete);
+		
 		id = _isTownHall
 			? 0
 			: VillagerManager.villagerManagerInstance.allVillagerResidences.Count + 1;

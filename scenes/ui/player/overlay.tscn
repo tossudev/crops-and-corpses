@@ -32,20 +32,20 @@ scale = Vector2(0.95, 0.95)
 theme_override_font_sizes/font_size = 32
 text = "Press 'V' to open Build menu"
 
-[node name="crafting tip" type="Label" parent="TestInfo"]
+[node name="crafting tip" type="Label" parent="TestInfo/Building tip"]
 layout_mode = 0
-offset_top = 92.0
+offset_top = 50.5263
 offset_right = 952.0
-offset_bottom = 188.0
+offset_bottom = 146.526
 scale = Vector2(0.9, 0.9)
 theme_override_font_sizes/font_size = 32
 text = "Press 'Q' to toggle Crafting"
 
-[node name="crafting tip2" type="Label" parent="TestInfo"]
+[node name="crafting tip2" type="Label" parent="TestInfo/Building tip/crafting tip"]
 layout_mode = 0
-offset_top = 130.0
+offset_top = 44.4445
 offset_right = 952.0
-offset_bottom = 226.0
+offset_bottom = 140.444
 scale = Vector2(0.9, 0.9)
 theme_override_font_sizes/font_size = 32
 text = "Press 'J' to toggle Quest"

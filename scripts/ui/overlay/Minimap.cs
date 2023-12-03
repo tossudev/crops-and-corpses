@@ -18,8 +18,9 @@ public partial class Minimap : Control {
 
 	const string FOLIAGE_GROUP = "Foliage";
 
-	public override void _Ready() {
-        
+	public override void _Ready()
+	{
+		return;
 		player = (CharacterBody2D) GetTree().GetFirstNodeInGroup("player");
 
 		cam = GetNode<Camera2D>("SubViewport/Radar/Camera");

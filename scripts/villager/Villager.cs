@@ -211,9 +211,11 @@ public partial class Villager : CharacterBody2D
 
 	public void _on_button_button_up()
 	{
+		QuestManager questManager = GetNode<QuestManager>("/root/QuestManager");
 		if (!_inTownScene && needRescue)
 		{
 			OpenRescueDialogue();
+			questManager.GetActiveQuest().ChangeQuestDescription("Take the villager to Street Sign");
 		}
 		else
 		{

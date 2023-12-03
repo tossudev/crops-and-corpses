@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmr1ik7ojfwn5"]
+[gd_scene load_steps=9 format=3 uid="uid://dmr1ik7ojfwn5"]
 
-[ext_resource type="Texture2D" uid="uid://baeufxm0dy8va" path="res://scenes/ui/general/button.png" id="1_c5gvq"]
 [ext_resource type="Script" path="res://scripts/Quest/QuestBoardUi.cs" id="1_q7a21"]
 [ext_resource type="LabelSettings" uid="uid://dv17cjn3uthox" path="res://assets/resources/labelsettings/crafting_panel_item_label_settings.tres" id="2_er7mk"]
+[ext_resource type="Texture2D" uid="uid://dog4onyvfb2ut" path="res://assets/sprites/ui/stone_button.png" id="3_caejg"]
+[ext_resource type="LabelSettings" path="res://assets/resources/labelsettings/demolish_menu_buttons_label_settings.tres" id="4_1hps3"]
+[ext_resource type="StyleBox" uid="uid://cphnvuxh1r71q" path="res://assets/resources/styles/default_tab_container_hovered_tab_style.tres" id="4_dbqua"]
+[ext_resource type="Texture2D" uid="uid://dha0ys5o7lb1b" path="res://assets/sprites/ui/cross_1024.png" id="4_emc8o"]
+[ext_resource type="StyleBox" path="res://assets/resources/styles/default_tab_container_panel_style.tres" id="5_4p6gx"]
+[ext_resource type="Texture2D" uid="uid://bx13h85ncr7ei" path="res://assets/sprites/ui/wooden_panel.png" id="7_ulw16"]
 
 [node name="QuestBoardUi" type="Control"]
 layout_mode = 3
@@ -11,170 +16,196 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.02774, 1.0091)
 script = ExtResource("1_q7a21")
-
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 0
-offset_right = 1928.0
-offset_bottom = 1089.0
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 355.0
-offset_top = 34.0
-offset_right = 395.0
-offset_bottom = 57.0
-scale = Vector2(2.47888, 1.54671)
-text = "Difficulty
-"
-label_settings = ExtResource("2_er7mk")
-
-[node name="Label2" type="Label" parent="."]
-layout_mode = 0
-offset_left = 850.0
-offset_top = 38.0
-offset_right = 920.0
-offset_bottom = 64.0
-scale = Vector2(2.47888, 1.54671)
-text = "location
-"
-label_settings = ExtResource("2_er7mk")
 
 [node name="ForestButton" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 802.0
-offset_top = 150.0
-offset_right = 1063.0
-offset_bottom = 404.0
+offset_left = 361.96
+offset_top = 156.575
+offset_right = 622.96
+offset_bottom = 417.575
 scale = Vector2(1.07942, 0.390251)
-icon = ExtResource("1_c5gvq")
+icon = ExtResource("3_caejg")
 
 [node name="Label" type="Label" parent="ForestButton"]
 layout_mode = 0
-offset_left = 12.9699
-offset_top = 76.8736
-offset_right = 110.97
-offset_bottom = 139.874
-scale = Vector2(2.7057, 2.25505)
-text = "Forest"
+offset_left = 77.8196
+offset_top = 110.185
+offset_right = 189.82
+offset_bottom = 158.185
+text = "Forrest
+"
 label_settings = ExtResource("2_er7mk")
 
 [node name="RuinsButton" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 800.0
-offset_top = 285.0
-offset_right = 1061.0
-offset_bottom = 539.0
+offset_left = 362.933
+offset_top = 300.267
+offset_right = 623.933
+offset_bottom = 561.267
 scale = Vector2(1.07942, 0.390251)
-icon = ExtResource("1_c5gvq")
+icon = ExtResource("3_caejg")
 
 [node name="Label" type="Label" parent="RuinsButton"]
 layout_mode = 0
-offset_left = 25.9399
-offset_top = 87.1235
-offset_right = 102.94
-offset_bottom = 130.123
-scale = Vector2(2.7057, 2.25505)
+offset_left = 95.4216
+offset_top = 105.061
+offset_right = 180.422
+offset_bottom = 153.061
 text = "Ruins"
 label_settings = ExtResource("2_er7mk")
 
 [node name="CaveButton" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 798.0
-offset_top = 416.0
-offset_right = 1059.0
-offset_bottom = 670.0
+offset_left = 360.987
+offset_top = 447.923
+offset_right = 621.987
+offset_bottom = 708.923
 scale = Vector2(1.07942, 0.390251)
-icon = ExtResource("1_c5gvq")
+icon = ExtResource("3_caejg")
 
 [node name="Label" type="Label" parent="CaveButton"]
 layout_mode = 0
-offset_left = 41.689
-offset_top = 66.6238
-offset_right = 109.689
-offset_bottom = 109.624
-scale = Vector2(2.7057, 2.25505)
-text = "Cave
-"
+offset_left = 96.348
+offset_top = 105.061
+offset_right = 170.348
+offset_bottom = 153.061
+text = "Cave"
 label_settings = ExtResource("2_er7mk")
 
 [node name="dif1" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 327.0
-offset_top = 146.0
-offset_right = 588.0
-offset_bottom = 400.0
+offset_left = 44.7584
+offset_top = 149.638
+offset_right = 305.758
+offset_bottom = 410.638
 scale = Vector2(1.07942, 0.390251)
-icon = ExtResource("1_c5gvq")
+icon = ExtResource("3_caejg")
 
 [node name="Label" type="Label" parent="dif1"]
 layout_mode = 0
-offset_left = 98.0
-offset_top = 67.0
-offset_right = 118.0
-offset_bottom = 115.0
-scale = Vector2(2.7057, 2.25505)
+offset_left = 108.17
+offset_top = 104.113
+offset_right = 148.17
+offset_bottom = 154.113
 text = "1"
-label_settings = ExtResource("2_er7mk")
+label_settings = ExtResource("4_1hps3")
 
 [node name="dif2" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 329.0
-offset_top = 280.0
-offset_right = 590.0
-offset_bottom = 559.0
+offset_left = 42.8124
+offset_top = 299.276
+offset_right = 303.812
+offset_bottom = 578.276
 scale = Vector2(1.07942, 0.390251)
-icon = ExtResource("1_c5gvq")
+icon = ExtResource("3_caejg")
 
 [node name="Label" type="Label" parent="dif2"]
 layout_mode = 0
-offset_left = 91.7159
-offset_top = 112.748
-offset_right = 109.716
-offset_bottom = 160.748
-scale = Vector2(2.7057, 2.25505)
+offset_left = 108.392
+offset_top = 105.061
+offset_right = 148.392
+offset_bottom = 128.061
 text = "2"
 label_settings = ExtResource("2_er7mk")
 
 [node name="dif3" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 323.0
-offset_top = 411.0
-offset_right = 584.0
-offset_bottom = 693.0
+offset_left = 44.7584
+offset_top = 456.841
+offset_right = 305.758
+offset_bottom = 738.841
 scale = Vector2(1.07942, 0.390251)
-icon = ExtResource("1_c5gvq")
+icon = ExtResource("3_caejg")
 
-[node name="Label" type="Label" parent="dif3"]
+[node name="Label2" type="Label" parent="dif3"]
 layout_mode = 0
-offset_left = 96.3481
-offset_top = 97.3732
-offset_right = 114.348
-offset_bottom = 145.373
-scale = Vector2(2.7057, 2.25505)
-text = "3
-"
-label_settings = ExtResource("2_er7mk")
-
-[node name="Label3" type="Label" parent="."]
-layout_mode = 0
-offset_left = 60.0
-offset_top = 94.0
-offset_right = 301.0
-offset_bottom = 137.0
-text = "Current Difficulty"
+offset_left = 108.392
+offset_top = 105.061
+offset_right = 148.392
+offset_bottom = 128.061
+text = "3"
 label_settings = ExtResource("2_er7mk")
 
 [node name="Cdif" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 112.0
-offset_top = 152.0
-offset_right = 186.0
-offset_bottom = 232.0
+offset_left = 121.626
+offset_top = 608.461
+offset_right = 195.626
+offset_bottom = 688.461
+label_settings = ExtResource("2_er7mk")
+
+[node name="MainCloseButtonContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -598.653
+offset_top = 73.3325
+offset_right = -486.653
+offset_bottom = 185.332
+grow_horizontal = 0
+scale = Vector2(1.64713, 1.23077)
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="CloseButton" type="Button" parent="MainCloseButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("4_dbqua")
+theme_override_styles/hover = ExtResource("4_dbqua")
+theme_override_styles/pressed = ExtResource("5_4p6gx")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainCloseButtonContainer/CloseButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="TextureRect" type="TextureRect" parent="MainCloseButtonContainer/CloseButton/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("4_emc8o")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2.65662, 3.25378)
+texture = ExtResource("7_ulw16")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 112.869
+offset_top = 89.1881
+offset_right = 251.869
+offset_bottom = 137.188
+text = "Difficulty"
+label_settings = ExtResource("2_er7mk")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 422.286
+offset_top = 88.1972
+offset_right = 556.286
+offset_bottom = 136.197
+text = "Level"
+label_settings = ExtResource("2_er7mk")

@@ -46,16 +46,16 @@ public partial class QuestJournal : Control
 		}
 	}
 
-    public override void _Input(InputEvent @event)
-    {
-        base._Input(@event);
+	public override void _Input(InputEvent @event)
+	{
+		base._Input(@event);
 		if (@event.IsActionPressed("Toggel_QuestJournal"))
 		{
 			toggleQuestJournal();
 			
 			
 		}
-    }
+	}
 
 
 }

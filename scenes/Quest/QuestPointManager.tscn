@@ -8,13 +8,4 @@ script = ExtResource("1_nq8hn")
 
 [node name="QuestPoint" parent="." instance=ExtResource("2_nplq4")]
 
-[node name="QuestPoint2" parent="." instance=ExtResource("2_nplq4")]
-position = Vector2(1076.93, 874.63)
-
-[node name="QuestPoint3" parent="." instance=ExtResource("2_nplq4")]
-position = Vector2(-481.9, 484.13)
-
-[node name="QuestPoint4" parent="." instance=ExtResource("2_nplq4")]
-position = Vector2(1070.58, -211.152)
-
 [editable path="QuestPoint"]

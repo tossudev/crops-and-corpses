@@ -13,17 +13,14 @@ public partial class QuestPoint : Node2D
 	VillagerManager villagerManager;
 
 
-	const string Node2D_ZombieSpawn = "%ZombieSpawn";
-	private Node2D zombieSpawn;
+	
 
 	
 	const string Node2D_QuestZombieSpawn = "%QuestZombieSpawn";
 	private Node2D spawnZombiePoint;
 
 
-	const string Node2D_QuestZombies = "%QuestZombies";
-	private Node2D QuestZombies;
-
+	
 	  
 		
 	const string Node2D_VillagerPoint = "%VillagerSpawn";
@@ -43,7 +40,7 @@ public partial class QuestPoint : Node2D
 	public bool isQuestPointActive = false;
 
 	int playerDistanceToQuestPoint;
-	int SpawnRange = 500;
+	int SpawnRange = 300;
 
 	int villagerSpawnRange = 50;
 
@@ -56,27 +53,16 @@ public partial class QuestPoint : Node2D
 	public override void _Ready()
 	{
 		base._Ready();
-		QuestZombies = GetNode<Node2D>(Node2D_QuestZombies);
+		
 	
 
 		questManager = GetNode<QuestManager>("/root/QuestManager");
 
 		zombieScene = (PackedScene)ResourceLoader.Load("res://scenes/zombie/Zombie.tscn");
 		spawnZombiePoint = GetNode<Node2D>(Node2D_QuestZombieSpawn);
-
-		zombieSpawn = GetNode<Node2D>(Node2D_ZombieSpawn);
+		playerController = (PlayerController)GetTree().GetFirstNodeInGroup("player");
+		ZombieArea = GetNode<Area2D>(Area2D_ZombieArea);
 	
-
-		
-
-		
-
- 
-
-	
-
-	playerController = (PlayerController)GetTree().GetFirstNodeInGroup("player");
-	if (playerController == null)
 	
 		
 	
@@ -95,13 +81,23 @@ public partial class QuestPoint : Node2D
 		playerDistanceToQuestPoint = (int)playerController.GlobalPosition.DistanceTo(GlobalPosition);
 
 	
-		if (isQuestPointActive && !isZombiesSpawned && playerDistanceToQuestPoint < SpawnRange)
+		if (isQuestPointActive && !isZombiesSpawned && playerDistanceToQuestPoint <= SpawnRange)
 		{
 			
 			SpawnZombies();
-			SpawnVillagers();
+		
 	
 			isZombiesSpawned = true;
+			if(ZombieArea.GetOverlappingBodies().Count < 2)
+			{
+				GD.Print(ZombieArea.GetOverlappingBodies().Count);
+
+				questManager.GetActiveQuest().ChangeQuestDescription("Click on the villager to rescue him");
+			}
+			else
+			{
+				
+			}
 		}
 		
 		
@@ -114,19 +110,44 @@ public partial class QuestPoint : Node2D
 	
 	void SpawnVillagers( )
 	{
-		
-		VillagerManager.villagerManagerInstance.SpawnQuestVillagers();
+		GD.Print("SpawnVillagers");
 
 	}
 
 	public void SpawnZombies()
-	{
+    {
 
-		GD.Print("SpawnZombies");
-	}
+        var zombieSpawn = GetParent().GetParent().GetNodeOrNull<SpawnScript>("ZombieSpawn");
+
+        if (zombieSpawn != null && isZombiesSpawned == false)
+        {
+            for (int i = 0; i < zombieAmount; i++)
+            {
+				zombieSpawn.SpawnZombieAtPoint(spawnZombiePoint.GlobalPosition);
+
+                GD.Print("SpawnZombies");
+            }
+			questManager.GetActiveQuest().ChangeQuestDescription("Clear the area of zombies");
+			isZombiesSpawned = true;
+        }
+        else
+        {
+            GD.PrintErr("ZombieSpawn not found or not initialized.");
+            // Handle the error as needed, e.g., return or throw an exception.
+            return;
+        }
 
 
-	private void SpawendZombieAmount(){
+
+
+
+
+
+
+    }
+
+
+    private void SpawendZombieAmount(){
 	   CurrentDifficulty = questManager.GetActiveQuest().difficulty;
 	   switch (CurrentDifficulty)
 	   {
@@ -156,6 +177,8 @@ public partial class QuestPoint : Node2D
 		
 		isQuestPointActive = true;
 	}
+
+	
 }
 
 

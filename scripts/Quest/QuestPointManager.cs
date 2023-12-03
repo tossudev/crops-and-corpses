@@ -13,11 +13,10 @@ public partial class QuestPointManager : Node
 
      QuestManager questManager;
 
-    PackedScene forestQuestScene = (PackedScene)GD.Load("res://scenes/quest/forest_quest_scene.tscn");
-    PackedScene caveQuestScene = (PackedScene)GD.Load("res://scenes/quest/cave_quest_scene.tscn");
-    PackedScene ruinsQuestScene = (PackedScene)GD.Load("res://scenes/quest/ruins_quest_scene.tscn");
 
     PackedScene InThisSceneQuestScene;
+
+    public Node2D[] CaveFullQuestPoints;
 
    
 
@@ -67,6 +66,8 @@ public partial class QuestPointManager : Node
         return null;
     }
 
+
+    
 }
 
 

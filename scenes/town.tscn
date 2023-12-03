@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=40 format=3 uid="uid://bgyv0c8xt1fd4"]
 
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="2_mph18"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_nnncm"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="21_mo6ng"]
 [ext_resource type="PackedScene" path="res://scenes/world/navigation_manager.tscn" id="23_vb7um"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="26_e7msj"]
+[ext_resource type="PackedScene" uid="uid://4t8daavjseop" path="res://scenes/Quest/QuestBoard.tscn" id="27_838xk"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="29_6j2s6"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_02qf6"]
@@ -187,6 +188,9 @@ scale = Vector2(1, 1)
 
 [node name="ArmLBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="2"]
 scale = Vector2(0.999998, 0.999998)
+
+[node name="ArmL" parent="Objects/Player/Skeleton2D/TorsoBone/ArmLBone" index="0"]
+position = Vector2(4.06, 13.3)
 
 [node name="HeadBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="4"]
 scale = Vector2(0.999997, 0.999997)
@@ -1547,6 +1551,9 @@ script = ExtResource("29_6j2s6")
 
 [node name="Sunlight" type="CanvasModulate" parent="SunlightContainer"]
 position = Vector2(-71, -4)
+
+[node name="QuestBoard" parent="." instance=ExtResource("27_838xk")]
+position = Vector2(-793, -459)
 
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
 [connection signal="timeout" from="ZombieSpawn/Timer" to="ZombieSpawn" method="ZombieSpawn" flags=18]

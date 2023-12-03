@@ -36,7 +36,8 @@ public partial class VillagerManager : Node
 	Node2D _villagerParentNode;
 	const string VILLAGER_PARENT_NODEPATH = "%Villagers";
 
-	
+	public readonly List<VillagerResidence> allVillagerResidences = new ();
+
 	
 	public override void _Ready()
 	{
@@ -56,7 +57,7 @@ public partial class VillagerManager : Node
 
 		if (TownManager.EveryXSecond((int) AutosaveIntervalSeconds.VILLAGER_POSITION_INTERVAL))
 		{
-			SyncVillagerPositions();
+			UpdateVillagers();
 		}
 	}
 
@@ -159,11 +160,16 @@ public partial class VillagerManager : Node
 		villagerToRegister.Teleport(spawnCoordinates);
 	}
 
-    void SyncVillagerPositions()
+    void UpdateVillagers()
 	{
 		foreach (var villager in _allVillagers)
 		{
 			villager.SavePosition();
+
+			if (villager.rawData.currentState == VillagerState.Homeless)
+			{
+				villager.rawData.TrySetHome();
+			}
 		}
 
 		Task save = SaveData.SyncVillagers();
@@ -231,6 +237,21 @@ public partial class VillagerManager : Node
 		CountBrokenFencesInTown();
 		return _brokenFenceList;
 	}
+
+
+
+	public void AddNewResidence(VillagerResidence residence)
+	{
+		allVillagerResidences.Add(residence);
+	}
+	
+	public List<VillagerResidence> GetFreeHomesList()
+	{
+		var freeHomesList = allVillagerResidences.FindAll(
+			residence => residence.hasRoomForMoreVillagers && !residence.isBroken);
+
+		return freeHomesList;
+	}
 }
 
 public struct VillagerData{
@@ -268,5 +289,6 @@ public enum VillagerState
 	FarmingTask,
 	FindWoodTask,
 	FindStoneTask,
-	RescueQuest
+	RescueQuest,
+	Homeless
 }

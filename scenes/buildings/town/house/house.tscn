@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://3ct83j0jgteb"]
+[gd_scene load_steps=10 format=3 uid="uid://3ct83j0jgteb"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_uikdl"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_driju"]
-[ext_resource type="Texture2D" uid="uid://bmn8ggt1kvsn7" path="res://assets/sprites/buildings/smallhouse_color.png" id="2_dt56r"]
+[ext_resource type="Texture2D" uid="uid://cg5j4xefc87sn" path="res://assets/sprites/buildings/smallhouse_color.png" id="2_dt56r"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_u5tml"]
-[ext_resource type="PackedScene" uid="uid://2v1aodyd0p4b" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_lfvtm"]
+[ext_resource type="PackedScene" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_lfvtm"]
+[ext_resource type="PackedScene" uid="uid://dune6txyuwmm2" path="res://scenes/buildings/town/villager_residence_component.tscn" id="6_17x1j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1313"]
 size = Vector2(247.75, 293.902)
@@ -79,5 +80,9 @@ offset_left = -289.0
 offset_top = -261.0
 offset_right = 298.0
 offset_bottom = 245.0
+
+[node name="VillagerResidenceComponent" parent="." instance=ExtResource("6_17x1j")]
+unique_name_in_owner = true
+_housingCapacity = 2
 
 [connection signal="input_event" from="Area2D" to="BuildingDemolishMenu" method="OnBuildingInput"]

@@ -7,6 +7,9 @@ public partial class BuildingHealth : Node2D
 {
 	HealthComponent _healthComponent;
     const string HEALTH_COMPONENT_NODENAME = "%HealthComponent";
+    
+    VillagerResidence _villagerResidenceComponent;
+    const string RESIDENCE_COMPONENT_NODENAME = "%VillagerResidenceComponent";
 
     
     CollisionShape2D _collisionShape;
@@ -25,6 +28,8 @@ public partial class BuildingHealth : Node2D
         _healthComponent = GetNode<HealthComponent>(HEALTH_COMPONENT_NODENAME);
         _healthComponent.AssignBuilding(this);
 
+        _villagerResidenceComponent = GetNodeOrNull<VillagerResidence>(RESIDENCE_COMPONENT_NODENAME);
+        
         _collisionShape = GetNode<CollisionShape2D>(COLLISIONSHAPE2D_NODENAME);
         _parent = GetParent() as Node2D;
 
@@ -75,6 +80,7 @@ public partial class BuildingHealth : Node2D
             return;
         }
 
+        _villagerResidenceComponent?.OnBreak();
         _parent.CallDeferred("OnBreak");
     }
     
@@ -89,6 +95,7 @@ public partial class BuildingHealth : Node2D
             return;
         }
 
+        _villagerResidenceComponent?.OnFixed();
         _parent.CallDeferred("OnFixed");
     }
 }

@@ -37,23 +37,13 @@ public static class PlayerInfo
 
 	public static async Task<int> GetHealth()
 	{
-		if (!SaveData.firstLoadComplete)
-		{
-			await Task.Delay(100);
-			return await GetHealth();
-		}
-
+		await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete);
 		return health;
 	}
 
 	public static async Task<int> GetStamina()
 	{
-		if (!SaveData.firstLoadComplete)
-		{
-			await Task.Delay(100);
-			return await GetStamina();
-		}
-
+		await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete);
 		return stamina;
 	}
 }

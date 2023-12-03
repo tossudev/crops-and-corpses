@@ -32,7 +32,6 @@ public partial class Villager : CharacterBody2D
 	int _archerTowerIndex = 0;
 	int _fenceIndex = 0;
 	float _speed = 0;
-	bool collision = false;
 	bool _taskStarted = false;
 	int _resourceTaskCounter = 0;
 	const string PLAYER_NODENAME = "%Player";
@@ -128,25 +127,6 @@ public partial class Villager : CharacterBody2D
 
 	void State()
 	{
-		if (!TimeManager.dayTime && !_inTownScene)
-		{
-			switch (_rawData.currentOccupation)
-			{
-				case VillagerOccupation.Soldier:
-					SetCurrentState(VillagerState.FindArcherTower);
-					break;
-
-				default:
-					{
-						if (rawData.currentState != VillagerState.InShelter)
-						{
-							SetCurrentState(VillagerState.FindShelter);
-						}
-						break;
-					}
-			}
-		}
-
 		switch (rawData.currentState)
 		{
 			case VillagerState.RoamAround:
@@ -186,16 +166,8 @@ public partial class Villager : CharacterBody2D
 				break;
 
 			case VillagerState.FindShelter:
-
-				if (TimeManager.dayTime)
-				{
-					SetCurrentState(VillagerState.ChooseTask);
-				}
-				else
-				{
-					FindShelter();
-				}
-
+                
+				FindShelter();
 				break;
 
 			case VillagerState.InShelter when TimeManager.dayTime:
@@ -233,19 +205,13 @@ public partial class Villager : CharacterBody2D
 		SetCurrentState(VillagerState.FollowPlayer);
 	}
 
-	const string VILLAGER_RESIDENCE_NODENAME = "%TownHallMenu";
+	const string VILLAGER_RESIDENCE_NODENAME = "%VillagerResidence";
 	public void _on_area_2d_area_entered(Area2D area)
 	{
-		collision = true;
+		if (!area.Owner.HasNode(VILLAGER_RESIDENCE_NODENAME)) return;
+		currentResidence = area.Owner.GetNodeOrNull<VillagerResidence>(VILLAGER_RESIDENCE_NODENAME);
 
-		if (area.Owner.HasNode(VILLAGER_RESIDENCE_NODENAME))
-		{
-			currentResidence = area.Owner.GetNodeOrNull<TownHallMenu>(VILLAGER_RESIDENCE_NODENAME)._villagerResidence;
-
-			currentResidence?.VillagerEnterBuilding(this);
-
-			area.GetInstanceId();
-		}
+		currentResidence?.VillagerEnterBuilding(this);
 	}
 
 	void Movement(Vector2 target)
@@ -281,7 +247,14 @@ public partial class Villager : CharacterBody2D
 
 	void FindShelter()
 	{
-		_targetPosition = TownManager.townHallPosition - GlobalPosition + CreateOffsetVector2(-100, 100);
+		if (TimeManager.dayTime)
+		{
+			SetCurrentState(VillagerState.ChooseTask);
+		}
+		else
+		{
+			_targetPosition = TownManager.townHallPosition - GlobalPosition + CreateOffsetVector2(-100, 100);
+		}
 	}
 
 	Vector2 CreateOffsetVector2(double min, double max)
@@ -358,6 +331,21 @@ public partial class Villager : CharacterBody2D
 			default:
 				decision = VillagerState.RoamAround;
 				break;
+		}
+
+		
+		if (rawData.homeId == 0)
+		{
+			decision = VillagerState.Homeless;
+		}
+		
+		// Night Time
+		if (!TimeManager.dayTime && _inTownScene)
+		{
+			if (_rawData.currentOccupation != VillagerOccupation.Soldier)
+			{
+				decision = VillagerState.FindShelter;
+			}
 		}
 
 		SetCurrentState(decision);

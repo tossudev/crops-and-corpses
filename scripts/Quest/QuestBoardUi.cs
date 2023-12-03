@@ -29,6 +29,9 @@ const string MenuButtonPath = "%DiffcultyButton";
 	const string BUTTON_CLOSE_NODENAME = "%MainCloseButtonContainer/CloseButton";
 	Button _closeButton;
 
+	const string LABEL_QUESTTATUSTEXT_NODENAME = "%QuestStatusText";
+	Label questStatusText;
+
 	const string label_CDiff = "%Cdif";
 	Label CDiffLabel;
 
@@ -56,6 +59,8 @@ const string MenuButtonPath = "%DiffcultyButton";
 		Dif2Button = GetNode<Button>(button_Dif2);
 		Dif3Button = GetNode<Button>(button_Dif3);
 		CDiffLabel = GetNode<Label>(label_CDiff);
+		questStatusText = GetNode<Label>(LABEL_QUESTTATUSTEXT_NODENAME);
+
 		
 		
 		// Button mapping
@@ -74,11 +79,24 @@ const string MenuButtonPath = "%DiffcultyButton";
 
 	void CheckIfQuestStartedToday()
 	{
-		if (questManager.GetActiveQuest().startDay == _globalTime.GetDay())
+		if (questManager.GetActiveQuest().startDay == _globalTime.GetDay() && questManager.GetActiveQuest() != null)
 		{
-			// TODO: disable other ui. Display text that quest was started today
+			questStatusText.Text = "Quest started today check quesjournal for more info " ;
 		}
-	}
+		else if(questManager.GetActiveQuest() == null && questManager.GetActiveQuest().startDay == _globalTime.GetDay())
+		{
+			questStatusText.Text = "Check back tomorrow for a new quest";
+		}
+
+		else if(questManager.GetActiveQuest() != null && questManager.GetActiveQuest().startDay != _globalTime.GetDay())
+		{
+			questStatusText.Text = "Quest started " + questManager.GetActiveQuest().startDay + " days ago";
+		}
+		else if (questManager.GetActiveQuest() == null && questManager.GetActiveQuest().startDay != _globalTime.GetDay())
+		{
+			questStatusText.Text = "Can start a new quest select  a difficulty first and then location";
+		}
+		
 	
 	void SetQuestDifficulty(int diff)
 	{
@@ -88,18 +106,15 @@ const string MenuButtonPath = "%DiffcultyButton";
 	}
 void SetLevelsActive()
 {
-	var rawTownStats = GetNode<RawTownStats>("/root/RawTownStats");
-	_forestButton.Disabled = false;
-	if (rawTownStats.isRuinsUnlocked)
+	if(SceneInfo.forestBridgeOpen == true)
 	{
 		_ruinsButton.Visible = true;
-	   
 	}
-	if (rawTownStats.isMineshaftUnlocked)
+	if(SceneInfo.ruinsCaveOpen == true)
 	{
 		_caveButton.Visible = true;
-	  
 	}
+
 } 
 
 
@@ -114,8 +129,10 @@ void SetLevelsActive()
 	// open the quest board
 	public void OpenQuestBoard()
 	{
+		
 		Visible = true;
 		SetLevelsActive();
+		
 		
 	}
 }

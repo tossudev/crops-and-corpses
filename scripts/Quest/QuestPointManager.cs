@@ -16,9 +16,10 @@ public partial class QuestPointManager : Node
 
     PackedScene InThisSceneQuestScene;
 
-    public Node2D[] CaveFullQuestPoints;
 
-   
+  [Export] public Node2D[] CaveFullQuestPoints;
+
+    
 
     public override void _Ready()
     {
@@ -30,6 +31,15 @@ public partial class QuestPointManager : Node
             if (node is QuestPoint questPoint)
             {
                 activeQuestPoints.Add(questPoint);
+                if(Scene.Cave == SceneManager.GetCurrentScene(this) && SceneInfo.ruinsCaveOpen == true)
+                {
+                    foreach (Node2D node2D in CaveFullQuestPoints)
+                    {
+                        activeQuestPoints.Add(node2D as QuestPoint);
+                    }
+                   
+                }
+              
             }
         }
          GD.Print("Active quest points count: " + activeQuestPoints.Count);

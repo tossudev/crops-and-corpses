@@ -44,7 +44,6 @@ scale = Vector2(1.02774, 1.0091)
 script = ExtResource("1_q7a21")
 
 [node name="Panel" type="Panel" parent="."]
-z_index = -1
 custom_minimum_size = Vector2(720, 720)
 layout_mode = 0
 offset_right = 257.0

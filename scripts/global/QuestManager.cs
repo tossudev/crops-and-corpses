@@ -51,11 +51,6 @@ public partial class QuestManager : Node
 		
 		StartQuest($"Rescue Quest: {location.Name}", difficulty, QuestType.Rescue, location);
 	}
-
-	public void CompleteQuest()
-	{
-		SetActiveQuest(null);
-	}
 	
 	public static void LoadQuest()
 	{
@@ -63,7 +58,10 @@ public partial class QuestManager : Node
 	}
 
 
-	public Quest GetActiveQuest() => activeQuest;
+	public Quest GetActiveQuest()
+	{
+		return activeQuest;
+	}
 
 	public void SetActiveQuest(Quest quest)
 	{ 
@@ -72,5 +70,18 @@ public partial class QuestManager : Node
 
 
 	public void CompleteQuestStage(string stage) => activeQuest?.CompleteQuestStage(stage);
-	
+
+
+	public void FinishQuest()
+	{
+		TownManager.GainExp(activeQuest.difficulty switch
+		{
+			1 => ExpGain.BIG,
+			2 => ExpGain.VERY_BIG,
+			3 => ExpGain.HUGE,
+			_ => ExpGain.MEDIUM
+		});
+		
+		SetActiveQuest(null);
+	}
 }

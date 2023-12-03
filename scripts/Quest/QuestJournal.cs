@@ -21,41 +21,10 @@ public partial class QuestJournal : Control
 
 	public void UpdateQuestJournal()
 	{
-		if (questManager.GetActiveQuest != null)
-		{
-			QuestTextLabel.Text = questManager.GetActiveQuest().GetQuestDescription().ToString();
+		var quest = questManager.GetActiveQuest();
 
-	
-		}
-		else
-		{
-			QuestTextLabel.Text = "Go to the quest board to start a quest.";
-		}
+		QuestTextLabel.Text = quest != null
+			? questManager.GetActiveQuest().GetQuestDescription()
+			: "Open Quest Journal to start a new quest";
 	}
-
-	void toggleQuestJournal()
-	{
-		UpdateQuestJournal();
-		if (Visible == true)
-		{
-			QuestTextLabel.Visible = false;
-		}
-		else
-		{
-			QuestTextLabel.Visible = true;
-		}
-	}
-
-	public override void _Input(InputEvent @event)
-	{
-		base._Input(@event);
-		if (@event.IsActionPressed("Toggel_QuestJournal"))
-		{
-			toggleQuestJournal();
-			
-			
-		}
-	}
-
-
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://di5l0mrx44owj"]
+[gd_scene load_steps=27 format=3 uid="uid://di5l0mrx44owj"]
 
 [ext_resource type="Script" path="res://scripts/ui/town/TownHallMenu.cs" id="1_8dpyt"]
 [ext_resource type="LabelSettings" uid="uid://djab4esbcqs0l" path="res://assets/resources/labelsettings/town_hall_menu_Header_label_settings.tres" id="1_dqf6y"]
@@ -26,7 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory/inventory_slot.tscn" id="19_2cmba"]
 [ext_resource type="StyleBox" uid="uid://cphnvuxh1r71q" path="res://assets/resources/styles/default_tab_container_hovered_tab_style.tres" id="19_rmd0d"]
 [ext_resource type="StyleBox" uid="uid://bfq7mg2htfllb" path="res://assets/resources/styles/inventory_style_box_texture.tres" id="22_u1bpq"]
-[ext_resource type="PackedScene" uid="uid://dmr1ik7ojfwn5" path="res://scenes/quest/QuestBoardUi.tscn" id="27_ha2dk"]
 
 [node name="Town Hall Menu" type="Control"]
 z_index = 100
@@ -576,9 +575,5 @@ anchor_right = 1.0
 offset_left = -128.0
 offset_right = -16.0
 grow_horizontal = 0
-
-[node name="QuestBoardUi" parent="." instance=ExtResource("27_ha2dk")]
-unique_name_in_owner = true
-layout_mode = 1
 
 [editable path="MainPanel/MainCloseButtonContainer"]

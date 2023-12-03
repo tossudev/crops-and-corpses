@@ -42,13 +42,8 @@ public partial class QuestBoardUi : Control
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        CloseQuestBoard();
         _globalTime = GetNodeOrNull<GlobalTime>("/root/GlobalTime");
         questManager = GetNode<QuestManager>("/root/QuestManager");
-
-        _ruinsButton.Visible = false;
-        _caveButton.Visible = false;
-
         _closeButton = GetNode<Button>(BUTTON_CLOSE_NODENAME);
 
         _forestButton = GetNode<Button>(BUTTON_FOREST_NODENAME);

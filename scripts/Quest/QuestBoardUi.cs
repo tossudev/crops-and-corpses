@@ -74,30 +74,34 @@ const string MenuButtonPath = "%DiffcultyButton";
 		
 		_closeButton.Pressed += CloseQuestBoard;
 	}
-	
+
 
 
 	void CheckIfQuestStartedToday()
 	{
 		if (questManager.GetActiveQuest().startDay == _globalTime.GetDay() && questManager.GetActiveQuest() != null)
 		{
-			questStatusText.Text = "Quest started today check quesjournal for more info " ;
+			questStatusText.Text = "Quest started today check quesjournal for more info ";
 		}
-		else if(questManager.GetActiveQuest() == null && questManager.GetActiveQuest().startDay == _globalTime.GetDay())
+		else if (questManager.GetActiveQuest() == null &&
+		         questManager.GetActiveQuest().startDay == _globalTime.GetDay())
 		{
 			questStatusText.Text = "Check back tomorrow for a new quest";
 		}
 
-		else if(questManager.GetActiveQuest() != null && questManager.GetActiveQuest().startDay != _globalTime.GetDay())
+		else if (questManager.GetActiveQuest() != null &&
+		         questManager.GetActiveQuest().startDay != _globalTime.GetDay())
 		{
 			questStatusText.Text = "Quest started " + questManager.GetActiveQuest().startDay + " days ago";
 		}
-		else if (questManager.GetActiveQuest() == null && questManager.GetActiveQuest().startDay != _globalTime.GetDay())
+		else if (questManager.GetActiveQuest() == null &&
+		         questManager.GetActiveQuest().startDay != _globalTime.GetDay())
 		{
 			questStatusText.Text = "Can start a new quest select  a difficulty first and then location";
 		}
-		
-	
+
+	}
+
 	void SetQuestDifficulty(int diff)
 	{
 		_selectedDiff = diff;

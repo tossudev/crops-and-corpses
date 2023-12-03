@@ -1,13 +1,37 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmr1ik7ojfwn5"]
+[gd_scene load_steps=12 format=3 uid="uid://dmr1ik7ojfwn5"]
 
 [ext_resource type="Script" path="res://scripts/Quest/QuestBoardUi.cs" id="1_q7a21"]
+[ext_resource type="StyleBox" uid="uid://cekqcomecgkhn" path="res://assets/resources/styles/default_ui_style_box_texture.tres" id="2_76tps"]
 [ext_resource type="LabelSettings" uid="uid://dv17cjn3uthox" path="res://assets/resources/labelsettings/crafting_panel_item_label_settings.tres" id="2_er7mk"]
-[ext_resource type="Texture2D" uid="uid://dog4onyvfb2ut" path="res://assets/sprites/ui/stone_button.png" id="3_caejg"]
-[ext_resource type="LabelSettings" path="res://assets/resources/labelsettings/demolish_menu_buttons_label_settings.tres" id="4_1hps3"]
 [ext_resource type="StyleBox" uid="uid://cphnvuxh1r71q" path="res://assets/resources/styles/default_tab_container_hovered_tab_style.tres" id="4_dbqua"]
 [ext_resource type="Texture2D" uid="uid://dha0ys5o7lb1b" path="res://assets/sprites/ui/cross_1024.png" id="4_emc8o"]
-[ext_resource type="StyleBox" path="res://assets/resources/styles/default_tab_container_panel_style.tres" id="5_4p6gx"]
-[ext_resource type="Texture2D" uid="uid://bx13h85ncr7ei" path="res://assets/sprites/ui/wooden_panel.png" id="7_ulw16"]
+[ext_resource type="StyleBox" uid="uid://bjrxs66a6rkm7" path="res://assets/resources/styles/default_tab_container_panel_style.tres" id="5_4p6gx"]
+[ext_resource type="PackedScene" uid="uid://bodxywqjv8hxl" path="res://scenes/ui/Quest/questBoardBtn.tscn" id="6_rui5t"]
+[ext_resource type="StyleBox" uid="uid://bfq7mg2htfllb" path="res://assets/resources/styles/inventory_style_box_texture.tres" id="8_u1061"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8vnvs"]
+font_size = 40
+outline_size = 4
+outline_color = Color(0, 0, 0, 0.784314)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.784314)
+shadow_offset = Vector2(1, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5v560"]
+font_size = 30
+outline_size = 4
+outline_color = Color(0, 0, 0, 0.784314)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.784314)
+shadow_offset = Vector2(1, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_d0ai0"]
+font_size = 24
+outline_size = 4
+outline_color = Color(0, 0, 0, 0.784314)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.784314)
+shadow_offset = Vector2(1, 2)
 
 [node name="QuestBoardUi" type="Control"]
 layout_mode = 3
@@ -19,147 +43,114 @@ grow_vertical = 2
 scale = Vector2(1.02774, 1.0091)
 script = ExtResource("1_q7a21")
 
-[node name="ForestButton" type="Button" parent="."]
-unique_name_in_owner = true
+[node name="Panel" type="Panel" parent="."]
+z_index = -1
+custom_minimum_size = Vector2(720, 720)
 layout_mode = 0
-offset_left = 361.96
-offset_top = 156.575
-offset_right = 622.96
-offset_bottom = 417.575
-scale = Vector2(1.07942, 0.390251)
-icon = ExtResource("3_caejg")
+offset_right = 257.0
+offset_bottom = 255.0
+theme_override_styles/panel = ExtResource("2_76tps")
 
-[node name="Label" type="Label" parent="ForestButton"]
+[node name="Label" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 77.8196
-offset_top = 110.185
-offset_right = 189.82
-offset_bottom = 158.185
-text = "Forrest
-"
+offset_left = 116.761
+offset_top = 63.4229
+offset_right = 255.761
+offset_bottom = 111.423
+text = "Difficulty"
 label_settings = ExtResource("2_er7mk")
 
-[node name="RuinsButton" type="Button" parent="."]
+[node name="Label2" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 451.476
+offset_top = 55.495
+offset_right = 585.476
+offset_bottom = 113.495
+text = "Level"
+label_settings = SubResource("LabelSettings_8vnvs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(720, 0)
+layout_mode = 0
+offset_left = 23.3522
+offset_top = 174.413
+offset_right = 743.352
+offset_bottom = 510.413
+theme_override_constants/separation = 32
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="dif1" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_rui5t")]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 362.933
-offset_top = 300.267
-offset_right = 623.933
-offset_bottom = 561.267
-scale = Vector2(1.07942, 0.390251)
-icon = ExtResource("3_caejg")
+layout_mode = 2
 
-[node name="Label" type="Label" parent="RuinsButton"]
-layout_mode = 0
-offset_left = 95.4216
-offset_top = 105.061
-offset_right = 180.422
-offset_bottom = 153.061
-text = "Ruins"
-label_settings = ExtResource("2_er7mk")
-
-[node name="CaveButton" type="Button" parent="."]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 360.987
-offset_top = 447.923
-offset_right = 621.987
-offset_bottom = 708.923
-scale = Vector2(1.07942, 0.390251)
-icon = ExtResource("3_caejg")
-
-[node name="Label" type="Label" parent="CaveButton"]
-layout_mode = 0
-offset_left = 96.348
-offset_top = 105.061
-offset_right = 170.348
-offset_bottom = 153.061
-text = "Cave"
-label_settings = ExtResource("2_er7mk")
-
-[node name="dif1" type="Button" parent="."]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 44.7584
-offset_top = 149.638
-offset_right = 305.758
-offset_bottom = 410.638
-scale = Vector2(1.07942, 0.390251)
-icon = ExtResource("3_caejg")
-
-[node name="Label" type="Label" parent="dif1"]
-layout_mode = 0
-offset_left = 108.17
-offset_top = 104.113
-offset_right = 148.17
-offset_bottom = 154.113
+[node name="Label2" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/dif1" index="0"]
 text = "1"
-label_settings = ExtResource("4_1hps3")
 
-[node name="dif2" type="Button" parent="."]
+[node name="dif2" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_rui5t")]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 42.8124
-offset_top = 299.276
-offset_right = 303.812
-offset_bottom = 578.276
-scale = Vector2(1.07942, 0.390251)
-icon = ExtResource("3_caejg")
+layout_mode = 2
 
-[node name="Label" type="Label" parent="dif2"]
-layout_mode = 0
-offset_left = 108.392
-offset_top = 105.061
-offset_right = 148.392
-offset_bottom = 128.061
+[node name="Label2" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/dif2" index="0"]
 text = "2"
-label_settings = ExtResource("2_er7mk")
 
-[node name="dif3" type="Button" parent="."]
+[node name="dif3" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_rui5t")]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 44.7584
-offset_top = 456.841
-offset_right = 305.758
-offset_bottom = 738.841
-scale = Vector2(1.07942, 0.390251)
-icon = ExtResource("3_caejg")
+layout_mode = 2
 
-[node name="Label2" type="Label" parent="dif3"]
-layout_mode = 0
-offset_left = 108.392
-offset_top = 105.061
-offset_right = 148.392
-offset_bottom = 128.061
-text = "3"
-label_settings = ExtResource("2_er7mk")
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
 
-[node name="Cdif" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="ForestButton" parent="Panel/HBoxContainer/MarginContainer2/VBoxContainer" instance=ExtResource("6_rui5t")]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 121.626
-offset_top = 608.461
-offset_right = 195.626
-offset_bottom = 688.461
-label_settings = ExtResource("2_er7mk")
+layout_mode = 2
 
-[node name="MainCloseButtonContainer" type="MarginContainer" parent="."]
+[node name="Label2" parent="Panel/HBoxContainer/MarginContainer2/VBoxContainer/ForestButton" index="0"]
+text = "Forest"
+
+[node name="RuinsButton" parent="Panel/HBoxContainer/MarginContainer2/VBoxContainer" instance=ExtResource("6_rui5t")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label2" parent="Panel/HBoxContainer/MarginContainer2/VBoxContainer/RuinsButton" index="0"]
+text = "Ruins"
+
+[node name="CaveButton" parent="Panel/HBoxContainer/MarginContainer2/VBoxContainer" instance=ExtResource("6_rui5t")]
+layout_mode = 2
+
+[node name="Label2" parent="Panel/HBoxContainer/MarginContainer2/VBoxContainer/CaveButton" index="0"]
+text = "Cave"
+
+[node name="MainCloseButtonContainer" type="MarginContainer" parent="Panel"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -598.653
-offset_top = 73.3325
-offset_right = -486.653
-offset_bottom = 185.332
+offset_left = -128.411
+offset_top = 15.8557
+offset_right = -16.4106
+offset_bottom = 127.856
 grow_horizontal = 0
-scale = Vector2(1.64713, 1.23077)
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="CloseButton" type="Button" parent="MainCloseButtonContainer"]
+[node name="CloseButton" type="Button" parent="Panel/MainCloseButtonContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
@@ -167,7 +158,7 @@ theme_override_styles/normal = ExtResource("4_dbqua")
 theme_override_styles/hover = ExtResource("4_dbqua")
 theme_override_styles/pressed = ExtResource("5_4p6gx")
 
-[node name="MarginContainer" type="MarginContainer" parent="MainCloseButtonContainer/CloseButton"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MainCloseButtonContainer/CloseButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -179,33 +170,62 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="TextureRect" type="TextureRect" parent="MainCloseButtonContainer/CloseButton/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="Panel/MainCloseButtonContainer/CloseButton/MarginContainer"]
 layout_mode = 2
 texture = ExtResource("4_emc8o")
 expand_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
-z_index = -1
+[node name="Cdif" type="Label" parent="Panel"]
+unique_name_in_owner = true
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(2.65662, 3.25378)
-texture = ExtResource("7_ulw16")
+offset_left = 147.897
+offset_top = 95.1343
+offset_right = 221.897
+offset_bottom = 175.134
+text = "2"
+label_settings = SubResource("LabelSettings_5v560")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 112.869
-offset_top = 89.1881
-offset_right = 251.869
-offset_bottom = 137.188
-text = "Difficulty"
-label_settings = ExtResource("2_er7mk")
+[node name="StatusHeader" type="Label" parent="Panel"]
+custom_minimum_size = Vector2(300, 64)
+offset_left = 202.386
+offset_top = 531.166
+offset_right = 502.386
+offset_bottom = 595.166
+text = "Current status"
+label_settings = SubResource("LabelSettings_5v560")
+horizontal_alignment = 1
+autowrap_mode = 3
 
-[node name="Label2" type="Label" parent="."]
-layout_mode = 0
-offset_left = 422.286
-offset_top = 88.1972
-offset_right = 556.286
-offset_bottom = 136.197
-text = "Level"
-label_settings = ExtResource("2_er7mk")
+[node name="StatusPanel" type="Panel" parent="Panel"]
+custom_minimum_size = Vector2(512, 96)
+offset_left = 101.193
+offset_top = 578.734
+offset_right = 613.193
+offset_bottom = 674.734
+theme_override_styles/panel = ExtResource("8_u1061")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/StatusPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+
+[node name="QuestStatus" type="Label" parent="Panel/StatusPanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Forest rescue quest"
+label_settings = SubResource("LabelSettings_d0ai0")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[editable path="Panel/HBoxContainer/MarginContainer/VBoxContainer/dif1"]
+[editable path="Panel/HBoxContainer/MarginContainer/VBoxContainer/dif2"]
+[editable path="Panel/HBoxContainer/MarginContainer2/VBoxContainer/ForestButton"]
+[editable path="Panel/HBoxContainer/MarginContainer2/VBoxContainer/RuinsButton"]
+[editable path="Panel/HBoxContainer/MarginContainer2/VBoxContainer/CaveButton"]

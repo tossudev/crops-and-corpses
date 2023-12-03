@@ -133,12 +133,15 @@ public partial class VillagerManager : Node
 			);
 	}
 
-	public void SpawnQuestVillagers()
+	public void SpawnQuestVillagers(Vector2 position)
 	{
 		SaveData.allVillagerData.ForEach(data =>
 		{
+			Vector2 offsetVector = new Vector2(GD.Randi() % 3, GD.Randi() % 3);
+			
 			if (!data.isTownPopulation)
 			{
+				data.SetCoordinates(position + offsetVector);
 				SpawnExistingVillager(data);
 			}
 		});

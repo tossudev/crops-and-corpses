@@ -44,6 +44,11 @@ public partial class QuestManager : Node
 
 	public void StartRescueQuest(Scene.RootScene location, int difficulty)
 	{
+		for (int i = 0; i < difficulty; i++)
+		{
+			VillagerManager.villagerManagerInstance.AddNewVillagerRawData();
+		}
+		
 		StartQuest($"Rescue Quest: {location.Name}", difficulty, QuestType.Rescue, location);
 	}
 

@@ -53,11 +53,15 @@ public partial class ZombieManager : Node
 	private void UpdateStats()
 	{
 		int townStats = TownManager.currentTownStats.townHallLevel;
-		if(zombieKillCount >= 0) zombieKillCount -= 0.5f; // Decreasing kill count by 0.5 every second
+		if(zombieKillCount > 0) zombieKillCount -= 0.2f; // Decreasing kill count by 0.5 every second
 
-		if (dayMode)type= ZombieType.Weak;
-		else type = ZombieType.Medium;	
-
+		if (dayMode)type = ZombieType.Weak;
+		else 
+		{
+			type = ZombieType.Medium;
+			if(zombieKillCount > 10 && townStats > 4) type = ZombieType.Strong;	
+		}
+		
 		switch(type)
 		{	
 			case ZombieType.Strong:

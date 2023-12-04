@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 public partial class Portal : Node2D
 {
-	[Export] public PortalID id;
+	[Export] public SceneID targetSceneID;
 	[Export] public Node2D exitPosition;
 
 	private PortalManager _portalManager;
@@ -18,16 +18,7 @@ public partial class Portal : Node2D
 	{
 		if (body is PlayerController)
 		{
-			_portalManager.PortalTo(id);
+			_portalManager.PortalTo(targetSceneID);
 		}
 	}
-}
-
-public enum PortalID
-{
-	None,
-	Cave,
-	Forest,
-	Ruins,
-	Town,
 }

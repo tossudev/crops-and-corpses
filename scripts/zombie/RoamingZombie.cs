@@ -23,24 +23,31 @@ public partial class RoamingZombie : CharacterBody2D
 	private HealthComponent _healthComponent;
 	private NodePath _rootNodePath;
 	private Node2D rootNode;
-
 	private bool _playerInRange = false;
 	private bool _fenceInRange = false;
 	private ulong _entered;
 	private ulong _exited;
 	private bool _inTown;
+
+	private PackedScene _caveZombieSkeleton;
 	//AnimationPlayer animationPlayer;
 
 	public override void _Ready()
 	{
+		//GD.Print(GetParent().GetParent<Node2D>().Name);
 		_lootController.loot = _lootList[0];
 		_lootController.Init();
-
+		if(GetParent().GetParent<Node2D>().Name == "Cave")
+		{
+			 _caveZombieSkeleton = (PackedScene)GD.Load("res://scenes/zombie/Zombie4Skeleton.tscn");
+		}
 		var zombieSkeleton1 = (PackedScene)GD.Load("res://scenes/zombie/Zombie1Skeleton.tscn");
 		var zombieSkeleton2 = (PackedScene)GD.Load("res://scenes/zombie/Zombie2Skeleton.tscn");
 		var zombieSkeleton3 = (PackedScene)GD.Load("res://scenes/zombie/Zombie3Skeleton.tscn");
-
-		int randomSkeletonIndex = (int)GD.RandRange(1, 3);
+		int randomSkeletonIndex;
+		if(GetParent().GetParent<Node2D>().Name != "Cave") randomSkeletonIndex = (int)GD.RandRange(1, 3);
+		else randomSkeletonIndex = (int)GD.RandRange(1, 4);
+		
 		switch (randomSkeletonIndex)
 		{
 			case 1:
@@ -55,9 +62,14 @@ public partial class RoamingZombie : CharacterBody2D
 				Skeleton2D temp3 = (Skeleton2D)zombieSkeleton3.Instantiate();
 				this.AddChild(temp3);
 				break;
+			case 4:
+				Skeleton2D temp4 = (Skeleton2D)_caveZombieSkeleton.Instantiate();
+				this.AddChild(temp4);
+				break;
 			default:
 				break;
 		}
+		
 		//animationPlayer = GetNode<AnimationPlayer>("Skeleton2D/AnimationPlayer");
 		_hitboxes = new HitboxComponent[2];
 		//	instantiatedNPC = (PackedScene)GD.Load("res://scenes/villager/villager.tscn");
@@ -69,7 +81,9 @@ public partial class RoamingZombie : CharacterBody2D
 		_healthBar = GetNodeOrNull<ProgressBar>("HealthBar");
 		_healthComponent = GetNodeOrNull<HealthComponent>("HealthComponent");
 		_audioStreamPlayer2D = GetNodeOrNull<AudioStreamPlayer2D>("ZombieNoise");
-
+		
+		
+ 
 
 		_attack = new Attack
 		{
@@ -88,10 +102,7 @@ public partial class RoamingZombie : CharacterBody2D
 			var zombieHatNode = zombieHeadBonetNode.GetNode<Sprite2D>("ZombieHat" + randomIndex);
 			zombieHatNode.Visible = true;
 		}
-		else
-		{
-			return;
-		}
+		
 		switch (randomIndex)
 		{
 			case 1:

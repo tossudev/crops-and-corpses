@@ -10,7 +10,7 @@ public partial class SpawnScript : Node2D
 	private partial class SpawnPoint : Node2D
 	{
 		public Node2D Node { get; set; }
-		public bool IsActive { get; set; }
+		//public bool IsActive { get; set; }
 	}
 	List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
 	Timer spawnDelay;
@@ -23,7 +23,7 @@ public partial class SpawnScript : Node2D
 	private int counter;
 	private int spawnPointCount;
 	private bool zombieDelayBool=false;
-	[Export]private float maxDistance=2000f;
+	[Export]private float maxDistance;
 	[Export] public CharacterBody2D player;
 	private static List<CharacterBody2D> zombieList = new List<CharacterBody2D>();
 	public GlobalTime globalTime;
@@ -37,7 +37,7 @@ public partial class SpawnScript : Node2D
 		{
 			if(node is Node2D spawnPoint && node.Name.ToString().Contains("SpawnPoint"))
 			{
-				spawnPoints.Add(new SpawnPoint{Node = spawnPoint,IsActive = true});
+				spawnPoints.Add(new SpawnPoint{Node = spawnPoint});
 				spawnPointCount +=1;
 				
 			//	GD.Print(spawnPoint);
@@ -108,54 +108,41 @@ public partial class SpawnScript : Node2D
 	 
 	}
 	public void ZombieSpawn()
-	{
-		enemiesNode = GetNode<Node2D>("%Enemies");
-
-		SpawnPoint closestSpawnPoint = FindClosestActiveSpawnPoint();
-		if(closestSpawnPoint !=null )
-		{
-			Vector2 spawnPointPos = closestSpawnPoint.Node.Position;
-			Vector2 playerPos = player.Position;
-
-			float distance = spawnPointPos.DistanceTo(playerPos);
-			// GD.Print("Spawn Attempt - Distance:", distance, " Max Distance:", maxDistance);
-			if(distance <= maxDistance)
-			{
-				CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
-				prefab.Position = spawnPointPos;
-				enemiesNode.AddChild(prefab);
-				zombieList.Add(prefab);
-				closestSpawnPoint.IsActive = false;
-			}
-			else
-			{
-				GD.Print("Spawn point too far away, skipping spawn.");
-			}
-			 closestSpawnPoint.IsActive = true;
-
-		}
-
-		if(spawnPoints.All(sp => !sp.IsActive))
-		{
-			foreach (SpawnPoint sp in spawnPoints)
-			{
-				sp.IsActive = true;
-			}
-		}
-		
-	}
-	public void SpawnZombieAtPoint(Vector2 spawnPoint)
 {
-    
-    CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
-   	prefab.Position = spawnPoint;	
-    AddChild(prefab);
-	zombieList.Add(prefab);
+    enemiesNode = GetNode<Node2D>("%Enemies");
+
+    foreach (SpawnPoint spawnPoint in spawnPoints)
+    {
+        Vector2 spawnPointPos = spawnPoint.Node.Position;
+        Vector2 playerPos = player.Position;
+
+        float distance = spawnPointPos.DistanceTo(playerPos);
+        GD.Print(distance + " spawnPoint distance to player");
+
+        if (distance <= maxDistance)
+        {
+            CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
+            prefab.Position = spawnPointPos;
+            enemiesNode.AddChild(prefab);
+            zombieList.Add(prefab);
+        }
+        else
+        {
+            GD.Print("Spawn point too far away, skipping spawn.");
+        }
+    }
 }
+	public void SpawnZombieAtPoint(Vector2 spawnPoint)
+	{    
+		CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
+		prefab.Position = spawnPoint;	
+		AddChild(prefab);
+		zombieList.Add(prefab);
+	}
 	
 
 
-	private SpawnPoint FindClosestActiveSpawnPoint()
+/* 	private SpawnPoint FindClosestActiveSpawnPoint()
 	{
 		SpawnPoint closestSpawnPoint = null;
 		float closestDistance = float.MaxValue;
@@ -171,7 +158,7 @@ public partial class SpawnScript : Node2D
 		}
 
 		return closestSpawnPoint;
-	}
+	} */
 	public static void RemoveZombieFromList(CharacterBody2D zombie)
 	{
 		zombieList.Remove(zombie);
@@ -181,11 +168,11 @@ public partial class SpawnScript : Node2D
 	{
 		return isNightOrDay;
 	}
-	public void QuestZombieSpawn(int spawnAmount)
+	/* public void QuestZombieSpawn(int spawnAmount)
 	{	
 		for(int y = 0; y < spawnPointCount; y++)
 		{
 			ZombieSpawn();
 		}
-	}
+	} */
 }

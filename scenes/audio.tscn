@@ -9,9 +9,11 @@ script = ExtResource("1_uvkjy")
 
 [node name="GeneralSFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamPolyphonic_xpd7p")
-volume_db = -6.0
 autoplay = true
 max_polyphony = 32
+bus = &"SFX"
+
+[node name="WalkingSFX" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

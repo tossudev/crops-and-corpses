@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bdg0mgh0rgkvq"]
 
-[ext_resource type="Script" path="res://scripts/ui/inventory/InventorySlot.cs" id="1_uxrvb"]
+[ext_resource type="Script" path="res://scripts/ui/inventory/StorageSlot.cs" id="1_dis7m"]
 [ext_resource type="LabelSettings" uid="uid://d08eb8aufif7l" path="res://assets/resources/labelsettings/inventory_slot_quantity_label.tres" id="3_ytlk2"]
 [ext_resource type="PackedScene" uid="uid://cdi621xg0nv2g" path="res://scenes/ui/general/floating_button_name_panel.tscn" id="4_31v0k"]
 
@@ -8,12 +8,12 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bkr0r"]
 
-[sub_resource type="Gradient" id="Gradient_r2ia5"]
+[sub_resource type="Gradient" id="Gradient_05bul"]
 offsets = PackedFloat32Array(0, 0.784314, 0.973039, 1)
 colors = PackedColorArray(0.501961, 0.501961, 0.501961, 0.501961, 0.61339, 0.61339, 0.61339, 0.572922, 0.180005, 0.180005, 0.180005, 0.862745, 0.000113828, 0.000113828, 0.000113828, 0.862745)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_bnah0"]
-gradient = SubResource("Gradient_r2ia5")
+gradient = SubResource("Gradient_05bul")
 fill = 2
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0)
@@ -24,7 +24,8 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 64.0
 offset_bottom = 64.0
-script = ExtResource("1_uxrvb")
+script = ExtResource("1_dis7m")
+slotType = 10
 
 [node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2(72, 72)

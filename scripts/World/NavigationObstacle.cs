@@ -14,7 +14,7 @@ public partial class NavigationObstacle : Polygon2D
 		debugText = GetNode<Label>("Label");
 
 		Node scene = GetTree().CurrentScene;
-		navManager = scene.GetNode<Node2D>("%NavigationManager") as NavigationManager;
+		navManager = scene.GetNodeOrNull<Node2D>("%NavigationManager") as NavigationManager;
     }
 
 
@@ -32,6 +32,11 @@ public partial class NavigationObstacle : Polygon2D
 
     public override void _ExitTree() {
         base._ExitTree();
+
+        if (navManager == null) {
+            return;
+        }
+        
 		navManager.RemoveArea(nodeIndex);
     }
 }

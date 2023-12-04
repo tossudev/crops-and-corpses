@@ -24,7 +24,7 @@ public partial class CraftPanel : Control
 	TextureRect _itemImage;
 	const string CRAFT_ITEM_IMAGE_NODENAME = "%CraftItemImage";
 
-	[Export] InventorySlot[] _requiredResSlots;
+	[Export] StorageSlot[] _requiredResSlots;
 
 	Label _errorMsgLabel;
 	const string ERROR_LABEL_NODENAME = "%ErrorLabel";
@@ -108,7 +108,7 @@ public partial class CraftPanel : Control
 			    _requiredResSlots[i].Visible = false;
 			    continue;
 		    }
-		    _requiredResSlots[i].InitiateSlot(-1);
+		    _requiredResSlots[i].InitializeSlot(-1);
 		    _requiredResSlots[i].Visible = true;
 
 		    CraftingRequirement requirement = craftedItem.craftingRequirements[i];
@@ -129,9 +129,14 @@ public partial class CraftPanel : Control
 		try
 		{
 			if (craftedItem.craftingRequirements.Any(
-				    craftingRequirement => !PlayerInventoryData.ExistsInInventory(
-				    craftingRequirement.item.ID,craftingRequirement.quantity * amountToCraft)))
+				    craftingRequirement => 
+					    !StorageData.ExistsInStorage(SaveData.organizedPlayerInventory,
+						    craftingRequirement.item.ID, craftingRequirement.quantity * amountToCraft)
+					    &&
+					    !StorageData.ExistsInStorage(SaveData.playerHotbarItems,
+						    craftingRequirement.item.ID, craftingRequirement.quantity * amountToCraft)))
 			{
+				// neither inventory nor hotbar contains one of the requirements
 				return false;
 			}
 			
@@ -146,8 +151,9 @@ public partial class CraftPanel : Control
 				}
 			}
 
-			await PlayerInventoryController.AddItem(
-				new RawInventoryItem(craftedItem.ID, craftedItem.Name, amountToCraft, craftedItem.StackSize));
+			await PlayerInventoryController.AddItemToHotbarOrInventory(
+				new RawInventoryItem(craftedItem.ID, craftedItem.Name, amountToCraft, craftedItem.StackSize),
+				-1, true);
 			
 			return true;
 		}

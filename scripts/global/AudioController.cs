@@ -5,23 +5,36 @@ using System;
 public partial class AudioController : Node {
 
     AudioStreamPlayer _sfxPlayer;
-    AudioStreamPlaybackPolyphonic _sfxPlayback;
+    AudioStreamPlayer _walkPlayer;
+
+    // AudioStreamPlaybackPolyphonic _sfxPlayback;
     
     AudioStreamPlayer _musicPlayer;
     AudioStreamPlayer _ambiencePlayer;
 
+    string[] walkNoises = {
+        "res://assets/Sounds/character_sounds/steps/step1.wav",
+        "res://assets/Sounds/character_sounds/steps/step2.wav",
+        "res://assets/Sounds/character_sounds/steps/step3.wav",
+        "res://assets/Sounds/character_sounds/steps/step4.wav",
+        "res://assets/Sounds/character_sounds/steps/step5.wav",
+    };
+
     const string soundDirectory = "res://assets/Sounds/";
+    const float _runSpeed = 1.5f;
 
 
     public override void _Ready() {
         _sfxPlayer = GetNode<AudioStreamPlayer>("GeneralSFX");
-        _sfxPlayback = _sfxPlayer.GetStreamPlayback() as AudioStreamPlaybackPolyphonic;
+        _walkPlayer = GetNode<AudioStreamPlayer>("WalkingSFX");
+
+        // _sfxPlayback = _sfxPlayer.GetStreamPlayback() as AudioStreamPlaybackPolyphonic;
+
         _musicPlayer = GetNode<AudioStreamPlayer>("Music"); 
         _ambiencePlayer = GetNode<AudioStreamPlayer>("Ambience");
 
-        
-        // PlayMusic("music/music_day.ogg");
-        // PlayAmbience("ambiences/ambience_day.ogg");
+        // PlayMusic("res://assets/Sounds/music/music_day.ogg");
+        PlayAmbience("res://assets/Sounds/ambiences/ambience_day.ogg");
     }
 
 
@@ -51,6 +64,24 @@ public partial class AudioController : Node {
         if (playerDuplicate != null) {
             playerDuplicate.QueueFree();
         }
+    }
+
+
+    public void PlayWalking(bool fast) {
+        if (_walkPlayer.Playing) {
+            return;
+        }
+
+        int _randSoundIndex = (int) GD.RandRange(0.0, walkNoises.Length);
+        string soundFileString = walkNoises[_randSoundIndex];
+        _walkPlayer.Stream = GetAudioFromFile(soundFileString);
+
+        _walkPlayer.PitchScale = 1f;
+        if (fast) {
+            _walkPlayer.PitchScale = _runSpeed;
+        }
+
+        _walkPlayer.Play();
     }
 
 

@@ -6,7 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="scripts\ui\crafting\" />
-    <Folder Include="scripts\ui\inventory\" />
     <Folder Include="scripts\ui\overlay\" />
   </ItemGroup>
 </Project>

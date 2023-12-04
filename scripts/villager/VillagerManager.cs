@@ -236,6 +236,11 @@ public partial class VillagerManager : Node
 	{
 		allVillagerResidences.Add(residence);
 	}
+
+	public VillagerResidence FindResidenceById(int id)
+	{
+		return allVillagerResidences.Find(residence => residence.id == id);
+	}
 	
 	public List<VillagerResidence> GetFreeHomesList()
 	{

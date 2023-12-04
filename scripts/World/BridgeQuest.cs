@@ -7,7 +7,7 @@ public partial class BridgeQuest : Node2D
 	private CanvasLayer _canvasLayer;
 	private bool _playerInArea;
 	private bool _questFinished;
-	private const int WOOD_NEEDED = 10;
+	private const int WOOD_NEEDED = 50;
 
 	public override void _Ready()
 	{
@@ -27,7 +27,7 @@ public partial class BridgeQuest : Node2D
 		{
 			_playerInArea = true;
 
-			if (PlayerInventoryData.ExistsInInventory(1, WOOD_NEEDED))
+			if (StorageData.ExistsInStorage(SaveData.organizedPlayerInventory, 0, WOOD_NEEDED))
 			{
 				GetNode<Button>("%FinishQuestBtn").Disabled = false;	
 				_questFinished = true;			
@@ -53,6 +53,7 @@ public partial class BridgeQuest : Node2D
 		if (_questFinished)
 		{
 			if (_bridge != null) _bridge.Visible = true;
+			SceneInfo.forestBuildABridgeOpen = true;
 			GetNode<StaticBody2D>("%Barrier").QueueFree();
 			_canvasLayer.Visible = false;
 			GetNode<Label>("%BridgeLabel").Text = "Nice job, you finished the bridge! I wonder where it leads to...";

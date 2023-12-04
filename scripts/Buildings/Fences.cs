@@ -45,9 +45,10 @@ public partial class Fences : Node2D
         _savePath = ProjectSettings.GlobalizePath("user://saves/");
         _fileName = "buildings.txt";
 
-        if(SceneManager.IsCurrentScene(this, Scene.Town))
+        _fences = GetNode("Fences") as Node2D;
+
+        if (SceneManager.IsCurrentScene(this, Scene.Town))
         {
-            _fences = GetNode("Fences") as Node2D;
             LoadBuildings(_savePath, _fileName);
         }
 

@@ -26,7 +26,7 @@ public partial class LootController : StaticBody2D
 	RandomNumberGenerator rng;
 	private int _meanDrop;
 	static AudioController _audioController;
-	private bool _canBeDestroyed = false;
+	private bool _canBeDestroyed;
 
 
 	public override void _Ready()
@@ -35,6 +35,8 @@ public partial class LootController : StaticBody2D
 			return;
 
 		_audioController = GetNode<AudioController>("/root/Audio");
+		
+		_canBeDestroyed = false;
 		Init();
 	}
 
@@ -61,11 +63,11 @@ public partial class LootController : StaticBody2D
 			_items.Add(loot.lootItems[GD.RandRange(0, loot.lootItems.Count - 1)].item);
 		}
 
-		if (GD.Randf() < 0.8f)
+		if (GD.Randf() < 0.75f)
 		{
 			_items.RemoveAt(GD.RandRange(0, _items.Count - 1));
 		}
-		else if (GD.Randf() > 0.95f)
+		else if (GD.Randf() > 0.9f)
 		{
 			_items.Add(_items[GD.RandRange(0, _items.Count - 1)]);
 		}

@@ -17,7 +17,7 @@ public partial class QuestPointManager : Node
     PackedScene InThisSceneQuestScene;
 
 
-  [Export] public Node2D[] CaveFullQuestPoints;
+ 
 
     
 
@@ -31,14 +31,7 @@ public partial class QuestPointManager : Node
             if (node is QuestPoint questPoint)
             {
                 activeQuestPoints.Add(questPoint);
-                if(Scene.Cave == SceneManager.GetCurrentScene(this) && SceneInfo.ruinsCaveOpen == true)
-                {
-                    foreach (Node2D node2D in CaveFullQuestPoints)
-                    {
-                        activeQuestPoints.Add(node2D as QuestPoint);
-                    }
-                   
-                }
+                
               
             }
         }
@@ -46,16 +39,22 @@ public partial class QuestPointManager : Node
 
 
         questManager = GetNode<QuestManager>("/root/QuestManager");
-        
+
+
+
 
 
         // If the current quest location is the same as the current scene, activate the quest point for that scene
-        if (SceneManager.IsCurrentScene(this, questManager.GetActiveQuest().Location))
+        if (!SceneManager.IsCurrentScene(this, questManager.GetActiveQuest().Location))
+        {
+            GD.Print("Quest point not active");
+        }
+        else
         {
 
             GetRandomQuestPoint().isQuestPointActive = true;
-          
-        
+
+
             //ActivateQuestPointForScene(SceneManager.GetCurrentScene(this));
         }
     }

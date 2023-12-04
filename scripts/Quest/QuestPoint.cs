@@ -23,8 +23,9 @@ public partial class QuestPoint : Node2D
 
     const string Area2D_ZombieArea = "%ZombieArea";
     private Area2D ZombieArea;
-
+    private SpawnScript zombieSpawn;
     PlayerController playerController;
+    private List<Node> zombiesInArea = new List<Node>();
 
 
     private int zombieAmount = 4;
@@ -45,8 +46,10 @@ public partial class QuestPoint : Node2D
     public override void _Ready()
     {
         base._Ready();
+       
 
 
+  
         questManager = GetNode<QuestManager>("/root/QuestManager");
 
         zombieScene = (PackedScene)ResourceLoader.Load("res://scenes/zombie/Zombie.tscn");
@@ -54,61 +57,86 @@ public partial class QuestPoint : Node2D
         villagerSpawnPoint = GetNode<Node2D>(Node2D_VillagerPoint);
         playerController = (PlayerController)GetTree().GetFirstNodeInGroup("player");
         ZombieArea = GetNode<Area2D>(Area2D_ZombieArea);
+        zombieSpawn = GetParent().GetParent().GetNodeOrNull<SpawnScript>("ZombieSpawn");
+
+        
 
 
-        questManager.StartRescueQuest(Scene.Cave, 1);
-        GD.Print(questManager.GetActiveQuest().difficulty);
+       
     }
 
-    public override void _PhysicsProcess(double delta)
+
+
+    
+       
+      public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-
 
         if (isQuestPointActive == true)
         {
             playerDistanceToQuestPoint = (int)playerController.GlobalPosition.DistanceTo(GlobalPosition);
 
-
             if (isQuestPointActive && !isZombiesSpawned && playerDistanceToQuestPoint <= SpawnRange)
             {
                 SpawnZombies();
                 SpawnVillagers();
-
-                isZombiesSpawned = true;
-                if (ZombieArea.GetOverlappingBodies().Count < 2)
-                {
-                    GD.Print(ZombieArea.GetOverlappingBodies().Count);
-
-                    questManager.GetActiveQuest().ChangeQuestDescription("Click on the villager to rescue him");
-                }
-                else
-                {
-                }
             }
+
+            if(zombieSpawn.GetZombieQuestListCount() == 0 && isZombiesSpawned == true)
+            {
+                questManager.GetActiveQuest().ChangeQuestDescription("click on the villager to rescue him");
+                
+                isQuestPointActive = false;
+            }
+            
+
         }
+
     }
+
+
 
 
     void SpawnVillagers()
     {
         GD.Print("SpawnVillagers");
         VillagerManager.villagerManagerInstance.SpawnQuestVillagers(villagerSpawnPoint.GlobalPosition);
+        
+        
+        
+        
+
+
+       
+
     }
+
+    
+
+    
 
     public void SpawnZombies()
     {
-        var zombieSpawn = GetParent().GetParent().GetNodeOrNull<SpawnScript>("ZombieSpawn");
+        SpawendZombieAmount();
+        
 
         if (zombieSpawn != null && isZombiesSpawned == false)
         {
             for (int i = 0; i < zombieAmount; i++)
             {
-                zombieSpawn.SpawnZombieAtPoint(spawnZombiePoint.GlobalPosition);
+
+                //spawnZombiePoint ofset
+
+               
+                zombieSpawn.SpawnZombieAtPoint(spawnZombiePoint.GlobalPosition
+                    + new Vector2(GD.RandRange(-SpawnRange, SpawnRange), GD.RandRange(-SpawnRange, SpawnRange)));
+            
 
                 GD.Print("SpawnZombies");
             }
 
+            GD.Print(zombieSpawn.GetZombieQuestListCount()); 
             questManager.GetActiveQuest().ChangeQuestDescription("Clear the area of zombies");
             isZombiesSpawned = true;
         }
@@ -120,6 +148,7 @@ public partial class QuestPoint : Node2D
         }
     }
 
+    
 
     private void SpawendZombieAmount()
     {
@@ -141,13 +170,17 @@ public partial class QuestPoint : Node2D
         }
     }
 
+    
 
-    public void On_ZombieArea_body_entered(Node body)
-    {
-    }
+   
+
+
+
 
     public void ActivateQuestPoint()
     {
         isQuestPointActive = true;
     }
-}
+    }
+    
+    

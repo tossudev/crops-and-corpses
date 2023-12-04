@@ -39,6 +39,10 @@ public partial class QuestBoardUi : Control
 
     GlobalTime _globalTime;
 
+    
+
+
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -57,9 +61,9 @@ public partial class QuestBoardUi : Control
 
 
         // Button mapping
-        _forestButton.Pressed += () => questManager.StartRescueQuest(Scene.Forest, _selectedDiff);
-        _ruinsButton.Pressed += () => questManager.StartRescueQuest(Scene.Ruins, _selectedDiff);
-        _caveButton.Pressed += () => questManager.StartRescueQuest(Scene.Cave, _selectedDiff);
+        _forestButton.Pressed += () => questManager.StartRescueQuest(Scene.Forest,_selectedDiff);
+        _ruinsButton.Pressed += () => questManager.StartRescueQuest(Scene.Ruins,_selectedDiff);
+        _caveButton.Pressed += () => questManager.StartRescueQuest(Scene.Cave,_selectedDiff);
 
         Dif1Button.Pressed += () => SetQuestDifficulty(1);
         Dif2Button.Pressed += () => SetQuestDifficulty(2);
@@ -116,6 +120,10 @@ public partial class QuestBoardUi : Control
         CDiffLabel.Text = diff.ToString();
     }
 
+    
+
+   
+
     void SetLevelsActive()
     {
         _ruinsButton.Visible = TownManager.currentTownStats.isRuinsUnlocked;
@@ -134,6 +142,11 @@ public partial class QuestBoardUi : Control
     public void OpenQuestBoard()
     {
         Visible = true;
-        SetLevelsActive();
+        //SetLevelsActive();
+    }
+
+    public int GetSelectedDifficulty()
+    {
+        return _selectedDiff;
     }
 }

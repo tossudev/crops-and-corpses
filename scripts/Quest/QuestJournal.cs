@@ -19,6 +19,13 @@ public partial class QuestJournal : Control
 
 	}
 
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+		UpdateQuestJournal();
+    }
+	
+
 	public void UpdateQuestJournal()
 	{
 		var quest = questManager.GetActiveQuest();

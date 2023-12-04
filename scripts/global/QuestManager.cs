@@ -24,14 +24,19 @@ public partial class QuestManager : Node
 	}
 
 
-	void StartQuest(string questName, int difficulty, QuestType type, Scene.RootScene questLocation)
+	void StartQuest(string questName, int difficulty, QuestType type, Scene.RootScene Location)
 	{
 		int StartDay = globalTime.GetDay();
 		GD.Print($"Start day: {StartDay}");
+		
+
+		
+
 
 		if (activeQuest == null)
 		{
-			Quest newQuest = new Quest(questName, difficulty, StartDay, type, questLocation);
+			
+			Quest newQuest = new Quest(questName, difficulty, StartDay, type, Location);
 			
 			SetActiveQuest(newQuest);
 		}
@@ -44,13 +49,19 @@ public partial class QuestManager : Node
 
 	public void StartRescueQuest(Scene.RootScene location, int difficulty)
 	{
-		for (int i = 0; i < difficulty; i++)
-		{
-			VillagerManager.villagerManagerInstance.AddNewVillagerRawData();
-		}
+		if(difficulty > 0){
+	
+			for (int i = 0; i < difficulty; i++)
+			{
+				VillagerManager.villagerManagerInstance.AddNewVillagerRawData();
+			}
 		
-		StartQuest($"Rescue Quest: {location.Name}", difficulty, QuestType.Rescue, location);
-	}
+			StartQuest($"Rescue Quest: {location.Name}", difficulty, QuestType.Rescue, location);
+		
+
+			GD.Print($"Rescue Quest started at {location.Name} with difficulty {difficulty}");
+	}}
+	
 	
 	public static void LoadQuest()
 	{
@@ -68,7 +79,12 @@ public partial class QuestManager : Node
 		activeQuest = quest;
 	} 
 
+	
 
+
+
+
+	
 	public void CompleteQuestStage(string stage) => activeQuest?.CompleteQuestStage(stage);
 
 

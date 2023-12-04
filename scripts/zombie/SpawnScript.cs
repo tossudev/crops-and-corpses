@@ -26,6 +26,8 @@ public partial class SpawnScript : Node2D
 	[Export]private float maxDistance=2000f;
 	[Export] public CharacterBody2D player;
 	private static List<CharacterBody2D> zombieList = new List<CharacterBody2D>();
+
+	private static List<CharacterBody2D> zombieQuestList = new List<CharacterBody2D>();
 	public GlobalTime globalTime;
 
 	public override void _Ready()
@@ -150,7 +152,7 @@ public partial class SpawnScript : Node2D
     CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
    	prefab.Position = spawnPoint;	
     AddChild(prefab);
-	zombieList.Add(prefab);
+	zombieQuestList.Add(prefab);
 }
 	
 
@@ -175,6 +177,18 @@ public partial class SpawnScript : Node2D
 	public static void RemoveZombieFromList(CharacterBody2D zombie)
 	{
 		zombieList.Remove(zombie);
+	
+		if (zombieQuestList.Contains(zombie))
+		{
+			zombieQuestList.Remove(zombie);
+		}
+		
+		
+	}
+
+	public int GetZombieQuestListCount()
+	{
+		return zombieQuestList.Count;
 	}
 
 	public bool GetIsNightOrDay()

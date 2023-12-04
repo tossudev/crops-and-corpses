@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://cimpx303d7npd" path="res://scenes/ui/town_ui/town_hall_stats_panel.tscn" id="1_vgihe"]
 [ext_resource type="PackedScene" uid="uid://ba8jl34px0fpl" path="res://scenes/ui/crafting/crafting_window.tscn" id="2_atu7v"]
 [ext_resource type="PackedScene" uid="uid://di5l0mrx44owj" path="res://scenes/buildings/town/town_hall/town_hall_menu.tscn" id="2_d0ykg"]
-[ext_resource type="PackedScene" uid="uid://c1r6la2nplhqp" path="res://scenes/ui/DayCounterLabel.tscn" id="3_bmooi"]
+[ext_resource type="PackedScene" path="res://scenes/ui/DayCounterLabel.tscn" id="3_bmooi"]
 [ext_resource type="PackedScene" uid="uid://bsoen384q11gf" path="res://scenes/ui/building_menu.tscn" id="5_om3g0"]
-[ext_resource type="PackedScene" uid="uid://dmr1ik7ojfwn5" path="res://scenes/quest/QuestBoardUi.tscn" id="6_8vyk0"]
-[ext_resource type="PackedScene" path="res://scenes/ui/minimap.tscn" id="6_khm13"]
+[ext_resource type="PackedScene" uid="uid://dmr1ik7ojfwn5" path="res://scenes/Quest/QuestBoardUi.tscn" id="6_8vyk0"]
+[ext_resource type="PackedScene" uid="uid://5agkiate7gox" path="res://scenes/ui/minimap.tscn" id="6_khm13"]
 [ext_resource type="PackedScene" uid="uid://b50blftb1dypc" path="res://scenes/ui/player/player_hud.tscn" id="7_hs5fm"]
 [ext_resource type="Script" path="res://scripts/ui/overlay/HourCounter.cs" id="8_6k6a4"]
 [ext_resource type="PackedScene" uid="uid://c60n4vmc8f5pw" path="res://scenes/ui/villager_control_panel.tscn" id="10_d7eqe"]
@@ -117,18 +117,18 @@ offset_left = 1.0
 offset_top = 10.0
 offset_right = 1.0
 offset_bottom = 10.0
-mouse_filter = 2
 
-[node name="QuestText" parent="QuestJournal" index="0"]
-offset_left = 1543.0
-offset_top = 310.0
-offset_right = 1775.0
-offset_bottom = 357.0
+[node name="MarginContainer" parent="QuestJournal" index="0"]
+offset_left = 1532.0
+offset_top = 221.0
+offset_right = -20.0
+offset_bottom = -795.0
 
 [node name="QuestBoardUi" parent="." instance=ExtResource("6_8vyk0")]
 offset_left = 608.0
 offset_top = 216.0
 offset_right = 608.0
 offset_bottom = 216.0
+mouse_filter = 2
 
 [editable path="QuestJournal"]

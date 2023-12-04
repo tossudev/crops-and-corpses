@@ -10,6 +10,8 @@ public partial class Quest : Node
     public int difficulty { get; private set; }
     public int startDay { get; private set; }
 
+   
+
     public string Description { get; private set; }
     
     public string SceneName { get; private set; }
@@ -37,6 +39,7 @@ public partial class Quest : Node
 
                 string plural = difficulty > 1 ? "s" : "";
                 Description = $"Rescue {difficulty} villager{plural} from {location.Name}.";
+                this.difficulty = difficulty;
                 break;
             
             case QuestType.BridgeBuild:
@@ -108,6 +111,10 @@ public partial class Quest : Node
     {
         return Description = description;
     }
+
+    
+   
+      
 
 }
 

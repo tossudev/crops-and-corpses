@@ -1755,7 +1755,7 @@ _player = NodePath("../Player")
 
 [node name="cave_entrance" parent="Objects/Cave Entrances" node_paths=PackedStringArray("exitPosition") instance=ExtResource("4_xu51x")]
 position = Vector2(-9360, 6888)
-id = 2
+targetSceneID = 2
 exitPosition = NodePath("Exit")
 
 [node name="Exit" type="Node2D" parent="Objects/Cave Entrances/cave_entrance"]
@@ -1763,7 +1763,7 @@ position = Vector2(-16, 142)
 
 [node name="cave_entrance2" parent="Objects/Cave Entrances" node_paths=PackedStringArray("exitPosition") instance=ExtResource("4_xu51x")]
 position = Vector2(-8976, -8472)
-id = 3
+targetSceneID = 3
 exitPosition = NodePath("Exit")
 
 [node name="Exit" type="Node2D" parent="Objects/Cave Entrances/cave_entrance2"]
@@ -1771,7 +1771,7 @@ position = Vector2(-16, 142)
 
 [node name="cave_entrance3" parent="Objects/Cave Entrances" node_paths=PackedStringArray("exitPosition") instance=ExtResource("4_xu51x")]
 position = Vector2(776, -1688)
-id = 2
+targetSceneID = 2
 exitPosition = NodePath("Exit")
 
 [node name="Exit" type="Node2D" parent="Objects/Cave Entrances/cave_entrance3"]

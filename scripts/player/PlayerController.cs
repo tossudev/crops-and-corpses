@@ -176,7 +176,7 @@ public partial class PlayerController : CharacterBody2D
 
 	private void Respawn()
 	{
-		PlayerInfo.travelID = PortalID.Town;
+		PlayerInfo.sceneID = SceneID.Town;
 		_healthComponent.SetHealth(_healthComponent.GetMaxHealth());
 		_staminaComponent.SetStamina(_staminaComponent.GetMaxStamina());
 

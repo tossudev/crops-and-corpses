@@ -7,6 +7,8 @@ public partial class ArcherTower : Node2D
     [Export]
     Node2D _animationsScene;
     ArcherAnimation _animator;
+    const string SPRITE2D_NODENAME = "%Sprite2D";
+    Sprite2D _archerSprite2D;
 
 	[Export]
     Timer _attackTimer;
@@ -33,6 +35,8 @@ public partial class ArcherTower : Node2D
     public override void _Ready()
 	{
         _animator = _animationsScene.GetNode("Skeleton2D") as ArcherAnimation;
+        _archerSprite2D = GetNode<Sprite2D>(SPRITE2D_NODENAME);
+        _archerSprite2D.Visible = false;
 
         _attackSpeed = 0.5f;
         _speed = 16;
@@ -75,12 +79,14 @@ public partial class ArcherTower : Node2D
     public void ActivateTower()
     {
         _attackTimer.Start();
+        _archerSprite2D.Visible = true;
         isOccupied = true;
     }
 
     public void DeactivateTower()
     {
         _attackTimer.Stop();
+        _archerSprite2D.Visible = false;
         isOccupied = false;
     }
 

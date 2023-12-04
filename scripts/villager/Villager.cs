@@ -15,12 +15,12 @@ public enum VillagerOccupation
 public partial class Villager : CharacterBody2D
 {
 	//[Export] VillagerManager _villagerManager;
+	PlayerSpriteController _spriteControl;
 	Vector2 _targetPosition;
 	Timer _taskTimer;
 	Timer _chooseTaskTimer;
 	[Export] NavigationAgent2D navMeshAgent;
-	//[Export] NavigationRegion2D navRegionArea;
-	//List<Node2D> _fenceList = new List<Node2D>();
+	PackedScene villagerSkeleton;
 	Plant _currentPlant;
 	ArcherTower _archerTower;
 	BuildingHealth _fenceHealth;
@@ -28,6 +28,7 @@ public partial class Villager : CharacterBody2D
 	Node2D _fences;
 	BuildingHealth _currentBuilding;
 	Sprite2D _villagerSprite;
+	AnimationPlayer _villagerAnimation;
 	int _plantIndex = 0;
 	int _archerTowerIndex = 0;
 	int _fenceIndex = 0;
@@ -35,6 +36,7 @@ public partial class Villager : CharacterBody2D
 	bool _taskStarted = false;
 	int _resourceTaskCounter = 0;
 	const string PLAYER_NODENAME = "%Player";
+	const string ANIMATION_PLAYER_NODENAME = "%VillagerAnimationPlayer";
 	const string STREETSIGN_NODENAME = "%StreetSign";
 	CharacterBody2D _player;
 	public bool needRescue = false;
@@ -53,8 +55,12 @@ public partial class Villager : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		villagerSkeleton = (PackedScene)GD.Load("res://scenes/villager/VillagerSkeleton.tscn");
+		var skeletonPrefab = villagerSkeleton.Instantiate();
+		AddChild(skeletonPrefab);
+		_villagerAnimation = skeletonPrefab.GetNodeOrNull<AnimationPlayer>(ANIMATION_PLAYER_NODENAME);
+
 		_player = GetParent().GetNodeOrNull<CharacterBody2D>(PLAYER_NODENAME);
-		_villagerSprite = GetNode<Sprite2D>("Sprite2D");
 		_buildings = (Node2D)GetTree().GetFirstNodeInGroup("buildings");
 
 		_taskTimer = new Timer
@@ -64,6 +70,8 @@ public partial class Villager : CharacterBody2D
 		_taskTimer.Timeout += State;
 		AddChild(_taskTimer);
 		_taskTimer.Start();
+
+		SetCurrentState(VillagerState.RoamAround);
 	}
 
 	public void InitializeVillager(VillagerRawData data)
@@ -73,7 +81,7 @@ public partial class Villager : CharacterBody2D
 		_info.InitializeVillagerInfo(data);
 
 		// TODO: This needs to be changed once the rig sprites are in place and saved
-		_villagerSprite.Texture = VillagerManager.villagerManagerInstance.GetNewVillagerData().texture;
+		//_villagerSprite.Texture = VillagerManager.villagerManagerInstance.GetNewVillagerData().texture;
 
 
 		_inTownScene = SceneManager.IsCurrentScene(this, Scene.Town);
@@ -97,7 +105,7 @@ public partial class Villager : CharacterBody2D
 
 	void SetCurrentState(VillagerState state)
 	{
-		rawData.currentState = state;
+		rawData.currentState = VillagerState.RoamAround;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -221,6 +229,8 @@ public partial class Villager : CharacterBody2D
 		_speed = 100;
 		Vector2 _direction = (target - GlobalPosition).Normalized();
 		Velocity = _direction * _speed;
+		
+		UpdateSprite();
 		MoveAndSlide();
 	}
 
@@ -231,6 +241,7 @@ public partial class Villager : CharacterBody2D
 
 	void RoamAround()
 	{
+		_villagerAnimation.Play("walk");
 		_targetPosition = GlobalPosition + CreateOffsetVector2(-200, 200);
 
 		if (_chooseTaskTimer == null)
@@ -249,6 +260,7 @@ public partial class Villager : CharacterBody2D
 
 	void FindShelter()
 	{
+		_villagerAnimation.Play("run");
 		if (TimeManager.dayTime)
 		{
 			SetCurrentState(VillagerState.ChooseTask);
@@ -268,6 +280,23 @@ public partial class Villager : CharacterBody2D
 		float y = (float)GD.RandRange(min, max);
 
 		return new Vector2(x, y);
+	}
+
+	void UpdateSprite()
+	{
+		Skeleton2D villagerSkeleton = GetNode<Skeleton2D>("VillagerSkeleton2D");
+		if (Velocity.X != 0.0 || Velocity.Y != 0.0)
+		{
+			if (Velocity.X >= 1.0)
+			{
+				villagerSkeleton.Scale = new Vector2(1.0f, 1.0f);
+			}
+
+			else if (Velocity.X <= 0.0f)
+			{
+				villagerSkeleton.Scale = new Vector2(-1.0f, 1.0f);
+			}
+		}
 	}
 
 	void ChooseTask()

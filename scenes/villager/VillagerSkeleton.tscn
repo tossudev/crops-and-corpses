@@ -1,0 +1,276 @@
+[gd_scene load_steps=11 format=3 uid="uid://bpk2mfwuk2vto"]
+
+[ext_resource type="Texture2D" uid="uid://bhs1ljjiborv0" path="res://assets/sprites/character/npc1/SVG/right_arm.svg" id="1_2gd05"]
+[ext_resource type="Texture2D" uid="uid://clf243xshrbq0" path="res://assets/sprites/character/npc1/SVG/right_foot.svg" id="2_h21ng"]
+[ext_resource type="Texture2D" uid="uid://d21f1fy58skyt" path="res://assets/sprites/character/npc1/SVG/left_foot.svg" id="3_dlmhl"]
+[ext_resource type="Texture2D" uid="uid://ninaa6okhmd4" path="res://assets/sprites/character/npc1/SVG/body.svg" id="4_lq4lk"]
+[ext_resource type="Texture2D" uid="uid://dm7u6jhdemm5x" path="res://assets/sprites/character/npc1/SVG/head.svg" id="5_fdk6o"]
+[ext_resource type="Texture2D" uid="uid://bgcuur47nlhwu" path="res://assets/sprites/character/npc1/SVG/left_arm.svg" id="7_y55e7"]
+
+[sub_resource type="Animation" id="Animation_kdsab"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.00886717, -0.0889859]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/RightArm:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.00112666, 0.325997]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/LeftArm:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.2678, -0.844484]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/RightLeg:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0619121, -0.430435]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/LeftLeg:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.764165]
+}
+
+[sub_resource type="Animation" id="Animation_pnjdx"]
+resource_name = "idle"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.0120296, -0.0636093, 0.0259197]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/RightArm:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.0001, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0041995, -0.0973664, -0.0326747]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/LeftArm:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.0001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.273349, -0.162379]
+}
+
+[sub_resource type="Animation" id="Animation_4fm7q"]
+resource_name = "run"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.00886717, 0.15995]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/RightArm:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.00112666, 0.481462]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/LeftArm:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.2678, -1.17417]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/RightLeg:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0619121, -0.56186]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/LeftLeg:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.712453]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4u6q3"]
+_data = {
+"idle": SubResource("Animation_pnjdx"),
+"run": SubResource("Animation_4fm7q"),
+"walk": SubResource("Animation_kdsab")
+}
+
+[node name="VillagerSkeleton2D" type="Skeleton2D"]
+
+[node name="RightArm" type="Sprite2D" parent="."]
+position = Vector2(30, -50)
+rotation = 0.0473088
+scale = Vector2(1, 1)
+texture = ExtResource("1_2gd05")
+offset = Vector2(8, 26)
+
+[node name="RightLeg" type="Sprite2D" parent="."]
+position = Vector2(23.0492, 55.8206)
+rotation = -0.0080779
+texture = ExtResource("2_h21ng")
+offset = Vector2(-0.401377, 12.6705)
+
+[node name="LeftLeg" type="Sprite2D" parent="."]
+position = Vector2(-13, 59)
+rotation = 0.10863
+texture = ExtResource("3_dlmhl")
+offset = Vector2(1, 13)
+
+[node name="Body" type="Bone2D" parent="."]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="Body" type="Sprite2D" parent="Body"]
+position = Vector2(1, 0)
+texture = ExtResource("4_lq4lk")
+offset = Vector2(-1, 0)
+
+[node name="Head" type="Bone2D" parent="Body"]
+position = Vector2(0, -62)
+rotation = -0.0202565
+scale = Vector2(1, 1)
+rest = Transform2D(1, 0, 0, 1, 1, -139)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
+
+[node name="Head" type="Sprite2D" parent="Body/Head"]
+position = Vector2(1.03889, -1.98006)
+rotation = -0.00668717
+texture = ExtResource("5_fdk6o")
+offset = Vector2(0.12922, -77.6727)
+
+[node name="VillagerHat" type="Sprite2D" parent="Body/Head/Head"]
+position = Vector2(0.938048, -118.048)
+rotation = 0.095211
+scale = Vector2(1, 1)
+
+[node name="RightArm" type="Bone2D" parent="Body"]
+position = Vector2(30, -50)
+rotation = 0.0473088
+scale = Vector2(1, 1)
+rest = Transform2D(1, 0, 0, 1, 42, -22)
+
+[node name="Remote_RightArm" type="RemoteTransform2D" parent="Body/RightArm"]
+remote_path = NodePath("../../../RightArm")
+
+[node name="LeftArm" type="Bone2D" parent="Body"]
+position = Vector2(-39, -44)
+rotation = -0.349779
+scale = Vector2(1, 1)
+rest = Transform2D(1, 0, 0, 1, -47, -21)
+
+[node name="LeftArm" type="Sprite2D" parent="Body/LeftArm"]
+position = Vector2(5, -5)
+texture = ExtResource("7_y55e7")
+offset = Vector2(-14, 29)
+
+[node name="RightLeg" type="Bone2D" parent="Body"]
+position = Vector2(27, 57)
+rotation = -0.0080779
+rest = Transform2D(1, 0, 0, 1, 26, 65)
+
+[node name="Remote_RightLeg" type="RemoteTransform2D" parent="Body/RightLeg"]
+position = Vector2(-3.94118, -1.21125)
+remote_path = NodePath("../../../RightLeg")
+
+[node name="LeftLeg" type="Bone2D" parent="Body"]
+position = Vector2(-13, 59)
+rotation = 0.10863
+rest = Transform2D(1, 0, 0, 1, -21, 69)
+
+[node name="Remote_LeftLeg" type="RemoteTransform2D" parent="Body/LeftLeg"]
+remote_path = NodePath("../../../LeftLeg")
+
+[node name="VillagerAnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_4u6q3")
+}

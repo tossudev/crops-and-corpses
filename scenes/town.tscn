@@ -3,16 +3,16 @@
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="2_mph18"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_nnncm"]
 [ext_resource type="PackedScene" uid="uid://chw8bc0kxym0e" path="res://scenes/villager/villager_manager.tscn" id="2_yronx"]
-[ext_resource type="Texture2D" uid="uid://b0bwuw75iarx6" path="res://assets/sprites/tiles/Water_tile_copy_donotdelete.png" id="3_ui0sk"]
-[ext_resource type="Texture2D" uid="uid://dtw8yo8a7d5df" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp_copyDoNotDelete.png" id="4_87olk"]
+[ext_resource type="Texture2D" uid="uid://0hhkfe0l3h7p" path="res://assets/sprites/tiles/Water_tile_copy_donotdelete.png" id="3_ui0sk"]
+[ext_resource type="Texture2D" uid="uid://bqff8g4bg4gjr" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp_copyDoNotDelete.png" id="4_87olk"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_ho2sg"]
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="5_tpvf0"]
-[ext_resource type="Texture2D" uid="uid://bpe33j45oj7is" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="5_x7rje"]
+[ext_resource type="Texture2D" uid="uid://b1p5pr8rl5ao2" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="5_x7rje"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="6_3ler8"]
-[ext_resource type="Texture2D" uid="uid://dv80aatxqft1k" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="6_jb6x6"]
-[ext_resource type="Texture2D" uid="uid://cr8fc5pc8s4f1" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="7_t3t4h"]
+[ext_resource type="Texture2D" uid="uid://cvrwsbcrk40ky" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="6_jb6x6"]
+[ext_resource type="Texture2D" uid="uid://bm3t1j2epo8mh" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="7_t3t4h"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/water.gdshader" id="7_vli6y"]
-[ext_resource type="Texture2D" uid="uid://mnyogk2730an" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="8_u4ryb"]
+[ext_resource type="Texture2D" uid="uid://dpeka1n5kwv22" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="8_u4ryb"]
 [ext_resource type="Texture2D" uid="uid://dks6iqnb0a6gx" path="res://assets/resources/shaders/water_noise_texture.tres" id="8_up80f"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
 [ext_resource type="PackedScene" uid="uid://bcoq8weob6f7g" path="res://scenes/world/tree2.tscn" id="9_wtibd"]
@@ -190,6 +190,7 @@ scale = Vector2(0.999998, 0.999998)
 
 [node name="ArmL" parent="Objects/Player/Skeleton2D/TorsoBone/ArmLBone" index="0"]
 position = Vector2(4.06, 13.3)
+scale = Vector2(1, 1)
 
 [node name="HeadBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="4"]
 scale = Vector2(0.999997, 0.999997)

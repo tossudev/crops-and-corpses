@@ -1,13 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://bp0j6co1k7bim"]
+[gd_scene load_steps=11 format=3 uid="uid://c60n4vmc8f5pw"]
 
 [ext_resource type="Script" path="res://scripts/villager/DialogueControl.cs" id="1_02ul8"]
 [ext_resource type="StyleBox" uid="uid://cekqcomecgkhn" path="res://assets/resources/styles/default_ui_style_box_texture.tres" id="2_a74se"]
-[ext_resource type="LabelSettings" uid="uid://cgpffxjx1da83" path="res://assets/resources/labelsettings/villager_name_label_settings.tres" id="3_cwpme"]
+[ext_resource type="LabelSettings" path="res://assets/resources/labelsettings/villager_name_label_settings.tres" id="3_cwpme"]
 [ext_resource type="StyleBox" uid="uid://4n1kln0dgyha" path="res://assets/resources/labelsettings/villager_mood_text_style_box_texture.tres" id="4_6d0qw"]
-[ext_resource type="LabelSettings" uid="uid://vgv4ruwo62re" path="res://assets/resources/labelsettings/villager_mood_text_label_settings.tres" id="4_bmerq"]
-[ext_resource type="Texture2D" uid="uid://bnd33hpfvrxau" path="res://assets/sprites/character/hats/ushanka.png" id="4_jefot"]
+[ext_resource type="LabelSettings" path="res://assets/resources/labelsettings/villager_mood_text_label_settings.tres" id="4_bmerq"]
+[ext_resource type="Texture2D" uid="uid://bqm4hudbq4ptk" path="res://assets/sprites/character/hats/ushanka.png" id="4_jefot"]
 [ext_resource type="Texture2D" uid="uid://vdrlnp0brkoy" path="res://assets/sprites/character/npc2/SVG/head.svg" id="5_oo0ry"]
-[ext_resource type="LabelSettings" uid="uid://c58omraid67fd" path="res://assets/resources/labelsettings/villager_occupations_header_label_settings.tres" id="6_kx0s4"]
+[ext_resource type="LabelSettings" path="res://assets/resources/labelsettings/villager_occupations_header_label_settings.tres" id="6_kx0s4"]
 [ext_resource type="FontFile" uid="uid://doceug7kw76yx" path="res://assets/resources/labelsettings/base_ui_font.tres" id="6_pr2p0"]
 [ext_resource type="LabelSettings" uid="uid://bqcg7d7ahuyjg" path="res://assets/resources/labelsettings/villager_status_label_settings.tres" id="7_b3kd7"]
 

@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7h4rqauwp16i"]
+
+[ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="1_xax7i"]
+
+[node name="ZombieSpawn" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_xax7i")
+player = NodePath("")
+
+[node name="SpawnPoint0" type="Node2D" parent="."]
+position = Vector2(-5432, 4232)
+
+[node name="SpawnPoint1" type="Node2D" parent="."]
+position = Vector2(128, 6584)
+
+[node name="SpawnPoint2" type="Node2D" parent="."]
+position = Vector2(2832, 3288)
+
+[node name="SpawnPoint3" type="Node2D" parent="."]
+position = Vector2(6832, 5960)
+
+[node name="SpawnPoint4" type="Node2D" parent="."]
+position = Vector2(5600, 480)
+
+[node name="SpawnPoint5" type="Node2D" parent="."]
+position = Vector2(-2728, -3320)
+
+[node name="SpawnPoint6" type="Node2D" parent="."]
+position = Vector2(3304, -5504)
+
+[node name="SpawnPoint7" type="Node2D" parent="."]
+position = Vector2(-2408, -6856)
+
+[node name="SpawnPoint8" type="Node2D" parent="."]
+position = Vector2(-6464, -4400)
+
+[node name="SpawnPoint9" type="Node2D" parent="."]
+position = Vector2(-3792, -1048)
+
+[node name="SpawnPoint10" type="Node2D" parent="."]
+position = Vector2(-7752, 1344)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="ZombieDeletionTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="ZombieSpawn" flags=18]
+[connection signal="timeout" from="ZombieDeletionTimer" to="." method="DeleteZombieDelay" flags=18]

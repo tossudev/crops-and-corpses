@@ -10,7 +10,7 @@ public partial class SpawnScript : Node2D
 	private partial class SpawnPoint : Node2D
 	{
 		public Node2D Node { get; set; }
-        public bool IsActive { get; set; }
+		public bool IsActive { get; set; }
 	}
 	List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
 	Timer spawnDelay;
@@ -52,16 +52,16 @@ public partial class SpawnScript : Node2D
 	}
   
 	  public override void _Process(double delta)
-    {
+	{
 	   CheckIfInsideCave();
-        if (!spawnDelay.IsStopped() && isNightOrDay)
-        {
-            spawnDelay.Start();
-        }
-        else if (spawnDelay.IsStopped() && !isNightOrDay)
-        {
+		if (!spawnDelay.IsStopped() && isNightOrDay)
+		{
+			spawnDelay.Start();
+		}
+		else if (spawnDelay.IsStopped() && !isNightOrDay)
+		{
 			spawnDelay.Stop();
-        }
+		}
 		CheckIfTownDestroyed();
 		if(zombieList.Count > 0 && zombieDelayBool)
 		{
@@ -80,7 +80,7 @@ public partial class SpawnScript : Node2D
 				}
 			}
 		}
-    }
+	}
 	private void CheckIfTownDestroyed()
 	{
 		if(globalTime.HasTownBeenDestroyed())
@@ -144,23 +144,34 @@ public partial class SpawnScript : Node2D
 		}
 		
 	}
+	public void SpawnZombieAtPoint(Vector2 spawnPoint)
+{
+    
+    CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
+   	prefab.Position = spawnPoint;	
+    AddChild(prefab);
+	zombieList.Add(prefab);
+}
+	
+
+
 	private SpawnPoint FindClosestActiveSpawnPoint()
-    {
-        SpawnPoint closestSpawnPoint = null;
-        float closestDistance = float.MaxValue;
+	{
+		SpawnPoint closestSpawnPoint = null;
+		float closestDistance = float.MaxValue;
 
-        foreach (SpawnPoint sp in spawnPoints.Where(sp => sp.IsActive))
-        {
-            float distance = sp.Node.Position.DistanceTo(player.Position);
-            if (distance < closestDistance)
-            {
-                closestSpawnPoint = sp;
-                closestDistance = distance;
-            }
-        }
+		foreach (SpawnPoint sp in spawnPoints.Where(sp => sp.IsActive))
+		{
+			float distance = sp.Node.Position.DistanceTo(player.Position);
+			if (distance < closestDistance)
+			{
+				closestSpawnPoint = sp;
+				closestDistance = distance;
+			}
+		}
 
-        return closestSpawnPoint;
-    }
+		return closestSpawnPoint;
+	}
 	public static void RemoveZombieFromList(CharacterBody2D zombie)
 	{
 		zombieList.Remove(zombie);

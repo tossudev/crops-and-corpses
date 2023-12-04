@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
@@ -27,6 +28,9 @@ public partial class VillagerRawData : GodotObject
     public VillagerState currentState;
     public int xCoord;
     public int yCoord;
+    
+    // NOT part of saving
+    public ulong homeId;
 
     public VillagerRawData() {}
 
@@ -40,6 +44,7 @@ public partial class VillagerRawData : GodotObject
         SetOccupation();
         currentState = VillagerState.ChooseTask;
         SetCoordinates(globalPositionVector2);
+        TrySetHome();
     }
 
     public VillagerRawData(
@@ -62,6 +67,7 @@ public partial class VillagerRawData : GodotObject
         this.currentState = currentState;
         
         SetCoordinates(new Vector2(xCoord, yCoord));
+        TrySetHome();
     }
 
     void SetType()
@@ -78,6 +84,15 @@ public partial class VillagerRawData : GodotObject
     {
         xCoord = Mathf.RoundToInt(coordinates.X);
         yCoord = Mathf.RoundToInt(coordinates.Y);
+    }
+
+    public void TrySetHome()
+    {
+        var freeHomes = VillagerManager.villagerManagerInstance.GetFreeHomesList();
+
+        homeId = freeHomes.Count > 0
+            ? freeHomes.First().AddResident(this)
+            : 0;
     }
     
     public static VillagerOccupation GetRandomOccupation()

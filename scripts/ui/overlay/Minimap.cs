@@ -18,13 +18,10 @@ public partial class Minimap : Control {
 
 	const string FOLIAGE_GROUP = "Foliage";
 
-	public override void _Ready() {
-		
+	public override void _Ready()
+	{
 		return;
-		
-		foreach (CharacterBody2D playerNode in GetTree().GetNodesInGroup("player")) {
-			player = playerNode;
-		}
+		player = (CharacterBody2D) GetTree().GetFirstNodeInGroup("player");
 
 		cam = GetNode<Camera2D>("SubViewport/Radar/Camera");
 		radar = GetNode<Node2D>("SubViewport/Radar");
@@ -33,12 +30,7 @@ public partial class Minimap : Control {
 		_characterTexture = GD.Load<Texture2D>("res://assets/placeholder/test_character/character.png");
 		_decoTexture = GD.Load<Texture2D>("res://assets/sprites/foliage/sprite_tree1.png");
 
-		foreach (CharacterBody2D npc in GetTree().GetNodesInGroup("npc")) {
-			Sprite2D newNpcMarker = markerNode.Instantiate<Sprite2D>();
-			newNpcMarker.GlobalPosition = npc.GlobalPosition / MAP_SIZE_DIVIDER;
-			newNpcMarker.Texture = _characterTexture;
-			radar.AddChild(newNpcMarker);
-		}
+		
 
 		// Change the path later
 		foreach (Node2D decoNode in GetTree().GetNodesInGroup(FOLIAGE_GROUP)) {
@@ -47,10 +39,6 @@ public partial class Minimap : Control {
 			newObjectMarker.Texture = _decoTexture;
 			radar.AddChild(newObjectMarker);
 		}
-
-		
-		
-		//GetInitialNodes();
 		
 		var root = GetTree().Root;
 
@@ -65,6 +53,16 @@ public partial class Minimap : Control {
 		//cam.GlobalPosition = player.GlobalPosition / MAP_SIZE_DIVIDER;
 	}
 
+
+	void AddVillagers()
+	{
+		foreach (CharacterBody2D npc in GetTree().GetNodesInGroup("npc")) {
+			Sprite2D newNpcMarker = markerNode.Instantiate<Sprite2D>();
+			newNpcMarker.GlobalPosition = npc.GlobalPosition / MAP_SIZE_DIVIDER;
+			newNpcMarker.Texture = _characterTexture;
+			radar.AddChild(newNpcMarker);
+		}
+	}
 
 	void CreateMap() {
 		Node mapTiles = groundTiles.Duplicate();

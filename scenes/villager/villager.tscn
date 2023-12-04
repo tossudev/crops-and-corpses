@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/villager/Villager.cs" id="1_nruw1"]
 [ext_resource type="Texture2D" uid="uid://bbei648d3eovx" path="res://assets/placeholder/test_character/character.png" id="2_n3vwh"]
-[ext_resource type="PackedScene" uid="uid://bmh424wu5k4gb" path="res://scenes/ui/villager_info.tscn" id="4_iwgqm"]
+[ext_resource type="PackedScene" path="res://scenes/ui/villager_info.tscn" id="4_iwgqm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sgd6u"]
 radius = 25.8088

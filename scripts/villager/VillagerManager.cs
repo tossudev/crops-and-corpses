@@ -25,8 +25,8 @@ public partial class VillagerManager : Node
 	
 	List<Villager> _miners = new ();
 	public List<Villager> minerVillagers => _miners;
-	public List<ArcherTower> archerTowerList = new List<ArcherTower>();
-	public List<BuildingHealth> _brokenFenceList = new List<BuildingHealth>();
+
+	List<BuildingHealth> _allBuildings = new ();
     
 
 	[Export] AllVillagerData _allData;
@@ -36,7 +36,8 @@ public partial class VillagerManager : Node
 	Node2D _villagerParentNode;
 	const string VILLAGER_PARENT_NODEPATH = "%Villagers";
 
-	
+	public readonly List<VillagerResidence> allVillagerResidences = new ();
+
 	
 	public override void _Ready()
 	{
@@ -56,7 +57,7 @@ public partial class VillagerManager : Node
 
 		if (TownManager.EveryXSecond((int) AutosaveIntervalSeconds.VILLAGER_POSITION_INTERVAL))
 		{
-			SyncVillagerPositions();
+			UpdateVillagers();
 		}
 	}
 
@@ -133,12 +134,15 @@ public partial class VillagerManager : Node
 			);
 	}
 
-	public void SpawnQuestVillagers()
+	public void SpawnQuestVillagers(Vector2 position)
 	{
 		SaveData.allVillagerData.ForEach(data =>
 		{
+			Vector2 offsetVector = new Vector2(GD.Randi() % 3, GD.Randi() % 3);
+			
 			if (!data.isTownPopulation)
 			{
+				data.SetCoordinates(position + offsetVector);
 				SpawnExistingVillager(data);
 			}
 		});
@@ -159,11 +163,16 @@ public partial class VillagerManager : Node
 		villagerToRegister.Teleport(spawnCoordinates);
 	}
 
-    void SyncVillagerPositions()
+    void UpdateVillagers()
 	{
 		foreach (var villager in _allVillagers)
 		{
 			villager.SavePosition();
+
+			if (villager.rawData.currentState == VillagerState.Homeless)
+			{
+				villager.rawData.TrySetHome();
+			}
 		}
 
 		Task save = SaveData.SyncVillagers();
@@ -204,32 +213,36 @@ public partial class VillagerManager : Node
 	{
 		return _allData.GetTextureByType(type, part);
 	}
-	public void AddArcherTower(ArcherTower archerTower)
+
+	public List<BuildingHealth> GetBrokenBuildingsOfType(BuildingType buildingType)
 	{
-		archerTowerList.Add(archerTower);
+		return _allBuildings.FindAll(building => building.isDamaged && building.buildingType == buildingType);
 	}
+
 	public List<ArcherTower> GetArcherTowerList()
 	{
+		List<ArcherTower> archerTowerList = new List<ArcherTower>();
+		var archerTowers = _allBuildings.FindAll(building => !building.isDamaged && building.buildingType == BuildingType.ArcherTower);
+		archerTowers.ForEach(archerTower => archerTowerList.Add((ArcherTower)archerTower.GetParent()));
 		return archerTowerList;
 	}
-	void CountBrokenFencesInTown()
-	{
-		_brokenFenceList.Clear();
-		var _fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
 
-		foreach (Node2D fence in _fences.GetChild(0).GetChildren())
-		{
-			var fenceHealth = fence.GetNode<BuildingHealth>("%BuildingHealth");
-			if(fenceHealth.isBroken)
-			{
-				_brokenFenceList.Add(fenceHealth);
-			}
-		}
-	}
-	public List<BuildingHealth> GetFenceList()
+	public void AddNewBuilding(BuildingHealth newBuilding)
 	{
-		CountBrokenFencesInTown();
-		return _brokenFenceList;
+		_allBuildings.Add(newBuilding);
+	}
+
+	public void AddNewResidence(VillagerResidence residence)
+	{
+		allVillagerResidences.Add(residence);
+	}
+	
+	public List<VillagerResidence> GetFreeHomesList()
+	{
+		var freeHomesList = allVillagerResidences.FindAll(
+			residence => residence.hasRoomForMoreVillagers && !residence.isBroken);
+
+		return freeHomesList;
 	}
 }
 
@@ -268,5 +281,6 @@ public enum VillagerState
 	FarmingTask,
 	FindWoodTask,
 	FindStoneTask,
-	RescueQuest
+	RescueQuest,
+	Homeless
 }

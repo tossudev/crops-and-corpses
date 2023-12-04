@@ -1,0 +1,126 @@
+[gd_scene load_steps=6 format=3 uid="uid://c51iubnlq7npt"]
+
+[ext_resource type="Texture2D" uid="uid://carua1m5jvrfl" path="res://assets/placeholder/temporary_logo.png" id="1_hqmmr"]
+[ext_resource type="Script" path="res://scripts/ui/MainMenu.cs" id="1_p6qp2"]
+[ext_resource type="Texture2D" uid="uid://cxdqeykbs5sp0" path="res://assets/sprites/ui/stone_button.png" id="2_bgqcd"]
+[ext_resource type="PackedScene" uid="uid://ds02hivesars3" path="res://scenes/ui/menu_animation_handler.tscn" id="3_l7wee"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kkgf1"]
+font_size = 50
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.784314)
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_p6qp2")
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -256.0
+offset_top = 16.0
+offset_right = 256.0
+offset_bottom = 544.0
+
+[node name="Play" type="Button" parent="Main" groups=["Buttons"]]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 176.0
+pivot_offset = Vector2(256, 56)
+
+[node name="Background" type="NinePatchRect" parent="Main/Play"]
+layout_mode = 0
+offset_right = 2048.0
+offset_bottom = 448.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_bgqcd")
+patch_margin_left = 50
+patch_margin_top = 83
+patch_margin_right = 184
+patch_margin_bottom = 147
+
+[node name="Label" type="Label" parent="Main/Play"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+label_settings = SubResource("LabelSettings_kkgf1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings" type="Button" parent="Main" groups=["Buttons"]]
+layout_mode = 0
+offset_top = 208.0
+offset_right = 512.0
+offset_bottom = 320.0
+pivot_offset = Vector2(256, 56)
+
+[node name="Background" type="NinePatchRect" parent="Main/Settings"]
+layout_mode = 0
+offset_right = 2048.0
+offset_bottom = 448.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_bgqcd")
+patch_margin_left = 50
+patch_margin_top = 83
+patch_margin_right = 184
+patch_margin_bottom = 147
+
+[node name="Label" type="Label" parent="Main/Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_kkgf1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quit" type="Button" parent="Main" groups=["Buttons"]]
+layout_mode = 0
+offset_top = 352.0
+offset_right = 512.0
+offset_bottom = 464.0
+pivot_offset = Vector2(256, 56)
+
+[node name="Background" type="NinePatchRect" parent="Main/Quit"]
+layout_mode = 0
+offset_right = 2048.0
+offset_bottom = 448.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_bgqcd")
+patch_margin_left = 50
+patch_margin_top = 83
+patch_margin_right = 184
+patch_margin_bottom = 147
+
+[node name="Label" type="Label" parent="Main/Quit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+label_settings = SubResource("LabelSettings_kkgf1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title_TEMPORARY" type="Sprite2D" parent="Main"]
+position = Vector2(256, -272)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_hqmmr")
+
+[node name="MenuAnimationHandler" parent="." instance=ExtResource("3_l7wee")]
+
+[connection signal="pressed" from="Main/Play" to="." method="OnPlayPressed"]
+[connection signal="pressed" from="Main/Quit" to="." method="OnQuitPressed"]

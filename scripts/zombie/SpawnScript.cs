@@ -145,13 +145,12 @@ public partial class SpawnScript : Node2D
 		
 	}
 	public void SpawnZombieAtPoint(Vector2 spawnPoint)
-{
-    
-    CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
-   	prefab.Position = spawnPoint;	
-    AddChild(prefab);
-	zombieList.Add(prefab);
-}
+	{    
+		CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
+		prefab.Position = spawnPoint;	
+		AddChild(prefab);
+		zombieList.Add(prefab);
+	}
 	
 
 

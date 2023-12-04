@@ -1,4 +1,4 @@
-[gd_scene load_steps=151 format=3 uid="uid://cce2sygxgl033"]
+[gd_scene load_steps=154 format=3 uid="uid://cce2sygxgl033"]
 
 [ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="1_dfb2v"]
 [ext_resource type="Script" path="res://scripts/forest.cs" id="1_h2vq7"]
@@ -33,7 +33,6 @@
 [ext_resource type="Texture2D" uid="uid://c6vfjuod286y6" path="res://assets/sprites/tiles/grass_corner_tile4.png" id="14_78vcf"]
 [ext_resource type="Texture2D" uid="uid://b13l88w6b2qh0" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="15_ie1vm"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="16_rit5n"]
-[ext_resource type="PackedScene" uid="uid://3ct83j0jgteb" path="res://scenes/buildings/town/house/house.tscn" id="16_tadus"]
 [ext_resource type="Texture2D" uid="uid://bi48utqac6akr" path="res://assets/sprites/tiles/grass_corner_tile6.png" id="17_0beee"]
 [ext_resource type="Texture2D" uid="uid://d3svcqsb68vbq" path="res://assets/sprites/tiles/grass_corner_tile7.png" id="18_8hjld"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_g46xp"]
@@ -77,10 +76,14 @@
 [ext_resource type="Texture2D" uid="uid://bbxpdedx0jcf8" path="res://assets/sprites/tiles/cave_corner_tile8.png" id="56_0nvt0"]
 [ext_resource type="PackedScene" uid="uid://dyq3ksvy2gwvv" path="res://scenes/world/bush.tscn" id="58_m4acs"]
 [ext_resource type="PackedScene" uid="uid://chw8bc0kxym0e" path="res://scenes/villager/villager_manager.tscn" id="61_87l3j"]
+[ext_resource type="Texture2D" uid="uid://bjaxeksksxahl" path="res://assets/sprites/Farm sprites/sign_waterplant.png" id="61_kgsc4"]
 [ext_resource type="PackedScene" uid="uid://dt4impfdusiy" path="res://scenes/farm/plants/plant_poppy.tscn" id="65_i2ild"]
 [ext_resource type="PackedScene" uid="uid://bbia6yxwghu3o" path="res://scenes/farm/plants/plant_lupine.tscn" id="66_p6d2a"]
 [ext_resource type="PackedScene" uid="uid://luqdfx7qh2jl" path="res://scenes/farm/plants/plant_pumpkin.tscn" id="66_uj5sv"]
 [ext_resource type="Script" path="res://scripts/World/PortalManager.cs" id="69_35sbn"]
+[ext_resource type="PackedScene" uid="uid://b2gv07xesl7qm" path="res://scenes/buildings/town/house/house_broken.tscn" id="82_4resf"]
+[ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="83_46bai"]
+[ext_resource type="PackedScene" uid="uid://p1u3hu223lbd" path="res://scenes/zombie/zombie_manager.tscn" id="84_gwur6"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_dlrrq"]
 vertices = PackedVector2Array(-9019, -4233, 8204, -4197, 8204, 4297, -8983, 4226)
@@ -641,11 +644,13 @@ height = 256
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="Forest" type="Node2D" node_paths=PackedStringArray("_bridge", "_fallingTree")]
+[node name="Forest" type="Node2D" node_paths=PackedStringArray("_bridge", "_fallingTree", "_bridgeQuest", "_ruinsBridge")]
 y_sort_enabled = true
 script = ExtResource("1_h2vq7")
 _bridge = NodePath("Objects/FallingTreeBridge")
 _fallingTree = NodePath("Objects/FallingTree")
+_bridgeQuest = NodePath("Objects/Buildings/BridgeQuest")
+_ruinsBridge = NodePath("Objects/Buildings/WoodenBridge")
 
 [node name="NavigationManager" parent="." instance=ExtResource("1_dfb2v")]
 unique_name_in_owner = true
@@ -714,7 +719,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="Objects" node_paths=PackedStringArray("_camera") instance=ExtResource("6_d65ob")]
 unique_name_in_owner = true
-position = Vector2(5405, 2522)
+position = Vector2(-7645, -3073)
 _camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
@@ -755,6 +760,7 @@ scale = Vector2(0.6, 0.6)
 y_sort_enabled = true
 
 [node name="BridgeQuest" parent="Objects/Buildings" node_paths=PackedStringArray("_bridge") instance=ExtResource("51_o7a3j")]
+y_sort_enabled = true
 position = Vector2(5788, 2509)
 _bridge = NodePath("../WoodenBridge")
 
@@ -767,6 +773,16 @@ position = Vector2(291.962, 117.078)
 [node name="Barrier" parent="Objects/Buildings/BridgeQuest" index="2"]
 position = Vector2(611, 160)
 
+[node name="BridgeSign" type="Node2D" parent="Objects/Buildings"]
+y_sort_enabled = true
+position = Vector2(-5, 142)
+
+[node name="SignWaterplant" type="Sprite2D" parent="Objects/Buildings/BridgeSign"]
+position = Vector2(6084, 2467)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("61_kgsc4")
+offset = Vector2(0, -50)
+
 [node name="WoodenBridge" parent="Objects/Buildings" instance=ExtResource("51_6fpp5")]
 visible = false
 position = Vector2(6610, 2734)
@@ -778,8 +794,8 @@ rotation = 1.55852
 scale = Vector2(0.501793, 1.89499)
 texture = ExtResource("19_dhclt")
 
-[node name="House2" parent="Objects/Buildings" instance=ExtResource("16_tadus")]
-position = Vector2(652, -2730)
+[node name="HouseBroken" parent="Objects/Buildings" instance=ExtResource("82_4resf")]
+position = Vector2(638, -2577)
 
 [node name="well" parent="Objects/Buildings" instance=ExtResource("50_vewfo")]
 position = Vector2(342, -2572)
@@ -8441,7 +8457,7 @@ _player = NodePath("../Player")
 
 [node name="cave_entrance" parent="Objects/Cave Entrances" node_paths=PackedStringArray("exitPosition") instance=ExtResource("49_ibfou")]
 position = Vector2(6540, -2066)
-id = 1
+targetSceneID = 1
 exitPosition = NodePath("Exit")
 
 [node name="Exit" type="Node2D" parent="Objects/Cave Entrances/cave_entrance"]
@@ -8452,6 +8468,45 @@ position = Vector2(-16, 142)
 [node name="SunlightContainer" parent="." instance=ExtResource("18_j47l1")]
 
 [node name="VillagerManager" parent="." instance=ExtResource("61_87l3j")]
+
+[node name="ZombieSpawn" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("83_46bai")
+player = NodePath("../Objects/Player")
+
+[node name="SpawnPoint1" type="Node2D" parent="ZombieSpawn"]
+position = Vector2(-2525, -3054)
+
+[node name="SpawnPoint0" type="Node2D" parent="ZombieSpawn"]
+position = Vector2(-1801, 1297)
+
+[node name="SpawnPoint2" type="Node2D" parent="ZombieSpawn"]
+position = Vector2(4292, -2217)
+
+[node name="SpawnPoint3" type="Node2D" parent="ZombieSpawn"]
+position = Vector2(2621, 2786)
+
+[node name="SpawnPoint4" type="Node2D" parent="ZombieSpawn"]
+position = Vector2(7052, -2978)
+
+[node name="SpawnPoint5" type="Node2D" parent="ZombieSpawn"]
+position = Vector2(-5843, -3068)
+
+[node name="SpawnPoint6" type="Node2D" parent="ZombieSpawn"]
+position = Vector2(-7327, 2022)
+
+[node name="Timer" type="Timer" parent="ZombieSpawn"]
+autostart = true
+
+[node name="ZombieDeletionTimer" type="Timer" parent="ZombieSpawn"]
+autostart = true
+
+[node name="Enemies" type="Node2D" parent="ZombieSpawn"]
+unique_name_in_owner = true
+
+[node name="ZombieManager" parent="." instance=ExtResource("84_gwur6")]
+
+[connection signal="timeout" from="ZombieSpawn/Timer" to="ZombieSpawn" method="ZombieSpawn" flags=18]
+[connection signal="timeout" from="ZombieSpawn/ZombieDeletionTimer" to="ZombieSpawn" method="DeleteZombieDelay" flags=18]
 
 [editable path="NavigationManager"]
 [editable path="Objects/Buildings/BridgeQuest"]

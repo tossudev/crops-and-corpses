@@ -183,7 +183,6 @@ offset_left = 147.897
 offset_top = 95.1343
 offset_right = 221.897
 offset_bottom = 175.134
-text = "2"
 label_settings = SubResource("LabelSettings_5v560")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -222,7 +221,6 @@ theme_override_constants/margin_right = 32
 [node name="QuestStatusText" type="Label" parent="Panel/StatusPanel/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Forest rescue quest"
 label_settings = SubResource("LabelSettings_d0ai0")
 horizontal_alignment = 1
 autowrap_mode = 3

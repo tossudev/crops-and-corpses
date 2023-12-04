@@ -119,6 +119,7 @@ public partial class QuestPoint : Node2D
     public void SpawnZombies()
     {
         SpawendZombieAmount();
+        Vector2 offsetVector = new Vector2(GD.Randi() % 3, GD.Randi() % 3);
         
 
         if (zombieSpawn != null && isZombiesSpawned == false)
@@ -129,8 +130,7 @@ public partial class QuestPoint : Node2D
                 //spawnZombiePoint ofset
 
                
-                zombieSpawn.SpawnZombieAtPoint(spawnZombiePoint.GlobalPosition
-                    + new Vector2(GD.RandRange(-SpawnRange, SpawnRange), GD.RandRange(-SpawnRange, SpawnRange)));
+                zombieSpawn.SpawnZombieAtPoint(spawnZombiePoint.GlobalPosition + offsetVector);
             
 
                 GD.Print("SpawnZombies");

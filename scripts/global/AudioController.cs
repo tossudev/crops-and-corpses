@@ -5,7 +5,10 @@ using System;
 public partial class AudioController : Node {
 
     AudioStreamPlayer _sfxPlayer;
+    AudioStreamPlayer _loopingSfxPlayer;
+
     AudioStreamPlaybackPolyphonic _sfxPlayback;
+    AudioStreamPlaybackPolyphonic _loopingSfxPlayback;
     
     AudioStreamPlayer _musicPlayer;
     AudioStreamPlayer _ambiencePlayer;
@@ -16,6 +19,10 @@ public partial class AudioController : Node {
     public override void _Ready() {
         _sfxPlayer = GetNode<AudioStreamPlayer>("GeneralSFX");
         _sfxPlayback = _sfxPlayer.GetStreamPlayback() as AudioStreamPlaybackPolyphonic;
+
+        _loopingSfxPlayer = GetNode<AudioStreamPlayer>("LoopingSFX");
+        _loopingSfxPlayback = _loopingSfxPlayer.GetStreamPlayback() as AudioStreamPlaybackPolyphonic;
+
         _musicPlayer = GetNode<AudioStreamPlayer>("Music"); 
         _ambiencePlayer = GetNode<AudioStreamPlayer>("Ambience");
 

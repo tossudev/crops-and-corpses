@@ -1,0 +1,95 @@
+[gd_scene load_steps=6 format=3 uid="uid://bt56v72d27ku6"]
+
+[ext_resource type="Script" path="res://scripts/World/BridgeQuest.cs" id="1_b1i77"]
+[ext_resource type="Texture2D" uid="uid://p0vefm8oo5l8" path="res://assets/sprites/ui/wooden_panel.png" id="3_ah3gb"]
+[ext_resource type="Texture2D" uid="uid://nssu7mse7xb2" path="res://assets/placeholder/J_Sprites/bugsign.png" id="3_foxyr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wtsxi"]
+radius = 368.05
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_flib8"]
+size = Vector2(103, 292)
+
+[node name="BridgeQuest" type="Node2D"]
+script = ExtResource("1_b1i77")
+
+[node name="Sign" type="Sprite2D" parent="."]
+position = Vector2(581, 260)
+texture = ExtResource("3_foxyr")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+position = Vector2(580.962, 259.078)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_wtsxi")
+
+[node name="Barrier" type="StaticBody2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier"]
+position = Vector2(41.5, 136)
+shape = SubResource("RectangleShape2D_flib8")
+debug_color = Color(0.835294, 0.235294, 0.772549, 0.419608)
+
+[node name="BridgeQuestUI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="BridgeQuestUI"]
+offset_left = 619.0
+offset_top = 190.0
+offset_right = 1307.0
+offset_bottom = 918.0
+texture = ExtResource("3_ah3gb")
+
+[node name="ColorRect" type="ColorRect" parent="BridgeQuestUI"]
+offset_left = 700.0
+offset_top = 243.0
+offset_right = 1218.0
+offset_bottom = 840.0
+color = Color(0.290196, 0.196078, 0.109804, 1)
+
+[node name="Title" type="Label" parent="BridgeQuestUI"]
+offset_left = 711.0
+offset_top = 259.0
+offset_right = 1196.0
+offset_bottom = 375.0
+theme_override_font_sizes/font_size = 40
+text = "A suspicious guest from someone..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BridgeLabel" type="Label" parent="BridgeQuestUI"]
+unique_name_in_owner = true
+offset_left = 706.0
+offset_top = 390.0
+offset_right = 1211.0
+offset_bottom = 622.0
+theme_override_font_sizes/font_size = 25
+text = "Woah looks like you'll need to collect 3 pieces of wood to build a bridge...!! Better get choppin'! "
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="CloseBtn" type="Button" parent="BridgeQuestUI"]
+offset_left = 818.0
+offset_top = 729.0
+offset_right = 1093.0
+offset_bottom = 814.0
+text = "Close"
+
+[node name="FinishQuestBtn" type="Button" parent="BridgeQuestUI"]
+unique_name_in_owner = true
+offset_left = 818.0
+offset_top = 634.0
+offset_right = 1092.0
+offset_bottom = 712.0
+disabled = true
+text = "Finish"
+
+[connection signal="body_entered" from="InteractionArea" to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="OnBodyExited"]
+[connection signal="input_event" from="InteractionArea" to="." method="OnInputEvent"]
+[connection signal="pressed" from="BridgeQuestUI/CloseBtn" to="." method="OnCloseButtonPressed"]
+[connection signal="pressed" from="BridgeQuestUI/FinishQuestBtn" to="." method="OnFinishQuestButtonPressed"]

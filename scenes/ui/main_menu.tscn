@@ -1,9 +1,225 @@
-[gd_scene load_steps=6 format=3 uid="uid://c51iubnlq7npt"]
+[gd_scene load_steps=26 format=3 uid="uid://c51iubnlq7npt"]
 
 [ext_resource type="Texture2D" uid="uid://carua1m5jvrfl" path="res://assets/placeholder/temporary_logo.png" id="1_hqmmr"]
 [ext_resource type="Script" path="res://scripts/ui/MainMenu.cs" id="1_p6qp2"]
+[ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="2_0yvb7"]
 [ext_resource type="Texture2D" uid="uid://cxdqeykbs5sp0" path="res://assets/sprites/ui/stone_button.png" id="2_bgqcd"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/water.gdshader" id="3_b1aqy"]
 [ext_resource type="PackedScene" uid="uid://ds02hivesars3" path="res://scenes/ui/menu_animation_handler.tscn" id="3_l7wee"]
+[ext_resource type="Texture2D" uid="uid://dks6iqnb0a6gx" path="res://assets/resources/shaders/water_noise_texture.tres" id="4_4ldda"]
+[ext_resource type="Texture2D" uid="uid://bble71coc5mtd" path="res://assets/sprites/tiles/quick_tilemap.png" id="5_ssyhd"]
+[ext_resource type="Texture2D" uid="uid://dopd5vri07ebr" path="res://assets/sprites/buildings/smallhouse_color.png" id="6_3235x"]
+[ext_resource type="Texture2D" uid="uid://bjkxbnu2m3qb" path="res://assets/sprites/buildings/largehouse_color.png" id="6_hrr2y"]
+[ext_resource type="Texture2D" uid="uid://c3wnl2mlufquq" path="res://assets/sprites/buildings/townhall_color.png" id="7_eun8m"]
+[ext_resource type="Texture2D" uid="uid://dcyviqfhbqcay" path="res://assets/sprites/foliage/tree_1.png" id="10_42wwo"]
+[ext_resource type="Texture2D" uid="uid://bqda3isun2o5m" path="res://assets/sprites/items/birch_1.png" id="11_53mae"]
+[ext_resource type="Texture2D" uid="uid://q5wxg1if5hb8" path="res://assets/sprites/foliage/tree_2.png" id="11_vgir7"]
+[ext_resource type="Texture2D" uid="uid://dde5lj8x1jcb" path="res://assets/sprites/items/birch_3.png" id="12_rycvp"]
+[ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="12_vsrsf"]
+[ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="17_dboc7"]
+[ext_resource type="Texture2D" uid="uid://cq6cjliuqvlbq" path="res://assets/sprites/items/lantern.png" id="18_c6wka"]
+[ext_resource type="Texture2D" uid="uid://ckxiguh3wkr5p" path="res://assets/sprites/items/lantern_2.png" id="19_t3xjj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ykylh"]
+shader = ExtResource("3_b1aqy")
+shader_parameter/refraction_stretch = Vector2(1, 1)
+shader_parameter/refraction_strength = 0.02
+shader_parameter/water_tint = Color(0, 0.87451, 1, 0.101961)
+shader_parameter/speed = 0.1
+shader_parameter/refraction_map = ExtResource("4_4ldda")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_thrgr"]
+texture = ExtResource("5_ssyhd")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/terrains_peering_bit/right_side = 0
+1:0/0/terrains_peering_bit/bottom_right_corner = 0
+1:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0/terrains_peering_bit/bottom_left_corner = 0
+1:0/0/terrains_peering_bit/left_side = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/terrains_peering_bit/bottom_side = 0
+2:0/0/terrains_peering_bit/bottom_left_corner = 0
+2:0/0/terrains_peering_bit/left_side = 0
+3:0/0 = 0
+3:0/0/terrain_set = 0
+3:0/0/terrain = 0
+3:0/0/terrains_peering_bit/right_side = 0
+3:0/0/terrains_peering_bit/bottom_right_corner = 0
+3:0/0/terrains_peering_bit/bottom_side = 0
+3:0/0/terrains_peering_bit/bottom_left_corner = 0
+3:0/0/terrains_peering_bit/left_side = 0
+3:0/0/terrains_peering_bit/top_left_corner = 0
+3:0/0/terrains_peering_bit/top_side = 0
+3:0/0/terrains_peering_bit/top_right_corner = 0
+4:0/0 = 0
+4:0/0/terrain_set = 0
+4:0/0/terrain = 1
+4:0/0/terrains_peering_bit/right_side = 1
+4:0/0/terrains_peering_bit/bottom_right_corner = 1
+4:0/0/terrains_peering_bit/bottom_side = 1
+5:0/0 = 0
+5:0/0/terrain_set = 0
+5:0/0/terrain = 1
+5:0/0/terrains_peering_bit/right_side = 1
+5:0/0/terrains_peering_bit/bottom_right_corner = 1
+5:0/0/terrains_peering_bit/bottom_side = 1
+5:0/0/terrains_peering_bit/bottom_left_corner = 1
+5:0/0/terrains_peering_bit/left_side = 1
+6:0/0 = 0
+6:0/0/terrain_set = 0
+6:0/0/terrain = 1
+6:0/0/terrains_peering_bit/bottom_side = 1
+6:0/0/terrains_peering_bit/bottom_left_corner = 1
+6:0/0/terrains_peering_bit/left_side = 1
+7:0/0 = 0
+7:0/0/terrain_set = 0
+7:0/0/terrain = 1
+7:0/0/terrains_peering_bit/right_side = 1
+7:0/0/terrains_peering_bit/bottom_right_corner = 1
+7:0/0/terrains_peering_bit/bottom_side = 1
+7:0/0/terrains_peering_bit/bottom_left_corner = 1
+7:0/0/terrains_peering_bit/left_side = 1
+7:0/0/terrains_peering_bit/top_left_corner = 1
+7:0/0/terrains_peering_bit/top_side = 1
+7:0/0/terrains_peering_bit/top_right_corner = 1
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/terrains_peering_bit/right_side = 0
+0:1/0/terrains_peering_bit/bottom_right_corner = 0
+0:1/0/terrains_peering_bit/bottom_side = 0
+0:1/0/terrains_peering_bit/top_side = 0
+0:1/0/terrains_peering_bit/top_right_corner = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/probability = 10.0
+1:1/0/terrains_peering_bit/right_side = 0
+1:1/0/terrains_peering_bit/bottom_right_corner = 0
+1:1/0/terrains_peering_bit/bottom_side = 0
+1:1/0/terrains_peering_bit/bottom_left_corner = 0
+1:1/0/terrains_peering_bit/left_side = 0
+1:1/0/terrains_peering_bit/top_left_corner = 0
+1:1/0/terrains_peering_bit/top_side = 0
+1:1/0/terrains_peering_bit/top_right_corner = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/terrains_peering_bit/bottom_side = 0
+2:1/0/terrains_peering_bit/bottom_left_corner = 0
+2:1/0/terrains_peering_bit/left_side = 0
+2:1/0/terrains_peering_bit/top_left_corner = 0
+2:1/0/terrains_peering_bit/top_side = 0
+3:1/0 = 0
+3:1/0/terrain_set = 0
+3:1/0/terrain = 0
+3:1/0/terrains_peering_bit/right_side = 0
+3:1/0/terrains_peering_bit/bottom_right_corner = 0
+3:1/0/terrains_peering_bit/bottom_side = 0
+3:1/0/terrains_peering_bit/bottom_left_corner = 0
+3:1/0/terrains_peering_bit/left_side = 0
+3:1/0/terrains_peering_bit/top_left_corner = 0
+3:1/0/terrains_peering_bit/top_side = 0
+3:1/0/terrains_peering_bit/top_right_corner = 0
+4:1/0 = 0
+4:1/0/terrain_set = 0
+4:1/0/terrain = 1
+4:1/0/terrains_peering_bit/right_side = 1
+4:1/0/terrains_peering_bit/bottom_right_corner = 1
+4:1/0/terrains_peering_bit/bottom_side = 1
+4:1/0/terrains_peering_bit/top_side = 1
+4:1/0/terrains_peering_bit/top_right_corner = 1
+5:1/0 = 0
+5:1/0/terrain_set = 0
+5:1/0/terrain = 1
+5:1/0/probability = 10.0
+5:1/0/terrains_peering_bit/right_side = 1
+5:1/0/terrains_peering_bit/bottom_right_corner = 1
+5:1/0/terrains_peering_bit/bottom_side = 1
+5:1/0/terrains_peering_bit/bottom_left_corner = 1
+5:1/0/terrains_peering_bit/left_side = 1
+5:1/0/terrains_peering_bit/top_left_corner = 1
+5:1/0/terrains_peering_bit/top_side = 1
+5:1/0/terrains_peering_bit/top_right_corner = 1
+6:1/0 = 0
+6:1/0/terrain_set = 0
+6:1/0/terrain = 1
+6:1/0/terrains_peering_bit/bottom_side = 1
+6:1/0/terrains_peering_bit/bottom_left_corner = 1
+6:1/0/terrains_peering_bit/left_side = 1
+6:1/0/terrains_peering_bit/top_left_corner = 1
+6:1/0/terrains_peering_bit/top_side = 1
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 0
+0:2/0/terrains_peering_bit/right_side = 0
+0:2/0/terrains_peering_bit/top_side = 0
+0:2/0/terrains_peering_bit/top_right_corner = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 0
+1:2/0/terrains_peering_bit/right_side = 0
+1:2/0/terrains_peering_bit/left_side = 0
+1:2/0/terrains_peering_bit/top_left_corner = 0
+1:2/0/terrains_peering_bit/top_side = 0
+1:2/0/terrains_peering_bit/top_right_corner = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 0
+2:2/0/terrains_peering_bit/left_side = 0
+2:2/0/terrains_peering_bit/top_left_corner = 0
+2:2/0/terrains_peering_bit/top_side = 0
+3:2/0 = 0
+3:2/0/terrain_set = 0
+3:2/0/terrain = 0
+3:2/0/terrains_peering_bit/right_side = 0
+3:2/0/terrains_peering_bit/bottom_right_corner = 0
+3:2/0/terrains_peering_bit/bottom_side = 0
+3:2/0/terrains_peering_bit/bottom_left_corner = 0
+3:2/0/terrains_peering_bit/left_side = 0
+3:2/0/terrains_peering_bit/top_left_corner = 0
+3:2/0/terrains_peering_bit/top_side = 0
+3:2/0/terrains_peering_bit/top_right_corner = 0
+4:2/0 = 0
+4:2/0/terrain_set = 0
+4:2/0/terrain = 1
+4:2/0/terrains_peering_bit/right_side = 1
+4:2/0/terrains_peering_bit/top_side = 1
+4:2/0/terrains_peering_bit/top_right_corner = 1
+5:2/0 = 0
+5:2/0/terrain_set = 0
+5:2/0/terrain = 1
+5:2/0/terrains_peering_bit/right_side = 1
+5:2/0/terrains_peering_bit/left_side = 1
+5:2/0/terrains_peering_bit/top_left_corner = 1
+5:2/0/terrains_peering_bit/top_side = 1
+5:2/0/terrains_peering_bit/top_right_corner = 1
+6:2/0 = 0
+6:2/0/terrain_set = 0
+6:2/0/terrain = 1
+6:2/0/terrains_peering_bit/left_side = 1
+6:2/0/terrains_peering_bit/top_left_corner = 1
+6:2/0/terrains_peering_bit/top_side = 1
+
+[sub_resource type="TileSet" id="TileSet_qhvyq"]
+tile_size = Vector2i(128, 128)
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Grass"
+terrain_set_0/terrain_0/color = Color(1, 0.588235, 0.427451, 1)
+terrain_set_0/terrain_1/name = "Sand"
+terrain_set_0/terrain_1/color = Color(0.517647, 0.537255, 1, 1)
+sources/0 = SubResource("TileSetAtlasSource_thrgr")
 
 [sub_resource type="LabelSettings" id="LabelSettings_kkgf1"]
 font_size = 50
@@ -12,23 +228,103 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 3
 shadow_color = Color(0, 0, 0, 0.784314)
 
+[sub_resource type="Gradient" id="Gradient_uxh3s"]
+offsets = PackedFloat32Array(0, 0.67313)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tr2wf"]
+gradient = SubResource("Gradient_uxh3s")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_p6qp2")
 
-[node name="Camera" type="Camera2D" parent="."]
+[node name="MenuAnimationHandler" parent="." instance=ExtResource("3_l7wee")]
 
-[node name="Main" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -256.0
-offset_top = 16.0
-offset_right = 256.0
-offset_bottom = 544.0
+[node name="Main" type="Node2D" parent="."]
+
+[node name="Camera" type="Camera2D" parent="Main"]
+z_index = 100
+
+[node name="Background" type="Node2D" parent="Main"]
+
+[node name="Water" type="Sprite2D" parent="Main/Background"]
+texture_repeat = 2
+texture = ExtResource("2_0yvb7")
+region_enabled = true
+region_rect = Rect2(0, 0, 2304, 1296)
+
+[node name="WaterShader" type="Sprite2D" parent="Main/Background"]
+material = SubResource("ShaderMaterial_ykylh")
+scale = Vector2(5, 5)
+texture = ExtResource("4_4ldda")
+
+[node name="Tiles" type="TileMap" parent="Main/Background"]
+tile_set = SubResource("TileSet_qhvyq")
+format = 2
+layer_0/name = "Grass"
+layer_0/y_sort_origin = -1
+layer_0/tile_data = PackedInt32Array(-65528, 65536, 2, -131064, 131072, 1, -196600, 131072, 1, -262136, 131072, 1, -327672, 131072, 1, -65529, 65536, 2, -131065, 65536, 1, -196601, 65536, 1, -262137, 65536, 1, -327673, 65536, 1, -65530, 0, 2, -131066, 65536, 1, -196602, 65536, 1, -262138, 65536, 1, -327674, 65536, 1, -131067, 0, 2, -196603, 65536, 1, -262139, 65536, 1, -327675, 196608, 0, -196604, 65536, 2, -262140, 65536, 1, -327676, 65536, 1, -196605, 65536, 2, -262141, 65536, 1, -327677, 65536, 1, 262146, 131072, 0, -196606, 0, 2, -262142, 196608, 1, -327678, 65536, 1, 262145, 65536, 0, -262143, 65536, 2, -327679, 65536, 1, 262144, 65536, 0, -262144, 65536, 2, -327680, 65536, 1, 327679, 65536, 0, -196609, 65536, 1, -262145, 65536, 1, 327678, 65536, 0, -262146, 196608, 1, 327677, 0, 0, -262147, 65536, 2, 327676, 65536, 2, 262140, 131072, 0, -262148, 65536, 2, 327675, 65536, 2, 262139, 65536, 0, -262149, 0, 2, 327674, 65536, 2, 262138, 65536, 1, 196602, 131072, 1, 327673, 65536, 2, 262137, 65536, 1, 196601, 65536, 1, 327672, 65536, 2, 262136, 196608, 1, 196600, 65536, 1, 131064, 65536, 1, 65528, 131072, 0, -131073, 0, 2, -196610, 0, 2, 131065, 65536, 0, 131066, 131072, 0, 327671, 0, 2, 262135, 0, 1, 196599, 0, 1, 131063, 0, 1, 65527, 0, 0, -393208, 131072, 0, -393209, 65536, 0, -393210, 65536, 0, -393211, 65536, 0, -393212, 65536, 0, -393213, 65536, 0, -393214, 65536, 0, -393215, 65536, 0, -393216, 65536, 0, -327681, 65536, 0, -327682, 65536, 0, -327683, 65536, 0, -327684, 65536, 0, -327685, 65536, 0, -327686, 0, 0, 262149, 0, 1, 196614, 65536, 0, 196615, 65536, 0, 196613, 0, 0, 262150, 196608, 1, 262151, 65536, 1, 327687, 65536, 2, 262152, 131072, 1, 196616, 131072, 0, 327686, 65536, 2, 327685, 0, 2, 327688, 131072, 2, -131077, 65536, 0, -65542, 0, 1, -5, 196608, 0, -4, 196608, 1, -3, 65536, 1, -65539, 131072, 1, -65540, 65536, 1, -65541, 196608, 0, 65532, 65536, 2, 65533, 65536, 1, -131075, 131072, 0, -131076, 65536, 0, 65531, 0, 2, -6, 0, 2, -131078, 0, 0, 131069, 0, 2, 131070, 65536, 2, 131071, 65536, 2, 65536, 131072, 2, 65535, 65536, 1, -2, 131072, 1, 65534, 65536, 1, 0, 131072, 0)
+layer_1/name = "Sand"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array(65527, 262144, 1, 65528, 327680, 0, 131064, 458752, 0, 131065, 327680, 1, 131066, 393216, 1, 196602, 327680, 1, 196601, 458752, 0, 131063, 262144, 2, 196600, 262144, 2, 262138, 327680, 1, 262139, 327680, 1, 262137, 262144, 1, 327675, 327680, 1, 327676, 327680, 1, 262140, 327680, 0, 327674, 327680, 2, 327673, 262144, 2, -9, 262144, 0, 65529, 327680, 0, 65530, 393216, 0, 196603, 393216, 0, 262141, 327680, 0, 327677, 327680, 2, 327678, 327680, 2, 327679, 327680, 2, 262144, 327680, 1, 262145, 393216, 0, 327680, 393216, 2, 262143, 393216, 0, 262142, 327680, 0, 393212, 393216, 2, 393211, 262144, 2, 7, 393216, 2, 6, 262144, 2, -65530, 327680, 1, -65531, 262144, 2, -131067, 262144, 1, -196603, 262144, 1, -262139, 262144, 0, -262138, 393216, 0, -196602, 327680, 1, -131066, 458752, 0, -65529, 393216, 1, -131065, 393216, 1, -196601, 393216, 0, -262144, 327680, 2, -196609, 327680, 2, -196610, 327680, 2, -196611, 262144, 2, -262147, 327680, 1, -262146, 327680, 0, -262145, 327680, 0, -327680, 327680, 0, -262143, 393216, 2, -327679, 393216, 0, -262148, 262144, 2, -131080, 327680, 2, -196616, 327680, 1, -262152, 327680, 1, -262151, 393216, 1, -196615, 393216, 1, -131079, 393216, 2, -327688, 327680, 0, -327689, 262144, 0, -262153, 262144, 1, -196617, 262144, 1, -327687, 393216, 0, -131081, 327680, 2, -131082, 262144, 2, 65539, 262144, 0, 131075, 458752, 0, 196611, 262144, 2, 196612, 393216, 2, 131076, 393216, 1, 65540, 393216, 0)
+
+[node name="Prop1" type="Sprite2D" parent="Main/Background"]
+position = Vector2(624, -504)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_3235x")
+
+[node name="Prop2" type="Sprite2D" parent="Main/Background"]
+position = Vector2(-840, 432)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_eun8m")
+
+[node name="Prop3" type="Sprite2D" parent="Main/Background"]
+position = Vector2(-520, -368)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_hrr2y")
+
+[node name="Prop4" type="Sprite2D" parent="Main/Background"]
+position = Vector2(400, -408)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_42wwo")
+
+[node name="Prop5" type="Sprite2D" parent="Main/Background"]
+position = Vector2(-360, -160)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_53mae")
+
+[node name="Prop6" type="Sprite2D" parent="Main/Background"]
+position = Vector2(-568, -128)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_rycvp")
+
+[node name="Prop7" type="Sprite2D" parent="Main/Background"]
+position = Vector2(-40, 96)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_rycvp")
+
+[node name="Prop8" type="Sprite2D" parent="Main/Background"]
+position = Vector2(776, 496)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+
+[node name="Prop9" type="Sprite2D" parent="Main/Background"]
+position = Vector2(944, -480)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_vsrsf")
 
 [node name="Play" type="Button" parent="Main" groups=["Buttons"]]
-layout_mode = 0
+offset_left = -256.0
 offset_top = 64.0
-offset_right = 512.0
+offset_right = 256.0
 offset_bottom = 176.0
 pivot_offset = Vector2(256, 56)
 
@@ -56,9 +352,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Settings" type="Button" parent="Main" groups=["Buttons"]]
-layout_mode = 0
+offset_left = -256.0
 offset_top = 208.0
-offset_right = 512.0
+offset_right = 256.0
 offset_bottom = 320.0
 pivot_offset = Vector2(256, 56)
 
@@ -86,9 +382,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Quit" type="Button" parent="Main" groups=["Buttons"]]
-layout_mode = 0
+offset_left = -256.0
 offset_top = 352.0
-offset_right = 512.0
+offset_right = 256.0
 offset_bottom = 464.0
 pivot_offset = Vector2(256, 56)
 
@@ -116,11 +412,229 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Title_TEMPORARY" type="Sprite2D" parent="Main"]
-position = Vector2(256, -272)
+position = Vector2(0, -248)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_hqmmr")
 
-[node name="MenuAnimationHandler" parent="." instance=ExtResource("3_l7wee")]
+[node name="Settings" type="Node2D" parent="."]
+position = Vector2(2496, 0)
+
+[node name="Camera" type="Camera2D" parent="Settings"]
+z_index = 100
+enabled = false
+
+[node name="Background" type="Node2D" parent="Settings"]
+
+[node name="Tiles" type="TileMap" parent="Settings/Background"]
+modulate = Color(0.304688, 0.304688, 0.304688, 1)
+tile_set = ExtResource("17_dboc7")
+format = 2
+layer_0/name = "Ground"
+layer_0/tile_data = PackedInt32Array(-262152, 12, 0, -196616, 12, 0, -131080, 12, 0, -65544, 12, 0, -8, 11, 0, 65528, 11, 1, 131064, 9, 0, 196600, 9, 0, 262136, 9, 0, 327672, 9, 0, -262151, 12, 0, -196615, 12, 0, -131079, 11, 0, -65543, 11, 1, -7, 9, 0, 65529, 9, 0, 131065, 9, 0, 196601, 10, 0, 262137, 9, 0, 327673, 9, 0, -262150, 12, 0, -196614, 12, 0, -131078, 11, 0, -65542, 11, 1, -6, 9, 0, 65530, 9, 0, 131066, 9, 0, 196602, 9, 0, 262138, 9, 0, 327674, 9, 0, -262149, 12, 0, -196613, 11, 0, -131077, 11, 1, -65541, 9, 0, -5, 9, 0, 65531, 10, 0, 131067, 9, 0, 196603, 9, 0, 262139, 12, 0, 327675, 12, 0, -262148, 11, 0, -196612, 11, 1, -131076, 9, 0, -65540, 9, 0, -4, 9, 0, 65532, 9, 0, 131068, 9, 0, 196604, 9, 0, 262140, 12, 0, 327676, 12, 0, -262147, 11, 0, -196611, 11, 1, -131075, 9, 0, -65539, 9, 0, -3, 10, 0, 65533, 9, 0, 131069, 9, 0, 196605, 9, 0, 262141, 12, 0, 327677, 12, 0, -262146, 11, 0, -196610, 11, 1, -131074, 30, 0, -65538, 9, 0, -2, 9, 0, 65534, 9, 0, 131070, 9, 0, 196606, 12, 0, 262142, 12, 0, 327678, 12, 0, -262145, 11, 0, -196609, 11, 1, -131073, 32, 0, -65537, 9, 0, -1, 9, 0, 65535, 9, 0, 131071, 9, 0, 196607, 12, 0, 262143, 12, 0, 327679, 12, 0, -327680, 11, 0, -262144, 11, 1, -196608, 31, 0, -131072, 29, 0, -65536, 9, 0, 0, 9, 0, 65536, 10, 0, 131072, 12, 0, 196608, 12, 0, 262144, 11, 0, -327679, 11, 0, -262143, 11, 1, -196607, 31, 0, -131071, 31, 0, -65535, 31, 0, 1, 31, 0, 65537, 9, 0, 131073, 12, 0, 196609, 12, 0, 262145, 11, 0, -327678, 11, 0, -262142, 11, 1, -196606, 31, 0, -131070, 30, 0, -65534, 31, 0, 2, 29, 0, 65538, 32, 0, 131074, 12, 0, 196610, 12, 0, 262146, 11, 0, -327677, 11, 0, -262141, 11, 1, -196605, 9, 0, -131069, 9, 0, -65533, 31, 0, 3, 30, 0, 65539, 31, 0, 131075, 12, 0, 196611, 12, 0, 262147, 12, 0, -327676, 11, 0, -262140, 11, 1, -196604, 9, 0, -131068, 9, 0, -65532, 9, 0, 4, 9, 0, 65540, 31, 0, 131076, 12, 0, 196612, 12, 0, 262148, 12, 0, -327675, 12, 0, -262139, 11, 0, -196603, 11, 1, -131067, 9, 0, -65531, 9, 0, 5, 9, 0, 65541, 10, 0, 131077, 31, 0, 196613, 29, 0, 262149, 12, 0, -327674, 12, 0, -262138, 12, 0, -196602, 11, 0, -131066, 11, 1, -65530, 9, 0, 6, 9, 0, 65542, 9, 0, 131078, 9, 0, 196614, 9, 0, -327673, 12, 0, -262137, 12, 0, -196601, 11, 0, -131065, 11, 1, -65529, 9, 0, 7, 9, 0, 65543, 10, 0, 131079, 10, 0, 196615, 10, 0, 262151, 9, 0, 327680, 11, 1, 327681, 11, 1, 327682, 11, 1, 262150, 32, 0)
+layer_1/name = "Rocks"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array(65529, 25, 0, -7, 25, 0, -6, 25, 0, -196605, 25, 0, -65529, 25, 0, 327674, 25, 0, 327673, 25, 0, 327672, 25, 0, 262136, 25, 0, 196615, 25, 0, 262137, 25, 0, 196614, 25, 0, 262151, 25, 0, 196605, 25, 0, 65530, 26, 0, -131076, 26, 0)
+layer_2/name = "Lava"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 0
+layer_2/tile_data = PackedInt32Array()
+
+[node name="Prop1" type="Sprite2D" parent="Settings/Background"]
+position = Vector2(-552, -232)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("18_c6wka")
+
+[node name="PointLight2D" type="PointLight2D" parent="Settings/Background/Prop1"]
+position = Vector2(64, -96)
+scale = Vector2(5, 5)
+color = Color(1, 0.980392, 0.552941, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_tr2wf")
+
+[node name="Prop2" type="Sprite2D" parent="Settings/Background"]
+position = Vector2(704, -72)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("18_c6wka")
+flip_h = true
+
+[node name="PointLight2D" type="PointLight2D" parent="Settings/Background/Prop2"]
+position = Vector2(64, -96)
+scale = Vector2(5, 5)
+color = Color(1, 0.980392, 0.552941, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_tr2wf")
+
+[node name="Prop3" type="Sprite2D" parent="Settings/Background"]
+position = Vector2(-840, 352)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("18_c6wka")
+
+[node name="PointLight2D" type="PointLight2D" parent="Settings/Background/Prop3"]
+position = Vector2(64, -96)
+scale = Vector2(5, 5)
+color = Color(1, 0.980392, 0.552941, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_tr2wf")
+
+[node name="Prop4" type="Sprite2D" parent="Settings/Background"]
+position = Vector2(48, 104)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("19_t3xjj")
+
+[node name="PointLight2D" type="PointLight2D" parent="Settings/Background/Prop4"]
+position = Vector2(64, -96)
+scale = Vector2(5, 5)
+color = Color(1, 0.980392, 0.552941, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_tr2wf")
+
+[node name="LavaLights" type="Node2D" parent="Settings/Background"]
+
+[node name="LavaLight1" type="PointLight2D" parent="Settings/Background/LavaLights"]
+position = Vector2(-160, -336)
+scale = Vector2(2, 2)
+color = Color(0.87451, 0.564706, 0.419608, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_tr2wf")
+
+[node name="LavaLight2" type="PointLight2D" parent="Settings/Background/LavaLights"]
+position = Vector2(56, -232)
+scale = Vector2(2, 2)
+color = Color(0.87451, 0.564706, 0.419608, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_tr2wf")
+
+[node name="LavaLight3" type="PointLight2D" parent="Settings/Background/LavaLights"]
+position = Vector2(296, -336)
+scale = Vector2(2, 2)
+color = Color(0.87451, 0.564706, 0.419608, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_tr2wf")
+
+[node name="LavaLight4" type="PointLight2D" parent="Settings/Background/LavaLights"]
+position = Vector2(224, -40)
+scale = Vector2(2, 2)
+color = Color(0.87451, 0.564706, 0.419608, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_tr2wf")
+
+[node name="LavaLight5" type="PointLight2D" parent="Settings/Background/LavaLights"]
+position = Vector2(408, -16)
+scale = Vector2(2, 2)
+color = Color(0.87451, 0.564706, 0.419608, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_tr2wf")
+
+[node name="LavaLight6" type="PointLight2D" parent="Settings/Background/LavaLights"]
+position = Vector2(376, 184)
+scale = Vector2(2, 2)
+color = Color(0.87451, 0.564706, 0.419608, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_tr2wf")
+
+[node name="LavaLight7" type="PointLight2D" parent="Settings/Background/LavaLights"]
+position = Vector2(584, 208)
+scale = Vector2(2, 2)
+color = Color(0.87451, 0.564706, 0.419608, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_tr2wf")
+
+[node name="LavaLight8" type="PointLight2D" parent="Settings/Background/LavaLights"]
+position = Vector2(712, 424)
+scale = Vector2(2, 2)
+color = Color(0.87451, 0.564706, 0.419608, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_tr2wf")
+
+[node name="LavaLight9" type="PointLight2D" parent="Settings/Background/LavaLights"]
+position = Vector2(840, 584)
+scale = Vector2(2, 2)
+color = Color(0.87451, 0.564706, 0.419608, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_tr2wf")
+
+[node name="LavaLight10" type="PointLight2D" parent="Settings/Background/LavaLights"]
+position = Vector2(72, -360)
+scale = Vector2(2, 2)
+color = Color(0.87451, 0.564706, 0.419608, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_tr2wf")
+
+[node name="Back" type="Button" parent="Settings" groups=["Buttons"]]
+z_index = 1025
+offset_left = -256.0
+offset_top = 352.0
+offset_right = 256.0
+offset_bottom = 464.0
+pivot_offset = Vector2(256, 56)
+
+[node name="Background" type="NinePatchRect" parent="Settings/Back"]
+layout_mode = 0
+offset_right = 2048.0
+offset_bottom = 448.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_bgqcd")
+patch_margin_left = 50
+patch_margin_top = 83
+patch_margin_right = 184
+patch_margin_bottom = 147
+
+[node name="Label" type="Label" parent="Settings/Back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_kkgf1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FullScreen" type="Button" parent="Settings" groups=["Buttons"]]
+z_index = 1025
+offset_left = -256.0
+offset_top = -56.0
+offset_right = 256.0
+offset_bottom = 56.0
+pivot_offset = Vector2(256, 56)
+disabled = true
+
+[node name="Label" type="Label" parent="Settings/FullScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fullscreen"
+label_settings = SubResource("LabelSettings_kkgf1")
+vertical_alignment = 1
+
+[node name="Button" type="CheckButton" parent="Settings/FullScreen"]
+layout_mode = 0
+offset_right = 171.0
+offset_bottom = 37.0
+scale = Vector2(3, 3)
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+
+[node name="TransitionOverlay" type="ColorRect" parent="Overlay"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
 
 [connection signal="pressed" from="Main/Play" to="." method="OnPlayPressed"]
+[connection signal="pressed" from="Main/Settings" to="." method="OnSettingsPressed"]
 [connection signal="pressed" from="Main/Quit" to="." method="OnQuitPressed"]
+[connection signal="pressed" from="Settings/Back" to="." method="OnBackToMenuPressed"]
+[connection signal="toggled" from="Settings/FullScreen/Button" to="." method="OnFullscreenToggled"]

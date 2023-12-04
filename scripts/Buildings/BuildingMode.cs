@@ -8,7 +8,7 @@ public partial class BuildingMode : Node2D
 
     public BuildingMenu buildingMenu;
 
-    public int buildingPriceLogs;
+    public int buildingPriceLogs, buildingPriceStone;
 
     int _tileSize;
 
@@ -35,13 +35,13 @@ public partial class BuildingMode : Node2D
             buildingMenu.CloseBuildMenu();
         }
 
-        if(!StorageData.ExistsInStorage(SaveData.organizedPlayerInventory, buildingMenu.log.ID, buildingPriceLogs))
+        if(!PlayerInventoryData.ExistsInInventory(buildingMenu.log.ID, buildingPriceLogs) || !PlayerInventoryData.ExistsInInventory(buildingMenu.stone.ID, buildingPriceStone))
         {
             Modulate = new Color(3, 1, 1, 1);
 
             if (Input.IsActionJustPressed("Click"))
             {
-                Debug.WriteLine("Not enough logs");
+                Debug.WriteLine("Not enough materials");
             }
             return;
         }

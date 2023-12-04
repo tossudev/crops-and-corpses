@@ -60,8 +60,6 @@ public partial class ArcherTower : Node2D
             _speed = _accuracy * _speed;
             _attackRange = _speed * (_projectile.airtime - _projectile.despawnTime);
         }
-
-        VillagerManager.villagerManagerInstance.AddArcherTower(this);
     }
 
     private void OnBreak()

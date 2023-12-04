@@ -25,8 +25,8 @@ public partial class VillagerManager : Node
 	
 	List<Villager> _miners = new ();
 	public List<Villager> minerVillagers => _miners;
-	public List<ArcherTower> archerTowerList = new List<ArcherTower>();
-	public List<BuildingHealth> _brokenFenceList = new List<BuildingHealth>();
+
+	List<BuildingHealth> _allBuildings = new ();
     
 
 	[Export] AllVillagerData _allData;
@@ -213,35 +213,24 @@ public partial class VillagerManager : Node
 	{
 		return _allData.GetTextureByType(type, part);
 	}
-	public void AddArcherTower(ArcherTower archerTower)
+
+	public List<BuildingHealth> GetBrokenBuildingsOfType(BuildingType buildingType)
 	{
-		archerTowerList.Add(archerTower);
+		return _allBuildings.FindAll(building => building.isDamaged && building.buildingType == buildingType);
 	}
+
 	public List<ArcherTower> GetArcherTowerList()
 	{
+		List<ArcherTower> archerTowerList = new List<ArcherTower>();
+		var archerTowers = _allBuildings.FindAll(building => !building.isDamaged && building.buildingType == BuildingType.ArcherTower);
+		archerTowers.ForEach(archerTower => archerTowerList.Add((ArcherTower)archerTower.GetParent()));
 		return archerTowerList;
 	}
-	void CountBrokenFencesInTown()
+
+	public void AddNewBuilding(BuildingHealth newBuilding)
 	{
-		_brokenFenceList.Clear();
-		var _fences = (Node2D)GetTree().GetFirstNodeInGroup("fences");
-
-		foreach (Node2D fence in _fences.GetChild(0).GetChildren())
-		{
-			var fenceHealth = fence.GetNode<BuildingHealth>("%BuildingHealth");
-			if(fenceHealth.isBroken)
-			{
-				_brokenFenceList.Add(fenceHealth);
-			}
-		}
+		_allBuildings.Add(newBuilding);
 	}
-	public List<BuildingHealth> GetFenceList()
-	{
-		CountBrokenFencesInTown();
-		return _brokenFenceList;
-	}
-
-
 
 	public void AddNewResidence(VillagerResidence residence)
 	{

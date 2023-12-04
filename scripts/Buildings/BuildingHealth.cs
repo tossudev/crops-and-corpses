@@ -2,7 +2,11 @@ using Godot;
 using System;
 using System.Diagnostics;
 using System.Security;
-
+public enum BuildingType{
+    House,
+    Fence,
+    ArcherTower
+}
 public partial class BuildingHealth : Node2D
 {
 	HealthComponent _healthComponent;
@@ -21,7 +25,7 @@ public partial class BuildingHealth : Node2D
 
     public int buildingHealth;
     public int loadedHealth = 100;
-    
+    public BuildingType buildingType;
 	// Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -33,10 +37,31 @@ public partial class BuildingHealth : Node2D
         _collisionShape = GetNode<CollisionShape2D>(COLLISIONSHAPE2D_NODENAME);
         _parent = GetParent() as Node2D;
 
-        buildingHealth = _healthComponent.GetMaxHealth();
-	}
-    
+        if(_parent.IsInGroup("fence"))
+        {
+            buildingType = BuildingType.Fence;
+        }
+        if(_parent.IsInGroup("ArcherTower"))
+        {
+            buildingType = BuildingType.ArcherTower;
+        }
+        if(_parent.IsInGroup("House"))
+        {
+            buildingType = BuildingType.House;
+        }
 
+        buildingHealth = _healthComponent.GetMaxHealth();
+        RegisterBuilding();
+	}
+
+    async void RegisterBuilding()
+    {
+        await TaskExtensions.SuspendWhile(() =>
+        VillagerManager.villagerManagerInstance == null || !SaveData.firstLoadComplete);
+
+        VillagerManager.villagerManagerInstance.AddNewBuilding(this);
+    }
+    
     private void OnHealth(float health)
     {
         buildingHealth = Mathf.FloorToInt(health);
@@ -97,5 +122,10 @@ public partial class BuildingHealth : Node2D
 
         _villagerResidenceComponent?.OnFixed();
         _parent.CallDeferred("OnFixed");
+    }
+
+    public void FixBrokenBuilding()
+    {
+        _healthComponent.SetHealth(_healthComponent.GetMaxHealth());
     }
 }

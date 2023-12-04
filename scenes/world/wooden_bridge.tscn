@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2f36184vqw0v"]
+
+[ext_resource type="Texture2D" uid="uid://cvgiagoddsrlv" path="res://assets/sprites/items/bridge.png" id="1_3sw0v"]
+
+[node name="WoodenBridge" type="Node2D"]
+
+[node name="Bridge" type="Sprite2D" parent="."]
+texture = ExtResource("1_3sw0v")
+offset = Vector2(0, 30)

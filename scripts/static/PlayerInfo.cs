@@ -8,14 +8,15 @@ public static class PlayerInfo
 {
 	public static int health { get; set; }
 	public static int stamina { get; set; }
-	public static PortalID travelID { get; set; }
+	public static SceneID sceneID { get; set; }
 
 	public static Dictionary GetDictionary()
 	{
 		Dictionary playerInfo = new Dictionary
 		{
 			{ "health", health },
-			{ "stamina", stamina }
+			{ "stamina", stamina },
+			{ "sceneID", (int)sceneID}
 		};
 
 		return playerInfo;
@@ -33,6 +34,7 @@ public static class PlayerInfo
 
 		health = (int)playerInfo["health"];
 		stamina = (int)playerInfo["stamina"];
+		sceneID = (SceneID)(int)playerInfo["sceneID"];
 	}
 
 	public static async Task<int> GetHealth()

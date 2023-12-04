@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dyov2x2gnwqv6"]
+[gd_scene load_steps=5 format=3 uid="uid://dyov2x2gnwqv6"]
 
 [ext_resource type="Script" path="res://scripts/World/DroppedItem.cs" id="1_8u8db"]
+[ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="2_qccw0"]
 [ext_resource type="Texture2D" uid="uid://p12qd2o46h0j" path="res://assets/placeholder/R_mockupSprites/bucket.png" id="3_1wpdg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c83ao"]
@@ -9,6 +10,12 @@ size = Vector2(64, 64)
 [node name="DroppedItem" type="Node2D" node_paths=PackedStringArray("_displayImage")]
 script = ExtResource("1_8u8db")
 _displayImage = NodePath("TextureRect")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.25098)
+position = Vector2(-2.5034e-06, 12)
+scale = Vector2(1.33333, 1)
+texture = ExtResource("2_qccw0")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 64

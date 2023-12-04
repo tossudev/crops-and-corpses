@@ -9,6 +9,7 @@ public static class SceneInfo
 	public static bool caveBridgeOpen { get; set; }
 	public static bool ruinsCaveOpen { get; set; }
 	public static bool forestBridgeOpen { get; set; }
+	public static bool forestBuildABridgeOpen { get; set; }
 
 	public static Dictionary GetDictionary()
 	{
@@ -16,7 +17,8 @@ public static class SceneInfo
 		{
 			{ "CaveBridgeOpen", caveBridgeOpen },
 			{ "ruinsCaveOpen", ruinsCaveOpen },
-			{ "forestBridgeOpen", forestBridgeOpen }
+			{ "forestBridgeOpen", forestBridgeOpen },
+			{ "forestBuildABridgeOpen", forestBuildABridgeOpen}
 		};
 
 		return sceneInfo;
@@ -35,6 +37,7 @@ public static class SceneInfo
 		caveBridgeOpen = (bool)sceneInfo["CaveBridgeOpen"];
 		ruinsCaveOpen = (bool)sceneInfo["ruinsCaveOpen"];
 		forestBridgeOpen = (bool)sceneInfo["forestBridgeOpen"];
+		forestBuildABridgeOpen = (bool)sceneInfo["forestBuildABridgeOpen"];
 	}
 
 	public static async Task<bool> GetCaveBridgeOpen()
@@ -53,5 +56,11 @@ public static class SceneInfo
 	{
 		await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete);
 		return forestBridgeOpen;
+	}
+
+	public static async Task<bool> GetForestBuildABridgeOpen()
+	{
+		await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete);
+		return forestBuildABridgeOpen;
 	}
 }

@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bt56v72d27ku6"]
 
 [ext_resource type="Script" path="res://scripts/World/BridgeQuest.cs" id="1_b1i77"]
+[ext_resource type="Texture2D" uid="uid://bjaxeksksxahl" path="res://assets/sprites/Farm sprites/sign_waterplant.png" id="2_sm22y"]
 [ext_resource type="Texture2D" uid="uid://p0vefm8oo5l8" path="res://assets/sprites/ui/wooden_panel.png" id="3_ah3gb"]
-[ext_resource type="Texture2D" uid="uid://nssu7mse7xb2" path="res://assets/placeholder/J_Sprites/bugsign.png" id="3_foxyr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wtsxi"]
 radius = 368.05
@@ -14,17 +14,19 @@ size = Vector2(103, 292)
 script = ExtResource("1_b1i77")
 
 [node name="Sign" type="Sprite2D" parent="."]
-position = Vector2(581, 260)
-texture = ExtResource("3_foxyr")
+visible = false
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_sm22y")
+offset = Vector2(0, -50)
 
 [node name="InteractionArea" type="Area2D" parent="."]
-position = Vector2(580.962, 259.078)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("CircleShape2D_wtsxi")
 
 [node name="Barrier" type="StaticBody2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(454, 63)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier"]
 position = Vector2(41.5, 136)
@@ -67,7 +69,7 @@ offset_top = 390.0
 offset_right = 1211.0
 offset_bottom = 622.0
 theme_override_font_sizes/font_size = 25
-text = "Woah looks like you'll need to collect 3 pieces of wood to build a bridge...!! Better get choppin'! "
+text = "Woah looks like you'll need to collect 50 pieces of wood to build a bridge...!! Better get choppin'! "
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2

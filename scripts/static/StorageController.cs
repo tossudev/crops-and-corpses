@@ -1,13 +1,21 @@
 
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
 
+
+
+
 public static class StorageController
 {
-	const string droppedItemNodePath = "res://scenes/world/dropped_item.tscn";
     public const string INVENTORY_SLOT_RESPATH = "res://scenes/ui/inventory/inventory_slot.tscn";
+    public const string HOTBAR_SLOT_RESPATH = "res://scenes/ui/inventory/hotbar_slot.tscn";
+    public const string TOWN_STORAGE_SLOT_RESPATH = "res://scenes/ui/inventory/town_storage_slot.tscn";
 
+    
+    
     ///  <summary> Main Storage additive operation </summary>
     ///  <param name="storageGridContainer"></param>
     ///  <param name="rawArray"> The array of RawInventoryItem to add the item to</param>
@@ -54,8 +62,7 @@ public static class StorageController
 	        }
 	        else if (PlayerInventoryController.selectedItem.id == rawItem.id && indexValid)
 	        {
-		        PlayerInventoryController.SelectInventoryItemAtSlot(
-			        PlayerInventoryController.selectedItem.indexInStorage);
+		        PlayerInventoryController.SelectInventoryItemOfId(PlayerInventoryController.selectedItem.id);
 	        }
         }
         
@@ -84,7 +91,10 @@ public static class StorageController
 	static Task<int> AddToSlotUntilFull(GridContainer storageGridContainer, Array<RawInventoryItem> rawArray,
 		RawInventoryItem itemToAdd, int index)
 	{
+		if (index >= rawArray.Count) return Task.FromResult(itemToAdd.quantity);
+		
 		RawInventoryItem itemInSlot = rawArray[index];
+        
         
 		int spaceRemainingAtIndex = itemInSlot?.SpaceRemainingInStack ?? itemToAdd.stackSize;
 		
@@ -132,13 +142,8 @@ public static class StorageController
 
 		if (index >= 0)
 		{
-			if (index <= rawArray.Count - 1)
-			{
-				return await RemoveFromSlotUntilEmpty(storageGridContainer, rawArray, rawItem.quantity, index, true) == 0;
-			}
-			
-			GD.PrintErr("Index was greater than player inventory max size - 1");
-			return false;
+			return await RemoveFromSlotUntilEmpty(
+				storageGridContainer, rawArray, rawItem.quantity, index, true) == 0;
 		}
 		
 		switch (await RemoveFromStorageUntilEmptyOfItem(storageGridContainer, rawArray, rawItem))
@@ -196,6 +201,8 @@ public static class StorageController
 	static Task<int> RemoveFromSlotUntilEmpty(GridContainer slotContainer, Array<RawInventoryItem> rawArray,
 		int amountToRemove, int index, bool mustRemoveAll = false)
 	{
+		if (index >= rawArray.Count) return Task.FromResult(amountToRemove);
+		
 		RawInventoryItem itemInSlot = rawArray[index];
 				
 		int amountRemoved = (itemInSlot.quantity - amountToRemove > 0)
@@ -224,9 +231,74 @@ public static class StorageController
 		UpdateStorageSlot(slotContainer, rawArray, null, index);
 	}
 
-	public static async void UpdateStorageSlot(GridContainer slotContainer, Array<RawInventoryItem> rawArray, RawInventoryItem item, int index)
+	public static void UpdateStorageSlot(GridContainer slotContainer, Array<RawInventoryItem> rawArray, RawInventoryItem item, int index)
 	{
-		var slotToUpdate = slotContainer.GetChild<InventorySlot>(index);
+		var slotToUpdate = slotContainer.GetChild<StorageSlot>(index);
         StorageSlotController.UpdateSlot(slotToUpdate, rawArray, item);
+	}
+
+	public static void InitializeItemGridContainer(GridContainer slotContainer, Array<RawInventoryItem> rawArray,
+		StorageSlotType slotType, int startIndex, int lastIndex)
+	{
+		
+		foreach (var node in slotContainer.GetChildren())
+		{
+			node.Free();
+		}
+
+		string resourcePath = slotType switch
+		{
+			StorageSlotType.PlayerInventory => INVENTORY_SLOT_RESPATH,
+			StorageSlotType.Hotbar => HOTBAR_SLOT_RESPATH,
+			StorageSlotType.TownStorage => TOWN_STORAGE_SLOT_RESPATH,
+			_ => throw new ArgumentOutOfRangeException(nameof(slotType), slotType, null)
+		};
+
+		InitSlotsWithItems(slotContainer, rawArray, resourcePath, startIndex, lastIndex);
+	}
+
+	static void InitSlotsWithItems(GridContainer slotContainer, Array<RawInventoryItem> rawArray,
+		string packedSceneString, int startIndex, int lastIndex)
+	{
+		var itemSlotNode = GD.Load<PackedScene>(packedSceneString);
+
+		for (int i = startIndex; i <= lastIndex; i++)
+		{
+			var itemSlot = itemSlotNode.Instantiate<StorageSlot>();
+
+			slotContainer.AddChild(itemSlot);
+
+			itemSlot.InitializeSlot(i);
+			
+			
+			
+			StorageSlotController.UpdateSlot(itemSlot, rawArray, rawArray[i], false);
+		}
+	}
+	
+	public static void SelectSingleItem(GridContainer slotContainer, Array<RawInventoryItem> rawArray,
+		RawInventoryItem item, int index)
+	{
+		item.quantity -= 1;
+
+		if (item.quantity >= 1)
+		{
+			UpdateStorageSlot(slotContainer, rawArray, item, index);
+		}
+		else
+		{
+			NullifyItemAtIndex(slotContainer, rawArray, index);
+		}
+
+
+		PlayerInventoryController.SelectNewItem(new RawInventoryItem(item.id, item.name, 1, item.stackSize));
+	}
+
+	public static void SelectItemAtSlot(GridContainer slotContainer, int index)
+	{
+		StorageSlot slot = slotContainer.GetChild<StorageSlot>(index);
+
+		PlayerInventoryController.SelectNewItem(slot.slotItem);
+		slot.ToggleVisuals(false);
 	}
 }

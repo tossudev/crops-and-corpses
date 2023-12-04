@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class TownStorage : Node
+public partial class TownStorageController : Node
 {
 
     GridContainer _storageGrid;

@@ -1,9 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8jk1uc8qnex0"]
+[gd_scene load_steps=8 format=3 uid="uid://b8jk1uc8qnex0"]
 
-[ext_resource type="Texture2D" uid="uid://cxg5dn0iwo65b" path="res://animations/CharacterSkirt/CharacterSkirt/Body.png" id="1_pfvf1"]
 [ext_resource type="Texture2D" uid="uid://gk00ff0ho1k7" path="res://assets/placeholder/test_character/head.png" id="2_3eg0t"]
-[ext_resource type="Texture2D" uid="uid://bjbcfwpdvf3vr" path="res://animations/CharacterSkirt/CharacterSkirt/ArmL.png" id="3_6mwsn"]
-[ext_resource type="Texture2D" uid="uid://dm6mnj2ta4ryh" path="res://animations/CharacterSkirt/CharacterSkirt/ArmR.png" id="4_jy3g0"]
 
 [sub_resource type="Animation" id="Animation_fttlt"]
 resource_name = "Crawl"
@@ -448,7 +445,6 @@ rest = Transform2D(1, 0, 0, 1, 0, 0)
 z_index = -1
 position = Vector2(-1, -16)
 scale = Vector2(0.531, 0.531)
-texture = ExtResource("1_pfvf1")
 
 [node name="HeadBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
 position = Vector2(2.01, -82.501)
@@ -471,7 +467,7 @@ rest = Transform2D(0.985399, -0.170258, 0.170258, 0.985399, 26.32, -45.85)
 z_index = -2
 position = Vector2(4.2793, 24.1449)
 rotation = -0.0131563
-texture = ExtResource("3_6mwsn")
+scale = Vector2(1, 1)
 
 [node name="HandLBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
 position = Vector2(18, 33)
@@ -489,7 +485,6 @@ rest = Transform2D(0.972315, 0.233675, -0.233675, 0.972315, -27, -48)
 [node name="ArmR" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmRBone"]
 position = Vector2(-4.87, 16.26)
 scale = Vector2(0.56, 0.56)
-texture = ExtResource("4_jy3g0")
 
 [node name="HandRBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmRBone"]
 visible = false

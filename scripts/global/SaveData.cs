@@ -20,6 +20,7 @@ public partial class SaveData : Node
     public const string APPLIED_TOWN_UNLOCKS_KEY = "appliedTownUnlocks";
     public const string VILLAGER_DATA_KEY = "allVillagers";
     public const string ORGANIZED_INVENTORY_ITEMS_KEY = "organizedInventoryItems";
+    public const string HOTBAR_ITEMS_KEY = "playerHotbarItems";
     public const string TOWN_STORAGE_ITEMS_KEY = "townStorageItems";
     public const string PLAYER_INFO_KEY = "playerInfo";
     public const string SCENE_INFO_KEY = "sceneInfo";
@@ -31,6 +32,7 @@ public partial class SaveData : Node
     public static List<TownUnlock> appliedUnlocks = new();
     public static List<VillagerRawData> allVillagerData = new();
     public static Array<RawInventoryItem> organizedPlayerInventory = new();
+    public static Array<RawInventoryItem> playerHotbarItems = new();
     public static Array<RawInventoryItem> townStorageItems = new();
     public static Dictionary playerInfo = new();
     public static Dictionary sceneInfo = new();
@@ -74,6 +76,7 @@ public partial class SaveData : Node
             appliedUnlocks,
             allVillagerData,
             organizedPlayerInventory,
+            playerHotbarItems,
             townStorageItems,
             playerInfo,
             sceneInfo);
@@ -129,8 +132,8 @@ public partial class SaveData : Node
         // Town stats
         TownManager.ReadTownDataFromFile(saveData, false);
 
-        // Inventory Data
-        await RawInventoryItem.ReadInventoryDataFromFile(saveData);
+        // Storage related Data
+        await RawInventoryItem.ReadStorageDataFromFile(saveData);
 
         // Villager Data
         await VillagerRawData.ReadVillagerDataFromFile(saveData);

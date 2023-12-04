@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using System.Threading.Tasks;
 
@@ -28,9 +29,6 @@ public partial class PlayerInventoryController : Control
 
 
     const int SELECTED_ITEM_OFFSET = 64;
-    const int HOTBAR_SIZE = 8;
-    public const int HOTBAR_START_IDX = StorageData.PLAYER_INVENTORY_MAX_SIZE - HOTBAR_SIZE;
-
 
     public override void _Ready()
     {
@@ -87,8 +85,7 @@ public partial class PlayerInventoryController : Control
 
     void UpdateHeldItem(int hotbarIndex)
     {
-        int itemInventoryIndex = HOTBAR_START_IDX + hotbarIndex;
-        heldItem = SaveData.organizedPlayerInventory[itemInventoryIndex];
+        heldItem = SaveData.playerHotbarItems[hotbarIndex];
 
         Vector2 heldItemPos = _hotbarGrid.GetChild<Control>(hotbarIndex).GlobalPosition;
         heldItemPos.X += SELECTED_ITEM_OFFSET / 2;
@@ -102,56 +99,25 @@ public partial class PlayerInventoryController : Control
     {
         await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete, 100);
 
-        foreach (var node in _inventoryGrid.GetChildren())
-        {
-            node.Free();
-        }
-
-        foreach (var node in _hotbarGrid.GetChildren())
-        {
-            node.Free();
-        }
-
-        // Init all slots with null items
-        for (int i = 0; i < StorageData.PLAYER_INVENTORY_MAX_SIZE; i++)
-        {
-            var itemSlotNode = GD.Load<PackedScene>(StorageController.INVENTORY_SLOT_RESPATH);
-            var itemSlot = itemSlotNode.Instantiate<Control>();
-
-            // This should probably be done better, works for now
-            if (IsSlotInHotbar(i))
-            {
-                _hotbarGrid.AddChild(itemSlot);
-            }
-            else
-            {
-                _inventoryGrid.AddChild(itemSlot);
-            }
-
-            var inventorySlot = (InventorySlot)itemSlot;
-
-            inventorySlot?.InitializeSlot(i);
-        }
-
-        for (int i = 0; i < StorageData.PLAYER_INVENTORY_MAX_SIZE; i++)
-        {
-            UpdateInventorySlot(
-                SaveData.organizedPlayerInventory[i],
-                IsSlotInHotbar(i)
-                    ? i - HOTBAR_START_IDX
-                    : i
+        StorageController.InitializeItemGridContainer(
+            _inventoryGrid,
+            SaveData.organizedPlayerInventory,
+            StorageSlotType.PlayerInventory,
+            0,
+            StorageData.PLAYER_INVENTORY_SIZE - 1
             );
-        }
+        
+        StorageController.InitializeItemGridContainer(
+            _hotbarGrid,
+            SaveData.playerHotbarItems,
+            StorageSlotType.Hotbar,
+            0,
+            StorageData.HOTBAR_SIZE - 1
+            );
 
         UpdateHeldItem(0);
         await SaveData.SyncInventory();
         isInitialized = true;
-    }
-
-
-    static bool IsSlotInHotbar(int index)
-    {
-        return index >= HOTBAR_START_IDX;
     }
 
 
@@ -205,8 +171,16 @@ public partial class PlayerInventoryController : Control
         bool affectSelectedItem = false,
         bool deselectOnAllAdded = true)
     {
+        rawItem.quantity = await StorageController.AddItem(
+            _hotbarGrid,
+            SaveData.playerHotbarItems,
+            rawItem,
+            index,
+            affectSelectedItem,
+            deselectOnAllAdded);
+        
         return await StorageController.AddItem(
-            ChooseGrid(index),
+            _inventoryGrid,
             SaveData.organizedPlayerInventory,
             rawItem,
             index,
@@ -221,75 +195,74 @@ public partial class PlayerInventoryController : Control
     ///	<returns> Whether the removal operation was successful or not </returns>
     public static async Task<bool> RemoveItemFromInventory(RawInventoryItem rawItem, int index = -1)
     {
-        return await StorageController.RemoveItemFromStorage(
-            ChooseGrid(index),
-            SaveData.organizedPlayerInventory,
+        bool success = await StorageController.RemoveItemFromStorage(
+            _hotbarGrid,
+            SaveData.playerHotbarItems,
             rawItem,
-            index
-        );
-    }
+            index);
 
-    static GridContainer ChooseGrid(int index)
-    {
-        return IsSlotInHotbar(index)
-            ? _hotbarGrid
-            : _inventoryGrid;
-    }
-
-    public static void SelectSingleItem(RawInventoryItem item, int index)
-    {
-        item.quantity -= 1;
-
-        if (item.quantity >= 1)
+        if (!success)
         {
-            StorageController.UpdateStorageSlot(
-                ChooseGrid(index), SaveData.organizedPlayerInventory, item, index);
+            success = await StorageController.RemoveItemFromStorage(
+                _inventoryGrid,
+                SaveData.organizedPlayerInventory,
+                rawItem,
+                index);
+        }
+
+        return success;
+    }
+
+    public static void SelectInventoryItemOfId(int itemId)
+    {
+        int index = StorageData.GetFirstStackIndexOfItem(SaveData.playerHotbarItems, itemId);
+        StorageSlot slot;
+        
+        if (index > 0)
+        {
+            slot = _hotbarGrid.GetChild<StorageSlot>(index);
         }
         else
         {
-            StorageController.NullifyItemAtIndex(
-                ChooseGrid(index), SaveData.organizedPlayerInventory, index);
+            index = StorageData.GetFirstStackIndexOfItem(SaveData.organizedPlayerInventory, itemId);
+            slot = _inventoryGrid.GetChild<StorageSlot>(index);
         }
 
-
-        SelectNewItem(new RawInventoryItem(item.id, item.name, 1, item.stackSize));
-    }
-
-    public static void SelectInventoryItemAtSlot(int index)
-    {
-        InventorySlot slot = IsSlotInHotbar(index)
-            ? _hotbarGrid.GetChild<InventorySlot>(index - HOTBAR_START_IDX)
-            : _inventoryGrid.GetChild<InventorySlot>(index);
-
+        if (!slot.slotHasItem) return;
+        
         SelectNewItem(slot.slotItem);
         slot.ToggleVisuals(false);
     }
 
-    public static void SwapItems(RawInventoryItem slotItem, int index)
+    public static void SwapItems(RawInventoryItem itemToSwap, int index)
     {
         RawInventoryItem tempSwapItem = new(
-            slotItem.id, slotItem.name, slotItem.quantity, slotItem.stackSize);
+            itemToSwap.id, itemToSwap.name, itemToSwap.quantity, itemToSwap.stackSize);
 
         UpdateInventorySlot(selectedItem, index);
 
         UpdateInventorySlot(tempSwapItem, selectedItem.indexInStorage);
 
-        SelectInventoryItemAtSlot(selectedItem.indexInStorage);
+        SelectInventoryItemOfId(selectedItem.id);
     }
 
     static void UpdateInventorySlot(RawInventoryItem item, int index)
     {
-        InventorySlot slotToUpdate;
-        if (IsSlotInHotbar(index))
+        StorageSlot slotToUpdate;
+        switch (item.currentHostSlotType)
         {
-            slotToUpdate = _hotbarGrid.GetChild<InventorySlot>(index - HOTBAR_START_IDX);
+            case StorageSlotType.Hotbar:
+                slotToUpdate = _hotbarGrid.GetChild<StorageSlot>(index);
+                break;
+            case StorageSlotType.PlayerInventory:
+                slotToUpdate = _inventoryGrid.GetChild<StorageSlot>(index);
+                break;
+            default:
+                return;
         }
-        else
-        {
-            slotToUpdate = _inventoryGrid.GetChild<InventorySlot>(index);
-        }
+        
 
-        StorageSlotController.UpdateSlot(slotToUpdate, SaveData.organizedPlayerInventory, item);
+        StorageSlotController.UpdateSlot(slotToUpdate, slotToUpdate.itemsRawArray, item);
     }
 
     public static void DropSelectedItem(Vector2 position, Node parent)
@@ -299,27 +272,42 @@ public partial class PlayerInventoryController : Control
 
         CreateDroppedItem(temp, position, parent);
 
+        var rawArray = temp.currentHostSlotType switch
+        {
+            StorageSlotType.PlayerInventory => SaveData.organizedPlayerInventory,
+            StorageSlotType.Hotbar => SaveData.playerHotbarItems,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        
         if (selectedItem.HasValidIndexInArray(SaveData.organizedPlayerInventory))
         {
+            var container = temp.currentHostSlotType switch
+            {
+                StorageSlotType.PlayerInventory => _inventoryGrid,
+                StorageSlotType.Hotbar => _hotbarGrid,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+                
             int idx = selectedItem.indexInStorage;
-            StorageController.NullifyItemAtIndex(ChooseGrid(idx), SaveData.organizedPlayerInventory, idx);
+            
+            StorageController.NullifyItemAtIndex(container, rawArray, idx);
         }
 
         DeselectItem();
 
         // Select a new item of the same type if exists
-        int index = StorageData.GetFirstStackIndexOfItem(SaveData.organizedPlayerInventory, temp.id);
+        int index = StorageData.GetFirstStackIndexOfItem(rawArray, temp.id);
 
         if (index == 0)
         {
             if (!StorageData.ExistsInStorage(
-                    SaveData.organizedPlayerInventory, temp.id, temp.quantity + 1))
+                    rawArray, temp.id, temp.quantity + 1))
             {
                 return;
             }
         }
 
-        SelectInventoryItemAtSlot(index);
+        SelectInventoryItemOfId(index);
     }
 
     /// <summary>

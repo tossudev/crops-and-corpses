@@ -6,8 +6,8 @@ using Godot.Collections;
 public enum StorageSlotType
 {
     PlayerInventory,
+    Hotbar,
     TownStorage,
-    Chest
 }
 
 public static class StorageSlotController
@@ -51,12 +51,17 @@ public static class StorageSlotController
 				}
 			}
 		}
+
+		if (slot.slotItem != null)
+		{
+			slot.slotItem.currentHostSlotType = slot.slotType;
+		}
+		
+		slot.UpdateVisuals();
         
 		if (doSync)
 		{
 			Task sync = SaveData.SyncInventory();
 		}
-		
-		slot.UpdateVisuals();
 	}
 }

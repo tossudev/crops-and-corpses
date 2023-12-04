@@ -6,7 +6,9 @@ using Godot.Collections;
 
 public static class StorageData
 {
-    public const int PLAYER_INVENTORY_MAX_SIZE = 40;
+    public const int PLAYER_INVENTORY_SIZE = 32;
+    public const int HOTBAR_SIZE = 8;
+    public const int TOWN_STORAGE_SIZE = 64;
     
     public static async void AddDefaultResourcesToInventoryIfEmpty()
     {

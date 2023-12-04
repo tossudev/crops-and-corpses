@@ -14,7 +14,7 @@ public partial class TownUpgradeButton : Button
 	Panel _unlockedPanel;
 	const string UNLOCKED_PANEL_NODENAME = "%UnlockedPanel";
 	
-	Array<InventorySlot> _inventorySlotContainer = new ();
+	Array<StorageSlot> _inventorySlotContainer = new ();
 	const string INVENTORY_SLOT_CONTAINER_NODENAME = "%InventorySlotContainer";
 
 	TownUpgrade _currentUpgrade;
@@ -35,7 +35,7 @@ public partial class TownUpgradeButton : Button
 			
 		foreach (var node in inventorySlotContainer.GetChildren())
 		{
-			if (node is not InventorySlot slot) return;
+			if (node is not StorageSlot slot) return;
 			_inventorySlotContainer.Add(slot);
 			slot.InitializeSlot(-1);
 		}

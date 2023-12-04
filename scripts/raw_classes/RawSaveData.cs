@@ -10,6 +10,7 @@ public partial class RawSaveData : GodotObject
     public List<TownUnlock> appliedUnlocks = new ();
     public List<VillagerRawData> allVillagers = new ();
     public Array<RawInventoryItem> organizedInventoryItems = new ();
+    public Array<RawInventoryItem> playerHotbarItems = new();
     public Array<RawInventoryItem> townStorageItems = new ();
     public Dictionary playerInfo = new ();
     public Dictionary sceneInfo = new ();
@@ -23,6 +24,7 @@ public partial class RawSaveData : GodotObject
         List<TownUnlock> appliedUnlocks,
         List<VillagerRawData> allVillagers,
         Array<RawInventoryItem> organizedInventoryItems,
+        Array<RawInventoryItem> playerHotbarItems,
         Array<RawInventoryItem> townStorageItems,
         Dictionary playerInfo,
         Dictionary sceneInfo)
@@ -32,6 +34,7 @@ public partial class RawSaveData : GodotObject
         this.appliedUnlocks = appliedUnlocks;
         this.allVillagers = allVillagers;
         this.organizedInventoryItems = organizedInventoryItems;
+        this.playerHotbarItems = playerHotbarItems;
         this.townStorageItems = townStorageItems;
         this.playerInfo = playerInfo;
         this.sceneInfo = sceneInfo;
@@ -61,6 +64,9 @@ public partial class RawSaveData : GodotObject
         // Organized inventory
         fullDictionary.Add(
             SaveData.ORGANIZED_INVENTORY_ITEMS_KEY, RawInventoryItem.GetOrganizedItemsArray(organizedInventoryItems));
+        
+        // Hotbar
+        fullDictionary.Add(SaveData.HOTBAR_ITEMS_KEY, RawInventoryItem.GetOrganizedItemsArray(playerHotbarItems));
 
         // Player info
         fullDictionary.Add(SaveData.PLAYER_INFO_KEY, PlayerInfo.GetDictionary());

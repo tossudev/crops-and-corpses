@@ -27,7 +27,7 @@ public partial class BridgeQuest : Node2D
 		{
 			_playerInArea = true;
 
-			if (PlayerInventoryData.ExistsInInventory(1, WOOD_NEEDED))
+			if (StorageData.ExistsInStorage(SaveData.organizedPlayerInventory, 0, WOOD_NEEDED))
 			{
 				GetNode<Button>("%FinishQuestBtn").Disabled = false;	
 				_questFinished = true;			

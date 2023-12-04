@@ -24,7 +24,7 @@ public partial class CraftPanel : Control
 	TextureRect _itemImage;
 	const string CRAFT_ITEM_IMAGE_NODENAME = "%CraftItemImage";
 
-	[Export] InventorySlot[] _requiredResSlots;
+	[Export] StorageSlot[] _requiredResSlots;
 
 	Label _errorMsgLabel;
 	const string ERROR_LABEL_NODENAME = "%ErrorLabel";

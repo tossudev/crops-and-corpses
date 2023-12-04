@@ -1,9 +1,12 @@
 
+using System;
 using Godot;
+using Godot.Collections;
 
-public abstract partial class StorageSlot : Control
+public partial class StorageSlot : Control
 {
 	[Export] public bool isCraftingSlot;
+	[Export] public StorageSlotType slotType;
 	
 	public TextureRect icon;
 	const string ICON_TEXTURE_NODENAME = "%ItemIcon";
@@ -12,6 +15,8 @@ public abstract partial class StorageSlot : Control
 	const string QUANTITY_LABEL_NODENAME = "%ItemQuantityLabel";
 	
 	public RawInventoryItem slotItem;
+	Array<RawInventoryItem> _itemsRawArray;
+	public Array<RawInventoryItem> itemsRawArray => _itemsRawArray;
 
 	public bool slotHasItem { get; private set; }
 	
@@ -22,6 +27,19 @@ public abstract partial class StorageSlot : Control
 
 
 	FloatingButtonName _floatingNamePanel;
+    
+	public override void _Ready()
+	{
+		base._Ready();
+		_itemsRawArray = slotType switch
+		{
+			StorageSlotType.PlayerInventory => SaveData.organizedPlayerInventory,
+			StorageSlotType.Hotbar => SaveData.playerHotbarItems,
+			StorageSlotType.TownStorage => SaveData.townStorageItems,
+			_ => throw new ArgumentOutOfRangeException()
+		};
+	}
+	
     void OnButtonGuiInput(InputEvent @event)
 	{
 		if (isCraftingSlot) return;
@@ -50,13 +68,69 @@ public abstract partial class StorageSlot : Control
 	    slotInitialized = true;
     }
 
-    protected abstract void ClickLeft();
+	void ClickLeft()
+    {
+	    switch (PlayerInventoryController.isItemSelected)
+	    {
+		    // Player selects new item
+		    case false when slotHasItem:
+			    PlayerInventoryController.SelectNewItem(slotItem);
+			    ToggleVisuals(false);
+			    break;
+		    
+		    // Player deselected item from hand
+		    case true when !slotHasItem:
+			    AddItemToInventory();
+			    break;
+		    
+		    // Player has item a slot with item
+		    case true when slotHasItem:
+		    {
+			    var selectedItem = PlayerInventoryController.selectedItem;
+			    
+			    if (selectedItem.HasValidIndexInArray(_itemsRawArray) &&
+			        slotIndex == selectedItem.indexInStorage)
+			    {
+				    StorageSlotController.UpdateSlot(this, _itemsRawArray, PlayerInventoryController.selectedItem);
+				    PlayerInventoryController.DeselectItem();
+			    }
+
+			    else if (slotItem.id == selectedItem.id)
+			    {
+				    AddItemToInventory();
+			    }
+
+			    else {
+				    PlayerInventoryController.SwapItems(slotItem, slotIndex);
+			    }
+
+			    break;
+		    }
+	    }
+    }
 
 
-    protected abstract void ClickRight();
+    protected void ClickRight()
+    {
+	    // Player takes one item from stack
+	    if (!PlayerInventoryController.isItemSelected && slotHasItem)
+	    {
+		    var parent = GetParent<GridContainer>();
+            
+		    StorageController.SelectSingleItem(parent, _itemsRawArray, slotItem, slotIndex);
+	    }
+    }
 
-
-    public abstract void ToggleVisuals(bool on);
+    async void AddItemToInventory()
+    {
+	    await PlayerInventoryController.AddItemToInventory(PlayerInventoryController.selectedItem, slotIndex, true);
+    }
+    
+    public void ToggleVisuals(bool on)
+    {
+	    icon.Visible = on;
+	    quantityLabel.Visible = on;
+    }
 
     public void UpdateVisuals()
     {

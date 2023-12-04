@@ -13,7 +13,7 @@ autoplay = true
 max_polyphony = 32
 bus = &"SFX"
 
-[node name="LoopingSFX" type="AudioStreamPlayer" parent="."]
+[node name="WalkingSFX" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

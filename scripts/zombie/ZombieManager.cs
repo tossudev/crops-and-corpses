@@ -52,14 +52,14 @@ public partial class ZombieManager : Node
 
 	private void UpdateStats()
 	{
+		
 		int townStats = TownManager.currentTownStats.townHallLevel;
-		if(zombieKillCount > 0) zombieKillCount -= 0.2f; // Decreasing kill count by 0.5 every second
-
+		if(zombieKillCount > 0) zombieKillCount -= 0.2f; // Decreasing kill count by 0.2 every second
 		if (dayMode)type = ZombieType.Weak;
 		else 
 		{
 			type = ZombieType.Medium;
-			if(zombieKillCount > 10 && townStats > 4) type = ZombieType.Strong;	
+			if(zombieKillCount > 10f && townStats > 4) type = ZombieType.Strong;	
 		}
 		
 		switch(type)
@@ -117,6 +117,12 @@ public partial class ZombieManager : Node
 				attackTime += 0.5;
 				idleSpeed +=50;
 				chaseSpeed +=50;
+				break;
+			case 5:
+				damage += 10;
+				attackTime += 1;
+				idleSpeed += 80;
+				chaseSpeed += 80;
 				break;
 			default:
 				break;

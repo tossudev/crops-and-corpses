@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class QuestManager : Node
@@ -80,6 +81,7 @@ public partial class QuestManager : Node
 	} 
 
 	
+	
 
 
 
@@ -100,4 +102,6 @@ public partial class QuestManager : Node
 		
 		SetActiveQuest(null);
 	}
+
+   public bool CanStartNewQuest() => activeQuest == null && globalTime.GetDay() != 0;
 }

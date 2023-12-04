@@ -113,9 +113,10 @@ public partial class Quest : Node
     }
 
     
-   
-      
-
+    public int GetStartDay()
+    {
+        return startDay;
+    }
 }
 
    

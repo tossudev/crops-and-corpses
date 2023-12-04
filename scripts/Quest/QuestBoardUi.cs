@@ -46,7 +46,8 @@ public partial class QuestBoardUi : Control
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        _globalTime = GetNodeOrNull<GlobalTime>("/root/GlobalTime");
+      _globalTime = GetNodeOrNull<GlobalTime>("/root/GlobalTime");
+
         questManager = GetNode<QuestManager>("/root/QuestManager");
         _closeButton = GetNode(BUTTON_CLOSE_CONTAINER_NODENAME).GetNode<Button>("%CloseButton");
 
@@ -61,18 +62,31 @@ public partial class QuestBoardUi : Control
 
 
         // Button mapping
-        _forestButton.Pressed += () => questManager.StartRescueQuest(Scene.Forest,_selectedDiff);
-        _ruinsButton.Pressed += () => questManager.StartRescueQuest(Scene.Ruins,_selectedDiff);
-        _caveButton.Pressed += () => questManager.StartRescueQuest(Scene.Cave,_selectedDiff);
+        _forestButton.Pressed += () => {
+    questManager.StartRescueQuest(Scene.Forest, _selectedDiff);
+    CheckIfQuestStartedToday();
+  };
+  _ruinsButton.Pressed += () =>{ 
+    questManager.StartRescueQuest(Scene.Ruins, _selectedDiff);
+    CheckIfQuestStartedToday();
+  };
+  _caveButton.Pressed += () => { 
+    questManager.StartRescueQuest(Scene.Cave, _selectedDiff);
+    CheckIfQuestStartedToday();
+  };
 
         Dif1Button.Pressed += () => SetQuestDifficulty(1);
         Dif2Button.Pressed += () => SetQuestDifficulty(2);
         Dif3Button.Pressed += () => SetQuestDifficulty(3);
 
         _closeButton.Pressed += CloseQuestBoard;
+        
+        CheckIfQuestStartedToday();
 
         CloseQuestBoard();
     }
+
+
 
     public override void _Input(InputEvent @event)
     {
@@ -86,33 +100,43 @@ public partial class QuestBoardUi : Control
             else
             {
                 OpenQuestBoard();
+                CheckIfQuestStartedToday();
             }
         }
     }
 
-    void CheckIfQuestStartedToday()
-    {
-        if (questManager.GetActiveQuest().startDay == _globalTime.GetDay() && questManager.GetActiveQuest() != null)
-        {
-            questStatusText.Text = "Quest started today check quesjournal for more info ";
-        }
-        else if (questManager.GetActiveQuest() == null &&
-                 questManager.GetActiveQuest().startDay == _globalTime.GetDay())
-        {
-            questStatusText.Text = "Check back tomorrow for a new quest";
-        }
+    
 
-        else if (questManager.GetActiveQuest() != null &&
-                 questManager.GetActiveQuest().startDay != _globalTime.GetDay())
+
+   void CheckIfQuestStartedToday()
+{
+    var activeQuest = questManager.GetActiveQuest();
+    if (activeQuest != null && _globalTime != null)
+    {
+        if(activeQuest.GetStartDay() < _globalTime.GetDay())
         {
-            questStatusText.Text = "Quest started " + questManager.GetActiveQuest().startDay + " days ago";
+            questStatusText.Text = "Quest already started";
         }
-        else if (questManager.GetActiveQuest() == null &&
-                 questManager.GetActiveQuest().startDay != _globalTime.GetDay())
+        else if (activeQuest.GetStartDay() == _globalTime.GetDay())
         {
-            questStatusText.Text = "Can start a new quest select  a difficulty first and then location";
+            if (activeQuest == null && _globalTime.GetDay() == questManager.GetActiveQuest().GetStartDay())
+            {
+                questStatusText.Text = "Quest completed today, wait for next day to start new quest";
+            }
+            else
+            {
+                questStatusText.Text = "Quest started today";
+            }
         }
     }
+    else
+    {
+        questStatusText.Text = "Can start new quest";
+    }
+}
+
+
+
 
     void SetQuestDifficulty(int diff)
     {
@@ -142,11 +166,13 @@ public partial class QuestBoardUi : Control
     public void OpenQuestBoard()
     {
         Visible = true;
-        //SetLevelsActive();
+        SetLevelsActive();
     }
 
     public int GetSelectedDifficulty()
     {
         return _selectedDiff;
     }
+
+    
 }

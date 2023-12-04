@@ -22,13 +22,12 @@
 [ext_resource type="Texture2D" uid="uid://bnd33hpfvrxau" path="res://assets/sprites/character/hats/ushanka.png" id="11_so3fe"]
 [ext_resource type="Texture2D" uid="uid://p106vjb26wkd" path="res://assets/sprites/items/item_log.png" id="12_0vd3i"]
 [ext_resource type="Texture2D" uid="uid://bakys00o3rkly" path="res://assets/sprites/character/hats/mining_hat.png" id="12_7e7qn"]
-[ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory/inventory_slot.tscn" id="19_2cmba"]
 [ext_resource type="StyleBox" uid="uid://cphnvuxh1r71q" path="res://assets/resources/styles/default_tab_container_hovered_tab_style.tres" id="19_rmd0d"]
 [ext_resource type="StyleBox" uid="uid://bfq7mg2htfllb" path="res://assets/resources/styles/inventory_style_box_texture.tres" id="22_u1bpq"]
 [ext_resource type="Script" path="res://scripts/ui/town/TownStorageController.cs" id="25_d4ugw"]
+[ext_resource type="PackedScene" uid="uid://bxxvs34x1r2us" path="res://scenes/ui/inventory/town_storage_slot.tscn" id="26_inyay"]
 
 [node name="Town Hall Menu" type="Control"]
-z_index = 100
 custom_minimum_size = Vector2(720, 512)
 layout_mode = 3
 anchors_preset = 0
@@ -361,6 +360,7 @@ grow_horizontal = 0
 
 [node name="StoragePanel" type="Panel" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -425,245 +425,77 @@ theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 8
 
-[node name="InventorySlot" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot2" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot2" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot3" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot3" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot4" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot4" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot5" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot5" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot6" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot6" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot7" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot7" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot8" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot8" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot9" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot9" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot10" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot10" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot11" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot11" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot12" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot12" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot13" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot13" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot14" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot14" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot15" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot15" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot16" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot16" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot17" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot17" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot18" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot18" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot19" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot19" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot20" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot20" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot21" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot21" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot22" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot22" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot23" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot23" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
-[node name="InventorySlot24" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
+[node name="TownStorageSlot24" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("26_inyay")]
 layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot25" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot26" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot27" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot28" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot29" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot30" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot31" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot32" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot33" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot34" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot35" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot36" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot37" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot38" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot39" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot40" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot41" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot42" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot43" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot44" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot45" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot46" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot47" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
-
-[node name="InventorySlot48" parent="StoragePanel/VBoxContainer/MarginContainer/InventoryPanel/MarginContainer/ScrollContainer/StorageGrid" instance=ExtResource("19_2cmba")]
-layout_mode = 2
-isCraftingSlot = null
-slotType = null
 
 [node name="StorageCloseButtonContainer" parent="StoragePanel" instance=ExtResource("9_dldyl")]
 unique_name_in_owner = true

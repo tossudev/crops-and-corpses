@@ -17,25 +17,28 @@ public partial class RawInventoryItem : GodotObject
     public string name;
     public int quantity;
     public int stackSize;
-    public int indexInStorage;
+    public int indexInStorageArray;
 
     // Not saved, only runtime
-    public StorageSlotType currentHostSlotType;
+    public StorageSlotType hostSlotType;
+    public Array<RawInventoryItem> hostArray;
+    public GridContainer hostGrid;
     
-    public RawInventoryItem(int id, string name, int quantity, int stackSize, int indexInStorage = -1)
+    
+    public RawInventoryItem(int id, string name, int quantity, int stackSize, int indexInStorageArray = -1)
     {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.stackSize = stackSize;
-        this.indexInStorage = indexInStorage;
+        this.indexInStorageArray = indexInStorageArray;
     }
 
     public int SpaceRemainingInStack => stackSize - quantity;
 
-    public bool HasValidIndexInArray(Array<RawInventoryItem> array)
+    public bool HasValidIndexInArray()
     {
-        return indexInStorage >= 0 && indexInStorage < array.Count;
+        return indexInStorageArray >= 0 && indexInStorageArray < hostArray.Count;
     }
     
     
@@ -83,7 +86,7 @@ public partial class RawInventoryItem : GodotObject
                     (int) itemDataDict[ITEM_STACKSIZE_KEY],
                     (int) itemDataDict[ITEM_ORGANIZED_INDEX_KEY]);
                 
-                rawItems[convertedRawItem.indexInStorage] = convertedRawItem;
+                rawItems[convertedRawItem.indexInStorageArray] = convertedRawItem;
             }
 
         });
@@ -119,7 +122,7 @@ public partial class RawInventoryItem : GodotObject
                 { ITEM_NAME_KEY, rawInventoryItem.name },
                 { ITEM_QUANTITY_KEY, rawInventoryItem.quantity },
                 { ITEM_STACKSIZE_KEY, rawInventoryItem.stackSize},
-                { ITEM_ORGANIZED_INDEX_KEY, rawInventoryItem.indexInStorage}
+                { ITEM_ORGANIZED_INDEX_KEY, rawInventoryItem.indexInStorageArray}
             });
         }
 

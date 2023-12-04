@@ -33,8 +33,24 @@ public static class StorageData
 
     public static bool ExistsInStorage(Array<RawInventoryItem> rawArray, int itemId, int amountRequired)
     {
-        int amountFound = rawArray.Where(rawItem => rawItem.id == itemId).Sum(rawItem => rawItem.quantity);
+        int amountFound = rawArray.Where(rawItem => rawItem != null && rawItem.id == itemId).Sum(rawItem => rawItem.quantity);
 
+        return amountFound >= amountRequired;
+    }
+    
+    public static bool ExistsInInventoryOrHotbar(int itemId, int amountRequired)
+    {
+        var rawArray = SaveData.organizedPlayerInventory;
+        
+        int amountFound = rawArray.Where(rawItem => rawItem != null && rawItem.id == itemId).
+            Sum(rawItem => rawItem.quantity);
+
+        
+        rawArray = SaveData.playerHotbarItems;
+        
+        amountFound += rawArray.Where(rawItem => rawItem != null && rawItem.id == itemId)
+            .Sum(rawItem => rawItem.quantity);
+        
         return amountFound >= amountRequired;
     }
 
@@ -55,7 +71,7 @@ public static class StorageData
             if (mustNotBeFull && rawInventoryItem.quantity >= rawInventoryItem.stackSize) continue;
             
             
-            indexToReturn = rawInventoryItem.indexInStorage;
+            indexToReturn = rawInventoryItem.indexInStorageArray;
             break;
         }
         

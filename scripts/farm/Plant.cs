@@ -321,7 +321,7 @@ public partial class Plant : Node2D
         	 int randomAmount = random.Next(1, _maxHarvestableAmount);
 			GD.Print("Harvested: " +plantName +" x"+randomAmount);
 			RawInventoryItem _plant = new RawInventoryItem(_harvestablePlant.ID, _harvestablePlant.Name, randomAmount, _harvestablePlant.StackSize);
-			await PlayerInventoryController.AddItemToInventory(_plant);
+			await PlayerInventoryController.AddItemToHotbarOrInventory(_plant);
 		}else if(_state == GrowthState.IsDead){
 			GD.Print("Cleared plant: "+plantName);
 		}

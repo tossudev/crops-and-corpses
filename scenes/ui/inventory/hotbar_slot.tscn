@@ -25,10 +25,11 @@ anchors_preset = 0
 offset_right = 72.0
 offset_bottom = 72.0
 script = ExtResource("1_vmhkh")
-slotType = 1
+slotType = 20
 
 [node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2(72, 72)
+layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_ruyd7")
@@ -79,6 +80,7 @@ vertical_alignment = 2
 
 [node name="FloatingButtonNamePanel" parent="." instance=ExtResource("2_nbltq")]
 unique_name_in_owner = true
+layout_mode = 0
 offset_right = 100.0
 
 [connection signal="gui_input" from="Button" to="." method="OnButtonGuiInput"]

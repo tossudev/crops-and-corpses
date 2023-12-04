@@ -169,7 +169,7 @@ public partial class HealthComponent : Node2D
 			itemToRemove.name,
 			1,
 			itemToRemove.stackSize),
-			itemToRemove.indexInStorage);
+			itemToRemove.indexInStorageArray);
 
 		_parentScript.CallDeferred("OnHealth", _health);
 	}

@@ -129,10 +129,14 @@ public partial class CraftPanel : Control
 		try
 		{
 			if (craftedItem.craftingRequirements.Any(
-				    craftingRequirement => !StorageData.ExistsInStorage(
-                    SaveData.organizedPlayerInventory,
-				    craftingRequirement.item.ID,craftingRequirement.quantity * amountToCraft)))
+				    craftingRequirement => 
+					    !StorageData.ExistsInStorage(SaveData.organizedPlayerInventory,
+						    craftingRequirement.item.ID, craftingRequirement.quantity * amountToCraft)
+					    &&
+					    !StorageData.ExistsInStorage(SaveData.playerHotbarItems,
+						    craftingRequirement.item.ID, craftingRequirement.quantity * amountToCraft)))
 			{
+				// neither inventory nor hotbar contains one of the requirements
 				return false;
 			}
 			
@@ -147,8 +151,9 @@ public partial class CraftPanel : Control
 				}
 			}
 
-			await PlayerInventoryController.AddItemToInventory(
-				new RawInventoryItem(craftedItem.ID, craftedItem.Name, amountToCraft, craftedItem.StackSize));
+			await PlayerInventoryController.AddItemToHotbarOrInventory(
+				new RawInventoryItem(craftedItem.ID, craftedItem.Name, amountToCraft, craftedItem.StackSize),
+				-1, true);
 			
 			return true;
 		}

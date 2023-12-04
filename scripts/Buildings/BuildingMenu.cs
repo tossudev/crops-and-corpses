@@ -141,7 +141,7 @@ public partial class BuildingMenu : Control
 
             int price = Int32.Parse(label.Text);
 
-            if (!PlayerInventoryData.ExistsInInventory(itemId, price))
+            if (!StorageData.ExistsInInventoryOrHotbar(itemId, price))
             {
                 label.SelfModulate = Colors.Red;
             }
@@ -455,7 +455,7 @@ public partial class BuildingMenu : Control
 
     private void OnButtonUp(Building building)
     {
-        if (!PlayerInventoryData.ExistsInInventory(log.ID, building.priceLogs) || !PlayerInventoryData.ExistsInInventory(stone.ID, building.priceStone))
+        if (!StorageData.ExistsInInventoryOrHotbar(log.ID, building.priceLogs) || !StorageData.ExistsInInventoryOrHotbar(stone.ID, building.priceStone))
         {
             _notEnoughResourcesLabel.Visible = true;
             return;

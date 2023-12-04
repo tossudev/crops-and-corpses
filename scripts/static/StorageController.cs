@@ -4,8 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
-
-
+using Array = System.Array;
 
 
 public static class StorageController
@@ -18,15 +17,15 @@ public static class StorageController
     
     ///  <summary> Main Storage additive operation </summary>
     ///  <param name="storageGridContainer"></param>
-    ///  <param name="rawArray"> The array of RawInventoryItem to add the item to</param>
+    ///  <param name="rawArrayToAddTo"> The array of RawInventoryItem to add the item to</param>
     ///  <param name="rawItem"> Includes id, name and quantity to add </param>
     ///  <param name="index"> optional: index in the inventory array </param>
     ///  <param name="affectSelectedItem"> optional : affect the current selected item </param>
     ///  <param name="deselectOnAllAdded"> optional : deselect current item if all items were added </param>
     ///  
     /// 	<returns> how many items could *NOT* be added </returns>
-    public static async Task<int> AddItem(GridContainer storageGridContainer, Array<RawInventoryItem> rawArray,
-	    RawInventoryItem rawItem, int index = -1, bool affectSelectedItem = false, bool deselectOnAllAdded = true)
+    public static async Task<int> AddItem(GridContainer storageGridContainer, Array<RawInventoryItem> rawArrayToAddTo,
+	    RawInventoryItem rawItem, int index = -1)
 	{
 
 		if (rawItem == null)
@@ -36,36 +35,10 @@ public static class StorageController
 		}
 		
 		rawItem.quantity = index == -1 
-			? await AddToGridUntilFull(storageGridContainer, rawArray, rawItem) // index not specified
-			: await AddToSlotUntilFull(storageGridContainer, rawArray, rawItem, index); // index given
-
-		bool indexValid = rawItem.HasValidIndexInArray(rawArray);
-		
-		if (rawItem.quantity == 0)
-		{
-			if (indexValid)
-			{
-				NullifyItemAtIndex(storageGridContainer, rawArray, rawItem.indexInStorage);
-			}
-		}
-		
-		
-        if (affectSelectedItem && PlayerInventoryController.isItemSelected)
-        {
-	        if (rawItem.quantity == 0)
-	        {
-		        // All items in question added
-		        if (deselectOnAllAdded)
-		        {
-			        PlayerInventoryController.DeselectItem();
-		        }
-	        }
-	        else if (PlayerInventoryController.selectedItem.id == rawItem.id && indexValid)
-	        {
-		        PlayerInventoryController.SelectInventoryItemOfId(PlayerInventoryController.selectedItem.id);
-	        }
-        }
+			? await AddToGridUntilFull(storageGridContainer, rawArrayToAddTo, rawItem) // index not specified
+			: await AddToSlotUntilFull(storageGridContainer, rawArrayToAddTo, rawItem, index); // index given
         
+		
         await SaveData.SyncInventory();
         return rawItem.quantity;
 	}
@@ -73,19 +46,21 @@ public static class StorageController
 	static async Task<int> AddToGridUntilFull(GridContainer storageGridContainer, Array<RawInventoryItem> rawArray,
 		RawInventoryItem itemToAdd)
 	{
+		int quantity = itemToAdd.quantity;
+		
 		for (int i = 0; i < rawArray.Count; i++)
 		{
 			RawInventoryItem itemInSlot = rawArray[i];
             
 			if (itemInSlot == null || itemToAdd.id == itemInSlot.id)
 			{
-				itemToAdd.quantity = await AddToSlotUntilFull(storageGridContainer, rawArray, itemToAdd, i);
+				quantity = await AddToSlotUntilFull(storageGridContainer, rawArray, itemToAdd, i);
 			}
 
-			if (itemToAdd.quantity == 0) break;
+			if (quantity == 0) break;
 		}
 		
-		return itemToAdd.quantity;
+		return quantity;
 	}
 	
 	static Task<int> AddToSlotUntilFull(GridContainer storageGridContainer, Array<RawInventoryItem> rawArray,
@@ -98,25 +73,26 @@ public static class StorageController
         
 		int spaceRemainingAtIndex = itemInSlot?.SpaceRemainingInStack ?? itemToAdd.stackSize;
 		
-		int amountToAdd = itemToAdd.quantity;
-
-		int howManyWereAdded = spaceRemainingAtIndex - amountToAdd < 0
+		int howManyWereAdded = spaceRemainingAtIndex - itemToAdd.quantity < 0
 			? spaceRemainingAtIndex
-			: amountToAdd;
+			: itemToAdd.quantity;
 
 		if (howManyWereAdded > 0)
 		{
+			
 			RawInventoryItem addedItem = new RawInventoryItem(
 				itemToAdd.id,
 				itemToAdd.name,
-				itemToAdd.stackSize - spaceRemainingAtIndex + howManyWereAdded,
+				(itemInSlot?.quantity ?? 0) + howManyWereAdded,
 				itemToAdd.stackSize);
 			
 			UpdateStorageSlot(storageGridContainer, rawArray, addedItem, index);
 
 			itemToAdd.quantity -= howManyWereAdded;
 		}
-        
+		
+		HandleRemainderOfAddOrRemoveOperation(itemToAdd);
+		
 		return Task.FromResult(itemToAdd.quantity);
 	}
 
@@ -213,25 +189,41 @@ public static class StorageController
 		
 		itemInSlot.quantity -= amountRemoved;
         
-		if (itemInSlot.quantity > 0)
-		{
-            UpdateStorageSlot(slotContainer, rawArray, itemInSlot, index);
-		}
-		else
-		{
-			NullifyItemAtIndex(slotContainer, rawArray, index);
-		}
-        
+		HandleRemainderOfAddOrRemoveOperation(itemInSlot);
+		
 		return Task.FromResult(amountToRemove - amountRemoved);
 	}
-	
+
+	static void HandleRemainderOfAddOrRemoveOperation(RawInventoryItem itemToHandle)
+	{
+		bool slotEmpty = itemToHandle.quantity == 0;
+		
+        if (PlayerInventoryController.HasSameItemSelected(itemToHandle))
+		{
+			if (slotEmpty)
+			{
+				PlayerInventoryController.DeselectItem();
+			}
+			else
+			{
+				PlayerInventoryController.UpdateSelectedItemVisuals();
+			}
+		}
+		
+		if (!itemToHandle.HasValidIndexInArray()) return;
+
+		if (slotEmpty)
+		{
+			NullifyItemAtIndex(itemToHandle.hostGrid, itemToHandle.hostArray, itemToHandle.indexInStorageArray);
+		}
+	}
 	
     public static void NullifyItemAtIndex(GridContainer slotContainer, Array<RawInventoryItem> rawArray, int index)
 	{
 		UpdateStorageSlot(slotContainer, rawArray, null, index);
 	}
 
-	public static void UpdateStorageSlot(GridContainer slotContainer, Array<RawInventoryItem> rawArray, RawInventoryItem item, int index)
+    static void UpdateStorageSlot(GridContainer slotContainer, Array<RawInventoryItem> rawArray, RawInventoryItem item, int index)
 	{
 		var slotToUpdate = slotContainer.GetChild<StorageSlot>(index);
         StorageSlotController.UpdateSlot(slotToUpdate, rawArray, item);
@@ -269,9 +261,7 @@ public static class StorageController
 			slotContainer.AddChild(itemSlot);
 
 			itemSlot.InitializeSlot(i);
-			
-			
-			
+            
 			StorageSlotController.UpdateSlot(itemSlot, rawArray, rawArray[i], false);
 		}
 	}
@@ -297,6 +287,13 @@ public static class StorageController
 	public static void SelectItemAtSlot(GridContainer slotContainer, int index)
 	{
 		StorageSlot slot = slotContainer.GetChild<StorageSlot>(index);
+
+		if (!slot.hasItem)
+		{
+			GD.Print("Can't select an item in slot with no item");
+			PlayerInventoryController.DeselectItem();
+			return;
+		}
 
 		PlayerInventoryController.SelectNewItem(slot.slotItem);
 		slot.ToggleVisuals(false);

@@ -146,6 +146,16 @@ public partial class PlayerInventoryController : Control
         UpdateSelectedItemVisuals();
     }
 
+    public static bool HasSameItemSelected(RawInventoryItem item)
+    {
+        if (!isItemSelected) return false;
+
+        return selectedItem.id == item.id
+               && selectedItem.hostGrid == item.hostGrid
+               && selectedItem.hostArray == item.hostArray
+               && selectedItem.indexInStorageArray == item.indexInStorageArray;
+    }
+    
     public static void UpdateSelectedItemVisuals()
     {
         Item itemResource = ItemData.GetItemById(selectedItem.id);
@@ -158,34 +168,59 @@ public partial class PlayerInventoryController : Control
     }
 
 
-    /// <summary> Main inventory additive operation </summary>
-    /// <param name="rawItem"> Includes id, name and quantity to add </param>
-    /// <param name="index"> optional: desired index in the organized player inventory array </param>
-    /// <param name="affectSelectedItem"> optional : affect the current selected item </param>
-    /// <param name="deselectOnAllAdded"> optional : deselect current item if all items were added </param>
-    /// 
-    ///	<returns> how many items could *NOT* be added </returns>
-    public static async Task<int> AddItemToInventory(
+    ///  <summary> Main inventory additive operation </summary>
+    ///  <param name="rawItem"> Includes id, name and quantity to add </param>
+    ///  <param name="index"> optional: desired index in the organized player inventory array </param>
+    ///  <param name="affectSelectedItem"> optional : affect the current selected item </param>
+    ///  <param name="deselectOnAllAdded"> optional : deselect current item if all items were added </param>
+    ///  <param name="prioritizeHotbar"></param>
+    ///  <returns> how many items could *NOT* be added </returns>
+    public static async Task<int> AddItemToHotbarOrInventory(
         RawInventoryItem rawItem,
         int index = -1,
         bool affectSelectedItem = false,
-        bool deselectOnAllAdded = true)
+        bool deselectOnAllAdded = true,
+        bool prioritizeHotbar = true)
     {
-        rawItem.quantity = await StorageController.AddItem(
-            _hotbarGrid,
-            SaveData.playerHotbarItems,
-            rawItem,
-            index,
-            affectSelectedItem,
-            deselectOnAllAdded);
-        
+        var remaining = prioritizeHotbar
+            ? await AddItemToHotbar(rawItem, index)
+            : await AddItemToInventory(rawItem, index);
+
+        if (remaining > 0)
+        {
+            remaining = prioritizeHotbar
+                ? await AddItemToInventory(rawItem, index)
+                : await AddItemToHotbar(rawItem, index);
+        }
+
+        return remaining;
+    }
+    
+    
+    
+    public static async Task<int> AddItemToInventory(
+        RawInventoryItem rawItem,
+        int index = -1)
+    {
         return await StorageController.AddItem(
             _inventoryGrid,
             SaveData.organizedPlayerInventory,
             rawItem,
-            index,
-            affectSelectedItem,
-            deselectOnAllAdded);
+            index
+            );
+    }
+    
+    public static async Task<int> AddItemToHotbar(
+        RawInventoryItem rawItem,
+        int index = -1
+        )
+    {
+        return rawItem.quantity = await StorageController.AddItem(
+            _hotbarGrid,
+            SaveData.playerHotbarItems,
+            rawItem,
+            index
+            );
     }
 
     /// <summary> Main inventory item removal method </summary>
@@ -196,16 +231,16 @@ public partial class PlayerInventoryController : Control
     public static async Task<bool> RemoveItemFromInventory(RawInventoryItem rawItem, int index = -1)
     {
         bool success = await StorageController.RemoveItemFromStorage(
-            _hotbarGrid,
-            SaveData.playerHotbarItems,
+            _inventoryGrid,
+            SaveData.organizedPlayerInventory,
             rawItem,
             index);
-
+        
         if (!success)
         {
             success = await StorageController.RemoveItemFromStorage(
-                _inventoryGrid,
-                SaveData.organizedPlayerInventory,
+                _hotbarGrid,
+                SaveData.playerHotbarItems,
                 rawItem,
                 index);
         }
@@ -213,43 +248,27 @@ public partial class PlayerInventoryController : Control
         return success;
     }
 
-    public static void SelectInventoryItemOfId(int itemId)
-    {
-        int index = StorageData.GetFirstStackIndexOfItem(SaveData.playerHotbarItems, itemId);
-        StorageSlot slot;
-        
-        if (index > 0)
-        {
-            slot = _hotbarGrid.GetChild<StorageSlot>(index);
-        }
-        else
-        {
-            index = StorageData.GetFirstStackIndexOfItem(SaveData.organizedPlayerInventory, itemId);
-            slot = _inventoryGrid.GetChild<StorageSlot>(index);
-        }
-
-        if (!slot.slotHasItem) return;
-        
-        SelectNewItem(slot.slotItem);
-        slot.ToggleVisuals(false);
-    }
-
-    public static void SwapItems(RawInventoryItem itemToSwap, int index)
+    public static void SwapItems(RawInventoryItem itemToSwapOut, int itemToSwapOutIndex)
     {
         RawInventoryItem tempSwapItem = new(
-            itemToSwap.id, itemToSwap.name, itemToSwap.quantity, itemToSwap.stackSize);
+            itemToSwapOut.id, itemToSwapOut.name, itemToSwapOut.quantity, itemToSwapOut.stackSize);
+        
+        tempSwapItem.hostSlotType = selectedItem.hostSlotType;
+        
+        selectedItem.hostSlotType = itemToSwapOut.hostSlotType;
 
-        UpdateInventorySlot(selectedItem, index);
+        int selectedItemIndex = selectedItem.indexInStorageArray;
+        
+        UpdateInventorySlot(selectedItem, itemToSwapOutIndex);
+        UpdateInventorySlot(tempSwapItem, selectedItemIndex);
 
-        UpdateInventorySlot(tempSwapItem, selectedItem.indexInStorage);
-
-        SelectInventoryItemOfId(selectedItem.id);
+        StorageController.SelectItemAtSlot(tempSwapItem.hostGrid, selectedItemIndex);
     }
 
     static void UpdateInventorySlot(RawInventoryItem item, int index)
     {
         StorageSlot slotToUpdate;
-        switch (item.currentHostSlotType)
+        switch (item.hostSlotType)
         {
             case StorageSlotType.Hotbar:
                 slotToUpdate = _hotbarGrid.GetChild<StorageSlot>(index);
@@ -270,44 +289,33 @@ public partial class PlayerInventoryController : Control
         RawInventoryItem temp = new RawInventoryItem(
             selectedItem.id, selectedItem.name, selectedItem.quantity, selectedItem.stackSize);
 
-        CreateDroppedItem(temp, position, parent);
+        temp.hostSlotType = selectedItem.hostSlotType;
+        temp.hostArray = selectedItem.hostArray;
+        temp.hostGrid = selectedItem.hostGrid;
 
-        var rawArray = temp.currentHostSlotType switch
-        {
-            StorageSlotType.PlayerInventory => SaveData.organizedPlayerInventory,
-            StorageSlotType.Hotbar => SaveData.playerHotbarItems,
-            _ => throw new ArgumentOutOfRangeException()
-        };
+        CreateDroppedItem(temp, position, parent);
         
-        if (selectedItem.HasValidIndexInArray(SaveData.organizedPlayerInventory))
+        if (selectedItem.HasValidIndexInArray())
         {
-            var container = temp.currentHostSlotType switch
-            {
-                StorageSlotType.PlayerInventory => _inventoryGrid,
-                StorageSlotType.Hotbar => _hotbarGrid,
-                _ => throw new ArgumentOutOfRangeException()
-            };
-                
-            int idx = selectedItem.indexInStorage;
+            int idx = selectedItem.indexInStorageArray;
             
-            StorageController.NullifyItemAtIndex(container, rawArray, idx);
+            StorageController.NullifyItemAtIndex(temp.hostGrid, temp.hostArray, idx);
         }
 
         DeselectItem();
 
         // Select a new item of the same type if exists
-        int index = StorageData.GetFirstStackIndexOfItem(rawArray, temp.id);
+        int index = StorageData.GetFirstStackIndexOfItem(temp.hostArray, temp.id);
 
         if (index == 0)
         {
-            if (!StorageData.ExistsInStorage(
-                    rawArray, temp.id, temp.quantity + 1))
+            if (!StorageData.ExistsInStorage(temp.hostArray, temp.id, temp.quantity + 1))
             {
                 return;
             }
         }
 
-        SelectInventoryItemOfId(index);
+        StorageController.SelectItemAtSlot(temp.hostGrid, index);
     }
 
     /// <summary>

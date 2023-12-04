@@ -17,8 +17,11 @@ public partial class StorageSlot : Control
 	public RawInventoryItem slotItem;
 	Array<RawInventoryItem> _itemsRawArray;
 	public Array<RawInventoryItem> itemsRawArray => _itemsRawArray;
+	
+	GridContainer _parentContainer;
+	public GridContainer parentContainer => _parentContainer;
 
-	public bool slotHasItem { get; private set; }
+	public bool hasItem { get; private set; }
 	
 	public bool slotInitialized { get; private set; }
 	
@@ -31,6 +34,8 @@ public partial class StorageSlot : Control
 	public override void _Ready()
 	{
 		base._Ready();
+		if (isCraftingSlot) return;
+
 		_itemsRawArray = slotType switch
 		{
 			StorageSlotType.PlayerInventory => SaveData.organizedPlayerInventory,
@@ -38,6 +43,8 @@ public partial class StorageSlot : Control
 			StorageSlotType.TownStorage => SaveData.townStorageItems,
 			_ => throw new ArgumentOutOfRangeException()
 		};
+		
+		_parentContainer = GetParent<GridContainer>();
 	}
 	
     void OnButtonGuiInput(InputEvent @event)
@@ -73,34 +80,33 @@ public partial class StorageSlot : Control
 	    switch (PlayerInventoryController.isItemSelected)
 	    {
 		    // Player selects new item
-		    case false when slotHasItem:
+		    case false when hasItem:
 			    PlayerInventoryController.SelectNewItem(slotItem);
 			    ToggleVisuals(false);
 			    break;
 		    
 		    // Player deselected item from hand
-		    case true when !slotHasItem:
-			    AddItemToInventory();
+		    case true when !hasItem:
+			    AddItemToProperStorage();
 			    break;
 		    
-		    // Player has item a slot with item
-		    case true when slotHasItem:
+		    // Player has clicked a slot with item in hand
+		    case true when hasItem:
 		    {
 			    var selectedItem = PlayerInventoryController.selectedItem;
 			    
-			    if (selectedItem.HasValidIndexInArray(_itemsRawArray) &&
-			        slotIndex == selectedItem.indexInStorage)
+			    if (PlayerInventoryController.HasSameItemSelected(slotItem))
 			    {
-				    StorageSlotController.UpdateSlot(this, _itemsRawArray, PlayerInventoryController.selectedItem);
+				    // Return item back to its place
+				    StorageSlotController.UpdateSlot(this, _itemsRawArray, selectedItem);
 				    PlayerInventoryController.DeselectItem();
 			    }
-
-			    else if (slotItem.id == selectedItem.id)
+				else if (selectedItem.id == slotItem.id)
 			    {
-				    AddItemToInventory();
+				    AddSelectedItemToSlot();
 			    }
-
-			    else {
+			    else
+			    {
 				    PlayerInventoryController.SwapItems(slotItem, slotIndex);
 			    }
 
@@ -113,17 +119,50 @@ public partial class StorageSlot : Control
     protected void ClickRight()
     {
 	    // Player takes one item from stack
-	    if (!PlayerInventoryController.isItemSelected && slotHasItem)
+	    if (!PlayerInventoryController.isItemSelected && hasItem)
 	    {
-		    var parent = GetParent<GridContainer>();
-            
-		    StorageController.SelectSingleItem(parent, _itemsRawArray, slotItem, slotIndex);
+		    StorageController.SelectSingleItem(parentContainer, _itemsRawArray, slotItem, slotIndex);
 	    }
     }
 
+    async void AddSelectedItemToSlot()
+    {
+	    await StorageController.AddItem(parentContainer, _itemsRawArray, PlayerInventoryController.selectedItem, slotIndex);
+    }
+
+	void AddItemToProperStorage()
+    {
+	    switch (slotType)
+	    {
+		    case StorageSlotType.Uninitialized:
+			    break;
+		    case StorageSlotType.PlayerInventory:
+			    AddItemToInventory();
+			    break;
+		    case StorageSlotType.Hotbar:
+			    AddItemToHotbar();
+			    break;
+		    case StorageSlotType.TownStorage:
+			    AddItemToTownStorage();
+			    break;
+		    default:
+			    throw new ArgumentOutOfRangeException();
+	    }
+    }
+    
     async void AddItemToInventory()
     {
-	    await PlayerInventoryController.AddItemToInventory(PlayerInventoryController.selectedItem, slotIndex, true);
+	    await PlayerInventoryController.AddItemToInventory(PlayerInventoryController.selectedItem, slotIndex);
+    }
+    
+    async void AddItemToHotbar()
+    {
+	    await PlayerInventoryController.AddItemToHotbar(PlayerInventoryController.selectedItem, slotIndex);
+    }
+    
+    async void AddItemToTownStorage()
+    {
+	    await TownStorageController.AddItemToTownStorage(PlayerInventoryController.selectedItem, slotIndex);
     }
     
     public void ToggleVisuals(bool on)
@@ -135,7 +174,7 @@ public partial class StorageSlot : Control
     public void UpdateVisuals()
     {
 	    if (slotItem == null) {
-		    slotHasItem = false;
+		    hasItem = false;
 
 		    icon.Texture = null;
 		    quantityLabel.Text = "";
@@ -143,7 +182,7 @@ public partial class StorageSlot : Control
 		    return;
 	    }
 
-	    slotHasItem = true;
+	    hasItem = true;
 		
 	    Item itemResource = ItemData.GetItemById(slotItem.id);
 

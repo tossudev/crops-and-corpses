@@ -25,6 +25,7 @@ anchors_preset = 0
 offset_right = 64.0
 offset_bottom = 64.0
 script = ExtResource("1_dis7m")
+slotType = 10
 
 [node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2(72, 72)

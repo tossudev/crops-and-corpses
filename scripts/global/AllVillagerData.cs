@@ -5,14 +5,15 @@ using System.Collections.Generic;
 public partial class AllVillagerData : Node
 {
 	[Export]Texture2D [] _villagerTextures;
+	VillagerInfo _villagerInfo;
 
 	[Export] string [] _villagerNames;
 
 	[Export] string [] _villagerInfos;
-	public Texture2D GetTexture(){
+	public Texture2D GetTexture(){ 
 
 		Random random = new Random();
-        int randomNumber = random.Next(0, _villagerTextures.Length);
+        int randomNumber = random.Next(0, _villagerInfo.villagerTextures.Count);
 		return _villagerTextures[randomNumber];
 	}
 	public string GetName(){
@@ -29,8 +30,6 @@ public partial class AllVillagerData : Node
 
 	public Texture2D GetTextureByType(VillagerType type, BodyPartTextureType part)
 	{
-		//Todo: this
-
 		return GetTexture();
 	}
 }

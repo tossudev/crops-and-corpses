@@ -9,11 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://1y1xpa0ldkye" path="res://scenes/buildings/town/archery_tower/archer_tower_build_mode.tscn" id="7_ry1qf"]
 [ext_resource type="PackedScene" uid="uid://7m8c0ty0xcd0" path="res://scenes/buildings/town/well/well.tscn" id="8_8sdq7"]
 [ext_resource type="PackedScene" uid="uid://bt0w6up5wga7i" path="res://scenes/buildings/town/well/well_build_mode.tscn" id="9_2genf"]
-[ext_resource type="Texture2D" uid="uid://gx3rxc18ic1u" path="res://assets/placeholder/buildings/farm_plot.jpg" id="10_qwgdd"]
 [ext_resource type="PackedScene" uid="uid://dr5dn7juefoha" path="res://scenes/buildings/town/large_house/large_house.tscn" id="10_v523t"]
 [ext_resource type="Texture2D" uid="uid://bmn8ggt1kvsn7" path="res://assets/sprites/buildings/smallhouse_color.png" id="11_d2el0"]
 [ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="11_orgxb"]
 [ext_resource type="PackedScene" uid="uid://du1sorwl3ihqh" path="res://scenes/buildings/town/large_house/large_house_build_mode.tscn" id="11_y4xg5"]
+[ext_resource type="Texture2D" uid="uid://clh7lf445p822" path="res://assets/sprites/tiles/farm_tile.png" id="12_0x6fb"]
 [ext_resource type="Texture2D" uid="uid://dxop7aeu2pnnr" path="res://assets/sprites/buildings/archery_tower.png" id="12_e25jc"]
 [ext_resource type="Texture2D" uid="uid://c5v773mk6tykk" path="res://assets/sprites/buildings/largehouse_color.png" id="16_p0h0c"]
 
@@ -45,7 +45,7 @@ _wellScene = ExtResource("8_8sdq7")
 _wellGhostScene = ExtResource("9_2genf")
 _largeHouseScene = ExtResource("10_v523t")
 _largeHouseGhostScene = ExtResource("11_y4xg5")
-_farmPlotIcon = ExtResource("10_qwgdd")
+_farmPlotIcon = ExtResource("12_0x6fb")
 _houseIcon = ExtResource("11_d2el0")
 _archerTowerIcon = ExtResource("12_e25jc")
 _wellIcon = ExtResource("11_orgxb")

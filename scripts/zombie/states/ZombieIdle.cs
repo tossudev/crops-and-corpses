@@ -11,6 +11,8 @@ public partial class ZombieIdle : ZombieStates
 	private CharacterBody2D _player;
 	private Node2D _fences;
 	//AnimationPlayer animPlayer;
+	[Export]private float _maxDistanceToPlayer;
+
 	public override void Enter()
     {		
         _player = (CharacterBody2D)GetTree().GetFirstNodeInGroup("player");
@@ -20,19 +22,24 @@ public partial class ZombieIdle : ZombieStates
 
 		if (_zombie != null)
 		{
-			int random = (int)GD.Randi() % 3 + 1;
-			if (random == 1)
+			if(_player.GlobalPosition.DistanceTo(_zombie.GlobalPosition) < _maxDistanceToPlayer)
 			{
-				ZombieManager.PlayZombieNoise(ZombieNoises.ZOMBIE_BREATH);
+				
+				int random = (int)GD.Randi() % 3 + 1;
+				if (random == 1)
+				{
+					ZombieManager.PlayZombieNoise(ZombieNoises.ZOMBIE_BREATH);
+				}
+				else if (random == 2)
+				{
+					ZombieManager.PlayZombieNoise(ZombieNoises.ZOMBIE_GROWL);
+				}
+				else
+				{
+					ZombieManager.PlayZombieNoise(ZombieNoises.ZOMBIE_HISS_2);
+				}
 			}
-			else if (random == 2)
-			{
-				ZombieManager.PlayZombieNoise(ZombieNoises.ZOMBIE_GROWL);
-			}
-			else
-			{
-				ZombieManager.PlayZombieNoise(ZombieNoises.ZOMBIE_HISS_2);
-			}
+			
 		}		
     }
 

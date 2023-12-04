@@ -5,7 +5,7 @@ using System.Runtime.ExceptionServices;
 
 public partial class PortalManager : Node2D
 {
-	[Export] private PortalID _sceneID;
+	[Export] private SceneID _sceneID;
 	[Export] private PlayerController _player;
 
 	public override void _Ready()
@@ -14,40 +14,49 @@ public partial class PortalManager : Node2D
 		{
 			if (child is Portal)
 			{
-				if (((Portal)child).id == PlayerInfo.travelID)
+				if (((Portal)child).targetSceneID == PlayerInfo.sceneID)
 				{
 					_player.Position = ((Portal)child).exitPosition.GlobalPosition;
 				}
 			}
 		}
 
-		PlayerInfo.travelID = _sceneID;
+		PlayerInfo.sceneID = _sceneID;
 	}
 
-	public void PortalTo(PortalID id)
+	public void PortalTo(SceneID sceneID)
 	{
 		_player.SaveState();
-		switch (id)
+		switch (sceneID)
 		{
-			case PortalID.Town:
+			case SceneID.Town:
 				SceneManager.ChangeScene(this, Scene.Town);
 				break;
 
-			case PortalID.Cave:
+			case SceneID.Cave:
 				SceneManager.ChangeScene(this, Scene.Cave);
 				break;
 
-			case PortalID.Forest:
+			case SceneID.Forest:
 				SceneManager.ChangeScene(this, Scene.Forest);
 				break;
 
-			case PortalID.Ruins:
+			case SceneID.Ruins:
 				SceneManager.ChangeScene(this, Scene.Ruins);
 				break;
 
 			default:
-				GD.PrintErr("Unknown scene name: " + id);
+				GD.PrintErr("Unknown scene name: " + sceneID);
 				break;
 		}
 	}
+}
+
+public enum SceneID
+{
+	None,
+	Cave,
+	Forest,
+	Ruins,
+	Town,
 }

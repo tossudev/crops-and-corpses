@@ -29,6 +29,10 @@ public partial class RawTownStats : GodotObject
     public const string CAVE_STALAGMITE_MINED_KEY = "isCaveStalagmiteMined";
     
     
+    public bool isDIYBridgeBuilt;
+    public const string DIY_BRIDGE_BUILT_KEY = "isDIYBridgeBuilt";
+    
+    
     // Soldier stats
     public int soldierAttackSpeed;
     public const string SOLDIER_ATTACK_SPEED_KEY = "soldierAttackSpeed";
@@ -62,7 +66,7 @@ public partial class RawTownStats : GodotObject
     public RawTownStats () {}
 
     public RawTownStats(int totalExperience,int townHallLevel, int populationCap, int providedHomes,
-        bool isRuinsUnlocked, bool isMineshaftUnlocked, bool isCaveStalagmiteMined,
+        bool isRuinsUnlocked, bool isMineshaftUnlocked, bool isCaveStalagmiteMined, bool isDIYBridgeBuilt,
         int soldierAttackSpeed, int soldierAccuracy,
         int farmerWalkSpeed, int farmerMaxFarms, int pesticideEffectiveness,
         int wallHP, bool spikyWalls,
@@ -77,6 +81,7 @@ public partial class RawTownStats : GodotObject
         this.isRuinsUnlocked = isRuinsUnlocked;
         this.isMineshaftUnlocked = isMineshaftUnlocked;
         this.isCaveStalagmiteMined = isCaveStalagmiteMined;
+        this.isDIYBridgeBuilt = isDIYBridgeBuilt;
         
         
         
@@ -123,6 +128,7 @@ public partial class RawTownStats : GodotObject
             isRuinsUnlocked: (bool)rawStatsDict[RUINS_UNLOCKED_KEY],
             isMineshaftUnlocked: (bool)rawStatsDict[MINESHAFT_UNLOCKED_KEY],
             isCaveStalagmiteMined: (bool)rawStatsDict[CAVE_STALAGMITE_MINED_KEY],
+            isDIYBridgeBuilt: (bool)rawStatsDict[DIY_BRIDGE_BUILT_KEY],
             
             
             soldierAttackSpeed: (int)rawStatsDict[SOLDIER_ATTACK_SPEED_KEY],
@@ -179,6 +185,7 @@ public partial class RawTownStats : GodotObject
                 { RUINS_UNLOCKED_KEY, townStats.isRuinsUnlocked },
                 { MINESHAFT_UNLOCKED_KEY, townStats.isMineshaftUnlocked },
                 { CAVE_STALAGMITE_MINED_KEY, townStats.isCaveStalagmiteMined },
+                { DIY_BRIDGE_BUILT_KEY, townStats.isDIYBridgeBuilt },
             
             
                 { SOLDIER_ATTACK_SPEED_KEY, townStats.soldierAttackSpeed },

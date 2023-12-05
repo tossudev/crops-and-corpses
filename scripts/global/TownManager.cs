@@ -141,6 +141,10 @@ public partial class TownManager : Node2D
 				SaveData.townHallStats.populationCap = 100;
 				break;
 			
+			case TownUnlock.DIY_BRIDGE_UNLOCK:
+				SaveData.townHallStats.isDIYBridgeBuilt = true;
+				break;
+			
 			case TownUnlock.RUINS_UNLOCK:
 				SaveData.townHallStats.isRuinsUnlocked = true;
 				break;
@@ -242,6 +246,7 @@ public enum TownUnlock
 	POP_CAP_LEVEL_3,
 	POP_CAP_LEVEL_4,
 	POP_CAP_LEVEL_5,
+	DIY_BRIDGE_UNLOCK,
 	RUINS_UNLOCK,
 	MINESHAFT_UNLOCK,
 	STALAGMITE_UNLOCK

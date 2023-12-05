@@ -12,6 +12,7 @@ public partial class TownStats : Resource
                                                     // (1 home for 1 villager, 3-5 per house)
     
     // Unlocks
+    [Export] bool _isDIYBridgeBuilt;           // Big tree has been cut down
     [Export] bool _isRuinsUnlocked;                 // Bridge is built
     [Export] bool _isMineshaftUnlocked;             // Mineshaft entrance is cleared
     [Export] bool _isCaveStalagmiteMined;           // Stalagmite is mined from the mineshaft side of the cave
@@ -45,6 +46,7 @@ public partial class TownStats : Resource
             isRuinsUnlocked: _isRuinsUnlocked,
             isMineshaftUnlocked: _isMineshaftUnlocked,
             isCaveStalagmiteMined: _isCaveStalagmiteMined,
+            isDIYBridgeBuilt: _isDIYBridgeBuilt,
             
             
             

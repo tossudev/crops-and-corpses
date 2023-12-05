@@ -23,7 +23,7 @@ public partial class VillagerFaceButton : Button
 		
 		_currentResident = residingVillager;
 
-		_faceSprite.Texture = _currentResident.villagerInfo.villagerHeadTexture;
+		_faceSprite.Texture = _currentResident.skeleton.villagerHead.Texture;
 			
 		id = residingVillager.rawData.id;
 	}

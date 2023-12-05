@@ -35,7 +35,7 @@ public partial class LootController : StaticBody2D
 			return;
 
 		_audioController = GetNode<AudioController>("/root/Audio");
-		
+
 		_canBeDestroyed = false;
 		Init();
 	}
@@ -79,7 +79,7 @@ public partial class LootController : StaticBody2D
 		var x = (this.Position.X);
 		var y = (this.Position.Y);
 		rng.Seed = (ulong)((x + y) * (x + y + 1) / 2 + y);
-		
+
 		float brightness = rng.RandfRange(_minBrightness, 1f);
 
 		if (_color != new Color(0, 0, 0, 0))
@@ -119,7 +119,8 @@ public partial class LootController : StaticBody2D
 			_animationPlayer.Play("shake");
 		}
 
-		if (_audio != null) {
+		if (_audio != null)
+		{
 			GD.Print(_audio.ResourcePath.ToString());
 			_audioController.PlayEffect(_audio.ResourcePath.ToString());
 		}
@@ -129,17 +130,17 @@ public partial class LootController : StaticBody2D
 			if (Name == "FallingTree")
 			{
 				_animationPlayer?.Play("fall");
-				SceneInfo.forestBridgeOpen = true;
+				TownManager.ApplyUnlock(TownUnlock.DIY_BRIDGE_UNLOCK);
 			}
 			else if (Name == "BridgeStalagmite")
 			{
 				_animationPlayer.SpeedScale = 2;
 				_animationPlayer?.Play("fallingStalagmite");
-				SceneInfo.caveBridgeOpen = true;
+				TownManager.ApplyUnlock(TownUnlock.STALAGMITE_UNLOCK);
 			}
 			else if (_fallingTreeBridge?.Name == "CaveBlockage")
 			{
-				SceneInfo.ruinsCaveOpen = true;
+				TownManager.ApplyUnlock(TownUnlock.MINESHAFT_UNLOCK);
 				DropItems(_items.Count);
 				QueueFree();
 			}

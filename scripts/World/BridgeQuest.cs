@@ -16,7 +16,7 @@ public partial class BridgeQuest : Node2D
 
 	private void OnInputEvent(Node viewport, InputEvent @event, long shapeIdx)
 	{
-		if(@event is InputEventMouseButton button && _playerInArea)
+		if (@event is InputEventMouseButton button && _playerInArea)
 		{
 			_canvasLayer.Visible = true;
 		}
@@ -29,8 +29,8 @@ public partial class BridgeQuest : Node2D
 
 			if (StorageData.ExistsInStorage(SaveData.organizedPlayerInventory, 0, WOOD_NEEDED))
 			{
-				GetNode<Button>("%FinishQuestBtn").Disabled = false;	
-				_questFinished = true;			
+				GetNode<Button>("%FinishQuestBtn").Disabled = false;
+				_questFinished = true;
 			}
 		}
 	}
@@ -60,14 +60,14 @@ public partial class BridgeQuest : Node2D
 		if (_questFinished)
 		{
 			RemoveLogsFromInventory();
-			
+
 			if (_bridge != null) _bridge.Visible = true;
-			SceneInfo.forestBuildABridgeOpen = true;
+			TownManager.ApplyUnlock(TownUnlock.RUINS_UNLOCK);
 			_canvasLayer.Visible = false;
 
-			GetNode<StaticBody2D>("%Barrier").QueueFree();		
-			GetNode<Button>("%FinishQuestBtn").Visible = false;	
+			GetNode<StaticBody2D>("%Barrier").QueueFree();
+			GetNode<Button>("%FinishQuestBtn").Visible = false;
 			GetNode<Label>("%BridgeLabel").Text = "Nice job, you finished the bridge! I wonder where it leads to...";
-		}		
+		}
 	}
 }

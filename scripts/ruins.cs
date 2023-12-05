@@ -5,9 +5,9 @@ public partial class ruins : Node2D
 {
 	[Export] private Node2D _caveBlockage;
 
-	public override async void _Ready()
+	public override void _Ready()
 	{
-		if (await SceneInfo.GetRuinsCaveOpen())
+		if (SaveData.townHallStats.isMineshaftUnlocked)
 		{
 			OpenCave();
 		}

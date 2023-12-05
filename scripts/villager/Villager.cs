@@ -15,12 +15,12 @@ public enum VillagerOccupation
 public partial class Villager : CharacterBody2D
 {
 	//[Export] VillagerManager _villagerManager;
+	PlayerSpriteController _spriteControl;
 	Vector2 _targetPosition;
 	Timer _taskTimer;
 	Timer _chooseTaskTimer;
 	[Export] NavigationAgent2D navMeshAgent;
-	//[Export] NavigationRegion2D navRegionArea;
-	//List<Node2D> _fenceList = new List<Node2D>();
+	PackedScene villagerSkeleton;
 	Plant _currentPlant;
 	ArcherTower _archerTower;
 	BuildingHealth _fenceHealth;
@@ -28,6 +28,7 @@ public partial class Villager : CharacterBody2D
 	Node2D _fences;
 	BuildingHealth _currentBuilding;
 	Sprite2D _villagerSprite;
+	AnimationPlayer _villagerAnimation;
 	int _plantIndex = 0;
 	int _archerTowerIndex = 0;
 	int _fenceIndex = 0;
@@ -35,12 +36,13 @@ public partial class Villager : CharacterBody2D
 	bool _taskStarted = false;
 	int _resourceTaskCounter = 0;
 	const string PLAYER_NODENAME = "%Player";
+	const string ANIMATION_PLAYER_NODENAME = "%VillagerAnimationPlayer";
 	const string STREETSIGN_NODENAME = "%StreetSign";
 	CharacterBody2D _player;
 	public bool needRescue = false;
 
-	[Export] VillagerInfo _info;
-	public VillagerInfo villagerInfo => _info;
+	[Export] VillagerSkeleton _skeleton;
+	public VillagerSkeleton skeleton => _skeleton;
 
 	VillagerRawData _rawData;
 	public VillagerRawData rawData => _rawData;
@@ -53,8 +55,9 @@ public partial class Villager : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		_villagerAnimation = skeleton.GetNodeOrNull<AnimationPlayer>(ANIMATION_PLAYER_NODENAME);
+
 		_player = GetTree().GetFirstNodeInGroup("player") as CharacterBody2D;
-		_villagerSprite = GetNode<Sprite2D>("Sprite2D");
 		_buildings = (Node2D)GetTree().GetFirstNodeInGroup("buildings");
 
 		_taskTimer = new Timer
@@ -64,17 +67,15 @@ public partial class Villager : CharacterBody2D
 		_taskTimer.Timeout += State;
 		AddChild(_taskTimer);
 		_taskTimer.Start();
+
+		SetCurrentState(VillagerState.RoamAround);
 	}
 
 	public void InitializeVillager(VillagerRawData data)
 	{
 		_rawData = data;
 
-		_info.InitializeVillagerInfo(data);
-
-		// TODO: This needs to be changed once the rig sprites are in place and saved
-		_villagerSprite.Texture = VillagerManager.villagerManagerInstance.GetNewVillagerData().texture;
-
+		skeleton.InitializeSkeleton(data);
 
 		_inTownScene = SceneManager.IsCurrentScene(this, Scene.Town);
 
@@ -97,7 +98,7 @@ public partial class Villager : CharacterBody2D
 
 	void SetCurrentState(VillagerState state)
 	{
-		rawData.currentState = state;
+		rawData.currentState = VillagerState.RoamAround;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -229,6 +230,8 @@ public partial class Villager : CharacterBody2D
 		_speed = 100;
 		Vector2 _direction = (target - GlobalPosition).Normalized();
 		Velocity = _direction * _speed;
+		
+		UpdateSprite();
 		MoveAndSlide();
 	}
 
@@ -239,6 +242,7 @@ public partial class Villager : CharacterBody2D
 
 	void RoamAround()
 	{
+		_villagerAnimation.Play("walk");
 		_targetPosition = GlobalPosition + CreateOffsetVector2(-200, 200);
 
 		if (_chooseTaskTimer == null)
@@ -257,6 +261,7 @@ public partial class Villager : CharacterBody2D
 
 	void FindShelter()
 	{
+		_villagerAnimation.Play("run");
 		_targetPosition = rawData.homeId == 0
 			? TownManager.townHallPosition - GlobalPosition + CreateOffsetVector2(-100, 100)
 			: VillagerManager.villagerManagerInstance.FindResidenceById(rawData.homeId).GlobalPosition;
@@ -281,6 +286,27 @@ public partial class Villager : CharacterBody2D
 		float y = (float)GD.RandRange(min, max);
 
 		return new Vector2(x, y);
+	}
+
+	void UpdateSprite()
+	{
+		Vector2 currentScale = skeleton.Scale;
+		if (Velocity.X != 0.0 || Velocity.Y != 0.0)
+		{
+			bool flip = false;
+			if (Velocity.X > 0.5 && currentScale.X < 0)
+			{
+				flip = true;	
+			}
+			else if (Velocity.X < -0.5 && currentScale.X > 0)
+			{
+				flip = true;
+			}
+			if(flip)
+			{
+				skeleton.Scale = new Vector2(skeleton.Scale.X * -1, skeleton.Scale.Y);
+			}
+		}
 	}
 
 	void ChooseTask()

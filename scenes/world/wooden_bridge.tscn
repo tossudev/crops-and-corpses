@@ -6,4 +6,4 @@
 
 [node name="Bridge" type="Sprite2D" parent="."]
 texture = ExtResource("1_3sw0v")
-offset = Vector2(0, 30)
+offset = Vector2(0, 60)

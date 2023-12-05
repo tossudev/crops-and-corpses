@@ -1,11 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://bt56v72d27ku6"]
+[gd_scene load_steps=7 format=3 uid="uid://bt56v72d27ku6"]
 
 [ext_resource type="Script" path="res://scripts/World/BridgeQuest.cs" id="1_b1i77"]
 [ext_resource type="Texture2D" uid="uid://bjaxeksksxahl" path="res://assets/sprites/Farm sprites/sign_waterplant.png" id="2_sm22y"]
 [ext_resource type="Texture2D" uid="uid://p0vefm8oo5l8" path="res://assets/sprites/ui/wooden_panel.png" id="3_ah3gb"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_58xoa"]
+size = Vector2(97, 101)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_wtsxi"]
-radius = 368.05
+radius = 279.016
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_flib8"]
 size = Vector2(103, 292)
@@ -22,6 +25,13 @@ offset = Vector2(0, -50)
 [node name="InteractionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(-0.5, -9.5)
+shape = SubResource("RectangleShape2D_58xoa")
+debug_color = Color(0.972549, 0, 0.431373, 0.419608)
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_wtsxi")
 
 [node name="Barrier" type="StaticBody2D" parent="."]
@@ -90,8 +100,8 @@ offset_bottom = 712.0
 disabled = true
 text = "Finish"
 
-[connection signal="body_entered" from="InteractionArea" to="." method="OnBodyEntered"]
-[connection signal="body_exited" from="InteractionArea" to="." method="OnBodyExited"]
 [connection signal="input_event" from="InteractionArea" to="." method="OnInputEvent"]
+[connection signal="body_entered" from="DetectionArea" to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="OnBodyExited"]
 [connection signal="pressed" from="BridgeQuestUI/CloseBtn" to="." method="OnCloseButtonPressed"]
 [connection signal="pressed" from="BridgeQuestUI/FinishQuestBtn" to="." method="OnFinishQuestButtonPressed"]

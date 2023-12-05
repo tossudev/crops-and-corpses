@@ -29,14 +29,12 @@ public partial class TownManager : Node2D
 	{
 		return _townPlayerTravel ??= (PlayerTravel) caller.GetTree().GetFirstNodeInGroup(TOWN_STREET_SIGN_GROUP);;
 	}
-    
-	public override void _EnterTree()
+
+	public static void SetTownHallPosition(Vector2 position)
 	{
-		base._EnterTree();
-		
-		_townHallPosition = GlobalPosition - new Vector2(13,13);
+		_townHallPosition = position;
 	}
-	
+
 	public static async void ReadTownDataFromFile(Dictionary saveData, bool sync = true)
 	{
 		if (await RawTownStats.AssignStatsDataFromDictionary(saveData, sync)) return;
@@ -143,6 +141,10 @@ public partial class TownManager : Node2D
 				SaveData.townHallStats.populationCap = 100;
 				break;
 			
+			case TownUnlock.DIY_BRIDGE_UNLOCK:
+				SaveData.townHallStats.isDIYBridgeBuilt = true;
+				break;
+			
 			case TownUnlock.RUINS_UNLOCK:
 				SaveData.townHallStats.isRuinsUnlocked = true;
 				break;
@@ -178,7 +180,6 @@ public partial class TownManager : Node2D
 		{
 			case FarmerUpgrade farmerUpgrade:
 				
-				SaveData.townHallStats.farmerMaxFarms += farmerUpgrade.farmerMaxFarms;
 				SaveData.townHallStats.farmerWalkSpeed += farmerUpgrade.farmerWalkSpeed;
 				break;
 			
@@ -201,7 +202,6 @@ public partial class TownManager : Node2D
 			case WallUpgrade wallUpgrade:
 
 				SaveData.townHallStats.wallHP = wallUpgrade.wallHP;
-				SaveData.townHallStats.spikyWalls = wallUpgrade.spikyWalls;
 				break;
 		}
 		
@@ -246,6 +246,7 @@ public enum TownUnlock
 	POP_CAP_LEVEL_3,
 	POP_CAP_LEVEL_4,
 	POP_CAP_LEVEL_5,
+	DIY_BRIDGE_UNLOCK,
 	RUINS_UNLOCK,
 	MINESHAFT_UNLOCK,
 	STALAGMITE_UNLOCK

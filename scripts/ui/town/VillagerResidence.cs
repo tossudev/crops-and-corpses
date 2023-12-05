@@ -25,7 +25,8 @@ public partial class VillagerResidence : Control
 	{
 		if (_isTownHall) return;
 		
-		_villagerFaceButtonParentGrid = GetNode<GridContainer>(VILLAGER_GRID_NODENAME);
+		// TODO:
+		_villagerFaceButtonParentGrid = GetNodeOrNull<GridContainer>(VILLAGER_GRID_NODENAME);
 		
 		RegisterResidence();
 	}

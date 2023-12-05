@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public static class Scene
 {
@@ -11,6 +13,11 @@ public static class Scene
         {
             Name = name;
             Path = path;
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 
@@ -27,5 +34,11 @@ public static class Scene
         Forest,
         Ruins,
         Cave
-    }; 
+    };
+
+    public static RootScene GetRootSceneByName(string name)
+    {
+        return allRootScenes.Find(
+            rootScene => string.Equals(rootScene.Name, name, StringComparison.CurrentCultureIgnoreCase));
+    }
 }

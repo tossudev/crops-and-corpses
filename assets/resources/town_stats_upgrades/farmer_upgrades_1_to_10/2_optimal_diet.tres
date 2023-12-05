@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="FarmerUpgrade" load_steps=8 format=3 uid="uid://dcgw0vdifp57y"]
+
+[ext_resource type="Resource" uid="uid://dkln62c0vsgk8" path="res://assets/resources/game_items/food_items_250_to_299/250_bread.tres" id="1_m85cd"]
+[ext_resource type="Script" path="res://scripts/resource_classes/upgrades/FarmerUpgrade.cs" id="1_pmnlm"]
+[ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_ph4nk"]
+[ext_resource type="Resource" uid="uid://c1q7mpup7mo0b" path="res://assets/resources/game_items/food_items_250_to_299/251_vegetable_stew.tres" id="3_ld82b"]
+[ext_resource type="Texture2D" uid="uid://ble6vfckev0pl" path="res://assets/sprites/items/bread.png" id="4_a0ewx"]
+
+[sub_resource type="Resource" id="Resource_a2d6j"]
+script = ExtResource("2_ph4nk")
+item = ExtResource("1_m85cd")
+quantity = 5
+
+[sub_resource type="Resource" id="Resource_ge5cc"]
+script = ExtResource("2_ph4nk")
+item = ExtResource("3_ld82b")
+quantity = 5
+
+[resource]
+script = ExtResource("1_pmnlm")
+_farmerWalkSpeed = 2
+_farmerMaxFarms = 0
+_pesticideEffectiveness = 0
+_id = 2
+_upgradeIcon = ExtResource("4_a0ewx")
+_upgradeHeader = "Optimal diet"
+_upgradeDescription = "Farmers find the optimal diet. And can do more efficient work."
+_craftingRequirements = Array[Object]([SubResource("Resource_a2d6j"), SubResource("Resource_ge5cc")])

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="HousingUpgrade" load_steps=8 format=3 uid="uid://gxf5nya03x75"]
+
+[ext_resource type="Script" path="res://scripts/resource_classes/upgrades/HousingUpgrade.cs" id="1_hb7n1"]
+[ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="1_qhgtt"]
+[ext_resource type="Texture2D" uid="uid://dbx7qsqbkgp03" path="res://assets/sprites/buildings/housedesing.png" id="1_xmklu"]
+[ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_tdw60"]
+[ext_resource type="Resource" uid="uid://b7mm5b7xm04ju" path="res://assets/resources/game_items/resource_items_0_to_99/3_steel.tres" id="3_t24av"]
+
+[sub_resource type="Resource" id="Resource_m7okk"]
+script = ExtResource("2_tdw60")
+item = ExtResource("1_qhgtt")
+quantity = 50
+
+[sub_resource type="Resource" id="Resource_2p2ov"]
+script = ExtResource("2_tdw60")
+item = ExtResource("3_t24av")
+quantity = 10
+
+[resource]
+script = ExtResource("1_hb7n1")
+_houseHP = 60
+_id = 33
+_upgradeIcon = ExtResource("1_xmklu")
+_upgradeHeader = "New Support Beams"
+_upgradeDescription = "Install new support beams for maximum durability"
+_craftingRequirements = Array[Object]([SubResource("Resource_m7okk"), SubResource("Resource_2p2ov")])

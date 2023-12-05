@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhxbs3wp2qeak"]
+
+[ext_resource type="Script" path="res://scripts/World/Portal.cs" id="1_cvtlk"]
+[ext_resource type="Texture2D" uid="uid://dy1yfxvn4qrlf" path="res://assets/sprites/Farm sprites/cave enter.png" id="2_yndtf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t05ui"]
+size = Vector2(438, 87)
+
+[node name="invisible_portal" type="StaticBody2D"]
+script = ExtResource("1_cvtlk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_yndtf")
+offset = Vector2(0, -65.65)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(14, 0)
+shape = SubResource("RectangleShape2D_t05ui")
+debug_color = Color(0.454902, 0.501961, 0.847059, 0.419608)
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

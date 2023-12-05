@@ -1,12 +1,10 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class QuestManager : Node
 {
 	GlobalTime globalTime;
-
-	private Quest activeQuest;
-	
 	public override void _Ready()
 	{
 		
@@ -24,16 +22,18 @@ public partial class QuestManager : Node
 	}
 
 
-	void StartQuest(string questName, int difficulty, QuestType type, Scene.RootScene questLocation)
+	async void StartQuest(int difficulty, QuestType type, Scene.RootScene Location)
 	{
 		int StartDay = globalTime.GetDay();
 		GD.Print($"Start day: {StartDay}");
-
-		if (activeQuest == null)
+		
+        
+		if (await PlayerInfo.GetActiveQuest() == null)
 		{
-			Quest newQuest = new Quest(questName, difficulty, StartDay, type, questLocation);
 			
-			SetActiveQuest(newQuest);
+			Quest newQuest = new Quest(difficulty, StartDay, type, Location);
+			
+			PlayerInfo.SetActiveQuest(newQuest);
 		}
 		else
 		{
@@ -42,39 +42,35 @@ public partial class QuestManager : Node
 	}
 	
 
-	public void StartRescueQuest(Scene.RootScene location, int difficulty)
+	public async void StartRescueQuest(Scene.RootScene location, int difficulty)
 	{
+		if (difficulty <= 0) return;
+		
+		if (await PlayerInfo.GetActiveQuest() != null) return;
+		
 		for (int i = 0; i < difficulty; i++)
 		{
 			VillagerManager.villagerManagerInstance.AddNewVillagerRawData();
 		}
+
+		StartQuest(difficulty, QuestType.Rescue, location);
+
+
+		GD.Print($"Rescue Quest started at {location.Name} with difficulty {difficulty}");
+	}
+
+
+	public async void FinishQuest()
+	{
+		var quest = await PlayerInfo.GetActiveQuest();
 		
-		StartQuest($"Rescue Quest: {location.Name}", difficulty, QuestType.Rescue, location);
-	}
-	
-	public static void LoadQuest()
-	{
-		// Your implementation here
-	}
-
-
-	public Quest GetActiveQuest()
-	{
-		return activeQuest;
-	}
-
-	public void SetActiveQuest(Quest quest)
-	{ 
-		activeQuest = quest;
-	} 
-
-
-	public void CompleteQuestStage(string stage) => activeQuest?.CompleteQuestStage(stage);
-
-
-	public void FinishQuest()
-	{
-		TownManager.GainExp(activeQuest.difficulty switch
+		if (quest == null)
+		{
+			GD.PushError("Can't finish a null quest");
+			return;
+		}
+		
+		TownManager.GainExp(quest.questDifficulty switch
 		{
 			1 => ExpGain.BIG,
 			2 => ExpGain.VERY_BIG,
@@ -82,6 +78,6 @@ public partial class QuestManager : Node
 			_ => ExpGain.MEDIUM
 		});
 		
-		SetActiveQuest(null);
+		PlayerInfo.SetActiveQuest(null);
 	}
 }

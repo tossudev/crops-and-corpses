@@ -72,6 +72,7 @@ wait_time = 2.0
 unique_name_in_owner = true
 position = Vector2(-126, -75)
 _parentScript = NodePath("../BuildingHealth")
+_maxHealth = 200
 _healItemPrefabs = Array[PackedScene]([])
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") groups=["building"] instance=ExtResource("7_u83t5")]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://dr5dn7juefoha"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_gmjf4"]
-[ext_resource type="Texture2D" uid="uid://d21t44ku0n8mk" path="res://assets/sprites/buildings/largehouse_color.png" id="2_uosje"]
+[ext_resource type="Texture2D" uid="uid://c5v773mk6tykk" path="res://assets/sprites/buildings/largehouse_color.png" id="2_uosje"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_ysaqf"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_2ldom"]
-[ext_resource type="PackedScene" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_72uur"]
+[ext_resource type="PackedScene" uid="uid://2v1aodyd0p4b" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_72uur"]
 [ext_resource type="PackedScene" uid="uid://dune6txyuwmm2" path="res://scenes/buildings/town/villager_residence_component.tscn" id="6_h2v24"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sekvv"]
@@ -52,6 +52,7 @@ shape = SubResource("RectangleShape2D_oi4v2")
 unique_name_in_owner = true
 position = Vector2(-126, -75)
 _parentScript = NodePath("../BuildingHealth")
+_maxHealth = 150
 _healItemPrefabs = Array[PackedScene]([])
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") groups=["building"] instance=ExtResource("4_2ldom")]

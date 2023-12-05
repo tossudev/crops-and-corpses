@@ -1,32 +1,37 @@
 using Godot;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using Godot.Collections;
 
 public partial class Quest : Node
 {
-    public string QuestName { get; private set; }
-
-    public int difficulty { get; private set; }
-    public int startDay { get; private set; }
-
-    public string Description { get; private set; }
+    // Keys
+    public const string QUEST_DIFFICULTY_KEY = "difficulty";
+    public const string QUEST_START_DAY_KEY = "startDay";
+    public const string QUEST_DESCRIPTION_KEY = "description";
+    public const string QUEST_TYPE_KEY = "questType";
+    public const string QUEST_STAGES_KEY = "stages";
+    public const string QUEST_LOCATION_KEY = "location";
     
-    public string SceneName { get; private set; }
-    public List<string> Stages { get; private set; }
-    public Scene.RootScene Location { get; }
-   
-    public Vector2 Position { get; internal set; }
+    
+    public int questDifficulty { get; private set; }
+    public int startDay { get; private set; }
+    public string description { get; private set; }
 
+    public QuestType type;
 
-    public Quest(string questName, int difficulty, int startDay, QuestType type, Scene.RootScene location)
+    public Array<string> stages { get; private set; } = new();
+    public Scene.RootScene location { get; private set; }
+
+    public Quest () {}
+    
+    public Quest(int difficulty, int startDay, QuestType type, Scene.RootScene location)
     {
-        QuestName = questName;
         SetDesc(type, difficulty, location);
         this.startDay = startDay;
         SetStages(type);
         
-        Location = location;
+        this.location = location;
     }
 
     void SetDesc(QuestType type, int difficulty, Scene.RootScene location)
@@ -36,12 +41,8 @@ public partial class Quest : Node
             case QuestType.Rescue:
 
                 string plural = difficulty > 1 ? "s" : "";
-                Description = $"Rescue {difficulty} villager{plural} from {location.Name}.";
-                break;
-            
-            case QuestType.BridgeBuild:
-                //TODO?
-                Description = "";
+                description = $"Rescue {difficulty} villager{plural} from {location.Name}.";
+                questDifficulty = difficulty;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -54,12 +55,7 @@ public partial class Quest : Node
         {
             case QuestType.Rescue:
 
-                Stages = new List<string> { "Find", "Rescue", "Deliver" };
-                break;
-            
-            case QuestType.BridgeBuild:
-                //TODO?
-                Description = "";
+                stages = new Array<string> { "Find", "Rescue", "Deliver" };
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -68,47 +64,77 @@ public partial class Quest : Node
     
     public bool IsQuestComplete()
     {
-        return Stages.Count == 0;
+        return stages.Count == 0;
     }
 
-    public void CompleteQuestStage(string stage)
+    public bool CompleteQuestStage(string stage)
     {
-        if (Stages.Contains(stage))
-        {
-            Stages.Remove(stage);
-        }
+        if (!stages.Contains(stage)) return false;
+        
+        stages.Remove(stage);
+        return true;
     }
 
     public string GetQuestStage()
     {
-        return Stages[0];
-    }
-
-    public string GetQuestName()
-    {
-        return QuestName;
+        return stages[0];
     }
 
     public string GetQuestDescription()
     {
-        return Description;
-    }
-
-    public Scene.RootScene GetQuestLocation()
-    {
-        return Location;
-    }
-
-    public List<string> GetQuestStages()
-    {
-        return Stages;
+        return description;
     }
 
     public string ChangeQuestDescription(string description)
     {
-        return Description = description;
+        return this.description = description;
     }
 
+    
+    public int GetStartDay()
+    {
+        return startDay;
+    }
+    
+    public static Dictionary GetDictionary(Quest quest)
+    {
+        if (quest == null) return new Dictionary();
+        
+        Variant questStages = quest.stages;
+        
+        Dictionary questData = new Dictionary
+        {
+            { QUEST_DESCRIPTION_KEY, quest.description },
+            { QUEST_DIFFICULTY_KEY, quest.questDifficulty },
+            { QUEST_LOCATION_KEY, quest.location.ToString() },
+            { QUEST_TYPE_KEY, (int) quest.type },
+            { QUEST_START_DAY_KEY, quest.startDay },
+            { QUEST_STAGES_KEY, questStages }
+        };
+
+        return questData;
+    }
+
+    public static Quest LoadQuestFromData(Dictionary questDictionary)
+    {
+        if (questDictionary == null || questDictionary.Count == 0)
+        {
+            return null;
+        }
+
+        Quest loadedQuest = new Quest
+        {
+            questDifficulty = (int) questDictionary[QUEST_DIFFICULTY_KEY],
+            startDay = (int) questDictionary[QUEST_START_DAY_KEY],
+            description = (string) questDictionary[QUEST_DESCRIPTION_KEY],
+            type = (QuestType) (int) questDictionary[QUEST_TYPE_KEY],
+            stages = (Array<string>) questDictionary[QUEST_STAGES_KEY],
+            location = Scene.GetRootSceneByName((string) questDictionary[QUEST_LOCATION_KEY])
+        };
+
+        return loadedQuest;
+    }
+    
 }
 
    

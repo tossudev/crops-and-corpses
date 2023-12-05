@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 public enum VillagerOccupation
 {
-	Builder,
+	Miner,
 	Farmer,
 	Soldier,
 	Woodcutter,
-	Miner
+	Builder
 }
 
 public partial class Villager : CharacterBody2D
@@ -57,7 +57,7 @@ public partial class Villager : CharacterBody2D
 	{
 		_villagerAnimation = skeleton.GetNodeOrNull<AnimationPlayer>(ANIMATION_PLAYER_NODENAME);
 
-		_player = GetParent().GetNodeOrNull<CharacterBody2D>(PLAYER_NODENAME);
+		_player = GetTree().GetFirstNodeInGroup("player") as CharacterBody2D;
 		_buildings = (Node2D)GetTree().GetFirstNodeInGroup("buildings");
 
 		_taskTimer = new Timer
@@ -183,16 +183,13 @@ public partial class Villager : CharacterBody2D
 				GD.Print("State not found");
 				break;
 		}
-		//GD.Print(_state);
-	}
+    }
 
 	public void _on_button_button_up()
 	{
-		QuestManager questManager = GetNode<QuestManager>("/root/QuestManager");
 		if (!_inTownScene && needRescue)
 		{
 			OpenRescueDialogue();
-			questManager.GetActiveQuest().ChangeQuestDescription("Take the villager to Street Sign");
 		}
 		else
 		{
@@ -205,10 +202,15 @@ public partial class Villager : CharacterBody2D
 		DialogueControl.instance.OpenDialogueWindow(this);
 	}
 
-	public void OpenRescueDialogue()
+	public async void OpenRescueDialogue()
 	{
-		GD.Print("You saved me");
-		// Tähä joku button tai joku ?????
+        var quest = await PlayerInfo.GetActiveQuest();
+
+		if (!(quest?.stages.Contains("Kill") ?? false)) return;
+		
+		if (!quest.CompleteQuestStage("Rescue")) return;
+			
+		quest.ChangeQuestDescription("Take the villager to Street Sign");
 		SetCurrentState(VillagerState.FollowPlayer);
 	}
 
@@ -356,15 +358,16 @@ public partial class Villager : CharacterBody2D
 			case VillagerOccupation.Miner:
 				decision = VillagerState.FindStoneTask;
 				break;
-
-
+            
 			default:
-				decision = VillagerState.RoamAround;
+				decision = rawData.currentState == VillagerState.RescueQuest 
+					? VillagerState.RescueQuest 
+                    : VillagerState.RoamAround;
 				break;
 		}
 
 
-		if (rawData.homeId == 0)
+		if (rawData.homeId == 0 && _inTownScene)
 		{
 			decision = VillagerState.Homeless;
 		}
@@ -379,6 +382,8 @@ public partial class Villager : CharacterBody2D
 		}
 
 		SetCurrentState(decision);
+		
+		GD.Print($"{rawData.name} has decided {rawData.currentState} as their state");
 	}
 
 	void GatherResources()

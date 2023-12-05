@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-public partial class VillagerManager : Node
+public partial class VillagerManager : Node2D
 {
 	public static VillagerManager villagerManagerInstance;
 	
@@ -30,6 +30,7 @@ public partial class VillagerManager : Node
     
 
 	[Export] AllVillagerData _allData;
+	public AllVillagerData allVillagerData => _allData;
 
 	const string VILLAGER_SCENE_PATH = "res://scenes/villager/villager.tscn";
 
@@ -84,21 +85,10 @@ public partial class VillagerManager : Node
 		test = SpawnNewVillager(spawnCoordinates);
 		test = SpawnNewVillager(spawnCoordinates);
 	}
-	
-	public VillagerData GetNewVillagerData(){
-		
-		return new VillagerData
-		{
-			name = _allData.GetName(),
-			info = _allData.GetInfo(),
-			texture = _allData.GetTexture()
-		};
-	}
 
 	public VillagerRawData AddNewVillagerRawData(bool intoTown = false)
 	{
-		VillagerData newData = GetNewVillagerData();
-		VillagerRawData newRawData = new VillagerRawData(newData.name, newData.info, intoTown, Vector2.Zero);
+		VillagerRawData newRawData = new VillagerRawData(_allData.GetName(), _allData.GetInfo(), intoTown, Vector2.Zero);
 		SaveData.allVillagerData.Add(newRawData);
 
 		return newRawData;
@@ -147,7 +137,6 @@ public partial class VillagerManager : Node
 			}
 		});
 	}
-	
 	
 	void RegisterAndInitVillager(Villager villagerToRegister, VillagerRawData data, Vector2 spawnCoordinates)
 	{
@@ -206,7 +195,7 @@ public partial class VillagerManager : Node
 		villager.rawData.currentOccupation = newOccupation;
 		villager.rawData.currentState = VillagerState.ChooseTask;
 		
-		villager.villagerInfo.ChangeHat(newOccupation);
+		villager.skeleton.ChangeHat(newOccupation);
 	}
 
 	public Texture2D GetTextureByType(VillagerType type, BodyPartTextureType part)
@@ -238,9 +227,9 @@ public partial class VillagerManager : Node
 	}
 
 	public VillagerResidence FindResidenceById(int id)
-	{
-		return allVillagerResidences.Find(residence => residence.id == id);
-	}
+    {
+        return allVillagerResidences.Find(residence => residence.id == id);
+    }
 	
 	public List<VillagerResidence> GetFreeHomesList()
 	{
@@ -249,12 +238,6 @@ public partial class VillagerManager : Node
 
 		return freeHomesList;
 	}
-}
-
-public struct VillagerData{
-	public string name;
-	public string info;
-	public Texture2D texture;
 }
 
 public enum VillagerType

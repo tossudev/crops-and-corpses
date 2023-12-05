@@ -41,8 +41,8 @@ public partial class Villager : CharacterBody2D
 	CharacterBody2D _player;
 	public bool needRescue = false;
 
-	[Export] VillagerInfo _info;
-	public VillagerInfo villagerInfo => _info;
+	[Export] VillagerSkeleton _skeleton;
+	public VillagerSkeleton skeleton => _skeleton;
 
 	VillagerRawData _rawData;
 	public VillagerRawData rawData => _rawData;
@@ -55,10 +55,7 @@ public partial class Villager : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		villagerSkeleton = (PackedScene)GD.Load("res://scenes/villager/VillagerSkeleton.tscn");
-		var skeletonPrefab = villagerSkeleton.Instantiate();
-		AddChild(skeletonPrefab);
-		_villagerAnimation = skeletonPrefab.GetNodeOrNull<AnimationPlayer>(ANIMATION_PLAYER_NODENAME);
+		_villagerAnimation = skeleton.GetNodeOrNull<AnimationPlayer>(ANIMATION_PLAYER_NODENAME);
 
 		_player = GetParent().GetNodeOrNull<CharacterBody2D>(PLAYER_NODENAME);
 		_buildings = (Node2D)GetTree().GetFirstNodeInGroup("buildings");
@@ -78,11 +75,7 @@ public partial class Villager : CharacterBody2D
 	{
 		_rawData = data;
 
-		_info.InitializeVillagerInfo(data);
-
-		// TODO: This needs to be changed once the rig sprites are in place and saved
-		//_villagerSprite.Texture = VillagerManager.villagerManagerInstance.GetNewVillagerData().texture;
-
+		skeleton.InitializeSkeleton(data);
 
 		_inTownScene = SceneManager.IsCurrentScene(this, Scene.Town);
 
@@ -293,17 +286,21 @@ public partial class Villager : CharacterBody2D
 
 	void UpdateSprite()
 	{
-		Skeleton2D villagerSkeleton = GetNode<Skeleton2D>("VillagerSkeleton2D");
+		Vector2 currentScale = skeleton.Scale;
 		if (Velocity.X != 0.0 || Velocity.Y != 0.0)
 		{
-			if (Velocity.X >= 1.0)
+			bool flip = false;
+			if (Velocity.X > 0.5 && currentScale.X < 0)
 			{
-				villagerSkeleton.Scale = new Vector2(1.0f, 1.0f);
+				flip = true;	
 			}
-
-			else if (Velocity.X <= 0.0f)
+			else if (Velocity.X < -0.5 && currentScale.X > 0)
 			{
-				villagerSkeleton.Scale = new Vector2(-1.0f, 1.0f);
+				flip = true;
+			}
+			if(flip)
+			{
+				skeleton.Scale = new Vector2(skeleton.Scale.X * -1, skeleton.Scale.Y);
 			}
 		}
 	}

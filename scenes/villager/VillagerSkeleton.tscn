@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bpk2mfwuk2vto"]
+[gd_scene load_steps=12 format=3 uid="uid://bpk2mfwuk2vto"]
 
 [ext_resource type="Texture2D" uid="uid://bhs1ljjiborv0" path="res://assets/sprites/character/npc1/SVG/right_arm.svg" id="1_2gd05"]
+[ext_resource type="Script" path="res://scripts/villager/VillagerSkeleton.cs" id="1_xafwi"]
 [ext_resource type="Texture2D" uid="uid://clf243xshrbq0" path="res://assets/sprites/character/npc1/SVG/right_foot.svg" id="2_h21ng"]
 [ext_resource type="Texture2D" uid="uid://d21f1fy58skyt" path="res://assets/sprites/character/npc1/SVG/left_foot.svg" id="3_dlmhl"]
 [ext_resource type="Texture2D" uid="uid://ninaa6okhmd4" path="res://assets/sprites/character/npc1/SVG/body.svg" id="4_lq4lk"]
@@ -184,25 +185,27 @@ _data = {
 }
 
 [node name="VillagerSkeleton2D" type="Skeleton2D"]
+scale = Vector2(0.9, 0.9)
+script = ExtResource("1_xafwi")
 
 [node name="RightArm" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(30, -50)
-rotation = 0.0473088
+rotation = 0.00112666
+scale = Vector2(1, 1)
 texture = ExtResource("1_2gd05")
 offset = Vector2(8, 26)
 
 [node name="RightLeg" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(21.0492, 48.8206)
-rotation = -0.0080779
+position = Vector2(21.1413, 44.5472)
+rotation = 0.0619121
 texture = ExtResource("2_h21ng")
 offset = Vector2(-0.401377, 12.6705)
 
 [node name="LeftLeg" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-18, 51)
-rotation = 0.10863
+position = Vector2(-21, 51)
 texture = ExtResource("3_dlmhl")
 offset = Vector2(1, 13)
 
@@ -217,11 +220,12 @@ offset = Vector2(-1, 0)
 
 [node name="Head" type="Bone2D" parent="Body"]
 position = Vector2(0, -62)
-rotation = -0.0202565
+rotation = -0.00886717
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 1, -139)
 auto_calculate_length_and_angle = false
 length = 16.0
-bone_angle = 0.0
+bone_angle = -83.81
 
 [node name="Head" type="Sprite2D" parent="Body/Head"]
 unique_name_in_owner = true
@@ -237,16 +241,24 @@ rotation = 0.095211
 
 [node name="RightArm" type="Bone2D" parent="Body"]
 position = Vector2(30, -50)
-rotation = 0.0473088
+rotation = 0.00112666
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 42, -22)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 56.044
 
 [node name="Remote_RightArm" type="RemoteTransform2D" parent="Body/RightArm"]
 remote_path = NodePath("../../../RightArm")
 
 [node name="LeftArm" type="Bone2D" parent="Body"]
 position = Vector2(-39, -44)
-rotation = -0.349779
+rotation = -0.2678
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -47, -21)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = -237.184
 
 [node name="LeftArm" type="Sprite2D" parent="Body/LeftArm"]
 unique_name_in_owner = true
@@ -255,8 +267,8 @@ texture = ExtResource("7_y55e7")
 offset = Vector2(-14, 29)
 
 [node name="RightLeg" type="Bone2D" parent="Body"]
-position = Vector2(25, 50)
-rotation = -0.0080779
+position = Vector2(25, 46)
+rotation = 0.0619121
 rest = Transform2D(1, 0, 0, 1, 26, 65)
 
 [node name="Remote_RightLeg" type="RemoteTransform2D" parent="Body/RightLeg"]
@@ -264,8 +276,7 @@ position = Vector2(-3.94118, -1.21125)
 remote_path = NodePath("../../../RightLeg")
 
 [node name="LeftLeg" type="Bone2D" parent="Body"]
-position = Vector2(-18, 51)
-rotation = 0.10863
+position = Vector2(-21, 51)
 rest = Transform2D(1, 0, 0, 1, -21, 69)
 
 [node name="Remote_LeftLeg" type="RemoteTransform2D" parent="Body/LeftLeg"]

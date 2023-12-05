@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://ba8mb2whyo4dy"]
 
 [ext_resource type="Script" path="res://scripts/villager/Villager.cs" id="1_nruw1"]
-[ext_resource type="Texture2D" uid="uid://bbei648d3eovx" path="res://assets/placeholder/test_character/character.png" id="2_n3vwh"]
-[ext_resource type="PackedScene" path="res://scenes/ui/villager_info.tscn" id="4_iwgqm"]
+[ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="2_by4y7"]
+[ext_resource type="PackedScene" uid="uid://bpk2mfwuk2vto" path="res://scenes/villager/VillagerSkeleton.tscn" id="3_siciw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sgd6u"]
 radius = 25.8088
@@ -10,24 +10,27 @@ radius = 25.8088
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsotk"]
 size = Vector2(294, 350)
 
-[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("navMeshAgent", "_info") groups=["npc"]]
+[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("navMeshAgent", "_skeleton") groups=["npc"]]
+y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_nruw1")
 navMeshAgent = NodePath("NavigationAgent2D")
-_info = NodePath("VillagerInfo")
+_skeleton = NodePath("VillagerSkeleton2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-9, -25.56)
 scale = Vector2(2.36, 2.36)
 shape = SubResource("CircleShape2D_sgd6u")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-unique_name_in_owner = true
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.333333)
 self_modulate = Color(1, 0.772549, 0, 1)
-position = Vector2(0, -112)
-texture = ExtResource("2_n3vwh")
+z_index = -1
+position = Vector2(0, 68)
+scale = Vector2(2.43, 1.55)
+texture = ExtResource("2_by4y7")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
@@ -52,11 +55,7 @@ offset_bottom = 6.0
 wait_time = 5.0
 one_shot = true
 
-[node name="VillagerInfo" parent="." instance=ExtResource("4_iwgqm")]
-offset_left = -96.0
-offset_top = -464.0
-offset_right = 72.0
-offset_bottom = -296.0
+[node name="VillagerSkeleton2D" parent="." instance=ExtResource("3_siciw")]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

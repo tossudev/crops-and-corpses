@@ -124,10 +124,10 @@ public  partial class DialogueControl : Control
 
 		VillagerRawData data = villager.rawData;
         
-		_villagerHatTextureRect.Texture = villager.villagerInfo.villagerHatTexture;
+		_villagerHatTextureRect.Texture = villager.skeleton.villagerHat.Texture;
 		_villagerHatTextureRect.Visible = data.currentOccupation != VillagerOccupation.Builder;
 		
-		_villagerHeadTextureRect.Texture = villager.villagerInfo.villagerHeadTexture;
+		_villagerHeadTextureRect.Texture = villager.skeleton.villagerHead.Texture;
 
 		_nameText.Text = data.name;
 		_loreText.Text = data.lore;

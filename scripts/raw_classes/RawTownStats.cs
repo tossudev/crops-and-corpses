@@ -45,19 +45,10 @@ public partial class RawTownStats : GodotObject
     // Farmer stats
     public int farmerWalkSpeed;
     public const string FARMER_WALK_SPEED_KEY = "farmerWalkSpeed";
-
-    public int farmerMaxFarms;
-    public const string FARMER_MAX_FARMS_KEY = "farmerMaxFarms";
-
-    public int pesticideEffectiveness;
-    public const string PESTICIDE_EFFECTIVENESS_KEY = "pesticideEffectiveness";
     
     // Walls
     public int wallHP;
     public const string WALL_HP_KEY = "wallHP";
-
-    public bool spikyWalls;
-    public const string SPIKY_WALLS_KEY = "spikyWalls";
 
     // Houses
     public int houseHP;
@@ -68,8 +59,8 @@ public partial class RawTownStats : GodotObject
     public RawTownStats(int totalExperience,int townHallLevel, int populationCap, int providedHomes,
         bool isRuinsUnlocked, bool isMineshaftUnlocked, bool isCaveStalagmiteMined, bool isDIYBridgeBuilt,
         int soldierAttackSpeed, int soldierAccuracy,
-        int farmerWalkSpeed, int farmerMaxFarms, int pesticideEffectiveness,
-        int wallHP, bool spikyWalls,
+        int farmerWalkSpeed,
+        int wallHP,
         int houseHP)
     {
         this.totalExperience = totalExperience;
@@ -91,13 +82,10 @@ public partial class RawTownStats : GodotObject
         
         
         this.farmerWalkSpeed = farmerWalkSpeed;
-        this.farmerMaxFarms = farmerMaxFarms;
-        this.pesticideEffectiveness = pesticideEffectiveness;
         
         
         
         this.wallHP = wallHP;
-        this.spikyWalls = spikyWalls;
         
         
         
@@ -135,14 +123,12 @@ public partial class RawTownStats : GodotObject
             soldierAccuracy: (int)rawStatsDict[SOLDIER_ACCURACY_KEY],
             
             
+            
             farmerWalkSpeed: (int)rawStatsDict[FARMER_WALK_SPEED_KEY],
-            farmerMaxFarms: (int)rawStatsDict[FARMER_MAX_FARMS_KEY],
-            pesticideEffectiveness: (int)rawStatsDict[PESTICIDE_EFFECTIVENESS_KEY],
             
             
             
             wallHP: (int)rawStatsDict[WALL_HP_KEY],
-            spikyWalls: (bool)rawStatsDict[SPIKY_WALLS_KEY],
             
             
             
@@ -193,12 +179,9 @@ public partial class RawTownStats : GodotObject
             
             
                 { FARMER_WALK_SPEED_KEY, townStats.farmerWalkSpeed },
-                { FARMER_MAX_FARMS_KEY, townStats.farmerMaxFarms },
-                { PESTICIDE_EFFECTIVENESS_KEY, townStats.pesticideEffectiveness },
             
             
                 { WALL_HP_KEY, townStats.wallHP },
-                { SPIKY_WALLS_KEY, townStats.spikyWalls },
             
             
                 { HOUSE_HP_KEY, townStats.houseHP }

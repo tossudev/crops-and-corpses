@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_i45ep"]
 [ext_resource type="Resource" uid="uid://bs6otct5awtuy" path="res://TinoTests/Resources/rock.tres" id="2_1jb1k"]
+[ext_resource type="AudioStream" uid="uid://0ypnop8xaiqs" path="res://assets/sounds_folder/character_sounds/rock_break.wav" id="3_c8m57"]
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="3_ci4t7"]
 [ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_i6dnf"]
-[ext_resource type="AudioStream" path="res://assets/Sounds/character_sounds/rock_break.wav" id="3_uge2a"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_lv2gj"]
 [ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="5_vty0u"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_yudbm"]
@@ -43,7 +43,7 @@ script = ExtResource("1_i45ep")
 loot = ExtResource("2_1jb1k")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite = NodePath("Sprite2D")
-_audio = ExtResource("3_uge2a")
+_audio = ExtResource("3_c8m57")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.615686)

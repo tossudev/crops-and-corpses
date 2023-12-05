@@ -5,9 +5,7 @@ public partial class WallUpgrade : TownUpgrade
 {
     [Export] int _wallHP;
     public int wallHP => _wallHP;
-
-    [Export] bool _spikyWalls;
-    public bool spikyWalls => _spikyWalls;
+    
     public override string GetEffectDescription()
     {
         string description = "";
@@ -18,12 +16,6 @@ public partial class WallUpgrade : TownUpgrade
             description += "Wall HP +" + wallHP;
         }
 
-        if (!TownManager.currentTownStats.spikyWalls && spikyWalls)
-        {
-            description = AddDelimiterIfNotEmpty(description);
-            description += "Walls deal DMG if attacked";
-        }
-        
         return description;
     }
 }

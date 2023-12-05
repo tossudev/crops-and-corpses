@@ -24,12 +24,9 @@ public partial class TownStats : Resource
     
     // Farmer stats
     [Export] int _farmerWalkSpeed;
-    [Export] int _farmerMaxFarms;
-    [Export] int _pesticideEffectiveness;
     
     // Walls
     [Export] int _wallHP;
-    [Export] bool _spikyWalls;
 
     // Houses
     [Export] int _houseHP;
@@ -56,13 +53,10 @@ public partial class TownStats : Resource
             
             
             farmerWalkSpeed: _farmerWalkSpeed,
-            farmerMaxFarms: _farmerMaxFarms,
-            pesticideEffectiveness: _pesticideEffectiveness,
             
             
             
             wallHP: _wallHP,
-            spikyWalls: _spikyWalls,
             
             
             

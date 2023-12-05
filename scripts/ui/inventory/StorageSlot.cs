@@ -98,7 +98,7 @@ public partial class StorageSlot : Control
 			    if (PlayerInventoryController.HasSameItemSelected(slotItem))
 			    {
 				    // Return item back to its place
-				    StorageSlotController.UpdateSlot(this, _itemsRawArray, selectedItem);
+				    StorageController.UpdateStorageSlot(_parentContainer, _itemsRawArray, selectedItem, slotIndex);
 				    PlayerInventoryController.DeselectItem();
 			    }
 				else if (selectedItem.id == slotItem.id)

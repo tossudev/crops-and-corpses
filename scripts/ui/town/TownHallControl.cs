@@ -12,7 +12,11 @@ public partial class TownHallControl : Node2D
 			TownHallMenu.menuInstance.OpenMainPanel();
 		}
 	}
-	
-	
-	
+
+	public override void _Ready()
+	{
+		base._Ready();
+
+		TownManager.SetTownHallPosition(GlobalPosition - new Vector2(-10, -10));
+	}
 }

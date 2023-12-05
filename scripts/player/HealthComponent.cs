@@ -225,6 +225,16 @@ public partial class HealthComponent : Node2D
 		_parentScript.CallDeferred("OnHealth", _health);
 		UpdateHealthBar();
 	}
+	
+	public void SetMaxHealth(int health)
+	{
+		_maxHealth = health;
+		
+		if (_health > _maxHealth)
+		{
+			SetHealth(_maxHealth);
+		}
+	}
 
 	public int GetHealth()
 	{

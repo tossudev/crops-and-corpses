@@ -9,11 +9,12 @@ public partial class FieldHandler : Node2D
 	[Export] int _currentPlants=0;
 	int _maxPlantSlots=1;
 	Plant _plant = null;
-	[Export] NodePath  _nodePath;
+    NodePath _plantNodePath;
 
 	bool _isPlayerNearby=false;
 	public override void _Ready() {
 		_col.InputEvent +=InteractWithField;
+		_plantNodePath = "%plant_slot";
 	}
 
 	public void SetPlant(string seedName){
@@ -46,7 +47,7 @@ public partial class FieldHandler : Node2D
 			1,
 			PlayerInventoryController.selectedItem.stackSize));
 		
-		TextureRect plantTexture =  GetNode<TextureRect>(_nodePath);
+		TextureRect plantTexture =  GetNode<TextureRect>(_plantNodePath);
 		_plant.myField = this;
 		plantTexture.AddChild(_plant);
 		
@@ -58,7 +59,7 @@ public partial class FieldHandler : Node2D
 	{
 		SetPlant(seedName);
 
-		TextureRect plantTexture = GetNode<TextureRect>(_nodePath);
+		TextureRect plantTexture = GetNode<TextureRect>(_plantNodePath);
 		_plant.myField = this;
 		plantTexture.AddChild(_plant);
 

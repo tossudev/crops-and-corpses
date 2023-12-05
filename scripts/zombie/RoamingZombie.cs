@@ -8,10 +8,10 @@ public partial class RoamingZombie : CharacterBody2D
 	[Export] private AudioStreamPlayer2D _audioStreamPlayer2D;
 	[Export] private LootController _lootController;
 	[Export] Array<Loot> _lootList;
-	private enum ZombieOccupation { Miner, Farmer, Soldier, Woodcutter, Builder };
+	
 	private enum ZombieReward{Small,Medium,Big};
 	private ZombieReward reward;
-	private ZombieOccupation zombieOccupation;
+	private VillagerOccupation zombieOccupation;
 	private Skeleton2D _sprite;
 	private CharacterBody2D _player;
 	private HitboxComponent[] _hitboxes;
@@ -93,7 +93,9 @@ public partial class RoamingZombie : CharacterBody2D
 
 		_updateStatsTimer.Start();
 
-		int randomIndex = (int)GD.RandRange(1, 5);
+		var occupation = VillagerRawData.GetRandomOccupation();
+		
+		int randomIndex = (int) occupation;
 
 
 		if (randomIndex >= 1 && randomIndex <= 4)
@@ -102,27 +104,8 @@ public partial class RoamingZombie : CharacterBody2D
 			var zombieHatNode = zombieHeadBonetNode.GetNode<Sprite2D>("ZombieHat" + randomIndex);
 			zombieHatNode.Visible = true;
 		}
-		
-		switch (randomIndex)
-		{
-			case 1:
-				zombieOccupation = ZombieOccupation.Farmer;
-				break;
-			case 2:
-				zombieOccupation = ZombieOccupation.Soldier;
-				break;
-			case 3:
-				zombieOccupation = ZombieOccupation.Miner;
-				break;
-			case 4:
-				zombieOccupation = ZombieOccupation.Woodcutter;
-				break;
-			case 5:
-				zombieOccupation = ZombieOccupation.Builder;
-				break;
-			default:
-				break;
-		}
+
+		zombieOccupation = occupation;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -191,6 +174,9 @@ public partial class RoamingZombie : CharacterBody2D
 			case EffectType.Cure:
 				SpawnScript.RemoveZombieFromList(this);
 				Vector2 zombiePos = this.Transform.Origin;
+                var newVillagerData = new VillagerRawData();
+				newVillagerData.SetOccupation(zombieOccupation);
+				VillagerManager.villagerManagerInstance.AddNewVillagerRawData();
 				VillagerManager.villagerManagerInstance.SpawnNewVillager(zombiePos, true);
 				QueueFree();
 				break;

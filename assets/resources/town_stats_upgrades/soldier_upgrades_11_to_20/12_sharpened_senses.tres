@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SoldierUpgrade" load_steps=2 format=3 uid="uid://dmqw02l8ub62t"]
+
+[ext_resource type="Script" path="res://scripts/resource_classes/upgrades/SoldierUpgrade.cs" id="1_v7gln"]
+
+[resource]
+script = ExtResource("1_v7gln")
+_soldierAttackSpeed = 0
+_soldierAccuracy = 0
+_id = 0
+_upgradeHeader = ""
+_upgradeDescription = ""
+_craftingRequirements = null

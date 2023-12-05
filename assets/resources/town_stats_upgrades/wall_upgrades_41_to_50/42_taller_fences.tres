@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WallUpgrade" load_steps=2 format=3 uid="uid://cgetkvf7fcmkp"]
+
+[ext_resource type="Script" path="res://scripts/resource_classes/upgrades/WallUpgrade.cs" id="1_tyhci"]
+
+[resource]
+script = ExtResource("1_tyhci")
+_wallHP = 0
+_spikyWalls = false
+_id = 0
+_upgradeHeader = ""
+_upgradeDescription = ""
+_craftingRequirements = null

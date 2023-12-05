@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="StorageUpgrade" load_steps=2 format=3 uid="uid://dit21bhacok2w"]
+
+[ext_resource type="Script" path="res://scripts/resource_classes/upgrades/StorageUpgrade.cs" id="1_e6e6n"]
+
+[resource]
+script = ExtResource("1_e6e6n")
+_storageCapacity = 0
+_id = 0
+_upgradeHeader = ""
+_upgradeDescription = ""
+_craftingRequirements = null

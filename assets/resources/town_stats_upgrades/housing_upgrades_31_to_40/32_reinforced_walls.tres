@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HousingUpgrade" load_steps=2 format=3 uid="uid://ba81dbkcaxnh3"]
+
+[ext_resource type="Script" path="res://scripts/resource_classes/upgrades/HousingUpgrade.cs" id="1_hjm3c"]
+
+[resource]
+script = ExtResource("1_hjm3c")
+_houseHP = 0
+_id = 0
+_upgradeHeader = ""
+_upgradeDescription = ""
+_craftingRequirements = null

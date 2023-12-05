@@ -12,14 +12,17 @@
 radius = 332.374
 
 [node name="street_sign_post" type="Node2D"]
+position = Vector2(3, -137)
 scale = Vector2(0.6, 0.6)
 script = ExtResource("1_ffm7f")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_rlsfp")
+offset = Vector2(0, -250)
 
 [node name="ruins_sign" type="Area2D" parent="."]
-position = Vector2(68.3333, -168.333)
+position = Vector2(71.6667, -413.333)
+scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ruins_sign"]
 position = Vector2(2.5, 0)
@@ -29,7 +32,8 @@ shape = ExtResource("3_y35pe")
 texture = ExtResource("4_7x21e")
 
 [node name="town_sign" type="Area2D" parent="."]
-position = Vector2(66.6666, -165)
+position = Vector2(66.6667, -356.667)
+scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="town_sign"]
 shape = ExtResource("3_y35pe")
@@ -38,7 +42,8 @@ shape = ExtResource("3_y35pe")
 texture = ExtResource("5_80p6s")
 
 [node name="forest_sign" type="Area2D" parent="."]
-position = Vector2(-58.3333, -115)
+position = Vector2(-58.3333, -316.667)
+scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="forest_sign"]
 shape = ExtResource("3_y35pe")
@@ -47,6 +52,7 @@ shape = ExtResource("3_y35pe")
 texture = ExtResource("6_s8p2d")
 
 [node name="VillagerDropOff" type="Node2D" parent="."]
+position = Vector2(0, -260)
 script = ExtResource("7_ddcla")
 
 [node name="DropOffArea" type="Area2D" parent="VillagerDropOff"]

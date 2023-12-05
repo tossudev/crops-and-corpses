@@ -19,6 +19,7 @@ public partial class BuildingDemolishMenu : Control
     Button _demolishButton;
     const string DEMOLISH_BUTTON_NODENAME = "%DemolishButton";
 
+    [Export]
     public string buildingName;
 
     Label _demolishLabel;
@@ -58,7 +59,10 @@ public partial class BuildingDemolishMenu : Control
 
         if (mouseEvent.ButtonIndex == MouseButton.Left)
         {
-            OpenMainPanel();
+            if (PlayerInventoryController.heldItem == null || (PlayerInventoryController.heldItem.id != 405 && PlayerInventoryController.heldItem.id != 406))
+            {
+                OpenMainPanel();
+            }
         }
     }
 

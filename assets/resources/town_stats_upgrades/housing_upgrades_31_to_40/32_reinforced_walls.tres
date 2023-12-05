@@ -1,11 +1,26 @@
-[gd_resource type="Resource" script_class="HousingUpgrade" load_steps=2 format=3 uid="uid://ba81dbkcaxnh3"]
+[gd_resource type="Resource" script_class="HousingUpgrade" load_steps=8 format=3 uid="uid://ba81dbkcaxnh3"]
 
 [ext_resource type="Script" path="res://scripts/resource_classes/upgrades/HousingUpgrade.cs" id="1_hjm3c"]
+[ext_resource type="Resource" uid="uid://b7mm5b7xm04ju" path="res://assets/resources/game_items/resource_items_0_to_99/3_steel.tres" id="1_mr8ja"]
+[ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_kghj1"]
+[ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="3_jjbta"]
+[ext_resource type="Texture2D" uid="uid://b5cv2b6w6tvm0" path="res://assets/sprites/buildings/housedesing2.png" id="4_ony8a"]
+
+[sub_resource type="Resource" id="Resource_ngjvt"]
+script = ExtResource("2_kghj1")
+item = ExtResource("1_mr8ja")
+quantity = 3
+
+[sub_resource type="Resource" id="Resource_2gwiu"]
+script = ExtResource("2_kghj1")
+item = ExtResource("3_jjbta")
+quantity = 20
 
 [resource]
 script = ExtResource("1_hjm3c")
-_houseHP = 0
-_id = 0
-_upgradeHeader = ""
-_upgradeDescription = ""
-_craftingRequirements = null
+_houseHP = 40
+_id = 32
+_upgradeIcon = ExtResource("4_ony8a")
+_upgradeHeader = "Reinforced Walls"
+_upgradeDescription = "Reinforced walls make the house more durable"
+_craftingRequirements = Array[Object]([SubResource("Resource_ngjvt"), SubResource("Resource_2gwiu")])

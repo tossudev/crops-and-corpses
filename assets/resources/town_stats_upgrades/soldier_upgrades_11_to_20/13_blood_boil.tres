@@ -1,12 +1,33 @@
-[gd_resource type="Resource" script_class="SoldierUpgrade" load_steps=2 format=3 uid="uid://dwq2vaf0x5d5i"]
+[gd_resource type="Resource" script_class="SoldierUpgrade" load_steps=10 format=3 uid="uid://dwq2vaf0x5d5i"]
 
+[ext_resource type="Resource" uid="uid://be88krv16kuqn" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/112_poppy_seed.tres" id="1_2jb82"]
+[ext_resource type="Texture2D" uid="uid://dn7esiusn51if" path="res://assets/sprites/items/item_poppy.png" id="1_l0eh7"]
 [ext_resource type="Script" path="res://scripts/resource_classes/upgrades/SoldierUpgrade.cs" id="1_ox5vu"]
+[ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_jdr06"]
+[ext_resource type="Resource" uid="uid://bpa3bx68ohi5" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/111_lupine.tres" id="3_6kcpn"]
+[ext_resource type="Resource" uid="uid://466kaxdtvhse" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/105_mushroom.tres" id="4_3osu1"]
+
+[sub_resource type="Resource" id="Resource_jik6t"]
+script = ExtResource("2_jdr06")
+item = ExtResource("1_2jb82")
+quantity = 10
+
+[sub_resource type="Resource" id="Resource_4u7p0"]
+script = ExtResource("2_jdr06")
+item = ExtResource("3_6kcpn")
+quantity = 10
+
+[sub_resource type="Resource" id="Resource_t1hlh"]
+script = ExtResource("2_jdr06")
+item = ExtResource("4_3osu1")
+quantity = 10
 
 [resource]
 script = ExtResource("1_ox5vu")
-_soldierAttackSpeed = 0
-_soldierAccuracy = 0
-_id = 0
-_upgradeHeader = ""
-_upgradeDescription = ""
-_craftingRequirements = null
+_soldierAttackSpeed = 20
+_soldierAccuracy = 20
+_id = 13
+_upgradeIcon = ExtResource("1_l0eh7")
+_upgradeHeader = "Blood Boil"
+_upgradeDescription = "The soldiers' blood boils, and the enemies feel the fury"
+_craftingRequirements = Array[Object]([SubResource("Resource_jik6t"), SubResource("Resource_4u7p0"), SubResource("Resource_t1hlh")])

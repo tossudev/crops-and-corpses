@@ -1,12 +1,27 @@
-[gd_resource type="Resource" script_class="SoldierUpgrade" load_steps=2 format=3 uid="uid://dmqw02l8ub62t"]
+[gd_resource type="Resource" script_class="SoldierUpgrade" load_steps=8 format=3 uid="uid://dmqw02l8ub62t"]
 
+[ext_resource type="Resource" uid="uid://bpa3bx68ohi5" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/111_lupine.tres" id="1_jyd5f"]
 [ext_resource type="Script" path="res://scripts/resource_classes/upgrades/SoldierUpgrade.cs" id="1_v7gln"]
+[ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_04rig"]
+[ext_resource type="Resource" uid="uid://1ocpajcw4bxt" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/113_poppy.tres" id="3_wlrhs"]
+[ext_resource type="Texture2D" uid="uid://cp376efi7bb12" path="res://assets/sprites/items/item_steel_sword.png" id="5_1pb2e"]
+
+[sub_resource type="Resource" id="Resource_2kmkc"]
+script = ExtResource("2_04rig")
+item = ExtResource("1_jyd5f")
+quantity = 5
+
+[sub_resource type="Resource" id="Resource_ue7px"]
+script = ExtResource("2_04rig")
+item = ExtResource("3_wlrhs")
+quantity = 10
 
 [resource]
 script = ExtResource("1_v7gln")
-_soldierAttackSpeed = 0
-_soldierAccuracy = 0
-_id = 0
-_upgradeHeader = ""
-_upgradeDescription = ""
-_craftingRequirements = null
+_soldierAttackSpeed = 10
+_soldierAccuracy = 10
+_id = 12
+_upgradeIcon = ExtResource("5_1pb2e")
+_upgradeHeader = "Sharp Senses"
+_upgradeDescription = "Soldiers strengthen their predator senses."
+_craftingRequirements = Array[Object]([SubResource("Resource_2kmkc"), SubResource("Resource_ue7px")])

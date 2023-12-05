@@ -5,29 +5,27 @@ using Godot.Collections;
 [System.Serializable]
 public partial class RawSaveData : GodotObject
 {
-    public RawTownStats townStats = new ();
-    public List<TownUpgrade> appliedUpgrades = new ();
-    public List<TownUnlock> appliedUnlocks = new ();
-    public List<VillagerRawData> allVillagers = new ();
-    public Array<RawInventoryItem> organizedInventoryItems = new ();
+    public RawTownStats townStats = new();
+    public List<TownUpgrade> appliedUpgrades = new();
+    public List<TownUnlock> appliedUnlocks = new();
+    public List<VillagerRawData> allVillagers = new();
+    public Array<RawInventoryItem> organizedInventoryItems = new();
     public Array<RawInventoryItem> playerHotbarItems = new();
-    public Array<RawInventoryItem> townStorageItems = new ();
-    public Dictionary playerInfo = new ();
-    public Dictionary sceneInfo = new ();
+    public Array<RawInventoryItem> townStorageItems = new();
+    public Dictionary playerInfo = new();
 
     public RawSaveData()
     {
     }
 
-    public RawSaveData(RawTownStats townStats, 
-        List<TownUpgrade> appliedUpgrades, 
+    public RawSaveData(RawTownStats townStats,
+        List<TownUpgrade> appliedUpgrades,
         List<TownUnlock> appliedUnlocks,
         List<VillagerRawData> allVillagers,
         Array<RawInventoryItem> organizedInventoryItems,
         Array<RawInventoryItem> playerHotbarItems,
         Array<RawInventoryItem> townStorageItems,
-        Dictionary playerInfo,
-        Dictionary sceneInfo)
+        Dictionary playerInfo)
     {
         this.townStats = townStats;
         this.appliedUpgrades = appliedUpgrades;
@@ -37,7 +35,6 @@ public partial class RawSaveData : GodotObject
         this.playerHotbarItems = playerHotbarItems;
         this.townStorageItems = townStorageItems;
         this.playerInfo = playerInfo;
-        this.sceneInfo = sceneInfo;
     }
 
     public Dictionary GetFullDataDictionary()
@@ -64,15 +61,12 @@ public partial class RawSaveData : GodotObject
         // Organized inventory
         fullDictionary.Add(
             SaveData.ORGANIZED_INVENTORY_ITEMS_KEY, RawInventoryItem.GetOrganizedItemsArray(organizedInventoryItems));
-        
+
         // Hotbar
         fullDictionary.Add(SaveData.HOTBAR_ITEMS_KEY, RawInventoryItem.GetOrganizedItemsArray(playerHotbarItems));
 
         // Player info
         fullDictionary.Add(SaveData.PLAYER_INFO_KEY, PlayerInfo.GetDictionary());
-
-        // Scene info
-        fullDictionary.Add(SaveData.SCENE_INFO_KEY, SceneInfo.GetDictionary());
 
 
         return fullDictionary;

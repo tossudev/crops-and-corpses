@@ -6,9 +6,9 @@ public partial class cave : Node2D
 	[Export] private Node2D _bridge;
 	[Export] private Node2D _stalagmite;
 
-	public override async void _Ready()
+	public override void _Ready()
 	{
-		if (await SceneInfo.GetCaveBridgeOpen())
+		if (SaveData.townHallStats.isCaveStalagmiteMined)
 		{
 			OpenBridge();
 		}

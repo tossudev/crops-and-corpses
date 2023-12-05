@@ -8,14 +8,14 @@ public partial class forest : Node2D
 	[Export] private Node2D _bridgeQuest;
 	[Export] private Node2D _ruinsBridge;
 
-	public override async void _Ready()
+	public override void _Ready()
 	{
-		if (await SceneInfo.GetForestBridgeOpen())
+		if (SaveData.townHallStats.isDIYBridgeBuilt)
 		{
 			OpenBridge();
 		}
 
-		if (await SceneInfo.GetForestBuildABridgeOpen())
+		if (SaveData.townHallStats.isRuinsUnlocked)
 		{
 			OpenRuinsBridge();
 		}
@@ -30,7 +30,7 @@ public partial class forest : Node2D
 
 	private void OpenRuinsBridge()
 	{
-		if (_ruinsBridge != null)  
+		if (_ruinsBridge != null)
 			_ruinsBridge.Visible = true;
 		_bridgeQuest.QueueFree();
 	}

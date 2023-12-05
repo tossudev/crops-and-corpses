@@ -67,23 +67,25 @@ public partial class BuildingMenu : Control
 
         _buildingPrefabs = new List<Building>();
 
-        _farmPlot = new Building(_farmPlotScene, _farmPlotGhostScene, 1, 1, "Farm Plot", _farmPlotIcon);
+       
+
+        _farmPlot = new Building(_farmPlotScene, _farmPlotGhostScene, 1, 1, ExpGain.VERY_SMALL,  "Farm Plot", _farmPlotIcon);
         _buildingPrefabs.Add(_farmPlot);
 
-        _house = new Building(_houseScene, _houseGhostScene, 4, 2, "House", _houseIcon);
+        _house = new Building(_houseScene, _houseGhostScene, 4, 2, ExpGain.SMALL,  "House", _houseIcon);
         _buildingPrefabs.Add(_house);
 
-        _largeHouse = new Building(_largeHouseScene, _largeHouseGhostScene, 6, 3, "Large House", _largeHouseIcon);
+        _largeHouse = new Building(_largeHouseScene, _largeHouseGhostScene, 6, 3, ExpGain.MEDIUM,  "Large House", _largeHouseIcon);
         _buildingPrefabs.Add(_largeHouse);
 
-        _well = new Building(_wellScene, _wellGhostScene, 1, 4, "Well", _wellIcon);
+        _well = new Building(_wellScene, _wellGhostScene, 1, 4, ExpGain.SMALL,  "Well", _wellIcon);
         _buildingPrefabs.Add(_well);
 
-        _archerTower = new Building(_archerTowerScene, _archerTowerGhostScene, 6, 6, "Archer Tower", _archerTowerIcon);
+        _archerTower = new Building(_archerTowerScene, _archerTowerGhostScene, 6, 6, ExpGain.BIG, "Archer Tower", _archerTowerIcon);
         _buildingPrefabs.Add(_archerTower);
 
         _notEnoughResourcesLabel.AddThemeFontSizeOverride("font_size", 32);
-        
+
         CreateBuildMenu();
 
         LoadBuildings();
@@ -490,6 +492,8 @@ public partial class BuildingMenu : Control
         Node2D _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;
         _buildingScene.Position = _ghostBuilding.Position;
         _buildings.AddChild(_buildingScene);
+
+        TownManager.GainExp(_currentBuilding.buildingExp);
 
         if (_currentBuilding.name == "House" || _currentBuilding.name == "Large House" || _currentBuilding.name == "Archer Tower")
         {

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_uikdl"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_driju"]
-[ext_resource type="Texture2D" uid="uid://cg5j4xefc87sn" path="res://assets/sprites/buildings/smallhouse_color.png" id="2_dt56r"]
+[ext_resource type="Texture2D" uid="uid://bmn8ggt1kvsn7" path="res://assets/sprites/buildings/smallhouse_color.png" id="2_dt56r"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_u5tml"]
-[ext_resource type="PackedScene" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_lfvtm"]
+[ext_resource type="PackedScene" uid="uid://2v1aodyd0p4b" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_lfvtm"]
 [ext_resource type="PackedScene" uid="uid://dune6txyuwmm2" path="res://scenes/buildings/town/villager_residence_component.tscn" id="6_17x1j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1313"]

@@ -159,6 +159,8 @@ public partial class HandheldController : Node2D
 
         _skeleton.usingTool = true;
 
+        GD.Print("Handheld: use");
+
         if (_ranged)
         {
             StartDraw();

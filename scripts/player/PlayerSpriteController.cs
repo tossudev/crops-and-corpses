@@ -28,8 +28,6 @@ public partial class PlayerSpriteController : Skeleton2D
 		{
 			animPlayer.SpeedScale = movement.Length() / animSpeedMultiplier;
 
-			GD.Print(isFlipped);
-
 			if (!usingTool && !usingRanged)
 				animPlayer.Play("walk");
 			else

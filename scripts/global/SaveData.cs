@@ -35,7 +35,6 @@ public partial class SaveData : Node
     public static Array<RawInventoryItem> playerHotbarItems = new();
     public static Array<RawInventoryItem> townStorageItems = new();
     public static Dictionary playerInfo = new();
-    public static Dictionary sceneInfo = new();
 
     public static bool savingInProgress = false;
     public static bool firstLoadComplete = false;
@@ -78,8 +77,7 @@ public partial class SaveData : Node
             organizedPlayerInventory,
             playerHotbarItems,
             townStorageItems,
-            playerInfo,
-            sceneInfo);
+            playerInfo);
 
         Dictionary saveDictionary = rawSaveData.GetFullDataDictionary();
 
@@ -140,9 +138,6 @@ public partial class SaveData : Node
 
         // Player Info
         PlayerInfo.LoadPlayerInfo(saveData);
-
-        // Scene Info
-        SceneInfo.LoadSceneInfo(saveData);
 
         firstLoadComplete = true;
     }

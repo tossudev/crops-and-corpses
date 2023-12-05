@@ -8827,6 +8827,7 @@ position = Vector2(-16, 142)
 
 [node name="ZombieSpawn" type="Node2D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("83_46bai")
+maxDistance = 1600.0
 player = NodePath("../Objects/Player")
 
 [node name="SpawnPoint1" type="Node2D" parent="ZombieSpawn"]

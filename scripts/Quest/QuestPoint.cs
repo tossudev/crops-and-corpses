@@ -99,16 +99,11 @@ public partial class QuestPoint : Node2D
         
         playerDistanceToQuestPoint = (int) playerController.GlobalPosition.DistanceTo(GlobalPosition);
 
-        if (!isZombiesSpawned && playerDistanceToQuestPoint <= SpawnRange)
+        if (playerDistanceToQuestPoint <= SpawnRange)
         {
-            _activeQuest.CompleteQuestStage("Find");
+            _activeQuest.CompleteQuestStage(QuestStage.Find);
 
             KillStage();
-        }
-
-        if (zombieSpawn.GetZombieQuestListCount() == 0 && isZombiesSpawned)
-        {
-            _activeQuest.CompleteQuestStage("Kill");
         }
     }
 
@@ -122,18 +117,14 @@ public partial class QuestPoint : Node2D
 
     public void SpawnZombies()
     {
-        SpawendZombieAmount();
         Vector2 offsetVector = new Vector2(GD.Randi() % 3, GD.Randi() % 3);
 
 
         if (zombieSpawn != null && isZombiesSpawned == false)
         {
-            for (int i = 0; i < zombieAmount; i++)
+            for (int i = 0; i < GetSpawnedZombieAmount(); i++)
             {
                 zombieSpawn.SpawnZombieAtPoint(spawnZombiePoint.GlobalPosition + offsetVector);
-
-
-                GD.Print("SpawnZombies");
             }
 
             _activeQuest?.ChangeQuestDescription("Clear the area of zombies");
@@ -142,43 +133,40 @@ public partial class QuestPoint : Node2D
         else
         {
             GD.PrintErr("ZombieSpawn not found or not initialized.");
-            // Handle the error as needed, e.g., return or throw an exception.
-            return;
         }
     }
 
 
-    private void SpawendZombieAmount()
+    int GetSpawnedZombieAmount()
     {
         CurrentDifficulty = _activeQuest?.questDifficulty ?? 0;
-        
-        switch (CurrentDifficulty)
+
+        return CurrentDifficulty switch
         {
-            case 1:
-                zombieAmount = 4;
-                break;
-            case 2:
-                zombieAmount = 6;
-                break;
-            case 3:
-                zombieAmount = 8;
-                break;
-            default:
-                zombieAmount = 4;
-                break;
-        }
+            1 => 4,
+            2 => 6,
+            3 => 8,
+            _ => 4,
+        };
     }
 
     void KillStage()
     {
         _activeQuest.ChangeQuestDescription("Kill all zombies");
-        SpawnZombies();
-        SpawnVillagers();
+
+        if (!isZombiesSpawned)
+        {
+            SpawnZombies();
+            SpawnVillagers();
+        }
+        
         
         if (zombieSpawn.GetZombieQuestListCount() == 0)
         {
-            _activeQuest.CompleteQuestStage("Kill");
-            _activeQuest.ChangeQuestDescription("Talk to the villagers");
+            if (_activeQuest.CompleteQuestStage(QuestStage.Kill));
+            {
+                _activeQuest.ChangeQuestDescription("Talk to the villagers");
+            }
         }
     }
 

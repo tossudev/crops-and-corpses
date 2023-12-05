@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_yp60e")
 item = ExtResource("1_wsm4d")
-damage = 33
+damage = 40
 knockback = 500.0
 cooldown = 0.5
 effect = 0

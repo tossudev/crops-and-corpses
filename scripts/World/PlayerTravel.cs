@@ -33,4 +33,10 @@ public partial class PlayerTravel : Node2D
 			SceneManager.ChangeScene(this, Scene.Forest);
 		}
 	}
+
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		TownManager.townPlayerTravel = null;
+	}
 }

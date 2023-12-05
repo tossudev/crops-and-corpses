@@ -3,6 +3,14 @@ using System;
 using System.ComponentModel;
 using Godot.Collections;
 
+public enum QuestStage
+{
+    Find,
+    Kill,
+    Rescue,
+    Deliver
+}
+
 public partial class Quest : Node
 {
     // Keys
@@ -20,7 +28,7 @@ public partial class Quest : Node
 
     public QuestType type;
 
-    public Array<string> stages { get; private set; } = new();
+    public Array<QuestStage> stages { get; private set; } = new();
     public Scene.RootScene location { get; private set; }
 
     public Quest () {}
@@ -55,7 +63,7 @@ public partial class Quest : Node
         {
             case QuestType.Rescue:
 
-                stages = new Array<string> { "Find", "Rescue", "Deliver" };
+                stages = new Array<QuestStage> { QuestStage.Find, QuestStage.Kill, QuestStage.Rescue, QuestStage.Deliver };
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -67,17 +75,12 @@ public partial class Quest : Node
         return stages.Count == 0;
     }
 
-    public bool CompleteQuestStage(string stage)
+    public bool CompleteQuestStage(QuestStage stage)
     {
         if (!stages.Contains(stage)) return false;
         
         stages.Remove(stage);
         return true;
-    }
-
-    public string GetQuestStage()
-    {
-        return stages[0];
     }
 
     public string GetQuestDescription()
@@ -128,7 +131,7 @@ public partial class Quest : Node
             startDay = (int) questDictionary[QUEST_START_DAY_KEY],
             description = (string) questDictionary[QUEST_DESCRIPTION_KEY],
             type = (QuestType) (int) questDictionary[QUEST_TYPE_KEY],
-            stages = (Array<string>) questDictionary[QUEST_STAGES_KEY],
+            stages = (Array<QuestStage>) questDictionary[QUEST_STAGES_KEY],
             location = Scene.GetRootSceneByName((string) questDictionary[QUEST_LOCATION_KEY])
         };
 

@@ -206,11 +206,13 @@ public partial class Villager : CharacterBody2D
 	{
         var quest = await PlayerInfo.GetActiveQuest();
 
-		if (!(quest?.stages.Contains("Kill") ?? false)) return;
+		if (!(quest?.stages.Contains(QuestStage.Rescue) ?? false)) return;
 		
-		if (!quest.CompleteQuestStage("Rescue")) return;
-			
+		if (quest.stages.Contains(QuestStage.Kill)) return;
+		
+		if (!quest.CompleteQuestStage(QuestStage.Rescue)) return;
 		quest.ChangeQuestDescription("Take the villager to Street Sign");
+		
 		SetCurrentState(VillagerState.FollowPlayer);
 	}
 

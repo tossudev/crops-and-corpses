@@ -24,12 +24,12 @@ public partial class TownManager : Node2D
 	
 	const string TOWN_STREET_SIGN_GROUP = "StreetSign";
 
-	static PlayerTravel _townPlayerTravel;
+	public static PlayerTravel townPlayerTravel;
 	public static PlayerTravel GetTownPlayerTravel (Node caller)
 	{
-		return _townPlayerTravel ??= (PlayerTravel) caller.GetTree().GetFirstNodeInGroup(TOWN_STREET_SIGN_GROUP);;
+		return townPlayerTravel ??= (PlayerTravel) caller.GetTree().GetFirstNodeInGroup(TOWN_STREET_SIGN_GROUP);;
 	}
-
+    
 	public static void SetTownHallPosition(Vector2 position)
 	{
 		_townHallPosition = position;

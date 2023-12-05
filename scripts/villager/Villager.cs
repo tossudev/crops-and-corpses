@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 public enum VillagerOccupation
 {
-	Builder,
+	Miner,
 	Farmer,
 	Soldier,
 	Woodcutter,
-	Miner
+	Builder
 }
 
 public partial class Villager : CharacterBody2D
@@ -182,8 +182,7 @@ public partial class Villager : CharacterBody2D
 				GD.Print("State not found");
 				break;
 		}
-		//GD.Print(_state);
-	}
+    }
 
 	public void _on_button_button_up()
 	{
@@ -353,6 +352,8 @@ public partial class Villager : CharacterBody2D
 		}
 
 		SetCurrentState(decision);
+		
+		GD.Print($"{rawData.name} has decided {rawData.currentState} as their state");
 	}
 
 	void GatherResources()

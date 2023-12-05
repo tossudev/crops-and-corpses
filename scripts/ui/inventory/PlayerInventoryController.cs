@@ -248,40 +248,27 @@ public partial class PlayerInventoryController : Control
         return success;
     }
 
-    public static void SwapItems(RawInventoryItem itemToSwapOut, int itemToSwapOutIndex)
+    public static void SwapItems(RawInventoryItem itemToSwapOut, int swapOutSlotIndex)
     {
         RawInventoryItem tempSwapItem = new(
             itemToSwapOut.id, itemToSwapOut.name, itemToSwapOut.quantity, itemToSwapOut.stackSize);
         
         tempSwapItem.hostSlotType = selectedItem.hostSlotType;
+        tempSwapItem.hostArray = selectedItem.hostArray;
+        tempSwapItem.hostGrid = selectedItem.hostGrid;
+        tempSwapItem.indexInStorageArray = selectedItem.indexInStorageArray;
+
         
         selectedItem.hostSlotType = itemToSwapOut.hostSlotType;
-
-        int selectedItemIndex = selectedItem.indexInStorageArray;
+        selectedItem.hostGrid = itemToSwapOut.hostGrid;
+        selectedItem.hostArray = itemToSwapOut.hostArray;
+        selectedItem.indexInStorageArray = itemToSwapOut.indexInStorageArray;
         
-        UpdateInventorySlot(selectedItem, itemToSwapOutIndex);
-        UpdateInventorySlot(tempSwapItem, selectedItemIndex);
-
-        StorageController.SelectItemAtSlot(tempSwapItem.hostGrid, selectedItemIndex);
-    }
-
-    static void UpdateInventorySlot(RawInventoryItem item, int index)
-    {
-        StorageSlot slotToUpdate;
-        switch (item.hostSlotType)
-        {
-            case StorageSlotType.Hotbar:
-                slotToUpdate = _hotbarGrid.GetChild<StorageSlot>(index);
-                break;
-            case StorageSlotType.PlayerInventory:
-                slotToUpdate = _inventoryGrid.GetChild<StorageSlot>(index);
-                break;
-            default:
-                return;
-        }
+        StorageController.UpdateStorageSlot(selectedItem.hostGrid, selectedItem.hostArray, selectedItem, swapOutSlotIndex);
         
-
-        StorageSlotController.UpdateSlot(slotToUpdate, slotToUpdate.itemsRawArray, item);
+        
+        StorageController.UpdateStorageSlot(tempSwapItem.hostGrid, tempSwapItem.hostArray, tempSwapItem, tempSwapItem.indexInStorageArray);
+        StorageController.SelectItemAtSlot(tempSwapItem.hostGrid, tempSwapItem.indexInStorageArray);
     }
 
     public static void DropSelectedItem(Vector2 position, Node parent)

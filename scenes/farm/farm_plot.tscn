@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" path="res://scripts/farm/FieldHandler.cs" id="1_0dcsm"]
 [ext_resource type="Shape2D" uid="uid://be1ka8r6xc5x1" path="res://scenes/farm/shapes/dirt_shape.tres" id="2_r82bd"]
-[ext_resource type="Texture2D" uid="uid://clh7lf445p822" path="res://assets/sprites/tiles/farm_tile.png" id="3_wn7wb"]
+[ext_resource type="Texture2D" uid="uid://bsvydtv7ujwkm" path="res://assets/sprites/tiles/farm_tile.png" id="3_wn7wb"]
 
-[node name="farm_plot" type="Node2D" groups=["FarmPlot"]]
+[node name="farm_plot" type="Node2D" node_paths=PackedStringArray("_col") groups=["FarmPlot"]]
 scale = Vector2(2, 2)
 script = ExtResource("1_0dcsm")
+_col = NodePath("FarmPlot")
 
 [node name="FarmPlot" type="Area2D" parent="."]
 position = Vector2(-32, -32)
@@ -17,6 +18,7 @@ collision_mask = 3
 shape = ExtResource("2_r82bd")
 
 [node name="plant_slot" type="TextureRect" parent="." groups=["plantslot"]]
+unique_name_in_owner = true
 z_index = 1
 custom_minimum_size = Vector2(500, 0)
 anchors_preset = 1

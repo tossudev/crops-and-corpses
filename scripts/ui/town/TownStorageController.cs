@@ -1,10 +1,14 @@
 using Godot;
 using System;
 using System.Threading.Tasks;
+using Godot.Collections;
 
 public partial class TownStorageController : Node
 {
 
+    static Array<RawInventoryItem> _storageArray;
+    public static Array<RawInventoryItem> storageArray => _storageArray;
+    
     static GridContainer _storageGrid;
     const string STORAGE_GRID_NODENAME = "%StorageGrid";
 
@@ -13,18 +17,19 @@ public partial class TownStorageController : Node
         base._Ready();
 
         _storageGrid = GetNode<GridContainer>(STORAGE_GRID_NODENAME);
+        _storageArray = SaveData.townStorageItems;
         
         InitializeGrid();
     }
 
-    async void InitializeGrid()
+    static async void InitializeGrid()
     {
         await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete, 150);
 
         
         StorageController.InitializeItemGridContainer(
             _storageGrid,
-            SaveData.townStorageItems,
+            _storageArray,
             StorageSlotType.TownStorage,
             0,
             StorageData.TOWN_STORAGE_SIZE - 1
@@ -44,7 +49,7 @@ public partial class TownStorageController : Node
     {
         return rawItem.quantity = await StorageController.AddItem(
             _storageGrid,
-            SaveData.townStorageItems,
+            _storageArray,
             rawItem,
             index
         );

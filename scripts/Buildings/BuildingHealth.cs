@@ -29,6 +29,12 @@ public partial class BuildingHealth : Node2D
 	// Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+        if (!SceneManager.IsCurrentScene(this, Scene.Town))
+        {
+            QueueFree();
+            return;
+        }
+        
         _healthComponent = GetNode<HealthComponent>(HEALTH_COMPONENT_NODENAME);
         _healthComponent.AssignBuilding(this);
 

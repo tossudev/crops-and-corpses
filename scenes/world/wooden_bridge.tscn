@@ -1,8 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2f36184vqw0v"]
+[gd_scene load_steps=3 format=3 uid="uid://c2f36184vqw0v"]
 
 [ext_resource type="Texture2D" uid="uid://cvgiagoddsrlv" path="res://assets/sprites/items/bridge.png" id="1_3sw0v"]
+[ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="1_fvyli"]
 
 [node name="WoodenBridge" type="Node2D"]
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+position = Vector2(278, 145)
+scale = Vector2(3.40556, 2.91667)
+texture = ExtResource("1_fvyli")
+
+[node name="Shadow2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+position = Vector2(-259.6, 155)
+scale = Vector2(3.40556, 2.91667)
+texture = ExtResource("1_fvyli")
 
 [node name="Bridge" type="Sprite2D" parent="."]
 texture = ExtResource("1_3sw0v")

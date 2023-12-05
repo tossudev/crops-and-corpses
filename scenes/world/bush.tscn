@@ -1,8 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://dyq3ksvy2gwvv"]
+[gd_scene load_steps=3 format=3 uid="uid://dyq3ksvy2gwvv"]
 
+[ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="1_2kboq"]
 [ext_resource type="Texture2D" uid="uid://dvkqfgy5tuo3i" path="res://assets/sprites/foliage/tree.rock.coal.pumpkin.bush/bush/bush.svg.svg" id="1_2rgdt"]
 
 [node name="bush" type="Node2D"]
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+scale = Vector2(2.7, 2)
+texture = ExtResource("1_2kboq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_2rgdt")

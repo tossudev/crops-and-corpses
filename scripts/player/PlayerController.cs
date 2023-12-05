@@ -28,6 +28,8 @@ public partial class PlayerController : CharacterBody2D
 	public bool canRun;
 	public bool stopMovement;
 	public float speedPercent = 1;
+	static AudioController _audioController;
+
 
 	public override void _Ready()
 	{
@@ -39,6 +41,8 @@ public partial class PlayerController : CharacterBody2D
 
 		canRun = true;
 		stopMovement = false;
+
+		_audioController = GetNode<AudioController>("/root/Audio");
 	}
 
 	// to disable the player input, use:
@@ -144,6 +148,15 @@ public partial class PlayerController : CharacterBody2D
 		if (stopMovement)
 		{
 			movement = Vector2.Zero;
+		}
+
+		if (movement != Vector2.Zero) {
+			if (speedMultiplier == _runMultiplier) {
+				_audioController.PlayWalking(true);
+			}
+			else {
+				_audioController.PlayWalking(false);
+			}
 		}
 
 		Velocity = movement + _knockback;

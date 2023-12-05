@@ -27,7 +27,7 @@ public partial class BridgeQuest : Node2D
 		{
 			_playerInArea = true;
 
-			if (PlayerInventoryData.ExistsInInventory(1, WOOD_NEEDED))
+			if (StorageData.ExistsInStorage(SaveData.organizedPlayerInventory, 0, WOOD_NEEDED))
 			{
 				GetNode<Button>("%FinishQuestBtn").Disabled = false;	
 				_questFinished = true;			
@@ -48,14 +48,24 @@ public partial class BridgeQuest : Node2D
 		_canvasLayer.Visible = false;
 	}
 
+	private async void RemoveLogsFromInventory()
+	{
+		Item _log = (Item)ResourceLoader.Load("res://assets/resources/game_items/resource_items_0_to_99/0_log.tres");
+		RawInventoryItem _logsForQuest = new RawInventoryItem(_log.ID, _log.Name, WOOD_NEEDED, _log.StackSize);
+		await PlayerInventoryController.RemoveItemFromInventory(_logsForQuest);
+	}
+
 	private void OnFinishQuestButtonPressed()
 	{
 		if (_questFinished)
 		{
+			RemoveLogsFromInventory();
+			
 			if (_bridge != null) _bridge.Visible = true;
 			SceneInfo.forestBuildABridgeOpen = true;
-			GetNode<StaticBody2D>("%Barrier").QueueFree();
 			_canvasLayer.Visible = false;
+
+			GetNode<StaticBody2D>("%Barrier").QueueFree();			
 			GetNode<Label>("%BridgeLabel").Text = "Nice job, you finished the bridge! I wonder where it leads to...";
 		}		
 	}

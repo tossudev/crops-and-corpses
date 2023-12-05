@@ -35,7 +35,7 @@ public partial class BuildingMode : Node2D
             buildingMenu.CloseBuildMenu();
         }
 
-        if(!PlayerInventoryData.ExistsInInventory(buildingMenu.log.ID, buildingPriceLogs) || !PlayerInventoryData.ExistsInInventory(buildingMenu.stone.ID, buildingPriceStone))
+        if(!StorageData.ExistsInInventoryOrHotbar(buildingMenu.log.ID, buildingPriceLogs) || !StorageData.ExistsInInventoryOrHotbar(buildingMenu.stone.ID, buildingPriceStone))
         {
             Modulate = new Color(3, 1, 1, 1);
 

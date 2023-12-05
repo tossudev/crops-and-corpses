@@ -1,39 +1,39 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdg0mgh0rgkvq"]
+[gd_scene load_steps=8 format=3 uid="uid://bxxvs34x1r2us"]
 
-[ext_resource type="Script" path="res://scripts/ui/inventory/StorageSlot.cs" id="1_dis7m"]
-[ext_resource type="LabelSettings" uid="uid://d08eb8aufif7l" path="res://assets/resources/labelsettings/inventory_slot_quantity_label.tres" id="3_ytlk2"]
-[ext_resource type="PackedScene" uid="uid://cdi621xg0nv2g" path="res://scenes/ui/general/floating_button_name_panel.tscn" id="4_31v0k"]
+[ext_resource type="Script" path="res://scripts/ui/inventory/StorageSlot.cs" id="1_m24wy"]
+[ext_resource type="LabelSettings" uid="uid://d08eb8aufif7l" path="res://assets/resources/labelsettings/inventory_slot_quantity_label.tres" id="1_ojxft"]
+[ext_resource type="PackedScene" uid="uid://cdi621xg0nv2g" path="res://scenes/ui/general/floating_button_name_panel.tscn" id="2_uowpx"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wimfk"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7pdo5"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bkr0r"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5m48t"]
 
-[sub_resource type="Gradient" id="Gradient_05bul"]
+[sub_resource type="Gradient" id="Gradient_r2ia5"]
 offsets = PackedFloat32Array(0, 0.784314, 0.973039, 1)
 colors = PackedColorArray(0.501961, 0.501961, 0.501961, 0.501961, 0.61339, 0.61339, 0.61339, 0.572922, 0.180005, 0.180005, 0.180005, 0.862745, 0.000113828, 0.000113828, 0.000113828, 0.862745)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_bnah0"]
-gradient = SubResource("Gradient_05bul")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tkwdc"]
+gradient = SubResource("Gradient_r2ia5")
 fill = 2
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0)
 
-[node name="InventorySlot" type="Control"]
+[node name="TownStorageSlot" type="Control"]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 64.0
-offset_bottom = 64.0
-script = ExtResource("1_dis7m")
-slotType = 10
+offset_right = 72.0
+offset_bottom = 72.0
+script = ExtResource("1_m24wy")
+slotType = 30
 
 [node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_wimfk")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_bkr0r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_7pdo5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5m48t")
 
 [node name="BackGround" type="TextureRect" parent="Button"]
 unique_name_in_owner = true
@@ -42,7 +42,7 @@ layout_mode = 0
 offset_right = 72.0
 offset_bottom = 72.0
 mouse_filter = 2
-texture = SubResource("GradientTexture2D_bnah0")
+texture = SubResource("GradientTexture2D_tkwdc")
 expand_mode = 1
 stretch_mode = 4
 
@@ -74,15 +74,13 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 32
 text = "0"
-label_settings = ExtResource("3_ytlk2")
+label_settings = ExtResource("1_ojxft")
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="FloatingButtonNamePanel" parent="." instance=ExtResource("4_31v0k")]
+[node name="FloatingButtonNamePanel" parent="." instance=ExtResource("2_uowpx")]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 100.0
 
 [connection signal="gui_input" from="Button" to="." method="OnButtonGuiInput"]
-[connection signal="mouse_entered" from="Button" to="FloatingButtonNamePanel" method="OnMouseEntered"]
-[connection signal="mouse_exited" from="Button" to="FloatingButtonNamePanel" method="OnMouseExited"]

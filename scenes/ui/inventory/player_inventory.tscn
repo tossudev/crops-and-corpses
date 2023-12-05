@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsb8od2mcpg2x"]
+[gd_scene load_steps=10 format=3 uid="uid://bsb8od2mcpg2x"]
 
 [ext_resource type="Script" path="res://scripts/ui/inventory/PlayerInventoryController.cs" id="1_kcr62"]
 [ext_resource type="StyleBox" uid="uid://bfq7mg2htfllb" path="res://assets/resources/styles/inventory_style_box_texture.tres" id="2_6dwwa"]
 [ext_resource type="PackedScene" uid="uid://bdg0mgh0rgkvq" path="res://scenes/ui/inventory/inventory_slot.tscn" id="2_52evd"]
 [ext_resource type="Texture2D" uid="uid://dlrp82rd7h6bu" path="res://icon.svg" id="2_pvric"]
+[ext_resource type="PackedScene" uid="uid://c4oums4r0gjip" path="res://scenes/ui/inventory/hotbar_slot.tscn" id="4_k32d3"]
 [ext_resource type="Texture2D" uid="uid://cc700vknsb8sy" path="res://assets/sprites/ui/stone_button_hover.png" id="5_3dkit"]
 
 [sub_resource type="Gradient" id="Gradient_1ijah"]
@@ -174,28 +175,28 @@ grow_vertical = 2
 theme_override_constants/h_separation = 8
 columns = 8
 
-[node name="InventorySlot" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
+[node name="HotbarSlot" parent="HotbarPanel/HotbarGrid" instance=ExtResource("4_k32d3")]
 layout_mode = 2
 
-[node name="InventorySlot2" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
+[node name="HotbarSlot2" parent="HotbarPanel/HotbarGrid" instance=ExtResource("4_k32d3")]
 layout_mode = 2
 
-[node name="InventorySlot3" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
+[node name="HotbarSlot3" parent="HotbarPanel/HotbarGrid" instance=ExtResource("4_k32d3")]
 layout_mode = 2
 
-[node name="InventorySlot4" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
+[node name="HotbarSlot4" parent="HotbarPanel/HotbarGrid" instance=ExtResource("4_k32d3")]
 layout_mode = 2
 
-[node name="InventorySlot5" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
+[node name="HotbarSlot5" parent="HotbarPanel/HotbarGrid" instance=ExtResource("4_k32d3")]
 layout_mode = 2
 
-[node name="InventorySlot6" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
+[node name="HotbarSlot6" parent="HotbarPanel/HotbarGrid" instance=ExtResource("4_k32d3")]
 layout_mode = 2
 
-[node name="InventorySlot7" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
+[node name="HotbarSlot7" parent="HotbarPanel/HotbarGrid" instance=ExtResource("4_k32d3")]
 layout_mode = 2
 
-[node name="InventorySlot8" parent="HotbarPanel/HotbarGrid" instance=ExtResource("2_52evd")]
+[node name="HotbarSlot8" parent="HotbarPanel/HotbarGrid" instance=ExtResource("4_k32d3")]
 layout_mode = 2
 
 [node name="SelectedItem" type="Control" parent="."]

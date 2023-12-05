@@ -34,7 +34,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 	public override void _Ready()
 	{
-		GD.Print(GetParent().GetParent<Node2D>().Name);
+		//GD.Print(GetParent().GetParent<Node2D>().Name);
 		_lootController.loot = _lootList[0];
 		_lootController.Init();
 		if(GetParent().GetParent<Node2D>().Name == "Cave")
@@ -83,7 +83,7 @@ public partial class RoamingZombie : CharacterBody2D
 		_audioStreamPlayer2D = GetNodeOrNull<AudioStreamPlayer2D>("ZombieNoise");
 		
 		
-
+ 
 
 		_attack = new Attack
 		{
@@ -102,10 +102,7 @@ public partial class RoamingZombie : CharacterBody2D
 			var zombieHatNode = zombieHeadBonetNode.GetNode<Sprite2D>("ZombieHat" + randomIndex);
 			zombieHatNode.Visible = true;
 		}
-		else
-		{
-			return;
-		}
+		
 		switch (randomIndex)
 		{
 			case 1:

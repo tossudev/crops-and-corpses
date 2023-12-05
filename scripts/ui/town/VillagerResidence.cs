@@ -26,6 +26,8 @@ public partial class VillagerResidence : Control
 		if (_isTownHall) return;
 		
 		_villagerFaceButtonParentGrid = GetNode<GridContainer>(VILLAGER_GRID_NODENAME);
+		
+		RegisterResidence();
 	}
 
 	async void RegisterResidence()
@@ -88,10 +90,10 @@ public partial class VillagerResidence : Control
 	/// </summary>
 	/// <param name="villager"></param>
 	/// <returns></returns>
-	public ulong AddResident(VillagerRawData data)
+	public int AddResident(VillagerRawData data)
 	{
 		_allResidents.Add(data);
-		return GetInstanceId();
+		return id;
 	}
     
 	public void OnBreak()

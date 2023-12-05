@@ -35,7 +35,7 @@ public partial class UpgradeConfirmationPanel: Panel
     Label _upgradeEffectLabel;
     const string UPGRADE_EFFECT_LABEL_NODENAME = "%EffectDescriptionLabel";
 	
-    Array<InventorySlot> _inventorySlotContainer = new ();
+    Array<StorageSlot> _inventorySlotContainer = new ();
     const string INVENTORY_SLOT_CONTAINER_NODENAME = "%InventorySlotContainer";
     
     Button _unlockButton;
@@ -69,7 +69,7 @@ public partial class UpgradeConfirmationPanel: Panel
         
         foreach (var node in GetNode(INVENTORY_SLOT_CONTAINER_NODENAME).GetChildren())
         {
-            _inventorySlotContainer.Add(node as InventorySlot);
+            _inventorySlotContainer.Add(node as StorageSlot);
         }
 
         _unlockButton.Pressed += UnlockUpgrade;
@@ -111,9 +111,9 @@ public partial class UpgradeConfirmationPanel: Panel
             if (i < _currentUpgrade.craftingRequirements.Length)
             {
                 
-                if (!_inventorySlotContainer[i].slotInitiated)
+                if (!_inventorySlotContainer[i].slotInitialized)
                 {
-                    _inventorySlotContainer[i].InitiateSlot(-1);
+                    _inventorySlotContainer[i].InitializeSlot(-1);
                 }
 				
                 Item itemResource = ItemData.GetItemById(_currentUpgrade.craftingRequirements[i].item.ID);
@@ -172,7 +172,8 @@ public partial class UpgradeConfirmationPanel: Panel
         try
         {
             if (_currentUpgrade.craftingRequirements.Any(
-                    craftingRequirement => !PlayerInventoryData.ExistsInInventory(
+                    craftingRequirement => !StorageData.ExistsInStorage(
+                        SaveData.organizedPlayerInventory,
                         craftingRequirement.item.ID,craftingRequirement.quantity)))
             {
                 SetUnlockButtonState(UnlockButtonState.Locked, _unlockButton, _unlockButtonTextLabel);

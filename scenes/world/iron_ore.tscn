@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dn2v4uxpv2gx6"]
+[gd_scene load_steps=12 format=3 uid="uid://dn2v4uxpv2gx6"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_5m8pk"]
 [ext_resource type="Resource" uid="uid://bqdor0tg0upjq" path="res://TinoTests/Resources/iron_ore.tres" id="2_x8kij"]
+[ext_resource type="AudioStream" uid="uid://b3nve0tvrbddr" path="res://assets/Sounds/character_sounds/rock_break.wav" id="3_ocxm8"]
 [ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_yp0f4"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_a0d06"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_yemw3"]
@@ -41,6 +42,7 @@ collision_layer = 5
 script = ExtResource("1_5m8pk")
 loot = ExtResource("2_x8kij")
 _animationPlayer = NodePath("AnimationPlayer")
+_audio = ExtResource("3_ocxm8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-5, -90)

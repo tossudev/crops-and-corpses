@@ -46,10 +46,8 @@ public partial class QuestPoint : Node2D
     public override void _Ready()
     {
         base._Ready();
-       
 
 
-  
         questManager = GetNode<QuestManager>("/root/QuestManager");
 
         zombieScene = (PackedScene)ResourceLoader.Load("res://scenes/zombie/Zombie.tscn");
@@ -58,89 +56,87 @@ public partial class QuestPoint : Node2D
         playerController = (PlayerController)GetTree().GetFirstNodeInGroup("player");
         ZombieArea = GetNode<Area2D>(Area2D_ZombieArea);
         zombieSpawn = GetParent().GetParent().GetNodeOrNull<SpawnScript>("ZombieSpawn");
-
-       
-
-        
-
-
-       
     }
 
 
+    Quest _activeQuest;
+    Timer _questFetchTimer;
 
+
+    async void QuestFetchTimerTimeout()
+    {
+        _questFetchTimer.Paused = true;
+        _questFetchTimer.QueueFree();
+        _questFetchTimer = null;
+
+        _activeQuest = await PlayerInfo.GetActiveQuest();
+    }
     
-       
-      public override void _PhysicsProcess(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
 
-        if (isQuestPointActive == true && questManager.GetActiveQuest().GetQuestStage() == "Find")
+        if (!isQuestPointActive) return;
+        
+        if (_activeQuest == null)
         {
-            playerDistanceToQuestPoint = (int)playerController.GlobalPosition.DistanceTo(GlobalPosition);
-
-            if (!isZombiesSpawned && playerDistanceToQuestPoint <= SpawnRange)
+            if (_questFetchTimer == null)
             {
+                _questFetchTimer = new Timer()
+                {
+                    WaitTime = GD.RandRange(2f, 4f),
+                    Autostart = true
+                };
 
-                questManager.CompleteQuestStage("Find");
-            
-                KillStage();
-
-    
-
-                
-
-               
+                _questFetchTimer.Timeout += QuestFetchTimerTimeout;
+                AddChild(_questFetchTimer);
             }
 
-            if(zombieSpawn.GetZombieQuestListCount() == 0 && isZombiesSpawned == true)
-            {
-                questManager.GetActiveQuest().CompleteQuestStage("Kill");
-                
-               
-            }
-            
+            return;
+        }
+        
+        
+        
+        playerDistanceToQuestPoint = (int) playerController.GlobalPosition.DistanceTo(GlobalPosition);
 
+        if (!isZombiesSpawned && playerDistanceToQuestPoint <= SpawnRange)
+        {
+            _activeQuest.CompleteQuestStage("Find");
+
+            KillStage();
         }
 
+        if (zombieSpawn.GetZombieQuestListCount() == 0 && isZombiesSpawned)
+        {
+            _activeQuest.CompleteQuestStage("Kill");
+        }
     }
-
-
 
 
     void SpawnVillagers()
     {
         GD.Print("SpawnVillagers");
         VillagerManager.villagerManagerInstance.SpawnQuestVillagers(villagerSpawnPoint.GlobalPosition);
-        
     }
 
-    
-
-    
 
     public void SpawnZombies()
     {
         SpawendZombieAmount();
         Vector2 offsetVector = new Vector2(GD.Randi() % 3, GD.Randi() % 3);
-        
+
 
         if (zombieSpawn != null && isZombiesSpawned == false)
         {
             for (int i = 0; i < zombieAmount; i++)
             {
-
-                //spawnZombiePoint ofset
-
-               
                 zombieSpawn.SpawnZombieAtPoint(spawnZombiePoint.GlobalPosition + offsetVector);
-            
+
 
                 GD.Print("SpawnZombies");
             }
 
-            GD.Print(zombieSpawn.GetZombieQuestListCount()); 
-            questManager.GetActiveQuest().ChangeQuestDescription("Clear the area of zombies");
+            _activeQuest?.ChangeQuestDescription("Clear the area of zombies");
             isZombiesSpawned = true;
         }
         else
@@ -151,11 +147,11 @@ public partial class QuestPoint : Node2D
         }
     }
 
-    
 
     private void SpawendZombieAmount()
     {
-        CurrentDifficulty = questManager.GetActiveQuest().difficulty;
+        CurrentDifficulty = _activeQuest?.questDifficulty ?? 0;
+        
         switch (CurrentDifficulty)
         {
             case 1:
@@ -175,27 +171,20 @@ public partial class QuestPoint : Node2D
 
     void KillStage()
     {
-        questManager.GetActiveQuest().ChangeQuestDescription("Kill all zombies");
+        _activeQuest.ChangeQuestDescription("Kill all zombies");
         SpawnZombies();
         SpawnVillagers();
-        if(zombieSpawn.GetZombieQuestListCount() == 0)
+        
+        if (zombieSpawn.GetZombieQuestListCount() == 0)
         {
-            questManager.GetActiveQuest().CompleteQuestStage("Kill");
-            questManager.GetActiveQuest().ChangeQuestDescription("Talk to the villagers");
+            _activeQuest.CompleteQuestStage("Kill");
+            _activeQuest.ChangeQuestDescription("Talk to the villagers");
         }
     }
-
-    
-
-   
-
-
 
 
     public void ActivateQuestPoint()
     {
         isQuestPointActive = true;
     }
-    }
-    
-    
+}

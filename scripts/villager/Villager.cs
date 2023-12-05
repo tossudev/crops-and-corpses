@@ -53,7 +53,7 @@ public partial class Villager : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_player = GetParent().GetNodeOrNull<CharacterBody2D>(PLAYER_NODENAME);
+		_player = GetTree().GetFirstNodeInGroup("player") as CharacterBody2D;
 		_villagerSprite = GetNode<Sprite2D>("Sprite2D");
 		_buildings = (Node2D)GetTree().GetFirstNodeInGroup("buildings");
 
@@ -186,11 +186,9 @@ public partial class Villager : CharacterBody2D
 
 	public void _on_button_button_up()
 	{
-		QuestManager questManager = GetNode<QuestManager>("/root/QuestManager");
 		if (!_inTownScene && needRescue)
 		{
 			OpenRescueDialogue();
-			questManager.GetActiveQuest().ChangeQuestDescription("Take the villager to Street Sign");
 		}
 		else
 		{
@@ -203,10 +201,14 @@ public partial class Villager : CharacterBody2D
 		DialogueControl.instance.OpenDialogueWindow(this);
 	}
 
-	public void OpenRescueDialogue()
+	public async void OpenRescueDialogue()
 	{
 		GD.Print("You saved me");
-		// Tähä joku button tai joku ?????
+
+		var quest = await PlayerInfo.GetActiveQuest();
+			
+        quest?.ChangeQuestDescription("Take the villager to Street Sign");
+		
 		SetCurrentState(VillagerState.FollowPlayer);
 	}
 

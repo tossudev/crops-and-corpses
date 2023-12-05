@@ -26,12 +26,12 @@ public partial class QuestJournal : Control
     }
 	
 
-	public void UpdateQuestJournal()
+	public async void UpdateQuestJournal()
 	{
-		var quest = questManager.GetActiveQuest();
+		var quest = await PlayerInfo.GetActiveQuest();
 
 		QuestTextLabel.Text = quest != null
-			? questManager.GetActiveQuest().GetQuestDescription()
+			? quest.GetQuestDescription()
 			: "Open Quest Journal to start a new quest";
 	}
 }

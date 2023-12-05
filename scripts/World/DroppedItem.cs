@@ -6,8 +6,15 @@ public partial class DroppedItem : Node2D
 	RawInventoryItem _containedRawItem;
 	Item _containedAsItem;
 	[Export] TextureRect _displayImage;
+	static AudioController _audioController;
 
-	public void SetItem(RawInventoryItem item)
+
+
+    public override void _Ready() {
+		_audioController = GetNode<AudioController>("/root/Audio");
+    }
+
+    public void SetItem(RawInventoryItem item)
 	{
 		_containedRawItem = new RawInventoryItem(item.id, item.name, item.quantity, item.stackSize);
 		_containedAsItem = ItemData.GetItemById(_containedRawItem.id);
@@ -21,6 +28,7 @@ public partial class DroppedItem : Node2D
 
 		if (addedItems > 0) return;
 		
+		_audioController.PlayEffect("res://assets/Sounds/character_sounds/pickup_item.wav");
 		QueueFree();
 	}
 }

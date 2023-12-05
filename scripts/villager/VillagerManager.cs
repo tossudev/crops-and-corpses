@@ -196,7 +196,6 @@ public partial class VillagerManager : Node2D
 		villager.rawData.currentState = VillagerState.ChooseTask;
 		
 		villager.skeleton.ChangeHat(newOccupation);
-		villager.villagerInfo.ChangeHat(newOccupation);
 	}
 
 	public Texture2D GetTextureByType(VillagerType type, BodyPartTextureType part)

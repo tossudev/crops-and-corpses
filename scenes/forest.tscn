@@ -775,7 +775,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="Objects" node_paths=PackedStringArray("_camera") instance=ExtResource("6_d65ob")]
 unique_name_in_owner = true
-position = Vector2(-2693, 1175)
+position = Vector2(-7613, -3002)
 _camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]

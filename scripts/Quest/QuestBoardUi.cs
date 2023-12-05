@@ -159,12 +159,18 @@ public partial class QuestBoardUi : Control
     // close the quest board
     void CloseQuestBoard()
     {
+        
         Visible = false;
     }
 
     // open the quest board
     public void OpenQuestBoard()
     {
+        // if scene is not town, return
+        if (!SceneManager.IsCurrentScene(this, Scene.Town))
+        {
+            return;
+        }
         Visible = true;
         SetLevelsActive();
     }

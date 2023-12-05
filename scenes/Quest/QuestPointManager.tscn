@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://wwf7rdwowll5"]
 
 [ext_resource type="Script" path="res://scripts/Quest/QuestPointManager.cs" id="1_nq8hn"]
-[ext_resource type="PackedScene" uid="uid://7r2mskqdc0va" path="res://scenes/quest/QuestPoint.tscn" id="2_nplq4"]
+[ext_resource type="PackedScene" uid="uid://7r2mskqdc0va" path="res://scenes/Quest/QuestPoint.tscn" id="2_nplq4"]
 
-[node name="QuestPointManager" type="Node2D" node_paths=PackedStringArray("CaveFullQuestPoints")]
+[node name="QuestPointManager" type="Node2D"]
 script = ExtResource("1_nq8hn")
-CaveFullQuestPoints = []
 
 [node name="QuestPoint" parent="." instance=ExtResource("2_nplq4")]
 

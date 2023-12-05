@@ -1,18 +1,18 @@
-[gd_scene load_steps=39 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=47 format=3 uid="uid://bgyv0c8xt1fd4"]
 
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="2_mph18"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_nnncm"]
-[ext_resource type="PackedScene" uid="uid://chw8bc0kxym0e" path="res://scenes/villager/villager_manager.tscn" id="2_yronx"]
-[ext_resource type="Texture2D" uid="uid://e6no15wwap5h" path="res://assets/sprites/tiles/Water_tile_copy_donotdelete.png" id="3_ui0sk"]
-[ext_resource type="Texture2D" uid="uid://ckrkidytpfj8k" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp_copyDoNotDelete.png" id="4_87olk"]
+[ext_resource type="PackedScene" path="res://scenes/villager/villager_manager.tscn" id="2_yronx"]
+[ext_resource type="Texture2D" uid="uid://fkwyt0oriqh8" path="res://assets/sprites/tiles/Water_tile_copy_donotdelete.png" id="3_ui0sk"]
+[ext_resource type="Texture2D" uid="uid://b1xjt2u5t5ddk" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp_copyDoNotDelete.png" id="4_87olk"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_ho2sg"]
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="5_tpvf0"]
-[ext_resource type="Texture2D" uid="uid://c2k05hntqpny0" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="5_x7rje"]
+[ext_resource type="Texture2D" uid="uid://dqwbjgo3jcuqk" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="5_x7rje"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="6_3ler8"]
-[ext_resource type="Texture2D" uid="uid://d4j1ingj7iycn" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="6_jb6x6"]
-[ext_resource type="Texture2D" uid="uid://bf7tmknjtmuhq" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="7_t3t4h"]
+[ext_resource type="Texture2D" uid="uid://cap2r2pm8psod" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="6_jb6x6"]
+[ext_resource type="Texture2D" uid="uid://bcumvul1rflrh" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="7_t3t4h"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/water.gdshader" id="7_vli6y"]
-[ext_resource type="Texture2D" uid="uid://c10bjgh3tjqv3" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="8_u4ryb"]
+[ext_resource type="Texture2D" uid="uid://bbu3idneitmk6" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="8_u4ryb"]
 [ext_resource type="Texture2D" uid="uid://dks6iqnb0a6gx" path="res://assets/resources/shaders/water_noise_texture.tres" id="8_up80f"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
 [ext_resource type="PackedScene" uid="uid://bcoq8weob6f7g" path="res://scenes/world/tree2.tscn" id="9_wtibd"]
@@ -21,9 +21,14 @@
 [ext_resource type="PackedScene" uid="uid://cyk44y2mntxd0" path="res://scenes/buildings/town/town_hall/town_hall.tscn" id="11_r6hyg"]
 [ext_resource type="PackedScene" uid="uid://dyq3ksvy2gwvv" path="res://scenes/world/bush.tscn" id="14_6xci0"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
-[ext_resource type="PackedScene" uid="uid://7m8c0ty0xcd0" path="res://scenes/buildings/town/well/well.tscn" id="19_bx5hk"]
+[ext_resource type="Script" path="res://scripts/farm/Well.cs" id="20_q2pyn"]
+[ext_resource type="Texture2D" uid="uid://bsy0tepxetaka" path="res://assets/sprites/buildings/welldesing.png" id="21_bibmj"]
+[ext_resource type="Script" path="res://scripts/World/PortalManager.cs" id="21_cej3m"]
 [ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="21_mo6ng"]
-[ext_resource type="PackedScene" path="res://scenes/world/navigation_manager.tscn" id="23_vb7um"]
+[ext_resource type="Script" path="res://scripts/World/Portal.cs" id="22_53qji"]
+[ext_resource type="Shape2D" uid="uid://cexw2rv4qd6l6" path="res://scenes/farm/shapes/well_shape.tres" id="22_d2i6s"]
+[ext_resource type="Texture2D" uid="uid://dns02t706e1vy" path="res://assets/sprites/Farm sprites/cave enter.png" id="23_nkpxm"]
+[ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="23_vb7um"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="26_e7msj"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="29_6j2s6"]
 
@@ -116,6 +121,16 @@ height = 256
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8jifx"]
+size = Vector2(368.167, 385.714)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t05ui"]
+size = Vector2(105, 87)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hcff7"]
+radius = 56.0
+height = 294.0
+
 [node name="Town" type="Node2D"]
 y_sort_enabled = true
 
@@ -190,7 +205,6 @@ scale = Vector2(0.999998, 0.999998)
 
 [node name="ArmL" parent="Objects/Player/Skeleton2D/TorsoBone/ArmLBone" index="0"]
 position = Vector2(4.06, 13.3)
-scale = Vector2(1, 1)
 
 [node name="HeadBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="4"]
 scale = Vector2(0.999997, 0.999997)
@@ -1494,8 +1508,67 @@ position = Vector2(6.10352e-05, 6.10352e-05)
 [node name="TownHall" parent="Buildings" instance=ExtResource("11_r6hyg")]
 position = Vector2(104, -496)
 
-[node name="WellStatic" parent="Buildings" instance=ExtResource("19_bx5hk")]
+[node name="WellStatic" type="Node2D" parent="Buildings" groups=["Well"]]
 position = Vector2(-128, 256)
+scale = Vector2(0.25, 0.25)
+script = ExtResource("20_q2pyn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Buildings/WellStatic"]
+position = Vector2(-489, -464)
+texture = ExtResource("21_bibmj")
+
+[node name="Area2D" type="Area2D" parent="Buildings/WellStatic"]
+position = Vector2(-94.333, -26)
+collision_layer = 9
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/WellStatic/Area2D"]
+position = Vector2(-393, -224.542)
+scale = Vector2(2, 2)
+shape = ExtResource("22_d2i6s")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Buildings/WellStatic" groups=["building"]]
+position = Vector2(0, -40)
+scale = Vector2(1, 0.6)
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/WellStatic/StaticBody2D"]
+position = Vector2(-484.167, -253.333)
+scale = Vector2(2, 0.933333)
+shape = SubResource("RectangleShape2D_8jifx")
+
+[node name="Cave" type="Node2D" parent="Buildings/WellStatic" node_paths=PackedStringArray("_player")]
+position = Vector2(-476, -48.0002)
+script = ExtResource("21_cej3m")
+_sceneID = 4
+_player = NodePath("../../../Objects/Player")
+
+[node name="cave_entrance" type="StaticBody2D" parent="Buildings/WellStatic/Cave" node_paths=PackedStringArray("exitPosition")]
+script = ExtResource("22_53qji")
+targetSceneID = 1
+exitPosition = NodePath("Exit")
+
+[node name="Sprite2D" type="Sprite2D" parent="Buildings/WellStatic/Cave/cave_entrance"]
+position = Vector2(-8, 8)
+texture = ExtResource("23_nkpxm")
+offset = Vector2(0, -65.65)
+
+[node name="Area2D" type="Area2D" parent="Buildings/WellStatic/Cave/cave_entrance"]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/WellStatic/Cave/cave_entrance/Area2D"]
+position = Vector2(-13, -17)
+shape = SubResource("RectangleShape2D_t05ui")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/WellStatic/Cave/cave_entrance"]
+position = Vector2(-3, -37)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_hcff7")
+
+[node name="Exit" type="Node2D" parent="Buildings/WellStatic/Cave/cave_entrance"]
+position = Vector2(24, 312)
 
 [node name="SaveableBuildings" type="Node2D" parent="Buildings"]
 y_sort_enabled = true
@@ -1523,7 +1596,6 @@ script = ExtResource("26_e7msj")
 
 [node name="ZombieSpawn" type="Node2D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("21_mo6ng")
-maxDistance = 2000.0
 player = NodePath("../Objects/Player")
 
 [node name="SpawnPoint1" type="Node2D" parent="ZombieSpawn"]
@@ -1553,6 +1625,10 @@ script = ExtResource("29_6j2s6")
 [node name="Sunlight" type="CanvasModulate" parent="SunlightContainer"]
 position = Vector2(-71, -4)
 
+[connection signal="area_entered" from="Buildings/WellStatic/Area2D" to="Buildings/WellStatic" method="OnInteractable" flags=18]
+[connection signal="area_exited" from="Buildings/WellStatic/Area2D" to="Buildings/WellStatic" method="OnNonInteractable" flags=18]
+[connection signal="input_event" from="Buildings/WellStatic/Area2D" to="Buildings/WellStatic" method="InteractWithWell" flags=18]
+[connection signal="body_entered" from="Buildings/WellStatic/Cave/cave_entrance/Area2D" to="Buildings/WellStatic/Cave/cave_entrance" method="OnBodyEntered" flags=18]
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
 [connection signal="timeout" from="ZombieSpawn/Timer" to="ZombieSpawn" method="ZombieSpawn" flags=18]
 [connection signal="timeout" from="ZombieSpawn/ZombieDeletionTimer" to="ZombieSpawn" method="DeleteZombieDelay" flags=18]

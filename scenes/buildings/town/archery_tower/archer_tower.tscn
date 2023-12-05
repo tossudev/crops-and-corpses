@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scripts/Buildings/ArcherTower.cs" id="1_8yyo6"]
 [ext_resource type="PackedScene" uid="uid://dqmfwe15dtgat" path="res://scenes/Combat/projectile.tscn" id="2_151wa"]
 [ext_resource type="Resource" uid="uid://crwemoqf3d5lp" path="res://TinoTests/Resources/tower_arrow.tres" id="3_pa3cy"]
+[ext_resource type="Texture2D" path="res://assets/sprites/buildings/archery_tower_empty.png" id="4_20ctn"]
 [ext_resource type="PackedScene" uid="uid://cly04lvws81ml" path="res://animations/archer_tower/archer_tower/ArcherTower.tscn" id="4_71niy"]
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="5_sr0xp"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="6_hcsx8"]
-[ext_resource type="Texture2D" uid="uid://ddevfe36bkj42" path="res://assets/sprites/buildings/archery_tower.png" id="6_sglj4"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="7_u83t5"]
 [ext_resource type="PackedScene" path="res://scenes/buildings/building_demolish_menu.tscn" id="9_ln84s"]
 
@@ -38,10 +38,13 @@ unique_name_in_owner = true
 z_index = -1
 position = Vector2(-32.02, -61)
 scale = Vector2(0.24, 0.24)
-texture = ExtResource("6_sglj4")
+texture = ExtResource("4_20ctn")
 
 [node name="Animator" parent="Node2D" instance=ExtResource("4_71niy")]
-position = Vector2(-61.5, -51)
+unique_name_in_owner = true
+visible = false
+z_index = 1
+position = Vector2(-65, -46.5)
 scale = Vector2(0.24, 0.24)
 
 [node name="BuildingHealth" type="Node2D" parent="."]

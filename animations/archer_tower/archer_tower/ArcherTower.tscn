@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://cly04lvws81ml"]
 
-[ext_resource type="Texture2D" uid="uid://b260vik8fnelp" path="res://animations/archer_tower/archer_tower/archer.png" id="1_24e5b"]
-[ext_resource type="Texture2D" uid="uid://r4tn3nyh886o" path="res://animations/archer_tower/archer_tower/arm.png" id="2_e63gc"]
-[ext_resource type="Texture2D" uid="uid://cq6l7cmlahnk5" path="res://animations/archer_tower/archer_tower/frontfence.png" id="2_q0a48"]
-[ext_resource type="Texture2D" uid="uid://ooq3hbv2cfko" path="res://animations/archer_tower/archer_tower/bow.png" id="2_waih4"]
-[ext_resource type="Texture2D" uid="uid://lswgah2gw66p" path="res://animations/archer_tower/archer_tower/stringdown.png" id="3_fqdp2"]
-[ext_resource type="Texture2D" uid="uid://dcm4wmyftydh" path="res://animations/archer_tower/archer_tower/stringup.png" id="4_6l05g"]
+[ext_resource type="Texture2D" uid="uid://dysjr2kaihvt7" path="res://animations/archer_tower/archer_tower/archer.png" id="1_24e5b"]
+[ext_resource type="Texture2D" uid="uid://c41501julmdyx" path="res://animations/archer_tower/archer_tower/arm.png" id="2_e63gc"]
+[ext_resource type="Texture2D" uid="uid://bx0wsdgscaqrs" path="res://animations/archer_tower/archer_tower/frontfence.png" id="2_q0a48"]
+[ext_resource type="Texture2D" uid="uid://dhxbf1vhreuwq" path="res://animations/archer_tower/archer_tower/bow.png" id="2_waih4"]
+[ext_resource type="Texture2D" uid="uid://c8alp7lvkyx70" path="res://animations/archer_tower/archer_tower/stringdown.png" id="3_fqdp2"]
+[ext_resource type="Texture2D" uid="uid://ce7k1vio3f433" path="res://animations/archer_tower/archer_tower/stringup.png" id="4_6l05g"]
 [ext_resource type="Script" path="res://scripts/Buildings/ArcherAnimation.cs" id="5_fuh6j"]
 
 [sub_resource type="Animation" id="Animation_fttlt"]
@@ -398,10 +398,9 @@ _data = {
 "new_animation": SubResource("Animation_xhkbl")
 }
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 
 [node name="archer" type="Sprite2D" parent="."]
-visible = false
 z_index = -2
 position = Vector2(127, -196)
 texture = ExtResource("1_24e5b")
@@ -417,7 +416,6 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_e63gc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(135.07, -138.72)
 texture = ExtResource("2_q0a48")
 

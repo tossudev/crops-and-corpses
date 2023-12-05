@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c51iubnlq7npt"]
+[gd_scene load_steps=40 format=3 uid="uid://c51iubnlq7npt"]
 
 [ext_resource type="Texture2D" uid="uid://carua1m5jvrfl" path="res://assets/placeholder/temporary_logo.png" id="1_hqmmr"]
 [ext_resource type="Script" path="res://scripts/ui/MainMenu.cs" id="1_p6qp2"]
@@ -23,6 +23,12 @@
 [ext_resource type="Texture2D" uid="uid://lvnfkys1ygu3" path="res://assets/sprites/ui/toggle_button_on.png" id="20_kwqw5"]
 [ext_resource type="Texture2D" uid="uid://rt1a1lqk0d7" path="res://assets/sprites/ui/toggle_button_off.png" id="21_ielo2"]
 [ext_resource type="Texture2D" uid="uid://cvnoqpbr06n3t" path="res://assets/sprites/ui/grey_circle.png" id="22_0o08i"]
+[ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="24_muub7"]
+[ext_resource type="Texture2D" uid="uid://bdrlcw3a55ht6" path="res://assets/sprites/items/bridge.png" id="25_p7x5c"]
+[ext_resource type="Texture2D" uid="uid://bsa4asc4e8jc3" path="res://assets/sprites/buildings/well_color.png" id="26_2mw36"]
+[ext_resource type="Texture2D" uid="uid://crvolauraor0n" path="res://assets/sprites/Farm sprites/gate.png" id="27_fv2cy"]
+[ext_resource type="Texture2D" uid="uid://l6a5em6qijen" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="28_xif0a"]
+[ext_resource type="Texture2D" uid="uid://dktau8iwdmjho" path="res://assets/sprites/Farm sprites/cave enter.png" id="29_opbs3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ykylh"]
 shader = ExtResource("3_b1aqy")
@@ -225,8 +231,24 @@ terrain_set_0/terrain_1/name = "Sand"
 terrain_set_0/terrain_1/color = Color(0.517647, 0.537255, 1, 1)
 sources/0 = SubResource("TileSetAtlasSource_thrgr")
 
+[sub_resource type="LabelSettings" id="LabelSettings_s87p3"]
+font_size = 50
+font_color = Color(0.658824, 1, 0.572549, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.784314)
+
 [sub_resource type="LabelSettings" id="LabelSettings_kkgf1"]
 font_size = 50
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.784314)
+
+[sub_resource type="LabelSettings" id="LabelSettings_iqkq4"]
+font_size = 50
+font_color = Color(1, 0.505882, 0.529412, 1)
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 3
@@ -272,6 +294,7 @@ cache/0/16/0/kerning_overrides/50/12 = Vector2(0, 0)
 cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
 cache/0/16/0/kerning_overrides/36/0 = Vector2(0, 0)
 cache/0/16/0/kerning_overrides/36/12 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/36/20 = Vector2(0, 0)
 cache/0/20/0/ascent = 0.0
 cache/0/20/0/descent = 0.0
 cache/0/20/0/underline_position = 0.0
@@ -294,6 +317,7 @@ cache/0/20/0/kerning_overrides/50/12 = Vector2(0, 0)
 cache/0/20/0/kerning_overrides/32/0 = Vector2(0, 0)
 cache/0/20/0/kerning_overrides/36/0 = Vector2(0, 0)
 cache/0/20/0/kerning_overrides/36/12 = Vector2(0, 0)
+cache/0/20/0/kerning_overrides/36/20 = Vector2(0, 0)
 cache/0/24/0/ascent = 0.0
 cache/0/24/0/descent = 0.0
 cache/0/24/0/underline_position = 0.0
@@ -316,6 +340,7 @@ cache/0/24/0/kerning_overrides/50/12 = Vector2(0, 0)
 cache/0/24/0/kerning_overrides/32/0 = Vector2(0, 0)
 cache/0/24/0/kerning_overrides/36/0 = Vector2(0, 0)
 cache/0/24/0/kerning_overrides/36/12 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/36/20 = Vector2(0, 0)
 cache/0/18/0/ascent = 0.0
 cache/0/18/0/descent = 0.0
 cache/0/18/0/underline_position = 0.0
@@ -338,6 +363,7 @@ cache/0/18/0/kerning_overrides/50/12 = Vector2(0, 0)
 cache/0/18/0/kerning_overrides/32/0 = Vector2(0, 0)
 cache/0/18/0/kerning_overrides/36/0 = Vector2(0, 0)
 cache/0/18/0/kerning_overrides/36/12 = Vector2(0, 0)
+cache/0/18/0/kerning_overrides/36/20 = Vector2(0, 0)
 cache/0/455/0/ascent = 0.0
 cache/0/455/0/descent = 0.0
 cache/0/455/0/underline_position = 0.0
@@ -360,6 +386,7 @@ cache/0/455/0/kerning_overrides/50/12 = Vector2(0, 0)
 cache/0/455/0/kerning_overrides/32/0 = Vector2(0, 0)
 cache/0/455/0/kerning_overrides/36/0 = Vector2(0, 0)
 cache/0/455/0/kerning_overrides/36/12 = Vector2(0, 0)
+cache/0/455/0/kerning_overrides/36/20 = Vector2(0, 0)
 cache/0/5/0/ascent = 0.0
 cache/0/5/0/descent = 0.0
 cache/0/5/0/underline_position = 0.0
@@ -382,6 +409,7 @@ cache/0/5/0/kerning_overrides/50/12 = Vector2(0, 0)
 cache/0/5/0/kerning_overrides/32/0 = Vector2(0, 0)
 cache/0/5/0/kerning_overrides/36/0 = Vector2(0, 0)
 cache/0/5/0/kerning_overrides/36/12 = Vector2(0, 0)
+cache/0/5/0/kerning_overrides/36/20 = Vector2(0, 0)
 cache/0/50/0/ascent = 0.0
 cache/0/50/0/descent = 0.0
 cache/0/50/0/underline_position = 0.0
@@ -409,6 +437,7 @@ cache/0/50/0/kerning_overrides/50/12 = Vector2(0, 0)
 cache/0/50/0/kerning_overrides/32/0 = Vector2(0, 0)
 cache/0/50/0/kerning_overrides/36/0 = Vector2(0, 0)
 cache/0/50/0/kerning_overrides/36/12 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/36/20 = Vector2(0, 0)
 cache/0/50/8/glyphs/0/offset = Vector2(0, 0)
 cache/0/50/8/glyphs/0/size = Vector2(0, 0)
 cache/0/50/8/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
@@ -459,6 +488,7 @@ cache/0/32/0/kerning_overrides/50/12 = Vector2(0, 0)
 cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
 cache/0/32/0/kerning_overrides/36/0 = Vector2(0, 0)
 cache/0/32/0/kerning_overrides/36/12 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/36/20 = Vector2(0, 0)
 cache/0/36/0/ascent = 0.0
 cache/0/36/0/descent = 0.0
 cache/0/36/0/underline_position = 0.0
@@ -486,10 +516,15 @@ cache/0/36/0/kerning_overrides/50/12 = Vector2(0, 0)
 cache/0/36/0/kerning_overrides/32/0 = Vector2(0, 0)
 cache/0/36/0/kerning_overrides/36/0 = Vector2(0, 0)
 cache/0/36/0/kerning_overrides/36/12 = Vector2(0, 0)
+cache/0/36/0/kerning_overrides/36/20 = Vector2(0, 0)
 cache/0/36/12/glyphs/0/offset = Vector2(0, 0)
 cache/0/36/12/glyphs/0/size = Vector2(0, 0)
 cache/0/36/12/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
 cache/0/36/12/glyphs/0/texture_idx = -1
+cache/0/36/20/glyphs/0/offset = Vector2(0, 0)
+cache/0/36/20/glyphs/0/size = Vector2(0, 0)
+cache/0/36/20/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/36/20/glyphs/0/texture_idx = -1
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_p6qp2")
@@ -599,7 +634,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Play"
-label_settings = SubResource("LabelSettings_kkgf1")
+label_settings = SubResource("LabelSettings_s87p3")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -689,11 +724,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Quit"
-label_settings = SubResource("LabelSettings_kkgf1")
+label_settings = SubResource("LabelSettings_iqkq4")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Title_TEMPORARY" type="Sprite2D" parent="Main"]
+[node name="Title" type="Sprite2D" parent="Main"]
 position = Vector2(0, -248)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_hqmmr")
@@ -1046,14 +1081,6 @@ value = 0.6
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Overlay" type="CanvasLayer" parent="."]
-
-[node name="TransitionOverlay" type="ColorRect" parent="Overlay"]
-offset_right = 1920.0
-offset_bottom = 1080.0
-mouse_filter = 2
-color = Color(0, 0, 0, 0)
-
 [node name="Credits" type="Node2D" parent="."]
 position = Vector2(-2496, 0)
 
@@ -1073,6 +1100,224 @@ region_rect = Rect2(0, 0, 2304, 1296)
 material = SubResource("ShaderMaterial_ykylh")
 scale = Vector2(5, 5)
 texture = ExtResource("4_4ldda")
+
+[node name="Tiles" type="TileMap" parent="Credits/Background"]
+tile_set = SubResource("TileSet_qhvyq")
+format = 2
+layer_0/name = "Sand"
+layer_0/y_sort_origin = -1
+layer_0/tile_data = PackedInt32Array(-131080, 327680, 2, -196616, 327680, 1, -262151, 327680, 0, -262150, 327680, 0, -262149, 327680, 1, -262148, 327680, 1, -196615, 327680, 1, -131079, 327680, 2, -196613, 327680, 1, -131077, 327680, 1, -131078, 458752, 0, -196612, 327680, 1, -196614, 327680, 1, -262147, 327680, 1, -196611, 327680, 1, -196610, 458752, 0, -131075, 327680, 1, -131074, 327680, 1, -262146, 327680, 1, -196609, 327680, 1, -262145, 327680, 1, -262144, 327680, 1, -262143, 393216, 1, -196603, 262144, 1, -196602, 327680, 1, -262137, 393216, 1, -196601, 393216, 1, -131065, 393216, 1, -131066, 327680, 1, -65530, 262144, 1, 6, 262144, 1, 65542, 262144, 1, 65543, 393216, 1, 7, 393216, 1, -65529, 393216, 1, 196615, 393216, 2, 131079, 393216, 1, 196610, 327680, 1, 262146, 327680, 2, 262145, 327680, 2, 196609, 327680, 1, 196608, 327680, 1, 262143, 327680, 1, 327678, 327680, 2, 327677, 327680, 2, 262141, 458752, 0, 262140, 327680, 1, 327674, 327680, 2, 262139, 327680, 1, 327673, 327680, 2, 327675, 327680, 2, 262138, 327680, 0, 262137, 327680, 1, 262136, 327680, 1, 262135, 262144, 1, 196599, 262144, 1, 131064, 327680, 1, 196601, 393216, 1, 131065, 393216, 0, 65528, 393216, 0, 196600, 327680, 1, 65527, 262144, 0, 131063, 262144, 1, -9, 393216, 2, -65545, 393216, 0, -131081, 262144, 2, -196617, 262144, 1, -262153, 262144, 1, -262152, 327680, 0, -327680, 327680, 1, -327679, 393216, 1, -327675, 327680, 1, -327674, 327680, 1, -327673, 393216, 1, -262138, 327680, 1, -262139, 262144, 1, 262148, 393216, 2, 262147, 327680, 2, 262144, 327680, 2, 327679, 327680, 2, 393217, 393216, 2, 458751, 262144, 2, 393216, 327680, 2, 327676, 327680, 2, 327672, 327680, 2, 327671, 262144, 2, -327689, 262144, 0, -196608, 327680, 1, -131073, 327680, 1, -65539, 327680, 1, -3, 327680, 1, 131069, 327680, 1, 65533, 327680, 1, 196605, 327680, 1, 196606, 327680, 1, 196607, 327680, 1, 65536, 327680, 1, 1, 327680, 1, -65535, 327680, 1, -131071, 393216, 1, -196607, 393216, 1, -2, 327680, 1, -65538, 458752, 0, 262142, 327680, 1, 0, 458752, 0, -65536, 327680, 1, -65537, 327680, 1, 65534, 327680, 1, -1, 327680, 1, 131070, 327680, 1, 131072, 327680, 1, 131071, 327680, 1, 65535, 327680, 1, -131072, 327680, 1, -131076, 327680, 1, -4, 327680, 1, -65540, 327680, 1, 131067, 262144, 0, 65532, 327680, 1, 196603, 262144, 1, -5, 262144, 1, 65531, 262144, 2, -65542, 262144, 2, 196604, 327680, 1, 131068, 327680, 1, -65541, 327680, 1, 65537, 327680, 1, 131074, 327680, 1, 196611, 327680, 1, 131075, 327680, 1, 65538, 327680, 1, 2, 393216, 1, -65534, 393216, 0, 196612, 393216, 1, 131076, 393216, 0, 131073, 327680, 1, 196614, 262144, 2, 131078, 262144, 1, -131067, 262144, 2, -327676, 262144, 2, 65539, 393216, 0, -327685, 262144, 0, -327684, 327680, 0, -327683, 327680, 0, -327682, 327680, 0, -327681, 327680, 0, -393216, 327680, 0, -393215, 393216, 0, -393213, 262144, 2, -393212, 458752, 0, -393211, 327680, 0, -393210, 327680, 0, -393209, 393216, 0)
+layer_1/name = "Grass"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array(-196617, 0, 2, -196616, 65536, 2, -196615, 65536, 2, -196614, 65536, 2, -196613, 65536, 1, -131077, 0, 1, -131076, 65536, 1, -65540, 65536, 1, -3, 65536, 1, 65533, 65536, 1, 131069, 65536, 1, 196605, 65536, 1, 262141, 65536, 1, 327677, 65536, 1, 327676, 65536, 1, 393212, 65536, 2, 393211, 0, 2, 327675, 65536, 1, 262140, 65536, 1, 196604, 65536, 1, 131068, 0, 1, 65532, 0, 1, -4, 0, 1, -65541, 0, 2, -262149, 65536, 1, -262150, 196608, 2, 196603, 65536, 0, 262139, 65536, 1, 262138, 65536, 1, 327674, 65536, 2, 327673, 65536, 2, 262136, 65536, 1, 196600, 65536, 1, 196599, 0, 1, 131064, 131072, 0, 131063, 0, 0, 196601, 65536, 0, 262137, 65536, 1, 327672, 65536, 2, 262135, 0, 1, 327671, 0, 2, 327678, 65536, 1, 327679, 196608, 0, 262144, 65536, 1, 262145, 196608, 1, 393213, 65536, 2, 393214, 65536, 2, 393215, 65536, 2, 327681, 65536, 2, 327680, 65536, 2, 327682, 65536, 2, 262146, 65536, 1, 262147, 65536, 1, 262148, 131072, 1, 196611, 196608, 1, 196612, 131072, 0, 131075, 131072, 0, 131074, 196608, 1, 65538, 131072, 1, 65537, 65536, 1, 1, 65536, 1, -65535, 65536, 1, -65536, 65536, 1, -131072, 65536, 1, -196608, 65536, 1, -131071, 131072, 1, 2, 131072, 1, -65534, 131072, 0, -196607, 131072, 1, -262143, 131072, 0, -327680, 131072, 1, -262144, 196608, 0, -393216, 131072, 0, -327681, 65536, 1, -262145, 65536, 1, -196609, 65536, 1, -327682, 65536, 1, -393218, 65536, 0, -262146, 65536, 1, -196610, 65536, 1, -393217, 131072, 0, -393219, 65536, 0, -327684, 196608, 2, -327685, 196608, 1, -262148, 65536, 1, -393220, 0, 0, -262147, 65536, 1, -327683, 65536, 1, -327686, 65536, 0, -327687, 65536, 0, -262151, 65536, 1, -262152, 196608, 2, -262153, 0, 1, -327688, 65536, 1, -327689, 0, 0, -393224, 0, 0, -196612, 65536, 1, -196611, 65536, 1, -65539, 65536, 1, -131075, 65536, 1, -131074, 65536, 1, -65538, 196608, 0, 65534, 65536, 1, -2, 65536, 1, -1, 65536, 1, -65537, 65536, 1, -131073, 65536, 1, 65535, 65536, 1, 131070, 65536, 1, 196606, 65536, 1, 262143, 65536, 1, 196607, 65536, 1, 131071, 65536, 1, 0, 65536, 1, 262142, 65536, 1, 65536, 65536, 1, 196608, 65536, 1, 131073, 65536, 1, 196609, 65536, 1, 196610, 65536, 1, 327683, 65536, 2, 131072, 65536, 1, 327684, 131072, 2, 262150, 0, 1, 262151, 131072, 2, 196615, 131072, 1, 131079, 65536, 1, 65543, 65536, 1, 327686, 0, 0, 196614, 0, 1, 131078, 0, 0, -65530, 0, 1, 7, 65536, 1, -65529, 131072, 1, -131066, 0, 1, -196602, 0, 1, -262138, 196608, 1, -131065, 131072, 1, -196601, 131072, 1, -262137, 131072, 1, -327674, 65536, 1, -393210, 65536, 1, -393211, 65536, 1, -458748, 0, 0, -393212, 0, 2, -327675, 0, 2, -458747, 65536, 0, -393209, 131072, 0, -327673, 131072, 1, -458746, 131072, 0, 6, 0, 2, 8, 131072, 0, 65544, 131072, 1, 131080, 131072, 2, 196602, 65536, 0, 393222, 131072, 2)
+
+[node name="Props" type="Node2D" parent="Credits/Background"]
+
+[node name="Prop1" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-496, -320)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+
+[node name="Prop2" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(160, -104)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+
+[node name="Prop3" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-264, 104)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+
+[node name="Prop4" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(344, 368)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+
+[node name="Prop5" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-904, 392)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+
+[node name="Prop6" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-880, -504)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+
+[node name="Prop7" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(864, -536)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+
+[node name="Prop8" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(920, -384)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+
+[node name="Prop9" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(880, 368)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+
+[node name="Prop10" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-424, -136)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+flip_h = true
+
+[node name="Prop11" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-552, -544)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+flip_h = true
+
+[node name="Prop12" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(64, -312)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+flip_h = true
+
+[node name="Prop13" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-528, 360)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+flip_h = true
+
+[node name="Prop14" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-984, 216)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+flip_h = true
+
+[node name="Prop15" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(936, -72)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+flip_h = true
+
+[node name="Prop16" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-392, 552)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_vgir7")
+flip_h = true
+
+[node name="Prop17" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-8, 544)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("24_muub7")
+flip_h = true
+
+[node name="Prop18" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-728, -496)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("24_muub7")
+flip_h = true
+
+[node name="Prop19" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-776, 472)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("24_muub7")
+flip_h = true
+
+[node name="Prop20" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(656, 240)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("25_p7x5c")
+flip_h = true
+
+[node name="Prop21" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-240, -248)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("26_2mw36")
+flip_h = true
+
+[node name="Prop22" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-248, -536)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_hrr2y")
+flip_h = true
+
+[node name="Prop24" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-312, -136)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("27_fv2cy")
+flip_h = true
+
+[node name="Prop25" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-224, -136)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("27_fv2cy")
+flip_h = true
+
+[node name="Prop26" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-136, -136)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("27_fv2cy")
+flip_h = true
+
+[node name="Prop27" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-48, -136)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("27_fv2cy")
+flip_h = true
+
+[node name="Prop28" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-48, -136)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("27_fv2cy")
+flip_h = true
+
+[node name="Prop29" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-360, -160)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("28_xif0a")
+flip_h = true
+
+[node name="Prop30" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-432, -368)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("28_xif0a")
+flip_h = true
+
+[node name="Prop31" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-432, -288)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("28_xif0a")
+flip_h = true
+
+[node name="Prop32" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-32, -408)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("28_xif0a")
+flip_h = true
+
+[node name="Prop33" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-32, -328)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("28_xif0a")
+flip_h = true
+
+[node name="Prop34" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(-32, -248)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("28_xif0a")
+flip_h = true
+
+[node name="Prop35" type="Sprite2D" parent="Credits/Background/Props"]
+position = Vector2(904, -224)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("29_opbs3")
+flip_h = true
+
+[node name="DimColor" type="ColorRect" parent="Credits/Background"]
+offset_left = -960.0
+offset_top = -544.0
+offset_right = 960.0
+offset_bottom = 544.0
+color = Color(0, 0, 0, 0.32549)
 
 [node name="Back" type="Button" parent="Credits" groups=["Buttons"]]
 z_index = 1025
@@ -1105,23 +1350,35 @@ label_settings = SubResource("LabelSettings_kkgf1")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CreditTextField" type="RichTextLabel" parent="Credits"]
-offset_left = -896.0
-offset_top = -512.0
-offset_right = 896.0
-offset_bottom = 352.0
+[node name="CreditTextTitle" type="RichTextLabel" parent="Credits"]
+clip_contents = false
+offset_left = -192.0
+offset_top = -480.0
+offset_right = 192.0
+offset_bottom = -376.0
 mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = SubResource("FontFile_1afan")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]
+[color=#2ecc71]Crops & Corpses
+Credits[/color]
+"
+
+[node name="CreditTextField" type="RichTextLabel" parent="Credits"]
+clip_contents = false
+offset_left = -512.0
+offset_top = -336.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
 theme_override_fonts/normal_font = SubResource("FontFile_1afan")
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[center]---
-[color=#2ecc71]Crops & Corpses
-Credits[/color]
-
----
-
+text = "[center]
 [color=#c0f99e]Programming[/color]
 [color=#ffffff]
 Tino Behnen
@@ -1132,17 +1389,29 @@ Daniel Heugenhauser
 Otso Salmenperä
 Janita Korhonen
 Ella Arokivi
-Tossu
+Tossu"
+
+[node name="CreditTextField2" type="RichTextLabel" parent="Credits"]
+clip_contents = false
+offset_top = -336.0
+offset_right = 512.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = SubResource("FontFile_1afan")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[center]
+[color=#c0f99e]Music[/color]
+[color=#ffffff]
+Ilmari Apajalahti
 
 ---
 
-[color=#c0f99e]Art[/color]
+[color=#c0f99e]Sound[/color]
 [color=#ffffff]
-Aida Kimpimäki
-Lennert Vercammen
-Marla
-Nella
-Axu
+Ilmari Apajalahti
+Tossu
 
 ---
 
@@ -1150,6 +1419,36 @@ Axu
 [color=#ffffff]
 Mikael Sekkouri
 "
+
+[node name="CreditTextField3" type="RichTextLabel" parent="Credits"]
+clip_contents = false
+offset_left = -256.0
+offset_top = 32.0
+offset_right = 256.0
+offset_bottom = 328.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = SubResource("FontFile_1afan")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[center][color=#c0f99e]Art[/color]
+[color=#ffffff]
+Aida Kimpimäki
+Lennert Vercammen
+Marla
+Nella
+Axu
+Hamed Hoseini
+"
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+
+[node name="TransitionOverlay" type="ColorRect" parent="Overlay"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
 
 [connection signal="pressed" from="Main/Play" to="." method="OnPlayPressed"]
 [connection signal="pressed" from="Main/Settings" to="." method="OnSettingsPressed"]

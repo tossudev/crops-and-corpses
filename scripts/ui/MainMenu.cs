@@ -6,19 +6,33 @@ public partial class MainMenu : Node2D {
 	float transitionTime = 1.0f;
 	ColorRect transitionOverlay;
 
+	Sprite2D title;
 	Camera2D camMain;
 	Camera2D camSettings;
 	Camera2D camCredits;
+
+	double time = 0.0d;
 
 
     public override void _Ready() {
         base._Ready();
 		transitionOverlay = GetNodeOrNull<ColorRect>("Overlay/TransitionOverlay");
 
+		title = GetNodeOrNull<Sprite2D>("Main/Title");
 		camMain = GetNodeOrNull<Camera2D>("Main/Camera");
 		camSettings = GetNodeOrNull<Camera2D>("Settings/Camera");
 		camCredits = GetNodeOrNull<Camera2D>("Credits/Camera");
     }
+
+
+    public override void _Process(double delta) {
+        base._Process(delta);
+		time += delta;
+
+		// little title animation thingy
+		double titleScale = (Mathf.Cos(time * 1.5) / 30) + 0.5;
+		title.Scale = new Vector2((float)titleScale, (float)titleScale);
+	}
 
 
     void OnPlayPressed() {

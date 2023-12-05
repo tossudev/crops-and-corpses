@@ -203,12 +203,13 @@ public partial class Villager : CharacterBody2D
 
 	public async void OpenRescueDialogue()
 	{
-		GD.Print("You saved me");
+        var quest = await PlayerInfo.GetActiveQuest();
 
-		var quest = await PlayerInfo.GetActiveQuest();
-			
-        quest?.ChangeQuestDescription("Take the villager to Street Sign");
+		if (!(quest?.stages.Contains("Kill") ?? false)) return;
 		
+		if (!quest.CompleteQuestStage("Rescue")) return;
+			
+		quest.ChangeQuestDescription("Take the villager to Street Sign");
 		SetCurrentState(VillagerState.FollowPlayer);
 	}
 
@@ -331,15 +332,16 @@ public partial class Villager : CharacterBody2D
 			case VillagerOccupation.Miner:
 				decision = VillagerState.FindStoneTask;
 				break;
-
-
+            
 			default:
-				decision = VillagerState.RoamAround;
+				decision = rawData.currentState == VillagerState.RescueQuest 
+					? VillagerState.RescueQuest 
+                    : VillagerState.RoamAround;
 				break;
 		}
 
 
-		if (rawData.homeId == 0)
+		if (rawData.homeId == 0 && _inTownScene)
 		{
 			decision = VillagerState.Homeless;
 		}

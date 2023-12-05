@@ -67,12 +67,12 @@ public partial class Quest : Node
         return stages.Count == 0;
     }
 
-    public void CompleteQuestStage(string stage)
+    public bool CompleteQuestStage(string stage)
     {
-        if (stages.Contains(stage))
-        {
-            stages.Remove(stage);
-        }
+        if (!stages.Contains(stage)) return false;
+        
+        stages.Remove(stage);
+        return true;
     }
 
     public string GetQuestStage()

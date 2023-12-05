@@ -65,7 +65,8 @@ public partial class BridgeQuest : Node2D
 			SceneInfo.forestBuildABridgeOpen = true;
 			_canvasLayer.Visible = false;
 
-			GetNode<StaticBody2D>("%Barrier").QueueFree();			
+			GetNode<StaticBody2D>("%Barrier").QueueFree();		
+			GetNode<Button>("%FinishQuestBtn").Visible = false;	
 			GetNode<Label>("%BridgeLabel").Text = "Nice job, you finished the bridge! I wonder where it leads to...";
 		}		
 	}

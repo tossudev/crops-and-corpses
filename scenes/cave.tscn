@@ -1771,7 +1771,7 @@ position = Vector2(-16, 142)
 
 [node name="cave_entrance3" parent="Objects/Cave Entrances" node_paths=PackedStringArray("exitPosition") instance=ExtResource("4_xu51x")]
 position = Vector2(776, -1688)
-targetSceneID = 2
+targetSceneID = 4
 exitPosition = NodePath("Exit")
 
 [node name="Exit" type="Node2D" parent="Objects/Cave Entrances/cave_entrance3"]

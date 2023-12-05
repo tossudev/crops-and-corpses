@@ -6,13 +6,13 @@
 [resource]
 script = ExtResource("2_lins5")
 item = ExtResource("1_v6mmg")
-damage = 25.0
+damage = 25
 knockback = 2.08165e-12
 cooldown = 0.5
 effect = 0
 targetType = 1
-attackAnim = ""
-CooldownAnim = ""
+attackAnim = 4
+cooldownAnim = 0
 reach = 2.0
 holdAction = true
 ranged = false

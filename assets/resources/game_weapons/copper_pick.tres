@@ -6,13 +6,13 @@
 [resource]
 script = ExtResource("2_rpoao")
 item = ExtResource("1_t3h6g")
-damage = 25.0
+damage = 25
 knockback = 2.08165e-12
 cooldown = 0.5
 effect = 0
 targetType = 2
-attackAnim = ""
-CooldownAnim = ""
+attackAnim = 3
+cooldownAnim = 0
 reach = 2.0
 holdAction = true
 ranged = false

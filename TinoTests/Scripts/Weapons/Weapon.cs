@@ -12,8 +12,8 @@ public partial class Weapon : Resource
     [Export] public float cooldown { get; set; }
     [Export] public EffectType effect { get; set; }
     [Export] public TargetType targetType { get; set; }
-    [Export] public String attackAnim { get; set; }
-    [Export] public String CooldownAnim { get; set; }
+    [Export] public WeaponAnimation attackAnim { get; set; }
+    [Export] public WeaponAnimation cooldownAnim { get; set; }
 
     [ExportCategory("Melee")]
     [Export] public float reach { get; set; } = 1;
@@ -32,4 +32,15 @@ public enum TargetType
     Tree,
     Rock,
     Building
+}
+public enum WeaponAnimation
+{
+    None,
+    Swing,
+    bowDraw,
+    PickaxeCooldown,
+    AxeCooldown,
+    SwordCooldown,
+    BowCooldown,
+    HandCooldown
 }

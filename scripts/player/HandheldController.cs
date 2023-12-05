@@ -14,7 +14,9 @@ public partial class HandheldController : Node2D
     [Export] private PackedScene _projectilePrefab;
     [Export] private PlayerController _player;
     [Export] private StaminaComponent _staminaComponent;
-    [Export] private Sprite2D _sprite;
+    [Export] private Sprite2D _toolSprite;
+    [Export] private Sprite2D _dynamicSprite;
+    [Export] private PlayerSpriteController _skeleton;
 
     private Attack _attack;
     private int _damage;
@@ -34,6 +36,12 @@ public partial class HandheldController : Node2D
     private string _targetGroup;
     private string _attackAnim;
     private string _cooldownAnim;
+    private AnimationPlayer _skeletonAnimPlayer;
+
+    public override void _Ready()
+    {
+        _skeletonAnimPlayer = _skeleton.GetNode<AnimationPlayer>("AnimationPlayer");
+    }
 
     public void Init()
     {
@@ -49,7 +57,8 @@ public partial class HandheldController : Node2D
         if (_weapon == null)
             _weapon = _hand;
 
-        _sprite.Texture = null;
+        _dynamicSprite.Texture = null;
+        _toolSprite.Texture = null;
 
         _damage = _weapon.damage;
         _knockback = _weapon.knockback;
@@ -62,8 +71,8 @@ public partial class HandheldController : Node2D
         _ranged = _weapon.ranged;
         _drawTime = _weapon.drawTime;
         _projectile = _weapon.projectile;
-        _attackAnim = _weapon.attackAnim;
-        _cooldownAnim = _weapon.CooldownAnim;
+        _attackAnim = GetAnimation(_weapon.attackAnim);
+        _cooldownAnim = GetAnimation(_weapon.cooldownAnim);
 
         if (_ranged)
         {
@@ -109,19 +118,22 @@ public partial class HandheldController : Node2D
         if (_ranged)
         {
             LookAt(GetGlobalMousePosition());
-            // flip the sprite if the mouse is on the left side of the player
-            if (GetGlobalMousePosition().X < GlobalPosition.X)
-            {
-                this.Scale = new Vector2(1, -1) * _reach;
-            }
-            else
-            {
-                this.Scale = Vector2.One * _reach;
-            }
+        }
+
+        if (GetGlobalMousePosition().X < GlobalPosition.X)
+        {
+            this.Scale = new Vector2(1, -1) * _reach;
+        }
+        else
+        {
+            this.Scale = Vector2.One * _reach;
         }
 
         if (_timer.TimeLeft <= 0)
+        {
             _player.stopMovement = false;
+            _skeleton.usingTool = false;
+        }
 
         if (_actionHeld)
         {
@@ -144,6 +156,8 @@ public partial class HandheldController : Node2D
 
         if (_weapon.holdAction)
             _actionHeld = true;
+
+        _skeleton.usingTool = true;
 
         if (_ranged)
         {
@@ -174,6 +188,8 @@ public partial class HandheldController : Node2D
         float angle = direction.Angle() * 180 / Mathf.Pi;
         angle = Mathf.Round(angle / 45) * 45;
 
+        _toolSprite.Texture = _weapon.item?.IconTexture;
+
         _attack.direction = direction;
 
         this.RotationDegrees = angle;
@@ -181,7 +197,7 @@ public partial class HandheldController : Node2D
         _staminaComponent.UseStamina(5);
 
         _animationPlayer.SpeedScale = 1 / _cooldown;
-        _animationPlayer.Play("swing");
+        _animationPlayer.Play(_attackAnim);
         _timer.Start(_cooldown);
     }
 
@@ -198,8 +214,13 @@ public partial class HandheldController : Node2D
         if (!isDrawing)
             isDrawing = true;
 
+        _skeleton.usingRanged = true;
+
         _player.speedPercent = 0.5f;
         _player.canRun = false;
+
+        if (_attackAnim == "idle")
+            _toolSprite.Texture = _weapon.item?.IconTexture;
 
         _staminaComponent.drainRate = 0.5f;
         _staminaComponent.canDrain = true;
@@ -216,6 +237,9 @@ public partial class HandheldController : Node2D
         _player.stopMovement = false;
         _staminaComponent.canDrain = false;
 
+        if (_timer.TimeLeft <= 0)
+            _skeleton.usingTool = false;
+
         if (_ranged)
         {
             ReleaseDraw();
@@ -228,6 +252,8 @@ public partial class HandheldController : Node2D
             return;
 
         isDrawing = false;
+
+        _skeleton.usingRanged = false;
 
         _player.speedPercent = 1;
         _player.canRun = true;
@@ -263,6 +289,31 @@ public partial class HandheldController : Node2D
         projectile.GlobalRotation = _attack.direction.Angle();
 
         _timer.Start(_cooldown);
+    }
+
+    private string GetAnimation(WeaponAnimation weaponAnimation)
+    {
+        switch (weaponAnimation)
+        {
+            case WeaponAnimation.None:
+                return "idle";
+            case WeaponAnimation.Swing:
+                return "swing";
+            case WeaponAnimation.bowDraw:
+                return "bow_draw";
+            case WeaponAnimation.PickaxeCooldown:
+                return "pick_cd";
+            case WeaponAnimation.AxeCooldown:
+                return "axe_cd";
+            case WeaponAnimation.SwordCooldown:
+                return "sword_cd";
+            case WeaponAnimation.BowCooldown:
+                return "bow_cd";
+            case WeaponAnimation.HandCooldown:
+                return "hand_cd";
+            default:
+                return "idle";
+        }
     }
 
     private void OnHitboxEntered(Area2D body)

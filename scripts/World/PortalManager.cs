@@ -26,7 +26,6 @@ public partial class PortalManager : Node2D
 
 	public void PortalTo(SceneID sceneID)
 	{
-		_player.SaveState();
 		switch (sceneID)
 		{
 			case SceneID.Town:

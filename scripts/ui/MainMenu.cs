@@ -17,6 +17,7 @@ public partial class MainMenu : Node2D {
 
 		camMain = GetNodeOrNull<Camera2D>("Main/Camera");
 		camSettings = GetNodeOrNull<Camera2D>("Settings/Camera");
+		camCredits = GetNodeOrNull<Camera2D>("Credits/Camera");
     }
 
 
@@ -24,29 +25,20 @@ public partial class MainMenu : Node2D {
 		Transition("Game");
 	}
 
-
 	void OnBackToMenuPressed() {
 		Transition("Menu");
 	}
 	
-
 	void OnSettingsPressed() {
 		Transition("Settings");
 	}
 
+	void OnCreditsPressed() {
+		Transition("Credits");
+	}
 
 	void OnQuitPressed() {
 		GetTree().Quit();
-	}
-
-
-	void OnFullscreenToggled(bool buttonPressed) {
-		if (buttonPressed) {
-			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
-		}
-		else {
-			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
-		}
 	}
 
 
@@ -61,6 +53,7 @@ public partial class MainMenu : Node2D {
 
 		camMain.Enabled = false;
 		camSettings.Enabled = false;
+		camCredits.Enabled = false;
 
 		switch (to) {
 			case "Menu":
@@ -68,6 +61,9 @@ public partial class MainMenu : Node2D {
 				break;
 			case "Settings":
 				camSettings.Enabled = true;
+				break;
+			case "Credits":
+				camCredits.Enabled = true;
 				break;
 			case "Game":
 				GetTree().ChangeSceneToFile("res://scenes/town.tscn");

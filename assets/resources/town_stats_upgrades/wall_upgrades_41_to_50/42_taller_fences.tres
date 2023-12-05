@@ -1,12 +1,27 @@
-[gd_resource type="Resource" script_class="WallUpgrade" load_steps=2 format=3 uid="uid://cgetkvf7fcmkp"]
+[gd_resource type="Resource" script_class="WallUpgrade" load_steps=8 format=3 uid="uid://cgetkvf7fcmkp"]
 
+[ext_resource type="Texture2D" uid="uid://cqeqo8grwweyk" path="res://assets/sprites/Farm sprites/gate.png" id="1_10hlp"]
 [ext_resource type="Script" path="res://scripts/resource_classes/upgrades/WallUpgrade.cs" id="1_tyhci"]
+[ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="1_vjcxn"]
+[ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_qp24b"]
+[ext_resource type="Resource" uid="uid://dmm0h1ba6feb7" path="res://assets/resources/game_items/resource_items_0_to_99/1_iron.tres" id="3_iarla"]
+
+[sub_resource type="Resource" id="Resource_ikq42"]
+script = ExtResource("2_qp24b")
+item = ExtResource("1_vjcxn")
+quantity = 50
+
+[sub_resource type="Resource" id="Resource_84fv7"]
+script = ExtResource("2_qp24b")
+item = ExtResource("3_iarla")
+quantity = 10
 
 [resource]
 script = ExtResource("1_tyhci")
-_wallHP = 0
+_wallHP = 100
 _spikyWalls = false
-_id = 0
-_upgradeHeader = ""
-_upgradeDescription = ""
-_craftingRequirements = null
+_id = 42
+_upgradeIcon = ExtResource("1_10hlp")
+_upgradeHeader = "Taller Fences"
+_upgradeDescription = "Make your fence higher and prevent zombies from getting through"
+_craftingRequirements = Array[Object]([SubResource("Resource_ikq42"), SubResource("Resource_84fv7")])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfa7c2hs7jxvf"]
+[gd_scene load_steps=9 format=3 uid="uid://cfa7c2hs7jxvf"]
 
 [ext_resource type="Script" path="res://scripts/World/PlayerTravel.cs" id="1_ffm7f"]
 [ext_resource type="Texture2D" uid="uid://3465re0y5s7f" path="res://assets/sprites/items/street_sign_post.png" id="1_rlsfp"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://ds0ykpdv4ev7y" path="res://assets/sprites/items/post_ruins.png" id="4_7x21e"]
 [ext_resource type="Texture2D" uid="uid://bkhi7xspqtvt7" path="res://assets/sprites/items/post_town.png" id="5_80p6s"]
 [ext_resource type="Texture2D" uid="uid://c3tmforyijtta" path="res://assets/sprites/items/post_forest.png" id="6_s8p2d"]
+[ext_resource type="Script" path="res://scenes/world/VillagerDropOff.cs" id="7_ddcla"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c11ny"]
+radius = 332.374
 
 [node name="street_sign_post" type="Node2D"]
 scale = Vector2(0.6, 0.6)
@@ -42,6 +46,17 @@ shape = ExtResource("3_y35pe")
 [node name="Sprite2D" type="Sprite2D" parent="forest_sign"]
 texture = ExtResource("6_s8p2d")
 
+[node name="VillagerDropOff" type="Node2D" parent="."]
+script = ExtResource("7_ddcla")
+
+[node name="DropOffArea" type="Area2D" parent="VillagerDropOff"]
+position = Vector2(5, 256.667)
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VillagerDropOff/DropOffArea"]
+shape = SubResource("CircleShape2D_c11ny")
+
 [connection signal="input_event" from="ruins_sign" to="." method="TravelRuins"]
 [connection signal="input_event" from="town_sign" to="." method="TravelTown"]
 [connection signal="input_event" from="forest_sign" to="." method="TravelForest"]
+[connection signal="body_entered" from="VillagerDropOff/DropOffArea" to="VillagerDropOff" method="_on_drop_off_area_body_entered"]

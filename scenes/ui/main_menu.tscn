@@ -1132,7 +1132,7 @@ Daniel Heugenhauser
 Otso Salmenperä
 Janita Korhonen
 Ella Arokivi
-Joonatan Vähäkangas
+Tossu
 
 ---
 
@@ -1156,6 +1156,7 @@ Mikael Sekkouri
 [connection signal="pressed" from="Main/Credits" to="." method="OnCreditsPressed"]
 [connection signal="pressed" from="Main/Quit" to="." method="OnQuitPressed"]
 [connection signal="pressed" from="Settings/Back" to="." method="OnBackToMenuPressed"]
+[connection signal="pressed" from="Settings/Back" to="Settings" method="OnSettingsSaved"]
 [connection signal="toggled" from="Settings/Fullscreen/Button" to="Settings" method="OnFullscreenToggled"]
 [connection signal="value_changed" from="Settings/AudioSfx/Slider" to="Settings" method="OnSfxChanged"]
 [connection signal="value_changed" from="Settings/AudioAmbience/Slider" to="Settings" method="OnAmbienceChanged"]

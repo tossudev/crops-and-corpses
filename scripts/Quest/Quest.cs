@@ -19,8 +19,8 @@ public partial class Quest : Node
     public string description { get; private set; }
 
     public QuestType type;
-    
-    public Array<string> stages { get; private set; }
+
+    public Array<string> stages { get; private set; } = new();
     public Scene.RootScene location { get; private set; }
 
     public Quest () {}
@@ -98,6 +98,8 @@ public partial class Quest : Node
     
     public static Dictionary GetDictionary(Quest quest)
     {
+        if (quest == null) return new Dictionary();
+        
         Variant questStages = quest.stages;
         
         Dictionary questData = new Dictionary
@@ -115,9 +117,8 @@ public partial class Quest : Node
 
     public static Quest LoadQuestFromData(Dictionary questDictionary)
     {
-        if (questDictionary == null)
+        if (questDictionary == null || questDictionary.Count == 0)
         {
-            GD.PrintErr("Save data is null, can't load player info!");
             return null;
         }
 

@@ -21,7 +21,7 @@ texture = ExtResource("1_rlsfp")
 offset = Vector2(0, -250)
 
 [node name="ruins_sign" type="Area2D" parent="."]
-position = Vector2(71.6667, -413.333)
+position = Vector2(75, -411.667)
 scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ruins_sign"]
@@ -42,7 +42,7 @@ shape = ExtResource("3_y35pe")
 texture = ExtResource("5_80p6s")
 
 [node name="forest_sign" type="Area2D" parent="."]
-position = Vector2(-58.3333, -316.667)
+position = Vector2(-71.6667, -371.667)
 scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="forest_sign"]

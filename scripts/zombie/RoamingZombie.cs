@@ -172,7 +172,6 @@ public partial class RoamingZombie : CharacterBody2D
 		switch (attack.effect)
 		{
 			case EffectType.Cure:
-				SpawnScript.RemoveZombieFromList(this);
 				Vector2 zombiePos = this.Transform.Origin;
                 var newVillagerData = new VillagerRawData();
 				newVillagerData.SetOccupation(zombieOccupation);
@@ -190,8 +189,6 @@ public partial class RoamingZombie : CharacterBody2D
 	{
 		if (_health <= 0)
 		{
-			SpawnScript.RemoveZombieFromList(this);
-
 			ExpGain expGained = ZombieManager.type switch
 			{
 				ZombieManager.ZombieType.Weak => ExpGain.MEDIUM,
@@ -206,6 +203,13 @@ public partial class RoamingZombie : CharacterBody2D
 		}
 
 		_lootController.CallDeferred("OnHealth", _health);
+	}
+
+
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		SpawnScript.RemoveZombieFromList(this);
 	}
 
 	private void OnAttackBoxEntered(Node2D body)

@@ -75,9 +75,7 @@ public partial class SpawnScript : Node2D
 				//GD.Print("Distance to player" + distance+ " MaxDistance "+maxDistance);
 				if(distance > maxDistance)
 				{
-					GD.Print("Zombie Deleted");
 					zombieList[i].QueueFree();
-					zombieList.RemoveAt(i);
 				}
 			}
 		}
@@ -142,6 +140,7 @@ public partial class SpawnScript : Node2D
 		prefab.Position = spawnPoint;
 		enemiesNode.AddChild(prefab);
 		questZombieList.Add(prefab);
+		zombieList.Add(prefab);
 	}
 	
 
@@ -165,15 +164,15 @@ public partial class SpawnScript : Node2D
 	} */
 	public static void RemoveZombieFromList(CharacterBody2D zombie)
 	{
-		zombieList.Remove(zombie);
-
+		if (zombieList.Contains(zombie))
+		{
+			zombieList.Remove(zombie);
+		}
+		
 		if (questZombieList.Contains(zombie))
 		{
 			questZombieList.Remove(zombie);
 		}
-
-		
-		
 	}
 
 	public bool GetIsNightOrDay()

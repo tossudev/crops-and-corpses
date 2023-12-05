@@ -67,9 +67,7 @@ public partial class Villager : CharacterBody2D
 		_taskTimer.Timeout += State;
 		AddChild(_taskTimer);
 		_taskTimer.Start();
-
-		SetCurrentState(VillagerState.RoamAround);
-	}
+    }
 
 	public void InitializeVillager(VillagerRawData data)
 	{
@@ -98,7 +96,7 @@ public partial class Villager : CharacterBody2D
 
 	void SetCurrentState(VillagerState state)
 	{
-		rawData.currentState = VillagerState.RoamAround;
+		rawData.currentState = state;
 	}
 
 	public override void _PhysicsProcess(double delta)

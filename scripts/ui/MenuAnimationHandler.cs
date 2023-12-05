@@ -40,7 +40,7 @@ public partial class MenuAnimationHandler : Node {
 
     public void OnButtonUp(Button button) {
         ScaleAnimation(button, bigScale);
-        _audioController.PlayEffect("res://assets/Sounds/ui/click.wav");
+        _audioController.PlayEffect("ui/click.wav");
     }
 
 

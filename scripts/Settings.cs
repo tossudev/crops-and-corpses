@@ -88,7 +88,7 @@ public partial class Settings : Node2D {
 	void OnFullscreenToggled(bool buttonPressed) {
 		fullscreen = buttonPressed;
 		ToggleFullscreen();
-		_audioController.PlayEffect("res://assets/Sounds/ui/click.wav");
+		_audioController.PlayEffect("ui/click.wav");
 	}
 
 	void ToggleFullscreen() {

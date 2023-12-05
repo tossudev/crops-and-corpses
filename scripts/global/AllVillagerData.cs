@@ -34,7 +34,7 @@ public partial class AllVillagerData : Node
 	const string FEMALE2_LEG_L_RESPATH = "res://assets/sprites/character/npc2/SVG/left_foot.svg";
 	const string FEMALE3_LEG_L_RESPATH = "res://assets/sprites/character/npc3/SVG/left_foot.svg";
 
-	public Dictionary<VillagerType, Dictionary<BodyPartTextureType, Texture2D>> villagerTextures;
+	public Dictionary<VillagerType, Dictionary<BodyPartTextureType, Texture2D>> villagerTextures = new ();
 	VillagerSkeleton _villagerSkeleton;
 
 	[Export] string [] _villagerNames;
@@ -52,6 +52,13 @@ public partial class AllVillagerData : Node
         int randomNumber = random.Next(0, _villagerInfos.Length);
 		return _villagerInfos[randomNumber];
 	}
+
+	public override void _Ready()
+	{
+		base._Ready();
+		InitializeVillagerTextures();
+	}
+
 	public void InitializeVillagerTextures()
 	{
 		villagerTextures[VillagerType.Female1] = new Dictionary<BodyPartTextureType, Texture2D>

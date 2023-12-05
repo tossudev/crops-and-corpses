@@ -1,15 +1,15 @@
 [gd_scene load_steps=16 format=3 uid="uid://da3wirta51spt"]
 
-[ext_resource type="Texture2D" uid="uid://66jrj5frjubg" path="res://assets/sprites/character/zombie2/2.2/1x/left leg.png" id="1_h0rkt"]
-[ext_resource type="Texture2D" uid="uid://dd0y6itp7lokm" path="res://assets/sprites/character/zombie2/2.2/1x/right leg.png" id="2_iunsu"]
-[ext_resource type="Texture2D" uid="uid://dap25v5nnxolb" path="res://assets/sprites/character/zombie2/2.2/1x/left hand.png" id="3_65j4u"]
-[ext_resource type="Texture2D" uid="uid://dilrw6qhrhqpx" path="res://assets/sprites/character/zombie2/2.2/1x/torso.png" id="4_cww3q"]
-[ext_resource type="Texture2D" uid="uid://d37e4dl8u6tqr" path="res://assets/sprites/character/zombie2/2.2/1x/head.png" id="5_5w0fw"]
-[ext_resource type="Texture2D" uid="uid://dtiwff2vm8drf" path="res://assets/sprites/character/hats/mining_hat.png" id="6_ly3ra"]
-[ext_resource type="Texture2D" uid="uid://csrm5plu4jxny" path="res://assets/sprites/character/hats/bucket_helmet.png" id="7_2jgao"]
-[ext_resource type="Texture2D" uid="uid://b64iay75nivow" path="res://assets/sprites/character/hats/straw_hat.png" id="8_vi6yb"]
-[ext_resource type="Texture2D" uid="uid://cgwstuqfkjljm" path="res://assets/sprites/character/hats/ushanka.png" id="9_yt84f"]
-[ext_resource type="Texture2D" uid="uid://dilpe853iv7c4" path="res://assets/sprites/character/zombie2/2.2/1x/right hand.png" id="10_fsqys"]
+[ext_resource type="Texture2D" uid="uid://c5jto51evt3jk" path="res://assets/sprites/character/zombie2/2.2/1x/left leg.png" id="1_h0rkt"]
+[ext_resource type="Texture2D" uid="uid://bgtjwj5gvti3" path="res://assets/sprites/character/zombie2/2.2/1x/right leg.png" id="2_iunsu"]
+[ext_resource type="Texture2D" uid="uid://dals7bwdqdue6" path="res://assets/sprites/character/zombie2/2.2/1x/left hand.png" id="3_65j4u"]
+[ext_resource type="Texture2D" uid="uid://du5g88kg77bkx" path="res://assets/sprites/character/zombie2/2.2/1x/torso.png" id="4_cww3q"]
+[ext_resource type="Texture2D" uid="uid://2wu1ki7hdj5" path="res://assets/sprites/character/zombie2/2.2/1x/head.png" id="5_5w0fw"]
+[ext_resource type="Texture2D" uid="uid://bakys00o3rkly" path="res://assets/sprites/character/hats/mining_hat.png" id="6_ly3ra"]
+[ext_resource type="Texture2D" uid="uid://dvrpluxm42nf4" path="res://assets/sprites/character/hats/bucket_helmet.png" id="7_2jgao"]
+[ext_resource type="Texture2D" uid="uid://kjimq4t0wnvv" path="res://assets/sprites/character/hats/straw_hat.png" id="8_vi6yb"]
+[ext_resource type="Texture2D" uid="uid://bnd33hpfvrxau" path="res://assets/sprites/character/hats/ushanka.png" id="9_yt84f"]
+[ext_resource type="Texture2D" uid="uid://bjms15s1mruwc" path="res://assets/sprites/character/zombie2/2.2/1x/right hand.png" id="10_fsqys"]
 
 [sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_xtbr3"]
 
@@ -237,6 +237,9 @@ texture = ExtResource("3_65j4u")
 [node name="TorsoBone" type="Bone2D" parent="."]
 rotation = -1.57061
 rest = Transform2D(0.000183062, -1, 1, 0.000183062, 0, 0)
+auto_calculate_length_and_angle = false
+length = 60.075
+bone_angle = -2.8729
 
 [node name="TorsoSprite" type="Sprite2D" parent="TorsoBone"]
 rotation = 1.57061
@@ -246,6 +249,9 @@ texture = ExtResource("4_cww3q")
 position = Vector2(59.9995, -3.01099)
 scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(0.999517, -0.0310752, 0.0310752, 0.999517, 59.9995, -3.01099)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
 
 [node name="HeadSprite" type="Sprite2D" parent="TorsoBone/HeadBone"]
 position = Vector2(81.9978, -12.015)
@@ -281,6 +287,9 @@ texture = ExtResource("9_yt84f")
 position = Vector2(49.006, 32.991)
 rotation = 2.5142
 rest = Transform2D(-0.809562, 0.587035, -0.587035, -0.809562, 49.006, 32.991)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 144.053
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="TorsoBone/LeftArmBone"]
 position = Vector2(36.245, 9.91453)
@@ -292,6 +301,9 @@ position = Vector2(-58.9956, 24.0108)
 rotation = 2.88043
 scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(-0.966091, 0.258199, -0.258199, -0.966091, -58.9956, 24.0108)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 165.036
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="TorsoBone/LeftLegBone"]
 position = Vector2(17.6046, -3.1744)
@@ -302,6 +314,9 @@ remote_path = NodePath("../../../LeftLegSprite")
 position = Vector2(43.9923, -42.0081)
 rotation = -2.64637
 rest = Transform2D(-0.879863, -0.475228, 0.475228, -0.879863, 45.9919, -44.0084)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = -151.626
 
 [node name="RightArm" type="Sprite2D" parent="TorsoBone/RightArmBone"]
 position = Vector2(40.28, -6.52055)
@@ -313,6 +328,9 @@ position = Vector2(-59.006, -32.9892)
 rotation = -2.86417
 scale = Vector2(0.999999, 1)
 rest = Transform2D(-0.961764, -0.27388, 0.27388, -0.961764, -59.006, -32.9892)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = -164.105
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="TorsoBone/RightLegBone"]
 position = Vector2(20.7949, -3.09362)

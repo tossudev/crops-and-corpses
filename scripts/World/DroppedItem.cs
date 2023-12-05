@@ -28,7 +28,7 @@ public partial class DroppedItem : Node2D
 
 		if (addedItems > 0) return;
 		
-		_audioController.PlayEffect("res://assets/Sounds/character_sounds/pickup_item.wav");
+		_audioController.PlayEffect("character_sounds/pickup_item.wav");
 		QueueFree();
 	}
 }

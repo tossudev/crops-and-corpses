@@ -211,6 +211,9 @@ offset = Vector2(1, 13)
 
 [node name="Body" type="Bone2D" parent="."]
 rest = Transform2D(1, 0, 0, 1, 0, 0)
+auto_calculate_length_and_angle = false
+length = 62.0
+bone_angle = -90.0
 
 [node name="Body" type="Sprite2D" parent="Body"]
 unique_name_in_owner = true
@@ -270,6 +273,9 @@ offset = Vector2(-14, 29)
 position = Vector2(25, 46)
 rotation = 0.0619121
 rest = Transform2D(1, 0, 0, 1, 26, 65)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 3.5473
 
 [node name="Remote_RightLeg" type="RemoteTransform2D" parent="Body/RightLeg"]
 position = Vector2(-3.94118, -1.21125)
@@ -278,6 +284,9 @@ remote_path = NodePath("../../../RightLeg")
 [node name="LeftLeg" type="Bone2D" parent="Body"]
 position = Vector2(-21, 51)
 rest = Transform2D(1, 0, 0, 1, -21, 69)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
 
 [node name="Remote_LeftLeg" type="RemoteTransform2D" parent="Body/LeftLeg"]
 remote_path = NodePath("../../../LeftLeg")

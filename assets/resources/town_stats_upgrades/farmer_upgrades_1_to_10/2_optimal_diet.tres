@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/resource_classes/upgrades/FarmerUpgrade.cs" id="1_pmnlm"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_ph4nk"]
 [ext_resource type="Resource" uid="uid://c1q7mpup7mo0b" path="res://assets/resources/game_items/food_items_250_to_299/251_vegetable_stew.tres" id="3_ld82b"]
-[ext_resource type="Texture2D" uid="uid://ble6vfckev0pl" path="res://assets/sprites/items/bread.png" id="4_a0ewx"]
+[ext_resource type="Texture2D" uid="uid://dshc2eef1thhh" path="res://assets/sprites/items/bread.png" id="4_a0ewx"]
 
 [sub_resource type="Resource" id="Resource_a2d6j"]
 script = ExtResource("2_ph4nk")
@@ -19,8 +19,6 @@ quantity = 5
 [resource]
 script = ExtResource("1_pmnlm")
 _farmerWalkSpeed = 2
-_farmerMaxFarms = 0
-_pesticideEffectiveness = 0
 _id = 2
 _upgradeIcon = ExtResource("4_a0ewx")
 _upgradeHeader = "Optimal diet"

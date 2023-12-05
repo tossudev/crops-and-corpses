@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_nwmmy"]
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="3_43jpe"]
 [ext_resource type="Texture2D" uid="uid://dcyviqfhbqcay" path="res://assets/sprites/foliage/tree_1.png" id="3_80g65"]
-[ext_resource type="AudioStream" uid="uid://cbj24llssn22j" path="res://assets/Sounds/character_sounds/HitTree.wav" id="3_raxqr"]
+[ext_resource type="AudioStream" uid="uid://cbj24llssn22j" path="res://assets/sounds/character_sounds/hit_tree.wav" id="3_raxqr"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_ykn2p"]
 [ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_66dyk"]
 

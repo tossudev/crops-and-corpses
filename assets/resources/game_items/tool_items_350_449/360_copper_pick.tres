@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=8 format=3 uid="uid://b0wqidoebr4r8"]
 
-[ext_resource type="Texture2D" uid="uid://b2s2jlvmtitoq" path="res://assets/sprites/items/item_pickaxe.png" id="1_nlen4"]
+[ext_resource type="Texture2D" uid="uid://b8djrqe4m4gqi" path="res://assets/sprites/items/item_pickaxe.png" id="1_nlen4"]
 [ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="2_ed21v"]
 [ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="2_eobb6"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_5n85v"]

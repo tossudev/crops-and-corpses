@@ -204,8 +204,6 @@ public partial class VillagerManager : Node
 		villager.currentOccupationList.Add(villager);
 
 		villager.rawData.currentOccupation = newOccupation;
-		villager.rawData.currentState = VillagerState.ChooseTask;
-		
 		villager.villagerInfo.ChangeHat(newOccupation);
 	}
 

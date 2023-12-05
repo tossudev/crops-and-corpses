@@ -29,6 +29,17 @@ public static class StorageData
         Item curePotion = ItemData.GetItemById(300);
         await PlayerInventoryController.AddItemToInventory(
             new RawInventoryItem(curePotion.ID, curePotion.Name, 15, curePotion.StackSize));
+        
+        AddDefaultResourceToHotbar(150, 1);
+        AddDefaultResourceToHotbar(350, 1);
+        AddDefaultResourceToHotbar(360, 1);
+    }
+
+    static async void AddDefaultResourceToHotbar(int ID, int quantity)
+    {
+        Item item = ItemData.GetItemById(ID);
+        await PlayerInventoryController.AddItemToHotbar(
+            new RawInventoryItem(item.ID, item.Name, quantity, item.StackSize));
     }
 
     public static bool ExistsInStorage(Array<RawInventoryItem> rawArray, int itemId, int amountRequired)

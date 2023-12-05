@@ -33,7 +33,6 @@ public partial class FieldHandler : Node2D
 					: PlayerInventoryController.heldItem.name);
 
 			if(_plant!=null && _currentPlants < _maxPlantSlots){
-				GD.Print("Planted a "+_plant.seedName);
 				PlantPlant();
 			}
 		}

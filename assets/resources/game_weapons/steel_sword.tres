@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_b8o4n")
 item = ExtResource("1_uimka")
-damage = 50.0
+damage = 66
 knockback = 500.0
 cooldown = 0.5
 effect = 0

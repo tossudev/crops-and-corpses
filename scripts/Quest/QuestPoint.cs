@@ -59,6 +59,8 @@ public partial class QuestPoint : Node2D
         ZombieArea = GetNode<Area2D>(Area2D_ZombieArea);
         zombieSpawn = GetParent().GetParent().GetNodeOrNull<SpawnScript>("ZombieSpawn");
 
+       
+
         
 
 
@@ -73,21 +75,29 @@ public partial class QuestPoint : Node2D
     {
         base._PhysicsProcess(delta);
 
-        if (isQuestPointActive == true)
+        if (isQuestPointActive == true && questManager.GetActiveQuest().GetQuestStage() == "Find")
         {
             playerDistanceToQuestPoint = (int)playerController.GlobalPosition.DistanceTo(GlobalPosition);
 
-            if (isQuestPointActive && !isZombiesSpawned && playerDistanceToQuestPoint <= SpawnRange)
+            if (!isZombiesSpawned && playerDistanceToQuestPoint <= SpawnRange)
             {
-                SpawnZombies();
-                SpawnVillagers();
+
+                questManager.CompleteQuestStage("Find");
+            
+                KillStage();
+
+    
+
+                
+
+               
             }
 
             if(zombieSpawn.GetZombieQuestListCount() == 0 && isZombiesSpawned == true)
             {
-                questManager.GetActiveQuest().ChangeQuestDescription("click on the villager to rescue him");
+                questManager.GetActiveQuest().CompleteQuestStage("Kill");
                 
-                isQuestPointActive = false;
+               
             }
             
 
@@ -103,13 +113,6 @@ public partial class QuestPoint : Node2D
         GD.Print("SpawnVillagers");
         VillagerManager.villagerManagerInstance.SpawnQuestVillagers(villagerSpawnPoint.GlobalPosition);
         
-        
-        
-        
-
-
-       
-
     }
 
     
@@ -167,6 +170,18 @@ public partial class QuestPoint : Node2D
             default:
                 zombieAmount = 4;
                 break;
+        }
+    }
+
+    void KillStage()
+    {
+        questManager.GetActiveQuest().ChangeQuestDescription("Kill all zombies");
+        SpawnZombies();
+        SpawnVillagers();
+        if(zombieSpawn.GetZombieQuestListCount() == 0)
+        {
+            questManager.GetActiveQuest().CompleteQuestStage("Kill");
+            questManager.GetActiveQuest().ChangeQuestDescription("Talk to the villagers");
         }
     }
 

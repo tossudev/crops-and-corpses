@@ -26,6 +26,7 @@ public partial class SpawnScript : Node2D
 	[Export]private float maxDistance;
 	[Export] public CharacterBody2D player;
 	private static List<CharacterBody2D> zombieList = new List<CharacterBody2D>();
+	private static List<CharacterBody2D> questZombieList = new List<CharacterBody2D>();
 	public GlobalTime globalTime;
 
 	public override void _Ready()
@@ -134,10 +135,13 @@ public partial class SpawnScript : Node2D
 }
 	public void SpawnZombieAtPoint(Vector2 spawnPoint)
 	{    
+
+		enemiesNode = GetNode<Node2D>("%Enemies");
+
 		CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
-		prefab.Position = spawnPoint;	
-		AddChild(prefab);
-		zombieList.Add(prefab);
+		prefab.Position = spawnPoint;
+		enemiesNode.AddChild(prefab);
+		questZombieList.Add(prefab);
 	}
 	
 
@@ -162,17 +166,34 @@ public partial class SpawnScript : Node2D
 	public static void RemoveZombieFromList(CharacterBody2D zombie)
 	{
 		zombieList.Remove(zombie);
+
+		if (questZombieList.Contains(zombie))
+		{
+			questZombieList.Remove(zombie);
+		}
+
+		
+		
 	}
 
 	public bool GetIsNightOrDay()
 	{
 		return isNightOrDay;
 	}
-	/* public void QuestZombieSpawn(int spawnAmount)
-	{	
-		for(int y = 0; y < spawnPointCount; y++)
-		{
-			ZombieSpawn();
-		}
-	} */
+
+    public int GetZombieQuestListCount()
+    {
+        return questZombieList.Count;
+    }
+
+
+
+
+    /* public void QuestZombieSpawn(int spawnAmount)
+{	
+    for(int y = 0; y < spawnPointCount; y++)
+    {
+        ZombieSpawn();
+    }
+} */
 }

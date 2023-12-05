@@ -44,22 +44,43 @@ public partial class QuestPointManager : Node
 
 
 
-        // If the current quest location is the same as the current scene, activate the quest point for that scene
-        if (!SceneManager.IsCurrentScene(this, questManager.GetActiveQuest().Location))
+       questManager = GetNode<QuestManager>("/root/QuestManager");
+
+
+       questManager = GetNode<QuestManager>("/root/QuestManager");
+
+    if (questManager != null)
+    {
+        var activeQuest = questManager.GetActiveQuest();
+        if (activeQuest != null)
         {
-            GD.Print("Quest point not active");
+            // If the active quest is not at this location, don't activate a quest point.
+            if (!SceneManager.IsCurrentScene(this, activeQuest.Location))
+            {
+                GD.Print("Quest point not active");
+                return;
+            }
+            else
+            {
+                // If the active quest is at this location, activate a random quest point.
+                GetRandomQuestPoint().isQuestPointActive = true;
+            }
         }
         else
         {
-
-            GetRandomQuestPoint().isQuestPointActive = true;
-
-
-            //ActivateQuestPointForScene(SceneManager.GetCurrentScene(this));
+            GD.Print("No active quest");
         }
     }
-    
+    else
+    {
+        GD.Print("questManager is null");
+    }
 
+
+    }
+
+    // Check if the quest manager exists.
+ 
     public QuestPoint GetRandomQuestPoint()
 {
     if (activeQuestPoints.Count > 0)

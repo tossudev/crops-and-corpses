@@ -86,12 +86,14 @@ public partial class Fences : Node2D
         }
     }
 
-    public void InstantiateFences()
+    public async void InstantiateFences()
 	{
         foreach (Node2D node in _fences.GetChildren())
         {
             node.QueueFree();
         }
+
+        await SaveData.SyncTownStats();
 
         // west fence
         for (int i = 0; i < fenceLengthY; i++)
@@ -212,6 +214,11 @@ public partial class Fences : Node2D
             healthscript.LoadBuildingHealth(_fencesList[_fenceIndex]);
             _fenceIndex++;
         }
+        else if (SceneManager.IsCurrentScene(this, Scene.Town))
+        {
+            HealthComponent healtComponent = _fenceScene.GetNode<HealthComponent>("%HealthComponent");
+            healtComponent.SetHealth(100 + SaveData.townHallStats.wallHP);
+        }
     }
 
     private void InstantiateDoor(float posX, float posY, PackedScene door)
@@ -228,7 +235,12 @@ public partial class Fences : Node2D
             healthscript.LoadBuildingHealth(_fencesList[_fenceIndex]);
             _fenceIndex++;
         }
-        
+        else if (SceneManager.IsCurrentScene(this, Scene.Town))
+        {
+            HealthComponent healtComponent = _fenceDoorScene.GetNode<HealthComponent>("%HealthComponent");
+            healtComponent.SetHealth(100 + SaveData.townHallStats.wallHP);          
+        }
+
 
         if (_fenceDoorScene.HasMethod("DoorsOpen"))
         {

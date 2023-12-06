@@ -56,11 +56,12 @@ public partial class HealthComponent : Node2D
 
 		if (_isBuilding)
 		{
-            await ToSignal(GetTree().CreateTimer(1f), "timeout");
-
-			if (_building.buildingType == BuildingType.House && _building.isLoaded)
+           
+            if (_building.buildingType == BuildingType.House && _building.isLoaded)
             {
-				SetMaxHealth(_maxHealth + TownManager.currentTownStats.houseHP);
+                await SaveData.SyncTownStats();
+
+                SetMaxHealth(_maxHealth + TownManager.currentTownStats.houseHP);
 				_building.LoadBuildingHealth(_building.loadedHealth);
             }
             else if (_building.buildingType == BuildingType.House)

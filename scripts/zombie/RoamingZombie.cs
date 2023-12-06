@@ -37,7 +37,7 @@ public partial class RoamingZombie : CharacterBody2D
 		//GD.Print(GetParent().GetParent<Node2D>().Name);
 		_lootController.loot = _lootList[0];
 		_lootController.Init();
-		if(GetParent().GetParent<Node2D>().Name == "Cave")
+		if(SceneManager.GetCurrentScene(this) == Scene.Cave)
 		{
 			 _caveZombieSkeleton = (PackedScene)GD.Load("res://scenes/zombie/Zombie4Skeleton.tscn");
 		}
@@ -45,7 +45,7 @@ public partial class RoamingZombie : CharacterBody2D
 		var zombieSkeleton2 = (PackedScene)GD.Load("res://scenes/zombie/Zombie2Skeleton.tscn");
 		var zombieSkeleton3 = (PackedScene)GD.Load("res://scenes/zombie/Zombie3Skeleton.tscn");
 		int randomSkeletonIndex;
-		if(GetParent().GetParent<Node2D>().Name != "Cave") randomSkeletonIndex = (int)GD.RandRange(1, 3);
+		if(SceneManager.GetCurrentScene(this)!=Scene.Cave) randomSkeletonIndex = (int)GD.RandRange(1, 3);
 		else randomSkeletonIndex = (int)GD.RandRange(1, 4);
 		
 		switch (randomSkeletonIndex)
@@ -100,6 +100,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 		if (randomIndex >= 1 && randomIndex <= 4)
 		{
+			GD.Print(randomIndex+" randomIndex");
 			var zombieHeadBonetNode = GetNode<Bone2D>("Skeleton2D/TorsoBone/HeadBone/"); //Skeleton2D/TorsoBone/HeadBone/ZombieHat1
 			var zombieHatNode = zombieHeadBonetNode.GetNode<Sprite2D>("ZombieHat" + randomIndex);
 			zombieHatNode.Visible = true;
@@ -176,7 +177,7 @@ public partial class RoamingZombie : CharacterBody2D
                 var newVillagerData = new VillagerRawData();
 				newVillagerData.SetOccupation(zombieOccupation);
 				VillagerManager.villagerManagerInstance.AddNewVillagerRawData();
-				VillagerManager.villagerManagerInstance.SpawnNewVillager(zombiePos, true);
+				VillagerManager.villagerManagerInstance.SpawnNewVillager(zombiePos, false);
 				QueueFree();
 				break;
 			default:

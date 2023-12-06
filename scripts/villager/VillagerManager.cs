@@ -27,6 +27,7 @@ public partial class VillagerManager : Node2D
 	public List<Villager> minerVillagers => _miners;
 
 	List<BuildingHealth> _allBuildings = new ();
+	public List<BuildingHealth> allBuildings => _allBuildings;
     
 
 	[Export] AllVillagerData _allData;
@@ -203,9 +204,14 @@ public partial class VillagerManager : Node2D
 		return _allData.GetTextureByType(type, part);
 	}
 
-	public List<BuildingHealth> GetBrokenBuildingsOfType(BuildingType buildingType)
+	public List<BuildingHealth> GetDamagedBuildingsOfType(BuildingType buildingType)
 	{
 		return _allBuildings.FindAll(building => building.isDamaged && building.buildingType == buildingType);
+	}
+	
+	public List<BuildingHealth> GetAllBrokenBuildings()
+	{
+		return _allBuildings.FindAll(building => building.isBroken);
 	}
 
 	public List<ArcherTower> GetArcherTowerList()
@@ -219,11 +225,36 @@ public partial class VillagerManager : Node2D
 	public void AddNewBuilding(BuildingHealth newBuilding)
 	{
 		_allBuildings.Add(newBuilding);
+		TownHallStatsPanel._thStatsPanelInstance?.UpdateStat(TownStatType.BROKEN_BUILDINGS);
+	}
+
+	public void RemoveBuilding(BuildingHealth buildingToRemove)
+	{
+		_allBuildings.Remove(buildingToRemove);
+		TownHallStatsPanel._thStatsPanelInstance?.UpdateStat(TownStatType.BROKEN_BUILDINGS);
 	}
 
 	public void AddNewResidence(VillagerResidence residence)
 	{
 		allVillagerResidences.Add(residence);
+        UpdateHousingInfo();
+	}
+	
+	public void RemoveResidence(VillagerResidence residence)
+	{
+		allVillagerResidences.Remove(residence);
+		UpdateHousingInfo();
+	}
+
+	void UpdateHousingInfo()
+	{
+		int housesProvided = 0;
+		allVillagerResidences.ForEach(residence => housesProvided += residence.housingCapacity);
+		
+		TownManager.currentTownStats.providedHomes = housesProvided;
+			
+		
+		TownHallStatsPanel._thStatsPanelInstance?.UpdateStat(TownStatType.HOUSING);
 	}
 
 	public VillagerResidence FindResidenceById(int id)
@@ -233,10 +264,8 @@ public partial class VillagerManager : Node2D
 	
 	public List<VillagerResidence> GetFreeHomesList()
 	{
-		var freeHomesList = allVillagerResidences.FindAll(
-			residence => residence.hasRoomForMoreVillagers && !residence.isBroken);
-
-		return freeHomesList;
+		return allVillagerResidences.FindAll(
+			residence => residence.hasRoomForMoreVillagers && !residence.isBroken);;
 	}
 }
 

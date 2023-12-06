@@ -44,9 +44,7 @@ public partial class TownHallMenu : Control
 	
 	
 
-	public VillagerResidence _villagerResidence;
-	const string VILLAGER_RESIDENCE_NODENAME = "%VillagerGrid";
-
+	public VillagerResidence villagerResidence;
 
 	public static TownHallMenu menuInstance;
 	
@@ -68,7 +66,6 @@ public partial class TownHallMenu : Control
 		_storagePanel = GetNode<Panel>(STORAGE_PANEL_NODENAME);
 		
 		_upgradeGridContainer = GetNode<GridContainer>(UPGRADE_GRID_NODENAME);
-		_villagerResidence = GetNode<VillagerResidence>(VILLAGER_RESIDENCE_NODENAME);
 		InitUpgradeList();
 
 		// Main Panel mappings

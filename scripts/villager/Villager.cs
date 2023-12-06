@@ -41,6 +41,12 @@ public partial class Villager : CharacterBody2D
 	CharacterBody2D _player;
 	public bool needRescue = false;
 
+	CollisionShape2D _baseCollider;
+	const string BASE_COLLIDER_NODENAME = "%BaseCollisionShape2D";
+
+	
+	const string VILLAGER_RESIDENCE_NODENAME = "%VillagerResidenceComponent";
+	
 	[Export] VillagerSkeleton _skeleton;
 	public VillagerSkeleton skeleton => _skeleton;
 
@@ -56,6 +62,7 @@ public partial class Villager : CharacterBody2D
 	public override void _Ready()
 	{
 		_villagerAnimation = skeleton.GetNodeOrNull<AnimationPlayer>(ANIMATION_PLAYER_NODENAME);
+		_baseCollider = GetNodeOrNull<CollisionShape2D>(BASE_COLLIDER_NODENAME);
 
 		_player = GetTree().GetFirstNodeInGroup("player") as CharacterBody2D;
 		_buildings = (Node2D)GetTree().GetFirstNodeInGroup("buildings");
@@ -115,13 +122,13 @@ public partial class Villager : CharacterBody2D
 	{
 		SetCurrentState(VillagerState.InShelter);
 		_targetPosition = GlobalPosition;
-		Visible = false;
+		ToggleCollisionAndVisuals(false);
 	}
 
 	public void ExitShelter()
 	{
 		SetCurrentState(VillagerState.ChooseTask);
-		Visible = true;
+		ToggleCollisionAndVisuals(true);
 	}
 
 	void State()
@@ -214,15 +221,19 @@ public partial class Villager : CharacterBody2D
 		SetCurrentState(VillagerState.FollowPlayer);
 	}
 
-	const string VILLAGER_RESIDENCE_NODENAME = "%VillagerResidence";
 	public void _on_area_2d_area_entered(Area2D area)
 	{
-		if (!area.Owner.HasNode(VILLAGER_RESIDENCE_NODENAME)) return;
-		currentResidence = area.Owner.GetNodeOrNull<VillagerResidence>(VILLAGER_RESIDENCE_NODENAME);
+		currentResidence = area.Owner?.GetNodeOrNull<VillagerResidence>(VILLAGER_RESIDENCE_NODENAME);
 
 		currentResidence?.VillagerEnterBuilding(this);
 	}
 
+	void ToggleCollisionAndVisuals(bool on)
+	{
+		Visible = on;
+		_baseCollider.SetDeferred("Disabled", !on);
+	}
+	
 	void Movement(Vector2 target)
 	{
 		_speed = 100;
@@ -260,14 +271,15 @@ public partial class Villager : CharacterBody2D
 	void FindShelter()
 	{
 		_villagerAnimation.Play("run");
+		
 		_targetPosition = rawData.homeId == 0
-			? TownManager.townHallPosition - GlobalPosition + CreateOffsetVector2(-100, 100)
+			? TownManager.townHallPosition
 			: VillagerManager.villagerManagerInstance.FindResidenceById(rawData.homeId).GlobalPosition;
 	}
 
 	void BeInShelter()
 	{
-		if (rawData.currentState == VillagerState.Homeless) return;
+		if (rawData.homeId == 0) return;
 		
 		if (TimeManager.dayTime)
 		{
@@ -392,7 +404,7 @@ public partial class Villager : CharacterBody2D
 		if (GlobalPosition.DistanceTo(_targetPosition) < 5)
 		{
 			_taskStarted = true;
-			_villagerSprite.Visible = false;
+			ToggleCollisionAndVisuals(false);
 			_resourceTaskCounter++;
 		}
 	}
@@ -400,7 +412,7 @@ public partial class Villager : CharacterBody2D
 	void ResourceGatheringDone()
 	{
 		Random rnd = new Random();
-		_villagerSprite.Visible = true;
+		ToggleCollisionAndVisuals(true);
 		if (_rawData.currentOccupation == VillagerOccupation.Miner)
 		{
 			int amount = rnd.Next(4, 21);
@@ -501,7 +513,7 @@ public partial class Villager : CharacterBody2D
 	}
 	void FixBuildings()
 	{
-		if (_currentBuilding != null)
+		if (_currentBuilding != null && VillagerManager.villagerManagerInstance.allBuildings.Contains(_currentBuilding))
 		{
 			if (!_currentBuilding.isDamaged)
 			{
@@ -518,9 +530,9 @@ public partial class Villager : CharacterBody2D
 		}
 		else
 		{
-			var archerTowers = VillagerManager.villagerManagerInstance.GetBrokenBuildingsOfType(BuildingType.ArcherTower);
-			var fences = VillagerManager.villagerManagerInstance.GetBrokenBuildingsOfType(BuildingType.Fence);
-			var houses = VillagerManager.villagerManagerInstance.GetBrokenBuildingsOfType(BuildingType.House);
+			var archerTowers = VillagerManager.villagerManagerInstance.GetDamagedBuildingsOfType(BuildingType.ArcherTower);
+			var fences = VillagerManager.villagerManagerInstance.GetDamagedBuildingsOfType(BuildingType.Fence);
+			var houses = VillagerManager.villagerManagerInstance.GetDamagedBuildingsOfType(BuildingType.House);
 
 			if (archerTowers.Count > 0)
 			{
@@ -572,7 +584,7 @@ public partial class Villager : CharacterBody2D
 
 			if (GlobalPosition.DistanceTo(_archerTower.GlobalPosition) < 200)
 			{
-				Visible = false;
+				ToggleCollisionAndVisuals(false);
 				_archerTower.ActivateTower();
 			}
 		}
@@ -585,7 +597,7 @@ public partial class Villager : CharacterBody2D
 	void ExitArcherTower()
 	{
 		_archerTower.DeactivateTower();
-		Visible = true;
+		ToggleCollisionAndVisuals(true);
 	}
 }
 

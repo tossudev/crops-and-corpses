@@ -162,7 +162,7 @@ public partial class TownManager : Node2D
 		}
 		
 		SaveData.appliedUnlocks.Add(unlock);
-		TownHallStatsPanel._thStatsPanelInstance.UpdateAllStats();
+		TownHallStatsPanel._thStatsPanelInstance?.UpdateAllStats();
 		Task sync = SaveData.SyncTownStats();
 	}
 	
@@ -206,7 +206,7 @@ public partial class TownManager : Node2D
 		}
 		
 		SaveData.appliedUpgrades.Add(upgrade);
-		TownHallStatsPanel._thStatsPanelInstance.UpdateAllStats();
+		TownHallStatsPanel._thStatsPanelInstance?.UpdateAllStats();
 
 		Task sync = SaveData.SyncTownStats();
 	}

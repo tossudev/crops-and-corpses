@@ -14,6 +14,8 @@ public partial class VillagerResidence : Control
 
 	
 	[Export] int _housingCapacity;
+	public int housingCapacity => _housingCapacity;
+	
 	Array<VillagerRawData> _allResidents = new ();
 	Array<int> _currentResidentIds = new ();
 
@@ -31,10 +33,15 @@ public partial class VillagerResidence : Control
 		RegisterResidence();
 	}
 
+	public void SetFaceButtonParentGrid(GridContainer container)
+	{
+		_villagerFaceButtonParentGrid = container;
+	}
+	
 	async void RegisterResidence()
 	{
 		await TaskExtensions.SuspendWhile(() =>
-			VillagerManager.villagerManagerInstance == null || !SaveData.firstLoadComplete);
+			VillagerManager.villagerManagerInstance == null || !SaveData.firstLoadComplete, GD.Randi() % 2000 + 100);
 		
 		id = _isTownHall
 			? 0
@@ -42,9 +49,19 @@ public partial class VillagerResidence : Control
 		
 		VillagerManager.villagerManagerInstance.AddNewResidence(this);
 	}
-	
-	public void VillagerEnterBuilding(Villager newVillager)
+
+	public override void _ExitTree()
 	{
+		base._ExitTree();
+		if (VillagerManager.villagerManagerInstance?.allVillagerResidences.Contains(this) ?? false)
+		{
+			VillagerManager.villagerManagerInstance.RemoveResidence(this);
+		}
+	}
+	
+	public async void VillagerEnterBuilding(Villager newVillager)
+	{
+		
 		if (newVillager == null)
 		{
 			GD.PushError("Villager trying to enter building was null");
@@ -58,6 +75,12 @@ public partial class VillagerResidence : Control
 			(VillagerFaceButton) GD.Load<PackedScene>(VILLAGER_FACE_BUTTON_FILEPATH).Instantiate<Control>();
 					
 		villagerFaceButton.InitButton(newVillager);
+
+		if (_isTownHall)
+		{
+			await TaskExtensions.SuspendWhile(() =>
+				TownHallMenu.menuInstance == null || TownHallMenu.menuInstance.villagerResidence == null, 100);
+		}
 		
 		_villagerFaceButtonParentGrid.AddChild(villagerFaceButton);
     }

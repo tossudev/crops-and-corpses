@@ -9,24 +9,21 @@
 [ext_resource type="PackedScene" uid="uid://dqmfwe15dtgat" path="res://scenes/Combat/projectile.tscn" id="5_jec12"]
 [ext_resource type="Script" path="res://scripts/player/PlayerSpriteController.cs" id="5_xyhkk"]
 [ext_resource type="Texture2D" uid="uid://ds4d0bkp8w0vx" path="res://assets/sprites/items/item_bow.png" id="6_as6n5"]
-[ext_resource type="Texture2D" uid="uid://b16eb2s35wa0d" path="res://animations/bow_span_frames/bow_span_1.png" id="7_v74kp"]
-[ext_resource type="Texture2D" uid="uid://cmbhdum8ifm8c" path="res://animations/bow_span_frames/bow_span_2.png" id="8_51htp"]
-[ext_resource type="Texture2D" uid="uid://dx6s3y4sg7ffp" path="res://assets/placeholder/test_character/Torso.png" id="8_f81gn"]
-[ext_resource type="Texture2D" uid="uid://dppdy80r0lu6t" path="res://animations/bow_span_frames/bow_span_3.png" id="9_d0ae6"]
+[ext_resource type="Texture2D" uid="uid://m2o405ksc4vq" path="res://animations/bow_span_frames/bow_span_1.png" id="7_v74kp"]
+[ext_resource type="Texture2D" uid="uid://dh8ejgsml6vfa" path="res://animations/bow_span_frames/bow_span_2.png" id="8_51htp"]
+[ext_resource type="Texture2D" uid="uid://b88fh1jtsmgw4" path="res://animations/bow_span_frames/bow_span_3.png" id="9_d0ae6"]
 [ext_resource type="Texture2D" uid="uid://gk00ff0ho1k7" path="res://assets/placeholder/test_character/head.png" id="9_igyft"]
-[ext_resource type="Texture2D" uid="uid://dc7yljnfkph5n" path="res://assets/placeholder/test_character/ArmL.png" id="10_6b7e2"]
-[ext_resource type="Texture2D" uid="uid://b43k1qhcyo47g" path="res://animations/bow_span_frames/bow_span_4.png" id="10_h46fc"]
+[ext_resource type="Texture2D" uid="uid://dbfrluit03dyk" path="res://animations/bow_span_frames/bow_span_4.png" id="10_h46fc"]
 [ext_resource type="Texture2D" uid="uid://8h4nv7s06ft5" path="res://TinoTests/Sprites/Swingbox.png" id="11_qvnc4"]
 [ext_resource type="Texture2D" uid="uid://cdb4mm1b3ya5m" path="res://assets/placeholder/test_character/HandL.png" id="11_u2drr"]
 [ext_resource type="Texture2D" uid="uid://dqjvk3err1qh5" path="res://assets/placeholder/test_character/ArmR.png" id="12_5kh5t"]
-[ext_resource type="Texture2D" uid="uid://c5j7dr0ottqrr" path="res://animations/swing/swing1.png" id="12_njn76"]
-[ext_resource type="Texture2D" uid="uid://2aiy48fedeic" path="res://animations/swing/swing4.png" id="12_pwkhs"]
-[ext_resource type="Texture2D" uid="uid://cfnyvrnyg6pk1" path="res://assets/placeholder/test_character/HandR.png" id="13_644b2"]
-[ext_resource type="Texture2D" uid="uid://die15223jydc2" path="res://animations/swing/swing2.png" id="13_pejwp"]
-[ext_resource type="Texture2D" uid="uid://b5k3tp7c80o0t" path="res://animations/swing/swing3.png" id="14_62ccw"]
+[ext_resource type="Texture2D" uid="uid://cwt32ntjx8gl6" path="res://animations/swing/swing1.png" id="12_njn76"]
+[ext_resource type="Texture2D" uid="uid://dv7q0y70clbgl" path="res://animations/swing/swing4.png" id="12_pwkhs"]
+[ext_resource type="Texture2D" uid="uid://dp5d6rwtjiwp6" path="res://animations/swing/swing2.png" id="13_pejwp"]
+[ext_resource type="Texture2D" uid="uid://cdusubodjb85a" path="res://animations/swing/swing3.png" id="14_62ccw"]
 [ext_resource type="Texture2D" uid="uid://bgp4wcx2fpky1" path="res://assets/placeholder/test_character/LegL.png" id="14_pxa3s"]
 [ext_resource type="Texture2D" uid="uid://dm80cnvcf6m5q" path="res://assets/placeholder/test_character/FootL.png" id="15_m13sc"]
-[ext_resource type="PackedScene" uid="uid://bu54axeet2w5" path="res://scenes/player/Components/stamina_component.tscn" id="15_owabl"]
+[ext_resource type="PackedScene" path="res://scenes/player/Components/stamina_component.tscn" id="15_owabl"]
 [ext_resource type="Texture2D" uid="uid://dtxvt7hf4w3m1" path="res://assets/placeholder/test_character/LegR.png" id="16_3ecwo"]
 [ext_resource type="PackedScene" uid="uid://csdmv5fy2tvqa" path="res://scenes/consumables/food/bread.tscn" id="16_patuu"]
 [ext_resource type="PackedScene" uid="uid://bcmw0lume6obc" path="res://scenes/consumables/food/potato.tscn" id="17_nh2gr"]
@@ -34,7 +31,10 @@
 [ext_resource type="PackedScene" uid="uid://d1dkkqdm6w4fv" path="res://scenes/consumables/food/pumpkin.tscn" id="18_4wo3v"]
 [ext_resource type="PackedScene" uid="uid://bxe1k2od7pwk1" path="res://scenes/consumables/food/vegetable_stew.tscn" id="19_lksru"]
 [ext_resource type="PackedScene" uid="uid://msff4kj1ku3r" path="res://scenes/consumables/potions/health_potion.tscn" id="20_d2w1s"]
+[ext_resource type="Texture2D" uid="uid://bhnr32sr455lc" path="res://animations/CharacterSkirt/ArmL.png" id="21_3x2ac"]
 [ext_resource type="PackedScene" uid="uid://0onjm62rd2pi" path="res://scenes/ui/player/overlay.tscn" id="22_gao6a"]
+[ext_resource type="Texture2D" uid="uid://yx50ai0dbvwk" path="res://animations/CharacterSkirt/Body.png" id="23_isgdf"]
+[ext_resource type="Texture2D" uid="uid://cfcnwifa3737a" path="res://animations/CharacterSkirt/ArmR.png" id="26_llby3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_efott"]
 radius = 117.527
@@ -1213,7 +1213,7 @@ rest = Transform2D(0.985399, -0.170258, 0.170258, 0.985399, 26.32, -45.85)
 position = Vector2(4.06, 13.3)
 rotation = -0.0131563
 scale = Vector2(1, 1)
-texture = ExtResource("10_6b7e2")
+texture = ExtResource("21_3x2ac")
 
 [node name="HandLBone" type="Bone2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
 position = Vector2(18, 33)
@@ -1232,9 +1232,10 @@ rotation = -0.0131563
 remote_path = NodePath("../ArmL")
 
 [node name="Torso" type="Sprite2D" parent="Skeleton2D/TorsoBone"]
-position = Vector2(-1, -38)
+position = Vector2(0, -39.5833)
 rotation = -0.018441
-texture = ExtResource("8_f81gn")
+scale = Vector2(0.88, 0.88)
+texture = ExtResource("23_isgdf")
 
 [node name="HeadBone" type="Bone2D" parent="Skeleton2D/TorsoBone"]
 position = Vector2(-1, -78)
@@ -1273,8 +1274,9 @@ scale = Vector2(0.5, -0.5)
 offset = Vector2(70, -55)
 
 [node name="HandR" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmRBone/HandRBone"]
-position = Vector2(3, 1)
-texture = ExtResource("13_644b2")
+position = Vector2(9.09, -12.34)
+scale = Vector2(0.77, 0.77)
+texture = ExtResource("26_llby3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Skeleton2D"]
 autoplay = "walk"

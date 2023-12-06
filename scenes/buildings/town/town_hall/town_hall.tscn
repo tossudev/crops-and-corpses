@@ -1,52 +1,61 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyk44y2mntxd0"]
+[gd_scene load_steps=8 format=3 uid="uid://cyk44y2mntxd0"]
 
 [ext_resource type="Script" path="res://scripts/ui/town/TownHallControl.cs" id="1_cq4gd"]
 [ext_resource type="Texture2D" uid="uid://cl2us6n4fnxbi" path="res://assets/sprites/buildings/townhall_color.png" id="1_ylbb2"]
 [ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="3_e0407"]
 [ext_resource type="PackedScene" uid="uid://dune6txyuwmm2" path="res://scenes/buildings/town/villager_residence_component.tscn" id="4_e4bxi"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4d4i"]
-size = Vector2(952.001, 343.998)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epwut"]
+size = Vector2(900, 300)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubi7p"]
-size = Vector2(320, 95.9996)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oqwnt"]
+size = Vector2(320, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_je21u"]
+size = Vector2(1050, 450)
 
 [node name="TownHall" type="Node2D"]
 script = ExtResource("1_cq4gd")
+
+[node name="TownHall" type="Sprite2D" parent="."]
+position = Vector2(200, -337)
+texture = ExtResource("1_ylbb2")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 63)
 collision_layer = 5
 collision_mask = 16
 
-[node name="TownHall" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(200, -400)
-texture = ExtResource("1_ylbb2")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-100, -244)
 rotation = -3.14159
-shape = SubResource("RectangleShape2D_r4d4i")
+shape = SubResource("RectangleShape2D_epwut")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-96.0001, -47.9998)
+position = Vector2(-96, -63)
 rotation = -3.14159
-shape = SubResource("RectangleShape2D_ubi7p")
+shape = SubResource("RectangleShape2D_oqwnt")
 
 [node name="area 2d" type="Area2D" parent="."]
 collision_layer = 25
 collision_mask = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="area 2d"]
-position = Vector2(-104, -240)
+position = Vector2(-96, -160)
 rotation = -3.14159
-shape = SubResource("RectangleShape2D_r4d4i")
+shape = SubResource("RectangleShape2D_je21u")
 
 [node name="NavigationObstacleArea" parent="." instance=ExtResource("3_e0407")]
+position = Vector2(0, -56)
 polygon = PackedVector2Array(-576, 32, 376, 32, 376, -272, -576, -272)
 metadata/_edit_pinned_properties_ = [&"polygon"]
 
 [node name="VillagerResidenceComponent" parent="." instance=ExtResource("4_e4bxi")]
+unique_name_in_owner = true
+offset_left = -104.0
+offset_top = -112.0
+offset_right = -104.0
+offset_bottom = -112.0
 _isTownHall = true
 
 [connection signal="input_event" from="area 2d" to="." method="OnTownHallInput"]

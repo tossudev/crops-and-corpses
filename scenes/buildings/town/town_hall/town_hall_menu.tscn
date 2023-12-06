@@ -1,8 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://di5l0mrx44owj"]
+[gd_scene load_steps=28 format=3 uid="uid://di5l0mrx44owj"]
 
 [ext_resource type="Script" path="res://scripts/ui/town/TownHallMenu.cs" id="1_8dpyt"]
 [ext_resource type="LabelSettings" uid="uid://djab4esbcqs0l" path="res://assets/resources/labelsettings/town_hall_menu_Header_label_settings.tres" id="1_dqf6y"]
-[ext_resource type="PackedScene" uid="uid://blc0ulydodwt3" path="res://scenes/ui/town_ui/villager_grid.tscn" id="2_awj87"]
 [ext_resource type="LabelSettings" uid="uid://cajhmdtd7uw76" path="res://assets/resources/labelsettings/town_hall_menu_buttons_label_settings.tres" id="2_v313t"]
 [ext_resource type="StyleBox" uid="uid://bbwealwe8brh6" path="res://assets/resources/styles/default_button_style_box.tres" id="4_aoiff"]
 [ext_resource type="PackedScene" uid="uid://dwgkh3nvox0s2" path="res://scenes/ui/town_ui/town_upgrade_button.tscn" id="5_4q6yl"]
@@ -12,12 +11,14 @@
 [ext_resource type="StyleBox" uid="uid://cekqcomecgkhn" path="res://assets/resources/styles/default_ui_style_box_texture.tres" id="7_sjab3"]
 [ext_resource type="PackedScene" uid="uid://boj0vr56041sl" path="res://scenes/ui/town_ui/villager_occupation_tab.tscn" id="7_xljdt"]
 [ext_resource type="StyleBox" uid="uid://nn38c2paqf77" path="res://assets/resources/styles/default_tab_container_selected_tab_style.tres" id="8_4h6ko"]
+[ext_resource type="LabelSettings" uid="uid://bbixx2rjsddy7" path="res://assets/resources/labelsettings/crafting_resource_label_settings.tres" id="8_jxwxw"]
 [ext_resource type="FontFile" uid="uid://doceug7kw76yx" path="res://assets/resources/labelsettings/base_ui_font.tres" id="8_q7o4c"]
 [ext_resource type="PackedScene" uid="uid://2wht6mkjuojy" path="res://scenes/ui/town_ui/occupation_icon.tscn" id="8_ta5mm"]
 [ext_resource type="Texture2D" uid="uid://kjimq4t0wnvv" path="res://assets/sprites/character/hats/straw_hat.png" id="9_485m0"]
 [ext_resource type="PackedScene" uid="uid://kuv6vwvcsqo5" path="res://scenes/ui/town_ui/close_button_container.tscn" id="9_dldyl"]
 [ext_resource type="StyleBox" uid="uid://ddenh15clg401" path="res://assets/resources/styles/default_tab_container_unselected_tab_style.tres" id="9_ggc6j"]
 [ext_resource type="Texture2D" uid="uid://dvrpluxm42nf4" path="res://assets/sprites/character/hats/bucket_helmet.png" id="10_1vu63"]
+[ext_resource type="PackedScene" uid="uid://bdlsr0753oqd6" path="res://scenes/ui/town_ui/villager_face_button.tscn" id="10_lre4h"]
 [ext_resource type="StyleBox" uid="uid://bjrxs66a6rkm7" path="res://assets/resources/styles/default_tab_container_panel_style.tres" id="10_r4bd2"]
 [ext_resource type="Texture2D" uid="uid://bnd33hpfvrxau" path="res://assets/sprites/character/hats/ushanka.png" id="11_so3fe"]
 [ext_resource type="Texture2D" uid="uid://p106vjb26wkd" path="res://assets/sprites/items/item_log.png" id="12_0vd3i"]
@@ -144,8 +145,91 @@ custom_minimum_size = Vector2(0, 112)
 layout_mode = 2
 alignment = 1
 
-[node name="VillagerGrid" parent="MainPanel/VBoxContainer/Lowest HBox" instance=ExtResource("2_awj87")]
+[node name="VillagerGrid" type="Control" parent="MainPanel/VBoxContainer/Lowest HBox"]
+custom_minimum_size = Vector2(524, 156)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/VBoxContainer/Lowest HBox/VillagerGrid"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="Villagers Label" type="Label" parent="MainPanel/VBoxContainer/Lowest HBox/VillagerGrid/VBoxContainer"]
+layout_mode = 2
+text = "Residing villagers:"
+label_settings = ExtResource("8_jxwxw")
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="MainPanel/VBoxContainer/Lowest HBox/VillagerGrid/VBoxContainer"]
+custom_minimum_size = Vector2(512, 96)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("22_u1bpq")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainPanel/VBoxContainer/Lowest HBox/VillagerGrid/VBoxContainer/Panel"]
+custom_minimum_size = Vector2(504, 72)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -252.0
+offset_top = -40.0
+offset_right = 252.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical_scroll_mode = 0
+
+[node name="VillagerParentGrid" type="GridContainer" parent="MainPanel/VBoxContainer/Lowest HBox/VillagerGrid/VBoxContainer/Panel/ScrollContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(496, 72)
+layout_mode = 2
+theme_override_constants/h_separation = 9
+columns = 128
+
+[node name="Villager Face Button" parent="MainPanel/VBoxContainer/Lowest HBox/VillagerGrid/VBoxContainer/Panel/ScrollContainer/VillagerParentGrid" instance=ExtResource("10_lre4h")]
+visible = false
+layout_mode = 2
+
+[node name="Villager Face Button2" parent="MainPanel/VBoxContainer/Lowest HBox/VillagerGrid/VBoxContainer/Panel/ScrollContainer/VillagerParentGrid" instance=ExtResource("10_lre4h")]
+visible = false
+layout_mode = 2
+
+[node name="Villager Face Button3" parent="MainPanel/VBoxContainer/Lowest HBox/VillagerGrid/VBoxContainer/Panel/ScrollContainer/VillagerParentGrid" instance=ExtResource("10_lre4h")]
+visible = false
+layout_mode = 2
+
+[node name="Villager Face Button4" parent="MainPanel/VBoxContainer/Lowest HBox/VillagerGrid/VBoxContainer/Panel/ScrollContainer/VillagerParentGrid" instance=ExtResource("10_lre4h")]
+visible = false
+layout_mode = 2
+
+[node name="Villager Face Button5" parent="MainPanel/VBoxContainer/Lowest HBox/VillagerGrid/VBoxContainer/Panel/ScrollContainer/VillagerParentGrid" instance=ExtResource("10_lre4h")]
+visible = false
+layout_mode = 2
+
+[node name="Villager Face Button6" parent="MainPanel/VBoxContainer/Lowest HBox/VillagerGrid/VBoxContainer/Panel/ScrollContainer/VillagerParentGrid" instance=ExtResource("10_lre4h")]
+visible = false
+layout_mode = 2
+
+[node name="Villager Face Button7" parent="MainPanel/VBoxContainer/Lowest HBox/VillagerGrid/VBoxContainer/Panel/ScrollContainer/VillagerParentGrid" instance=ExtResource("10_lre4h")]
+visible = false
+layout_mode = 2
+
+[node name="Villager Face Button8" parent="MainPanel/VBoxContainer/Lowest HBox/VillagerGrid/VBoxContainer/Panel/ScrollContainer/VillagerParentGrid" instance=ExtResource("10_lre4h")]
+visible = false
+layout_mode = 2
+
+[node name="Villager Face Button9" parent="MainPanel/VBoxContainer/Lowest HBox/VillagerGrid/VBoxContainer/Panel/ScrollContainer/VillagerParentGrid" instance=ExtResource("10_lre4h")]
+visible = false
+layout_mode = 2
+
+[node name="Villager Face Button10" parent="MainPanel/VBoxContainer/Lowest HBox/VillagerGrid/VBoxContainer/Panel/ScrollContainer/VillagerParentGrid" instance=ExtResource("10_lre4h")]
+visible = false
 layout_mode = 2
 
 [node name="MainCloseButtonContainer" parent="MainPanel" instance=ExtResource("9_dldyl")]

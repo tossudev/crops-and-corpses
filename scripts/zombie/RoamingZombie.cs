@@ -10,14 +10,6 @@ public partial class RoamingZombie : CharacterBody2D
 	[Export] Array<Loot> _lootList;
 	
 	private enum ZombieReward{Small,Medium,Big};
-	private enum ZombieHats
-	{
-		Builder,
-        Farmer,
-        Soldier,
-        Miner,
-        WoodCutter
-	};
 	private ZombieReward reward;
 	private VillagerOccupation zombieOccupation;
 	private Skeleton2D _sprite;
@@ -102,14 +94,12 @@ public partial class RoamingZombie : CharacterBody2D
 		_updateStatsTimer.Start();
 
 		var occupation = VillagerRawData.GetRandomOccupation();
+		GD.Print(occupation.ToString());
 		
-		int randomIndex = (int) occupation;
-
-		ZombieHats hatType =(ZombieHats)randomIndex;
-		if (hatType != ZombieHats.Builder)
+		if (occupation != VillagerOccupation.Builder)
 		{
 			var zombieHeadBonetNode = GetNode<Bone2D>("Skeleton2D/TorsoBone/HeadBone/"); //Skeleton2D/TorsoBone/HeadBone/ZombieHat1
-			var zombieHatNode = zombieHeadBonetNode.GetNode<Sprite2D>("ZombieHat" + hatType.ToString());
+			var zombieHatNode = zombieHeadBonetNode.GetNode<Sprite2D>("ZombieHat" + occupation.ToString());
 			zombieHatNode.Visible = true;
 		}
 

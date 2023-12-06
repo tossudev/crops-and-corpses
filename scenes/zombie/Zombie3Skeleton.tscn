@@ -277,7 +277,7 @@ position = Vector2(144.188, -2.26265)
 rotation = 1.5708
 texture = ExtResource("8_vi6yb")
 
-[node name="ZombieHatWoodCutter" type="Sprite2D" parent="TorsoBone/HeadBone"]
+[node name="ZombieHatWoodcutter" type="Sprite2D" parent="TorsoBone/HeadBone"]
 visible = false
 position = Vector2(107.536, -17.9626)
 rotation = 1.5708

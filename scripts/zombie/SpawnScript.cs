@@ -16,7 +16,6 @@ public partial class SpawnScript : Node2D
 	Timer spawnDelay;
 	Timer zombieDeleteDelay;
 	PackedScene packedScene;
-
 	Node2D enemiesNode;
 	bool isNightOrDay;
 	string isNightOrDayString;
@@ -25,6 +24,7 @@ public partial class SpawnScript : Node2D
 	private bool zombieDelayBool=false;
 	[Export]private float maxDistance;
 	[Export] public CharacterBody2D player;
+	[Export] public int maxZombieCount;
 	private static List<CharacterBody2D> zombieList = new List<CharacterBody2D>();
 	private static List<CharacterBody2D> questZombieList = new List<CharacterBody2D>();
 	public GlobalTime globalTime;
@@ -116,9 +116,9 @@ public partial class SpawnScript : Node2D
         Vector2 playerPos = player.Position;
 
         float distance = spawnPointPos.DistanceTo(playerPos);
-        GD.Print(distance + " spawnPoint distance to player");
+      //  GD.Print(distance + " spawnPoint distance to player");
 
-        if (distance <= maxDistance)
+        if (distance <= maxDistance && maxZombieCount >= zombieList.Count)
         {
             CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
             prefab.Position = spawnPointPos;
@@ -127,7 +127,7 @@ public partial class SpawnScript : Node2D
         }
         else
         {
-            GD.Print("Spawn point too far away, skipping spawn.");
+            GD.Print("Spawn point too far away, or too many zombies in scene");
         }
     }
 }

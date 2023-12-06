@@ -1,15 +1,15 @@
 [gd_scene load_steps=16 format=3 uid="uid://de1vcogajcxyi"]
 
-[ext_resource type="Texture2D" uid="uid://dc3o6uy8y60nh" path="res://assets/sprites/character/zombie2/2.3/1x/left leg.png" id="1_w5fe5"]
-[ext_resource type="Texture2D" uid="uid://bovrjqtaxss4r" path="res://assets/sprites/character/zombie2/2.3/1x/right leg.png" id="2_2d6c2"]
-[ext_resource type="Texture2D" uid="uid://drbw3uwoackpc" path="res://assets/sprites/character/zombie2/2.3/1x/right hand.png" id="3_o5cqm"]
-[ext_resource type="Texture2D" uid="uid://bxirdckay1ane" path="res://assets/sprites/character/zombie2/2.3/1x/torso.png" id="4_jxo1u"]
-[ext_resource type="Texture2D" uid="uid://bo1lqx5ux3mvr" path="res://assets/sprites/character/zombie2/zombie2.1/1x/head (3).png" id="5_njn56"]
-[ext_resource type="Texture2D" uid="uid://bakys00o3rkly" path="res://assets/sprites/character/hats/mining_hat.png" id="6_2huiv"]
-[ext_resource type="Texture2D" uid="uid://dvrpluxm42nf4" path="res://assets/sprites/character/hats/bucket_helmet.png" id="7_tnv8y"]
-[ext_resource type="Texture2D" uid="uid://kjimq4t0wnvv" path="res://assets/sprites/character/hats/straw_hat.png" id="8_87lrh"]
-[ext_resource type="Texture2D" uid="uid://bnd33hpfvrxau" path="res://assets/sprites/character/hats/ushanka.png" id="9_unafl"]
-[ext_resource type="Texture2D" uid="uid://cfubshhnr4p63" path="res://assets/sprites/character/zombie2/zombie2.1/1x/right hand.png" id="10_lokya"]
+[ext_resource type="Texture2D" uid="uid://cduo4mubshssr" path="res://assets/sprites/character/zombie2/2.3/1x/left leg.png" id="1_w5fe5"]
+[ext_resource type="Texture2D" uid="uid://wfhdkc6pg63x" path="res://assets/sprites/character/zombie2/2.3/1x/right leg.png" id="2_2d6c2"]
+[ext_resource type="Texture2D" uid="uid://dfm74a1sdj2ej" path="res://assets/sprites/character/zombie2/2.3/1x/right hand.png" id="3_o5cqm"]
+[ext_resource type="Texture2D" uid="uid://dp4bc6bcb5lvu" path="res://assets/sprites/character/zombie2/2.3/1x/torso.png" id="4_jxo1u"]
+[ext_resource type="Texture2D" uid="uid://cqk83t866rc58" path="res://assets/sprites/character/zombie2/zombie2.1/1x/head (3).png" id="5_njn56"]
+[ext_resource type="Texture2D" uid="uid://dtiwff2vm8drf" path="res://assets/sprites/character/hats/mining_hat.png" id="6_2huiv"]
+[ext_resource type="Texture2D" uid="uid://csrm5plu4jxny" path="res://assets/sprites/character/hats/bucket_helmet.png" id="7_tnv8y"]
+[ext_resource type="Texture2D" uid="uid://b64iay75nivow" path="res://assets/sprites/character/hats/straw_hat.png" id="8_87lrh"]
+[ext_resource type="Texture2D" uid="uid://cgwstuqfkjljm" path="res://assets/sprites/character/hats/ushanka.png" id="9_unafl"]
+[ext_resource type="Texture2D" uid="uid://c1c7rpoyilbs7" path="res://assets/sprites/character/zombie2/zombie2.1/1x/right hand.png" id="10_lokya"]
 
 [sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_xtbr3"]
 
@@ -246,6 +246,7 @@ rotation = 1.57061
 texture = ExtResource("4_jxo1u")
 
 [node name="HeadBone" type="Bone2D" parent="TorsoBone"]
+unique_name_in_owner = true
 position = Vector2(59.9995, -3.01099)
 scale = Vector2(0.99999, 0.99999)
 rest = Transform2D(0.999517, -0.0310752, 0.0310752, 0.999517, 59.9995, -3.01099)
@@ -258,25 +259,25 @@ position = Vector2(81.9978, -12.015)
 rotation = 1.5708
 texture = ExtResource("5_njn56")
 
-[node name="ZombieHat3" type="Sprite2D" parent="TorsoBone/HeadBone"]
+[node name="ZombieHatMiner" type="Sprite2D" parent="TorsoBone/HeadBone"]
 visible = false
 position = Vector2(144.188, -2.26265)
 rotation = 1.5708
 texture = ExtResource("6_2huiv")
 
-[node name="ZombieHat2" type="Sprite2D" parent="TorsoBone/HeadBone"]
+[node name="ZombieHatSoldier" type="Sprite2D" parent="TorsoBone/HeadBone"]
 visible = false
 position = Vector2(144.188, -2.26265)
 rotation = 1.5708
 texture = ExtResource("7_tnv8y")
 
-[node name="ZombieHat1" type="Sprite2D" parent="TorsoBone/HeadBone"]
+[node name="ZombieHatFarmer" type="Sprite2D" parent="TorsoBone/HeadBone"]
 visible = false
 position = Vector2(144.188, -2.26265)
 rotation = 1.5708
 texture = ExtResource("8_87lrh")
 
-[node name="ZombieHat4" type="Sprite2D" parent="TorsoBone/HeadBone"]
+[node name="ZombieHatWoodCutter" type="Sprite2D" parent="TorsoBone/HeadBone"]
 visible = false
 position = Vector2(107.536, -17.9626)
 rotation = 1.5708

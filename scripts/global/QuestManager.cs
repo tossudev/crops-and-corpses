@@ -19,8 +19,23 @@ public partial class QuestManager : Node
 			// Handle the error as needed, e.g., return or throw an exception.
 			return;
 		}
+		
+		StartTutorialIfNewGame();
 	}
 
+	async void StartTutorialIfNewGame()
+	{
+		await TaskExtensions.SuspendWhile(() => TownManager.currentTownStats != null, 400);
+
+		if (TownManager.currentTownStats.totalExperience == 0)
+		{
+			if (globalTime.GetDay() == 0)
+			{
+				StartTutorialQuest();
+			}
+		}
+	}
+	
 
 	async void StartQuest(int difficulty, QuestType type, Scene.RootScene Location)
 	{
@@ -81,45 +96,28 @@ public partial class QuestManager : Node
 		PlayerInfo.SetActiveQuest(null);
 	}
 
-	public async void StartTutorialQuest()
+	public void StartTutorialQuest()
 	{
-		if (await PlayerInfo.GetActiveQuest() != null) return;
-
-		StartQuest(0, QuestType.Tutorial, null);
+		StartQuest(1, QuestType.Tutorial, null);
 	}
-
-
-	public async void FinishTutorialQuest()
-	{
-		var quest = await PlayerInfo.GetActiveQuest();
-
-		if (quest == null)
-		{
-			GD.PushError("Can't finish a null quest");
-			return;
-		}
-
-		TownManager.GainExp(ExpGain.SMALL);
-
-		PlayerInfo.SetActiveQuest(null);
-	}
+    
 
 	public override void _Input(InputEvent @event)
 	{
 		base._Input(@event);
-		if (@event.IsActionPressed("<toggle_inventory>"))
+		if (@event.IsActionPressed("toggle_inventory"))
 		{
 			inventoryOpen();
 
 		}
 
-		if (@event.IsActionPressed("<toggle_crafting>"))
+		if (@event.IsActionPressed("toggle_crafting_window"))
 		{
 			CraftingOpen();
 
 		}
 
-		if (@event.IsActionPressed("<toggle_quest_journal>"))
+		if (@event.IsActionPressed("Toggel_QuestJournal"))
 		{
 			QuestJournalOpen();
 
@@ -134,7 +132,6 @@ public partial class QuestManager : Node
 
 		if (quest == null)
 		{
-			GD.PushError("Can't finish a null quest");
 			return;
 		}
 
@@ -155,7 +152,6 @@ public partial class QuestManager : Node
 
 		if (quest == null)
 		{
-			GD.PushError("Can't finish a null quest");
 			return;
 		}
 
@@ -176,7 +172,6 @@ public partial class QuestManager : Node
 
 		if (quest == null)
 		{
-			GD.PushError("Can't finish a null quest");
 			return;
 		}
 
@@ -196,13 +191,12 @@ public partial class QuestManager : Node
 	}
 
 
-	public async void townHallClicked()
+	public async void TownHallClicked()
 	{
 		var quest = await PlayerInfo.GetActiveQuest();
 
 		if (quest == null)
 		{
-			GD.PushError("Can't finish a null quest");
 			return;
 		}
 
@@ -215,7 +209,6 @@ public partial class QuestManager : Node
 			{
 				quest.CompleteQuestStage(QuestStage.ClickOnTownHall);
 				FinishQuest();
-
 			}
 		}
 	}

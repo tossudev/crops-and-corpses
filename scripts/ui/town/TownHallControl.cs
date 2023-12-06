@@ -13,7 +13,7 @@ public partial class TownHallControl : Node2D
 
 			TownHallMenu.menuInstance.OpenMainPanel();
 
-			questManager.townHallClicked();
+			questManager.TownHallClicked();
 
 		}
 	}

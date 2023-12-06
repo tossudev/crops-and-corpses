@@ -43,10 +43,13 @@ public partial class Quest : Node
     public Quest(int difficulty, int startDay, QuestType type, Scene.RootScene location)
     {
         SetDesc(type, difficulty, location);
+                
+        questDifficulty = difficulty;
         this.startDay = startDay;
-        SetStages(type);
-
+        this.type = type;
         this.location = location;
+
+        SetStages(type);
     }
 
     void SetDesc(QuestType type, int difficulty, Scene.RootScene location)
@@ -57,13 +60,11 @@ public partial class Quest : Node
 
                 string plural = difficulty > 1 ? "s" : "";
                 description = $"Rescue {difficulty} villager{plural} from {location.Name}.";
-                questDifficulty = difficulty;
                 break;
 
             case QuestType.Tutorial:
 
                 description = "Press 'E' to open inventory.";
-                questDifficulty = 0;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -81,7 +82,7 @@ public partial class Quest : Node
 
             case QuestType.Tutorial:
 
-                stages = new Array<QuestStage> { QuestStage.OpenInventory, QuestStage.OpendCrafting, QuestStage.OpenQuestJournal, QuestStage.ClickOnTownHall };
+                stages = new Array<QuestStage> { QuestStage.OpenInventory, QuestStage.OpenCrafting, QuestStage.OpenQuestJournal, QuestStage.ClickOnTownHall };
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);

@@ -1,21 +1,21 @@
 [gd_scene load_steps=11 format=3 uid="uid://dr5dn7juefoha"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_gmjf4"]
-[ext_resource type="Texture2D" uid="uid://c5v773mk6tykk" path="res://assets/sprites/buildings/largehouse_color.png" id="2_uosje"]
+[ext_resource type="Texture2D" uid="uid://d21t44ku0n8mk" path="res://assets/sprites/buildings/largehouse_color.png" id="2_uosje"]
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="3_goisp"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_ysaqf"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_2ldom"]
-[ext_resource type="PackedScene" uid="uid://2v1aodyd0p4b" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_72uur"]
+[ext_resource type="PackedScene" uid="uid://bu0f37obys8sx" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_72uur"]
 [ext_resource type="PackedScene" uid="uid://dune6txyuwmm2" path="res://scenes/buildings/town/villager_residence_component.tscn" id="6_h2v24"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sekvv"]
-size = Vector2(255, 143.902)
+size = Vector2(280, 160)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oi4v2"]
 size = Vector2(253, 261.538)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_24awm"]
-size = Vector2(125.5, 125.5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_omjgn"]
+size = Vector2(270, 140)
 
 [node name="House" type="Node2D" groups=["LargeHouse"]]
 scale = Vector2(2, 2)
@@ -48,7 +48,7 @@ position = Vector2(-63, -52)
 scale = Vector2(1, 0.82)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-71, -15.8537)
+position = Vector2(-69, -9.7561)
 shape = SubResource("RectangleShape2D_sekvv")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["building"]]
@@ -77,9 +77,8 @@ collision_mask = 32
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-visible = false
-position = Vector2(61.75, 10.25)
-shape = SubResource("RectangleShape2D_24awm")
+position = Vector2(-6, 7)
+shape = SubResource("RectangleShape2D_omjgn")
 debug_color = Color(0.898039, 0.117647, 0.137255, 0.431373)
 
 [node name="HealthBar" type="ProgressBar" parent="."]
@@ -101,14 +100,20 @@ show_percentage = false
 
 [node name="BuildingDemolishMenu" parent="." instance=ExtResource("5_72uur")]
 unique_name_in_owner = true
-offset_left = -204.0
-offset_top = -141.0
-offset_right = 383.0
-offset_bottom = 365.0
-scale = Vector2(0.35, 0.35)
+offset_left = -240.0
+offset_top = -268.0
+offset_right = 347.0
+offset_bottom = 238.0
+scale = Vector2(0.51, 0.51)
 
 [node name="VillagerResidenceComponent" parent="." instance=ExtResource("6_h2v24")]
 unique_name_in_owner = true
+visible = false
+offset_left = -304.0
+offset_top = -336.0
+offset_right = -304.0
+offset_bottom = -336.0
+scale = Vector2(0.715, 0.715)
 _housingCapacity = 4
 
-[connection signal="input_event" from="Area2D" to="BuildingDemolishMenu" method="OnBuildingInput"]
+[connection signal="input_event" from="Area2D" to="VillagerResidenceComponent" method="OnBuildingInput"]

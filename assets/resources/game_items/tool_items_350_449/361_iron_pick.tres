@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Item" load_steps=8 format=3 uid="uid://cplc64alcfytf"]
 
 [ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="1_6xvxm"]
-[ext_resource type="Texture2D" uid="uid://b8djrqe4m4gqi" path="res://assets/sprites/items/item_pickaxe.png" id="1_lrcel"]
+[ext_resource type="Texture2D" uid="uid://cnhp1be6idh2e" path="res://assets/sprites/items/item_iron_pickaxe2.png" id="1_tjppb"]
 [ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="2_toga4"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_n8kct"]
 [ext_resource type="Resource" uid="uid://dmm0h1ba6feb7" path="res://assets/resources/game_items/resource_items_0_to_99/1_iron.tres" id="4_56s4t"]
@@ -20,6 +20,6 @@ quantity = 2
 script = ExtResource("1_6xvxm")
 ID = 361
 Name = "Iron Pick"
-IconTexture = ExtResource("1_lrcel")
+IconTexture = ExtResource("1_tjppb")
 StackSize = 1
 craftingRequirements = Array[Object]([SubResource("Resource_db8fj"), SubResource("Resource_w36sw")])

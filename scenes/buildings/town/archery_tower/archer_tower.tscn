@@ -1,14 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://54li2rwv5ov5"]
+[gd_scene load_steps=14 format=3 uid="uid://54li2rwv5ov5"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/ArcherTower.cs" id="1_8yyo6"]
 [ext_resource type="PackedScene" uid="uid://dqmfwe15dtgat" path="res://scenes/Combat/projectile.tscn" id="2_151wa"]
 [ext_resource type="Resource" uid="uid://crwemoqf3d5lp" path="res://TinoTests/Resources/tower_arrow.tres" id="3_pa3cy"]
-[ext_resource type="Texture2D" path="res://assets/sprites/buildings/archery_tower_empty.png" id="4_20ctn"]
+[ext_resource type="Texture2D" uid="uid://dmx3lihubx23l" path="res://assets/sprites/buildings/archery_tower_empty.png" id="4_20ctn"]
 [ext_resource type="PackedScene" uid="uid://cly04lvws81ml" path="res://animations/archer_tower/archer_tower/ArcherTower.tscn" id="4_71niy"]
+[ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="5_nmh3f"]
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="5_sr0xp"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="6_hcsx8"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="7_u83t5"]
-[ext_resource type="PackedScene" path="res://scenes/buildings/building_demolish_menu.tscn" id="9_ln84s"]
+[ext_resource type="PackedScene" uid="uid://2v1aodyd0p4b" path="res://scenes/buildings/building_demolish_menu.tscn" id="9_ln84s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jggck"]
 size = Vector2(128, 254.495)
@@ -39,6 +40,13 @@ z_index = -1
 position = Vector2(-32.02, -61)
 scale = Vector2(0.24, 0.24)
 texture = ExtResource("4_20ctn")
+
+[node name="Shadow" type="Sprite2D" parent="Node2D/Sprite2D"]
+modulate = Color(1, 1, 1, 0.498039)
+z_index = -1
+position = Vector2(0, 207.885)
+scale = Vector2(2.84, 2.13)
+texture = ExtResource("5_nmh3f")
 
 [node name="Animator" parent="Node2D" instance=ExtResource("4_71niy")]
 unique_name_in_owner = true

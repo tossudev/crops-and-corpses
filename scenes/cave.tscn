@@ -12,15 +12,15 @@
 [ext_resource type="PackedScene" uid="uid://ih0n4u2okucu" path="res://scenes/world/stalagmite2.tscn" id="7_ecfe8"]
 [ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="7_somas"]
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="8_pa72b"]
-[ext_resource type="Texture2D" uid="uid://dkjbgvrnc6r7" path="res://assets/sprites/tiles/stalagmate_two.png" id="10_gfyjh"]
+[ext_resource type="Texture2D" uid="uid://b7ium8gftygqs" path="res://assets/sprites/tiles/stalagmate_two.png" id="10_gfyjh"]
 [ext_resource type="Resource" uid="uid://bs6otct5awtuy" path="res://TinoTests/Resources/rock.tres" id="11_c0w2f"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="11_mechj"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="11_ufcgq"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="12_p8hl2"]
 [ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="13_66y4m"]
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="13_nie8h"]
-[ext_resource type="Texture2D" uid="uid://xcn7cih418ht" path="res://assets/sprites/tiles/stalagmate_drop.png" id="14_jaj2c"]
-[ext_resource type="Texture2D" uid="uid://dj3tsl8mk8qbe" path="res://assets/sprites/tiles/stalagmate_drop_two.png" id="15_rbqxh"]
+[ext_resource type="Texture2D" uid="uid://plojrrl0jnp0" path="res://assets/sprites/tiles/stalagmate_drop.png" id="14_jaj2c"]
+[ext_resource type="Texture2D" uid="uid://dmhbjxp56n2kb" path="res://assets/sprites/tiles/stalagmate_drop_two.png" id="15_rbqxh"]
 [ext_resource type="Script" path="res://scripts/World/PortalManager.cs" id="19_ml5be"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="19_w0jgf"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="20_wlbpj"]
@@ -1789,7 +1789,9 @@ script = ExtResource("20_wlbpj")
 
 [node name="ZombieSpawn" type="Node2D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("7_somas")
+maxDistance = 1500.0
 player = NodePath("../Objects/Player")
+maxZombieCount = 25
 
 [node name="SpawnPoint0" type="Node2D" parent="ZombieSpawn"]
 position = Vector2(-5432, 4232)

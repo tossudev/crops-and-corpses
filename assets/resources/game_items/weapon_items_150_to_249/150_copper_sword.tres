@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=8 format=3 uid="uid://di3mqk8b3d2ke"]
 
-[ext_resource type="Texture2D" uid="uid://nkqhv6fai4nk" path="res://assets/sprites/items/item_copper_sword2.png" id="1_hdfge"]
+[ext_resource type="Texture2D" uid="uid://dj2sgrjy7gpy6" path="res://assets/sprites/items/item_copper_sword2.png" id="1_hdfge"]
 [ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="2_jn5ha"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_jwmsd"]
 [ext_resource type="Resource" uid="uid://bofkpec0ir7h3" path="res://assets/resources/game_items/resource_items_0_to_99/2_copper.tres" id="4_8ufaa"]

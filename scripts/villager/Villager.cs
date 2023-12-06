@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 public enum VillagerOccupation
 {
-	Miner,
+	Builder,
 	Farmer,
 	Soldier,
+	Miner,
 	Woodcutter,
-	Builder
 }
 
 public partial class Villager : CharacterBody2D

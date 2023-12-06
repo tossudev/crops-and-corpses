@@ -435,6 +435,7 @@ public partial class BuildingMenu : Control
             if (jsonObject["name"].ToString() == "House" || jsonObject["name"].ToString() == "LargeHouse" || jsonObject["name"].ToString() == "ArcherTower")
             {
                 BuildingHealth healthscript = _buildingScene.GetNode("BuildingHealth") as BuildingHealth;
+                healthscript.isLoaded = true;
                 healthscript.loadedHealth = (int)jsonObject["health"];
             }
 

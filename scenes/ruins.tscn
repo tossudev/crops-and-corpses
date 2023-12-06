@@ -3,19 +3,19 @@
 [ext_resource type="Script" path="res://scripts/ruins.cs" id="1_7gyha"]
 [ext_resource type="PackedScene" path="res://scenes/world/lantern.tscn" id="4_61dbj"]
 [ext_resource type="PackedScene" uid="uid://b2gv07xesl7qm" path="res://scenes/buildings/town/house/house_broken.tscn" id="4_nfdnl"]
-[ext_resource type="Texture2D" uid="uid://cbf7wx6skn70u" path="res://assets/sprites/items/lantern.png" id="5_x4a6q"]
+[ext_resource type="Texture2D" uid="uid://dlcm7puhq88yp" path="res://assets/sprites/items/lantern.png" id="5_x4a6q"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_xoqnb"]
 [ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://scenes/spawn/ZombieSpawn.tscn" id="6_moakj"]
 [ext_resource type="Texture2D" uid="uid://q5wxg1if5hb8" path="res://assets/sprites/foliage/tree_2.png" id="6_rt25r"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="6_urqth"]
 [ext_resource type="Texture2D" uid="uid://dcyviqfhbqcay" path="res://assets/sprites/foliage/tree_1.png" id="7_dpch5"]
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="7_et7tw"]
-[ext_resource type="PackedScene" uid="uid://fd4b7o1o24sd" path="res://scenes/buildings/town/town_hall/town_hall_broken.tscn" id="7_kakyg"]
+[ext_resource type="PackedScene" path="res://scenes/buildings/town/town_hall/town_hall_broken.tscn" id="7_kakyg"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="7_ms5xt"]
 [ext_resource type="PackedScene" uid="uid://ci1gujwgui8qr" path="res://scenes/buildings/town/large_house/large_house_broken.tscn" id="8_gaa8h"]
 [ext_resource type="PackedScene" uid="uid://bfgy4jnvcy7pk" path="res://scenes/zombie/Zombie.tscn" id="8_ovu31"]
 [ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="8_pei51"]
-[ext_resource type="Texture2D" uid="uid://7idfs0eyme85" path="res://assets/sprites/items/cross_church.png" id="9_lqrkj"]
+[ext_resource type="Texture2D" uid="uid://ddgmkpn7a67a6" path="res://assets/sprites/items/cross_church.png" id="9_lqrkj"]
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="10_4qh86"]
 [ext_resource type="PackedScene" uid="uid://b4fyxjshjenvv" path="res://scenes/farm/plants/plant_potato.tscn" id="10_c8c0f"]
 [ext_resource type="PackedScene" uid="uid://disyt3fuu77je" path="res://scenes/buildings/fence_scenes/fence_west.tscn" id="11_3dwxc"]
@@ -25,29 +25,29 @@
 [ext_resource type="PackedScene" uid="uid://e58507ft315b" path="res://scenes/buildings/fence_scenes/fence_north.tscn" id="12_moe38"]
 [ext_resource type="PackedScene" uid="uid://luqdfx7qh2jl" path="res://scenes/farm/plants/plant_pumpkin.tscn" id="12_w0m5s"]
 [ext_resource type="TileSet" uid="uid://dajdby7nadxkd" path="res://assets/resources/tiles/ruins_collision_tiles.tres" id="14_yfo2u"]
-[ext_resource type="Texture2D" uid="uid://dkyrcjhsjmsrv" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="15_0ox1s"]
+[ext_resource type="Texture2D" uid="uid://flp7c4vgeb02" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="15_0ox1s"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="16_pefaa"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="16_s7swj"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_xu2jk"]
 [ext_resource type="PackedScene" uid="uid://du4tddxtyn51y" path="res://scenes/world/tree3.tscn" id="19_08txa"]
 [ext_resource type="PackedScene" uid="uid://dt4impfdusiy" path="res://scenes/farm/plants/plant_poppy.tscn" id="19_ukssx"]
-[ext_resource type="Texture2D" uid="uid://2hxv708lschl" path="res://assets/sprites/items/item_poppy_dead.png" id="20_1wvwg"]
+[ext_resource type="Texture2D" uid="uid://dwxskmx4eadl4" path="res://assets/sprites/items/item_poppy_dead.png" id="20_1wvwg"]
 [ext_resource type="PackedScene" uid="uid://7m8c0ty0xcd0" path="res://scenes/buildings/town/well/well.tscn" id="20_jm3gc"]
-[ext_resource type="Texture2D" uid="uid://dmckn72pppsk8" path="res://assets/sprites/items/item_pumpkin_dead.png" id="21_wawgo"]
+[ext_resource type="Texture2D" uid="uid://d1ludx0fciuga" path="res://assets/sprites/items/item_pumpkin_dead.png" id="21_wawgo"]
 [ext_resource type="Script" path="res://scripts/World/PortalManager.cs" id="22_30gdq"]
 [ext_resource type="PackedScene" uid="uid://cb3o7u5viapx8" path="res://scenes/farm/plants/plant_wheat.tscn" id="22_i4jq8"]
-[ext_resource type="Texture2D" uid="uid://dmyin6d6q7ieb" path="res://assets/sprites/items/item_potato_dead.png" id="22_q6anl"]
+[ext_resource type="Texture2D" uid="uid://hhdqprh783wu" path="res://assets/sprites/items/item_potato_dead.png" id="22_q6anl"]
 [ext_resource type="PackedScene" uid="uid://dyq3ksvy2gwvv" path="res://scenes/world/bush.tscn" id="22_wxiqh"]
 [ext_resource type="PackedScene" uid="uid://bbia6yxwghu3o" path="res://scenes/farm/plants/plant_lupine.tscn" id="23_5yyo7"]
-[ext_resource type="Texture2D" uid="uid://balyagv7w54i" path="res://assets/sprites/tiles/farm_tile.png" id="26_adjto"]
+[ext_resource type="Texture2D" uid="uid://dekgle6gm7bek" path="res://assets/sprites/tiles/farm_tile.png" id="26_adjto"]
 [ext_resource type="Texture2D" uid="uid://b0dlu5nexmss2" path="res://assets/sprites/tiles/grass_tile.png" id="27_4ir3q"]
-[ext_resource type="Texture2D" uid="uid://buwuhhccbw584" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="28_w6780"]
+[ext_resource type="Texture2D" uid="uid://dagkooxy63mfn" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="28_w6780"]
 [ext_resource type="PackedScene" uid="uid://ca4ui8y2u11io" path="res://scenes/world/cave_entrance.tscn" id="31_ekk8c"]
 [ext_resource type="Texture2D" uid="uid://dbgwlhprokvwi" path="res://assets/sprites/tiles/Dirt_tile.png" id="33_f0032"]
-[ext_resource type="Texture2D" uid="uid://cjblamfdkgg2n" path="res://assets/sprites/foliage/mini_tree_dead.png" id="34_guo8f"]
+[ext_resource type="Texture2D" uid="uid://byh7kgywnmfk4" path="res://assets/sprites/foliage/mini_tree_dead.png" id="34_guo8f"]
 [ext_resource type="Texture2D" uid="uid://lcg5swlsccjt" path="res://assets/sprites/tiles/Burnt_grass2_tile.png" id="37_dijnp"]
 [ext_resource type="Texture2D" uid="uid://by8gdsj0sfnja" path="res://assets/sprites/tiles/Burnt_grass_tile.png" id="38_fuoah"]
-[ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="44_kwisk"]
+[ext_resource type="PackedScene" path="res://scenes/world/navigation_manager.tscn" id="44_kwisk"]
 [ext_resource type="Texture2D" uid="uid://bf0kk4xsi7048" path="res://assets/sprites/tiles/Dirt_rocks_tile.png" id="45_318bl"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6nrqm"]
@@ -149,7 +149,8 @@ scale = Vector2(1, 1)
 scale = Vector2(0.999998, 0.999998)
 
 [node name="ArmL" parent="Objects/Player/Skeleton2D/TorsoBone/ArmLBone" index="0"]
-position = Vector2(4.05988, 13.2998)
+position = Vector2(4.06, 13.2998)
+scale = Vector2(1, 1)
 
 [node name="HeadBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="4"]
 scale = Vector2(0.999997, 0.999997)
@@ -615,6 +616,7 @@ y_sort_enabled = true
 position = Vector2(6.10352e-05, 6.10352e-05)
 
 [node name="ZombieSpawn" parent="Objects/Enemies" node_paths=PackedStringArray("player") instance=ExtResource("6_moakj")]
+maxDistance = 1500.0
 player = NodePath("../../Player")
 
 [node name="SpawnPoint1" parent="Objects/Enemies/ZombieSpawn" index="0"]
@@ -2338,7 +2340,6 @@ _player = NodePath("../../Player")
 
 [node name="cave_entrance" parent="Objects/Foliage/Cave" node_paths=PackedStringArray("exitPosition") instance=ExtResource("31_ekk8c")]
 position = Vector2(-7504, -3167)
-id = 1
 exitPosition = NodePath("Exit")
 
 [node name="Exit" type="Node2D" parent="Objects/Foliage/Cave/cave_entrance"]
@@ -2510,69 +2511,69 @@ y_sort_enabled = true
 y_sort_enabled = true
 position = Vector2(-3896, 480)
 
-[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush" index="0"]
+[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush" index="1"]
 modulate = Color(0.470588, 0.239216, 0.105882, 1)
 
 [node name="bush2" parent="Objects/Foliage/Bushes" instance=ExtResource("22_wxiqh")]
 position = Vector2(-712, 1186)
 
-[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush2" index="0"]
+[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush2" index="1"]
 modulate = Color(0.737255, 0.356863, 0.00392157, 1)
 position = Vector2(-40, 30)
 
 [node name="bush3" parent="Objects/Foliage/Bushes" instance=ExtResource("22_wxiqh")]
 position = Vector2(384, -592)
 
-[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush3" index="0"]
+[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush3" index="1"]
 modulate = Color(0.607843, 0.290196, 0.117647, 1)
 
 [node name="bush4" parent="Objects/Foliage/Bushes" instance=ExtResource("22_wxiqh")]
 position = Vector2(384, -592)
 
-[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush4" index="0"]
+[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush4" index="1"]
 modulate = Color(0.741176, 0.360784, 0, 1)
 
 [node name="bush5" parent="Objects/Foliage/Bushes" instance=ExtResource("22_wxiqh")]
 position = Vector2(812, -192)
 
-[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush5" index="0"]
+[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush5" index="1"]
 modulate = Color(0.662745, 0.317647, 0.00392157, 1)
 
 [node name="bush6" parent="Objects/Foliage/Bushes" instance=ExtResource("22_wxiqh")]
 position = Vector2(56, -1816)
 
-[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush6" index="0"]
+[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush6" index="1"]
 modulate = Color(0.737255, 0.356863, 0.00392157, 1)
 
 [node name="bush7" parent="Objects/Foliage/Bushes" instance=ExtResource("22_wxiqh")]
 position = Vector2(-112, -2729)
 
-[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush7" index="0"]
+[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush7" index="1"]
 modulate = Color(0.737255, 0.356863, 0.00392157, 1)
 
 [node name="bush8" parent="Objects/Foliage/Bushes" instance=ExtResource("22_wxiqh")]
 position = Vector2(-368, -1747)
 
-[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush8" index="0"]
+[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush8" index="1"]
 modulate = Color(0.631373, 0.301961, 0.00392157, 1)
 
 [node name="bush9" parent="Objects/Foliage/Bushes" instance=ExtResource("22_wxiqh")]
 position = Vector2(448, -2784)
 
-[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush9" index="0"]
+[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush9" index="1"]
 modulate = Color(0.996078, 0.533333, 0.188235, 1)
 
 [node name="bush10" parent="Objects/Foliage/Bushes" instance=ExtResource("22_wxiqh")]
 position = Vector2(672, -2592)
 
-[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush10" index="0"]
+[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush10" index="1"]
 modulate = Color(0.592157, 0.282353, 0.00392157, 1)
 
 [node name="bush11" parent="Objects/Foliage/Bushes" instance=ExtResource("22_wxiqh")]
 y_sort_enabled = true
 position = Vector2(-3191, -891)
 
-[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush11" index="0"]
+[node name="Sprite2D" parent="Objects/Foliage/Bushes/bush11" index="1"]
 modulate = Color(0.737255, 0.356863, 0.00392157, 1)
 
 [node name="PlantsDead" type="Node2D" parent="Objects/Foliage"]

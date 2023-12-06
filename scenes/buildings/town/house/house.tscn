@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://3ct83j0jgteb"]
+[gd_scene load_steps=11 format=3 uid="uid://3ct83j0jgteb"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_uikdl"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_driju"]
 [ext_resource type="Texture2D" uid="uid://bmn8ggt1kvsn7" path="res://assets/sprites/buildings/smallhouse_color.png" id="2_dt56r"]
+[ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="3_6okxm"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_u5tml"]
 [ext_resource type="PackedScene" uid="uid://2v1aodyd0p4b" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_lfvtm"]
 [ext_resource type="PackedScene" uid="uid://dune6txyuwmm2" path="res://scenes/buildings/town/villager_residence_component.tscn" id="6_17x1j"]
@@ -11,7 +12,7 @@
 size = Vector2(247.75, 293.902)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irxds"]
-size = Vector2(219, 758.654)
+size = Vector2(218, 461.538)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_24awm"]
 size = Vector2(125.5, 125.5)
@@ -26,6 +27,13 @@ script = ExtResource("1_uikdl")
 position = Vector2(-127, -203)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_dt56r")
+
+[node name="Shadow" type="Sprite2D" parent="House"]
+modulate = Color(1, 1, 1, 0.498039)
+z_index = -1
+position = Vector2(0, 255.33)
+scale = Vector2(6.8502, 6.97302)
+texture = ExtResource("3_6okxm")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-63, -52)
@@ -43,7 +51,7 @@ collision_mask = 7
 
 [node name="StaticCollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 unique_name_in_owner = true
-position = Vector2(-126.5, -295.937)
+position = Vector2(-126, -227.5)
 scale = Vector2(1, 0.65)
 shape = SubResource("RectangleShape2D_irxds")
 

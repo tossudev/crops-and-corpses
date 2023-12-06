@@ -56,7 +56,10 @@ public partial class HealthComponent : Node2D
 
 		if (_isBuilding)
 		{
-			_building.LoadBuildingHealth(_building.loadedHealth);
+			if(_building.isLoaded)
+			{
+                _building.LoadBuildingHealth(_building.loadedHealth);
+            }
 		}
 
 		if (_isPlayer)

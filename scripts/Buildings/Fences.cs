@@ -208,6 +208,7 @@ public partial class Fences : Node2D
         {
             BuildingHealth healthscript = _fenceScene.GetNode("BuildingHealth") as BuildingHealth;
             healthscript.loadedHealth = _fencesList[_fenceIndex];
+            healthscript.isLoaded = true;
             healthscript.LoadBuildingHealth(_fencesList[_fenceIndex]);
             _fenceIndex++;
         }
@@ -223,6 +224,7 @@ public partial class Fences : Node2D
         {
             BuildingHealth healthscript = _fenceDoorScene.GetNode("BuildingHealth") as BuildingHealth;
             healthscript.loadedHealth = _fencesList[_fenceIndex];
+            healthscript.isLoaded = true;
             healthscript.LoadBuildingHealth(_fencesList[_fenceIndex]);
             _fenceIndex++;
         }

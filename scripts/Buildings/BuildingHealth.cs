@@ -22,9 +22,11 @@ public partial class BuildingHealth : Node2D
 
     public bool isBroken;
     public bool isDamaged;
+    public bool isLoaded = false;
 
     public int buildingHealth;
-    public int loadedHealth = 100;
+    public int loadedHealth = 300;
+     
     public BuildingType buildingType;
 	// Called when the node enters the scene tree for the first time.
     public override void _Ready()

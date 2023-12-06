@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://bslom2g3m4qky"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/FenceDoor.cs" id="1_qlejx"]
-[ext_resource type="Texture2D" uid="uid://cdsb7tbr65gf0" path="res://assets/sprites/Farm sprites/gate door.png" id="2_8uf1v"]
-[ext_resource type="Texture2D" uid="uid://bhps6ywbr4asy" path="res://scenes/buildings/fence_scenes/fence door topdown view.png" id="3_6iurx"]
+[ext_resource type="Texture2D" uid="uid://c1mvwoenhyv3m" path="res://assets/sprites/Farm sprites/gate door.png" id="2_8uf1v"]
+[ext_resource type="Texture2D" uid="uid://cf37fqo557vpg" path="res://scenes/buildings/fence_scenes/fence door topdown view.png" id="3_6iurx"]
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="4_ovuda"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="5_4xgdc"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="6_6vpgs"]
@@ -62,7 +62,6 @@ position = Vector2(64.5, 17)
 shape = SubResource("RectangleShape2D_s8gej")
 
 [node name="DoorsTopdown" type="Node2D" parent="."]
-y_sort_enabled = true
 position = Vector2(0, -25.475)
 
 [node name="FenceDoorTopdown4" type="Sprite2D" parent="DoorsTopdown"]

@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://lhpbvcvullvs" path="res://assets/sprites/character/All zombies/brown/SVG/left_arm.svg" id="3_6r2kc"]
 [ext_resource type="Texture2D" uid="uid://c77ojediy8cga" path="res://assets/sprites/character/All zombies/brown/SVG/body.svg" id="4_eed1e"]
 [ext_resource type="Texture2D" uid="uid://c3abrbftrdo40" path="res://assets/sprites/character/All zombies/brown/SVG/head.svg" id="5_5dncy"]
-[ext_resource type="Texture2D" uid="uid://dvrpluxm42nf4" path="res://assets/sprites/character/hats/bucket_helmet.png" id="6_7juv4"]
-[ext_resource type="Texture2D" uid="uid://kjimq4t0wnvv" path="res://assets/sprites/character/hats/straw_hat.png" id="7_bto5w"]
-[ext_resource type="Texture2D" uid="uid://bakys00o3rkly" path="res://assets/sprites/character/hats/mining_hat.png" id="8_81n7w"]
-[ext_resource type="Texture2D" uid="uid://bnd33hpfvrxau" path="res://assets/sprites/character/hats/ushanka.png" id="9_jr0el"]
+[ext_resource type="Texture2D" uid="uid://csrm5plu4jxny" path="res://assets/sprites/character/hats/bucket_helmet.png" id="6_7juv4"]
+[ext_resource type="Texture2D" uid="uid://b64iay75nivow" path="res://assets/sprites/character/hats/straw_hat.png" id="7_bto5w"]
+[ext_resource type="Texture2D" uid="uid://dtiwff2vm8drf" path="res://assets/sprites/character/hats/mining_hat.png" id="8_81n7w"]
+[ext_resource type="Texture2D" uid="uid://cgwstuqfkjljm" path="res://assets/sprites/character/hats/ushanka.png" id="9_jr0el"]
 [ext_resource type="Texture2D" uid="uid://cuxivta7mnlfh" path="res://assets/sprites/character/All zombies/brown/SVG/right_arm.svg" id="10_fc6tj"]
 
 [sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_223h5"]
@@ -246,6 +246,7 @@ rotation = 1.57061
 texture = ExtResource("4_eed1e")
 
 [node name="HeadBone" type="Bone2D" parent="TorsoBone"]
+unique_name_in_owner = true
 position = Vector2(59.9995, -3.01099)
 scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(0.999517, -0.0310752, 0.0310752, 0.999517, 59.9995, -3.01099)
@@ -258,25 +259,25 @@ position = Vector2(81.9978, -12.015)
 rotation = 1.5708
 texture = ExtResource("5_5dncy")
 
-[node name="ZombieHat1" type="Sprite2D" parent="TorsoBone/HeadBone"]
+[node name="ZombieHatFarmer" type="Sprite2D" parent="TorsoBone/HeadBone"]
 visible = false
 position = Vector2(107.54, 2.97978)
 rotation = 1.5708
 texture = ExtResource("7_bto5w")
 
-[node name="ZombieHat2" type="Sprite2D" parent="TorsoBone/HeadBone"]
+[node name="ZombieHatSoldier" type="Sprite2D" parent="TorsoBone/HeadBone"]
 visible = false
 position = Vector2(107.54, 2.97978)
 rotation = 1.5708
 texture = ExtResource("6_7juv4")
 
-[node name="ZombieHat3" type="Sprite2D" parent="TorsoBone/HeadBone"]
+[node name="ZombieHatMiner" type="Sprite2D" parent="TorsoBone/HeadBone"]
 visible = false
 position = Vector2(107.54, 2.97978)
 rotation = 1.5708
 texture = ExtResource("8_81n7w")
 
-[node name="ZombieHat4" type="Sprite2D" parent="TorsoBone/HeadBone"]
+[node name="ZombieHatWoodcutter" type="Sprite2D" parent="TorsoBone/HeadBone"]
 visible = false
 position = Vector2(86.5974, 2.98369)
 rotation = 1.5708

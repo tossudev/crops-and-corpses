@@ -9,7 +9,12 @@ public partial class TownHallControl : Node2D
 		
 		if (mouseEvent.ButtonIndex == MouseButton.Left)
 		{
+			var questManager = GetNode<QuestManager>("/root/QuestManager");
+
 			TownHallMenu.menuInstance.OpenMainPanel();
+
+			questManager.townHallClicked();
+
 		}
 	}
 

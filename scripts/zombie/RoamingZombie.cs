@@ -21,8 +21,8 @@ public partial class RoamingZombie : CharacterBody2D
 	private Timer _updateStatsTimer;
 	private ProgressBar _healthBar;
 	private HealthComponent _healthComponent;
-	private NodePath _rootNodePath;
-	private Node2D rootNode;
+	//private NodePath _rootNodePath;
+	//private Node2D rootNode;
 	private bool _playerInRange = false;
 	private bool _fenceInRange = false;
 	private ulong _entered;
@@ -34,7 +34,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 	public override void _Ready()
 	{
-		//GD.Print(GetParent().GetParent<Node2D>().Name);
+		
 		_lootController.loot = _lootList[0];
 		_lootController.Init();
 		if(SceneManager.GetCurrentScene(this) == Scene.Cave)
@@ -73,8 +73,8 @@ public partial class RoamingZombie : CharacterBody2D
 		//animationPlayer = GetNode<AnimationPlayer>("Skeleton2D/AnimationPlayer");
 		_hitboxes = new HitboxComponent[2];
 		//	instantiatedNPC = (PackedScene)GD.Load("res://scenes/villager/villager.tscn");
-		_rootNodePath = GetParent<Node2D>().GetPath();
-		rootNode = GetNodeOrNull<Node2D>(_rootNodePath);
+	//	_rootNodePath = GetParent<Node2D>().GetPath();
+	//	rootNode = GetNodeOrNull<Node2D>(_rootNodePath);
 		_sprite = GetNodeOrNull<Skeleton2D>("Skeleton2D");
 		_timer = GetNodeOrNull<Timer>("AttackTimer");
 		_updateStatsTimer = GetNodeOrNull<Timer>("UpdateStatsTimer");
@@ -94,15 +94,12 @@ public partial class RoamingZombie : CharacterBody2D
 		_updateStatsTimer.Start();
 
 		var occupation = VillagerRawData.GetRandomOccupation();
+		GD.Print(occupation.ToString());
 		
-		int randomIndex = (int) occupation;
-
-
-		if (randomIndex >= 1 && randomIndex <= 4)
+		if (occupation != VillagerOccupation.Builder)
 		{
-			GD.Print(randomIndex+" randomIndex");
 			var zombieHeadBonetNode = GetNode<Bone2D>("Skeleton2D/TorsoBone/HeadBone/"); //Skeleton2D/TorsoBone/HeadBone/ZombieHat1
-			var zombieHatNode = zombieHeadBonetNode.GetNode<Sprite2D>("ZombieHat" + randomIndex);
+			var zombieHatNode = zombieHeadBonetNode.GetNode<Sprite2D>("ZombieHat" + occupation.ToString());
 			zombieHatNode.Visible = true;
 		}
 
@@ -143,11 +140,6 @@ public partial class RoamingZombie : CharacterBody2D
 					_sprite.Scale = new Vector2(-0.382f, 0.382f);
 				}
 			}
-
-			/* if (Velocity.X == 0.1f)
-			{
-				animationPlayer.Play("zombieIdle");
-			} */
 		}
 	}
 	public bool IsInTown()
@@ -177,7 +169,7 @@ public partial class RoamingZombie : CharacterBody2D
                 var newVillagerData = new VillagerRawData();
 				newVillagerData.SetOccupation(zombieOccupation);
 				VillagerManager.villagerManagerInstance.AddNewVillagerRawData();
-				VillagerManager.villagerManagerInstance.SpawnNewVillager(zombiePos, false);
+				VillagerManager.villagerManagerInstance.SpawnNewVillager(zombiePos, true);
 				QueueFree();
 				break;
 			default:

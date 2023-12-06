@@ -522,4 +522,42 @@ public partial class BuildingMenu : Control
 
         _buildings.AddChild(_ghostBuilding);
 	}
+
+    public void UpdateBuildingMaxHealth(BuildingType buildingType)
+    {
+        if(buildingType == BuildingType.House)
+        {
+            foreach(Node2D building in _buildings.GetChildren())
+            {
+                if (!building.IsInGroup("House") && !building.IsInGroup("LargeHouse"))
+                {
+                    return;
+                }
+
+                HealthComponent healtComponent = building.GetNode<HealthComponent>("%HealthComponent");
+                int lostHealth = healtComponent.GetMaxHealth() - healtComponent.GetHealth();
+
+                if (healtComponent.GetParent().IsInGroup("House"))
+                {
+                    healtComponent.SetMaxHealth(100 + SaveData.townHallStats.houseHP);
+                }
+                else if (healtComponent.GetParent().IsInGroup("LargeHouse"))
+                {
+                    healtComponent.SetMaxHealth(150 + SaveData.townHallStats.houseHP);
+                }
+                healtComponent.SetHealth(healtComponent.GetMaxHealth() - lostHealth);
+            }
+        }    
+        else if (buildingType == BuildingType.Fence)
+        {
+            foreach (Node2D fence in _fences.GetChild(0).GetChildren())
+            {
+                HealthComponent healtComponent = fence.GetNode<HealthComponent>("%HealthComponent");
+
+                int lostHealth = healtComponent.GetMaxHealth() - healtComponent.GetHealth();
+                healtComponent.SetMaxHealth(100 + SaveData.townHallStats.wallHP);
+                healtComponent.SetHealth(healtComponent.GetMaxHealth() - lostHealth);
+            }
+        }
+    }
 }

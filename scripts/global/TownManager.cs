@@ -187,7 +187,8 @@ public partial class TownManager : Node2D
 			case HousingUpgrade housingUpgrade:
 				
 				SaveData.townHallStats.houseHP += housingUpgrade.houseHP;
-				break;
+                BuildingMenu.buildMenu?.UpdateBuildingMaxHealth(BuildingType.House);
+                break;
 
 			
 			case SoldierUpgrade soldierUpgrade:
@@ -202,7 +203,8 @@ public partial class TownManager : Node2D
 			case WallUpgrade wallUpgrade:
 
 				SaveData.townHallStats.wallHP = wallUpgrade.wallHP;
-				break;
+                BuildingMenu.buildMenu?.UpdateBuildingMaxHealth(BuildingType.Fence);
+                break;
 		}
 		
 		SaveData.appliedUpgrades.Add(upgrade);

@@ -93,8 +93,9 @@ public partial class BuildingHealth : Node2D
 
     public void LoadBuildingHealth(int loadedHealth)
     {
-        buildingHealth = loadedHealth;
-        _healthComponent.SetHealth(loadedHealth);    
+        buildingHealth = loadedHealth;      
+
+        _healthComponent.SetHealth(loadedHealth);
 
         if (buildingHealth <= 0)
         {

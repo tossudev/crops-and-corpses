@@ -56,11 +56,24 @@ public partial class HealthComponent : Node2D
 
 		if (_isBuilding)
 		{
-			if(_building.isLoaded)
-			{
-                _building.LoadBuildingHealth(_building.loadedHealth);
+            await ToSignal(GetTree().CreateTimer(1f), "timeout");
+
+			if (_building.buildingType == BuildingType.House && _building.isLoaded)
+            {
+				SetMaxHealth(_maxHealth + TownManager.currentTownStats.houseHP);
+				_building.LoadBuildingHealth(_building.loadedHealth);
             }
-		}
+            else if (_building.buildingType == BuildingType.House)
+            {
+                SetMaxHealth(_maxHealth + TownManager.currentTownStats.houseHP);
+                SetHealth(_maxHealth);
+            }
+            else if (_building.buildingType == BuildingType.Fence)
+            {
+                SetMaxHealth(_maxHealth + TownManager.currentTownStats.wallHP);
+                UpdateHealthBar();
+            }
+        }
 
 		if (_isPlayer)
 		{
@@ -232,8 +245,9 @@ public partial class HealthComponent : Node2D
 	public void SetMaxHealth(int health)
 	{
 		_maxHealth = health;
-		
-		if (_health > _maxHealth)
+        _healthBar.MaxValue = _maxHealth;
+
+        if (_health > _maxHealth)
 		{
 			SetHealth(_maxHealth);
 		}

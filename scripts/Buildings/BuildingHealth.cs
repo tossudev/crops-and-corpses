@@ -65,9 +65,19 @@ public partial class BuildingHealth : Node2D
     async void RegisterBuilding()
     {
         await TaskExtensions.SuspendWhile(() =>
-        VillagerManager.villagerManagerInstance == null || !SaveData.firstLoadComplete);
-
+        VillagerManager.villagerManagerInstance == null || !SaveData.firstLoadComplete,
+            GD.Randi() % 2000 + 100);
+        
         VillagerManager.villagerManagerInstance.AddNewBuilding(this);
+    }
+    
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        if (VillagerManager.villagerManagerInstance?.allBuildings.Contains(this) ?? false)
+        {
+            VillagerManager.villagerManagerInstance.RemoveBuilding(this);
+        }
     }
     
     private void OnHealth(float health)

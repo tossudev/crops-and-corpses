@@ -1,8 +1,136 @@
-[gd_scene load_steps=2 format=3 uid="uid://dune6txyuwmm2"]
+[gd_scene load_steps=9 format=3 uid="uid://dune6txyuwmm2"]
 
 [ext_resource type="Script" path="res://scripts/ui/town/VillagerResidence.cs" id="1_eflyb"]
+[ext_resource type="StyleBox" uid="uid://cekqcomecgkhn" path="res://assets/resources/styles/default_ui_style_box_texture.tres" id="2_jq2lk"]
+[ext_resource type="LabelSettings" uid="uid://djab4esbcqs0l" path="res://assets/resources/labelsettings/town_hall_menu_Header_label_settings.tres" id="3_f3juk"]
+[ext_resource type="LabelSettings" uid="uid://bbixx2rjsddy7" path="res://assets/resources/labelsettings/crafting_resource_label_settings.tres" id="4_scxdq"]
+[ext_resource type="StyleBox" uid="uid://bfq7mg2htfllb" path="res://assets/resources/styles/inventory_style_box_texture.tres" id="5_iux3n"]
+[ext_resource type="PackedScene" uid="uid://kuv6vwvcsqo5" path="res://scenes/ui/town_ui/close_button_container.tscn" id="6_pc2fc"]
+[ext_resource type="StyleBox" uid="uid://cphnvuxh1r71q" path="res://assets/resources/styles/default_tab_container_hovered_tab_style.tres" id="7_n17ed"]
+[ext_resource type="StyleBox" uid="uid://bjrxs66a6rkm7" path="res://assets/resources/styles/default_tab_container_panel_style.tres" id="8_w40rr"]
 
 [node name="VillagerResidenceComponent" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_eflyb")
+
+[node name="MainPanel" type="Panel" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(512, 320)
+layout_mode = 0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("2_jq2lk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="Upper HBox" type="HBoxContainer" parent="MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 87.305)
+layout_mode = 2
+alignment = 1
+
+[node name="Header" type="Label" parent="MainPanel/VBoxContainer/Upper HBox"]
+layout_mode = 2
+text = "HOUSE"
+label_settings = ExtResource("3_f3juk")
+horizontal_alignment = 1
+
+[node name="Lowest HBox" type="MarginContainer" parent="MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 112)
+layout_mode = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_right = 23
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/VBoxContainer/Lowest HBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Villagers Label" type="Label" parent="MainPanel/VBoxContainer/Lowest HBox/VBoxContainer"]
+layout_mode = 2
+text = "Residing villagers:"
+label_settings = ExtResource("4_scxdq")
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="MainPanel/VBoxContainer/Lowest HBox/VBoxContainer"]
+custom_minimum_size = Vector2(485.84, 96)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("5_iux3n")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainPanel/VBoxContainer/Lowest HBox/VBoxContainer/Panel"]
+custom_minimum_size = Vector2(504, 72)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -252.0
+offset_top = -40.0
+offset_right = 252.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical_scroll_mode = 0
+
+[node name="VillagerParentGrid" type="GridContainer" parent="MainPanel/VBoxContainer/Lowest HBox/VBoxContainer/Panel/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(496, 72)
+layout_mode = 2
+theme_override_constants/h_separation = 9
+columns = 128
+
+[node name="CloseButtonContainer" parent="MainPanel" instance=ExtResource("6_pc2fc")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = -16.0
+offset_right = 8.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="CloseButton" parent="MainPanel/CloseButtonContainer" index="0"]
+custom_minimum_size = Vector2(64, 64)
+
+[node name="MarginContainer" parent="MainPanel/CloseButtonContainer/CloseButton" index="0"]
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="DemolishButtonMargin" type="MarginContainer" parent="MainPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_top = 232.0
+offset_right = 6.0
+offset_bottom = 344.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 32
+
+[node name="DemolishButton" type="Button" parent="MainPanel/DemolishButtonMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = ExtResource("7_n17ed")
+theme_override_styles/hover = ExtResource("7_n17ed")
+theme_override_styles/pressed = ExtResource("8_w40rr")
+text = "Demolish"
+
+[editable path="MainPanel/CloseButtonContainer"]

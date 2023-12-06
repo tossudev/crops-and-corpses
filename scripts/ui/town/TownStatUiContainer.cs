@@ -26,7 +26,7 @@ public partial class TownStatUiContainer : Control
 		_statText = GetNode<Label>(TEXT_NODENAME);
 	}
 
-	public void SetContainerType(TownStatType type)
+	public void SetContainerTypeAndModulation(TownStatType type, Color color)
 	{
 		_townStatType = type;
 
@@ -35,17 +35,17 @@ public partial class TownStatUiContainer : Control
 			TownStatType.HOUSING => "res://assets/sprites/buildings/smallhouse_color.png",
 			TownStatType.POPULATION_CAP => "res://assets/sprites/character/npc1/SVG/head.svg",
 			TownStatType.SILO_CAP => "res://assets/sprites/Farm sprites/hay.png",
-			TownStatType.BROKEN_BUILDINGS => "res://assets/sprites/Farm sprites/hay_dead.png",
+			TownStatType.BROKEN_BUILDINGS => "res://assets/sprites/buildings/smallhouse_color.png",
 			_ => throw new ArgumentOutOfRangeException()
 		});
 
-		_statImage.FlipH = type == TownStatType.BROKEN_BUILDINGS;
+		_statImage.SelfModulate = color;
 		
 		_floatingStatName.UpdateName(type switch
 		{
 			TownStatType.HOUSING => "Homes",
 			TownStatType.POPULATION_CAP => "Max population",
-			TownStatType.SILO_CAP => "Silo capacity",
+			TownStatType.SILO_CAP => "Silo compartments filled",
 			TownStatType.BROKEN_BUILDINGS => "Broken buildings",
 			_ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
 		});

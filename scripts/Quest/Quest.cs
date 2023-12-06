@@ -8,7 +8,14 @@ public enum QuestStage
     Find,
     Kill,
     Rescue,
-    Deliver
+    Deliver,
+
+    OpenInventory,
+    OpenCrafting,
+    OpenQuestJournal,
+    ClickOnTownHall,
+
+
 }
 
 public partial class Quest : Node
@@ -20,8 +27,8 @@ public partial class Quest : Node
     public const string QUEST_TYPE_KEY = "questType";
     public const string QUEST_STAGES_KEY = "stages";
     public const string QUEST_LOCATION_KEY = "location";
-    
-    
+
+
     public int questDifficulty { get; private set; }
     public int startDay { get; private set; }
     public string description { get; private set; }
@@ -31,15 +38,18 @@ public partial class Quest : Node
     public Array<QuestStage> stages { get; private set; } = new();
     public Scene.RootScene location { get; private set; }
 
-    public Quest () {}
-    
+    public Quest() { }
+
     public Quest(int difficulty, int startDay, QuestType type, Scene.RootScene location)
     {
         SetDesc(type, difficulty, location);
+                
+        questDifficulty = difficulty;
         this.startDay = startDay;
-        SetStages(type);
-        
+        this.type = type;
         this.location = location;
+
+        SetStages(type);
     }
 
     void SetDesc(QuestType type, int difficulty, Scene.RootScene location)
@@ -50,13 +60,17 @@ public partial class Quest : Node
 
                 string plural = difficulty > 1 ? "s" : "";
                 description = $"Rescue {difficulty} villager{plural} from {location.Name}.";
-                questDifficulty = difficulty;
+                break;
+
+            case QuestType.Tutorial:
+
+                description = "Press 'E' to open inventory.";
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
     }
-    
+
     void SetStages(QuestType type)
     {
         switch (type)
@@ -65,11 +79,17 @@ public partial class Quest : Node
 
                 stages = new Array<QuestStage> { QuestStage.Find, QuestStage.Kill, QuestStage.Rescue, QuestStage.Deliver };
                 break;
+
+            case QuestType.Tutorial:
+
+                stages = new Array<QuestStage> { QuestStage.OpenInventory, QuestStage.OpenCrafting, QuestStage.OpenQuestJournal, QuestStage.ClickOnTownHall };
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
+
     }
-    
+
     public bool IsQuestComplete()
     {
         return stages.Count == 0;
@@ -78,7 +98,7 @@ public partial class Quest : Node
     public bool CompleteQuestStage(QuestStage stage)
     {
         if (!stages.Contains(stage)) return false;
-        
+
         stages.Remove(stage);
         return true;
     }
@@ -93,18 +113,18 @@ public partial class Quest : Node
         return this.description = description;
     }
 
-    
+
     public int GetStartDay()
     {
         return startDay;
     }
-    
+
     public static Dictionary GetDictionary(Quest quest)
     {
         if (quest == null) return new Dictionary();
-        
+
         Variant questStages = quest.stages;
-        
+
         Dictionary questData = new Dictionary
         {
             { QUEST_DESCRIPTION_KEY, quest.description },
@@ -127,23 +147,23 @@ public partial class Quest : Node
 
         Quest loadedQuest = new Quest
         {
-            questDifficulty = (int) questDictionary[QUEST_DIFFICULTY_KEY],
-            startDay = (int) questDictionary[QUEST_START_DAY_KEY],
-            description = (string) questDictionary[QUEST_DESCRIPTION_KEY],
-            type = (QuestType) (int) questDictionary[QUEST_TYPE_KEY],
-            stages = (Array<QuestStage>) questDictionary[QUEST_STAGES_KEY],
-            location = Scene.GetRootSceneByName((string) questDictionary[QUEST_LOCATION_KEY])
+            questDifficulty = (int)questDictionary[QUEST_DIFFICULTY_KEY],
+            startDay = (int)questDictionary[QUEST_START_DAY_KEY],
+            description = (string)questDictionary[QUEST_DESCRIPTION_KEY],
+            type = (QuestType)(int)questDictionary[QUEST_TYPE_KEY],
+            stages = (Array<QuestStage>)questDictionary[QUEST_STAGES_KEY],
+            location = Scene.GetRootSceneByName((string)questDictionary[QUEST_LOCATION_KEY])
         };
 
         return loadedQuest;
     }
-    
+
 }
 
-   
+
 
 public enum QuestType
 {
     Rescue,
-    BridgeBuild
+    Tutorial
 }

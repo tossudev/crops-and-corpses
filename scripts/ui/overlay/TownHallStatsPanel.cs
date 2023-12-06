@@ -28,6 +28,17 @@ public partial class TownHallStatsPanel : Control
 		_thStatsPanelInstance = this;
 		
 		Initialize();
+
+		Timer updateTimer = new Timer()
+		{
+			Autostart = true,
+			OneShot = false,
+			WaitTime = 6f
+		};
+
+		updateTimer.Timeout += UpdateAllStats;
+		AddChild(updateTimer);
+		
 	}
 
 	public override void _ExitTree()
@@ -59,18 +70,20 @@ public partial class TownHallStatsPanel : Control
 		AddStatContainer(TownStatType.BROKEN_BUILDINGS);
 	}
 
-	void OpenTownHallUI()
-	{
-		
-	}
-
 	void AddStatContainer(TownStatType type)
 	{
 		TownStatUiContainer container = (TownStatUiContainer) _statContainerPrefab.Instantiate();
 		_townStatUiContainers.Add(container);
 		_statContainersVBoxContainer.AddChild(container);
 		
-		container.SetContainerType(type);
+		Color modulateColor = type == TownStatType.BROKEN_BUILDINGS
+			? Color.Color8(255, 255, 255, 150)
+			: Color.Color8(255, 255, 255, 255);
+		
+		container.SetContainerTypeAndModulation(type, modulateColor);
+
+		
+		
 		UpdateStat(type);
 	}
 
@@ -95,19 +108,28 @@ public partial class TownHallStatsPanel : Control
 	}
 
 
-	public void UpdateStat(TownStatType type)
+	public async void UpdateStat(TownStatType type)
 	{
 		var currentTownStats = TownManager.currentTownStats;
 		
-		string statText = type switch
+        await TaskExtensions.SuspendWhile(() => VillagerManager.villagerManagerInstance == null, 150);	
+		
+        string statText = type switch
 		{
 			TownStatType.HOUSING => $"{currentTownStats.providedHomes}/{currentTownStats.populationCap}",
-			TownStatType.POPULATION_CAP => $"{SaveData.allVillagerData.FindAll(data => data.isTownPopulation).Count}" +
+			
+			TownStatType.POPULATION_CAP => $"{SaveData.allVillagerData.Count(data => data.isTownPopulation)}" +
 			                               $"/{currentTownStats.populationCap}",
-			TownStatType.SILO_CAP => $"TBA",
-			TownStatType.BROKEN_BUILDINGS => $"TBA",
+			
+			TownStatType.SILO_CAP => $"{SaveData.townStorageItems.Count(s => s is not null)}" +
+			                         $"/{StorageData.TOWN_STORAGE_SIZE}",
+			
+			TownStatType.BROKEN_BUILDINGS => $"{VillagerManager.villagerManagerInstance.GetAllBrokenBuildings().Count}" +
+			                                 $"/{VillagerManager.villagerManagerInstance.allBuildings.Count}",
+			
 			_ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
 		};
+        
 		
 		_townStatUiContainers
 			.Find(container => container.townStatType == type)

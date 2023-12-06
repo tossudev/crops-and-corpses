@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bbvsfe4h2sph"]
+[gd_scene load_steps=37 format=3 uid="uid://bbvsfe4h2sph"]
 
 [ext_resource type="PackedScene" uid="uid://wy0dgop8pftu" path="res://scenes/world/cave_tilemap.tscn" id="1_yabqn"]
 [ext_resource type="Script" path="res://scripts/cave.cs" id="1_yjxwb"]
@@ -12,18 +12,20 @@
 [ext_resource type="PackedScene" uid="uid://ih0n4u2okucu" path="res://scenes/world/stalagmite2.tscn" id="7_ecfe8"]
 [ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="7_somas"]
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="8_pa72b"]
-[ext_resource type="Texture2D" uid="uid://dkjbgvrnc6r7" path="res://assets/sprites/tiles/stalagmate_two.png" id="10_gfyjh"]
+[ext_resource type="Texture2D" uid="uid://cwj4o76ojs5m6" path="res://assets/sprites/tiles/stalagmate_two.png" id="10_gfyjh"]
 [ext_resource type="Resource" uid="uid://bs6otct5awtuy" path="res://TinoTests/Resources/rock.tres" id="11_c0w2f"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="11_mechj"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="11_ufcgq"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="12_p8hl2"]
-[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="13_66y4m"]
+[ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="13_66y4m"]
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="13_nie8h"]
-[ext_resource type="Texture2D" uid="uid://xcn7cih418ht" path="res://assets/sprites/tiles/stalagmate_drop.png" id="14_jaj2c"]
-[ext_resource type="Texture2D" uid="uid://dj3tsl8mk8qbe" path="res://assets/sprites/tiles/stalagmate_drop_two.png" id="15_rbqxh"]
+[ext_resource type="Texture2D" uid="uid://1w2485erffor" path="res://assets/sprites/tiles/stalagmate_drop.png" id="14_jaj2c"]
+[ext_resource type="Texture2D" uid="uid://d18xlrgqlimwu" path="res://assets/sprites/tiles/stalagmate_drop_two.png" id="15_rbqxh"]
 [ext_resource type="Script" path="res://scripts/World/PortalManager.cs" id="19_ml5be"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="19_w0jgf"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="20_wlbpj"]
+[ext_resource type="PackedScene" uid="uid://wwf7rdwowll5" path="res://scenes/Quest/QuestPointManager.tscn" id="25_n2sk6"]
+[ext_resource type="PackedScene" uid="uid://7r2mskqdc0va" path="res://scenes/Quest/QuestPoint.tscn" id="26_t6sbg"]
 
 [sub_resource type="Gradient" id="Gradient_ksvwj"]
 offsets = PackedFloat32Array(0.187097, 0.364516, 0.396774, 1)
@@ -1789,6 +1791,7 @@ script = ExtResource("20_wlbpj")
 
 [node name="ZombieSpawn" type="Node2D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("7_somas")
+maxDistance = 1500.0
 player = NodePath("../Objects/Player")
 
 [node name="SpawnPoint0" type="Node2D" parent="ZombieSpawn"]
@@ -1840,7 +1843,31 @@ script = ExtResource("19_w0jgf")
 visible = false
 position = Vector2(-71, -4)
 
+[node name="QuestPointManager" parent="." instance=ExtResource("25_n2sk6")]
+position = Vector2(3195.03, -5116.2)
+
+[node name="QuestPoint" parent="QuestPointManager" instance=ExtResource("26_t6sbg")]
+position = Vector2(167.811, 59.9321)
+
+[node name="QuestZombieSpawn" parent="QuestPointManager/QuestPoint" index="0"]
+position = Vector2(-193.827, 122.736)
+
+[node name="VillagerSpawn" parent="QuestPointManager/QuestPoint" index="1"]
+position = Vector2(1165.35, -69.8145)
+
+[node name="QuestPoint2" parent="QuestPointManager" instance=ExtResource("26_t6sbg")]
+position = Vector2(-10658.4, 7089.35)
+
+[node name="QuestZombieSpawn" parent="QuestPointManager/QuestPoint2" index="0"]
+position = Vector2(-30.2383, -30.2379)
+
+[node name="VillagerSpawn" parent="QuestPointManager/QuestPoint2" index="1"]
+position = Vector2(226.786, 962.58)
+
 [connection signal="animation_finished" from="Objects/Breakable/BridgeStalagmite/AnimationPlayer" to="Objects/Breakable/BridgeStalagmite" method="OnAnimationFinished"]
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]
 [connection signal="timeout" from="ZombieSpawn/Timer" to="ZombieSpawn" method="ZombieSpawn" flags=18]
 [connection signal="timeout" from="ZombieSpawn/ZombieDeletionTimer" to="ZombieSpawn" method="DeleteZombieDelay" flags=18]
+
+[editable path="QuestPointManager/QuestPoint"]
+[editable path="QuestPointManager/QuestPoint2"]

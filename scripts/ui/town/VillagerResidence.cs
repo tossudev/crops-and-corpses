@@ -8,12 +8,24 @@ public partial class VillagerResidence : Control
 	
 	GridContainer _villagerFaceButtonParentGrid;
 	const string VILLAGER_GRID_NODENAME = "%VillagerParentGrid";
+	
+	Button _closeButton;
+	const string CLOSE_BUTTON_CONTAINER_NODENAME = "%CloseButtonContainer";
+	const string CLOSE_BUTTON_NODENAME = "%CloseButton";
+    
+	Button _demolishButton;
+	const string DEMOLISH_BUTTON_NODENAME = "%DemolishButton";
+	
+	BuildingDemolishMenu _demolishMenu;
+	const string DEMOLISH_MENU_NODENAME = "%BuildingDemolishMenu";
 
 	public int id { get; private set; }
 	public bool isBroken { get; private set; }
 
 	
 	[Export] int _housingCapacity;
+	public int housingCapacity => _housingCapacity;
+	
 	Array<VillagerRawData> _allResidents = new ();
 	Array<int> _currentResidentIds = new ();
 
@@ -23,18 +35,59 @@ public partial class VillagerResidence : Control
 	
 	public override void _Ready()
 	{
+		ClosePanel();
 		if (_isTownHall) return;
+
+		_closeButton = GetNode<MarginContainer>(CLOSE_BUTTON_CONTAINER_NODENAME).GetNode<Button>(CLOSE_BUTTON_NODENAME);
+		_closeButton.Pressed += ClosePanel;
+
+		_demolishMenu = Owner.GetNode<BuildingDemolishMenu>(DEMOLISH_MENU_NODENAME);
 		
-		// TODO:
+		_demolishButton = GetNode<Button>(DEMOLISH_BUTTON_NODENAME);
+		_demolishButton.Pressed += () =>
+		{
+			ClosePanel();
+			_demolishMenu.OpenMainPanel();
+		};
+
 		_villagerFaceButtonParentGrid = GetNodeOrNull<GridContainer>(VILLAGER_GRID_NODENAME);
+
 		
 		RegisterResidence();
 	}
 
+	public void SetFaceButtonParentGrid(GridContainer container)
+	{
+		_villagerFaceButtonParentGrid = container;
+	}
+
+	void OnBuildingInput(Node viewport, InputEvent @event, int shapeIdx)
+	{
+		if (@event is not InputEventMouseButton { Pressed: true } mouseEvent) return;
+
+		if (mouseEvent.ButtonIndex == MouseButton.Left)
+		{
+			if (PlayerInventoryController.heldItem == null || (PlayerInventoryController.heldItem.id != 405 && PlayerInventoryController.heldItem.id != 406))
+			{
+				OpenPanel();
+			}
+		}
+	}
+	
+	void OpenPanel()
+	{
+		Visible = true;
+	}
+
+	void ClosePanel()
+	{
+		Visible = false;
+	}
+	
 	async void RegisterResidence()
 	{
 		await TaskExtensions.SuspendWhile(() =>
-			VillagerManager.villagerManagerInstance == null || !SaveData.firstLoadComplete);
+			VillagerManager.villagerManagerInstance == null || !SaveData.firstLoadComplete, GD.Randi() % 2000 + 100);
 		
 		id = _isTownHall
 			? 0
@@ -42,9 +95,19 @@ public partial class VillagerResidence : Control
 		
 		VillagerManager.villagerManagerInstance.AddNewResidence(this);
 	}
-	
-	public void VillagerEnterBuilding(Villager newVillager)
+
+	public override void _ExitTree()
 	{
+		base._ExitTree();
+		if (VillagerManager.villagerManagerInstance?.allVillagerResidences.Contains(this) ?? false)
+		{
+			VillagerManager.villagerManagerInstance.RemoveResidence(this);
+		}
+	}
+	
+	public async void VillagerEnterBuilding(Villager newVillager)
+	{
+		
 		if (newVillager == null)
 		{
 			GD.PushError("Villager trying to enter building was null");
@@ -58,6 +121,12 @@ public partial class VillagerResidence : Control
 			(VillagerFaceButton) GD.Load<PackedScene>(VILLAGER_FACE_BUTTON_FILEPATH).Instantiate<Control>();
 					
 		villagerFaceButton.InitButton(newVillager);
+
+		if (_isTownHall)
+		{
+			await TaskExtensions.SuspendWhile(() =>
+				TownHallMenu.menuInstance == null || TownHallMenu.menuInstance.villagerResidence == null, 100);
+		}
 		
 		_villagerFaceButtonParentGrid.AddChild(villagerFaceButton);
     }

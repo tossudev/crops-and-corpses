@@ -239,7 +239,7 @@ offset = Vector2(0.12922, -77.6727)
 
 [node name="VillagerHat" type="Sprite2D" parent="Body/Head/Head"]
 unique_name_in_owner = true
-position = Vector2(0.938048, -118.048)
+position = Vector2(3.99519, -108.184)
 rotation = 0.095211
 
 [node name="RightArm" type="Bone2D" parent="Body"]

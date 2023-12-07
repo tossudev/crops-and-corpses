@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://2v1aodyd0p4b" path="res://scenes/buildings/building_demolish_menu.tscn" id="9_ln84s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jggck"]
-size = Vector2(128, 254.495)
+size = Vector2(123, 243)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0u7of"]
 size = Vector2(113.333, 118.406)
@@ -63,6 +63,7 @@ script = ExtResource("5_sr0xp")
 position = Vector2(-64, -128)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 2.5)
 shape = SubResource("RectangleShape2D_jggck")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["building"]]
@@ -86,7 +87,7 @@ _parentScript = NodePath("../BuildingHealth")
 _maxHealth = 200
 _healItemPrefabs = Array[PackedScene]([])
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") groups=["building"] instance=ExtResource("7_u83t5")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") groups=["Hitbox", "building"] instance=ExtResource("7_u83t5")]
 position = Vector2(-126, -75)
 collision_layer = 16
 collision_mask = 32

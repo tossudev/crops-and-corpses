@@ -21,6 +21,7 @@ texture = ExtResource("1_rlsfp")
 offset = Vector2(0, -250)
 
 [node name="ruins_sign" type="Area2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(75, -411.667)
 scale = Vector2(1.5, 1.5)
 

@@ -66,7 +66,7 @@ public partial class BuildingDemolishMenu : Control
         {
             if (GetParent().IsInGroup("FarmPlot"))
             {
-                Node2D plantSlot = GetParent().GetNode<Node2D>("%plant_slot");
+                TextureRect plantSlot = GetParent().GetNode<TextureRect>("%plant_slot");
                 if (plantSlot.GetChildCount() > 0)
                 {
                     return;

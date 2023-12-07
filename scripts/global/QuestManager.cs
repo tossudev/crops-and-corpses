@@ -122,6 +122,12 @@ public partial class QuestManager : Node
 			QuestJournalOpen();
 
 		}
+
+		if (@event.IsActionPressed("open_build_menu"))
+		{
+			BuildMenuOpen();
+
+		}
 	}
 
 
@@ -160,7 +166,7 @@ public partial class QuestManager : Node
 			{
 				if (quest.stages.Contains(QuestStage.OpenInventory)) return;
 				quest.CompleteQuestStage(QuestStage.OpenCrafting);
-				quest.ChangeQuestDescription("click on town hall.");
+				quest.ChangeQuestDescription("open 'V' build menu.");
 
 			}
 		}
@@ -187,6 +193,26 @@ public partial class QuestManager : Node
 		}
 
 
+	}
+
+	public async void BuildMenuOpen()
+	{
+		var quest = await PlayerInfo.GetActiveQuest();
+
+		if (quest == null)
+		{
+			return;
+		}
+
+		if (quest.type == QuestType.Tutorial)
+		{
+			if (quest.stages.Contains(QuestStage.OpenCrafting)) return;
+			if (quest.stages.Contains(QuestStage.OpenBuildMenu))
+			{
+				quest.CompleteQuestStage(QuestStage.OpenBuildMenu);
+				quest.ChangeQuestDescription("click on town hall.");
+			}
+		}
 	}
 
 

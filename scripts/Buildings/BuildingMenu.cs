@@ -44,6 +44,7 @@ public partial class BuildingMenu : Control
 
     public Item log;
     public Item stone;
+    public Item copper;
 
     public string savePath;
     const string FILE_NAME = "buildings.txt";
@@ -71,19 +72,19 @@ public partial class BuildingMenu : Control
 
        
 
-        _farmPlot = new Building(_farmPlotScene, _farmPlotGhostScene, 1, 1, ExpGain.VERY_SMALL,  "Farm Plot", _farmPlotIcon);
+        _farmPlot = new Building(_farmPlotScene, _farmPlotGhostScene, 1, 1, 0, ExpGain.VERY_SMALL,  "Farm Plot", _farmPlotIcon);
         _buildingPrefabs.Add(_farmPlot);
 
-        _house = new Building(_houseScene, _houseGhostScene, 4, 2, ExpGain.SMALL,  "House", _houseIcon);
+        _house = new Building(_houseScene, _houseGhostScene, 4, 2, 2, ExpGain.SMALL,  "House", _houseIcon);
         _buildingPrefabs.Add(_house);
 
-        _largeHouse = new Building(_largeHouseScene, _largeHouseGhostScene, 6, 3, ExpGain.MEDIUM,  "Large House", _largeHouseIcon);
+        _largeHouse = new Building(_largeHouseScene, _largeHouseGhostScene, 6, 3,3, ExpGain.MEDIUM,  "Large House", _largeHouseIcon);
         _buildingPrefabs.Add(_largeHouse);
 
-        _well = new Building(_wellScene, _wellGhostScene, 1, 4, ExpGain.SMALL,  "Well", _wellIcon);
+        _well = new Building(_wellScene, _wellGhostScene, 1, 4,0, ExpGain.SMALL,  "Well", _wellIcon);
         _buildingPrefabs.Add(_well);
 
-        _archerTower = new Building(_archerTowerScene, _archerTowerGhostScene, 6, 6, ExpGain.BIG, "Archer Tower", _archerTowerIcon);
+        _archerTower = new Building(_archerTowerScene, _archerTowerGhostScene, 6, 6,6, ExpGain.BIG, "Archer Tower", _archerTowerIcon);
         _buildingPrefabs.Add(_archerTower);
 
         _notEnoughResourcesLabel.AddThemeFontSizeOverride("font_size", 32);
@@ -99,9 +100,6 @@ public partial class BuildingMenu : Control
         {
             buildMenu = null;
         }
-
-        // move this to quit game button 
-        SaveBuildings();
     }
 
     public override void _Input(InputEvent @event) {
@@ -123,12 +121,12 @@ public partial class BuildingMenu : Control
 
     private void OpenBuildMenu()
     {
-        _player.SetPhysicsProcess(false);
         _player.SetProcessUnhandledInput(false);
         _buildMenu.Show();
 
         SetPriceLabelColor(0, log.ID);
         SetPriceLabelColor(1, stone.ID);
+        SetPriceLabelColor(2, copper.ID);
     }
 
     private void SetPriceLabelColor(int child, int itemId)
@@ -161,7 +159,6 @@ public partial class BuildingMenu : Control
 
     public void CloseBuildMenu()
     {
-        _player.SetPhysicsProcess(true);
         _player.SetProcessUnhandledInput(true);
         _buildMenu.Hide();
         _notEnoughResourcesLabel.Visible = false;
@@ -171,6 +168,7 @@ public partial class BuildingMenu : Control
     {
         log = ItemData.GetItemById(0);
         stone = ItemData.GetItemById(5);
+        copper = ItemData.GetItemById(2);
         
         _vBoxContainer.CustomMinimumSize = new Vector2(600, 400);
 
@@ -179,47 +177,38 @@ public partial class BuildingMenu : Control
             Button _button = new Button();
             _vBoxContainer.AddChild(_button);
             _button.CustomMinimumSize = new Vector2(400, 100);
-            _button.Text = _building.name + "                     ";
+            _button.Alignment = HorizontalAlignment.Left;
+            _button.Text = " " + _building.name;
             _button.Icon = _building.icon;
             _button.ExpandIcon = true;
             _button.AddThemeFontSizeOverride("font_size", 32);
             _button.ButtonUp += () => OnButtonUp(_building);
 
-
-            Sprite2D _logSprite = new Sprite2D();
-            _button.AddChild(_logSprite);
-            _logSprite.Texture = log.IconTexture;
-            _logSprite.Scale = new Vector2(0.4f, 0.4f);
-            _logSprite.Position = new Vector2(440, 50);
-
-            Label _logLabel = new Label();
-            _logSprite.AddChild(_logLabel);
-            _logLabel.Text = _building.priceLogs.ToString();
-            _logLabel.HorizontalAlignment = HorizontalAlignment.Right;
-            _logLabel.VerticalAlignment = VerticalAlignment.Bottom;
-            _logLabel.AnchorsPreset = 8;
-            _logLabel.Size = new Vector2(130, 130);
-            _logLabel.AddThemeFontSizeOverride("font_size", 80);
-
-
-            Sprite2D _stoneSprite = new Sprite2D();
-            _button.AddChild(_stoneSprite);
-            _stoneSprite.Texture = stone.IconTexture;
-            _stoneSprite.Scale = new Vector2(0.3f, 0.3f);
-            _stoneSprite.Position = new Vector2(540, 50);
-
-            Label _stoneLabel = new Label();
-            _stoneSprite.AddChild(_stoneLabel);
-            _stoneLabel.Text = _building.priceStone.ToString();
-            _stoneLabel.HorizontalAlignment = HorizontalAlignment.Right;
-            _stoneLabel.VerticalAlignment = VerticalAlignment.Bottom;
-            _stoneLabel.AnchorsPreset = 8;
-            _stoneLabel.Size = new Vector2(130, 130);
-            _stoneLabel.Scale = new Vector2(1.25f,1.25f);
-            _stoneLabel.AddThemeFontSizeOverride("font_size", 80);
+            CreatePriceIcons(_button, new Vector2(350, 50), new Vector2(0.4f, 0.4f), new Vector2(1,1), log.IconTexture, _building.priceLogs);
+            CreatePriceIcons(_button, new Vector2(450, 50), new Vector2(0.3f, 0.3f), new Vector2(1.25f, 1.25f), stone.IconTexture, _building.priceStone);
+            CreatePriceIcons(_button, new Vector2(540, 50), new Vector2(0.3f, 0.3f), new Vector2(1.25f, 1.25f),copper.IconTexture, _building.priceCopper);
         }
 
         _buildMenuControl.CustomMinimumSize = new Vector2(_buildMenuControl.CustomMinimumSize.X, _vBoxContainer.GetMinimumSize().Y + 20);
+    }
+
+    public void CreatePriceIcons(Button button, Vector2 position, Vector2 spriteScale, Vector2 labelScale, Texture2D texture, int price)
+    {
+        Sprite2D _sprite = new Sprite2D();
+        button.AddChild(_sprite);
+        _sprite.Texture = texture;
+        _sprite.Scale = spriteScale;
+        _sprite.Position = position;
+
+        Label _label = new Label();
+        _sprite.AddChild(_label);
+        _label.Text = price.ToString();
+        _label.HorizontalAlignment = HorizontalAlignment.Right;
+        _label.VerticalAlignment = VerticalAlignment.Bottom;
+        _label.AnchorsPreset = 8;
+        _label.Size = new Vector2(130, 130);
+        _label.Scale = labelScale;
+        _label.AddThemeFontSizeOverride("font_size", 80);
     }
 
     private JsonArray GetBuildings()
@@ -389,7 +378,7 @@ public partial class BuildingMenu : Control
         }
     }
 
-    public async void InstantiateBuildings(JsonArray loadedBuildings)
+    public void InstantiateBuildings(JsonArray loadedBuildings)
     {
         float time = 0;
 
@@ -468,7 +457,9 @@ public partial class BuildingMenu : Control
 
     private void OnButtonUp(Building building)
     {
-        if (!StorageData.ExistsInInventoryOrHotbar(log.ID, building.priceLogs) || !StorageData.ExistsInInventoryOrHotbar(stone.ID, building.priceStone))
+        if (!StorageData.ExistsInInventoryOrHotbar(log.ID, building.priceLogs) || 
+            !StorageData.ExistsInInventoryOrHotbar(stone.ID, building.priceStone) || 
+            !StorageData.ExistsInInventoryOrHotbar(copper.ID, building.priceCopper))
         {
             _notEnoughResourcesLabel.Visible = true;
             return;
@@ -482,19 +473,18 @@ public partial class BuildingMenu : Control
     {
         RawInventoryItem logsRaw = new RawInventoryItem(log.ID, log.Name, _currentBuilding.priceLogs, log.StackSize);
         RawInventoryItem stoneRaw = new RawInventoryItem(stone.ID, stone.Name, _currentBuilding.priceStone, stone.StackSize);
+        RawInventoryItem copperRaw = new RawInventoryItem(copper.ID, copper.Name, _currentBuilding.priceCopper, copper.StackSize);
 
         if (await PlayerInventoryController.RemoveItemFromInventory(logsRaw) == true)
         {
-            if (await PlayerInventoryController.RemoveItemFromInventory(stoneRaw) == false)
+            if (await PlayerInventoryController.RemoveItemFromInventory(stoneRaw) == true)
             {
-                GD.Print("Not enough stone!");
-                return;
+                if (await PlayerInventoryController.RemoveItemFromInventory(copperRaw) == false)
+                {
+                    GD.Print("Not enough stone!");
+                    return;
+                }
             }
-        }
-        else
-        {
-            GD.Print("Not enough logs!");
-            return;
         }
 
         Node2D _buildingScene = _currentBuilding.scene.Instantiate() as Node2D;
@@ -510,8 +500,11 @@ public partial class BuildingMenu : Control
             _demolishMenu.SetBuildingName();
         }
 
-        HealthComponent _healthComponent = _buildingScene.GetNode("%HealthComponent") as HealthComponent;
-        _healthComponent.SetHealth(_healthComponent.GetMaxHealth());
+        if (_currentBuilding.name == "House" || _currentBuilding.name == "LargeHouse" || _currentBuilding.name == "ArcherTower")
+        {
+            HealthComponent _healthComponent = _buildingScene.GetNode("%HealthComponent") as HealthComponent;
+            _healthComponent.SetHealth(_healthComponent.GetMaxHealth());
+        }
     }
 
     private void BuildingMode()
@@ -526,6 +519,7 @@ public partial class BuildingMenu : Control
         _buildingMode.buildingMenu = this;
         _buildingMode.buildingPriceLogs = _currentBuilding.priceLogs;
         _buildingMode.buildingPriceStone = _currentBuilding.priceStone;
+        _buildingMode.buildingPriceCopper = _currentBuilding.priceCopper;
 
         _buildings.AddChild(_ghostBuilding);
 	}

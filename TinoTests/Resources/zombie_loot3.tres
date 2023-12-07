@@ -1,51 +1,63 @@
-[gd_resource type="Resource" script_class="Loot" load_steps=17 format=3 uid="uid://nfsljestu85d"]
+[gd_resource type="Resource" script_class="Loot" load_steps=21 format=3 uid="uid://nfsljestu85d"]
 
-[ext_resource type="Resource" uid="uid://be020c80kdfnj" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/100_potato_seed.tres" id="1_spvaw"]
+[ext_resource type="Resource" path="res://assets/resources/game_items/resource_items_0_to_99/1_iron.tres" id="1_y8ok4"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_o2lph"]
-[ext_resource type="Resource" uid="uid://c1v5a4ipu05d" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/102_pumpkin_seed.tres" id="3_t30xh"]
-[ext_resource type="Resource" uid="uid://bvjuri17vg701" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/104_mushroom_seed.tres" id="4_odxh3"]
-[ext_resource type="Resource" uid="uid://7a8gf2arabq3" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/106_wheat_seed.tres" id="5_gx0pf"]
-[ext_resource type="Resource" uid="uid://bdxgtjm5ujcgk" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/108_maize_seed.tres" id="6_r0gbw"]
-[ext_resource type="Resource" uid="uid://ctt564su20h2f" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/110_lupine_seed.tres" id="7_nwghc"]
-[ext_resource type="Resource" uid="uid://be88krv16kuqn" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/112_poppy_seed.tres" id="8_wqtpv"]
+[ext_resource type="Resource" uid="uid://c3e5qdsie8n0l" path="res://assets/resources/game_items/weapon_items_150_to_249/161_arrow.tres" id="3_x0e8c"]
+[ext_resource type="Resource" uid="uid://1ocpajcw4bxt" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/113_poppy.tres" id="4_rj0gs"]
+[ext_resource type="Resource" uid="uid://bpa3bx68ohi5" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/111_lupine.tres" id="5_g4pqn"]
+[ext_resource type="Resource" uid="uid://djv78bsvabyah" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/109_maize.tres" id="6_usqxy"]
+[ext_resource type="Resource" uid="uid://dt5r6o5ibel3e" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/107_wheat.tres" id="7_71adn"]
+[ext_resource type="Resource" uid="uid://466kaxdtvhse" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/105_mushroom.tres" id="8_tdw8b"]
 [ext_resource type="Script" path="res://scripts/World/Loot.cs" id="9_78tae"]
+[ext_resource type="Resource" uid="uid://bwqnnm74g8l7l" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/103_pumpkin.tres" id="9_k4svq"]
+[ext_resource type="Resource" uid="uid://bfdw482ap5ams" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/101_potato.tres" id="10_ep75m"]
 
-[sub_resource type="Resource" id="Resource_pb26f"]
+[sub_resource type="Resource" id="Resource_2wicr"]
 script = ExtResource("2_o2lph")
-item = ExtResource("1_spvaw")
+item = ExtResource("1_y8ok4")
+quantity = 2
+
+[sub_resource type="Resource" id="Resource_6vmm0"]
+script = ExtResource("2_o2lph")
+item = ExtResource("3_x0e8c")
+quantity = 2
+
+[sub_resource type="Resource" id="Resource_nvnk3"]
+script = ExtResource("2_o2lph")
+item = ExtResource("4_rj0gs")
 quantity = 1
 
-[sub_resource type="Resource" id="Resource_ppum6"]
+[sub_resource type="Resource" id="Resource_ahu7d"]
 script = ExtResource("2_o2lph")
-item = ExtResource("3_t30xh")
+item = ExtResource("5_g4pqn")
 quantity = 1
 
-[sub_resource type="Resource" id="Resource_tt5yo"]
+[sub_resource type="Resource" id="Resource_tf4g4"]
 script = ExtResource("2_o2lph")
-item = ExtResource("4_odxh3")
+item = ExtResource("6_usqxy")
 quantity = 1
 
-[sub_resource type="Resource" id="Resource_e0v13"]
+[sub_resource type="Resource" id="Resource_o4m7q"]
 script = ExtResource("2_o2lph")
-item = ExtResource("5_gx0pf")
+item = ExtResource("7_71adn")
 quantity = 1
 
-[sub_resource type="Resource" id="Resource_rlg73"]
+[sub_resource type="Resource" id="Resource_2t41l"]
 script = ExtResource("2_o2lph")
-item = ExtResource("6_r0gbw")
+item = ExtResource("8_tdw8b")
 quantity = 1
 
-[sub_resource type="Resource" id="Resource_gk8qw"]
+[sub_resource type="Resource" id="Resource_hv0kk"]
 script = ExtResource("2_o2lph")
-item = ExtResource("7_nwghc")
+item = ExtResource("9_k4svq")
 quantity = 1
 
-[sub_resource type="Resource" id="Resource_gk4qx"]
+[sub_resource type="Resource" id="Resource_iy17l"]
 script = ExtResource("2_o2lph")
-item = ExtResource("8_wqtpv")
+item = ExtResource("10_ep75m")
 quantity = 1
 
 [resource]
 script = ExtResource("9_78tae")
-lootItems = [SubResource("Resource_pb26f"), SubResource("Resource_ppum6"), SubResource("Resource_tt5yo"), SubResource("Resource_e0v13"), SubResource("Resource_rlg73"), SubResource("Resource_gk8qw"), SubResource("Resource_gk4qx")]
+lootItems = [SubResource("Resource_2wicr"), SubResource("Resource_6vmm0"), SubResource("Resource_nvnk3"), SubResource("Resource_ahu7d"), SubResource("Resource_tf4g4"), SubResource("Resource_o4m7q"), SubResource("Resource_2t41l"), SubResource("Resource_hv0kk"), SubResource("Resource_iy17l")]
 meanDrop = 1

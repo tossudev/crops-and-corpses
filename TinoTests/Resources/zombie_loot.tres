@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Loot" load_steps=17 format=3 uid="uid://khdsb508afg6"]
+[gd_resource type="Resource" script_class="Loot" load_steps=21 format=3 uid="uid://khdsb508afg6"]
 
 [ext_resource type="Resource" uid="uid://be020c80kdfnj" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/100_potato_seed.tres" id="1_k03yv"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_qn8qa"]
@@ -9,16 +9,18 @@
 [ext_resource type="Resource" uid="uid://bdxgtjm5ujcgk" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/108_maize_seed.tres" id="6_8hger"]
 [ext_resource type="Resource" uid="uid://ctt564su20h2f" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/110_lupine_seed.tres" id="7_4aubg"]
 [ext_resource type="Resource" uid="uid://be88krv16kuqn" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/112_poppy_seed.tres" id="8_bgjo5"]
+[ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="9_61lje"]
+[ext_resource type="Resource" uid="uid://bv7vupb8k6yua" path="res://assets/resources/game_items/resource_items_0_to_99/5_stone.tres" id="10_rn7pw"]
 
 [sub_resource type="Resource" id="Resource_pb26f"]
 script = ExtResource("2_qn8qa")
 item = ExtResource("1_k03yv")
-quantity = 1
+quantity = 2
 
 [sub_resource type="Resource" id="Resource_ppum6"]
 script = ExtResource("2_qn8qa")
 item = ExtResource("3_evdof")
-quantity = 1
+quantity = 2
 
 [sub_resource type="Resource" id="Resource_tt5yo"]
 script = ExtResource("2_qn8qa")
@@ -45,7 +47,17 @@ script = ExtResource("2_qn8qa")
 item = ExtResource("8_bgjo5")
 quantity = 1
 
+[sub_resource type="Resource" id="Resource_upmgd"]
+script = ExtResource("2_qn8qa")
+item = ExtResource("9_61lje")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_3ocyw"]
+script = ExtResource("2_qn8qa")
+item = ExtResource("10_rn7pw")
+quantity = 1
+
 [resource]
 script = ExtResource("3_n4uu4")
-lootItems = [SubResource("Resource_pb26f"), SubResource("Resource_ppum6"), SubResource("Resource_tt5yo"), SubResource("Resource_e0v13"), SubResource("Resource_rlg73"), SubResource("Resource_gk8qw"), SubResource("Resource_gk4qx")]
+lootItems = [SubResource("Resource_pb26f"), SubResource("Resource_ppum6"), SubResource("Resource_tt5yo"), SubResource("Resource_e0v13"), SubResource("Resource_rlg73"), SubResource("Resource_gk8qw"), SubResource("Resource_gk4qx"), SubResource("Resource_upmgd"), SubResource("Resource_3ocyw")]
 meanDrop = 1

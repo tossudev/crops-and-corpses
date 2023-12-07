@@ -5,10 +5,10 @@ using System.Linq;
 
 public partial class AllVillagerData : Node
 {
-	const string FARMER_HAT_RESPATH = "res://assets/sprites/character/hats/straw_hat.png";
-	const string SOLDIER_HAT_RESPATH = "res://assets/sprites/character/hats/bucket_helmet.png";
-	const string WOODCUTTER_HAT_RESPATH = "res://assets/sprites/character/hats/ushanka.png";
-	const string MINER_HAT_RESPATH = "res://assets/sprites/character/hats/mining_hat.png";
+	const string FARMER_HAT_RESPATH = "res://assets/sprites/character/hats/straw_hat_for_villager.png";
+	const string SOLDIER_HAT_RESPATH = "res://assets/sprites/character/hats/helmet_hat_for_villager.png";
+	const string WOODCUTTER_HAT_RESPATH = "res://assets/sprites/character/hats/ushanka_hat_for_villager.png";
+	const string MINER_HAT_RESPATH = "res://assets/sprites/character/hats/mining_hat_for_villager.png";
 
 	const string FEMALE1_HEAD_RESPATH = "res://assets/sprites/character/npc1/SVG/head.svg";
 	const string FEMALE2_HEAD_RESPATH = "res://assets/sprites/character/npc2/SVG/head.svg";

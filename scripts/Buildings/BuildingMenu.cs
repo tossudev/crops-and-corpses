@@ -100,9 +100,6 @@ public partial class BuildingMenu : Control
         {
             buildMenu = null;
         }
-
-        // move this to quit game button 
-        SaveBuildings();
     }
 
     public override void _Input(InputEvent @event) {

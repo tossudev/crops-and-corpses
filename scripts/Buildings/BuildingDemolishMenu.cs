@@ -64,12 +64,11 @@ public partial class BuildingDemolishMenu : Control
 
         if (mouseEvent.ButtonIndex == MouseButton.Left)
         {
-            if (GetParent().IsInGroup("farmplot"))
+            if (GetParent().IsInGroup("FarmPlot"))
             {
                 Node2D plantSlot = GetParent().GetNode<Node2D>("%plant_slot");
                 if (plantSlot.GetChildCount() > 0)
                 {
-                    Debug.WriteLine("moiiiku");
                     return;
                 }
             }

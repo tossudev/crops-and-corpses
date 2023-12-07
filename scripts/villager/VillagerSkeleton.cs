@@ -5,6 +5,7 @@ using static VillagerManager;
 
 public partial class VillagerSkeleton : Skeleton2D
 {
+	bool _hatMoved = false;
 	const string HAT_NODENAME = "%VillagerHat";
 	const string HEAD_NODENAME = "%Head";
 	const string BODY_NODENAME = "%Body";
@@ -70,6 +71,17 @@ public partial class VillagerSkeleton : Skeleton2D
 
 	public void ChangeHat(VillagerOccupation occupation)
 	{
+		
+		if(!_hatMoved && occupation == VillagerOccupation.Woodcutter)
+		{
+			villagerHat.MoveLocalY(35);
+			_hatMoved = true;
+		}
+		if(_hatMoved && occupation != VillagerOccupation.Woodcutter)
+		{
+			villagerHat.MoveLocalY(-35);
+			_hatMoved = false;
+		}
 		villagerHat.Texture = villagerManagerInstance.allVillagerData.GetHatByOccupation(occupation);
 	}
 

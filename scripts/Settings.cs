@@ -39,7 +39,7 @@ public partial class Settings : Node2D {
 	}
 
 
-	void SaveSettings() {
+	public void SaveSettings() {
 		var settings = new ConfigFile();
 
 		settings.SetValue("Settings", "fullscreen", fullscreen);
@@ -51,7 +51,7 @@ public partial class Settings : Node2D {
 	}
 
 
-	void LoadSettings() {
+	public void LoadSettings() {
 		var settings = new ConfigFile();
 
 		Error err = settings.Load(SettingsFilePath);

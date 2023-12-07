@@ -266,5 +266,6 @@ vertical_alignment = 1
 [connection signal="value_changed" from="PauseMenu/Settings/AudioSfx/Slider" to="PauseMenu/Settings" method="OnSfxChanged"]
 [connection signal="value_changed" from="PauseMenu/Settings/AudioMusic/Slider" to="PauseMenu/Settings" method="OnMusicChanged"]
 [connection signal="value_changed" from="PauseMenu/Settings/AudioAmbience/Slider" to="PauseMenu/Settings" method="OnAmbienceChanged"]
+[connection signal="pressed" from="PauseMenu/Settings/Back" to="PauseMenu/Settings" method="OnSettingsSaved"]
 [connection signal="pressed" from="PauseMenu/Settings/Back" to="PauseMenu" method="OnBackPressed"]
 [connection signal="pressed" from="PauseMenu/Settings/Resume" to="PauseMenu" method="OnResumePressed"]

@@ -4,20 +4,25 @@ using System;
 public partial class PlayerTravel : Node2D
 {
 	const string RUINS_STREET_SIGN_GROUP = "%ruins_sign";
-	Area2D forrestSign;
+	Area2D ruinsSign;
 
 	public override void _Ready()
 	{
 		base._Ready();
-		forrestSign = GetNode<Area2D>(RUINS_STREET_SIGN_GROUP);
-		if( TownManager.currentTownStats.isRuinsUnlocked)
-		{
-			forrestSign.Visible = true;
-		}else
-		{
-			forrestSign.Visible = false;
-		}
-	}
+		ruinsSign = GetNode<Area2D>(RUINS_STREET_SIGN_GROUP);
+		ruinsSign.Visible = true;
+	
+			
+		
+        if (!TownManager.currentTownStats.isRuinsUnlocked || SceneManager.IsCurrentScene(this, Scene.Ruins))
+        {
+            ruinsSign.Visible = false;
+        }
+        else
+        {
+            ruinsSign.Visible = true;
+        }
+    }
 
 
 	void TravelTown(Node viewport, InputEvent @event, long shapeIdx)

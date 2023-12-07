@@ -6,8 +6,8 @@ public partial class HourCounter : Label
 	private float currentHour;
 	private bool isDayTime;
 	private GlobalTime globalTime;
-	private float dayDuration = 60.0f;
-	private float nightDuration = 30.0f;
+	private float dayDuration = 300.0f;
+	private float nightDuration = 150.0f;
 	
 
 

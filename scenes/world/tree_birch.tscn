@@ -1,0 +1,83 @@
+[gd_scene load_steps=13 format=3 uid="uid://vtukk51kve8t"]
+
+[ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_75bif"]
+[ext_resource type="Resource" uid="uid://b7jgjk4165udm" path="res://TinoTests/Resources/tree.tres" id="2_2ogn8"]
+[ext_resource type="AudioStream" uid="uid://unr5a347lwdw" path="res://assets/sounds_folder/character_sounds/hit_tree.wav" id="3_8ivus"]
+[ext_resource type="Texture2D" uid="uid://doqg0qxfr6stu" path="res://assets/sprites/items/birch_1.png" id="4_fffxv"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="5_sbuq5"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="6_m0wye"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="7_61lx5"]
+[ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="8_cgppw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_em0ef"]
+size = Vector2(80, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxksx"]
+size = Vector2(64, 40)
+
+[sub_resource type="Animation" id="Animation_ur5ux"]
+resource_name = "shake"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-24, -160), Vector2(-14, -160), Vector2(-24, -160)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nedua"]
+_data = {
+"shake": SubResource("Animation_ur5ux")
+}
+
+[node name="Tree" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer", "_sprite")]
+position = Vector2(2.08165e-12, 2.08165e-12)
+collision_layer = 5
+script = ExtResource("1_75bif")
+loot = ExtResource("2_2ogn8")
+_animationPlayer = NodePath("AnimationPlayer")
+_sprite = NodePath("Sprite2D")
+_audio = ExtResource("3_8ivus")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-24, -160)
+texture = ExtResource("4_fffxv")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("5_sbuq5")]
+_parentScript = NodePath("..")
+_hasHealthBar = false
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["tree"] instance=ExtResource("6_m0wye")]
+position = Vector2(-1, 0)
+collision_layer = 16
+collision_mask = 32
+_parentScript = NodePath("..")
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(1, -4)
+shape = SubResource("RectangleShape2D_em0ef")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_kxksx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nedua")
+}
+
+[node name="NavigationObstacleArea" parent="." instance=ExtResource("7_61lx5")]
+polygon = PackedVector2Array(-40, 24, 40, 24, 40, -32, -40, -32)
+metadata/_edit_pinned_properties_ = [&"polygon"]
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+scale = Vector2(3.5, 2.4)
+texture = ExtResource("8_cgppw")

@@ -10,7 +10,6 @@ public partial class PlayerController : CharacterBody2D
 	[Export] private PlayerSpriteController _rig;
 	[Export] private HealthComponent _healthComponent;
 	[Export] private StaminaComponent _staminaComponent;
-
 	[Export] private Node2D _respawnPoint;
 
 	[ExportCategory("Settings")]
@@ -23,12 +22,10 @@ public partial class PlayerController : CharacterBody2D
 	private bool _isDead = false;
 	private Vector2 _knockback = Vector2.Zero;
 	private float speedMultiplier = 1;
-
 	public bool canRun;
 	public bool stopMovement;
 	public float speedPercent = 1;
 	static AudioController _audioController;
-
 
 	public override void _Ready()
 	{
@@ -170,6 +167,8 @@ public partial class PlayerController : CharacterBody2D
 
 	private void AttackReceived(Attack attack)
 	{
+		if (IsQueuedForDeletion()) return;
+
 		var duration = 0.25f;
 		_knockback = attack.direction * attack.knockback;
 

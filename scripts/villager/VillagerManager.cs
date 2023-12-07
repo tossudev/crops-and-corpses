@@ -263,6 +263,12 @@ public partial class VillagerManager : Node2D
 		return allVillagerResidences.FindAll(
 			residence => residence.hasRoomForMoreVillagers && !residence.isBroken);;
 	}
+
+	public void RescueAllVillagers()
+	{
+		SaveData.allVillagerRawData.FindAll(data => !data.isTownPopulation)
+			.ForEach(rescuedVillager => rescuedVillager.currentState = VillagerState.FollowPlayer);
+	}
 }
 
 public enum VillagerType

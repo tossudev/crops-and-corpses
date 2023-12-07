@@ -132,10 +132,14 @@ public partial class TownHallStatsPanel : Control
 			
 			_ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
 		};
-        
-        
-		_townStatUiContainers
-			?.Find(container => container.townStatType == type)
-			.UpdateContainer(statText);
+
+
+        _townStatUiContainers?.ForEach(container =>
+        {
+	        if (container.townStatType == type)
+	        {
+		        container.UpdateContainer(statText);
+	        }
+        });
 	}
 }

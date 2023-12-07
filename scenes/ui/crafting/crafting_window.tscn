@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://ba8jl34px0fpl"]
+[gd_scene load_steps=40 format=3 uid="uid://ba8jl34px0fpl"]
 
 [ext_resource type="Script" path="res://scripts/ui/crafting/CraftingWindow.cs" id="1_glv8t"]
 [ext_resource type="Texture2D" uid="uid://d0p1n5y0uaenf" path="res://assets/sprites/ui/wooden_panel.png" id="2_g6msi"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://c1q7mpup7mo0b" path="res://assets/resources/game_items/food_items_250_to_299/251_vegetable_stew.tres" id="7_8yp1b"]
 [ext_resource type="Resource" uid="uid://c5sh8gg8de5a2" path="res://assets/resources/game_items/weapon_items_150_to_249/160_bow.tres" id="7_g4egb"]
 [ext_resource type="Resource" uid="uid://cplc64alcfytf" path="res://assets/resources/game_items/tool_items_350_449/361_iron_pick.tres" id="8_svy4t"]
+[ext_resource type="Resource" uid="uid://cqnav3flekvvt" path="res://assets/resources/game_items/tool_items_350_449/405_bucket.tres" id="8_thpem"]
 [ext_resource type="Resource" uid="uid://bpjwmo4fvwr48" path="res://assets/resources/game_items/tool_items_350_449/400_bug_spray.tres" id="9_p7d3c"]
 [ext_resource type="Resource" uid="uid://b0wqidoebr4r8" path="res://assets/resources/game_items/tool_items_350_449/360_copper_pick.tres" id="9_r2n7o"]
 [ext_resource type="Resource" uid="uid://cj0seqylk2aaa" path="res://assets/resources/game_items/tool_items_350_449/350_copper_axe.tres" id="11_gc4rs"]
@@ -114,7 +115,7 @@ layout_mode = 2
 [node name="CraftableItemBucket" parent="ItemArea/GridContainer/ItemGridSlot3" instance=ExtResource("5_8tf6t")]
 layout_direction = 0
 layout_mode = 2
-itemRes = ExtResource("8_svy4t")
+itemRes = ExtResource("8_thpem")
 
 [node name="ItemGridSlot4" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2

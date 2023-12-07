@@ -25,19 +25,31 @@ mouse_filter = 2
 script = ExtResource("1_rmo1d")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1552.0
-offset_bottom = -1016.0
-grow_horizontal = 2
-grow_vertical = 2
+custom_minimum_size = Vector2(368, 80)
+layout_mode = 0
+offset_left = 1547.0
+offset_top = 250.0
+offset_right = 1907.0
+offset_bottom = 330.0
 
 [node name="QuestText" type="Label" parent="MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 label_settings = SubResource("LabelSettings_hbasl")
 horizontal_alignment = 1
-vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(368, 80)
+layout_mode = 0
+offset_left = 1547.0
+offset_top = 346.0
+offset_right = 1907.0
+offset_bottom = 426.0
+
+[node name="QuestDistance" type="Label" parent="MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_hbasl")
+horizontal_alignment = 1
 autowrap_mode = 3

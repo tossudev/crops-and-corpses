@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json.Nodes;
+using System.Threading.Tasks;
 
 public partial class Fences : Node2D
 {
@@ -93,7 +94,7 @@ public partial class Fences : Node2D
             node.QueueFree();
         }
 
-        await SaveData.SyncTownStats();
+        await Task.Delay((int)(GD.Randi() % 1000));
 
         // west fence
         for (int i = 0; i < fenceLengthY; i++)

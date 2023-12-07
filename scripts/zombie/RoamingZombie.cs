@@ -27,14 +27,10 @@ public partial class RoamingZombie : CharacterBody2D
 	private bool _fenceInRange = false;
 	private ulong _entered;
 	private ulong _exited;
-	private bool _inTown;
-
 	private PackedScene _caveZombieSkeleton;
 	//AnimationPlayer animationPlayer;
-
 	public override void _Ready()
 	{
-		
 		_lootController.loot = _lootList[0];
 		_lootController.Init();
 		if(SceneManager.GetCurrentScene(this) == Scene.Cave)
@@ -141,15 +137,6 @@ public partial class RoamingZombie : CharacterBody2D
 				}
 			}
 		}
-	}
-	public bool IsInTown()
-	{
-		return _inTown;
-	}
-
-	public void SetInTown()
-	{
-		_inTown = true;
 	}
 
 	private void AttackReceived(Attack attack)

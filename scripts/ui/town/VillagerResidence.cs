@@ -133,16 +133,16 @@ public partial class VillagerResidence : Control
 	
 	public void VillagerExitBuilding (Villager leavingVillager)
 	{
-		int villagerInstanceId = leavingVillager.rawData.id;
+		int villagerId = leavingVillager.rawData.id;
 		
-		if (_currentResidentIds.Contains(villagerInstanceId))
+		if (_currentResidentIds.Contains(villagerId))
 		{
-			_currentResidentIds.Remove(villagerInstanceId);
+			_currentResidentIds.Remove(villagerId);
 
 			foreach (var node in _villagerFaceButtonParentGrid.GetChildren())
 			{
 				if (node is not VillagerFaceButton villagerFaceButton) continue;
-				if (villagerFaceButton.id != villagerInstanceId) continue;
+				if (villagerFaceButton.id != villagerId) continue;
 				
 				villagerFaceButton.QueueFree();
 				leavingVillager.ExitShelter();

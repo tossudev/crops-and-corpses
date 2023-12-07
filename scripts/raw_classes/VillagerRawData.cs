@@ -36,13 +36,13 @@ public partial class VillagerRawData : GodotObject
 
     public VillagerRawData(string name, string lore, bool isTownPopulation, Vector2 globalPositionVector2 )
     {
-        id = SaveData.allVillagerData.Count;
+        id = SaveData.allVillagerRawData.Count;
         this.name = name;
         this.lore = lore;
         this.isTownPopulation = isTownPopulation;
         SetType();
         SetRandomOccupation();
-        currentState = VillagerState.ChooseTask;
+        currentState = VillagerState.RoamAround;
         SetCoordinates(globalPositionVector2);
         TrySetHome();
     }
@@ -91,13 +91,15 @@ public partial class VillagerRawData : GodotObject
         yCoord = Mathf.RoundToInt(coordinates.Y);
     }
 
-    public void TrySetHome()
+    public bool TrySetHome()
     {
         var freeHomes = VillagerManager.villagerManagerInstance.GetFreeHomesList();
 
         homeId = freeHomes.Count > 0
             ? freeHomes.First().AddResident(this)
             : 0;
+
+        return homeId > 0;
     }
     
     public static VillagerOccupation GetRandomOccupation()
@@ -111,7 +113,7 @@ public partial class VillagerRawData : GodotObject
     /// <param name="saveData"></param>
     public static async Task ReadVillagerDataFromFile(Dictionary saveData)
     {
-        SaveData.allVillagerData.Clear();
+        SaveData.allVillagerRawData.Clear();
 
         if (saveData != null)
         {
@@ -134,7 +136,7 @@ public partial class VillagerRawData : GodotObject
                         (int) villagerDataDict[VILLAGER_Y_COORD_KEY]
                         );
                 
-                    SaveData.allVillagerData.Add(convertedRawVillager);
+                    SaveData.allVillagerRawData.Add(convertedRawVillager);
                 }
             });
         }

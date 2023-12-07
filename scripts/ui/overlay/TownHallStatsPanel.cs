@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic.CompilerServices;
 
 public partial class TownHallStatsPanel : Control
 {
@@ -110,15 +111,17 @@ public partial class TownHallStatsPanel : Control
 
 	public async void UpdateStat(TownStatType type)
 	{
-		var currentTownStats = TownManager.currentTownStats;
+        await TaskExtensions.SuspendWhile(() => 
+	        VillagerManager.villagerManagerInstance == null || TownManager.currentTownStats == null, 150);	
 		
-        await TaskExtensions.SuspendWhile(() => VillagerManager.villagerManagerInstance == null, 150);	
-		
+        var currentTownStats = TownManager.currentTownStats;
+
+        
         string statText = type switch
 		{
 			TownStatType.HOUSING => $"{currentTownStats.providedHomes}/{currentTownStats.populationCap}",
 			
-			TownStatType.POPULATION_CAP => $"{SaveData.allVillagerData.Count(data => data.isTownPopulation)}" +
+			TownStatType.POPULATION_CAP => $"{SaveData.allVillagerRawData.Count(data => data.isTownPopulation)}" +
 			                               $"/{currentTownStats.populationCap}",
 			
 			TownStatType.SILO_CAP => $"{SaveData.townStorageItems.Count(s => s is not null)}" +
@@ -130,9 +133,9 @@ public partial class TownHallStatsPanel : Control
 			_ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
 		};
         
-		
+        
 		_townStatUiContainers
-			.Find(container => container.townStatType == type)
+			?.Find(container => container.townStatType == type)
 			.UpdateContainer(statText);
 	}
 }

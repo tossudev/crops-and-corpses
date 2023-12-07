@@ -144,11 +144,10 @@ public  partial class DialogueControl : Control
 	    {
 		    VillagerState.RoamAround => "Wandering around",
 		    VillagerState.FollowPlayer => "Following",
-		    VillagerState.FixFence => "Repairing",
-		    VillagerState.FindArcherTower => "Defending",
+		    VillagerState.FixBuildings => "Repairing",
+		    VillagerState.SoldierDuty => "Defending",
 		    VillagerState.FindShelter => "Finding cover",
 		    VillagerState.InShelter => "Waiting for sunrise",
-		    VillagerState.ChooseTask => "Making a life choice",
 		    VillagerState.FarmingTask => "Farming",
 		    VillagerState.FindWoodTask => "Cutting wood",
 		    VillagerState.FindStoneTask => "Mining stone",
@@ -167,9 +166,9 @@ public  partial class DialogueControl : Control
 		    
 		    VillagerState.FollowPlayer => "I'm following you",
 		    
-		    VillagerState.FixFence => "Can't you see that I'm busy?!",
+		    VillagerState.FixBuildings => "Can't you see that I'm busy?!",
                 
-		    VillagerState.FindArcherTower => "To arms!",
+		    VillagerState.SoldierDuty => "To arms!",
 		    
 		    VillagerState.FindShelter => "Time to hide!",
 		    
@@ -178,8 +177,6 @@ public  partial class DialogueControl : Control
 		    VillagerState.InShelter when occupation == VillagerOccupation.Soldier => "I need a tower to man, you know?!",
 		    VillagerState.InShelter when occupation == VillagerOccupation.Woodcutter => "*Snoring*",
 		    VillagerState.InShelter when occupation == VillagerOccupation.Miner => "My foundations will hold!",
-		    
-		    VillagerState.ChooseTask => "Let me think...",
 		    
 		    VillagerState.FarmingTask => "Grow cropsie, grow...",
 		    

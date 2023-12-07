@@ -57,6 +57,7 @@ script = ExtResource("7_ddcla")
 
 [node name="DropOffArea" type="Area2D" parent="VillagerDropOff"]
 position = Vector2(5, 256.667)
+collision_layer = 9
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VillagerDropOff/DropOffArea"]

@@ -30,7 +30,7 @@ public partial class SaveData : Node
     public static RawTownStats townHallStats = new();
     public static List<TownUpgrade> appliedUpgrades = new();
     public static List<TownUnlock> appliedUnlocks = new();
-    public static List<VillagerRawData> allVillagerData = new();
+    public static List<VillagerRawData> allVillagerRawData = new();
     public static Array<RawInventoryItem> organizedPlayerInventory = new();
     public static Array<RawInventoryItem> playerHotbarItems = new();
     public static Array<RawInventoryItem> townStorageItems = new();
@@ -73,7 +73,7 @@ public partial class SaveData : Node
         var rawSaveData = new RawSaveData(townHallStats,
             appliedUpgrades,
             appliedUnlocks,
-            allVillagerData,
+            allVillagerRawData,
             organizedPlayerInventory,
             playerHotbarItems,
             townStorageItems,

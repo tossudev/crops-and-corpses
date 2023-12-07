@@ -13,25 +13,13 @@ public partial class HitboxComponent : Area2D
 			// GD.PrintErr("HitboxComponent: No health component found");
 			return;
 		}
+		
+		_parentScript?.CallDeferred("AttackReceived", attack);
 
-		if (_parentScript == null || !_parentScript.HasMethod("AttackReceived"))
-		{
-			// GD.Print("HitboxComponent: No method or parent script found");
-
-			// temp
-			if (this.GetParent().HasMethod("AttackReceived"))
-				this.GetParent().CallDeferred("AttackReceived", attack);
-			//
-
-			return;
-		}
-
-		_parentScript.CallDeferred("AttackReceived", attack);
-
+		
 		if (attack.effect == EffectType.Repair)
 		{
 			_healthComponent.TryHealWithRepairItem();
-			return;
 		}
 		else
 		{

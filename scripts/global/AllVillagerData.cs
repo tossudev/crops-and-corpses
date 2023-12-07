@@ -37,14 +37,19 @@ public partial class AllVillagerData : Node
 	public Dictionary<VillagerType, Dictionary<BodyPartTextureType, Texture2D>> villagerTextures = new ();
 	VillagerSkeleton _villagerSkeleton;
 
-	[Export] string [] _villagerNames;
+	[Export] string [] _villagerFirstNames;
+	[Export] string [] _villagerLastNames;
 
 	[Export] string [] _villagerInfos;
 
 	public string GetName(){
 		Random random = new Random();
-        int randomNumber = random.Next(0, _villagerNames.Length);
-		return _villagerNames[randomNumber];
+		
+        int random1 = random.Next(0, _villagerFirstNames.Length);
+        
+        int random2 = random.Next(0, _villagerLastNames.Length);
+        
+		return $"{_villagerFirstNames[random1]} {_villagerLastNames [random2]}";
 	}
 
 	public string GetInfo(){

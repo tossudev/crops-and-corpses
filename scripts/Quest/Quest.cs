@@ -129,7 +129,7 @@ public partial class Quest : Node
         {
             { QUEST_DESCRIPTION_KEY, quest.description },
             { QUEST_DIFFICULTY_KEY, quest.questDifficulty },
-            { QUEST_LOCATION_KEY, quest.location.ToString() },
+            { QUEST_LOCATION_KEY, quest.location?.ToString() },
             { QUEST_TYPE_KEY, (int) quest.type },
             { QUEST_START_DAY_KEY, quest.startDay },
             { QUEST_STAGES_KEY, questStages }

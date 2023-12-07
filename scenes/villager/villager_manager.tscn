@@ -4,12 +4,14 @@
 [ext_resource type="Script" path="res://scripts/global/AllVillagerData.cs" id="2_q4f2s"]
 
 [node name="VillagerManager" type="Node2D" node_paths=PackedStringArray("_allData")]
+y_sort_enabled = true
 script = ExtResource("1_lo0a5")
 _allData = NodePath("AllVillagerData")
 
 [node name="AllVillagerData" type="Node" parent="."]
 script = ExtResource("2_q4f2s")
-_villagerNames = PackedStringArray("Mikko", "Pekka", "Pirjo", "Martta", "Toope", "Nasse", "Kikke", "Tupu")
+_villagerFirstNames = PackedStringArray("Bruno", "Peter", "Spaz", "Marja", "Jerry", "Tom", "Heikka", "Antti", "Josefine", "Vlad", "Mahatma", "Aino", "Pavel", "Nick", "Rafael", "Angela", "Judy", "Ilona", "Susanne")
+_villagerLastNames = PackedStringArray("Harolds", "Palazzo", "Bienstock", "Hughes", "Rummukainen", "Carraway", "Miettinen", "Ronaldo", "Faraday", "Johnson", "Colt", "Utter", "Wembley", "Bull", "Koivula", "Sober")
 _villagerInfos = PackedStringArray("Ei helvetti mitä tähänki kirjottais.", "Super positiviinen tyyppi ja hyvä farmaa.", "Kaikkien kaveri.", "Mersumies.", "Teletapeista tuttu.", "Entinen merimies. Yarr!", "Nyt kyl saa riittää nää. Hihhei!", "Kerta vielä kiellon päälle.", "Karpalon makuinen.")
 
 [node name="Villagers" type="Node2D" parent="."]

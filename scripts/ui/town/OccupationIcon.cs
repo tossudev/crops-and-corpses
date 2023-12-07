@@ -45,7 +45,9 @@ public partial class OccupationIcon : Control
 			return;
 		}
         
-		int employeeAmount = _occupation switch
+		
+		int employeeAmount = VillagerManager.villagerManagerInstance != null
+		? _occupation switch
 		{
 			VillagerOccupation.Builder => VillagerManager.villagerManagerInstance.BuilderVillagers.Count,
 			VillagerOccupation.Farmer => VillagerManager.villagerManagerInstance.farmerVillagers.Count,
@@ -53,7 +55,8 @@ public partial class OccupationIcon : Control
 			VillagerOccupation.Woodcutter => VillagerManager.villagerManagerInstance.woodcutterVillagers.Count,
 			VillagerOccupation.Miner => VillagerManager.villagerManagerInstance.minerVillagers.Count,
 			_ => -1
-		};
+		}
+		: -1;
 
 		_employedAmountLabel.Text = $"x {employeeAmount}";
 	}

@@ -7,6 +7,9 @@ public partial class QuestJournal : Control
 
 	const string TEXTLABEL_QUESTTEXT = "%QuestText";
 	Label QuestTextLabel;
+	
+	const string DISTANCE_QUESTTEXT = "%QuestDistance";
+	static Label DistanceTextLabel;
 
 
 	public override void _Ready()
@@ -14,9 +17,11 @@ public partial class QuestJournal : Control
 		questManager = GetNode<QuestManager>("/root/QuestManager");
 		QuestTextLabel = GetNode<Label>(TEXTLABEL_QUESTTEXT);
 		QuestTextLabel.Visible = true;
+		
+		DistanceTextLabel = GetNode<Label>(DISTANCE_QUESTTEXT);
+		
+		
 		UpdateQuestJournal();
-
-
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -30,8 +35,22 @@ public partial class QuestJournal : Control
 	{
 		var quest = await PlayerInfo.GetActiveQuest();
 
-		QuestTextLabel.Text = quest != null
-			? quest.GetQuestDescription()
-			: "Open Quest Journal to start a new quest";
+		if (quest != null)
+		{
+			QuestTextLabel.Text = quest.GetQuestDescription();
+		}
+		else
+		{
+			QuestTextLabel.Text = "Open quest journal to start a new quest";
+			UpdateDistanceText(0);
+		}
+	}
+	
+	public static void UpdateDistanceText(int distance)
+	{
+		if (DistanceTextLabel == null) return;
+		DistanceTextLabel.Visible = distance != 0; 
+		
+		DistanceTextLabel.Text = $"Distance to mission area : {distance}m";
 	}
 }

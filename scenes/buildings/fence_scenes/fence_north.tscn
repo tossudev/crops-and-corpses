@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://e58507ft315b"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_jc86v"]
-[ext_resource type="Texture2D" uid="uid://crvolauraor0n" path="res://assets/sprites/Farm sprites/gate.png" id="2_xxu63"]
+[ext_resource type="Texture2D" uid="uid://bdvrnkj687l1l" path="res://assets/sprites/Farm sprites/gate.png" id="2_xxu63"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_xy11f"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_rslnb"]
-[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_0dlt1"]
+[ext_resource type="PackedScene" uid="uid://dp87d4wfgxnfm" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_0dlt1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xqnct"]
 size = Vector2(125, 58)
@@ -71,4 +71,5 @@ shape = SubResource("RectangleShape2D_7fnxi")
 debug_color = Color(0.980392, 0, 0.27451, 0.419608)
 
 [node name="NavigationObstacleArea" parent="." instance=ExtResource("6_0dlt1")]
-polygon = PackedVector2Array(-120, -56, -8, -56, -8, -8, -120, -8)
+position = Vector2(0, 88)
+polygon = PackedVector2Array(-96, -160, -32, -160, -32, -72, -96, -72)

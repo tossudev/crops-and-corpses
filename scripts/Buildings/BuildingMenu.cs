@@ -9,6 +9,8 @@ using System.Xml.Linq;
 public partial class BuildingMenu : Control
 {
     public static BuildingMenu buildMenu;
+
+    static bool _savingInProgress;
     
 	Building _farmPlot, _house, _archerTower, _well, _largeHouse;
 	Building _currentBuilding;
@@ -342,8 +344,10 @@ public partial class BuildingMenu : Control
         return _savedBuildings;
     }
 
-    public void SaveBuildings()
+    public async void SaveBuildings()
     {
+        await TaskExtensions.SuspendWhile(() => _savingInProgress);
+
         try
         {
             if (!Directory.Exists(savePath))
@@ -352,7 +356,10 @@ public partial class BuildingMenu : Control
             }
 
             string path = Path.Join(savePath, FILE_NAME);
-            File.WriteAllText(path, GetBuildings().ToString());
+
+            _savingInProgress = true;
+            await File.WriteAllTextAsync(path, GetBuildings().ToString());
+            _savingInProgress = false;
         }
         catch (Exception ex)
         {
@@ -360,8 +367,10 @@ public partial class BuildingMenu : Control
         }
     }
 
-    private void LoadBuildings()
+    async void LoadBuildings()
     {
+        await TaskExtensions.SuspendWhile(() => _savingInProgress);
+        
         string path = Path.Join(savePath, FILE_NAME);
 
         if (!File.Exists(path))
@@ -371,7 +380,7 @@ public partial class BuildingMenu : Control
 
         try
         {
-            JsonArray _loadedBuildings = (JsonArray)JsonArray.Parse(File.ReadAllText(path));
+            JsonArray _loadedBuildings = (JsonArray)JsonArray.Parse(await File.ReadAllTextAsync(path));
             InstantiateBuildings(_loadedBuildings);
         }
         catch (Exception ex) 

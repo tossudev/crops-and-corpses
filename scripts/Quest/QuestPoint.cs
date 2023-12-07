@@ -99,11 +99,18 @@ public partial class QuestPoint : Node2D
         
         playerDistanceToQuestPoint = (int) playerController.GlobalPosition.DistanceTo(GlobalPosition);
 
-        if (playerDistanceToQuestPoint <= SpawnRange)
+        if (_activeQuest.stages.Contains(QuestStage.Find))
         {
-            _activeQuest.CompleteQuestStage(QuestStage.Find);
-
-            KillStage();
+            QuestJournal.UpdateDistanceText(playerDistanceToQuestPoint);
+        }
+        
+        if (_activeQuest.stages.Contains(QuestStage.Kill))
+        {
+            if (playerDistanceToQuestPoint <= SpawnRange)
+            {
+                _activeQuest.CompleteQuestStage(QuestStage.Find);
+                KillStage();
+            }
         }
     }
 
@@ -168,6 +175,8 @@ public partial class QuestPoint : Node2D
                 _activeQuest.ChangeQuestDescription("Talk to the villagers");
             }
         }
+        
+        QuestJournal.UpdateDistanceText(0);
     }
 
 

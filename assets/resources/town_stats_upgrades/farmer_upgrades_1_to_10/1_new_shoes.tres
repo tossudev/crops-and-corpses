@@ -13,8 +13,6 @@ quantity = 10
 [resource]
 script = ExtResource("1_oxtwq")
 _farmerWalkSpeed = 1
-_farmerMaxFarms = 1
-_pesticideEffectiveness = 0
 _id = 1
 _upgradeIcon = ExtResource("3_d1exa")
 _upgradeHeader = "New Shoes"

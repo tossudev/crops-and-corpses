@@ -113,14 +113,14 @@ public partial class CraftPanel : Control
 
 		    CraftingRequirement requirement = craftedItem.craftingRequirements[i];
 
-
+		    int actualQuantity = requirement.quantity * _amountToCraft;
 
 		    RawInventoryItem requiredAsRaw = new RawInventoryItem(
-			    requirement.item.ID, requirement.item.Name, requirement.quantity * _amountToCraft, requirement.item.StackSize);
+			    requirement.item.ID, requirement.item.Name, actualQuantity, requirement.item.StackSize);
 			
 		    _requiredResSlots[i].icon.Texture = requirement.item.IconTexture;
 		    _requiredResSlots[i].slotItem = requiredAsRaw;
-		    _requiredResSlots[i].quantityLabel.Text = (requirement.quantity * _amountToCraft).ToString();
+		    _requiredResSlots[i].quantityLabel.Text = actualQuantity.ToString();
 	    }
     }
     
@@ -142,10 +142,13 @@ public partial class CraftPanel : Control
 			
 			foreach (var craftingRequirement in craftedItem.craftingRequirements)
 			{
-				craftingRequirement.quantity *= amountToCraft;
-
-
-				if (!await PlayerInventoryController.RemoveItemFromInventory(craftingRequirement.RequirementAsRaw()))
+				var requirementItem = craftingRequirement.item;
+				
+				var actualRequirement = new RawInventoryItem(
+					requirementItem.ID, requirementItem.Name, craftingRequirement.quantity * _amountToCraft,
+					requirementItem.StackSize);
+				
+				if (!await PlayerInventoryController.RemoveItemFromInventory(actualRequirement))
 				{
 					return false;
 				}

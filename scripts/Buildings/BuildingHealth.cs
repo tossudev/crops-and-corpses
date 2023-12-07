@@ -95,10 +95,7 @@ public partial class BuildingHealth : Node2D
             FixBuilding();
         }
 
-        if (isDamaged && buildingHealth == _healthComponent.GetMaxHealth())
-        {
-            isDamaged = false;
-        }
+        isDamaged = health < _healthComponent.GetMaxHealth();
     }
 
     public void LoadBuildingHealth(int loadedHealth)

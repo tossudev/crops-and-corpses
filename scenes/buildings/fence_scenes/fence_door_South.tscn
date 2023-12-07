@@ -1,12 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bslom2g3m4qky"]
+[gd_scene load_steps=12 format=3 uid="uid://bslom2g3m4qky"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/FenceDoor.cs" id="1_qlejx"]
-[ext_resource type="Texture2D" uid="uid://c1mvwoenhyv3m" path="res://assets/sprites/Farm sprites/gate door.png" id="2_8uf1v"]
-[ext_resource type="Texture2D" uid="uid://cf37fqo557vpg" path="res://scenes/buildings/fence_scenes/fence door topdown view.png" id="3_6iurx"]
+[ext_resource type="Texture2D" uid="uid://yvyahxkq53y3" path="res://assets/sprites/Farm sprites/gate door.png" id="2_8uf1v"]
+[ext_resource type="Texture2D" uid="uid://dn7l2th007l7l" path="res://scenes/buildings/fence_scenes/fence door topdown view.png" id="3_6iurx"]
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="4_ovuda"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="5_4xgdc"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="6_6vpgs"]
-[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="7_0jjsr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_638cj"]
 size = Vector2(119.656, 62)
@@ -133,11 +132,6 @@ offset_bottom = -86.0
 scale = Vector2(0.4, 0.4)
 show_percentage = false
 metadata/_edit_use_anchors_ = true
-
-[node name="NavigationObstacleArea" parent="." instance=ExtResource("7_0jjsr")]
-position = Vector2(53, 41.5109)
-scale = Vector2(1, 0.684783)
-polygon = PackedVector2Array(-173, -157, -61, -155.54, -61, -69.381, -173, -66.4603)
 
 [connection signal="input_event" from="Doors/Area2D" to="." method="OnFenceDoorInput"]
 [connection signal="input_event" from="DoorsTopdown/Area2D" to="." method="OnFenceDoorInput"]

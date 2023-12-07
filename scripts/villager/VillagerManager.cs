@@ -59,7 +59,7 @@ public partial class VillagerManager : Node2D
 
 		if (TownManager.EveryXSecond((int) AutosaveIntervalSeconds.VILLAGER_POSITION_INTERVAL))
 		{
-			UpdateVillagers();
+			SaveVillagers();
 		}
 	}
 
@@ -73,7 +73,7 @@ public partial class VillagerManager : Node2D
 	{
 		await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete);
 
-		foreach (var villagerRawData in SaveData.allVillagerData)
+		foreach (var villagerRawData in SaveData.allVillagerRawData)
 		{
 			if(villagerRawData.isTownPopulation)
 			{
@@ -90,7 +90,7 @@ public partial class VillagerManager : Node2D
 	public VillagerRawData AddNewVillagerRawData(bool intoTown = false)
 	{
 		VillagerRawData newRawData = new VillagerRawData(_allData.GetName(), _allData.GetInfo(), intoTown, Vector2.Zero);
-		SaveData.allVillagerData.Add(newRawData);
+		SaveData.allVillagerRawData.Add(newRawData);
 
 		return newRawData;
 	}
@@ -110,7 +110,7 @@ public partial class VillagerManager : Node2D
 
 	public void SpawnExistingVillager(VillagerRawData existingVillagerRawData)
 	{
-		if (SaveData.allVillagerData.All(data => data.id != existingVillagerRawData.id))
+		if (SaveData.allVillagerRawData.All(data => data.id != existingVillagerRawData.id))
 		{
 			GD.PushError("Villager data not found");
 			return;
@@ -127,7 +127,7 @@ public partial class VillagerManager : Node2D
 
 	public void SpawnQuestVillagers(Vector2 position)
 	{
-		SaveData.allVillagerData.ForEach(data =>
+		SaveData.allVillagerRawData.ForEach(data =>
 		{
 			Vector2 offsetVector = new Vector2(GD.Randi() % 3, GD.Randi() % 3);
 			
@@ -147,22 +147,18 @@ public partial class VillagerManager : Node2D
 		}
 		
 		_villagerParentNode.AddChild(villagerToRegister);
+		
+		
 		villagerToRegister.InitializeVillager(data);
 		
-		SetVillagerOccupation(villagerToRegister, data.currentOccupation);
 		villagerToRegister.Teleport(spawnCoordinates);
 	}
 
-    void UpdateVillagers()
+    void SaveVillagers()
 	{
 		foreach (var villager in _allVillagers)
 		{
 			villager.SavePosition();
-
-			if (villager.rawData.currentState == VillagerState.Homeless)
-			{
-				villager.rawData.TrySetHome();
-			}
 		}
 
 		Task save = SaveData.SyncVillagers();
@@ -194,9 +190,9 @@ public partial class VillagerManager : Node2D
 		villager.currentOccupationList.Add(villager);
 
 		villager.rawData.currentOccupation = newOccupation;
-		villager.rawData.currentState = VillagerState.ChooseTask;
 		
-		villager.skeleton.ChangeHat(newOccupation);
+        villager.skeleton.ChangeHat(newOccupation);
+		villager.ChooseTask();
 	}
 
 	public Texture2D GetTextureByType(VillagerType type, BodyPartTextureType part)
@@ -290,11 +286,10 @@ public enum VillagerState
 {
 	RoamAround,
 	FollowPlayer,
-	FixFence,
-	FindArcherTower,
+	FixBuildings,
+	SoldierDuty,
 	FindShelter,
 	InShelter,
-	ChooseTask,
 	FarmingTask,
 	FindWoodTask,
 	FindStoneTask,

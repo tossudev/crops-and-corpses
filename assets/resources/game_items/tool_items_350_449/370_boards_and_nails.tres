@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=8 format=3 uid="uid://bo4slwmfeb3si"]
 
-[ext_resource type="Texture2D" uid="uid://cyipyi3gny7vw" path="res://assets/placeholder/R_mockupSprites/iron.png" id="1_85h71"]
+[ext_resource type="Texture2D" uid="uid://57w7sytv331a" path="res://assets/sprites/items/item_bucket.png" id="1_fgpaj"]
 [ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="1_ni2vq"]
 [ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="2_myd3y"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_rgqoq"]
@@ -20,6 +20,6 @@ quantity = 1
 script = ExtResource("1_ni2vq")
 ID = 370
 Name = "Boards & Nails"
-IconTexture = ExtResource("1_85h71")
+IconTexture = ExtResource("1_fgpaj")
 StackSize = 64
 craftingRequirements = Array[Object]([SubResource("Resource_agriy"), SubResource("Resource_7hawd")])

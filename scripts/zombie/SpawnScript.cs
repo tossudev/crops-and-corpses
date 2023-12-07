@@ -127,7 +127,7 @@ public partial class SpawnScript : Node2D
         }
         else
         {
-            GD.Print("Spawn point too far away, or too many zombies in scene");
+            //GD.Print("Spawn point too far away, or too many zombies in scene");
         }
     }
 }

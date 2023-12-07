@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dr5dn7juefoha"]
+[gd_scene load_steps=12 format=3 uid="uid://dr5dn7juefoha"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_gmjf4"]
 [ext_resource type="Texture2D" uid="uid://d21t44ku0n8mk" path="res://assets/sprites/buildings/largehouse_color.png" id="2_uosje"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_2ldom"]
 [ext_resource type="PackedScene" uid="uid://bu0f37obys8sx" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_72uur"]
 [ext_resource type="PackedScene" uid="uid://dune6txyuwmm2" path="res://scenes/buildings/town/villager_residence_component.tscn" id="6_h2v24"]
+[ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="8_vj33q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sekvv"]
 size = Vector2(280, 160)
@@ -115,5 +116,9 @@ offset_right = -304.0
 offset_bottom = -336.0
 scale = Vector2(0.715, 0.715)
 _housingCapacity = 4
+
+[node name="NavigationObstacleArea" parent="." instance=ExtResource("8_vj33q")]
+position = Vector2(16, -16)
+polygon = PackedVector2Array(-276, 0, -24, 0, -24, -68, -276, -68)
 
 [connection signal="input_event" from="Area2D" to="VillagerResidenceComponent" method="OnBuildingInput"]

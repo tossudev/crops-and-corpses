@@ -28,6 +28,7 @@ public partial class ArcherTower : Node2D
     float _attackSpeed;
     int _accuracy;
     public bool isOccupied;
+    public int occupyingVillagerId = -1;
 
     public bool isBroken;
 
@@ -75,11 +76,12 @@ public partial class ArcherTower : Node2D
         isBroken = false;
     }
 
-    public void ActivateTower()
+    public void ActivateTower(int id)
     {
         _archerNode2D.Visible = true;
         _attackTimer.Start();
         isOccupied = true;
+        occupyingVillagerId = id;
     }
 
     public void DeactivateTower()
@@ -87,6 +89,7 @@ public partial class ArcherTower : Node2D
         _archerNode2D.Visible = false;
         _attackTimer.Stop();
         isOccupied = false;
+        occupyingVillagerId = -1;
     }
 
     async void OnShootTimerTimeout()

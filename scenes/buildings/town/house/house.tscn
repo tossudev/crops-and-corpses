@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://3ct83j0jgteb"]
+[gd_scene load_steps=12 format=3 uid="uid://3ct83j0jgteb"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_uikdl"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_driju"]
 [ext_resource type="Texture2D" uid="uid://cg5j4xefc87sn" path="res://assets/sprites/buildings/smallhouse_color.png" id="2_dt56r"]
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="3_6okxm"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_u5tml"]
-[ext_resource type="PackedScene" uid="uid://bu0f37obys8sx" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_lfvtm"]
+[ext_resource type="PackedScene" uid="uid://2v1aodyd0p4b" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_lfvtm"]
 [ext_resource type="PackedScene" uid="uid://dune6txyuwmm2" path="res://scenes/buildings/town/villager_residence_component.tscn" id="6_17x1j"]
+[ext_resource type="PackedScene" uid="uid://dp87d4wfgxnfm" path="res://scenes/world/navigation_obstacle_area.tscn" id="8_ou5na"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cd7u6"]
 size = Vector2(280, 300)
@@ -96,6 +97,10 @@ offset_left = -289.0
 offset_top = -261.0
 offset_right = 298.0
 offset_bottom = 245.0
+
+[node name="NavigationObstacleArea" parent="." instance=ExtResource("8_ou5na")]
+position = Vector2(8, -56)
+polygon = PackedVector2Array(-240, 16, -24, 16, -24, -168, -240, -168)
 
 [connection signal="input_event" from="Area2D" to="VillagerResidenceComponent" method="OnBuildingInput"]
 

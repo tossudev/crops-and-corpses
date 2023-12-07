@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 public partial class HealthComponent : Node2D
 {
@@ -59,7 +60,7 @@ public partial class HealthComponent : Node2D
            
             if (_building.buildingType == BuildingType.House && _building.isLoaded)
             {
-                await SaveData.SyncTownStats();
+                await Task.Delay((int)(GD.Randi() % 1000));
 
                 SetMaxHealth(_maxHealth + TownManager.currentTownStats.houseHP);
 				_building.LoadBuildingHealth(_building.loadedHealth);

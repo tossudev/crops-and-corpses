@@ -37,10 +37,13 @@ public partial class HandheldController : Node2D
     private string _attackAnim;
     private string _cooldownAnim;
     private AnimationPlayer _skeletonAnimPlayer;
+    static AudioController _audioController;
+
 
     public override void _Ready()
     {
         _skeletonAnimPlayer = _skeleton.GetNode<AnimationPlayer>("AnimationPlayer");
+        _audioController = GetNode<AudioController>("/root/Audio");
     }
 
     public void Init()
@@ -327,6 +330,24 @@ public partial class HandheldController : Node2D
                 if (_targetGroup != "enemy")
                 {
                     _player.stopMovement = true;
+                }
+
+                switch (_targetType)
+                {
+                    case TargetType.Enemy:
+                        _audioController.PlayEffect("character_sounds/hit_enemy.wav");
+                        break;
+                    case TargetType.Tree:
+                        _audioController.PlayEffect("character_sounds/hit_tree.wav");
+                        break;
+                    case TargetType.Rock:
+                        _audioController.PlayEffect("character_sounds/rock_break.wav");
+                        break;
+                    // case TargetType.Building:
+                    //     _targetGroup = "building";
+                    //     break;
+                    default:
+                        return;
                 }
             }
         }

@@ -4,6 +4,13 @@ using System;
 public partial class PauseMenu : Node2D {
 
 	bool paused = false;
+	Settings settings;
+
+
+    public override void _Ready() {
+        settings = GetNodeOrNull<Node2D>("Settings") as Settings;
+    }
+
 
     public override void _Process(double delta) {
         if (Input.IsActionJustPressed("pause")) {
@@ -14,6 +21,15 @@ public partial class PauseMenu : Node2D {
 
 	void TogglePause() {
 		paused = !paused;
+		
+		if (paused) {
+			settings.LoadSettings();
+		}
+
+		else {
+			settings.SaveSettings();
+		}
+
 		Visible = paused;
 
 		GetTree().Paused = paused;

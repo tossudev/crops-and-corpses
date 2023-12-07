@@ -135,7 +135,8 @@ public partial class HandheldController : Node2D
         if (_timer.TimeLeft <= 0)
         {
             _player.stopMovement = false;
-            _skeleton.usingTool = false;
+            if (!_ranged)
+                _skeleton.usingTool = false;
         }
 
         if (_actionHeld)
@@ -241,8 +242,7 @@ public partial class HandheldController : Node2D
         _player.stopMovement = false;
         _staminaComponent.canDrain = false;
 
-        if (_timer.TimeLeft <= 0)
-            _skeleton.usingTool = false;
+        _skeleton.usingTool = false;
 
         if (_ranged)
         {
@@ -258,6 +258,8 @@ public partial class HandheldController : Node2D
         isDrawing = false;
 
         _skeleton.usingRanged = false;
+        _skeleton.TurnHeadBack(false);
+        _skeleton.GetBoneNode(PlayerBone.Right_Arm).Visible = true;
 
         _player.speedPercent = 1;
         _player.canRun = true;

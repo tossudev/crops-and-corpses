@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Data.SqlTypes;
 using System.Reflection.Metadata.Ecma335;
 
 public partial class PlayerSpriteController : Skeleton2D
@@ -12,6 +13,9 @@ public partial class PlayerSpriteController : Skeleton2D
 	public bool usingTool;
 	public bool isFlipped;
 	public bool usingRanged;
+
+	[Export] Texture2D headSprite;
+	[Export] Texture2D backHeadSprite;
 
 	[Export] bool isNpc;
 
@@ -58,9 +62,33 @@ public partial class PlayerSpriteController : Skeleton2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (!usingTool) return;
+
+		if (!isFlipped && GetGlobalMousePosition().X < GlobalPosition.X)
+		{
+			Scale = new Vector2(scaleBackwards, scaleForwards);
+			isFlipped = true;
+		}
+		else if (isFlipped && GetGlobalMousePosition().X > GlobalPosition.X)
+		{
+			Scale = new Vector2(scaleForwards, scaleForwards);
+			isFlipped = false;
+		}
+
 		if (usingRanged)
 		{
 			var torso = GetBoneNode(PlayerBone.Torso);
+
+			if (GetGlobalMousePosition().Y < GlobalPosition.Y - 15)
+			{
+				TurnHeadBack(true);
+				GetBoneNode(PlayerBone.Right_Arm).Visible = false;
+			}
+			else
+			{
+				TurnHeadBack(false);
+				GetBoneNode(PlayerBone.Right_Arm).Visible = true;
+			}
 
 			// angle from player torso to mouse
 			float angle = GlobalPosition.DirectionTo(GetGlobalMousePosition()).Angle() - torso.GlobalRotation;
@@ -82,22 +110,7 @@ public partial class PlayerSpriteController : Skeleton2D
 
 			return;
 		}
-
-		if (!usingTool) return;
-
-		if (!isFlipped && GetGlobalMousePosition().X < GlobalPosition.X)
-		{
-			Scale = new Vector2(scaleBackwards, scaleForwards);
-			isFlipped = true;
-		}
-		else if (isFlipped && GetGlobalMousePosition().X > GlobalPosition.X)
-		{
-			Scale = new Vector2(scaleForwards, scaleForwards);
-			isFlipped = false;
-		}
 	}
-
-
 
 	public void FlipBoneX(PlayerBone bone)
 	{
@@ -120,7 +133,21 @@ public partial class PlayerSpriteController : Skeleton2D
 		boneNode.RotationDegrees = degrees;
 	}
 
-	private Bone2D GetBoneNode(PlayerBone bone)
+	public void TurnHeadBack(bool turn)
+	{
+		var head = GetBoneNode(PlayerBone.Head);
+
+		if (turn)
+		{
+			head.GetNode<Sprite2D>("Sprite2D").Texture = backHeadSprite;
+		}
+		else
+		{
+			head.GetNode<Sprite2D>("Sprite2D").Texture = headSprite;
+		}
+	}
+
+	public Bone2D GetBoneNode(PlayerBone bone)
 	{
 		var torso = GetNode<Bone2D>("TorsoBone");
 		switch (bone)

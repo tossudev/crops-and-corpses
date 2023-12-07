@@ -59,7 +59,7 @@ public partial class ZombieManager : Node
 		else 
 		{
 			type = ZombieType.Medium;
-			if(zombieKillCount > 10f && townStats > 4) type = ZombieType.Strong;	
+			if(zombieKillCount > 5f && townStats > 4) type = ZombieType.Strong;	
 		}
 		
 		switch(type)

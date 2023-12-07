@@ -22,6 +22,7 @@ public partial class SpawnScript : Node2D
 	private int counter;
 	private int spawnPointCount;
 	private bool zombieDelayBool=false;
+	[Export] private float caveMaxZombieCount;
 	[Export]private float maxDistance;
 	[Export] public CharacterBody2D player;
 	private int maxZombieCount;
@@ -135,27 +136,53 @@ public partial class SpawnScript : Node2D
 			break;
 	}
     enemiesNode = GetNode<Node2D>("%Enemies");
+	if(SceneManager.GetCurrentScene(this) == Scene.Cave)
+	{
+		 foreach (SpawnPoint spawnPoint in spawnPoints)
+		{
+			Vector2 spawnPointPos = spawnPoint.Node.Position;
+			Vector2 playerPos = player.Position;
 
-    foreach (SpawnPoint spawnPoint in spawnPoints)
-    {
-        Vector2 spawnPointPos = spawnPoint.Node.Position;
-        Vector2 playerPos = player.Position;
+			float distance = spawnPointPos.DistanceTo(playerPos);
+		//  GD.Print(distance + " spawnPoint distance to player");
 
-        float distance = spawnPointPos.DistanceTo(playerPos);
+			if (distance <= maxDistance && caveMaxZombieCount >= zombieList.Count)
+			{
+				CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
+				prefab.Position = spawnPointPos;
+				enemiesNode.AddChild(prefab);
+				zombieList.Add(prefab);
+			}
+			else
+			{
+				//GD.Print("Spawn point too far away, or too many zombies in scene");
+			}
+		}
+	}
+	else
+	{
+		foreach (SpawnPoint spawnPoint in spawnPoints)
+   		{
+			Vector2 spawnPointPos = spawnPoint.Node.Position;
+			Vector2 playerPos = player.Position;
+
+        	float distance = spawnPointPos.DistanceTo(playerPos);
       //  GD.Print(distance + " spawnPoint distance to player");
 
-        if (distance <= maxDistance && maxZombieCount >= zombieList.Count)
-        {
-            CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
-            prefab.Position = spawnPointPos;
-            enemiesNode.AddChild(prefab);
-            zombieList.Add(prefab);
-        }
-        else
-        {
-            //GD.Print("Spawn point too far away, or too many zombies in scene");
-        }
-    }
+			if (distance <= maxDistance && maxZombieCount >= zombieList.Count)
+			{
+				CharacterBody2D prefab = (CharacterBody2D)packedScene.Instantiate();
+				prefab.Position = spawnPointPos;
+				enemiesNode.AddChild(prefab);
+				zombieList.Add(prefab);
+			}
+			else
+			{
+				//GD.Print("Spawn point too far away, or too many zombies in scene");
+			}
+    	}
+	}
+    
 }
 	public void SpawnZombieAtPoint(Vector2 spawnPoint)
 	{    

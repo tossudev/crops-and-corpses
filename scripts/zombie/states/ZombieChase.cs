@@ -79,7 +79,11 @@ public partial class ZombieChase : ZombieStates
 		Vector2 nextPathPosition = _navAgent.GetNextPathPosition();
 		Vector2 newVelocity = (nextPathPosition - currentAgentPosition).Normalized();
 		_zombie.Velocity = newVelocity * _moveSpeed;
-		animPlayer.SpeedScale = 1*( _moveSpeed / 100 );
+		if(animPlayer != null)
+		{
+			animPlayer.SpeedScale =  _moveSpeed / 100;
+		}
+		
 	}
 
 	private void OnTimerTimeout()

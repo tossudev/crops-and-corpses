@@ -24,10 +24,11 @@ public partial class SpawnScript : Node2D
 	private bool zombieDelayBool=false;
 	[Export]private float maxDistance;
 	[Export] public CharacterBody2D player;
-	[Export] public int maxZombieCount;
+	private int maxZombieCount;
 	private static List<CharacterBody2D> zombieList = new List<CharacterBody2D>();
 	private static List<CharacterBody2D> questZombieList = new List<CharacterBody2D>();
 	public GlobalTime globalTime;
+	
 
 	public override void _Ready()
 	{
@@ -63,7 +64,7 @@ public partial class SpawnScript : Node2D
 		{
 			spawnDelay.Stop();
 		}
-		CheckIfTownDestroyed();
+		//CheckIfTownDestroyed();
 		if(zombieList.Count > 0 && zombieDelayBool)
 		{
 			Vector2 playerPos = player.Position;
@@ -80,14 +81,14 @@ public partial class SpawnScript : Node2D
 			}
 		}
 	}
-	private void CheckIfTownDestroyed()
+	/* private void CheckIfTownDestroyed()
 	{
 		if(globalTime.HasTownBeenDestroyed())
 		{
 			if(GetParent<Node2D>().Name != "Cave") spawnDelay.Stop();
 			
 		}
-	}
+	} */
 	private void DeleteZombieDelay()
 	{
 		//if(player.IsQueuedForDeletion()){zombieDeleteDelay.Stop();}
@@ -96,7 +97,7 @@ public partial class SpawnScript : Node2D
 	}
 	private void CheckIfInsideCave()
 	{
-		if (GetParent<Node2D>().Name != "Cave")
+		if (SceneManager.GetCurrentScene(this) != Scene.Cave)
 		{
 			isNightOrDay = TimeManager.dayTime;
 		}
@@ -108,6 +109,31 @@ public partial class SpawnScript : Node2D
 	}
 	public void ZombieSpawn()
 {
+	GD.Print("ZombieListCount " + zombieList.Count());
+	var townHallLevel = TownManager.currentTownStats.townHallLevel;
+	switch(townHallLevel)
+	{
+		case 0:
+			maxZombieCount = 10;
+			break;
+		case 1:
+			maxZombieCount = 10;
+			break;
+		case 2:
+			maxZombieCount = 15;
+			break;
+		case 3:
+			maxZombieCount = 20;
+			break;
+		case 4:
+			maxZombieCount = 25;
+			break;
+		case 5:
+			maxZombieCount = 30;
+			break;
+		default:
+			break;
+	}
     enemiesNode = GetNode<Node2D>("%Enemies");
 
     foreach (SpawnPoint spawnPoint in spawnPoints)

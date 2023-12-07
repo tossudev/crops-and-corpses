@@ -1,8 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://bt56v72d27ku6"]
+[gd_scene load_steps=14 format=3 uid="uid://bt56v72d27ku6"]
 
 [ext_resource type="Script" path="res://scripts/World/BridgeQuest.cs" id="1_b1i77"]
-[ext_resource type="Texture2D" uid="uid://bjaxeksksxahl" path="res://assets/sprites/Farm sprites/sign_waterplant.png" id="2_sm22y"]
+[ext_resource type="Texture2D" uid="uid://dpmy0buyymn3x" path="res://assets/sprites/Farm sprites/sign_warning.png" id="2_0yikk"]
 [ext_resource type="Texture2D" uid="uid://p0vefm8oo5l8" path="res://assets/sprites/ui/wooden_panel.png" id="3_ah3gb"]
+[ext_resource type="LabelSettings" uid="uid://dt5ytrcyx65cj" path="res://assets/resources/labelsettings/crafting_window_header.tres" id="4_6ur68"]
+[ext_resource type="StyleBox" uid="uid://bbwealwe8brh6" path="res://assets/resources/styles/default_button_style_box.tres" id="4_b4msy"]
+[ext_resource type="StyleBox" uid="uid://xd4dptkhsu7w" path="res://assets/resources/styles/default_button_hover_style_box.tres" id="5_fb12d"]
+[ext_resource type="LabelSettings" uid="uid://bbixx2rjsddy7" path="res://assets/resources/labelsettings/crafting_resource_label_settings.tres" id="5_gmrgr"]
+[ext_resource type="StyleBox" uid="uid://dsvrgshq7hla0" path="res://assets/resources/styles/default_button_pressed_style_box.tres" id="6_3dqfj"]
+[ext_resource type="FontFile" uid="uid://doceug7kw76yx" path="res://assets/resources/labelsettings/base_ui_font.tres" id="7_j5vir"]
+[ext_resource type="LabelSettings" uid="uid://ddsqt02wte6x0" path="res://assets/resources/labelsettings/default_button_label_settings.tres" id="9_t8x71"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58xoa"]
 size = Vector2(97, 101)
@@ -17,9 +24,8 @@ size = Vector2(103, 292)
 script = ExtResource("1_b1i77")
 
 [node name="Sign" type="Sprite2D" parent="."]
-visible = false
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_sm22y")
+texture = ExtResource("2_0yikk")
 offset = Vector2(0, -50)
 
 [node name="InteractionArea" type="Area2D" parent="."]
@@ -68,28 +74,23 @@ offset_right = 1196.0
 offset_bottom = 375.0
 theme_override_font_sizes/font_size = 40
 text = "A suspicious guest from someone..."
+label_settings = ExtResource("4_6ur68")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="BridgeLabel" type="Label" parent="BridgeQuestUI"]
 unique_name_in_owner = true
-offset_left = 706.0
+offset_left = 735.0
 offset_top = 390.0
-offset_right = 1211.0
+offset_right = 1181.0
 offset_bottom = 622.0
 theme_override_font_sizes/font_size = 25
 text = "Woah looks like you'll need to collect 50 pieces of wood to build a bridge...!! Better get choppin'! "
+label_settings = ExtResource("5_gmrgr")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
-
-[node name="CloseBtn" type="Button" parent="BridgeQuestUI"]
-offset_left = 818.0
-offset_top = 729.0
-offset_right = 1093.0
-offset_bottom = 814.0
-text = "Close"
 
 [node name="FinishQuestBtn" type="Button" parent="BridgeQuestUI"]
 unique_name_in_owner = true
@@ -97,11 +98,57 @@ offset_left = 818.0
 offset_top = 634.0
 offset_right = 1092.0
 offset_bottom = 712.0
+theme_override_fonts/font = ExtResource("7_j5vir")
+theme_override_styles/normal = ExtResource("4_b4msy")
+theme_override_styles/hover = ExtResource("5_fb12d")
+theme_override_styles/pressed = ExtResource("6_3dqfj")
 disabled = true
-text = "Finish"
+
+[node name="FinishBtnLabel" type="Label" parent="BridgeQuestUI/FinishQuestBtn"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.098
+anchor_right = 0.965
+anchor_bottom = 0.847
+offset_left = 71.3
+offset_top = 15.356
+offset_right = -71.41
+offset_bottom = -14.066
+text = "Finish Quest"
+label_settings = ExtResource("9_t8x71")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseBtn" type="Button" parent="BridgeQuestUI"]
+offset_left = 818.0
+offset_top = 729.0
+offset_right = 1093.0
+offset_bottom = 814.0
+theme_override_styles/normal = ExtResource("4_b4msy")
+theme_override_styles/hover = ExtResource("5_fb12d")
+theme_override_styles/pressed = ExtResource("6_3dqfj")
+
+[node name="Label" type="Label" parent="BridgeQuestUI/CloseBtn"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.098
+anchor_right = 0.965
+anchor_bottom = 0.847
+offset_left = 71.25
+offset_top = 19.67
+offset_right = -73.375
+offset_bottom = -14.995
+text = "Close"
+label_settings = ExtResource("9_t8x71")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="input_event" from="InteractionArea" to="." method="OnInputEvent"]
 [connection signal="body_entered" from="DetectionArea" to="." method="OnBodyEntered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="OnBodyExited"]
-[connection signal="pressed" from="BridgeQuestUI/CloseBtn" to="." method="OnCloseButtonPressed"]
 [connection signal="pressed" from="BridgeQuestUI/FinishQuestBtn" to="." method="OnFinishQuestButtonPressed"]
+[connection signal="pressed" from="BridgeQuestUI/CloseBtn" to="." method="OnCloseButtonPressed"]

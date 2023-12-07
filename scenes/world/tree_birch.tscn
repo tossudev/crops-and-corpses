@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://vtukk51kve8t"]
+[gd_scene load_steps=12 format=3 uid="uid://bsrw4dwjp2lkb"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_75bif"]
 [ext_resource type="Resource" uid="uid://b7jgjk4165udm" path="res://TinoTests/Resources/tree.tres" id="2_2ogn8"]
-[ext_resource type="AudioStream" uid="uid://unr5a347lwdw" path="res://assets/sounds_folder/character_sounds/hit_tree.wav" id="3_8ivus"]
-[ext_resource type="Texture2D" uid="uid://doqg0qxfr6stu" path="res://assets/sprites/items/birch_1.png" id="4_fffxv"]
+[ext_resource type="Texture2D" uid="uid://tst4aglcb0av" path="res://assets/sprites/items/birch_1.png" id="4_fffxv"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="5_sbuq5"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="6_m0wye"]
 [ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="7_61lx5"]
@@ -42,7 +41,6 @@ script = ExtResource("1_75bif")
 loot = ExtResource("2_2ogn8")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite = NodePath("Sprite2D")
-_audio = ExtResource("3_8ivus")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-24, -160)

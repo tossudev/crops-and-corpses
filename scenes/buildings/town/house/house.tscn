@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="8_ou5na"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cd7u6"]
-size = Vector2(280, 300)
+size = Vector2(230, 290.244)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irxds"]
 size = Vector2(218, 461.538)
@@ -42,7 +42,7 @@ position = Vector2(-63, -52)
 scale = Vector2(1, 0.82)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-65.125, -87.1951)
+position = Vector2(-62, -93.9024)
 shape = SubResource("RectangleShape2D_cd7u6")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["building"]]
@@ -63,7 +63,7 @@ position = Vector2(-126, -75)
 _parentScript = NodePath("../BuildingHealth")
 _healItemPrefabs = Array[PackedScene]([])
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_u5tml")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") groups=["Hitbox"] instance=ExtResource("3_u5tml")]
 position = Vector2(-126, -75)
 _healthComponent = NodePath("../HealthComponent")
 

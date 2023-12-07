@@ -1,13 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://du4tddxtyn51y"]
+[gd_scene load_steps=13 format=3 uid="uid://du4tddxtyn51y"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_k5454"]
 [ext_resource type="Resource" uid="uid://b7jgjk4165udm" path="res://TinoTests/Resources/tree.tres" id="2_tf5dk"]
-[ext_resource type="AudioStream" uid="uid://bji8ydcfgp1gr" path="res://assets/sounds_folder/character_sounds/hit_tree.wav" id="3_88kib"]
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="3_a0l43"]
-[ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="3_qrldr"]
+[ext_resource type="Texture2D" uid="uid://df2i6c8emtoj8" path="res://assets/sprites/items/birch_3.png" id="3_yi8vd"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_508he"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_1o5tn"]
-[ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_2m76p"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_2m76p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_em0ef"]
 size = Vector2(80, 56)
@@ -71,11 +70,10 @@ script = ExtResource("1_k5454")
 loot = ExtResource("2_tf5dk")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite = NodePath("Sprite2D")
-_audio = ExtResource("3_88kib")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2.08165e-12, -160)
-texture = ExtResource("3_qrldr")
+texture = ExtResource("3_yi8vd")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("4_508he")]
 _parentScript = NodePath("..")

@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://scripts/zombie/RoamingZombie.cs" id="1_bgof4"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_77rad"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_2qvph"]
-[ext_resource type="Resource" uid="uid://bs6otct5awtuy" path="res://TinoTests/Resources/rock.tres" id="3_jtany"]
+[ext_resource type="Resource" uid="uid://bav0gen8i62ti" path="res://TinoTests/Resources/zombie_loot2.tres" id="3_o5y10"]
 [ext_resource type="Script" path="res://scripts/zombie/StateMachine.cs" id="4_0nu7y"]
-[ext_resource type="Resource" uid="uid://bqdor0tg0upjq" path="res://TinoTests/Resources/iron_ore.tres" id="4_7fdbm"]
+[ext_resource type="Resource" uid="uid://nfsljestu85d" path="res://TinoTests/Resources/zombie_loot3.tres" id="4_vnr3h"]
 [ext_resource type="Script" path="res://scripts/zombie/states/ZombieIdle.cs" id="5_5tice"]
 [ext_resource type="Script" path="res://scripts/zombie/states/ZombieChase.cs" id="6_7qls5"]
 [ext_resource type="Script" path="res://scripts/zombie/states/ZombieAttackFence.cs" id="7_fw24w"]
@@ -32,7 +32,7 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_bgof4")
 _audioStreamPlayer2D = NodePath("ZombieNoise")
 _lootController = NodePath("Backpack")
-_lootList = Array[Object]([ExtResource("11_xvxhc"), ExtResource("3_jtany"), ExtResource("4_7fdbm")])
+_lootList = Array[Object]([ExtResource("11_xvxhc"), ExtResource("3_o5y10"), ExtResource("4_vnr3h")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5h8wa")

@@ -109,7 +109,7 @@ public partial class SpawnScript : Node2D
 	}
 	public void ZombieSpawn()
 {
-	GD.Print("ZombieListCount " + zombieList.Count());
+	//GD.Print("ZombieListCount " + zombieList.Count());
 	var townHallLevel = TownManager.currentTownStats.townHallLevel;
 	switch(townHallLevel)
 	{

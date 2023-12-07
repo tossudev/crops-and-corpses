@@ -6,7 +6,6 @@ public partial class PlayerController : CharacterBody2D
 	[ExportCategory("Components")]
 	[Export] private HandheldController _handheld;
 	[Export] private Camera2D _camera;
-	[Export] private Sprite2D _sprite;
 	[Export] private Area2D _pickupArea;
 	[Export] private PlayerSpriteController _rig;
 	[Export] private HealthComponent _healthComponent;

@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://btmwjcvssjjf7"]
+[gd_scene load_steps=12 format=3 uid="uid://btmwjcvssjjf7"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_15rhp"]
-[ext_resource type="AudioStream" uid="uid://b3nve0tvrbddr" path="res://assets/Sounds/character_sounds/rock_break.wav" id="2_srv7q"]
+[ext_resource type="AudioStream" uid="uid://4pjvi3sxlm02" path="res://assets/Sounds/character_sounds/rock_break.wav" id="2_srv7q"]
+[ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="3_1ic63"]
 [ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_6kr0x"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_isnin"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_kywjc"]
@@ -42,6 +43,13 @@ script = ExtResource("1_15rhp")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite = NodePath("Sprite2D")
 _audio = ExtResource("2_srv7q")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.615686)
+position = Vector2(-1.39566, -43.2337)
+rotation = 2.87979
+scale = Vector2(5.00348, 2.35276)
+texture = ExtResource("3_1ic63")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-5, -90)

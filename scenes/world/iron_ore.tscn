@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dn2v4uxpv2gx6"]
+[gd_scene load_steps=13 format=3 uid="uid://dn2v4uxpv2gx6"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_5m8pk"]
-[ext_resource type="Resource" uid="uid://bqdor0tg0upjq" path="res://TinoTests/Resources/iron_ore.tres" id="2_x8kij"]
-[ext_resource type="AudioStream" uid="uid://b3nve0tvrbddr" path="res://assets/Sounds/character_sounds/rock_break.wav" id="3_ocxm8"]
+[ext_resource type="Resource" uid="uid://3csk1j4ap4h8" path="res://TinoTests/Resources/iron_ore.tres" id="2_x8kij"]
+[ext_resource type="AudioStream" uid="uid://4pjvi3sxlm02" path="res://assets/Sounds/character_sounds/rock_break.wav" id="3_ocxm8"]
 [ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_yp0f4"]
+[ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="4_6h704"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_a0d06"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_yemw3"]
 [ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_tlo3i"]
@@ -43,6 +44,13 @@ script = ExtResource("1_5m8pk")
 loot = ExtResource("2_x8kij")
 _animationPlayer = NodePath("AnimationPlayer")
 _audio = ExtResource("3_ocxm8")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.615686)
+position = Vector2(-1.39566, -43.2337)
+rotation = 2.87979
+scale = Vector2(5.00348, 2.35276)
+texture = ExtResource("4_6h704")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-5, -90)

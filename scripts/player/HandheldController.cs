@@ -219,7 +219,7 @@ public partial class HandheldController : Node2D
         _player.speedPercent = 0.5f;
         _player.canRun = false;
 
-        if (_attackAnim == "idle")
+        if (_attackAnim == GetAnimation(WeaponAnimation.None))
             _toolSprite.Texture = _weapon.item?.IconTexture;
 
         _staminaComponent.drainRate = 0.5f;

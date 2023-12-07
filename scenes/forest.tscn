@@ -78,7 +78,7 @@
 [ext_resource type="Texture2D" uid="uid://bbxpdedx0jcf8" path="res://assets/sprites/tiles/cave_corner_tile8.png" id="56_0nvt0"]
 [ext_resource type="PackedScene" uid="uid://dyq3ksvy2gwvv" path="res://scenes/world/bush.tscn" id="58_m4acs"]
 [ext_resource type="PackedScene" uid="uid://chw8bc0kxym0e" path="res://scenes/villager/villager_manager.tscn" id="61_87l3j"]
-[ext_resource type="Texture2D" uid="uid://bjaxeksksxahl" path="res://assets/sprites/Farm sprites/sign_waterplant.png" id="61_kgsc4"]
+[ext_resource type="Texture2D" uid="uid://dpmy0buyymn3x" path="res://assets/sprites/Farm sprites/sign_warning.png" id="63_uknjt"]
 [ext_resource type="PackedScene" uid="uid://dt4impfdusiy" path="res://scenes/farm/plants/plant_poppy.tscn" id="65_i2ild"]
 [ext_resource type="PackedScene" uid="uid://bbia6yxwghu3o" path="res://scenes/farm/plants/plant_lupine.tscn" id="66_p6d2a"]
 [ext_resource type="PackedScene" uid="uid://luqdfx7qh2jl" path="res://scenes/farm/plants/plant_pumpkin.tscn" id="66_uj5sv"]
@@ -778,7 +778,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="Objects" node_paths=PackedStringArray("_camera") instance=ExtResource("6_d65ob")]
 unique_name_in_owner = true
-position = Vector2(-7613, -3002)
+position = Vector2(-7700, -3049)
 _camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
@@ -824,7 +824,7 @@ position = Vector2(6061, 2608)
 _bridge = NodePath("../WoodenBridge")
 
 [node name="Sign" parent="Objects/Buildings/BridgeQuest" index="0"]
-position = Vector2(292, 118)
+position = Vector2(177, 91)
 
 [node name="InteractionArea" parent="Objects/Buildings/BridgeQuest" index="1"]
 position = Vector2(178, 89.9999)
@@ -836,13 +836,14 @@ position = Vector2(182, 86)
 position = Vector2(472, 90)
 
 [node name="BridgeSign" type="Node2D" parent="Objects/Buildings"]
+visible = false
 y_sort_enabled = true
 position = Vector2(154, 238)
 
 [node name="SignWaterplant" type="Sprite2D" parent="Objects/Buildings/BridgeSign"]
 position = Vector2(6084, 2467)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("61_kgsc4")
+texture = ExtResource("63_uknjt")
 offset = Vector2(0, -80)
 
 [node name="WoodenBridge" parent="Objects/Buildings" instance=ExtResource("51_6fpp5")]
@@ -1058,9 +1059,8 @@ _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore44" parent="Objects/Rocks/Stone(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore44" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
 position = Vector2(-1874, 2699)
-_animationPlayer = NodePath("")
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 

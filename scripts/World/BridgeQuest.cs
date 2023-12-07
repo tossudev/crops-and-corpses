@@ -32,6 +32,7 @@ public partial class BridgeQuest : Node2D
 			if (StorageData.ExistsInInventoryOrHotbar(_log.ID, WOOD_NEEDED))
 			{
 				GetNode<Button>("%FinishQuestBtn").Disabled = false;
+				GetNode<Label>("%FinishBtnLabel").Visible = true;
 				_questFinished = true;
 			}
 		}
@@ -68,6 +69,7 @@ public partial class BridgeQuest : Node2D
 
 			GetNode<StaticBody2D>("%Barrier").QueueFree();
 			GetNode<Button>("%FinishQuestBtn").Visible = false;
+			GetNode<Label>("%FinishBtnLabel").Visible = false;
 			GetNode<Label>("%BridgeLabel").Text = "Nice job, you finished the bridge! I wonder where it leads to...";
 		}
 	}

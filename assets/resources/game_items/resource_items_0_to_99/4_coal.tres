@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bbw7uuyg7qc8i"]
 
-[ext_resource type="Texture2D" uid="uid://bujxn2b45e54t" path="res://assets/sprites/items/item_stone.png" id="1_xhvji"]
+[ext_resource type="Texture2D" uid="uid://dwvqbf7irmyqo" path="res://assets/sprites/items/item_coal.png" id="1_rbcdn"]
 [ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="2_jm62s"]
 
 [resource]
 script = ExtResource("2_jm62s")
 ID = 4
 Name = "Coal"
-IconTexture = ExtResource("1_xhvji")
+IconTexture = ExtResource("1_rbcdn")
 StackSize = 8
 craftingRequirements = Array[Object]([])

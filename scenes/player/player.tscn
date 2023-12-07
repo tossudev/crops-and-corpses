@@ -897,6 +897,7 @@ position = Vector2(2.08165e-12, 10)
 rotation = 3.14159
 scale = Vector2(0.125738, 0.125743)
 polygon = PackedVector2Array(65, -48, 94, -26, 116, 6, 126, 43, 2.08165e-12, 64, -126, 43, -116, 6, -94, -26, -65, -48, -32, -62, 2.08165e-12, -66, 32, -62)
+disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Handheld"]
 modulate = Color(1, 0, 0, 0)

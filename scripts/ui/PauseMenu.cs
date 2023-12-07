@@ -43,7 +43,13 @@ public partial class PauseMenu : Node2D {
 
 	public void OnBackPressed() {
 		TogglePause();
-		GetTree().ChangeSceneToFile("res://scenes/ui/main_menu.tscn");
+
+        if (SceneManager.IsCurrentScene(this, Scene.Town))
+        {
+            BuildingMenu.buildMenu?.SaveBuildings();
+        }
+
+        GetTree().ChangeSceneToFile("res://scenes/ui/main_menu.tscn");
 	}
 
 }

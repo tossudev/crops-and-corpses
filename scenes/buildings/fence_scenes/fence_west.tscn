@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://disyt3fuu77je"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_667uj"]
-[ext_resource type="Texture2D" uid="uid://cuwpylh2hqp0x" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="2_d27mr"]
+[ext_resource type="Texture2D" uid="uid://djhyomtxb2qta" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="2_d27mr"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_xoojr"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_vkqwf"]
 [ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_cet8m"]
@@ -70,5 +70,4 @@ show_percentage = false
 [node name="NavigationObstacleArea" parent="." instance=ExtResource("6_cet8m")]
 position = Vector2(99.2, 89.6)
 scale = Vector2(0.8, 1.2)
-color = Color(0.0235294, 0, 0.917647, 0)
 polygon = PackedVector2Array(-134, -174.667, -124, -174.667, -124, -114.667, -134, -114.667)

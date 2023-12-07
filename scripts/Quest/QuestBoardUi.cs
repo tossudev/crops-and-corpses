@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class QuestBoardUi : Control
 {
@@ -63,16 +64,19 @@ public partial class QuestBoardUi : Control
         {
             questManager.StartRescueQuest(Scene.Forest, _selectedDiff);
             CheckIfQuestStarted();
+            HideQuestButtons();
         };
         _ruinsButton.Pressed += () =>
         {
             questManager.StartRescueQuest(Scene.Ruins, _selectedDiff);
             CheckIfQuestStarted();
+            HideQuestButtons();
         };
         _caveButton.Pressed += () =>
         {
             questManager.StartRescueQuest(Scene.Cave, _selectedDiff);
             CheckIfQuestStarted();
+            HideQuestButtons();
         };
 
         Dif1Button.Pressed += () => SetQuestDifficulty(1);
@@ -148,18 +152,49 @@ public partial class QuestBoardUi : Control
     // open the quest board
     public void OpenQuestBoard()
     {
+
         // if scene is not town, return
         if (!SceneManager.IsCurrentScene(this, Scene.Town))
         {
             return;
         }
-
         Visible = true;
         SetLevelsActive();
     }
+       
 
     public int GetSelectedDifficulty()
     {
         return _selectedDiff;
+    }
+
+    // hide the quest buttons if active quest is not null
+    void HideQuestButtons()
+    {
+        var quest = PlayerInfo.GetActiveQuest();
+
+        if (SaveData.allVillagerRawData.Count(data => data.isTownPopulation) < TownManager.currentTownStats.populationCap)
+        {
+            if (quest != null)
+            {
+                _forestButton.Visible = false;
+                _ruinsButton.Visible = false;
+                _caveButton.Visible = false;
+            }
+            else
+            {
+                _forestButton.Visible = true;
+                _ruinsButton.Visible = true;
+                _caveButton.Visible = true;
+            }
+        }
+        else
+        {
+            _forestButton.Visible = false;
+            _ruinsButton.Visible = false;
+            _caveButton.Visible = false;
+        }
+
+
     }
 }

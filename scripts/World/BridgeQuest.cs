@@ -7,10 +7,12 @@ public partial class BridgeQuest : Node2D
 	private CanvasLayer _canvasLayer;
 	private bool _playerInArea;
 	private bool _questFinished;
+	private Item _log;
 	private const int WOOD_NEEDED = 50;
 
 	public override void _Ready()
 	{
+		_log = (Item)ResourceLoader.Load("res://assets/resources/game_items/resource_items_0_to_99/0_log.tres");
 		_canvasLayer = GetNode<CanvasLayer>("%BridgeQuestUI");
 	}
 
@@ -27,7 +29,7 @@ public partial class BridgeQuest : Node2D
 		{
 			_playerInArea = true;
 
-			if (StorageData.ExistsInStorage(SaveData.organizedPlayerInventory, 0, WOOD_NEEDED))
+			if (StorageData.ExistsInInventoryOrHotbar(_log.ID, WOOD_NEEDED))
 			{
 				GetNode<Button>("%FinishQuestBtn").Disabled = false;
 				_questFinished = true;
@@ -50,7 +52,6 @@ public partial class BridgeQuest : Node2D
 
 	private async void RemoveLogsFromInventory()
 	{
-		Item _log = (Item)ResourceLoader.Load("res://assets/resources/game_items/resource_items_0_to_99/0_log.tres");
 		RawInventoryItem _logsForQuest = new RawInventoryItem(_log.ID, _log.Name, WOOD_NEEDED, _log.StackSize);
 		await PlayerInventoryController.RemoveItemFromInventory(_logsForQuest);
 	}

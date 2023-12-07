@@ -231,6 +231,7 @@ public partial class HandheldController : Node2D
         _animationPlayer.SpeedScale = 1 / _drawTime;
         _animationPlayer.Play(_attackAnim);
         _timer.Start(_drawTime);
+        _audioController.PlayEffect("character_sounds/bow_draw.wav");
     }
 
     public void Release()
@@ -292,6 +293,7 @@ public partial class HandheldController : Node2D
         projectile.GlobalRotation = _attack.direction.Angle();
 
         _timer.Start(_cooldown);
+        _audioController.PlayEffect("character_sounds/bow_shoot.wav");
     }
 
     private string GetAnimation(WeaponAnimation weaponAnimation)
@@ -343,9 +345,9 @@ public partial class HandheldController : Node2D
                     case TargetType.Rock:
                         _audioController.PlayEffect("character_sounds/rock_break.wav");
                         break;
-                    // case TargetType.Building:
-                    //     _targetGroup = "building";
-                    //     break;
+                    case TargetType.Building:
+                        _audioController.PlayEffect("character_sounds/hit_enemy.wav");
+                        break;
                     default:
                         return;
                 }

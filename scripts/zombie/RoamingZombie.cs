@@ -90,7 +90,7 @@ public partial class RoamingZombie : CharacterBody2D
 		_updateStatsTimer.Start();
 
 		var occupation = VillagerRawData.GetRandomOccupation();
-		GD.Print(occupation.ToString());
+		//GD.Print(occupation.ToString());
 		
 		if (occupation != VillagerOccupation.Builder)
 		{
@@ -141,9 +141,9 @@ public partial class RoamingZombie : CharacterBody2D
 
 	private void AttackReceived(Attack attack)
 	{
+		if(IsQueuedForDeletion()) return;
 		var duration = 0.25f;
 		_knockback = attack.direction * attack.knockback;
-
 		var knockbackTween = GetTree().CreateTween();
 		knockbackTween.Parallel().TweenProperty(this, "_knockback", new Vector2(0, 0), duration);
 

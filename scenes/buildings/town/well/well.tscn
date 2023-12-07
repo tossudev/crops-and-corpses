@@ -13,12 +13,13 @@ size = Vector2(368.167, 385.714)
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_yeq5k")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="BuildingSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 modulate = Color(0.835294, 0.823529, 0.819608, 1)
 position = Vector2(-489, -464)
 texture = ExtResource("3_7hhxw")
 
-[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
+[node name="Shadow" type="Sprite2D" parent="BuildingSprite"]
 modulate = Color(1, 1, 1, 0.498039)
 z_index = -1
 position = Vector2(0, 342.535)

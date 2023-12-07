@@ -443,6 +443,7 @@ public partial class BuildingMenu : Control
                 BuildingHealth healthscript = _buildingScene.GetNode("BuildingHealth") as BuildingHealth;
                 healthscript.isLoaded = true;
                 healthscript.loadedHealth = (int)jsonObject["health"];
+                healthscript.LoadBuildingHealth((int)jsonObject["health"]);
             }
 
             if (jsonObject["name"].ToString() == "FarmPlot")
@@ -508,6 +509,9 @@ public partial class BuildingMenu : Control
         {
             _demolishMenu.SetBuildingName();
         }
+
+        HealthComponent _healthComponent = _buildingScene.GetNode("%HealthComponent") as HealthComponent;
+        _healthComponent.SetHealth(_healthComponent.GetMaxHealth());
     }
 
     private void BuildingMode()

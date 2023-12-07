@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://dr5dn7juefoha"]
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_gmjf4"]
-[ext_resource type="Texture2D" uid="uid://d21t44ku0n8mk" path="res://assets/sprites/buildings/largehouse_color.png" id="2_uosje"]
+[ext_resource type="Texture2D" uid="uid://c5v773mk6tykk" path="res://assets/sprites/buildings/largehouse_color.png" id="2_uosje"]
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="3_goisp"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_ysaqf"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_2ldom"]
-[ext_resource type="PackedScene" uid="uid://bu0f37obys8sx" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_72uur"]
+[ext_resource type="PackedScene" uid="uid://2v1aodyd0p4b" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_72uur"]
 [ext_resource type="PackedScene" uid="uid://dune6txyuwmm2" path="res://scenes/buildings/town/villager_residence_component.tscn" id="6_h2v24"]
-[ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="8_vj33q"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="8_vj33q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sekvv"]
 size = Vector2(280, 160)
@@ -25,19 +25,20 @@ scale = Vector2(2, 2)
 unique_name_in_owner = true
 script = ExtResource("1_gmjf4")
 
-[node name="House" type="Sprite2D" parent="."]
+[node name="BuildingSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(-131.955, -149.5)
 scale = Vector2(0.43, 0.43)
 texture = ExtResource("2_uosje")
 
-[node name="Shadow" type="Sprite2D" parent="House"]
+[node name="Shadow" type="Sprite2D" parent="BuildingSprite"]
 modulate = Color(1, 1, 1, 0.498039)
 z_index = -1
 position = Vector2(114.43, 350.233)
 scale = Vector2(5.05491, 7.64857)
 texture = ExtResource("3_goisp")
 
-[node name="Shadow2" type="Sprite2D" parent="House"]
+[node name="Shadow2" type="Sprite2D" parent="BuildingSprite"]
 modulate = Color(1, 1, 1, 0.498039)
 z_index = -1
 position = Vector2(-62.273, 296.424)

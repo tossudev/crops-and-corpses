@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingHealth.cs" id="1_uikdl"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_driju"]
-[ext_resource type="Texture2D" uid="uid://cg5j4xefc87sn" path="res://assets/sprites/buildings/smallhouse_color.png" id="2_dt56r"]
+[ext_resource type="Texture2D" uid="uid://bmn8ggt1kvsn7" path="res://assets/sprites/buildings/smallhouse_color.png" id="2_dt56r"]
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="3_6okxm"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="3_u5tml"]
 [ext_resource type="PackedScene" uid="uid://2v1aodyd0p4b" path="res://scenes/buildings/building_demolish_menu.tscn" id="5_lfvtm"]
 [ext_resource type="PackedScene" uid="uid://dune6txyuwmm2" path="res://scenes/buildings/town/villager_residence_component.tscn" id="6_17x1j"]
-[ext_resource type="PackedScene" uid="uid://dp87d4wfgxnfm" path="res://scenes/world/navigation_obstacle_area.tscn" id="8_ou5na"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="8_ou5na"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cd7u6"]
 size = Vector2(280, 300)
@@ -24,12 +24,13 @@ size = Vector2(280, 260)
 unique_name_in_owner = true
 script = ExtResource("1_uikdl")
 
-[node name="House" type="Sprite2D" parent="."]
+[node name="BuildingSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(-127, -203)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_dt56r")
 
-[node name="Shadow" type="Sprite2D" parent="House"]
+[node name="Shadow" type="Sprite2D" parent="BuildingSprite"]
 modulate = Color(1, 1, 1, 0.498039)
 z_index = -1
 position = Vector2(0, 255.33)

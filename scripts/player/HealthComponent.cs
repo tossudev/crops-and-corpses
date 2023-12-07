@@ -58,17 +58,12 @@ public partial class HealthComponent : Node2D
 		if (_isBuilding)
 		{
            
-            if (_building.buildingType == BuildingType.House && _building.isLoaded)
+			if (_building.buildingType == BuildingType.House)
             {
                 await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete);
 
                 SetMaxHealth(_maxHealth + TownManager.currentTownStats.houseHP);
-				_building.LoadBuildingHealth(_building.loadedHealth);
-            }
-            else if (_building.buildingType == BuildingType.House)
-            {
-                SetMaxHealth(_maxHealth + TownManager.currentTownStats.houseHP);
-                SetHealth(_maxHealth);
+				UpdateHealthBar();
             }
             else if (_building.buildingType == BuildingType.Fence)
             {

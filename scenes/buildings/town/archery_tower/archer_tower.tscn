@@ -34,14 +34,14 @@ scale = Vector2(2, 2)
 [node name="projectileStartPosition" type="Node2D" parent="Node2D"]
 position = Vector2(-21.095, -97.825)
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+[node name="BuildingSprite" type="Sprite2D" parent="Node2D"]
 unique_name_in_owner = true
 z_index = -1
 position = Vector2(-32.02, -61)
 scale = Vector2(0.24, 0.24)
 texture = ExtResource("4_20ctn")
 
-[node name="Shadow" type="Sprite2D" parent="Node2D/Sprite2D"]
+[node name="Shadow" type="Sprite2D" parent="Node2D/BuildingSprite"]
 modulate = Color(1, 1, 1, 0.498039)
 z_index = -1
 position = Vector2(0, 207.885)

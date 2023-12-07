@@ -15,6 +15,9 @@ public partial class BuildingHealth : Node2D
     VillagerResidence _villagerResidenceComponent;
     const string RESIDENCE_COMPONENT_NODENAME = "%VillagerResidenceComponent";
 
+    Sprite2D _sprite;
+    const string SPRITE_COMPONENT_NODENAME = "%BuildingSprite";
+
     
     CollisionShape2D _collisionShape;
     const string COLLISIONSHAPE2D_NODENAME = "%StaticCollisionShape2D";
@@ -43,7 +46,7 @@ public partial class BuildingHealth : Node2D
         _villagerResidenceComponent = GetNodeOrNull<VillagerResidence>(RESIDENCE_COMPONENT_NODENAME);
         
         _collisionShape = GetNode<CollisionShape2D>(COLLISIONSHAPE2D_NODENAME);
-        _parent = GetParent() as Node2D;
+        _parent = GetParent() as Node2D;      
 
         if(_parent.IsInGroup("fence"))
         {
@@ -56,6 +59,11 @@ public partial class BuildingHealth : Node2D
         if(_parent.IsInGroup("House"))
         {
             buildingType = BuildingType.House;
+        }
+
+        if (buildingType != BuildingType.Fence)
+        {
+            _sprite = GetNode<Sprite2D>(SPRITE_COMPONENT_NODENAME);
         }
 
         buildingHealth = _healthComponent.GetMaxHealth();
@@ -114,7 +122,15 @@ public partial class BuildingHealth : Node2D
     {
         isBroken = true;
         _collisionShape.Disabled = true;
-        _parent.Modulate = new Color(1, 1, 1, 0.3f);
+
+        if(buildingType == BuildingType.Fence)
+        {
+            _parent.Modulate = new Color(1, 1, 1, 0.3f);
+        }
+        else
+        {
+            _sprite.Modulate = new Color(1, 1, 1, 0.3f);
+        }
 
         if (_parent == null || !_parent.HasMethod("OnBreak"))
         {
@@ -129,7 +145,15 @@ public partial class BuildingHealth : Node2D
     {
         isBroken = false;
         _collisionShape.Disabled = false;
-        _parent.Modulate = new Color(1, 1, 1, 1);
+
+        if (buildingType == BuildingType.Fence)
+        {
+            _parent.Modulate = new Color(1, 1, 1, 1);
+        }
+        else
+        {
+            _sprite.Modulate = new Color(1, 1, 1, 1);
+        }
 
         if (_parent == null || !_parent.HasMethod("OnFixed"))
         {

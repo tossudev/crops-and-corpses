@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://c8bx46w1qix2q"]
+[gd_scene load_steps=56 format=3 uid="uid://c8bx46w1qix2q"]
 
 [ext_resource type="Script" path="res://scripts/player/PlayerController.cs" id="1_1gq73"]
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="2_jvgqr"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bu54axeet2w5" path="res://scenes/player/Components/stamina_component.tscn" id="15_owabl"]
 [ext_resource type="PackedScene" uid="uid://csdmv5fy2tvqa" path="res://scenes/consumables/food/bread.tscn" id="16_patuu"]
 [ext_resource type="Texture2D" uid="uid://f8qvl1cjxbpq" path="res://assets/sprites/character/player/SVG/legL.png" id="17_i6vo5"]
+[ext_resource type="Texture2D" uid="uid://yhcqkdltv2og" path="res://assets/sprites/character/player/SVG/headBack.png" id="17_j7t44"]
 [ext_resource type="PackedScene" uid="uid://bcmw0lume6obc" path="res://scenes/consumables/food/potato.tscn" id="17_nh2gr"]
 [ext_resource type="PackedScene" uid="uid://d1dkkqdm6w4fv" path="res://scenes/consumables/food/pumpkin.tscn" id="18_4wo3v"]
 [ext_resource type="Texture2D" uid="uid://10lmchpbf4sr" path="res://assets/sprites/character/player/SVG/footL.png" id="18_e1rfh"]
@@ -912,6 +913,8 @@ libraries = {
 position = Vector2(0, -7.5)
 scale = Vector2(0.15, 0.15)
 script = ExtResource("5_xyhkk")
+headSprite = ExtResource("24_unvh5")
+backHeadSprite = ExtResource("17_j7t44")
 
 [node name="TorsoBone" type="Bone2D" parent="Skeleton2D"]
 rest = Transform2D(1, 0, 0, 1, 0, 0)
@@ -922,7 +925,7 @@ rotation = 0.308657
 scale = Vector2(1, 1)
 rest = Transform2D(0.999992, 0.00400215, -0.00400215, 0.999992, 12.39, -0.8)
 
-[node name="LegL" type="Sprite2D" parent="Skeleton2D/TorsoBone/LegLBone"]
+[node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/TorsoBone/LegLBone"]
 position = Vector2(3.16, 19.55)
 rotation = -0.0137102
 texture = ExtResource("17_i6vo5")
@@ -934,7 +937,7 @@ auto_calculate_length_and_angle = false
 length = 16.0
 bone_angle = 1.17744
 
-[node name="FootL" type="Sprite2D" parent="Skeleton2D/TorsoBone/LegLBone/FootLBone"]
+[node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/TorsoBone/LegLBone/FootLBone"]
 position = Vector2(9, 45.58)
 texture = ExtResource("18_e1rfh")
 
@@ -943,7 +946,7 @@ position = Vector2(-19, -0.35)
 rotation = -0.462435
 rest = Transform2D(0.999877, 0.0156808, -0.0156808, 0.999877, -19, -0.35)
 
-[node name="LegR" type="Sprite2D" parent="Skeleton2D/TorsoBone/LegRBone"]
+[node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/TorsoBone/LegRBone"]
 position = Vector2(2.08165e-12, 14.7)
 texture = ExtResource("19_lkf3h")
 
@@ -954,7 +957,7 @@ auto_calculate_length_and_angle = false
 length = 16.0
 bone_angle = 0.769975
 
-[node name="FootR" type="Sprite2D" parent="Skeleton2D/TorsoBone/LegRBone/FootRBone"]
+[node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/TorsoBone/LegRBone/FootRBone"]
 position = Vector2(3.04, 44.37)
 texture = ExtResource("20_wh6re")
 
@@ -964,7 +967,7 @@ rotation = -0.171092
 scale = Vector2(0.999998, 0.999998)
 rest = Transform2D(0.985399, -0.170258, 0.170258, 0.985399, 26.32, -45.85)
 
-[node name="ArmL" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
+[node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
 position = Vector2(4.06, 13.3)
 rotation = -0.0131563
 texture = ExtResource("21_43kt1")
@@ -976,16 +979,16 @@ auto_calculate_length_and_angle = false
 length = 16.0
 bone_angle = 0.0
 
-[node name="HandL" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmLBone/HandLBone"]
+[node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmLBone/HandLBone"]
 position = Vector2(0.21, 0.58)
 texture = ExtResource("22_fv5rg")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Skeleton2D/TorsoBone/ArmLBone"]
 position = Vector2(4.06, 13.3)
 rotation = -0.0131563
-remote_path = NodePath("../ArmL")
+remote_path = NodePath("../Sprite2D")
 
-[node name="Torso" type="Sprite2D" parent="Skeleton2D/TorsoBone"]
+[node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/TorsoBone"]
 position = Vector2(-1, -38)
 rotation = -0.018441
 scale = Vector2(0.88, 0.88)
@@ -1000,7 +1003,7 @@ auto_calculate_length_and_angle = false
 length = 16.0
 bone_angle = -7.6224
 
-[node name="Head" type="Sprite2D" parent="Skeleton2D/TorsoBone/HeadBone"]
+[node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/TorsoBone/HeadBone"]
 position = Vector2(6, -43)
 rotation = -0.014518
 texture = ExtResource("24_unvh5")
@@ -1011,7 +1014,7 @@ rotation = 0.235856
 scale = Vector2(0.999998, 0.999998)
 rest = Transform2D(0.972315, 0.233675, -0.233675, 0.972315, -27, -48)
 
-[node name="ArmR" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmRBone"]
+[node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmRBone"]
 position = Vector2(-5, 13)
 texture = ExtResource("25_w8xxc")
 
@@ -1027,7 +1030,7 @@ rotation = 1.39626
 scale = Vector2(0.5, -0.5)
 offset = Vector2(70, -55)
 
-[node name="HandR" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmRBone/HandRBone"]
+[node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/TorsoBone/ArmRBone/HandRBone"]
 position = Vector2(3, 1)
 scale = Vector2(0.77, 0.77)
 texture = ExtResource("26_6bi6e")

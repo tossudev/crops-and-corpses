@@ -1,95 +1,97 @@
-[gd_scene load_steps=167 format=3 uid="uid://cce2sygxgl033"]
+[gd_scene load_steps=169 format=3 uid="uid://cce2sygxgl033"]
 
-[ext_resource type="PackedScene" path="res://scenes/world/navigation_manager.tscn" id="1_dfb2v"]
+[ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="1_dfb2v"]
 [ext_resource type="Script" path="res://scripts/forest.cs" id="1_h2vq7"]
 [ext_resource type="Texture2D" uid="uid://ehsp5k83fvvb" path="res://assets/sprites/tiles/grass_flowers2_tile.png" id="1_sbei6"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/water.gdshader" id="2_3pryh"]
 [ext_resource type="Texture2D" uid="uid://wx026lyp8qku" path="res://assets/sprites/tiles/grass_flowers_tile.png" id="2_5tcwd"]
 [ext_resource type="Texture2D" uid="uid://cejtv4mq41rkm" path="res://assets/sprites/tiles/grass_rocks_tile.png" id="3_a6p7s"]
-[ext_resource type="Texture2D" uid="uid://csaqqohvvwi56" path="res://assets/sprites/tiles/Water_tile_copy_donotdelete.png" id="3_plvrk"]
+[ext_resource type="Texture2D" uid="uid://bw2eon5r13yus" path="res://assets/sprites/tiles/Water_tile_copy_donotdelete.png" id="3_plvrk"]
 [ext_resource type="Texture2D" uid="uid://dks6iqnb0a6gx" path="res://assets/resources/shaders/water_noise_texture.tres" id="3_rbird"]
 [ext_resource type="Texture2D" uid="uid://dbgwlhprokvwi" path="res://assets/sprites/tiles/Dirt_tile.png" id="4_ahqt4"]
 [ext_resource type="Texture2D" uid="uid://b0dlu5nexmss2" path="res://assets/sprites/tiles/grass_tile.png" id="4_jql1j"]
-[ext_resource type="Texture2D" uid="uid://cvn68qaeeth1i" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp_copyDoNotDelete.png" id="4_wwbxk"]
+[ext_resource type="Texture2D" uid="uid://ckr5vwk6fn3rg" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp_copyDoNotDelete.png" id="4_wwbxk"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_5m7lu"]
 [ext_resource type="Texture2D" uid="uid://bf0kk4xsi7048" path="res://assets/sprites/tiles/Dirt_rocks_tile.png" id="6_5rtbt"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="6_d65ob"]
-[ext_resource type="Texture2D" uid="uid://jxppoe528x1a" path="res://assets/sprites/tiles/dirt_corner_tile1.png" id="6_u3bux"]
-[ext_resource type="Texture2D" uid="uid://ciory84j24kt3" path="res://assets/sprites/tiles/dirt_corner_tile5.png" id="7_3xb4g"]
+[ext_resource type="Texture2D" uid="uid://ciufpqpghmeav" path="res://assets/sprites/tiles/dirt_corner_tile1.png" id="6_u3bux"]
+[ext_resource type="Texture2D" uid="uid://dp4y2ymnnwv5x" path="res://assets/sprites/tiles/dirt_corner_tile5.png" id="7_3xb4g"]
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="7_jud20"]
-[ext_resource type="Texture2D" uid="uid://cjav0ewnp2nw0" path="res://assets/sprites/tiles/dirt_corner_tile6.png" id="8_682m5"]
+[ext_resource type="Texture2D" uid="uid://detsecq6dg2ji" path="res://assets/sprites/tiles/dirt_corner_tile6.png" id="8_682m5"]
 [ext_resource type="Texture2D" uid="uid://n8iftcgk0ti0" path="res://assets/sprites/tiles/Sand_tile.png" id="8_e4y30"]
-[ext_resource type="Texture2D" uid="uid://dfb5ivmssovh0" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="8_x823n"]
-[ext_resource type="Texture2D" uid="uid://2mnfy0guoncq" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="9_5rwtt"]
-[ext_resource type="Texture2D" uid="uid://bxhkl5dvmalt4" path="res://assets/sprites/tiles/dirt_corner_tile7.png" id="9_sudqa"]
-[ext_resource type="Texture2D" uid="uid://dw0mqeisoh1ud" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="10_o4kc8"]
-[ext_resource type="Texture2D" uid="uid://bype7etrjsybu" path="res://assets/sprites/tiles/dirt_corner_tile8.png" id="10_rbg3b"]
-[ext_resource type="Texture2D" uid="uid://c8eqge3lg5sv6" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="11_atcgv"]
+[ext_resource type="Texture2D" uid="uid://bt1pgtletm2bp" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="8_x823n"]
+[ext_resource type="Texture2D" uid="uid://bhen5nf0nap5k" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="9_5rwtt"]
+[ext_resource type="Texture2D" uid="uid://dh822ev4ed6xd" path="res://assets/sprites/tiles/dirt_corner_tile7.png" id="9_sudqa"]
+[ext_resource type="Texture2D" uid="uid://duolj84sp2sjx" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="10_o4kc8"]
+[ext_resource type="Texture2D" uid="uid://ccfsr35cmhnq8" path="res://assets/sprites/tiles/dirt_corner_tile8.png" id="10_rbg3b"]
+[ext_resource type="Texture2D" uid="uid://cu82aaaq0pb5r" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="11_atcgv"]
 [ext_resource type="PackedScene" uid="uid://bcoq8weob6f7g" path="res://scenes/world/tree2.tscn" id="11_r6rlm"]
-[ext_resource type="Texture2D" uid="uid://b2hyipmk7otyf" path="res://assets/sprites/tiles/grass_corner_tile1.png" id="11_x68fl"]
+[ext_resource type="Texture2D" uid="uid://cwhfnwiowk0u6" path="res://assets/sprites/tiles/grass_corner_tile1.png" id="11_x68fl"]
 [ext_resource type="PackedScene" uid="uid://du4tddxtyn51y" path="res://scenes/world/tree3.tscn" id="12_0nbqh"]
-[ext_resource type="Texture2D" uid="uid://bhi1enhnk1807" path="res://assets/sprites/tiles/grass_corner_tile2.png" id="12_xqhjk"]
-[ext_resource type="Texture2D" uid="uid://cic0y16vm74mq" path="res://assets/sprites/tiles/grass_corner_tile3.png" id="13_c7wja"]
-[ext_resource type="Texture2D" uid="uid://ha173tnyhdlp" path="res://assets/sprites/tiles/grass_corner_tile4.png" id="14_78vcf"]
-[ext_resource type="Texture2D" uid="uid://bun037rfj54jc" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="15_ie1vm"]
+[ext_resource type="Texture2D" uid="uid://556ehmvxj0lt" path="res://assets/sprites/tiles/grass_corner_tile2.png" id="12_xqhjk"]
+[ext_resource type="Texture2D" uid="uid://dis11gkqrkkso" path="res://assets/sprites/tiles/grass_corner_tile3.png" id="13_c7wja"]
+[ext_resource type="Texture2D" uid="uid://c6vfjuod286y6" path="res://assets/sprites/tiles/grass_corner_tile4.png" id="14_78vcf"]
+[ext_resource type="Texture2D" uid="uid://b13l88w6b2qh0" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="15_ie1vm"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="16_rit5n"]
-[ext_resource type="Texture2D" uid="uid://c1sq8lbggw14s" path="res://assets/sprites/tiles/grass_corner_tile6.png" id="17_0beee"]
-[ext_resource type="Texture2D" uid="uid://ch5an1aumot10" path="res://assets/sprites/tiles/grass_corner_tile7.png" id="18_8hjld"]
+[ext_resource type="Texture2D" uid="uid://bi48utqac6akr" path="res://assets/sprites/tiles/grass_corner_tile6.png" id="17_0beee"]
+[ext_resource type="Texture2D" uid="uid://d3svcqsb68vbq" path="res://assets/sprites/tiles/grass_corner_tile7.png" id="18_8hjld"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_g46xp"]
-[ext_resource type="PackedScene" path="res://scenes/world/SunlightContainer.tscn" id="18_j47l1"]
-[ext_resource type="Texture2D" uid="uid://bx13h85ncr7ei" path="res://assets/sprites/ui/wooden_panel.png" id="19_dhclt"]
-[ext_resource type="Texture2D" uid="uid://cktshmyhvcdlj" path="res://assets/sprites/tiles/grass_corner_tile8.png" id="19_j3eyx"]
-[ext_resource type="Texture2D" uid="uid://brpa24fc62gnh" path="res://assets/sprites/tiles/Sand_corner_tile1.png" id="20_1e5by"]
+[ext_resource type="PackedScene" uid="uid://dbkpifgs1g5os" path="res://scenes/world/SunlightContainer.tscn" id="18_j47l1"]
+[ext_resource type="Texture2D" uid="uid://p0vefm8oo5l8" path="res://assets/sprites/ui/wooden_panel.png" id="19_dhclt"]
+[ext_resource type="Texture2D" uid="uid://b44jwe681onp5" path="res://assets/sprites/tiles/grass_corner_tile8.png" id="19_j3eyx"]
+[ext_resource type="Texture2D" uid="uid://cqfverwpt5y6q" path="res://assets/sprites/tiles/Sand_corner_tile1.png" id="20_1e5by"]
 [ext_resource type="PackedScene" uid="uid://510sd2fl5tn2" path="res://scenes/farm/farm_plot.tscn" id="21_3lgi7"]
 [ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="21_tox2m"]
-[ext_resource type="Texture2D" uid="uid://csg3xkshb1e1c" path="res://assets/sprites/tiles/sand_corner_tile2.png" id="21_w6pde"]
+[ext_resource type="Texture2D" uid="uid://ns6o4wxlgaip" path="res://assets/sprites/tiles/sand_corner_tile2.png" id="21_w6pde"]
 [ext_resource type="PackedScene" uid="uid://neenh87kgx15" path="res://scenes/world/rock2.tscn" id="22_4gs3r"]
-[ext_resource type="Texture2D" uid="uid://x7imnuok3jum" path="res://assets/sprites/tiles/sand_corner_tile3.png" id="22_q34ae"]
+[ext_resource type="Texture2D" uid="uid://11mmp8wusubs" path="res://assets/sprites/tiles/sand_corner_tile3.png" id="22_q34ae"]
 [ext_resource type="Texture2D" uid="uid://q5wxg1if5hb8" path="res://assets/sprites/foliage/tree_2.png" id="22_r2sim"]
 [ext_resource type="PackedScene" uid="uid://bljea7oopk7tf" path="res://scenes/farm/plants/plant_mushroom.tscn" id="23_7l40m"]
-[ext_resource type="Texture2D" uid="uid://d2266llfrjqom" path="res://assets/sprites/tiles/sand_corner_tile4.png" id="23_uto3x"]
-[ext_resource type="Texture2D" uid="uid://g34gay7rr7j7" path="res://assets/sprites/tiles/sand_corner_tile5.png" id="24_7hyvp"]
+[ext_resource type="Texture2D" uid="uid://cnh3ckrtpierw" path="res://assets/sprites/tiles/sand_corner_tile4.png" id="23_uto3x"]
+[ext_resource type="Texture2D" uid="uid://ber4aj8tat8s2" path="res://assets/sprites/tiles/sand_corner_tile5.png" id="24_7hyvp"]
 [ext_resource type="Texture2D" uid="uid://dcyviqfhbqcay" path="res://assets/sprites/foliage/tree_1.png" id="25_bu01n"]
-[ext_resource type="Texture2D" uid="uid://d34holxlusm8f" path="res://assets/sprites/tiles/sand_corner_tile6.png" id="25_lcfwp"]
-[ext_resource type="Texture2D" uid="uid://by0xmni34twp0" path="res://assets/sprites/tiles/sand_corner_tile7.png" id="26_8e1hi"]
-[ext_resource type="Texture2D" uid="uid://dnoyd6wur5vbd" path="res://assets/sprites/tiles/sand_corner_tile8.png" id="28_h6bf1"]
-[ext_resource type="Texture2D" uid="uid://dir7y4sqdeo7v" path="res://assets/sprites/tiles/dirt_corner_tile4.png" id="32_50gts"]
-[ext_resource type="Texture2D" uid="uid://bo5dwnphqg8jw" path="res://assets/sprites/tiles/dirt_corner_tile2.png" id="33_2sb2l"]
-[ext_resource type="Texture2D" uid="uid://ddd310rgigsmi" path="res://assets/sprites/tiles/dirt_corner_tile3.png" id="34_4o5k3"]
+[ext_resource type="Texture2D" uid="uid://1ds8j1x1xfau" path="res://assets/sprites/tiles/sand_corner_tile6.png" id="25_lcfwp"]
+[ext_resource type="Texture2D" uid="uid://dpud2x855pn1g" path="res://assets/sprites/tiles/sand_corner_tile7.png" id="26_8e1hi"]
+[ext_resource type="Texture2D" uid="uid://oyp5jj0k0q4b" path="res://assets/sprites/tiles/sand_corner_tile8.png" id="28_h6bf1"]
+[ext_resource type="Texture2D" uid="uid://distq4ydvqkma" path="res://assets/sprites/tiles/dirt_corner_tile4.png" id="32_50gts"]
+[ext_resource type="Texture2D" uid="uid://fwi0ooryswlk" path="res://assets/sprites/tiles/dirt_corner_tile2.png" id="33_2sb2l"]
+[ext_resource type="Texture2D" uid="uid://bql3k2stmytly" path="res://assets/sprites/tiles/dirt_corner_tile3.png" id="34_4o5k3"]
 [ext_resource type="Texture2D" uid="uid://c8xb0af08ypnv" path="res://assets/sprites/tiles/Sand_rocks_tile.png" id="38_yq6f6"]
-[ext_resource type="Texture2D" uid="uid://liwkiih5577l" path="res://assets/sprites/tiles/mud_puddle_tile.png" id="39_reamf"]
-[ext_resource type="Texture2D" uid="uid://l81n2w6xo6co" path="res://assets/sprites/tiles/cobblestone_corner_tile.png" id="39_uyldf"]
-[ext_resource type="Texture2D" uid="uid://b6uqcr6sflbj3" path="res://assets/sprites/tiles/grass_clovers_tile.png" id="40_hs0np"]
-[ext_resource type="Texture2D" uid="uid://b6o77epcexcam" path="res://assets/sprites/tiles/cobblestone_tile.png" id="40_lgl07"]
-[ext_resource type="Texture2D" uid="uid://c6hinwnv5khsa" path="res://assets/sprites/tiles/cobblestone_corner_tile2.png" id="41_17l23"]
-[ext_resource type="Texture2D" uid="uid://bdpon027ctmcd" path="res://assets/sprites/tiles/cobblestone_corner_tile3.png" id="42_rdkhq"]
-[ext_resource type="Texture2D" uid="uid://bapnfuaqh03q8" path="res://assets/sprites/tiles/cobblestone_corner_tile4.png" id="43_r1oh5"]
+[ext_resource type="Texture2D" uid="uid://culy2hs6ak38u" path="res://assets/sprites/tiles/mud_puddle_tile.png" id="39_reamf"]
+[ext_resource type="Texture2D" uid="uid://xtmcesfk1xmb" path="res://assets/sprites/tiles/cobblestone_corner_tile.png" id="39_uyldf"]
+[ext_resource type="Texture2D" uid="uid://txstoa6i5q8u" path="res://assets/sprites/tiles/grass_clovers_tile.png" id="40_hs0np"]
+[ext_resource type="Texture2D" uid="uid://c4qgf8271fu1f" path="res://assets/sprites/tiles/cobblestone_tile.png" id="40_lgl07"]
+[ext_resource type="Texture2D" uid="uid://0thwlo5y3h7a" path="res://assets/sprites/tiles/cobblestone_corner_tile2.png" id="41_17l23"]
+[ext_resource type="Texture2D" uid="uid://vb0t8hacplax" path="res://assets/sprites/tiles/cobblestone_corner_tile3.png" id="42_rdkhq"]
+[ext_resource type="Texture2D" uid="uid://1xw8tbhmftf1" path="res://assets/sprites/tiles/cobblestone_corner_tile4.png" id="43_r1oh5"]
 [ext_resource type="PackedScene" uid="uid://ca4ui8y2u11io" path="res://scenes/world/cave_entrance.tscn" id="49_ibfou"]
 [ext_resource type="PackedScene" uid="uid://7m8c0ty0xcd0" path="res://scenes/buildings/town/well/well.tscn" id="50_vewfo"]
 [ext_resource type="PackedScene" uid="uid://c2f36184vqw0v" path="res://scenes/world/wooden_bridge.tscn" id="51_6fpp5"]
 [ext_resource type="Texture2D" uid="uid://lcg5swlsccjt" path="res://assets/sprites/tiles/Burnt_grass2_tile.png" id="51_aruqb"]
 [ext_resource type="PackedScene" uid="uid://bt56v72d27ku6" path="res://scenes/world/bridge_quest.tscn" id="51_o7a3j"]
-[ext_resource type="Texture2D" uid="uid://cpjjxq3bne01e" path="res://assets/sprites/tiles/lava_rocks_tile2.png" id="52_7nwkn"]
+[ext_resource type="Texture2D" uid="uid://2swmjsotjgc6" path="res://assets/sprites/tiles/lava_rocks_tile2.png" id="52_7nwkn"]
 [ext_resource type="Texture2D" uid="uid://by8gdsj0sfnja" path="res://assets/sprites/tiles/Burnt_grass_tile.png" id="52_clxim"]
-[ext_resource type="Texture2D" uid="uid://dwk8o3xlnbmtc" path="res://assets/sprites/tiles/cave_corner_tile1.png" id="53_grvfc"]
-[ext_resource type="Texture2D" uid="uid://bj4ak71wcglxd" path="res://assets/sprites/tiles/cave_corner_tile6.png" id="53_i8frx"]
-[ext_resource type="Texture2D" uid="uid://5ycpg6civkjp" path="res://assets/sprites/tiles/cave_corner_tile7.png" id="54_cgfr0"]
-[ext_resource type="Texture2D" uid="uid://c0jkrqehmf6j6" path="res://assets/sprites/tiles/cave_corner_tile5.png" id="55_x6lt5"]
-[ext_resource type="Texture2D" uid="uid://bfbq5lg2is3d6" path="res://assets/sprites/tiles/cave_corner_tile8.png" id="56_0nvt0"]
+[ext_resource type="Texture2D" uid="uid://duxkj4p70pb57" path="res://assets/sprites/tiles/cave_corner_tile1.png" id="53_grvfc"]
+[ext_resource type="Texture2D" uid="uid://dsfiyxtaclek" path="res://assets/sprites/tiles/cave_corner_tile6.png" id="53_i8frx"]
+[ext_resource type="Texture2D" uid="uid://u0ev31xfnxdk" path="res://assets/sprites/tiles/cave_corner_tile7.png" id="54_cgfr0"]
+[ext_resource type="Texture2D" uid="uid://k8gypc5qu1wn" path="res://assets/sprites/tiles/cave_corner_tile5.png" id="55_x6lt5"]
+[ext_resource type="Texture2D" uid="uid://bbxpdedx0jcf8" path="res://assets/sprites/tiles/cave_corner_tile8.png" id="56_0nvt0"]
 [ext_resource type="PackedScene" uid="uid://dyq3ksvy2gwvv" path="res://scenes/world/bush.tscn" id="58_m4acs"]
 [ext_resource type="PackedScene" uid="uid://chw8bc0kxym0e" path="res://scenes/villager/villager_manager.tscn" id="61_87l3j"]
-[ext_resource type="Texture2D" uid="uid://cwkml0ss03bsu" path="res://assets/sprites/Farm sprites/sign_waterplant.png" id="61_kgsc4"]
+[ext_resource type="Texture2D" uid="uid://dpmy0buyymn3x" path="res://assets/sprites/Farm sprites/sign_warning.png" id="63_uknjt"]
 [ext_resource type="PackedScene" uid="uid://dt4impfdusiy" path="res://scenes/farm/plants/plant_poppy.tscn" id="65_i2ild"]
 [ext_resource type="PackedScene" uid="uid://bbia6yxwghu3o" path="res://scenes/farm/plants/plant_lupine.tscn" id="66_p6d2a"]
 [ext_resource type="PackedScene" uid="uid://luqdfx7qh2jl" path="res://scenes/farm/plants/plant_pumpkin.tscn" id="66_uj5sv"]
 [ext_resource type="PackedScene" uid="uid://dpdpfs2c2kwi5" path="res://scenes/world/lantern.tscn" id="68_yp5jy"]
 [ext_resource type="Script" path="res://scripts/World/PortalManager.cs" id="69_35sbn"]
+[ext_resource type="PackedScene" uid="uid://btmwjcvssjjf7" path="res://scenes/world/copper_ore.tscn" id="71_3aduw"]
+[ext_resource type="PackedScene" uid="uid://dn2v4uxpv2gx6" path="res://scenes/world/iron_ore.tscn" id="72_khxif"]
 [ext_resource type="PackedScene" uid="uid://b2gv07xesl7qm" path="res://scenes/buildings/town/house/house_broken.tscn" id="82_4resf"]
 [ext_resource type="Script" path="res://scripts/zombie/SpawnScript.cs" id="83_46bai"]
-[ext_resource type="PackedScene" path="res://scenes/zombie/zombie_manager.tscn" id="84_gwur6"]
+[ext_resource type="PackedScene" uid="uid://p1u3hu223lbd" path="res://scenes/zombie/zombie_manager.tscn" id="84_gwur6"]
 [ext_resource type="PackedScene" uid="uid://bhxbs3wp2qeak" path="res://scenes/world/invisible_portal.tscn" id="85_mdxrh"]
-[ext_resource type="Texture2D" uid="uid://bc5dvoppbnw0w" path="res://assets/sprites/Farm sprites/hay_dead.png" id="87_gl8a3"]
-[ext_resource type="Texture2D" uid="uid://cnnt30aey1k75" path="res://assets/sprites/foliage/mini_tree_dead.png" id="88_3dpk8"]
+[ext_resource type="Texture2D" uid="uid://csdposq88xg1q" path="res://assets/sprites/Farm sprites/hay_dead.png" id="87_gl8a3"]
+[ext_resource type="Texture2D" uid="uid://d21ym10e1xao0" path="res://assets/sprites/foliage/mini_tree_dead.png" id="88_3dpk8"]
 [ext_resource type="PackedScene" uid="uid://wwf7rdwowll5" path="res://scenes/Quest/QuestPointManager.tscn" id="91_5rdoa"]
 [ext_resource type="PackedScene" uid="uid://7r2mskqdc0va" path="res://scenes/Quest/QuestPoint.tscn" id="92_s0qpj"]
 
@@ -776,7 +778,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="Objects" node_paths=PackedStringArray("_camera") instance=ExtResource("6_d65ob")]
 unique_name_in_owner = true
-position = Vector2(-7613, -3002)
+position = Vector2(-7700, -3049)
 _camera = NodePath("MainCamera")
 
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
@@ -822,7 +824,7 @@ position = Vector2(6061, 2608)
 _bridge = NodePath("../WoodenBridge")
 
 [node name="Sign" parent="Objects/Buildings/BridgeQuest" index="0"]
-position = Vector2(292, 118)
+position = Vector2(177, 91)
 
 [node name="InteractionArea" parent="Objects/Buildings/BridgeQuest" index="1"]
 position = Vector2(178, 89.9999)
@@ -834,13 +836,14 @@ position = Vector2(182, 86)
 position = Vector2(472, 90)
 
 [node name="BridgeSign" type="Node2D" parent="Objects/Buildings"]
+visible = false
 y_sort_enabled = true
 position = Vector2(154, 238)
 
 [node name="SignWaterplant" type="Sprite2D" parent="Objects/Buildings/BridgeSign"]
 position = Vector2(6084, 2467)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("61_kgsc4")
+texture = ExtResource("63_uknjt")
 offset = Vector2(0, -80)
 
 [node name="WoodenBridge" parent="Objects/Buildings" instance=ExtResource("51_6fpp5")]
@@ -914,252 +917,239 @@ _col = NodePath("../farm_plot/FarmPlot")
 [node name="Lantern" parent="Objects/Buildings" instance=ExtResource("68_yp5jy")]
 position = Vector2(7831, 3159)
 
-[node name="Rocks(notIron)" type="Node2D" parent="Objects"]
+[node name="Rocks" type="Node2D" parent="Objects"]
 y_sort_enabled = true
 
-[node name="Iron Ore" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
+[node name="Stone(notIron)" type="Node2D" parent="Objects/Rocks"]
+y_sort_enabled = true
+
+[node name="Iron Ore" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
 position = Vector2(-6304, -786)
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore2" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
-position = Vector2(-5652, -957)
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore3" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
-position = Vector2(-5418, -276)
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore4" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
-position = Vector2(-5346, -818)
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore5" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore5" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
 position = Vector2(-5837, -2032)
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore6" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore6" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
 position = Vector2(-5711, -2274)
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore7" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore7" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
 position = Vector2(-6074, -2611)
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore8" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
-position = Vector2(-7840, -520)
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore9" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore9" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
 position = Vector2(-7859, 2108)
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore10" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore10" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
 position = Vector2(-7366, 2415)
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore11" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore11" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
 position = Vector2(-7796, 2417)
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore12" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore12" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
 position = Vector2(-2350, -1518)
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore13" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore13" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
 position = Vector2(-2134, -1353)
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore14" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore14" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
 position = Vector2(-2877, -1219)
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore15" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
-position = Vector2(-457, -2146)
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore16" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore16" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
 position = Vector2(-700, -1898)
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore17" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore17" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
 position = Vector2(-1221, 3122)
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore18" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore18" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
 position = Vector2(-1319, 3471)
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore19" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore19" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
 position = Vector2(-2023, 3368)
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore20" parent="Objects/Rocks(notIron)" instance=ExtResource("22_4gs3r")]
-position = Vector2(359, 2899)
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore21" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore21" parent="Objects/Rocks/Stone(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
 position = Vector2(-5397, 1022)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore22" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore22" parent="Objects/Rocks/Stone(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
 position = Vector2(-5148, 1362)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore23" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore23" parent="Objects/Rocks/Stone(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
 position = Vector2(-2044, 2014)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore24" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore24" parent="Objects/Rocks/Stone(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
 position = Vector2(1309, -1956)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore25" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(-394, -1772)
-_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore26" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(6098, -1718)
-_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore27" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore27" parent="Objects/Rocks/Stone(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
 position = Vector2(5917, -2110)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore28" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(5883, -2426)
-_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore29" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(6397, -2566)
-_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore30" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(6902, -2525)
-_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore31" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(7024, -2098)
-_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore32" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore32" parent="Objects/Rocks/Stone(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
 position = Vector2(7048, -1785)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore33" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore33" parent="Objects/Rocks/Stone(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
 position = Vector2(6733, -1528)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore34" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore34" parent="Objects/Rocks/Stone(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
 position = Vector2(5929, -1405)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore35" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore35" parent="Objects/Rocks/Stone(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
 position = Vector2(3088, -185)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore36" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(2987, 168)
-_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore37" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(2917, -1697)
-_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore38" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(2866, -1475)
-_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore39" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore39" parent="Objects/Rocks/Stone(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
 position = Vector2(2161, -1102)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore40" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(5739, 2204)
-_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore41" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(3622, 1317)
-_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
-
-[node name="Iron Ore42" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
+[node name="Iron Ore42" parent="Objects/Rocks/Stone(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
 position = Vector2(3330, 3325)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore43" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(3452, 3036)
-_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+[node name="Iron Ore44" parent="Objects/Rocks/Stone(notIron)" instance=ExtResource("22_4gs3r")]
+position = Vector2(-1874, 2699)
 _color = Color(0.741176, 0.717647, 0.729412, 0)
 _minBrightness = 0.5
 
-[node name="Iron Ore44" parent="Objects/Rocks(notIron)" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("22_4gs3r")]
-position = Vector2(-1874, 2699)
-_animationPlayer = NodePath("../Iron Ore2/AnimationPlayer")
-_color = Color(0.741176, 0.717647, 0.729412, 0)
-_minBrightness = 0.5
+[node name="Copper" type="Node2D" parent="Objects/Rocks"]
+y_sort_enabled = true
+
+[node name="Copper Ore" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(-5532, 2303)
+
+[node name="Copper Ore2" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(-6127, 2759)
+
+[node name="Copper Ore3" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(-4432, 3162)
+
+[node name="Copper Ore4" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(-4352, 2221)
+
+[node name="Copper Ore5" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(5717, -2471)
+
+[node name="Copper Ore6" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(3522, 1333)
+
+[node name="Copper Ore7" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(2682, 3065)
+
+[node name="Copper Ore8" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(272, 2862)
+
+[node name="Copper Ore9" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(200, 340)
+
+[node name="Copper Ore10" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(-481, -2205)
+
+[node name="Copper Ore11" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(-281, -1809)
+
+[node name="Copper Ore12" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(-5504, -939)
+
+[node name="Copper Ore13" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(-5292, -519)
+
+[node name="Copper Ore14" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(-5525, -185)
+
+[node name="Copper Ore15" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(-7856, -490)
+
+[node name="Copper Ore16" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(5027, -740)
+
+[node name="Copper Ore17" parent="Objects/Rocks/Copper" instance=ExtResource("71_3aduw")]
+position = Vector2(4709, 777)
+
+[node name="Iron" type="Node2D" parent="Objects/Rocks"]
+y_sort_enabled = true
+
+[node name="Iron Ore" parent="Objects/Rocks/Iron" instance=ExtResource("72_khxif")]
+position = Vector2(5687, 2150)
+
+[node name="Iron Ore2" parent="Objects/Rocks/Iron" instance=ExtResource("72_khxif")]
+position = Vector2(2801, -1782)
+
+[node name="Iron Ore3" parent="Objects/Rocks/Iron" instance=ExtResource("72_khxif")]
+position = Vector2(2671, -1435)
+
+[node name="Iron Ore4" parent="Objects/Rocks/Iron" instance=ExtResource("72_khxif")]
+position = Vector2(6344, -2672)
+
+[node name="Iron Ore5" parent="Objects/Rocks/Iron" instance=ExtResource("72_khxif")]
+position = Vector2(6838, -2535)
+
+[node name="Iron Ore6" parent="Objects/Rocks/Iron" instance=ExtResource("72_khxif")]
+position = Vector2(7132, -2140)
+
+[node name="Iron Ore7" parent="Objects/Rocks/Iron" instance=ExtResource("72_khxif")]
+position = Vector2(6117, -1748)
+
+[node name="Iron Ore8" parent="Objects/Rocks/Iron" instance=ExtResource("72_khxif")]
+position = Vector2(3031, 143)
+
+[node name="Iron Ore9" parent="Objects/Rocks/Iron" instance=ExtResource("72_khxif")]
+position = Vector2(7171, 1578)
+
+[node name="Iron Ore10" parent="Objects/Rocks/Iron" instance=ExtResource("72_khxif")]
+position = Vector2(4048, -3032)
 
 [node name="Plants" type="Node2D" parent="Objects"]
 y_sort_enabled = true
@@ -1523,7 +1513,7 @@ position = Vector2(-4118, 2284)
 position = Vector2(-4845, 3363)
 
 [node name="plant_lupine40" parent="Objects/Plants/Lupines" instance=ExtResource("66_p6d2a")]
-position = Vector2(-6045, 2679)
+position = Vector2(-5739, 2381)
 
 [node name="plant_lupine41" parent="Objects/Plants/Lupines" instance=ExtResource("66_p6d2a")]
 position = Vector2(-5099, 3353)
@@ -2070,6 +2060,7 @@ y_sort_enabled = true
 position = Vector2(1989, 2960)
 
 [node name="Lights" type="Node2D" parent="Objects"]
+visible = false
 
 [node name="Light" type="PointLight2D" parent="Objects/Lights"]
 position = Vector2(-3862, 1851)

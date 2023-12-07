@@ -27,13 +27,15 @@ public static class Scene
     public static readonly RootScene Forest = new("res://scenes/forest.tscn", "Forest");
     public static readonly RootScene Ruins = new("res://scenes/ruins.tscn", "Ruins");
     public static readonly RootScene Cave = new("res://scenes/cave.tscn", "Cave");
+    public static readonly RootScene Menu = new("res://scenes/ui/main_menu.tscn", "Menu");
     
     public static List<RootScene> allRootScenes = new()
     {
         Town,
         Forest,
         Ruins,
-        Cave
+        Cave,
+        Menu,
     };
 
     public static RootScene GetRootSceneByName(string name)

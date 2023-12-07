@@ -33,19 +33,68 @@ public partial class AudioController : Node {
         _musicPlayer = GetNode<AudioStreamPlayer>("Music"); 
         _ambiencePlayer = GetNode<AudioStreamPlayer>("Ambience");
 
-        // PlayMusic("res://assets/Sounds/music/music_day.ogg");
-        PlayAmbience("ambiences/ambience_day.ogg");
+        PlayBackground();
+    }
+
+
+    public override void _Process(double delta) {
+        base._Process(delta);
+        PlayBackground();
+    }
+
+
+    // Play music and ambient noise according to current scene
+    public void PlayBackground() {
+        bool isDay;
+
+        // pirkka ratkaisu for the win !!
+        Node2D menuNode = GetNodeOrNull<Node2D>("/root/MainMenu");
+        if (menuNode != null) {
+            PlayAmbience("ambiences/ambience_day.ogg");
+            return;
+        }
+
+        if (SceneManager.GetCurrentScene(this) != Scene.Cave) {
+			isDay = TimeManager.dayTime;
+
+            if (isDay) {
+                PlayAmbience("ambiences/ambience_day.ogg");
+                PlayMusic("music/music_day.ogg");
+            }
+
+            else {
+                PlayAmbience("ambiences/ambience_night.ogg");
+                PlayMusic("music/music_night.ogg");
+            }
+		}
+        
+        else {
+            PlayAmbience("ambiences/ambience_night.ogg");
+            PlayMusic("music/music_night.ogg");
+        }
     }
 
 
     public void PlayMusic(string soundFile) {
+        if (IsSongAlreadyPlaying(soundFile, _musicPlayer)) {
+            return;
+        }
 
         _musicPlayer.Stream = GetAudioFromFile(soundFile);
         _musicPlayer.Play();
     }
 
+
+    public void StopMusic() {
+        _musicPlayer.Stop();
+    }
+
+
     public void PlayAmbience(string soundFile) {
-        
+        if (IsSongAlreadyPlaying(soundFile, _ambiencePlayer)) {
+            return;
+        }
+
         _ambiencePlayer.Stream = GetAudioFromFile(soundFile);
         _ambiencePlayer.Play();
     }
@@ -82,6 +131,20 @@ public partial class AudioController : Node {
         }
 
         _walkPlayer.Play();
+    }
+
+
+    bool IsSongAlreadyPlaying(string soundFile, AudioStreamPlayer _soundPlayer) {
+        if (_soundPlayer.Stream != null) {
+            string currentlyPlayingFile = _soundPlayer.Stream.ResourcePath;
+            string newFile = soundDirectory + soundFile;
+
+            if (newFile == currentlyPlayingFile) {
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 
 

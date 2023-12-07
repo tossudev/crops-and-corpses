@@ -3,19 +3,19 @@
 [ext_resource type="Script" path="res://scripts/ruins.cs" id="1_7gyha"]
 [ext_resource type="PackedScene" uid="uid://dpdpfs2c2kwi5" path="res://scenes/world/lantern.tscn" id="4_61dbj"]
 [ext_resource type="PackedScene" uid="uid://b2gv07xesl7qm" path="res://scenes/buildings/town/house/house_broken.tscn" id="4_nfdnl"]
-[ext_resource type="Texture2D" uid="uid://5ud5bitkclgs" path="res://assets/sprites/items/lantern.png" id="5_x4a6q"]
+[ext_resource type="Texture2D" uid="uid://bpff0i3txuqnq" path="res://assets/sprites/items/lantern.png" id="5_x4a6q"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_xoqnb"]
 [ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://scenes/spawn/ZombieSpawn.tscn" id="6_moakj"]
 [ext_resource type="Texture2D" uid="uid://q5wxg1if5hb8" path="res://assets/sprites/foliage/tree_2.png" id="6_rt25r"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="6_urqth"]
 [ext_resource type="Texture2D" uid="uid://dcyviqfhbqcay" path="res://assets/sprites/foliage/tree_1.png" id="7_dpch5"]
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="7_et7tw"]
-[ext_resource type="PackedScene" uid="uid://fd4b7o1o24sd" path="res://scenes/buildings/town/town_hall/town_hall_broken.tscn" id="7_kakyg"]
+[ext_resource type="PackedScene" uid="uid://cy7sat3yii1r0" path="res://scenes/buildings/town/town_hall/town_hall_broken.tscn" id="7_kakyg"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="7_ms5xt"]
 [ext_resource type="PackedScene" uid="uid://ci1gujwgui8qr" path="res://scenes/buildings/town/large_house/large_house_broken.tscn" id="8_gaa8h"]
 [ext_resource type="PackedScene" uid="uid://bfgy4jnvcy7pk" path="res://scenes/zombie/Zombie.tscn" id="8_ovu31"]
 [ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="8_pei51"]
-[ext_resource type="Texture2D" uid="uid://dgmd2mvp3rng0" path="res://assets/sprites/items/cross_church.png" id="9_lqrkj"]
+[ext_resource type="Texture2D" uid="uid://mnytodt7v2vt" path="res://assets/sprites/items/cross_church.png" id="9_lqrkj"]
 [ext_resource type="PackedScene" uid="uid://c1xqg6j0l6q2l" path="res://scenes/buildings/fence_scenes/fence.tscn" id="10_4qh86"]
 [ext_resource type="PackedScene" uid="uid://b4fyxjshjenvv" path="res://scenes/farm/plants/plant_potato.tscn" id="10_c8c0f"]
 [ext_resource type="PackedScene" uid="uid://disyt3fuu77je" path="res://scenes/buildings/fence_scenes/fence_west.tscn" id="11_3dwxc"]
@@ -25,29 +25,29 @@
 [ext_resource type="PackedScene" uid="uid://e58507ft315b" path="res://scenes/buildings/fence_scenes/fence_north.tscn" id="12_moe38"]
 [ext_resource type="PackedScene" uid="uid://luqdfx7qh2jl" path="res://scenes/farm/plants/plant_pumpkin.tscn" id="12_w0m5s"]
 [ext_resource type="TileSet" uid="uid://dajdby7nadxkd" path="res://assets/resources/tiles/ruins_collision_tiles.tres" id="14_yfo2u"]
-[ext_resource type="Texture2D" uid="uid://btwiu6dcpcsbq" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="15_0ox1s"]
+[ext_resource type="Texture2D" uid="uid://bnmhntukcdbp7" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="15_0ox1s"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="16_pefaa"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="16_s7swj"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_xu2jk"]
 [ext_resource type="PackedScene" uid="uid://du4tddxtyn51y" path="res://scenes/world/tree3.tscn" id="19_08txa"]
 [ext_resource type="PackedScene" uid="uid://dt4impfdusiy" path="res://scenes/farm/plants/plant_poppy.tscn" id="19_ukssx"]
-[ext_resource type="Texture2D" uid="uid://c0omdo51kbylp" path="res://assets/sprites/items/item_poppy_dead.png" id="20_1wvwg"]
+[ext_resource type="Texture2D" uid="uid://cs3htm8cw52im" path="res://assets/sprites/items/item_poppy_dead.png" id="20_1wvwg"]
 [ext_resource type="PackedScene" uid="uid://7m8c0ty0xcd0" path="res://scenes/buildings/town/well/well.tscn" id="20_jm3gc"]
-[ext_resource type="Texture2D" uid="uid://nwtqk7dvjehs" path="res://assets/sprites/items/item_pumpkin_dead.png" id="21_wawgo"]
+[ext_resource type="Texture2D" uid="uid://cwold4o2q74t8" path="res://assets/sprites/items/item_pumpkin_dead.png" id="21_wawgo"]
 [ext_resource type="Script" path="res://scripts/World/PortalManager.cs" id="22_30gdq"]
 [ext_resource type="PackedScene" uid="uid://cb3o7u5viapx8" path="res://scenes/farm/plants/plant_wheat.tscn" id="22_i4jq8"]
-[ext_resource type="Texture2D" uid="uid://bsaosjqvekp58" path="res://assets/sprites/items/item_potato_dead.png" id="22_q6anl"]
+[ext_resource type="Texture2D" uid="uid://voyo1usb16uc" path="res://assets/sprites/items/item_potato_dead.png" id="22_q6anl"]
 [ext_resource type="PackedScene" uid="uid://dyq3ksvy2gwvv" path="res://scenes/world/bush.tscn" id="22_wxiqh"]
 [ext_resource type="PackedScene" uid="uid://bbia6yxwghu3o" path="res://scenes/farm/plants/plant_lupine.tscn" id="23_5yyo7"]
-[ext_resource type="Texture2D" uid="uid://b224tkuheoh3b" path="res://assets/sprites/tiles/farm_tile.png" id="26_adjto"]
+[ext_resource type="Texture2D" uid="uid://bfn22gqwoaqbt" path="res://assets/sprites/tiles/farm_tile.png" id="26_adjto"]
 [ext_resource type="Texture2D" uid="uid://b0dlu5nexmss2" path="res://assets/sprites/tiles/grass_tile.png" id="27_4ir3q"]
-[ext_resource type="Texture2D" uid="uid://bun037rfj54jc" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="28_w6780"]
+[ext_resource type="Texture2D" uid="uid://b644tsyidu1bm" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="28_w6780"]
 [ext_resource type="PackedScene" uid="uid://ca4ui8y2u11io" path="res://scenes/world/cave_entrance.tscn" id="31_ekk8c"]
 [ext_resource type="Texture2D" uid="uid://dbgwlhprokvwi" path="res://assets/sprites/tiles/Dirt_tile.png" id="33_f0032"]
-[ext_resource type="Texture2D" uid="uid://cnnt30aey1k75" path="res://assets/sprites/foliage/mini_tree_dead.png" id="34_guo8f"]
+[ext_resource type="Texture2D" uid="uid://cyfgc82fwo01k" path="res://assets/sprites/foliage/mini_tree_dead.png" id="34_guo8f"]
 [ext_resource type="Texture2D" uid="uid://lcg5swlsccjt" path="res://assets/sprites/tiles/Burnt_grass2_tile.png" id="37_dijnp"]
 [ext_resource type="Texture2D" uid="uid://by8gdsj0sfnja" path="res://assets/sprites/tiles/Burnt_grass_tile.png" id="38_fuoah"]
-[ext_resource type="PackedScene" path="res://scenes/world/navigation_manager.tscn" id="44_kwisk"]
+[ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="44_kwisk"]
 [ext_resource type="Texture2D" uid="uid://bf0kk4xsi7048" path="res://assets/sprites/tiles/Dirt_rocks_tile.png" id="45_318bl"]
 [ext_resource type="PackedScene" uid="uid://wwf7rdwowll5" path="res://scenes/Quest/QuestPointManager.tscn" id="50_slwxb"]
 [ext_resource type="PackedScene" uid="uid://7r2mskqdc0va" path="res://scenes/Quest/QuestPoint.tscn" id="51_qxy2i"]
@@ -142,7 +142,6 @@ modulate = Color(0.764706, 0.764706, 0.764706, 1)
 position = Vector2(288, 3528)
 _camera = NodePath("MainCamera")
 maxZoom = 12.0
-_speed = 1500
 
 [node name="LegLBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="0"]
 scale = Vector2(1, 1)
@@ -2343,6 +2342,7 @@ _player = NodePath("../../Player")
 
 [node name="cave_entrance" parent="Objects/Foliage/Cave" node_paths=PackedStringArray("exitPosition") instance=ExtResource("31_ekk8c")]
 position = Vector2(-7504, -3167)
+targetSceneID = 1
 exitPosition = NodePath("Exit")
 
 [node name="Exit" type="Node2D" parent="Objects/Foliage/Cave/cave_entrance"]
@@ -2401,19 +2401,16 @@ y_sort_enabled = true
 
 [node name="plant_poppy" parent="Objects/Foliage/Collectables" instance=ExtResource("19_ukssx")]
 modulate = Color(0.698039, 0.698039, 0.698039, 1)
-y_sort_enabled = true
 position = Vector2(-1624, 1546)
 
 [node name="plant_poppy6" parent="Objects/Foliage/Collectables" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("19_ukssx")]
 modulate = Color(0.698039, 0.698039, 0.698039, 1)
-y_sort_enabled = true
 position = Vector2(-1368, 1552)
 _col = NodePath("../plant_poppy/Area2D")
 trect = NodePath("../plant_poppy/TextureRect")
 
 [node name="plant_poppy7" parent="Objects/Foliage/Collectables" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("19_ukssx")]
 modulate = Color(0.698039, 0.698039, 0.698039, 1)
-y_sort_enabled = true
 position = Vector2(-1240, 1552)
 _col = NodePath("../plant_poppy/Area2D")
 trect = NodePath("../plant_poppy/TextureRect")
@@ -2432,7 +2429,6 @@ position = Vector2(-2141, -2654)
 
 [node name="plant_pumpkin2" parent="Objects/Foliage/Collectables" instance=ExtResource("12_w0m5s")]
 modulate = Color(0.745098, 0.65098, 0.588235, 1)
-y_sort_enabled = true
 position = Vector2(-2264, -2400)
 
 [node name="plant_wheat" parent="Objects/Foliage/Collectables" instance=ExtResource("22_i4jq8")]
@@ -2490,7 +2486,6 @@ position = Vector2(-608, 408)
 
 [node name="plant_poppy5" parent="Objects/Foliage/Collectables" instance=ExtResource("19_ukssx")]
 modulate = Color(0.639216, 0.639216, 0.639216, 1)
-y_sort_enabled = true
 position = Vector2(200, -594)
 
 [node name="plant_lupine2" parent="Objects/Foliage/Collectables" instance=ExtResource("23_5yyo7")]

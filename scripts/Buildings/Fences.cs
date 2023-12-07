@@ -94,7 +94,7 @@ public partial class Fences : Node2D
             node.QueueFree();
         }
 
-        await Task.Delay((int)(GD.Randi() % 1000));
+        await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete);
 
         // west fence
         for (int i = 0; i < fenceLengthY; i++)
@@ -218,7 +218,7 @@ public partial class Fences : Node2D
         else if (SceneManager.IsCurrentScene(this, Scene.Town))
         {
             HealthComponent healtComponent = _fenceScene.GetNode<HealthComponent>("%HealthComponent");
-            healtComponent.SetHealth(100 + SaveData.townHallStats.wallHP);
+            healtComponent.SetHealth(100 + TownManager.currentTownStats.wallHP);
         }
     }
 
@@ -239,7 +239,7 @@ public partial class Fences : Node2D
         else if (SceneManager.IsCurrentScene(this, Scene.Town))
         {
             HealthComponent healtComponent = _fenceDoorScene.GetNode<HealthComponent>("%HealthComponent");
-            healtComponent.SetHealth(100 + SaveData.townHallStats.wallHP);          
+            healtComponent.SetHealth(100 + TownManager.currentTownStats.wallHP);          
         }
 
 

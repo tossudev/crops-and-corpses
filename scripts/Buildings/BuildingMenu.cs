@@ -389,7 +389,7 @@ public partial class BuildingMenu : Control
         }
     }
 
-    public void InstantiateBuildings(JsonArray loadedBuildings)
+    public async void InstantiateBuildings(JsonArray loadedBuildings)
     {
         float time = 0;
 
@@ -431,14 +431,11 @@ public partial class BuildingMenu : Control
             _buildingScene.Position = new Vector2(x, y);
             _buildings.AddChild(_buildingScene);
 
-            if(_currentBuilding.name == "House" || _currentBuilding.name == "Large House" || _currentBuilding.name == "Archer Tower")
+            _demolishMenu = _buildingScene.GetNode<BuildingDemolishMenu>(BUILDING_DEMOLISH_MENU_NODENAME);
+            _demolishMenu.buildingName = _currentBuilding.name;
+            if(_demolishMenu.buildingNameLabel != null)
             {
-                _demolishMenu = _buildingScene.GetNode<BuildingDemolishMenu>(BUILDING_DEMOLISH_MENU_NODENAME);
-                _demolishMenu.buildingName = _currentBuilding.name;
-                if(_demolishMenu.buildingNameLabel != null)
-                {
-                    _demolishMenu.SetBuildingName();
-                }
+               _demolishMenu.SetBuildingName();
             }
 
             if (jsonObject["name"].ToString() == "House" || jsonObject["name"].ToString() == "LargeHouse" || jsonObject["name"].ToString() == "ArcherTower")
@@ -505,14 +502,11 @@ public partial class BuildingMenu : Control
 
         TownManager.GainExp(_currentBuilding.buildingExp);
 
-        if (_currentBuilding.name == "House" || _currentBuilding.name == "Large House" || _currentBuilding.name == "Archer Tower")
+        _demolishMenu = _buildingScene.GetNode<BuildingDemolishMenu>(BUILDING_DEMOLISH_MENU_NODENAME);
+        _demolishMenu.buildingName = _currentBuilding.name;
+        if (_demolishMenu.buildingNameLabel != null)
         {
-            _demolishMenu = _buildingScene.GetNode<BuildingDemolishMenu>(BUILDING_DEMOLISH_MENU_NODENAME);
-            _demolishMenu.buildingName = _currentBuilding.name;
-            if (_demolishMenu.buildingNameLabel != null)
-            {
-                _demolishMenu.SetBuildingName();
-            }
+            _demolishMenu.SetBuildingName();
         }
     }
 

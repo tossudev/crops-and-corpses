@@ -1,5 +1,7 @@
 using Godot;
+using Godot.Collections;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 public partial class BuildingDemolishMenu : Control
@@ -19,10 +21,11 @@ public partial class BuildingDemolishMenu : Control
     Button _demolishButton;
     const string DEMOLISH_BUTTON_NODENAME = "%DemolishButton";
 
-    [Export]
     public string buildingName;
 
     Label _demolishLabel;
+
+    int[] _blockedItemIds;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -38,6 +41,8 @@ public partial class BuildingDemolishMenu : Control
         _closeMainPanelButton.ButtonUp += CloseMainPanel;
 
         SetBuildingName();
+
+        _blockedItemIds = new int[] { 100, 102, 104, 106, 108, 110, 112, 400, 405, 406 };
     }
 
     public void SetBuildingName()
@@ -59,10 +64,40 @@ public partial class BuildingDemolishMenu : Control
 
         if (mouseEvent.ButtonIndex == MouseButton.Left)
         {
-            if (PlayerInventoryController.heldItem == null || (PlayerInventoryController.heldItem.id != 405 && PlayerInventoryController.heldItem.id != 406))
+            if (GetParent().IsInGroup("farmplot"))
+            {
+                Node2D plantSlot = GetParent().GetNode<Node2D>("%plant_slot");
+                if (plantSlot.GetChildCount() > 0)
+                {
+                    Debug.WriteLine("moiiiku");
+                    return;
+                }
+            }
+
+
+            if (PlayerInventoryController.heldItem == null)
             {
                 OpenMainPanel();
+                return;
             }
+
+            if (GetParent().IsInGroup("ArcherTower"))
+            {
+                if (PlayerInventoryController.heldItem.id != 370)
+                {
+                    OpenMainPanel();
+                    return;
+                }
+            }
+
+            foreach(int itemId in _blockedItemIds)
+            {
+                if (PlayerInventoryController.heldItem.id == itemId)
+                {
+                    return;
+                }
+            }
+            OpenMainPanel();
         }
     }
 

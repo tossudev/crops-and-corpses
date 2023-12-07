@@ -16,29 +16,24 @@ public enum VillagerOccupation
 
 public partial class Villager : CharacterBody2D
 {
-	//[Export] VillagerManager _villagerManager;
 	PlayerSpriteController _spriteControl;
 	Vector2 _targetPosition;
 	Timer _taskTimer;
 	Timer _chooseTaskTimer;
 	[Export] NavigationAgent2D navMeshAgent;
 	PackedScene villagerSkeleton;
-	Plant _currentPlant;
-	ArcherTower _archerTower;
-	BuildingHealth _fenceHealth;
-	Node2D _buildings;
-	Node2D _fences;
-	BuildingHealth _currentBuilding;
-	Sprite2D _villagerSprite;
+	public Plant _currentPlant;
+	public ArcherTower _currentArcherTower;
+	public BuildingHealth _currentBuilding;
+    
 	AnimationPlayer _villagerAnimation;
-	int _plantIndex = 0;
+	const string ANIMATION_PLAYER_NODENAME = "%VillagerAnimationPlayer";
+
+	CharacterBody2D _player;
+
+	
 	float _speed = 100;
 	bool _taskStarted = false;
-	int _resourceTaskCounter = 0;
-	const string PLAYER_NODENAME = "%Player";
-	const string ANIMATION_PLAYER_NODENAME = "%VillagerAnimationPlayer";
-	const string STREETSIGN_NODENAME = "%StreetSign";
-	CharacterBody2D _player;
 	public bool needRescue = false;
 
 	CollisionShape2D _baseCollider;
@@ -65,7 +60,6 @@ public partial class Villager : CharacterBody2D
 		_baseCollider = GetNodeOrNull<CollisionShape2D>(BASE_COLLIDER_NODENAME);
 
 		_player = GetTree().GetFirstNodeInGroup("player") as CharacterBody2D;
-		_buildings = (Node2D)GetTree().GetFirstNodeInGroup("buildings");
     }
 
 	public void InitializeVillager(VillagerRawData data)
@@ -116,11 +110,6 @@ public partial class Villager : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (_taskStarted && _resourceTaskCounter == 5)
-		{
-			ResourceGatheringDone();
-		}
-
 		Movement();
 	}
 
@@ -220,8 +209,8 @@ public partial class Villager : CharacterBody2D
 		
 		if (!quest.CompleteQuestStage(QuestStage.Rescue)) return;
 		quest.ChangeQuestDescription("Take the villager to Street Sign");
-		
-		SetCurrentState(VillagerState.FollowPlayer);
+
+		VillagerManager.villagerManagerInstance.RescueAllVillagers();
 	}
 
 	public void _on_area_2d_area_entered(Area2D area)
@@ -339,7 +328,7 @@ public partial class Villager : CharacterBody2D
 			}
 			else
 			{
-				SetNavMeshAgentPath(false,GlobalPosition + CreateOffsetVector2(-150, 150));
+				SetNavMeshAgentPath(false,GlobalPosition + CreateOffsetVector2(-200, 200));
 
 			}
 		}
@@ -438,117 +427,172 @@ public partial class Villager : CharacterBody2D
 			}
 		}
 
+		// Just making sure that there are no loose ends
+		switch (rawData.currentOccupation)
+		{
+			case VillagerOccupation.Builder:
+				if (decision != VillagerState.FixBuildings && _currentBuilding != null)
+				{
+					_currentBuilding = null;
+				}
+				break;
+			case VillagerOccupation.Farmer:
+				if (decision != VillagerState.FarmingTask && _currentPlant != null)
+				{
+					_currentPlant = null;
+				}
+				break;
+			
+			case VillagerOccupation.Soldier:
+
+				if (decision != VillagerState.SoldierDuty && _currentArcherTower != null)
+				{
+					if (IsArcherTowerOccupiedByMe())
+					{
+						ExitArcherTower();
+					}
+				}
+				
+				break;
+			case VillagerOccupation.Miner:
+				break;
+			case VillagerOccupation.Woodcutter:
+				break;
+			default:
+				throw new ArgumentOutOfRangeException();
+		}
+		
+		
 		SetCurrentState(decision);
 		
 		GD.Print($"{rawData.name} has decided {rawData.currentState} as their state");
 	}
 
+
+	Timer _gatheringTimer;
 	void GatherResources()
 	{
-		SetNavMeshAgentPath(false, TownManager.GetTownPlayerTravel(this).GlobalPosition);
+		if (_taskStarted) return;
 		
+		SetNavMeshAgentPath(false, TownManager.GetTownPlayerTravel(this).GlobalPosition);
+			
 		if (GlobalPosition.DistanceTo(_targetPosition) < 100)
 		{
 			_taskStarted = true;
+
+			_gatheringTimer = new Timer()
+			{
+				WaitTime = 15f,
+				Autostart = true,
+			};
+
+			_gatheringTimer.Timeout += ResourceGatheringDone;
+			AddChild(_gatheringTimer);
+			
 			ToggleCollisionAndVisuals(false);
-			_resourceTaskCounter++;
 		}
+
+
+
 	}
 
-	void ResourceGatheringDone()
+	async void ResourceGatheringDone()
 	{
+		if (_gatheringTimer != null)
+		{
+			_gatheringTimer.QueueFree();
+			_gatheringTimer = null;
+		}
+		
 		Random rnd = new Random();
-		ToggleCollisionAndVisuals(true);
-		if (_rawData.currentOccupation == VillagerOccupation.Miner)
+
+		RawInventoryItem foundItem;
+		int amount = 0;
+		
+		switch (_rawData.currentOccupation)
 		{
-			int amount = rnd.Next(4, 21);
-			GD.Print("Found: " + amount + " stone");
+			case VillagerOccupation.Miner:
+			{
+				if (rnd.Next(0, 1) == 0)
+				{
+					Item foundStone = ItemData.GetItemById(5);
+					
+					amount = rnd.Next(4, 15);
+					foundItem = foundStone.ItemAsRaw(amount);
+				}
+				else
+				{
+					Item foundCopper = ItemData.GetItemById(2);
+					
+					amount = rnd.Next(2, 8);
+                    foundItem = foundCopper.ItemAsRaw(amount);
+				}
+				
+				break;
+			}
+			case VillagerOccupation.Woodcutter:
+			{
+				Item foundWood= ItemData.GetItemById(0);
+				
+				amount = rnd.Next(4, 16);
+				foundItem = foundWood.ItemAsRaw(amount);
+				break;
+			}
+			
+			default:
+				foundItem = null;
+				break;
 		}
 
-		if (_rawData.currentOccupation == VillagerOccupation.Woodcutter)
-		{
-			int amount = rnd.Next(4, 21);
-			GD.Print("Found: " + amount + " wood");
-		}
-
+		await TownStorageController.AddItemToTownStorage(foundItem);
+		
 		_taskStarted = false;
-		_resourceTaskCounter = 0;
+		ToggleCollisionAndVisuals(true);
 		ChooseTask();
 	}
 
 	void WaitingRescue()
 	{
-		SetNavMeshAgentPath(false,GlobalPosition + CreateOffsetVector2(-10, 10));
+		StandStill();
 	}
 
 	void CheckPlants()
 	{
-		var plants = FarmManager.instance.GetPlantedPlants();
-
-		_currentPlant = plants.Count > 0
-			? plants[_plantIndex]
-			: null;
-
 		if (_currentPlant == null)
 		{
-			SetCurrentState(VillagerState.RoamAround);
-			return;
-		}
+			var plants = FarmManager.instance.GetPlantsThatNeedAttention();
 
-		_currentPlant.isTendedTo = true;
+			_currentPlant = plants.Count > 0
+				? plants[(int) (GD.Randi() % plants.Count)]
+				: null;
 
-		if (_currentPlant.GetGrowthState() == GrowthState.IsWilting || _currentPlant.GetGrowthState() == GrowthState.WaitWatering ||
-			_currentPlant.GetGrowthState() == GrowthState.IsInfested)
-		{
-			SetNavMeshAgentPath(false, _currentPlant.GlobalPosition);
-		}
+			if (_currentPlant == null)
+			{
+				// No plant found
+				SetCurrentState(VillagerState.RoamAround);
+			}
+        }
 		else
 		{
-			bool _allHarvestable = true;
+			_currentPlant.isTendedTo = true;
 
-			for (int i = 0; i < FarmManager.instance.GetPlantedPlants().Count; i++)
+			SetNavMeshAgentPath(false, _currentPlant.GlobalPosition);
+				
+			if (GlobalPosition.DistanceTo(_currentPlant.GlobalPosition) > 200) return;
+
+			var growthState = _currentPlant.GetGrowthState();
+				
+			switch (growthState)
 			{
-				if (FarmManager.instance.GetPlantedPlants()[i].GetGrowthState() != GrowthState.IsHarvestable &&
-					FarmManager.instance.GetPlantedPlants()[i].GetGrowthState() != GrowthState.IsDead)
-				{
-					_allHarvestable = false;
+				case GrowthState.WaitWatering or GrowthState.IsWilting:
+					_currentPlant.WaterPlant();
 					break;
-				}
+				case GrowthState.IsInfested:
+					_currentPlant.CurePlant();
+					break;
 			}
-			if (_allHarvestable == false)
-			{
-				_plantIndex++;
-				if (_plantIndex >= FarmManager.instance.GetPlantedPlants().Count)
-				{
-					_plantIndex = 0;
-				}
-				return;
-			}
-
-			SetCurrentState(VillagerState.RoamAround);
-			return;
-		}
-		if (GlobalPosition.DistanceTo(_currentPlant.GlobalPosition) < 5)
-		{
-			GD.Print("I am at the plant yay");
-			if (_currentPlant.GetGrowthState() == GrowthState.IsWilting || _currentPlant.GetGrowthState() == GrowthState.WaitWatering)
-			{
-				_currentPlant.WaterPlant();
-			}
-			if (_currentPlant.GetGrowthState() == GrowthState.IsInfested)
-			{
-				_currentPlant.CurePlant();
-			}
-			if (_currentPlant.GetGrowthState() != GrowthState.IsWilting && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
-			 _currentPlant.GetGrowthState() != GrowthState.WaitWatering && _plantIndex < FarmManager.instance.GetPlantedPlants().Count ||
-			_currentPlant.GetGrowthState() != GrowthState.IsInfested && _plantIndex < FarmManager.instance.GetPlantedPlants().Count)
-			{
-				_plantIndex++;
-			}
-			if (_plantIndex == FarmManager.instance.GetPlantedPlants().Count)
-			{
-				_plantIndex = 0;
-			}
+				
+			_currentPlant = null;
 		}
 	}
 
@@ -616,13 +660,13 @@ public partial class Villager : CharacterBody2D
 		{
 			// It's fighting time!
 			
-			if (_archerTower == null || _archerTower.isBroken)
+			if (_currentArcherTower == null || _currentArcherTower.isBroken)
 			{
 				// Find a new tower!
 				ExitArcherTower();
-				_archerTower = FindFreeArcherTower();
+				_currentArcherTower = FindFreeArcherTower();
 
-				if (_archerTower is null)
+				if (_currentArcherTower is null)
 				{
 					// Run for your lives, no free towers
 					SetCurrentState(VillagerState.FindShelter);
@@ -631,17 +675,17 @@ public partial class Villager : CharacterBody2D
 			else
 			{
 				// Man the tower!
-				if (_archerTower.isOccupied)
+				if (_currentArcherTower.isOccupied)
 				{
-					if (_archerTower.occupyingVillagerId == rawData.id) return;
+					if (IsArcherTowerOccupiedByMe()) return;
 					
 					// Somebody else manned it first...
-					_archerTower = null;
+					_currentArcherTower = null;
 				}
 
-				SetNavMeshAgentPath(true, _archerTower.GlobalPosition);
+				SetNavMeshAgentPath(true, _currentArcherTower.GlobalPosition);
 
-				if (!(GlobalPosition.DistanceTo(_archerTower.GlobalPosition) < 200)) return;
+				if (!(GlobalPosition.DistanceTo(_currentArcherTower.GlobalPosition) < 200)) return;
                 
 				EnterArcherTower();
 			}
@@ -672,13 +716,20 @@ public partial class Villager : CharacterBody2D
 	void EnterArcherTower()
 	{
 		ToggleCollisionAndVisuals(false);
-		_archerTower?.ActivateTower(rawData.id);
+		_currentArcherTower?.ActivateTower(rawData.id);
+	}
+
+	bool IsArcherTowerOccupiedByMe()
+	{
+		if (_currentArcherTower is null || rawData is null) return false;
+		
+		return _currentArcherTower.isOccupied && _currentArcherTower.occupyingVillagerId == rawData.id;
 	}
 	
 	void ExitArcherTower()
 	{
-		_archerTower?.DeactivateTower();
-		_archerTower = null;
+		_currentArcherTower?.DeactivateTower();
+		_currentArcherTower = null;
 		ToggleCollisionAndVisuals(true);
 	}
 }

@@ -27,7 +27,6 @@ public partial class LootController : StaticBody2D
 	static AudioController _audioController;
 	private bool _canBeDestroyed;
 
-
 	public override void _Ready()
 	{
 		if (loot == null)

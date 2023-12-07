@@ -152,8 +152,7 @@ public partial class HandheldController : Node2D
 
     public void Use()
     {
-        if (_weapon == null)
-            Init();
+        Init();
 
         if (_timer.TimeLeft > 0 || isDrawing || _weapon == null)
             return;

@@ -197,7 +197,7 @@ public partial class Fences : Node2D
 
         if (centered)
         {
-            _fences.Position = new Vector2(64, 64);
+            //_fences.Position = new Vector2(64, 64);
         }        
     }
 

@@ -272,6 +272,11 @@ public static class StorageController
                 PlayerInventoryController.SelectNewItem(slot.slotItem);
             }
 
+            if (PlayerInventoryController.heldItemIndex == slot.slotIndex)
+            {
+                PlayerInventoryController.UpdateHeldItem(slot.slotIndex);
+            }
+
             if (slot.slotItem.quantity == 0)
             {
                 GD.PushError("Somehow ended up with 0 quantity storage slot");

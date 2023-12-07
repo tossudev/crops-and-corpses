@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 public partial class FarmManager : Node
 {
@@ -65,6 +66,18 @@ public partial class FarmManager : Node
 	public List<Plant> GetPlantedPlants(){
 		return _allPlantedPlants;
 	}
+	
+	public List<Plant> GetPlantsThatNeedAttention()
+	{
+		List<Plant> attentionPlants = new ();
+
+		attentionPlants.AddRange(from plant in _allPlantedPlants let state = plant.GetGrowthState()
+			where state is GrowthState.IsInfested or GrowthState.IsWilting or GrowthState.WaitWatering select plant);
+
+		return attentionPlants;
+	}
+    
+	
 	public void AddPlantedPlant(Plant plant){
 		_allPlantedPlants.Add(plant);
 	}

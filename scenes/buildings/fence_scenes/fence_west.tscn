@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cuwpylh2hqp0x" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="2_d27mr"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="3_xoojr"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="4_vkqwf"]
-[ext_resource type="PackedScene" uid="uid://dp87d4wfgxnfm" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_cet8m"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_cet8m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_10v6f"]
 size = Vector2(2.625, 150)
@@ -68,5 +68,7 @@ scale = Vector2(0.4, 0.4)
 show_percentage = false
 
 [node name="NavigationObstacleArea" parent="." instance=ExtResource("6_cet8m")]
-position = Vector2(120, 56)
-polygon = PackedVector2Array(-144, -168, -104, -168, -104, -88, -144, -88)
+position = Vector2(99.2, 89.6)
+scale = Vector2(0.8, 1.2)
+color = Color(0.0235294, 0, 0.917647, 0)
+polygon = PackedVector2Array(-134, -174.667, -124, -174.667, -124, -114.667, -134, -114.667)

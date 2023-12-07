@@ -20,9 +20,7 @@ public partial class QuestPoint : Node2D
     private Node2D villagerSpawnPoint;
     private PackedScene zombieScene;
     private PackedScene villagerScene;
-
-    const string Area2D_ZombieArea = "%ZombieArea";
-    private Area2D ZombieArea;
+    
     private SpawnScript zombieSpawn;
     PlayerController playerController;
     private List<Node> zombiesInArea = new List<Node>();
@@ -54,7 +52,6 @@ public partial class QuestPoint : Node2D
         spawnZombiePoint = GetNode<Node2D>(Node2D_QuestZombieSpawn);
         villagerSpawnPoint = GetNode<Node2D>(Node2D_VillagerPoint);
         playerController = (PlayerController)GetTree().GetFirstNodeInGroup("player");
-        ZombieArea = GetNode<Area2D>(Area2D_ZombieArea);
         zombieSpawn = GetParent().GetParent().GetNodeOrNull<SpawnScript>("ZombieSpawn");
     }
 

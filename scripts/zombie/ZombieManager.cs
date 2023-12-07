@@ -36,7 +36,7 @@ public partial class ZombieManager : Node
 
 	public static void PlayZombieNoise(ZombieNoises noise)
 	{
-		_audioController.PlayEffect(noise.ToString());	
+		_audioController?.PlayEffect(noise.ToString());	
 	}
 	
 	private void CheckIfPlayerAlive()

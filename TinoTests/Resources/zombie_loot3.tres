@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Loot" load_steps=17 format=3 uid="uid://buhemneb6namh"]
+[gd_resource type="Resource" script_class="Loot" load_steps=17 format=3 uid="uid://nfsljestu85d"]
 
 [ext_resource type="Resource" uid="uid://be020c80kdfnj" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/100_potato_seed.tres" id="1_spvaw"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_o2lph"]

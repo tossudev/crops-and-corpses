@@ -12,8 +12,12 @@ public enum QuestStage
 
     OpenInventory,
     OpenCrafting,
-    OpenQuestJournal,
+
+    OpenBuildMenu,
+    
     ClickOnTownHall,
+
+    OpenQuestJournal
 
 
 }
@@ -80,7 +84,7 @@ public partial class Quest : Node
                 break;
 
             case QuestType.Tutorial:
-                stages = new Array<QuestStage> { QuestStage.OpenInventory, QuestStage.OpenCrafting, QuestStage.ClickOnTownHall, QuestStage.OpenQuestJournal};
+                stages = new Array<QuestStage> { QuestStage.OpenInventory, QuestStage.OpenCrafting, QuestStage.OpenBuildMenu ,QuestStage.ClickOnTownHall, QuestStage.OpenQuestJournal};
                 break; 
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);

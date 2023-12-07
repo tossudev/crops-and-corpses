@@ -10,7 +10,6 @@ public partial class PlayerInventoryController : Control
 
     static Control _inventoryPanel;
     static GridContainer _inventoryGrid;
-    static Control _hotbarPanel;
     static GridContainer _hotbarGrid;
 
     public static bool isItemSelected = false;
@@ -24,12 +23,13 @@ public partial class PlayerInventoryController : Control
     const string INVENTORY_GRID_GROUP = "InventoryGrid";
     const string INVENTORY_PANEL_GROUP = "InventoryPanel";
 
-    const string HOTBAR_PANEL_GROUP = "HotbarPanel";
     const string HOTBAR_GRID_GROUP = "HotbarGrid";
 
 
     const int SELECTED_ITEM_OFFSET = 64;
 
+    public static int heldItemIndex;
+    
     public override void _Ready()
     {
         var tree = GetTree();
@@ -37,7 +37,6 @@ public partial class PlayerInventoryController : Control
         _inventoryPanel = (Control)tree.GetFirstNodeInGroup(INVENTORY_PANEL_GROUP);
         _inventoryGrid = (GridContainer)tree.GetFirstNodeInGroup(INVENTORY_GRID_GROUP);
 
-        _hotbarPanel = (Control)tree.GetFirstNodeInGroup(HOTBAR_PANEL_GROUP);
         _hotbarGrid = (GridContainer)tree.GetFirstNodeInGroup(HOTBAR_GRID_GROUP);
 
         _selectedItemNode = GetNode<Control>("SelectedItem");
@@ -83,9 +82,10 @@ public partial class PlayerInventoryController : Control
     }
 
 
-    void UpdateHeldItem(int hotbarIndex)
+    public static void UpdateHeldItem(int hotbarIndex)
     {
         heldItem = SaveData.playerHotbarItems[hotbarIndex];
+        heldItemIndex = hotbarIndex; 
 
         Vector2 heldItemPos = _hotbarGrid.GetChild<Control>(hotbarIndex).GlobalPosition;
         heldItemPos.X += SELECTED_ITEM_OFFSET / 2;

@@ -90,7 +90,7 @@ public partial class LootController : StaticBody2D
 
 	private void AttackReceived(Attack attack)
 	{
-		if (attack.effect == _requiredEffect || _requiredEffect == EffectType.None || Name == "Backpack")
+		if (attack.effect == _requiredEffect || _requiredEffect == EffectType.None)
 		{
 			_canBeDestroyed = true;
 		}
@@ -130,14 +130,9 @@ public partial class LootController : StaticBody2D
 			else if (_fallingTreeBridge?.Name == "CaveBlockage")
 			{
 				TownManager.ApplyUnlock(TownUnlock.MINESHAFT_UNLOCK);
-				DropItems(_items.Count);
-				QueueFree();
 			}
-			else
-			{
-				DropItems(_items.Count);
-				QueueFree();
-			}
+
+			DropItems(_items.Count);
 		}
 	}
 
@@ -146,7 +141,6 @@ public partial class LootController : StaticBody2D
 		if (animationName == "fall" || animationName == "fallingStalagmite")
 		{
 			if (_fallingTreeBridge != null) _fallingTreeBridge.Visible = true;
-			QueueFree();
 		}
 	}
 
@@ -170,5 +164,8 @@ public partial class LootController : StaticBody2D
 	{
 		var tween = GetTree().CreateTween();
 		tween.Parallel().TweenProperty(droppedItem, "position", droppedItem.Position + new Vector2(GD.RandRange(-75, 75), GD.RandRange(-75, 75)), 0.25f);
+
+		if (_items.Count == 0)
+			tween.TweenCallback(Callable.From(QueueFree));
 	}
 }

@@ -198,6 +198,11 @@ public partial class PlayerController : CharacterBody2D
 			PlayerInfo.sceneID = SceneID.Town;
 			SceneManager.ChangeScene(this, Scene.Town);
 		}
+		else
+		{
+			Position = _respawnPoint.Position;
+			_isDead = false;
+		}
 	}
 
 	void OnPickupAreaEntered(Area2D body)

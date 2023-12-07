@@ -170,7 +170,7 @@ public partial class QuestPoint : Node2D
         
         if (zombieSpawn.GetZombieQuestListCount() == 0)
         {
-            if (_activeQuest.CompleteQuestStage(QuestStage.Kill));
+            if (_activeQuest.CompleteQuestStage(QuestStage.Kill))
             {
                 _activeQuest.ChangeQuestDescription("Talk to the villagers");
             }

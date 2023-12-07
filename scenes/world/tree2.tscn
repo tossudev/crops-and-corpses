@@ -1,12 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bcoq8weob6f7g"]
+[gd_scene load_steps=12 format=3 uid="uid://bcoq8weob6f7g"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_bnnfg"]
 [ext_resource type="Resource" uid="uid://b7jgjk4165udm" path="res://TinoTests/Resources/tree.tres" id="2_d74pb"]
-[ext_resource type="AudioStream" uid="uid://bji8ydcfgp1gr" path="res://assets/sounds_folder/character_sounds/hit_tree.wav" id="3_ah8gk"]
 [ext_resource type="Texture2D" uid="uid://q5wxg1if5hb8" path="res://assets/sprites/foliage/tree_2.png" id="3_ubmpw"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_tuq8w"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_noskx"]
-[ext_resource type="PackedScene" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_txja1"]
+[ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_txja1"]
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="7_3qb0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ljv8c"]
@@ -41,7 +40,6 @@ script = ExtResource("1_bnnfg")
 loot = ExtResource("2_d74pb")
 _animationPlayer = NodePath("AnimationPlayer")
 _sprite = NodePath("Sprite2D")
-_audio = ExtResource("3_ah8gk")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.498039)

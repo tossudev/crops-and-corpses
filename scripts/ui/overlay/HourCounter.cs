@@ -24,10 +24,18 @@ public partial class HourCounter : Label
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		isDayTime = TimeManager.dayTime;
-		Modulate = isDayTime 
-			? new Color(1f,1f,1f) 
-			: new Color(1f,0,0);
+		if(SceneManager.GetCurrentScene(this) == Scene.Cave)
+		{
+			Modulate = new Color(1f,0,0);
+		}
+		else
+		{
+			isDayTime = TimeManager.dayTime;
+			Modulate = isDayTime 
+				? new Color(1f,1f,1f) 
+				: new Color(1f,0,0);
+		}
+		
 		currentHour = globalTime.GetTime();
 		hourOfDay = MathF.Floor(currentHour / (dayDuration + nightDuration) * 24+6) % 24;
 		if(hourOfDay == 0)

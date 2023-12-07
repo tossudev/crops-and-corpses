@@ -20,11 +20,18 @@ public partial class DayCounter : Label
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		isDayTime = TimeManager.dayTime;
-        
-		Modulate = isDayTime 
-			? new Color(1f,1f,1f) 
-			: new Color(1f,0,0); //Change color from white to red when night comes.
+
+		if(SceneManager.GetCurrentScene(this) == Scene.Cave)
+		{
+			Modulate = new Color(1f,0,0);
+		}
+		else
+		{
+			isDayTime = TimeManager.dayTime;
+			Modulate = isDayTime 
+				? new Color(1f,1f,1f) 
+				: new Color(1f,0,0);
+		}
 
 		currentDay = globalTime.GetDay();
 		Text = "Day: "+currentDay.ToString();

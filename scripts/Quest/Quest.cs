@@ -76,14 +76,12 @@ public partial class Quest : Node
         switch (type)
         {
             case QuestType.Rescue:
-
                 stages = new Array<QuestStage> { QuestStage.Find, QuestStage.Kill, QuestStage.Rescue, QuestStage.Deliver };
                 break;
 
             case QuestType.Tutorial:
-
-                stages = new Array<QuestStage> { QuestStage.OpenInventory, QuestStage.OpenCrafting, QuestStage.OpenQuestJournal, QuestStage.ClickOnTownHall };
-                break;
+                stages = new Array<QuestStage> { QuestStage.OpenInventory, QuestStage.OpenCrafting, QuestStage.ClickOnTownHall, QuestStage.OpenQuestJournal};
+                break; 
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }

@@ -16,6 +16,8 @@ public partial class FenceDoor : Node2D
     public override void _Ready()
     {
         _buildingHealth = GetNode("BuildingHealth") as BuildingHealth;
+
+        DoorsOpen();
     }
 
     void OnFenceDoorInput(Node viewport, InputEvent @event, int shapeIdx)

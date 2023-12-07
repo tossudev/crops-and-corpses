@@ -67,6 +67,8 @@ public partial class HealthComponent : Node2D
             }
             else if (_building.buildingType == BuildingType.Fence)
             {
+                await TaskExtensions.SuspendWhile(() => !SaveData.firstLoadComplete);
+
                 SetMaxHealth(_maxHealth + TownManager.currentTownStats.wallHP);
                 UpdateHealthBar();
             }
@@ -116,15 +118,13 @@ public partial class HealthComponent : Node2D
 		}
 		if (Input.IsActionJustPressed("Click"))
 		{
-			_count++;
+            _count++;
 			if (_count == 2)
 			{
 				TryHealWithItem();
 			}
 
 		}
-
-
 	}
 	public void TakeDamage(Attack attack)
 	{

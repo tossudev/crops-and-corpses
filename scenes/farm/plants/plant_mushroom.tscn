@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bljea7oopk7tf"]
+[gd_scene load_steps=9 format=3 uid="uid://bljea7oopk7tf"]
 
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_8b2ii"]
-[ext_resource type="Texture2D" uid="uid://bmd6fgtdja02e" path="res://assets/sprites/Farm sprites/small mushroom.png" id="2_14wtb"]
 [ext_resource type="Texture2D" uid="uid://dql2irrfsrbym" path="res://assets/sprites/Farm sprites/mushroom_dead.png" id="2_27yvn"]
 [ext_resource type="Texture2D" uid="uid://ccbmt775ltjs4" path="res://assets/sprites/Farm sprites/mushroom.png" id="3_1b5ug"]
+[ext_resource type="Texture2D" uid="uid://qghw4pt2paj2" path="res://assets/sprites/Farm sprites/small mushroom_improv.png" id="3_6opri"]
 [ext_resource type="Resource" uid="uid://466kaxdtvhse" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/105_mushroom.tres" id="5_t30ux"]
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://scenes/farm/shapes/plant_shape.tres" id="5_yqodh"]
+[ext_resource type="Resource" uid="uid://bvjuri17vg701" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/104_mushroom_seed.tres" id="6_oe3es"]
 [ext_resource type="Texture2D" uid="uid://dqgscu3bl0gng" path="res://assets/sprites/items/item_pumpkin.png" id="7_u5xaf"]
 
 [node name="plant_mushroom" type="Node2D" node_paths=PackedStringArray("_col", "trect")]
@@ -16,11 +17,12 @@ _description = "ShroOooms"
 _maxCycles = 3
 _maxHarvestableAmount = 3
 _deadTexture = ExtResource("2_27yvn")
-_sproutTexture = ExtResource("2_14wtb")
+_sproutTexture = ExtResource("3_6opri")
 _plantTexture = ExtResource("3_1b5ug")
 _col = NodePath("Area2D")
 trect = NodePath("TextureRect")
 _harvestablePlant = ExtResource("5_t30ux")
+_seed = ExtResource("6_oe3es")
 
 [node name="Area2D" type="Area2D" parent="."]
 unique_name_in_owner = true

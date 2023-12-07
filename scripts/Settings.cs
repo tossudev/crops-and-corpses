@@ -111,6 +111,11 @@ public partial class Settings : Node2D {
 		AudioServer.SetBusVolumeDb(1, ConvertVolumeValue(value));
 	}
 
+	void OnMusicChanged(float value) {
+		volumeMusic = value;
+		AudioServer.SetBusVolumeDb(2, ConvertVolumeValue(value));
+	}
+
 	void OnAmbienceChanged(float value) {
 		volumeAmbience = value;
 		AudioServer.SetBusVolumeDb(3, ConvertVolumeValue(value));

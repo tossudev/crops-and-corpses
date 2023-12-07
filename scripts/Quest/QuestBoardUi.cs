@@ -102,6 +102,15 @@ public partial class QuestBoardUi : Control
                 CheckIfQuestStarted();
             }
         }
+
+        if (@event.IsActionPressed("close_QuestBoard"))
+        {
+            if (Visible)
+            {
+                CloseQuestBoard();
+            }
+          
+        }
     }
 
 

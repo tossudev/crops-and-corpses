@@ -64,6 +64,7 @@ public partial class Plant : Node2D
 	[Export]TextureRect trect;
 
 	[Export] Item _harvestablePlant;
+	[Export] Item _seed;
 	#endregion
 	
 	#region variables for growing
@@ -321,6 +322,9 @@ public partial class Plant : Node2D
 			GD.Print("Harvested: " +plantName +" x"+randomAmount);
 			RawInventoryItem _plant = new RawInventoryItem(_harvestablePlant.ID, _harvestablePlant.Name, randomAmount, _harvestablePlant.StackSize);
 			await PlayerInventoryController.AddItemToHotbarOrInventory(_plant);
+
+			RawInventoryItem seed = new RawInventoryItem(_seed.ID, _seed.Name, 1, _seed.StackSize);
+			await PlayerInventoryController.AddItemToHotbarOrInventory(seed);
 		}else if(_state == GrowthState.IsDead){
 			GD.Print("Cleared plant: "+plantName);
 		}

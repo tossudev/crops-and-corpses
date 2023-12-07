@@ -140,7 +140,7 @@ public partial class QuestManager : Node
 			if (quest.stages.Contains(QuestStage.OpenInventory))
 			{
 				quest.CompleteQuestStage(QuestStage.OpenInventory);
-				quest.ChangeQuestDescription("Press 'C' to open crafting menu.");
+				quest.ChangeQuestDescription("Press 'Q' to open crafting menu.");
 
 			}
 		}

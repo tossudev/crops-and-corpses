@@ -11,17 +11,16 @@ public partial class GlobalTime : Node
     private Color sunlight;
     private int day;
     private float timeSpeed = 1;
-   // private int currenTowntDay;
    // private float globalhour;
     private string _savePath = ProjectSettings.GlobalizePath("user://saves/");
     private string _fileName = "Time.cfg";
-    private bool hasTownBeenDestroyed;
+   // private bool hasTownBeenDestroyed;
 
     TimeManager timeManager;
 
     public override void _Ready()
     {
-        hasTownBeenDestroyed = false;
+       // hasTownBeenDestroyed = false;
      
         if (!Directory.Exists(_savePath))
         {
@@ -75,22 +74,22 @@ public partial class GlobalTime : Node
     public void SetDay(int currentDay)
     {
         //Check if player is in town, when day changes. If not then town is destroyed and zombiespawning is stopped.
-        Node root = GetTree().Root;
-        Node2D townScene = root.GetNodeOrNull<Node2D>("Town");
-        if(townScene == null)
+       // Node root = GetTree().Root;
+     //   Node2D townScene = root.GetNodeOrNull<Node2D>("Town");
+      /*   if(townScene == null)
         {
             hasTownBeenDestroyed = true;
         }
         else
         {
             hasTownBeenDestroyed = false;
-        }
+        } */
         day = currentDay;
     }
-    public bool HasTownBeenDestroyed()
+   /*  public bool HasTownBeenDestroyed()
     {
         return hasTownBeenDestroyed;
-    }
+    } */
 
     public void LoadData()
     {

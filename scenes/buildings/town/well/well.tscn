@@ -47,12 +47,12 @@ scale = Vector2(2, 0.933333)
 shape = SubResource("RectangleShape2D_8jifx")
 
 [node name="BuildingDemolishMenu" parent="." instance=ExtResource("4_1j4ov")]
+unique_name_in_owner = true
 offset_left = -1120.0
 offset_top = -872.0
 offset_right = -533.0
 offset_bottom = -366.0
 scale = Vector2(2.8, 2.8)
-buildingName = "Well"
 
 [connection signal="area_entered" from="Area2D" to="." method="OnInteractable"]
 [connection signal="area_exited" from="Area2D" to="." method="OnNonInteractable"]

@@ -67,10 +67,10 @@ public partial class VillagerResidence : Control
 
 		if (mouseEvent.ButtonIndex == MouseButton.Left)
 		{
-			if (PlayerInventoryController.heldItem == null || (PlayerInventoryController.heldItem.id != 405 && PlayerInventoryController.heldItem.id != 406))
+			if(PlayerInventoryController.heldItem == null || PlayerInventoryController.heldItem.id != 370)
 			{
-				OpenPanel();
-			}
+                OpenPanel();
+            }
 		}
 	}
 	

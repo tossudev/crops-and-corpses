@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bbia6yxwghu3o"]
+[gd_scene load_steps=9 format=3 uid="uid://bbia6yxwghu3o"]
 
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_wuxn7"]
 [ext_resource type="Texture2D" uid="uid://cyfgc82fwo01k" path="res://assets/sprites/foliage/mini_tree_dead.png" id="2_er81q"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://scenes/farm/shapes/plant_shape.tres" id="4_ph7au"]
 [ext_resource type="Texture2D" uid="uid://brllcegw86j6w" path="res://assets/sprites/foliage/mini_tree.png" id="4_uj1fy"]
 [ext_resource type="Resource" uid="uid://bpa3bx68ohi5" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/111_lupine.tres" id="5_7awt4"]
+[ext_resource type="Resource" uid="uid://ctt564su20h2f" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/110_lupine_seed.tres" id="6_ijvol"]
 [ext_resource type="Texture2D" uid="uid://dqgscu3bl0gng" path="res://assets/sprites/items/item_pumpkin.png" id="7_eyfe1"]
 
 [node name="plant_lupine" type="Node2D" node_paths=PackedStringArray("_col", "trect")]
@@ -21,6 +22,7 @@ _plantTexture = ExtResource("4_uj1fy")
 _col = NodePath("Area2D")
 trect = NodePath("TextureRect")
 _harvestablePlant = ExtResource("5_7awt4")
+_seed = ExtResource("6_ijvol")
 
 [node name="Area2D" type="Area2D" parent="."]
 unique_name_in_owner = true

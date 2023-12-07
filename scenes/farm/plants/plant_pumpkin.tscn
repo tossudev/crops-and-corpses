@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://luqdfx7qh2jl"]
+[gd_scene load_steps=8 format=3 uid="uid://luqdfx7qh2jl"]
 
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_rb3wu"]
 [ext_resource type="Texture2D" uid="uid://cwold4o2q74t8" path="res://assets/sprites/items/item_pumpkin_dead.png" id="2_yk05e"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cr4lt5836k26b" path="res://assets/sprites/foliage/tree.rock.coal.pumpkin.bush/pumpkin/pumpkin.png.png" id="4_wj6o2"]
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://scenes/farm/shapes/plant_shape.tres" id="5_n1ybx"]
 [ext_resource type="Resource" uid="uid://bwqnnm74g8l7l" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/103_pumpkin.tres" id="5_tle7x"]
+[ext_resource type="Resource" uid="uid://c1v5a4ipu05d" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/102_pumpkin_seed.tres" id="6_1fg1s"]
 
 [node name="plant_pumpkin" type="Node2D" node_paths=PackedStringArray("_col", "trect")]
 script = ExtResource("1_rb3wu")
@@ -20,6 +21,7 @@ _plantTexture = ExtResource("4_wj6o2")
 _col = NodePath("Area2D")
 trect = NodePath("TextureRect")
 _harvestablePlant = ExtResource("5_tle7x")
+_seed = ExtResource("6_1fg1s")
 
 [node name="Area2D" type="Area2D" parent="."]
 unique_name_in_owner = true

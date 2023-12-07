@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4fyxjshjenvv"]
+[gd_scene load_steps=9 format=3 uid="uid://b4fyxjshjenvv"]
 
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_1kfoc"]
 [ext_resource type="Texture2D" uid="uid://voyo1usb16uc" path="res://assets/sprites/items/item_potato_dead.png" id="2_754dm"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cr1drq28ycxbn" path="res://assets/sprites/items/item_potato.png" id="4_wrfal"]
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://scenes/farm/shapes/plant_shape.tres" id="5_2rkl1"]
 [ext_resource type="Resource" uid="uid://bfdw482ap5ams" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/101_potato.tres" id="5_t4o1k"]
+[ext_resource type="Resource" uid="uid://be020c80kdfnj" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/100_potato_seed.tres" id="6_ny2hi"]
 [ext_resource type="Texture2D" uid="uid://dqgscu3bl0gng" path="res://assets/sprites/items/item_pumpkin.png" id="7_25nn4"]
 
 [node name="plant_potato" type="Node2D" node_paths=PackedStringArray("_col", "trect")]
@@ -21,6 +22,7 @@ _plantTexture = ExtResource("4_wrfal")
 _col = NodePath("Area2D")
 trect = NodePath("TextureRect")
 _harvestablePlant = ExtResource("5_t4o1k")
+_seed = ExtResource("6_ny2hi")
 
 [node name="Area2D" type="Area2D" parent="."]
 unique_name_in_owner = true

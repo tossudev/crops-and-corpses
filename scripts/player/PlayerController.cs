@@ -190,11 +190,16 @@ public partial class PlayerController : CharacterBody2D
 
 	private void Respawn()
 	{
-		PlayerInfo.sceneID = SceneID.Town;
 		_healthComponent.SetHealth(_healthComponent.GetMaxHealth());
 		_staminaComponent.SetStamina(_staminaComponent.GetMaxStamina());
 
-		SceneManager.ChangeScene(this, Scene.Town);
+		if (PlayerInfo.sceneID != SceneID.Town)
+		{
+			PlayerInfo.sceneID = SceneID.Town;
+			SceneManager.ChangeScene(this, Scene.Town);
+		}
+
+		Position = _respawnPoint.Position;
 	}
 
 	void OnPickupAreaEntered(Area2D body)

@@ -30,7 +30,8 @@ public partial class ZombieManager : Node
 	public override void _Process(double delta)
 	{
 		// true = day, false = night
-		dayMode = _dayNightSpawnNode.GetIsNightOrDay();		
+		//dayMode = _dayNightSpawnNode.GetIsNightOrDay();	
+		dayMode = TimeManager.dayTime;	
 	}
 
 	public static void PlayZombieNoise(ZombieNoises noise)
@@ -59,26 +60,26 @@ public partial class ZombieManager : Node
 		else 
 		{
 			type = ZombieType.Medium;
-			if(zombieKillCount > 5f && townStats > 4) type = ZombieType.Strong;	
+			if(zombieKillCount > 5f) type = ZombieType.Strong;	
 		}
 		
 		switch(type)
 		{	
 			case ZombieType.Strong:
 				damage = 15;
-				attackTime = 0.5;
+				attackTime = 1;
 				idleSpeed = 200;
 				chaseSpeed = 250;
 				break;
 			case ZombieType.Medium:
 				damage = 10;
-				attackTime = 0.5;
+				attackTime = 1;
 				idleSpeed = 150f;
 				chaseSpeed = 200f;
 				break;
 			case ZombieType.Weak:
 				damage = 5;
-				attackTime = 1.0f;
+				attackTime = 1.5f;
 				idleSpeed = 100f;
 				chaseSpeed = 150f;
 				break;
@@ -97,30 +98,32 @@ public partial class ZombieManager : Node
 	{
 		switch(townStats)
 		{
+			case 0:
+				break;
 			case 1:
 			//Level 1 no buffs
 				break;
 			case 2:
 				damage += 3;
-				attackTime += 0.1;
+				attackTime -= 0.2;
 				idleSpeed += 30;
 				chaseSpeed += 30;
 				break;
 			case 3:
 				damage += 5;
-				attackTime += 0.3;
+				attackTime -= 0.3;
 				idleSpeed += 40;
 				chaseSpeed += 40;
 				break;
 			case 4:
 				damage += 7;
-				attackTime += 0.5;
+				attackTime -= 0.5;
 				idleSpeed +=50;
 				chaseSpeed +=50;
 				break;
 			case 5:
 				damage += 10;
-				attackTime += 1;
+				attackTime -= 0.5;
 				idleSpeed += 80;
 				chaseSpeed += 80;
 				break;
@@ -133,7 +136,7 @@ public partial class ZombieManager : Node
 		if(zombieKillCount > 10)
 		{
 				damage += 20;
-				attackTime += 1;
+				attackTime -= 0.6;
 				idleSpeed +=30;
 				chaseSpeed +=30;
 		}

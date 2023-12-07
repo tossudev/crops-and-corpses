@@ -9,6 +9,7 @@ public static class SceneManager
 {
     static bool sceneChanged = true;
     static Node _currentRootScene;
+    static AudioController _audioController;
 
 
     public static Scene.RootScene GetCurrentScene(Node caller)
@@ -54,5 +55,8 @@ public static class SceneManager
         SaveData.SyncAll();
         caller.GetTree().ChangeSceneToFile(scene.Path);
         sceneChanged = true;
+
+        _audioController = caller.GetNode<Node>("/root/Audio") as AudioController;
+        _audioController.PlayBackground();
     }
 }

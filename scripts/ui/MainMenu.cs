@@ -10,6 +10,7 @@ public partial class MainMenu : Node2D {
 	Camera2D camMain;
 	Camera2D camSettings;
 	Camera2D camCredits;
+	static AudioController _audioController;
 
 	double time = 0.0d;
 
@@ -22,6 +23,9 @@ public partial class MainMenu : Node2D {
 		camMain = GetNodeOrNull<Camera2D>("Main/Camera");
 		camSettings = GetNodeOrNull<Camera2D>("Settings/Camera");
 		camCredits = GetNodeOrNull<Camera2D>("Credits/Camera");
+		_audioController = GetNode<Node>("/root/Audio") as AudioController;
+
+		_audioController.StopMusic();
     }
 
 
@@ -81,6 +85,7 @@ public partial class MainMenu : Node2D {
 				break;
 			case "Game":
 				GetTree().ChangeSceneToFile("res://scenes/town.tscn");
+				_audioController.PlayBackground();
 				return;
 		}
 

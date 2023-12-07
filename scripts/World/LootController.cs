@@ -45,14 +45,13 @@ public partial class LootController : StaticBody2D
 			return;
 		}
 
-		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
-		_animationPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
 		_meanDrop = loot.meanDrop;
 
 		if (_dropLootPosition == null)
 			_dropLootPosition = this;
 
-		Variations();
+		if (_sprite != null)
+			Variations();
 
 		_items.Clear();
 		for (int i = 0; i < _meanDrop; i++)

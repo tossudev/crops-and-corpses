@@ -100,7 +100,6 @@ public partial class BuildingMode : Node2D
 	{
         if(area.IsInGroup("Hitbox"))
         {
-            Debug.WriteLine("MOI");
             return;
         }
         collisions++;
@@ -110,7 +109,6 @@ public partial class BuildingMode : Node2D
     {
         if (area.IsInGroup("Hitbox"))
         {
-            Debug.WriteLine("MOI");
             return;
         }
         collisions--;
@@ -120,7 +118,6 @@ public partial class BuildingMode : Node2D
     {
         if (body.IsInGroup("Hitbox"))
         {
-            Debug.WriteLine("MOI");
             return;
         }
         collisions++;
@@ -130,7 +127,6 @@ public partial class BuildingMode : Node2D
     {
         if (body.IsInGroup("Hitbox"))
         {
-            Debug.WriteLine("MOI");
             return;
         }
         collisions--;

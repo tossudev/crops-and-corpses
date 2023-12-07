@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bfgy4jnvcy7pk"]
+[gd_scene load_steps=17 format=3 uid="uid://bfgy4jnvcy7pk"]
 
 [ext_resource type="Script" path="res://scripts/zombie/RoamingZombie.cs" id="1_bgof4"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="2_77rad"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cfvc5cwueobbh" path="res://assets/placeholder/zombie_placeholder.png" id="8_4yfg2"]
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="10_86eqm"]
 [ext_resource type="Resource" uid="uid://khdsb508afg6" path="res://TinoTests/Resources/zombie_loot.tres" id="11_xvxhc"]
+[ext_resource type="Script" path="res://scripts/World/Loot.cs" id="13_xafgg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5h8wa"]
 radius = 27.0
@@ -110,6 +111,7 @@ wait_time = 2.0
 
 [node name="Backpack" type="StaticBody2D" parent="."]
 script = ExtResource("10_86eqm")
+loot = ExtResource("13_xafgg")
 
 [connection signal="timeout" from="StateMachine/Chase/Timer" to="StateMachine/Chase" method="OnTimerTimeout"]
 [connection signal="body_entered" from="AttackBox" to="." method="OnAttackBoxEntered"]

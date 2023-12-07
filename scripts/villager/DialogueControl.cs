@@ -111,8 +111,16 @@ public  partial class DialogueControl : Control
 		instance = null;
 	}
 
+    public override void _Input(InputEvent @event)
+    {
+        if (@event.IsActionPressed("ui_cancel"))
+        {
+			ExitDialogue();
+        }
+    }
 
-	void SetNewOccupation(VillagerOccupation occupation)
+
+    void SetNewOccupation(VillagerOccupation occupation)
 	{
 		villagerManagerInstance.SetVillagerOccupation(_assignedVillager, occupation);
 		ExitDialogue();

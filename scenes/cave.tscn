@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bbvsfe4h2sph"]
+[gd_scene load_steps=38 format=3 uid="uid://bbvsfe4h2sph"]
 
 [ext_resource type="PackedScene" uid="uid://wy0dgop8pftu" path="res://scenes/world/cave_tilemap.tscn" id="1_yabqn"]
 [ext_resource type="Script" path="res://scripts/cave.cs" id="1_yjxwb"]
@@ -27,7 +27,6 @@
 [ext_resource type="PackedScene" uid="uid://wwf7rdwowll5" path="res://scenes/Quest/QuestPointManager.tscn" id="25_n2sk6"]
 [ext_resource type="PackedScene" uid="uid://7r2mskqdc0va" path="res://scenes/Quest/QuestPoint.tscn" id="26_t6sbg"]
 [ext_resource type="PackedScene" uid="uid://chw8bc0kxym0e" path="res://scenes/villager/villager_manager.tscn" id="27_uex5p"]
-[ext_resource type="PackedScene" uid="uid://cjois7dowg4ag" path="res://scenes/ui/scene_transition.tscn" id="28_c4ekh"]
 
 [sub_resource type="Gradient" id="Gradient_ksvwj"]
 offsets = PackedFloat32Array(0.187097, 0.364516, 0.396774, 1)
@@ -110,12 +109,11 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.791284, 0.240826)
 
-[node name="Cave" type="Node2D" node_paths=PackedStringArray("_bridge", "_stalagmite", "_sceneTransition")]
+[node name="Cave" type="Node2D" node_paths=PackedStringArray("_bridge", "_stalagmite")]
 y_sort_enabled = true
 script = ExtResource("1_yjxwb")
 _bridge = NodePath("Objects/Breakable/Bridge")
 _stalagmite = NodePath("Objects/Breakable/BridgeStalagmite")
-_sceneTransition = NodePath("SceneTransition")
 
 [node name="Tilemap" parent="." instance=ExtResource("1_yabqn")]
 unique_name_in_owner = true
@@ -2325,9 +2323,6 @@ position = Vector2(-30.2383, -30.2379)
 position = Vector2(226.786, 962.58)
 
 [node name="VillagerManager" parent="." instance=ExtResource("27_uex5p")]
-
-[node name="SceneTransition" parent="." instance=ExtResource("28_c4ekh")]
-unique_name_in_owner = true
 
 [connection signal="animation_finished" from="Objects/Breakable/BridgeStalagmite/AnimationPlayer" to="Objects/Breakable/BridgeStalagmite" method="OnAnimationFinished"]
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]

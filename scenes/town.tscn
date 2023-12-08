@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=50 format=3 uid="uid://bgyv0c8xt1fd4"]
 
 [ext_resource type="Script" path="res://scripts/town.cs" id="1_e434m"]
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_nnncm"]
@@ -34,7 +34,6 @@
 [ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="23_vb7um"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="26_e7msj"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="29_6j2s6"]
-[ext_resource type="PackedScene" uid="uid://cjois7dowg4ag" path="res://scenes/ui/scene_transition.tscn" id="35_sykfq"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_02qf6"]
 vertices = PackedVector2Array(-6648, -3776, 3968, -3904, 6640, 3872, -5768, 5704)
@@ -135,10 +134,9 @@ size = Vector2(105, 87)
 radius = 56.0
 height = 294.0
 
-[node name="Town" type="Node2D" node_paths=PackedStringArray("_sceneTransition")]
+[node name="Town" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_e434m")
-_sceneTransition = NodePath("SceneTransition")
 
 [node name="NavigationManager" parent="." instance=ExtResource("23_vb7um")]
 unique_name_in_owner = true
@@ -203,6 +201,12 @@ _respawnPoint = NodePath("../PlayerSpawn")
 
 [node name="LegLBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="0"]
 scale = Vector2(1, 1)
+
+[node name="ArmLBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="2"]
+scale = Vector2(0.999998, 0.999998)
+
+[node name="HeadBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="4"]
+scale = Vector2(0.999997, 0.999997)
 
 [node name="ArmRBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="5"]
 scale = Vector2(0.999999, 1)
@@ -1689,9 +1693,6 @@ script = ExtResource("29_6j2s6")
 
 [node name="Sunlight" type="CanvasModulate" parent="SunlightContainer"]
 position = Vector2(-71, -4)
-
-[node name="SceneTransition" parent="." instance=ExtResource("35_sykfq")]
-unique_name_in_owner = true
 
 [connection signal="area_entered" from="Buildings/WellStatic/Area2D" to="Buildings/WellStatic" method="OnInteractable" flags=18]
 [connection signal="area_exited" from="Buildings/WellStatic/Area2D" to="Buildings/WellStatic" method="OnNonInteractable" flags=18]

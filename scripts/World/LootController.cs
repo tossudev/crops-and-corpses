@@ -122,6 +122,8 @@ public partial class LootController : StaticBody2D
 
 		if (health <= 0)
 		{
+			TownManager.GainExp(_expGain);
+
 			if (Name == "FallingTree")
 			{
 				_animationPlayer.Play("fall");
@@ -142,8 +144,6 @@ public partial class LootController : StaticBody2D
 			{
 				DropItems(_items.Count);
 			}
-
-			TownManager.GainExp(_expGain);
 		}
 	}
 

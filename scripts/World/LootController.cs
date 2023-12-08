@@ -46,6 +46,9 @@ public partial class LootController : StaticBody2D
 
 		_meanDrop = loot.meanDrop;
 
+		_animationPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
+		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
+
 		if (_dropLootPosition == null)
 			_dropLootPosition = this;
 
@@ -64,7 +67,7 @@ public partial class LootController : StaticBody2D
 		}
 		else if (GD.Randf() > 0.9f)
 		{
-			_items.Add(_items[GD.RandRange(0, _items.Count - 1)]);
+			_items.Add(loot.lootItems[GD.RandRange(0, loot.lootItems.Count - 1)].item);
 		}
 	}
 
@@ -165,7 +168,7 @@ public partial class LootController : StaticBody2D
 		var tween = GetTree().CreateTween();
 		tween.Parallel().TweenProperty(droppedItem, "position", droppedItem.Position + new Vector2(GD.RandRange(-75, 75), GD.RandRange(-75, 75)), 0.25f);
 
-		if (_items.Count == 0)
+		if (_items.Count <= 0)
 			tween.TweenCallback(Callable.From(QueueFree));
 	}
 }

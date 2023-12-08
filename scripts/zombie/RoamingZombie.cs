@@ -335,7 +335,7 @@ public partial class RoamingZombie : CharacterBody2D
 		}
 		else if (GD.Randf() > 0.9f)
 		{
-			_items.Add(_items[GD.RandRange(0, _items.Count - 1)]);
+			_items.Add(loot.lootItems[GD.RandRange(0, loot.lootItems.Count - 1)].item);
 		}
 	}
 }

@@ -122,14 +122,13 @@ public partial class QuestPoint : Node2D
 
     public void SpawnZombies()
     {
-        Vector2 offsetVector = new Vector2(GD.Randi() % 3, GD.Randi() % 3);
-
+      
 
         if (zombieSpawn != null && isZombiesSpawned == false)
         {
             for (int i = 0; i < GetSpawnedZombieAmount(); i++)
             {
-                zombieSpawn.SpawnZombieAtPoint(spawnZombiePoint.GlobalPosition + offsetVector);
+                zombieSpawn.SpawnZombieAtPoint(spawnZombiePoint.GlobalPosition);
             }
 
             _activeQuest?.ChangeQuestDescription("Clear the area of zombies");

@@ -139,7 +139,10 @@ public partial class Plant : Node2D
 		}
 		Position = new Vector2(0, -5);
 		_state = GrowthState.WaitWatering;
-		
+		if(_plantType == PlantType.Maize) {
+					GetNode<TextureRect>("%TextureRect").ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
+					Position = new Vector2(0, -35);
+			} 
 		
 		AddChild(_growthTimer);
 		
@@ -150,6 +153,9 @@ public partial class Plant : Node2D
 		_warningSign.Position = new Vector2(-10, 10);
 		AddChild(_warningSign);
 
+		if(_plantType == PlantType.Maize) {
+					_warningSign.Position = new Vector2(-10, 50);
+			} 
 		_bugSignTexture = ResourceLoader.Load("res://assets/sprites/Farm sprites/sign_bugplant.png") as Texture2D;
 		_waterSignTexture = ResourceLoader.Load("res://assets/sprites/Farm sprites/sign_waterplant.png") as Texture2D;
 
@@ -193,6 +199,7 @@ public partial class Plant : Node2D
 		if (_plantType == PlantType.Lupine || _plantType == PlantType.Maize)
 		{
 			GetNode<TextureRect>("%TextureRect").ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
+			Position = new Vector2(0, -35);
 		}
 	}
 
@@ -322,7 +329,7 @@ public partial class Plant : Node2D
         if (_plantType == PlantType.Lupine || _plantType == PlantType.Maize)
         {
             GetNode<TextureRect>("%TextureRect").ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
-			Position = new Vector2(0, -25);
+			Position = new Vector2(0, -35);
         }
         _progress.Hide();
         _state = GrowthState.IsHarvestable;
@@ -354,7 +361,7 @@ public partial class Plant : Node2D
 		 if (_plantType == PlantType.Lupine || _plantType == PlantType.Maize)
         {
             GetNode<TextureRect>("%TextureRect").ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
-			Position = new Vector2(0, -25);
+			Position = new Vector2(0, -35);
         }
 		_progress.Hide();
 		_state = GrowthState.IsDead;

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_t4nyu"]
 [ext_resource type="Texture2D" uid="uid://dwx0g2c8ulc3i" path="res://assets/sprites/Farm sprites/corn_dead.png" id="2_hfven"]
 [ext_resource type="Texture2D" uid="uid://dvs3nv7xno3eb" path="res://assets/sprites/Farm sprites/corn.png" id="3_1kcug"]
-[ext_resource type="Texture2D" uid="uid://387mcregmrj4" path="res://assets/sprites/Farm sprites/sprout.png" id="3_rqq2d"]
+[ext_resource type="Texture2D" uid="uid://chnohurxsn2mq" path="res://assets/sprites/Farm sprites/corn_sprout.png" id="3_pag5s"]
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://scenes/farm/shapes/plant_shape.tres" id="5_2sl8h"]
 [ext_resource type="Resource" uid="uid://djv78bsvabyah" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/109_maize.tres" id="5_culae"]
 [ext_resource type="Resource" uid="uid://bdxgtjm5ujcgk" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/108_maize_seed.tres" id="5_gsqv0"]
@@ -16,7 +16,7 @@ _description = "Popcorn?"
 _maxCycles = 3
 _maxHarvestableAmount = 4
 _deadTexture = ExtResource("2_hfven")
-_sproutTexture = ExtResource("3_rqq2d")
+_sproutTexture = ExtResource("3_pag5s")
 _plantTexture = ExtResource("3_1kcug")
 _col = NodePath("Area2D")
 trect = NodePath("TextureRect")

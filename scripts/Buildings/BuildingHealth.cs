@@ -21,6 +21,10 @@ public partial class BuildingHealth : Node2D
     
     CollisionShape2D _collisionShape;
     const string COLLISIONSHAPE2D_NODENAME = "%StaticCollisionShape2D";
+
+    ProgressBar _healthBar;
+    const string HEALTH_BAR_NODENAME = "%HealthBar";
+
     Node2D _parent;
 
     public bool isBroken;
@@ -34,6 +38,14 @@ public partial class BuildingHealth : Node2D
 	// Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+        if (!SceneManager.IsCurrentScene(this, Scene.Town) && GetParent().IsInGroup("fence"))
+        {
+            _healthBar = GetNode<ProgressBar>(HEALTH_BAR_NODENAME);
+            _healthBar.QueueFree();
+            QueueFree();
+            return;
+        }
+
         _healthComponent = GetNode<HealthComponent>(HEALTH_COMPONENT_NODENAME);
         _healthComponent.AssignBuilding(this);
 

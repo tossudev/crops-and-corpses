@@ -1647,7 +1647,7 @@ _minBrightness = 0.5
 _scaleVariation = 0.2
 
 [node name="Tree75" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("7_et7tw")]
-position = Vector2(-6979, -1308)
+position = Vector2(-7072, -1232)
 _animationPlayer = NodePath("../Tree25/AnimationPlayer")
 _sprite = NodePath("../Tree25/Sprite2D")
 _color = Color(0.717647, 0.341176, 0.152941, 0)
@@ -1931,7 +1931,7 @@ _minBrightness = 0.5
 _scaleVariation = 0.2
 
 [node name="Tree110" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
-position = Vector2(4127, -3061)
+position = Vector2(4157, -3133)
 _color = Color(0.717647, 0.341176, 0.152941, 0)
 _minBrightness = 0.5
 _scaleVariation = 0.2
@@ -2465,14 +2465,14 @@ _color = Color(0.388235, 0.388235, 0.388235, 0)
 _minBrightness = 0.5
 
 [node name="Rock7" parent="Objects/Foliage/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("12_0gurk")]
-position = Vector2(5160, 2648)
+position = Vector2(5526, 2516)
 _animationPlayer = NodePath("../Rock5/AnimationPlayer")
 _sprite = NodePath("../Rock5/Sprite2D")
 _color = Color(0.388235, 0.388235, 0.388235, 0)
 _minBrightness = 0.5
 
 [node name="Rock11" parent="Objects/Foliage/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("12_0gurk")]
-position = Vector2(6528, 1752)
+position = Vector2(6228, 1291)
 _animationPlayer = NodePath("../Rock5/AnimationPlayer")
 _sprite = NodePath("../Rock5/Sprite2D")
 _color = Color(0.388235, 0.388235, 0.388235, 0)
@@ -2493,7 +2493,7 @@ _color = Color(0.388235, 0.388235, 0.388235, 0)
 _minBrightness = 0.5
 
 [node name="Rock10" parent="Objects/Foliage/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("12_0gurk")]
-position = Vector2(-6440, 3336)
+position = Vector2(-6140, 3456)
 _animationPlayer = NodePath("../Rock5/AnimationPlayer")
 _sprite = NodePath("../Rock5/Sprite2D")
 _color = Color(0.388235, 0.388235, 0.388235, 0)
@@ -2503,10 +2503,10 @@ _minBrightness = 0.5
 y_sort_enabled = true
 
 [node name="Copper Ore" parent="Objects/Foliage/Ores" instance=ExtResource("25_0xvqf")]
-position = Vector2(4383, 2515)
+position = Vector2(3898, 2137)
 
 [node name="Copper Ore2" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("25_0xvqf")]
-position = Vector2(5111, 655)
+position = Vector2(5411, 325)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
@@ -2541,37 +2541,33 @@ _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
 [node name="Copper Ore11" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("25_0xvqf")]
-position = Vector2(-7568, 3419)
+position = Vector2(-7562, 3119)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
 [node name="Copper Ore4" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("25_0xvqf")]
-position = Vector2(6803, -2930)
+position = Vector2(6156, -3026)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
 [node name="Copper Ore5" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("25_0xvqf")]
-position = Vector2(6248, -2380)
+position = Vector2(6032, -2272)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
 [node name="Iron Ore" parent="Objects/Foliage/Ores" instance=ExtResource("26_o2yuj")]
-position = Vector2(6906, 2622)
+position = Vector2(7080, 2526)
 
 [node name="Iron Ore2" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("26_o2yuj")]
-position = Vector2(7090, -3207)
-_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
-
-[node name="Iron Ore3" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("26_o2yuj")]
-position = Vector2(-642, -3230)
+position = Vector2(7042, -3105)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
 [node name="Iron Ore4" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("26_o2yuj")]
-position = Vector2(-5996, -3215)
+position = Vector2(-6086, -3107)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
 [node name="Iron Ore5" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("26_o2yuj")]
-position = Vector2(-7547, 1988)
+position = Vector2(-7301, 1892)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
 [node name="Cave" type="Node2D" parent="Objects/Foliage" node_paths=PackedStringArray("_player")]

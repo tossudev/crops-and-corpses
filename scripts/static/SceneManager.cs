@@ -46,11 +46,20 @@ public static class SceneManager
     {
         sceneChanging = true;
 
+        var player = caller.GetTree().GetFirstNodeInGroup("player") as PlayerController;
+        player.GetNodeOrNull<CanvasLayer>("%PlayerOverlay").Visible = false;
+
+        var sceneTransition = _currentRootScene.GetNode<AnimationPlayer>("%SceneTransition");
+        sceneTransition.SpeedScale = 2;
+        sceneTransition?.Play("fade_out");
+
+        await TaskExtensions.SuspendWhile(() => sceneTransition.IsPlaying());
+
         await TaskExtensions.SuspendWhile(() => NavigationManager.bakeInProgress);
         CommitSceneChange(caller, scene);
 
         await TaskExtensions.SuspendWhile(() => _sceneChange == Error.Ok);
-        
+
         sceneChanging = false;
         sceneChanged = true;
     }

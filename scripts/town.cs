@@ -1,9 +1,8 @@
 using Godot;
 using System;
 
-public partial class ruins : Node2D
+public partial class town : Node2D
 {
-	[Export] private Node2D _caveBlockage;
 	[Export] private AnimationPlayer _sceneTransition;
 
 	public override void _Ready()
@@ -12,14 +11,12 @@ public partial class ruins : Node2D
 		_sceneTransition.SpeedScale = 0.75f;
 		_sceneTransition?.Play("fade_in");
 
-		if (SaveData.townHallStats.isMineshaftUnlocked)
-		{
-			OpenCave();
-		}
+		PlayerController player = GetTree().GetFirstNodeInGroup("player") as PlayerController;
+		player.GetNode<CanvasLayer>("PlayerOverlay").Visible = true;
 	}
 
-	private void OpenCave()
+	private PlayerController GetNodeInGroup(string v)
 	{
-		_caveBlockage.QueueFree();
+		throw new NotImplementedException();
 	}
 }

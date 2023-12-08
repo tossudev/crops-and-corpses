@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://bofkpec0ir7h3" path="res://assets/resources/game_items/resource_items_0_to_99/2_copper.tres" id="1_v0feu"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="2_cliof"]
-[ext_resource type="Resource" uid="uid://bv7vupb8k6yua" path="res://assets/resources/game_items/resource_items_0_to_99/5_stone.tres" id="3_cwf8w"]
+[ext_resource type="Resource" path="res://assets/resources/game_items/resource_items_0_to_99/5_stone.tres" id="3_cwf8w"]
 [ext_resource type="Script" path="res://scripts/World/Loot.cs" id="4_5hvbo"]
 
 [sub_resource type="Resource" id="Resource_jxoe4"]

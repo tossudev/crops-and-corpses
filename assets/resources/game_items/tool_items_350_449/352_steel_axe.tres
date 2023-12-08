@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=8 format=3 uid="uid://b7m6k2h3ssdyx"]
 
-[ext_resource type="Texture2D" uid="uid://civk2v4k0qwuq" path="res://assets/sprites/items/item_steel_axe2.png" id="1_onl0w"]
+[ext_resource type="Texture2D" uid="uid://dop7s351bcjs4" path="res://assets/sprites/items/item_steel_axe2.png" id="1_onl0w"]
 [ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="2_og44w"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_jvrxs"]
 [ext_resource type="Resource" uid="uid://b7mm5b7xm04ju" path="res://assets/resources/game_items/resource_items_0_to_99/3_steel.tres" id="4_bdoab"]

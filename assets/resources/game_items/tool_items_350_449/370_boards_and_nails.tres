@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=8 format=3 uid="uid://bo4slwmfeb3si"]
 
-[ext_resource type="Texture2D" uid="uid://du4ruidygi5t5" path="res://assets/sprites/Farm sprites/nails and planks.png" id="1_6ldsv"]
+[ext_resource type="Texture2D" uid="uid://be5cjqw3c8xuq" path="res://assets/sprites/Farm sprites/nails and planks.png" id="1_6ldsv"]
 [ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="1_ni2vq"]
 [ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="2_myd3y"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_rgqoq"]

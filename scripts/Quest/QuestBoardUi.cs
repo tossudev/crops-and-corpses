@@ -180,8 +180,9 @@ public partial class QuestBoardUi : Control
         }
         
         _forestButton.Visible = true;
-        _ruinsButton.Visible = true;
-        _caveButton.Visible = true;
+        _ruinsButton.Visible = TownManager.currentTownStats.isRuinsUnlocked;
+        _caveButton.Visible = TownManager.currentTownStats.isMineshaftUnlocked;
+        
         Dif1Button.Visible = true;
         Dif2Button.Visible = true;
         Dif3Button.Visible = true;

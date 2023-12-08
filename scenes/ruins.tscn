@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/ruins.cs" id="1_7gyha"]
 [ext_resource type="PackedScene" uid="uid://chw8bc0kxym0e" path="res://scenes/villager/villager_manager.tscn" id="3_qlutx"]
-[ext_resource type="PackedScene" uid="uid://dpdpfs2c2kwi5" path="res://scenes/world/lantern.tscn" id="4_61dbj"]
+[ext_resource type="PackedScene" path="res://scenes/world/lantern.tscn" id="4_61dbj"]
 [ext_resource type="PackedScene" uid="uid://b2gv07xesl7qm" path="res://scenes/buildings/town/house/house_broken.tscn" id="4_nfdnl"]
-[ext_resource type="Texture2D" uid="uid://bpff0i3txuqnq" path="res://assets/sprites/items/lantern.png" id="5_x4a6q"]
+[ext_resource type="Texture2D" uid="uid://dx2etqu1it47s" path="res://assets/sprites/items/lantern.png" id="5_x4a6q"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_xoqnb"]
 [ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://scenes/spawn/ZombieSpawn.tscn" id="6_moakj"]
 [ext_resource type="Texture2D" uid="uid://q5wxg1if5hb8" path="res://assets/sprites/foliage/tree_2.png" id="6_rt25r"]
@@ -18,11 +18,11 @@
 [ext_resource type="PackedScene" uid="uid://bfgy4jnvcy7pk" path="res://scenes/zombie/Zombie.tscn" id="8_ovu31"]
 [ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="8_pei51"]
 [ext_resource type="Script" path="res://scripts/farm/Well.cs" id="9_8bsgc"]
-[ext_resource type="Texture2D" uid="uid://mnytodt7v2vt" path="res://assets/sprites/items/cross_church.png" id="9_lqrkj"]
+[ext_resource type="Texture2D" uid="uid://bmfm6yq20ilcq" path="res://assets/sprites/items/cross_church.png" id="9_lqrkj"]
 [ext_resource type="PackedScene" uid="uid://b4fyxjshjenvv" path="res://scenes/farm/plants/plant_potato.tscn" id="10_c8c0f"]
 [ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="10_p4imi"]
 [ext_resource type="PackedScene" uid="uid://disyt3fuu77je" path="res://scenes/buildings/fence_scenes/fence_west.tscn" id="11_3dwxc"]
-[ext_resource type="PackedScene" uid="uid://c5347glm0d040" path="res://scenes/world/gravecross.tscn" id="11_ho833"]
+[ext_resource type="PackedScene" path="res://scenes/world/gravecross.tscn" id="11_ho833"]
 [ext_resource type="PackedScene" uid="uid://bljea7oopk7tf" path="res://scenes/farm/plants/plant_mushroom.tscn" id="11_koiqo"]
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="11_onp5s"]
 [ext_resource type="PackedScene" uid="uid://b6w8cr3rm5pu3" path="res://scenes/world/rock.tscn" id="12_0gurk"]
@@ -30,7 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://luqdfx7qh2jl" path="res://scenes/farm/plants/plant_pumpkin.tscn" id="12_w0m5s"]
 [ext_resource type="Shape2D" uid="uid://cexw2rv4qd6l6" path="res://scenes/farm/shapes/well_shape.tres" id="12_x0tbr"]
 [ext_resource type="TileSet" uid="uid://dajdby7nadxkd" path="res://assets/resources/tiles/ruins_collision_tiles.tres" id="14_yfo2u"]
-[ext_resource type="Texture2D" uid="uid://bnmhntukcdbp7" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="15_0ox1s"]
+[ext_resource type="Texture2D" uid="uid://cuwpylh2hqp0x" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="15_0ox1s"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="16_pefaa"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="16_s7swj"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_xu2jk"]
@@ -38,19 +38,19 @@
 [ext_resource type="PackedScene" uid="uid://dt4impfdusiy" path="res://scenes/farm/plants/plant_poppy.tscn" id="19_ukssx"]
 [ext_resource type="Script" path="res://scripts/World/PortalManager.cs" id="22_30gdq"]
 [ext_resource type="PackedScene" uid="uid://cb3o7u5viapx8" path="res://scenes/farm/plants/plant_wheat.tscn" id="22_i4jq8"]
-[ext_resource type="Texture2D" uid="uid://voyo1usb16uc" path="res://assets/sprites/items/item_potato_dead.png" id="22_q6anl"]
+[ext_resource type="Texture2D" uid="uid://cb3g46boedr3x" path="res://assets/sprites/items/item_potato_dead.png" id="22_q6anl"]
 [ext_resource type="PackedScene" uid="uid://dyq3ksvy2gwvv" path="res://scenes/world/bush.tscn" id="22_wxiqh"]
 [ext_resource type="PackedScene" uid="uid://bbia6yxwghu3o" path="res://scenes/farm/plants/plant_lupine.tscn" id="23_5yyo7"]
 [ext_resource type="PackedScene" uid="uid://btmwjcvssjjf7" path="res://scenes/world/copper_ore.tscn" id="25_0xvqf"]
-[ext_resource type="Texture2D" uid="uid://bfn22gqwoaqbt" path="res://assets/sprites/tiles/farm_tile.png" id="26_adjto"]
+[ext_resource type="Texture2D" uid="uid://bsvydtv7ujwkm" path="res://assets/sprites/tiles/farm_tile.png" id="26_adjto"]
 [ext_resource type="PackedScene" uid="uid://dn2v4uxpv2gx6" path="res://scenes/world/iron_ore.tscn" id="26_o2yuj"]
 [ext_resource type="Texture2D" uid="uid://b0dlu5nexmss2" path="res://assets/sprites/tiles/grass_tile.png" id="27_4ir3q"]
-[ext_resource type="Texture2D" uid="uid://b644tsyidu1bm" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="28_w6780"]
+[ext_resource type="Texture2D" uid="uid://b8pq04xnqet8c" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="28_w6780"]
 [ext_resource type="PackedScene" uid="uid://ca4ui8y2u11io" path="res://scenes/world/cave_entrance.tscn" id="31_ekk8c"]
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="32_ug637"]
 [ext_resource type="Texture2D" uid="uid://dbgwlhprokvwi" path="res://assets/sprites/tiles/Dirt_tile.png" id="33_f0032"]
 [ext_resource type="Resource" uid="uid://bs6otct5awtuy" path="res://TinoTests/Resources/rock.tres" id="33_ubvr4"]
-[ext_resource type="Texture2D" uid="uid://cyfgc82fwo01k" path="res://assets/sprites/foliage/mini_tree_dead.png" id="34_guo8f"]
+[ext_resource type="Texture2D" uid="uid://dqqxryordqsk6" path="res://assets/sprites/foliage/mini_tree_dead.png" id="34_guo8f"]
 [ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="34_rgojr"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="35_twoo1"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="36_cmwu4"]
@@ -58,16 +58,16 @@
 [ext_resource type="Texture2D" uid="uid://by8gdsj0sfnja" path="res://assets/sprites/tiles/Burnt_grass_tile.png" id="38_fuoah"]
 [ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="44_kwisk"]
 [ext_resource type="Texture2D" uid="uid://bf0kk4xsi7048" path="res://assets/sprites/tiles/Dirt_rocks_tile.png" id="45_318bl"]
-[ext_resource type="PackedScene" uid="uid://wwf7rdwowll5" path="res://scenes/Quest/QuestPointManager.tscn" id="50_slwxb"]
-[ext_resource type="PackedScene" uid="uid://7r2mskqdc0va" path="res://scenes/Quest/QuestPoint.tscn" id="51_qxy2i"]
+[ext_resource type="PackedScene" uid="uid://wwf7rdwowll5" path="res://scenes/quest/QuestPointManager.tscn" id="50_slwxb"]
+[ext_resource type="PackedScene" uid="uid://7r2mskqdc0va" path="res://scenes/quest/QuestPoint.tscn" id="51_qxy2i"]
 [ext_resource type="PackedScene" uid="uid://72r5f8oc60kk" path="res://scenes/world/tree_birch2.tscn" id="52_ly26v"]
 [ext_resource type="PackedScene" uid="uid://bsrw4dwjp2lkb" path="res://scenes/world/tree_birch.tscn" id="53_awb1e"]
 [ext_resource type="PackedScene" uid="uid://4awyyd7jsaqq" path="res://scenes/farm/plants/plant_maize.tscn" id="61_mh8tx"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6nrqm"]
-vertices = PackedVector2Array(-5915, -3296, 11376, -3284, 11088, 5826, -6173, 5826)
+vertices = PackedVector2Array(-8520, -4112, 7992, -4080, 8096, 4360, -8488, 4224)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-5915, -3296, 11376, -3284, 11088, 5826, -6173, 5826)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8520, -4112, 7992, -4080, 8096, 4360, -8488, 4224)])
 
 [sub_resource type="Gradient" id="Gradient_ksvwj"]
 offsets = PackedFloat32Array(0, 0.528169)
@@ -190,7 +190,6 @@ _caveBlockage = NodePath("Objects/Foliage/Cave/CaveBlockage")
 unique_name_in_owner = true
 
 [node name="Region" parent="NavigationManager" index="0"]
-position = Vector2(-3007, -1088)
 navigation_polygon = SubResource("NavigationPolygon_6nrqm")
 
 [node name="VillagerManager" parent="." instance=ExtResource("3_qlutx")]
@@ -216,8 +215,7 @@ scale = Vector2(1, 1)
 scale = Vector2(0.999998, 0.999998)
 
 [node name="Sprite2D" parent="Objects/Player/Skeleton2D/TorsoBone/ArmLBone" index="0"]
-position = Vector2(4.06, 13.2998)
-scale = Vector2(1, 1)
+position = Vector2(4.05988, 13.3003)
 
 [node name="HeadBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="4"]
 scale = Vector2(0.999997, 0.999997)

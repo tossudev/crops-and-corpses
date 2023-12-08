@@ -17,19 +17,6 @@ public static class StorageData
         await Task.Delay(1000);
         if (SaveData.organizedPlayerInventory.Any(item => item != null)) return;
         
-        Item log = ItemData.GetItemById(0);
-        await PlayerInventoryController.AddItemToInventory(
-            new RawInventoryItem(log.ID, log.Name, 20, log.StackSize));
-        
-        
-        Item iron = ItemData.GetItemById(1);
-        await PlayerInventoryController.AddItemToInventory(
-            new RawInventoryItem(iron.ID, iron.Name, 20, iron.StackSize));
-        
-        Item curePotion = ItemData.GetItemById(300);
-        await PlayerInventoryController.AddItemToInventory(
-            new RawInventoryItem(curePotion.ID, curePotion.Name, 15, curePotion.StackSize));
-        
         AddDefaultResourceToHotbar(150, 1);
         AddDefaultResourceToHotbar(350, 1);
         AddDefaultResourceToHotbar(360, 1);

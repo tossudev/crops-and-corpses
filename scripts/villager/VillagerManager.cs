@@ -80,11 +80,6 @@ public partial class VillagerManager : Node2D
 				SpawnExistingVillager(villagerRawData);
 			}
 		}
-		
-		bool test;
-		Vector2 spawnCoordinates = new Vector2(0, 0);
-		test = SpawnNewVillager(spawnCoordinates);
-		test = SpawnNewVillager(spawnCoordinates);
 	}
 
 	public VillagerRawData AddNewVillagerRawData(bool intoTown = false)

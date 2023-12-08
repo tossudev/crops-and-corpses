@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=6 format=3 uid="uid://dkln62c0vsgk8"]
 
-[ext_resource type="Texture2D" uid="uid://dtpoap2v2we63" path="res://assets/sprites/items/bread.png" id="1_htsaw"]
+[ext_resource type="Texture2D" uid="uid://dshc2eef1thhh" path="res://assets/sprites/items/bread.png" id="1_htsaw"]
 [ext_resource type="Resource" uid="uid://dt5r6o5ibel3e" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/107_wheat.tres" id="2_src1d"]
 [ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_6bnbm"]
 [ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="4_moaog"]

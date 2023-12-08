@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://di5l0mrx44owj" path="res://scenes/buildings/town/town_hall/town_hall_menu.tscn" id="2_d0ykg"]
 [ext_resource type="PackedScene" uid="uid://c1r6la2nplhqp" path="res://scenes/ui/DayCounterLabel.tscn" id="3_bmooi"]
 [ext_resource type="PackedScene" uid="uid://bsoen384q11gf" path="res://scenes/ui/building_menu.tscn" id="5_om3g0"]
-[ext_resource type="PackedScene" uid="uid://dmr1ik7ojfwn5" path="res://scenes/Quest/QuestBoardUi.tscn" id="6_8vyk0"]
+[ext_resource type="PackedScene" uid="uid://dmr1ik7ojfwn5" path="res://scenes/quest/QuestBoardUi.tscn" id="6_8vyk0"]
 [ext_resource type="PackedScene" uid="uid://b50blftb1dypc" path="res://scenes/ui/player/player_hud.tscn" id="7_hs5fm"]
 [ext_resource type="Script" path="res://scripts/ui/overlay/HourCounter.cs" id="8_6k6a4"]
 [ext_resource type="PackedScene" uid="uid://c60n4vmc8f5pw" path="res://scenes/ui/villager_control_panel.tscn" id="10_d7eqe"]
@@ -14,42 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://cg3cohpsevwgr" path="res://scenes/ui/end_screen.tscn" id="12_ocn6t"]
 
 [node name="Overlay" type="CanvasLayer"]
-
-[node name="TestInfo" type="Label" parent="."]
-visible = false
-offset_left = 8.0
-offset_top = 4.0
-offset_right = 960.0
-offset_bottom = 100.0
-theme_override_font_sizes/font_size = 32
-text = "Press 'E' to toggle inventory"
-
-[node name="Building tip" type="Label" parent="TestInfo"]
-layout_mode = 0
-offset_top = 44.0
-offset_right = 952.0
-offset_bottom = 140.0
-scale = Vector2(0.95, 0.95)
-theme_override_font_sizes/font_size = 32
-text = "Press 'V' to open Build menu"
-
-[node name="crafting tip" type="Label" parent="TestInfo/Building tip"]
-layout_mode = 0
-offset_top = 50.5263
-offset_right = 952.0
-offset_bottom = 146.526
-scale = Vector2(0.9, 0.9)
-theme_override_font_sizes/font_size = 32
-text = "Press 'Q' to toggle Crafting"
-
-[node name="crafting tip2" type="Label" parent="TestInfo/Building tip/crafting tip"]
-layout_mode = 0
-offset_top = 44.4445
-offset_right = 952.0
-offset_bottom = 140.444
-scale = Vector2(0.9, 0.9)
-theme_override_font_sizes/font_size = 32
-text = "Press 'J' to toggle Quest"
 
 [node name="TownHallStatsPanel" parent="." instance=ExtResource("1_vgihe")]
 mouse_filter = 2
@@ -76,8 +40,10 @@ offset_bottom = 768.0
 mouse_filter = 2
 
 [node name="BuildingMenu" parent="." instance=ExtResource("5_om3g0")]
-offset_top = 40.0
-offset_bottom = 80.0
+offset_left = 0.0
+offset_top = 100.0
+offset_right = 40.0
+offset_bottom = 140.0
 mouse_filter = 2
 
 [node name="HourCounterLabel" parent="." instance=ExtResource("3_bmooi")]

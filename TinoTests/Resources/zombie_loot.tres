@@ -10,7 +10,7 @@
 [ext_resource type="Resource" uid="uid://ctt564su20h2f" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/110_lupine_seed.tres" id="7_4aubg"]
 [ext_resource type="Resource" uid="uid://be88krv16kuqn" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/112_poppy_seed.tres" id="8_bgjo5"]
 [ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="9_61lje"]
-[ext_resource type="Resource" uid="uid://bv7vupb8k6yua" path="res://assets/resources/game_items/resource_items_0_to_99/5_stone.tres" id="10_rn7pw"]
+[ext_resource type="Resource" path="res://assets/resources/game_items/resource_items_0_to_99/5_stone.tres" id="10_rn7pw"]
 
 [sub_resource type="Resource" id="Resource_pb26f"]
 script = ExtResource("2_qn8qa")

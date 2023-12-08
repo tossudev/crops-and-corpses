@@ -1,11 +1,11 @@
 [gd_resource type="TileSet" load_steps=16 format=3 uid="uid://dajdby7nadxkd"]
 
 [ext_resource type="Texture2D" uid="uid://b0dlu5nexmss2" path="res://assets/sprites/tiles/grass_tile.png" id="1_8vy6i"]
-[ext_resource type="Texture2D" uid="uid://b2lompksqm4yr" path="res://assets/sprites/tiles/grass_corner_tile6.png" id="2_k4dor"]
-[ext_resource type="Texture2D" uid="uid://bn7env81bgx0u" path="res://assets/sprites/tiles/grass_corner_tile7.png" id="3_62ogh"]
+[ext_resource type="Texture2D" uid="uid://65vtecbdteyv" path="res://assets/sprites/tiles/grass_corner_tile6.png" id="2_k4dor"]
+[ext_resource type="Texture2D" uid="uid://db6vx5gu2isqf" path="res://assets/sprites/tiles/grass_corner_tile7.png" id="3_62ogh"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="3_fanbg"]
-[ext_resource type="Texture2D" uid="uid://b644tsyidu1bm" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="4_h6a7m"]
-[ext_resource type="Texture2D" uid="uid://cwjlgacud2xba" path="res://assets/sprites/tiles/grass_corner_tile8.png" id="5_deaio"]
+[ext_resource type="Texture2D" uid="uid://b8pq04xnqet8c" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="4_h6a7m"]
+[ext_resource type="Texture2D" uid="uid://do67fkvjtufsq" path="res://assets/sprites/tiles/grass_corner_tile8.png" id="5_deaio"]
 [ext_resource type="Texture2D" uid="uid://n8iftcgk0ti0" path="res://assets/sprites/tiles/Sand_tile.png" id="7_ll0no"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgoqj"]

@@ -37,9 +37,15 @@ public partial class AudioController : Node {
     }
 
 
+
+
     public override void _Process(double delta) {
         base._Process(delta);
-        PlayBackground();
+
+        if (TownManager.EveryXSecond(5))
+        {
+            PlayBackground();
+        }
     }
 
 

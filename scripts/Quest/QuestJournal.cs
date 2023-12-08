@@ -58,6 +58,6 @@ public partial class QuestJournal : Control
 		if (DistanceTextLabel == null) return;
 		DistanceTextLabel.Visible = distance != 0; 
 		
-		DistanceTextLabel.Text = $"Distance to mission area : {distance}m";
+		DistanceTextLabel.Text = $"Distance to mission area : {distance / 8}m";
 	}
 }

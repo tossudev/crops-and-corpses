@@ -48,10 +48,14 @@ public static class SceneManager
 
         await TaskExtensions.SuspendWhile(() => NavigationManager.bakeInProgress);
         CommitSceneChange(caller, scene);
+
+        await TaskExtensions.SuspendWhile(() => _sceneChange == Error.Ok);
         
         sceneChanging = false;
+        sceneChanged = true;
     }
 
+    static Error _sceneChange;
     static void CommitSceneChange(Node caller, Scene.RootScene scene)
     {
         if (IsCurrentScene(caller, Scene.Town))
@@ -59,15 +63,10 @@ public static class SceneManager
             BuildingMenu.buildMenu?.SaveBuildings();
         }
 
-        PlayerController player;
-        player = caller.GetTree().GetFirstNodeInGroup("player") as PlayerController;
-        player.SaveState();
+        var player = caller.GetTree().GetFirstNodeInGroup("player") as PlayerController;
+        player?.SaveState();
 
         SaveData.SyncAll();
-        caller.GetTree().ChangeSceneToFile(scene.Path);
-        sceneChanged = true;
-
-        _audioController = caller.GetNode<Node>("/root/Audio") as AudioController;
-        _audioController.PlayBackground();
+        _sceneChange = caller.GetTree().ChangeSceneToFile(scene.Path);
     }
 }

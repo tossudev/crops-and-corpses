@@ -65,6 +65,9 @@ public partial class Plant : Node2D
 
 	[Export] Item _harvestablePlant;
 	[Export] Item _seed;
+
+	[Export] bool _isDead;
+	[Export] bool _flipX;
 	#endregion
 	
 	#region variables for growing
@@ -107,18 +110,31 @@ public partial class Plant : Node2D
 	}
 
 	void InitializePlant(){
-
+		
+		Random random = new Random();
+        int randomNumber = random.Next(1, 3);
+		if(randomNumber==1){
+			GetNode<TextureRect>("%TextureRect").FlipH =true;
+		}
+		
 		_col = GetNode<Area2D>("%Area2D");
 		trect = GetNode<TextureRect>("%TextureRect");
-		if(myField==null){
+		if(myField==null && !_isDead){
 			GetNode<TextureRect>("%TextureRect").Texture = _plantTexture;
 			_state = GrowthState.IsHarvestable;
 			GetNode<TextureRect>("%TextureRect").Size= new Vector2(96, 96);
-			if(_plantType == PlantType.Lupine) {
+			if(_plantType == PlantType.Lupine || _plantType == PlantType.Maize) {
 					GetNode<TextureRect>("%TextureRect").ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
 			} 
-		
 			
+			return;
+		}else if(myField==null && _isDead){
+			GetNode<TextureRect>("%TextureRect").Texture = _deadTexture;
+			_state = GrowthState.IsDead;
+			GetNode<TextureRect>("%TextureRect").Size= new Vector2(96, 96);
+			if(_plantType == PlantType.Lupine || _plantType == PlantType.Maize) {
+					GetNode<TextureRect>("%TextureRect").ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
+			} 
 			return;
 		}
 		Position = new Vector2(0, -5);
@@ -174,7 +190,7 @@ public partial class Plant : Node2D
 
         PlantState();
 
-		if (_plantType == PlantType.Lupine)
+		if (_plantType == PlantType.Lupine || _plantType == PlantType.Maize)
 		{
 			GetNode<TextureRect>("%TextureRect").ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
 		}
@@ -303,7 +319,7 @@ public partial class Plant : Node2D
 	}
 	void EvolvePlant(){
 
-        if (_plantType == PlantType.Lupine)
+        if (_plantType == PlantType.Lupine || _plantType == PlantType.Maize)
         {
             GetNode<TextureRect>("%TextureRect").ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
 			Position = new Vector2(0, -25);
@@ -335,7 +351,7 @@ public partial class Plant : Node2D
 
 	public void Die(){
 
-		 if (_plantType == PlantType.Lupine)
+		 if (_plantType == PlantType.Lupine || _plantType == PlantType.Maize)
         {
             GetNode<TextureRect>("%TextureRect").ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
 			Position = new Vector2(0, -25);

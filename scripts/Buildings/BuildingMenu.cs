@@ -256,8 +256,6 @@ public partial class BuildingMenu : Control
 
                 if (node.FindChild("plant_slot").GetChildCount() > 0)
                 {
-                    //plantName = node.FindChild("plant_slot").GetChild(0).Name;
-
                     Plant plant = node.FindChild("plant_slot").GetChild(0) as Plant;
                     growthTime = plant.currentGrowthTime;
 
@@ -505,6 +503,7 @@ public partial class BuildingMenu : Control
             HealthComponent _healthComponent = _buildingScene.GetNode("%HealthComponent") as HealthComponent;
             _healthComponent.SetHealth(_healthComponent.GetMaxHealth());
         }
+        SaveBuildings();
     }
 
     private void BuildingMode()

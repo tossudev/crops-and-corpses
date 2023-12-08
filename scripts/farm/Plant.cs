@@ -348,6 +348,10 @@ public partial class Plant : Node2D
 
 			RawInventoryItem seed = new RawInventoryItem(_seed.ID, _seed.Name, 1, _seed.StackSize);
 			await PlayerInventoryController.AddItemToHotbarOrInventory(seed);
+
+			if(_plantType == PlantType.Maize || _plantType == PlantType.Mushroom) TownManager.GainExp(ExpGain.HARVEST_LEGENDARY);
+			else if(_plantType == PlantType.Lupine || _plantType == PlantType.Poppy) TownManager.GainExp(ExpGain.HARVEST_RARE);
+			else TownManager.GainExp(ExpGain.HARVEST_COMMON);
 		}else if(_state == GrowthState.IsDead){
 			GD.Print("Cleared plant: "+plantName);
 		}

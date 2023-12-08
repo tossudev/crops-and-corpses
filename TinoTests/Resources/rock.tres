@@ -13,3 +13,4 @@ quantity = 4
 script = ExtResource("4_nj5ww")
 lootItems = [SubResource("Resource_qty7m")]
 meanDrop = 4
+expGain = 5

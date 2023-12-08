@@ -1,20 +1,7 @@
-[gd_resource type="Resource" script_class="Item" load_steps=8 format=3 uid="uid://di3mqk8b3d2ke"]
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://di3mqk8b3d2ke"]
 
-[ext_resource type="Texture2D" uid="uid://dj2sgrjy7gpy6" path="res://assets/sprites/items/item_copper_sword2.png" id="1_hdfge"]
-[ext_resource type="Resource" uid="uid://wwrmxi0srnix" path="res://assets/resources/game_items/resource_items_0_to_99/0_log.tres" id="2_jn5ha"]
-[ext_resource type="Script" path="res://scripts/resource_classes/CraftingRequirement.cs" id="3_jwmsd"]
-[ext_resource type="Resource" uid="uid://bofkpec0ir7h3" path="res://assets/resources/game_items/resource_items_0_to_99/2_copper.tres" id="4_8ufaa"]
+[ext_resource type="Texture2D" uid="uid://nkqhv6fai4nk" path="res://assets/sprites/items/item_copper_sword2.png" id="1_hdfge"]
 [ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="5_k6fin"]
-
-[sub_resource type="Resource" id="Resource_8d7he"]
-script = ExtResource("3_jwmsd")
-item = ExtResource("2_jn5ha")
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_xkag0"]
-script = ExtResource("3_jwmsd")
-item = ExtResource("4_8ufaa")
-quantity = 3
 
 [resource]
 script = ExtResource("5_k6fin")
@@ -22,4 +9,4 @@ ID = 150
 Name = "Copper Sword"
 IconTexture = ExtResource("1_hdfge")
 StackSize = 1
-craftingRequirements = Array[Object]([SubResource("Resource_8d7he"), SubResource("Resource_xkag0")])
+craftingRequirements = Array[Object]([])

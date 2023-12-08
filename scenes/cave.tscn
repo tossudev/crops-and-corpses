@@ -152,192 +152,360 @@ y_sort_enabled = true
 
 [node name="Iron Ore" parent="Objects/Breakable/Iron Ore" instance=ExtResource("4_7yixc")]
 position = Vector2(58, 1738)
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore2" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(-1739, 1517)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore3" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(-1635, 1705)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore4" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(6555, 6455)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore5" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(6674, 5991)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore6" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(6118, 5608)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore7" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(1672, -890)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore8" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(-1906, -296)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore9" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(-1141, -1147)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore10" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(-1533, -4109)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore11" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(-3706, -3353)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore12" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(3193, -6010)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore13" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(-2825, -7173)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore14" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(-1992, -6460)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore15" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(-5886, -4860)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore16" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(-3192, -30)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore17" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(-3187, -1172)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore18" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(-8058, 889)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore19" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(-7540, 2400)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore20" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(-8200, -7802)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Iron Ore21" parent="Objects/Breakable/Iron Ore" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("4_7yixc")]
 position = Vector2(-9887, -8189)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore" type="Node2D" parent="Objects/Breakable"]
 y_sort_enabled = true
 
 [node name="Copper Ore" parent="Objects/Breakable/Copper Ore" instance=ExtResource("6_7ms7p")]
 position = Vector2(5950, 574)
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore2" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(6151, 695)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore3" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(3485, 3144)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore4" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(3710, 3249)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore5" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(1994, 4047)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore6" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(-5112, 3974)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore7" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(-5499, 4600)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore8" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(-4089, 4477)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore9" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(-770, 6709)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore10" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(790, 6204)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore11" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(10, 7413)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore12" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(-515, -649)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore13" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(-2716, -4100)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore14" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(3218, -4513)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore15" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(-1492, -6416)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore16" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(-6140, -3797)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore17" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(-3737, -756)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore18" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(-8701, 1901)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore19" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(-9735, -6416)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore20" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(-10218, -7433)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Copper Ore21" parent="Objects/Breakable/Copper Ore" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("6_7ms7p")]
 position = Vector2(-9273, -7242)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
+_color = Color(0.670588, 0.490196, 0.415686, 1)
+_minBrightness = 0.5
+_rotationVariation = 5
+_scaleVariation = 0.25
 
 [node name="Coal Ore" type="Node2D" parent="Objects/Breakable"]
 y_sort_enabled = true
@@ -1794,6 +1962,7 @@ _flipVariation = false
 _fallingTreeBridge = NodePath("../Bridge")
 
 [node name="Sprite2D" type="Sprite2D" parent="Objects/Breakable/BridgeStalagmite"]
+position = Vector2(2.08165e-12, 2.08165e-12)
 rotation = 3.14159
 scale = Vector2(0.636183, 0.75)
 texture = ExtResource("10_gfyjh")
@@ -1951,6 +2120,7 @@ position = Vector2(-6464, -4400)
 position = Vector2(-3792, -1048)
 
 [node name="Timer" type="Timer" parent="ZombieSpawn"]
+wait_time = 5.0
 autostart = true
 
 [node name="ZombieDeletionTimer" type="Timer" parent="ZombieSpawn"]
@@ -2129,6 +2299,7 @@ position = Vector2(2258, -3751)
 _audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.121569, 0.121569, 0.121569, 1)
 
 [node name="QuestPointManager" parent="." instance=ExtResource("25_n2sk6")]

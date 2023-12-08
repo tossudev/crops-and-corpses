@@ -61,6 +61,8 @@ public partial class HandheldController : Node2D
             _weapon = _hand;
 
         _dynamicSprite.Texture = null;
+        _toolSprite.Texture = null;
+        _toolSprite.RotationDegrees = 0;
 
         _damage = _weapon.damage;
         _knockback = _weapon.knockback;
@@ -79,7 +81,6 @@ public partial class HandheldController : Node2D
         if (_ranged)
         {
             _hitbox.Monitoring = false;
-            _toolSprite.Texture = null;
         }
         else
         {
@@ -136,6 +137,7 @@ public partial class HandheldController : Node2D
         if (_timer.TimeLeft <= 0)
         {
             _player.stopMovement = false;
+
             if (!_ranged)
                 _skeleton.usingTool = false;
         }
@@ -242,8 +244,6 @@ public partial class HandheldController : Node2D
         _player.stopMovement = false;
         _staminaComponent.canDrain = false;
 
-        _skeleton.usingTool = false;
-
         if (_ranged)
         {
             ReleaseDraw();
@@ -252,6 +252,8 @@ public partial class HandheldController : Node2D
 
     public void ReleaseDraw()
     {
+        _skeleton.usingTool = false;
+
         if (!isDrawing)
             return;
 

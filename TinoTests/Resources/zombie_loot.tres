@@ -61,3 +61,4 @@ quantity = 1
 script = ExtResource("3_n4uu4")
 lootItems = [SubResource("Resource_pb26f"), SubResource("Resource_ppum6"), SubResource("Resource_tt5yo"), SubResource("Resource_e0v13"), SubResource("Resource_rlg73"), SubResource("Resource_gk8qw"), SubResource("Resource_gk4qx"), SubResource("Resource_upmgd"), SubResource("Resource_3ocyw")]
 meanDrop = 1
+expGain = 5

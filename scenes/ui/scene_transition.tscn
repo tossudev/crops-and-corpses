@@ -9,7 +9,7 @@ tracks/0/path = NodePath("SceneTransition/ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 1),
+"times": PackedFloat32Array(0, 0.3, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
@@ -67,8 +67,6 @@ libraries = {
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 100
-offset_left = -5e+07
-offset_top = -5e+07
-offset_right = 5e+07
-offset_bottom = 5e+07
-color = Color(0, 0, 0, 0)
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)

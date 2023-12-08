@@ -8,7 +8,8 @@ public partial class ruins : Node2D
 
 	public override void _Ready()
 	{
-		_sceneTransition = GetNodeOrNull<AnimationPlayer>("%SceneTransition");
+		PlayerController player = GetTree().GetFirstNodeInGroup("player") as PlayerController;
+		_sceneTransition = player.GetNode<CanvasLayer>("%PlayerOverlay").GetNode<AnimationPlayer>("%SceneTransition");
 		_sceneTransition.SpeedScale = 0.75f;
 		_sceneTransition?.Play("fade_in");
 

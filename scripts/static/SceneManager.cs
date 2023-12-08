@@ -44,16 +44,14 @@ public static class SceneManager
 
     public static async void ChangeScene(Node caller, Scene.RootScene scene)
     {
-        sceneChanging = true;
-
         var player = caller.GetTree().GetFirstNodeInGroup("player") as PlayerController;
-        player.GetNodeOrNull<CanvasLayer>("%PlayerOverlay").Visible = false;
-
-        var sceneTransition = _currentRootScene.GetNode<AnimationPlayer>("%SceneTransition");
+        var sceneTransition = player.GetNode<CanvasLayer>("%PlayerOverlay").GetNode<AnimationPlayer>("%SceneTransition");
         sceneTransition.SpeedScale = 2;
         sceneTransition?.Play("fade_out");
 
         await TaskExtensions.SuspendWhile(() => sceneTransition.IsPlaying());
+
+        sceneChanging = true;
 
         await TaskExtensions.SuspendWhile(() => NavigationManager.bakeInProgress);
         CommitSceneChange(caller, scene);

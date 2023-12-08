@@ -162,6 +162,9 @@ public partial class QuestBoardUi : Control
         _forestButton.Visible = false;
         _ruinsButton.Visible = false;
         _caveButton.Visible = false;
+        Dif1Button.Visible = false;
+        Dif2Button.Visible = false;
+        Dif3Button.Visible = false;
 
         if (quest != null)
         {
@@ -179,6 +182,9 @@ public partial class QuestBoardUi : Control
         _forestButton.Visible = true;
         _ruinsButton.Visible = true;
         _caveButton.Visible = true;
+        Dif1Button.Visible = true;
+        Dif2Button.Visible = true;
+        Dif3Button.Visible = true;
         questStatusText.Text = "Select a difficulty and then a location to start a new Quest";
     }
 }

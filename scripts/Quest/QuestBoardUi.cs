@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Linq;
 
 public partial class QuestBoardUi : Control
 {
@@ -160,7 +159,7 @@ public partial class QuestBoardUi : Control
         }
         Visible = true;
         SetLevelsActive();
-    }
+}
        
 
     public int GetSelectedDifficulty()
@@ -173,28 +172,21 @@ public partial class QuestBoardUi : Control
     {
         var quest = PlayerInfo.GetActiveQuest();
 
-        if (SaveData.allVillagerRawData.Count(data => data.isTownPopulation) < TownManager.currentTownStats.populationCap)
-        {
-            if (quest != null)
-            {
-                _forestButton.Visible = false;
-                _ruinsButton.Visible = false;
-                _caveButton.Visible = false;
-            }
-            else
-            {
-                _forestButton.Visible = true;
-                _ruinsButton.Visible = true;
-                _caveButton.Visible = true;
-            }
-        }
-        else
+        if (quest != null)
         {
             _forestButton.Visible = false;
             _ruinsButton.Visible = false;
             _caveButton.Visible = false;
+            Dif1Button.Visible = false;
+            Dif2Button.Visible = false;
+            Dif3Button.Visible = false;
         }
-
-
+        else
+        {
+            _forestButton.Visible = true;
+            _ruinsButton.Visible = true;
+            _caveButton.Visible = true;
+        }
+        
     }
 }

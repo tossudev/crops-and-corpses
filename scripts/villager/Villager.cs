@@ -205,7 +205,7 @@ public partial class Villager : CharacterBody2D
 
 		if (!(quest?.HasStage(QuestStage.Find) ?? false)) return;
 		
-		if (quest.stages.Contains(QuestStage.Kill)) return;
+		if (quest.HasStage(QuestStage.Kill)) return;
 		
 		if (!quest.CompleteQuestStage(QuestStage.Rescue)) return;
 		quest.ChangeQuestDescription("Take the villager to Street Sign");

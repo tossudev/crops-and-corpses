@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cb3o7u5viapx8"]
+[gd_scene load_steps=8 format=3 uid="uid://cb3o7u5viapx8"]
 
 [ext_resource type="Script" path="res://scripts/farm/Plant.cs" id="1_6sli3"]
 [ext_resource type="Texture2D" uid="uid://1hy2fgku6jg4" path="res://assets/sprites/Farm sprites/hay_dead.png" id="2_vsc68"]
@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://dt5r6o5ibel3e" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/107_wheat.tres" id="5_2mson"]
 [ext_resource type="Shape2D" uid="uid://drxjqm142wxqv" path="res://scenes/farm/shapes/plant_shape.tres" id="5_gd24g"]
 [ext_resource type="Resource" uid="uid://7a8gf2arabq3" path="res://assets/resources/game_items/farm_and_herb_items_100_to_149/106_wheat_seed.tres" id="6_h4s0w"]
-[ext_resource type="Texture2D" uid="uid://dqgscu3bl0gng" path="res://assets/sprites/items/item_pumpkin.png" id="7_twm35"]
 
 [node name="plant_wheat" type="Node2D" node_paths=PackedStringArray("_col", "trect")]
 script = ExtResource("1_6sli3")
@@ -45,7 +44,7 @@ offset_right = 24.0
 offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7_twm35")
+texture = ExtResource("4_rwnoo")
 expand_mode = 2
 
 [connection signal="area_entered" from="Area2D" to="." method="OnInteractable"]

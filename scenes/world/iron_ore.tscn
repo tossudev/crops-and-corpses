@@ -1,21 +1,21 @@
 [gd_scene load_steps=13 format=3 uid="uid://dn2v4uxpv2gx6"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_5m8pk"]
-[ext_resource type="Resource" uid="uid://3csk1j4ap4h8" path="res://TinoTests/Resources/iron_ore.tres" id="2_x8kij"]
-[ext_resource type="AudioStream" uid="uid://4pjvi3sxlm02" path="res://assets/Sounds/character_sounds/rock_break.wav" id="3_ocxm8"]
-[ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_yp0f4"]
+[ext_resource type="Resource" uid="uid://bqdor0tg0upjq" path="res://TinoTests/Resources/iron_ore.tres" id="2_x8kij"]
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="4_6h704"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_a0d06"]
+[ext_resource type="Texture2D" uid="uid://c35swwgssfaob" path="res://assets/sprites/items/ore_iron_bottom.png" id="4_t7jma"]
+[ext_resource type="Texture2D" uid="uid://c3wyiggibxvcc" path="res://assets/sprites/items/ore_iron_overlay.png" id="5_4nkuq"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_yemw3"]
 [ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_tlo3i"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pn142"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0pao4"]
 radius = 85.9731
-height = 288.353
+height = 222.676
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgg0g"]
-radius = 57.9772
-height = 258.482
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m7ya1"]
+radius = 51.788
+height = 203.046
 
 [sub_resource type="Animation" id="Animation_ir0ao"]
 resource_name = "shake"
@@ -37,24 +37,28 @@ _data = {
 "shake": SubResource("Animation_ir0ao")
 }
 
-[node name="Iron Ore" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer")]
+[node name="Iron Ore" type="StaticBody2D" node_paths=PackedStringArray("_animationPlayer", "_sprite")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 collision_layer = 5
 script = ExtResource("1_5m8pk")
 loot = ExtResource("2_x8kij")
 _animationPlayer = NodePath("AnimationPlayer")
-_audio = ExtResource("3_ocxm8")
+_sprite = NodePath("Sprite2D")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.615686)
-position = Vector2(-1.39566, -43.2337)
-rotation = 2.87979
-scale = Vector2(5.00348, 2.35276)
+position = Vector2(-5, -47)
+scale = Vector2(4.56045, 2.35276)
 texture = ExtResource("4_6h704")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-5, -90)
-texture = ExtResource("3_yp0f4")
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_t7jma")
+
+[node name="Overlay" type="Sprite2D" parent="Sprite2D"]
+scale = Vector2(1, 1)
+texture = ExtResource("5_4nkuq")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("4_a0d06")]
 _parentScript = NodePath("..")
@@ -68,15 +72,15 @@ _parentScript = NodePath("..")
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(-7, -80)
-rotation = 1.25664
-shape = SubResource("CapsuleShape2D_pn142")
+position = Vector2(-7, -87)
+rotation = 1.39626
+shape = SubResource("CapsuleShape2D_0pao4")
 debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-8, -72)
-rotation = 1.25664
-shape = SubResource("CapsuleShape2D_wgg0g")
+position = Vector2(-0.999999, -66)
+rotation = 1.39626
+shape = SubResource("CapsuleShape2D_m7ya1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

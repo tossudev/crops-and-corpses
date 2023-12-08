@@ -10,9 +10,6 @@
 y_sort_enabled = true
 position = Vector2(64, 64)
 
-[node name="Node2D2" parent="." instance=ExtResource("1_et46p")]
-position = Vector2(-4992, 2560)
-
 [node name="_Node2D_13" parent="." instance=ExtResource("1_et46p")]
 position = Vector2(-4992, 2432)
 
@@ -129,9 +126,6 @@ position = Vector2(-4992, -2304)
 
 [node name="_Node2D_50" parent="." instance=ExtResource("1_et46p")]
 position = Vector2(-4992, -2432)
-
-[node name="Node2D" parent="." instance=ExtResource("3_ganuw")]
-position = Vector2(5120, 2560)
 
 [node name="_Node2D_51" parent="." instance=ExtResource("3_ganuw")]
 position = Vector2(5120, 2432)
@@ -273,9 +267,6 @@ position = Vector2(5120, -2833)
 
 [node name="_Node2D_254" parent="." instance=ExtResource("3_ganuw")]
 position = Vector2(5120, -2995)
-
-[node name="_Node2D_89" parent="." instance=ExtResource("5_1qmxa")]
-position = Vector2(5120, -3132)
 
 [node name="_Node2D_90" parent="." instance=ExtResource("5_1qmxa")]
 position = Vector2(4992, -3132)
@@ -510,9 +501,6 @@ position = Vector2(-4736, -3132)
 
 [node name="_Node2D_167" parent="." instance=ExtResource("5_1qmxa")]
 position = Vector2(-4864, -3132)
-
-[node name="_Node2D_168" parent="." instance=ExtResource("5_1qmxa")]
-position = Vector2(-4992, -3132)
 
 [node name="_Node2D_169" parent="." instance=ExtResource("5_1qmxa")]
 position = Vector2(5120, 2560)

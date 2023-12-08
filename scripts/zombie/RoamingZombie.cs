@@ -145,11 +145,14 @@ public partial class RoamingZombie : CharacterBody2D
 
 	private void AttackReceived(Attack attack)
 	{
-		if (IsQueuedForDeletion()) return;
 		var duration = 0.25f;
 		_knockback = attack.direction * attack.knockback;
-		var knockbackTween = GetTree().CreateTween();
-		knockbackTween.Parallel().TweenProperty(this, "_knockback", new Vector2(0, 0), duration);
+
+		if (!IsQueuedForDeletion())
+		{
+			var knockbackTween = GetTree().CreateTween();
+			knockbackTween.Parallel().TweenProperty(this, "_knockback", new Vector2(0, 0), duration);
+		}
 
 		/* GD.Print("2");
 		GD.Print(attack.effect); */
@@ -177,8 +180,8 @@ public partial class RoamingZombie : CharacterBody2D
 			ExpGain expGained = ZombieManager.type switch
 			{
 				ZombieManager.ZombieType.Weak => ExpGain.MEDIUM,
-				ZombieManager.ZombieType.Medium => ExpGain.VERY_BIG,
-				ZombieManager.ZombieType.Strong => ExpGain.BIG,
+				ZombieManager.ZombieType.Medium => ExpGain.BIG,
+				ZombieManager.ZombieType.Strong => ExpGain.VERY_BIG,
 				_ => throw new ArgumentOutOfRangeException()
 			};
 
@@ -313,7 +316,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 			RawInventoryItem dropItem = new RawInventoryItem(_items[randIndex].ID, _items[randIndex].Name, 1, _items[randIndex].StackSize);
 
-			Node2D droppedItem = PlayerInventoryController.CreateDroppedItem(dropItem, this.GlobalPosition, GetParent().GetParent());
+			PlayerInventoryController.CreateDroppedItem(dropItem, this.GlobalPosition, GetParent().GetParent());
 
 			_items.RemoveAt(randIndex);
 		}

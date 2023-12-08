@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://djv78bsvabyah"]
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://djv78bsvabyah"]
 
+[ext_resource type="Texture2D" uid="uid://dvs3nv7xno3eb" path="res://assets/sprites/Farm sprites/corn.png" id="1_7356r"]
 [ext_resource type="Script" path="res://scripts/resource_classes/Item.cs" id="1_v5q0h"]
 
 [resource]
 script = ExtResource("1_v5q0h")
 ID = 109
 Name = "Maize"
+IconTexture = ExtResource("1_7356r")
 StackSize = 8
 craftingRequirements = Array[Object]([])

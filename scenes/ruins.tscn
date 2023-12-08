@@ -1,10 +1,10 @@
-[gd_scene load_steps=74 format=3 uid="uid://c0o7irtwrvayp"]
+[gd_scene load_steps=82 format=3 uid="uid://c0o7irtwrvayp"]
 
 [ext_resource type="Script" path="res://scripts/ruins.cs" id="1_7gyha"]
 [ext_resource type="PackedScene" uid="uid://chw8bc0kxym0e" path="res://scenes/villager/villager_manager.tscn" id="3_qlutx"]
 [ext_resource type="PackedScene" uid="uid://dpdpfs2c2kwi5" path="res://scenes/world/lantern.tscn" id="4_61dbj"]
 [ext_resource type="PackedScene" uid="uid://b2gv07xesl7qm" path="res://scenes/buildings/town/house/house_broken.tscn" id="4_nfdnl"]
-[ext_resource type="Texture2D" uid="uid://d1hhwa4yl622" path="res://assets/sprites/items/lantern.png" id="5_x4a6q"]
+[ext_resource type="Texture2D" uid="uid://bpff0i3txuqnq" path="res://assets/sprites/items/lantern.png" id="5_x4a6q"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_xoqnb"]
 [ext_resource type="PackedScene" uid="uid://k1nr7tplu40i" path="res://scenes/spawn/ZombieSpawn.tscn" id="6_moakj"]
 [ext_resource type="Texture2D" uid="uid://q5wxg1if5hb8" path="res://assets/sprites/foliage/tree_2.png" id="6_rt25r"]
@@ -13,12 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="7_et7tw"]
 [ext_resource type="PackedScene" uid="uid://cy7sat3yii1r0" path="res://scenes/buildings/town/town_hall/town_hall_broken.tscn" id="7_kakyg"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="7_ms5xt"]
-[ext_resource type="PackedScene" path="res://RuinsFences.tscn" id="7_tvrd8"]
+[ext_resource type="PackedScene" uid="uid://cytr8qonqqv3a" path="res://RuinsFences.tscn" id="7_tvrd8"]
 [ext_resource type="PackedScene" uid="uid://ci1gujwgui8qr" path="res://scenes/buildings/town/large_house/large_house_broken.tscn" id="8_gaa8h"]
 [ext_resource type="PackedScene" uid="uid://bfgy4jnvcy7pk" path="res://scenes/zombie/Zombie.tscn" id="8_ovu31"]
 [ext_resource type="Texture2D" uid="uid://dnx1nfqxuhrm" path="res://assets/sprites/foliage/tree_3.png" id="8_pei51"]
 [ext_resource type="Script" path="res://scripts/farm/Well.cs" id="9_8bsgc"]
-[ext_resource type="Texture2D" uid="uid://c65p40wn5dqxw" path="res://assets/sprites/items/cross_church.png" id="9_lqrkj"]
+[ext_resource type="Texture2D" uid="uid://mnytodt7v2vt" path="res://assets/sprites/items/cross_church.png" id="9_lqrkj"]
 [ext_resource type="PackedScene" uid="uid://b4fyxjshjenvv" path="res://scenes/farm/plants/plant_potato.tscn" id="10_c8c0f"]
 [ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="10_p4imi"]
 [ext_resource type="PackedScene" uid="uid://disyt3fuu77je" path="res://scenes/buildings/fence_scenes/fence_west.tscn" id="11_3dwxc"]
@@ -30,40 +30,44 @@
 [ext_resource type="PackedScene" uid="uid://luqdfx7qh2jl" path="res://scenes/farm/plants/plant_pumpkin.tscn" id="12_w0m5s"]
 [ext_resource type="Shape2D" uid="uid://cexw2rv4qd6l6" path="res://scenes/farm/shapes/well_shape.tres" id="12_x0tbr"]
 [ext_resource type="TileSet" uid="uid://dajdby7nadxkd" path="res://assets/resources/tiles/ruins_collision_tiles.tres" id="14_yfo2u"]
-[ext_resource type="Texture2D" uid="uid://djhyomtxb2qta" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="15_0ox1s"]
+[ext_resource type="Texture2D" uid="uid://bnmhntukcdbp7" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="15_0ox1s"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="16_pefaa"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="16_s7swj"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="18_xu2jk"]
 [ext_resource type="PackedScene" uid="uid://du4tddxtyn51y" path="res://scenes/world/tree3.tscn" id="19_08txa"]
 [ext_resource type="PackedScene" uid="uid://dt4impfdusiy" path="res://scenes/farm/plants/plant_poppy.tscn" id="19_ukssx"]
-[ext_resource type="Texture2D" uid="uid://bc5ex2vn3s3j6" path="res://assets/sprites/items/item_poppy_dead.png" id="20_1wvwg"]
-[ext_resource type="Texture2D" uid="uid://o83f7fcgpuys" path="res://assets/sprites/items/item_pumpkin_dead.png" id="21_wawgo"]
 [ext_resource type="Script" path="res://scripts/World/PortalManager.cs" id="22_30gdq"]
 [ext_resource type="PackedScene" uid="uid://cb3o7u5viapx8" path="res://scenes/farm/plants/plant_wheat.tscn" id="22_i4jq8"]
-[ext_resource type="Texture2D" uid="uid://dru8nr667i2a" path="res://assets/sprites/items/item_potato_dead.png" id="22_q6anl"]
+[ext_resource type="Texture2D" uid="uid://voyo1usb16uc" path="res://assets/sprites/items/item_potato_dead.png" id="22_q6anl"]
 [ext_resource type="PackedScene" uid="uid://dyq3ksvy2gwvv" path="res://scenes/world/bush.tscn" id="22_wxiqh"]
 [ext_resource type="PackedScene" uid="uid://bbia6yxwghu3o" path="res://scenes/farm/plants/plant_lupine.tscn" id="23_5yyo7"]
 [ext_resource type="PackedScene" uid="uid://btmwjcvssjjf7" path="res://scenes/world/copper_ore.tscn" id="25_0xvqf"]
-[ext_resource type="Texture2D" uid="uid://clh7lf445p822" path="res://assets/sprites/tiles/farm_tile.png" id="26_adjto"]
+[ext_resource type="Texture2D" uid="uid://bfn22gqwoaqbt" path="res://assets/sprites/tiles/farm_tile.png" id="26_adjto"]
 [ext_resource type="PackedScene" uid="uid://dn2v4uxpv2gx6" path="res://scenes/world/iron_ore.tscn" id="26_o2yuj"]
 [ext_resource type="Texture2D" uid="uid://b0dlu5nexmss2" path="res://assets/sprites/tiles/grass_tile.png" id="27_4ir3q"]
-[ext_resource type="Texture2D" uid="uid://bsbicos3vjd27" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="28_w6780"]
+[ext_resource type="Texture2D" uid="uid://b644tsyidu1bm" path="res://assets/sprites/tiles/grass_corner_tile5.png" id="28_w6780"]
 [ext_resource type="PackedScene" uid="uid://ca4ui8y2u11io" path="res://scenes/world/cave_entrance.tscn" id="31_ekk8c"]
+[ext_resource type="Script" path="res://scripts/World/LootController.cs" id="32_ug637"]
 [ext_resource type="Texture2D" uid="uid://dbgwlhprokvwi" path="res://assets/sprites/tiles/Dirt_tile.png" id="33_f0032"]
-[ext_resource type="Texture2D" uid="uid://cjydhg8wj2ym2" path="res://assets/sprites/foliage/mini_tree_dead.png" id="34_guo8f"]
+[ext_resource type="Resource" uid="uid://bs6otct5awtuy" path="res://TinoTests/Resources/rock.tres" id="33_ubvr4"]
+[ext_resource type="Texture2D" uid="uid://cyfgc82fwo01k" path="res://assets/sprites/foliage/mini_tree_dead.png" id="34_guo8f"]
+[ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="34_rgojr"]
+[ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="35_twoo1"]
+[ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="36_cmwu4"]
 [ext_resource type="Texture2D" uid="uid://lcg5swlsccjt" path="res://assets/sprites/tiles/Burnt_grass2_tile.png" id="37_dijnp"]
 [ext_resource type="Texture2D" uid="uid://by8gdsj0sfnja" path="res://assets/sprites/tiles/Burnt_grass_tile.png" id="38_fuoah"]
 [ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="44_kwisk"]
 [ext_resource type="Texture2D" uid="uid://bf0kk4xsi7048" path="res://assets/sprites/tiles/Dirt_rocks_tile.png" id="45_318bl"]
 [ext_resource type="PackedScene" uid="uid://wwf7rdwowll5" path="res://scenes/Quest/QuestPointManager.tscn" id="50_slwxb"]
 [ext_resource type="PackedScene" uid="uid://7r2mskqdc0va" path="res://scenes/Quest/QuestPoint.tscn" id="51_qxy2i"]
-[ext_resource type="PackedScene" path="res://scenes/world/tree_birch2.tscn" id="52_ly26v"]
-[ext_resource type="PackedScene" path="res://scenes/world/tree_birch.tscn" id="53_awb1e"]
+[ext_resource type="PackedScene" uid="uid://72r5f8oc60kk" path="res://scenes/world/tree_birch2.tscn" id="52_ly26v"]
+[ext_resource type="PackedScene" uid="uid://bsrw4dwjp2lkb" path="res://scenes/world/tree_birch.tscn" id="53_awb1e"]
+[ext_resource type="PackedScene" uid="uid://4awyyd7jsaqq" path="res://scenes/farm/plants/plant_maize.tscn" id="61_mh8tx"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6nrqm"]
-vertices = PackedVector2Array(-4961, -2000, 9991, -2192, 10127, 4888, -5009, 4704)
+vertices = PackedVector2Array(-5915, -3296, 11376, -3284, 11088, 5826, -6173, 5826)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-4961, -2000, 9991, -2192, 10127, 4888, -5009, 4704)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-5915, -3296, 11376, -3284, 11088, 5826, -6173, 5826)])
 
 [sub_resource type="Gradient" id="Gradient_ksvwj"]
 offsets = PackedFloat32Array(0, 0.528169)
@@ -81,6 +85,34 @@ size = Vector2(368.167, 385.714)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3lwm8"]
 size = Vector2(48, 352)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pn142"]
+radius = 85.9731
+height = 288.353
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgg0g"]
+radius = 57.9772
+height = 258.482
+
+[sub_resource type="Animation" id="Animation_ir0ao"]
+resource_name = "shake"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-5, -90), Vector2(5, -90), Vector2(-5, -90)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x8yya"]
+_data = {
+"shake": SubResource("Animation_ir0ao")
+}
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ea2vc"]
 texture = ExtResource("5_xoqnb")
@@ -156,10 +188,9 @@ _caveBlockage = NodePath("Objects/Foliage/Cave/CaveBlockage")
 
 [node name="NavigationManager" parent="." instance=ExtResource("44_kwisk")]
 unique_name_in_owner = true
-visible = false
 
 [node name="Region" parent="NavigationManager" index="0"]
-position = Vector2(-2623, -1088)
+position = Vector2(-3007, -1088)
 navigation_polygon = SubResource("NavigationPolygon_6nrqm")
 
 [node name="VillagerManager" parent="." instance=ExtResource("3_qlutx")]
@@ -174,6 +205,10 @@ position = Vector2(288, 3528)
 _camera = NodePath("MainCamera")
 maxZoom = 12.0
 
+[node name="Skeleton2D" parent="Objects/Player" index="4"]
+headSprite = null
+backHeadSprite = null
+
 [node name="LegLBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="0"]
 scale = Vector2(1, 1)
 
@@ -181,7 +216,7 @@ scale = Vector2(1, 1)
 scale = Vector2(0.999998, 0.999998)
 
 [node name="Sprite2D" parent="Objects/Player/Skeleton2D/TorsoBone/ArmLBone" index="0"]
-position = Vector2(4.06, 13.2998)
+position = Vector2(4.06, 13.3003)
 scale = Vector2(1, 1)
 
 [node name="HeadBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="4"]
@@ -702,366 +737,439 @@ script = ExtResource("7_ms5xt")
 [node name="Zombie" parent="Objects/ZombieSpawn/Enemies" instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-88.0001, 624)
+loot = null
 
 [node name="Zombie2" parent="Objects/ZombieSpawn/Enemies" instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-3552, -2)
+loot = null
 
 [node name="Zombie3" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-589, 47)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie22" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-1568, -734)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie72" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-1424, -1292)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie73" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-677, -1737)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie23" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-1784, -2456)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie24" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-1632, -2240)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie25" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-864, -2664)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie26" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-2640, -2671)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie27" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-2233, -3154)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie28" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-2400, -1721)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie29" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-3856, -1134)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie30" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-2968, -1272)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie31" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-2412, -960)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie32" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-4832, -873)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie6" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-56.0001, -656)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie7" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(368, -336)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie8" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(920, -1001)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie9" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(1504, -1033)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie10" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(691, -1759)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie11" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(1539, -2312)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie12" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(2504, -2063)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie13" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(2702, -976)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie14" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(3221, -1291)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie15" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(3624, -636)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie40" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(6248, -2080)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie41" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(7160, -1236)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie42" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(5792, 532)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie43" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(7086, 456)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie44" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(6736, 2223)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie45" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(5920, 2760)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie46" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(6352, 3356)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie47" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(4819, 3408)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie48" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(4992, 3264)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie49" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(2328, 2784)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie50" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(1840, 2312)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie51" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-1656, 2424)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie52" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-2224, 3308)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie53" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-2832, 2792)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie54" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-5032, 3200)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie55" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-6040, 2593)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie56" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-7184, 2280)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie57" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-7277, 3232)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie58" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-7464, 1103)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie59" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-7056, 770)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie60" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-6496, 1177)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie61" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-5808, 640)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie62" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-6752, -183)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie63" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-7361, -1576)
 rotation = 1.0472
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie64" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-7432, -2590)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie65" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-6957, -2616)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie66" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-6488, -3120)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie67" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-5752, -2536)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie68" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-4320, -3216)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie69" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-3872, -2296)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie70" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-4800, -1988)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie71" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-5720, -1177)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie16" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(3344, 144)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie17" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(2879, 672)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie18" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(2560, 1096)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie19" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(3440, 1458)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie20" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(464, 488)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie21" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(880, 285)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie4" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-2960, -425)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie5" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-2800, 186)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie33" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-2432, 1476)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie34" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-1648, 1224)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie35" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-1120, 1378)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie36" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-681, 875)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie37" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(-312, 1330)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie38" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(1456, 1089)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Zombie39" parent="Objects/ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("8_ovu31")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 position = Vector2(776, 1208)
 _audioStreamPlayer2D = NodePath("../Zombie2/ZombieNoise")
+loot = null
 
 [node name="Foliage" type="Node2D" parent="Objects"]
 y_sort_enabled = true
@@ -1342,12 +1450,6 @@ _color = Color(0.717647, 0.341176, 0.152941, 0)
 _minBrightness = 0.5
 _scaleVariation = 0.2
 
-[node name="Tree156" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
-position = Vector2(1083, 1488)
-_color = Color(0.717647, 0.341176, 0.152941, 0)
-_minBrightness = 0.5
-_scaleVariation = 0.2
-
 [node name="Tree24" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
 position = Vector2(1776, 3296)
 _color = Color(0.717647, 0.341176, 0.152941, 0)
@@ -1425,7 +1527,7 @@ _minBrightness = 0.5
 _scaleVariation = 0.2
 
 [node name="Tree60" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("7_et7tw")]
-position = Vector2(-3198, 2764)
+position = Vector2(-3204, 2840)
 _animationPlayer = NodePath("../Tree25/AnimationPlayer")
 _sprite = NodePath("../Tree25/Sprite2D")
 _color = Color(0.717647, 0.341176, 0.152941, 0)
@@ -1481,7 +1583,7 @@ _minBrightness = 0.5
 _scaleVariation = 0.2
 
 [node name="Tree67" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("7_et7tw")]
-position = Vector2(-5058, 2750)
+position = Vector2(-5071, 2845)
 _animationPlayer = NodePath("../Tree25/AnimationPlayer")
 _sprite = NodePath("../Tree25/Sprite2D")
 _color = Color(0.717647, 0.341176, 0.152941, 0)
@@ -1773,7 +1875,7 @@ _minBrightness = 0.5
 _scaleVariation = 0.2
 
 [node name="Tree112" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("7_et7tw")]
-position = Vector2(3207, 2808)
+position = Vector2(3156, 2878)
 _animationPlayer = NodePath("../Tree28/AnimationPlayer")
 _sprite = NodePath("../Tree28/Sprite2D")
 _color = Color(0.717647, 0.341176, 0.152941, 0)
@@ -1829,7 +1931,7 @@ _minBrightness = 0.5
 _scaleVariation = 0.2
 
 [node name="Tree110" parent="Objects/Foliage/Trees" instance=ExtResource("7_et7tw")]
-position = Vector2(4127, -3061)
+position = Vector2(4157, -3133)
 _color = Color(0.717647, 0.341176, 0.152941, 0)
 _minBrightness = 0.5
 _scaleVariation = 0.2
@@ -1982,14 +2084,6 @@ _scaleVariation = 0.2
 
 [node name="Tree154" parent="Objects/Foliage/Trees" instance=ExtResource("19_08txa")]
 position = Vector2(1080, 1016)
-_color = Color(0.717647, 0.341176, 0.152941, 0)
-_minBrightness = 0.5
-_scaleVariation = 0.2
-
-[node name="Tree155" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("19_08txa")]
-position = Vector2(1080, 1016)
-_animationPlayer = NodePath("../Tree154/AnimationPlayer")
-_sprite = NodePath("../Tree154/Sprite2D")
 _color = Color(0.717647, 0.341176, 0.152941, 0)
 _minBrightness = 0.5
 _scaleVariation = 0.2
@@ -2177,7 +2271,7 @@ _minBrightness = 0.5
 _scaleVariation = 0.2
 
 [node name="Tree5" parent="Objects/Foliage/Trees" instance=ExtResource("52_ly26v")]
-position = Vector2(674, 2768)
+position = Vector2(630, 2831)
 _color = Color(0.717647, 0.341176, 0.152941, 0)
 _minBrightness = 0.5
 _scaleVariation = 0.2
@@ -2261,14 +2355,6 @@ _minBrightness = 0.5
 _scaleVariation = 0.2
 
 [node name="Tree176" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("19_08txa")]
-position = Vector2(-7075, -40)
-_animationPlayer = NodePath("../Tree154/AnimationPlayer")
-_sprite = NodePath("../Tree154/Sprite2D")
-_color = Color(0.717647, 0.341176, 0.152941, 0)
-_minBrightness = 0.5
-_scaleVariation = 0.2
-
-[node name="Tree177" parent="Objects/Foliage/Trees" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("19_08txa")]
 position = Vector2(-7075, -40)
 _animationPlayer = NodePath("../Tree154/AnimationPlayer")
 _sprite = NodePath("../Tree154/Sprite2D")
@@ -2365,7 +2451,7 @@ _color = Color(0.388235, 0.388235, 0.388235, 0)
 _minBrightness = 0.5
 
 [node name="Rock9" parent="Objects/Foliage/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("12_0gurk")]
-position = Vector2(-5614, -2777)
+position = Vector2(-5574, -2646)
 _animationPlayer = NodePath("../Rock5/AnimationPlayer")
 _sprite = NodePath("../Rock5/Sprite2D")
 _color = Color(0.388235, 0.388235, 0.388235, 0)
@@ -2379,14 +2465,14 @@ _color = Color(0.388235, 0.388235, 0.388235, 0)
 _minBrightness = 0.5
 
 [node name="Rock7" parent="Objects/Foliage/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("12_0gurk")]
-position = Vector2(5160, 2648)
+position = Vector2(5526, 2516)
 _animationPlayer = NodePath("../Rock5/AnimationPlayer")
 _sprite = NodePath("../Rock5/Sprite2D")
 _color = Color(0.388235, 0.388235, 0.388235, 0)
 _minBrightness = 0.5
 
 [node name="Rock11" parent="Objects/Foliage/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("12_0gurk")]
-position = Vector2(6528, 1752)
+position = Vector2(6228, 1291)
 _animationPlayer = NodePath("../Rock5/AnimationPlayer")
 _sprite = NodePath("../Rock5/Sprite2D")
 _color = Color(0.388235, 0.388235, 0.388235, 0)
@@ -2407,7 +2493,7 @@ _color = Color(0.388235, 0.388235, 0.388235, 0)
 _minBrightness = 0.5
 
 [node name="Rock10" parent="Objects/Foliage/Rocks" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("12_0gurk")]
-position = Vector2(-6440, 3336)
+position = Vector2(-6140, 3456)
 _animationPlayer = NodePath("../Rock5/AnimationPlayer")
 _sprite = NodePath("../Rock5/Sprite2D")
 _color = Color(0.388235, 0.388235, 0.388235, 0)
@@ -2417,10 +2503,10 @@ _minBrightness = 0.5
 y_sort_enabled = true
 
 [node name="Copper Ore" parent="Objects/Foliage/Ores" instance=ExtResource("25_0xvqf")]
-position = Vector2(4383, 2515)
+position = Vector2(3898, 2137)
 
 [node name="Copper Ore2" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("25_0xvqf")]
-position = Vector2(5111, 655)
+position = Vector2(5411, 325)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
@@ -2455,37 +2541,33 @@ _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
 [node name="Copper Ore11" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("25_0xvqf")]
-position = Vector2(-7568, 3419)
+position = Vector2(-7562, 3119)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
 [node name="Copper Ore4" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("25_0xvqf")]
-position = Vector2(6803, -2930)
+position = Vector2(6156, -3026)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
 [node name="Copper Ore5" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer", "_sprite") instance=ExtResource("25_0xvqf")]
-position = Vector2(6248, -2380)
+position = Vector2(6032, -2272)
 _animationPlayer = NodePath("../Copper Ore/AnimationPlayer")
 _sprite = NodePath("../Copper Ore/Sprite2D")
 
 [node name="Iron Ore" parent="Objects/Foliage/Ores" instance=ExtResource("26_o2yuj")]
-position = Vector2(6906, 2622)
+position = Vector2(7080, 2526)
 
 [node name="Iron Ore2" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("26_o2yuj")]
-position = Vector2(7090, -3207)
-_animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
-
-[node name="Iron Ore3" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("26_o2yuj")]
-position = Vector2(-642, -3230)
+position = Vector2(7042, -3105)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
 [node name="Iron Ore4" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("26_o2yuj")]
-position = Vector2(-5996, -3215)
+position = Vector2(-6086, -3107)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
 [node name="Iron Ore5" parent="Objects/Foliage/Ores" node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("26_o2yuj")]
-position = Vector2(-7680, 1988)
+position = Vector2(-7301, 1892)
 _animationPlayer = NodePath("../Iron Ore/AnimationPlayer")
 
 [node name="Cave" type="Node2D" parent="Objects/Foliage" node_paths=PackedStringArray("_player")]
@@ -2505,8 +2587,10 @@ position = Vector2(-16, 142)
 [node name="CaveBlockage" type="Node2D" parent="Objects/Foliage/Cave"]
 y_sort_enabled = true
 
-[node name="Rock13" parent="Objects/Foliage/Cave/CaveBlockage" node_paths=PackedStringArray("_animationPlayer", "_sprite", "_fallingTreeBridge") instance=ExtResource("12_0gurk")]
+[node name="Rock13" type="StaticBody2D" parent="Objects/Foliage/Cave/CaveBlockage" node_paths=PackedStringArray("_animationPlayer", "_sprite", "_fallingTreeBridge")]
 position = Vector2(-7416, -3088)
+script = ExtResource("32_ug637")
+loot = ExtResource("33_ubvr4")
 _requiredEffect = 3
 _animationPlayer = NodePath("../../../Rocks/Rock5/AnimationPlayer")
 _sprite = NodePath("../../../Rocks/Rock5/Sprite2D")
@@ -2514,9 +2598,49 @@ _color = Color(0.517647, 0.517647, 0.517647, 0)
 _minBrightness = 0.5
 _fallingTreeBridge = NodePath("..")
 
-[node name="Rock14" parent="Objects/Foliage/Cave/CaveBlockage" node_paths=PackedStringArray("_animationPlayer", "_sprite", "_fallingTreeBridge") instance=ExtResource("12_0gurk")]
+[node name="Shadow" type="Sprite2D" parent="Objects/Foliage/Cave/CaveBlockage/Rock13"]
+modulate = Color(1, 1, 1, 0.615686)
+position = Vector2(-1.39566, -43.2337)
+rotation = 2.87979
+scale = Vector2(5.00348, 2.35276)
+texture = ExtResource("11_onp5s")
+
+[node name="Sprite2D" type="Sprite2D" parent="Objects/Foliage/Cave/CaveBlockage/Rock13"]
+position = Vector2(-5, -90)
+texture = ExtResource("34_rgojr")
+
+[node name="HealthComponent" parent="Objects/Foliage/Cave/CaveBlockage/Rock13" node_paths=PackedStringArray("_parentScript") instance=ExtResource("35_twoo1")]
+_parentScript = NodePath("..")
+_hasHealthBar = false
+
+[node name="HitboxComponent" parent="Objects/Foliage/Cave/CaveBlockage/Rock13" node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["rock"] instance=ExtResource("36_cmwu4")]
+position = Vector2(-1, 0)
+collision_layer = 16
+collision_mask = 32
+_parentScript = NodePath("..")
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Foliage/Cave/CaveBlockage/Rock13/HitboxComponent"]
+position = Vector2(-7, -80)
+rotation = 1.25664
+shape = SubResource("CapsuleShape2D_pn142")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Foliage/Cave/CaveBlockage/Rock13"]
+position = Vector2(-8, -72)
+rotation = 1.25664
+shape = SubResource("CapsuleShape2D_wgg0g")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Objects/Foliage/Cave/CaveBlockage/Rock13"]
+libraries = {
+"": SubResource("AnimationLibrary_x8yya")
+}
+
+[node name="Rock14" type="StaticBody2D" parent="Objects/Foliage/Cave/CaveBlockage" node_paths=PackedStringArray("_animationPlayer", "_sprite", "_fallingTreeBridge")]
 y_sort_enabled = true
 position = Vector2(-7550, -3068)
+script = ExtResource("32_ug637")
+loot = ExtResource("33_ubvr4")
 _requiredEffect = 3
 _animationPlayer = NodePath("../../../Rocks/Rock5/AnimationPlayer")
 _sprite = NodePath("../../../Rocks/Rock5/Sprite2D")
@@ -2524,34 +2648,114 @@ _color = Color(0.517647, 0.517647, 0.517647, 0)
 _minBrightness = 0.5
 _fallingTreeBridge = NodePath("..")
 
-[node name="Rock15" parent="Objects/Foliage/Cave" instance=ExtResource("12_0gurk")]
+[node name="Shadow" type="Sprite2D" parent="Objects/Foliage/Cave/CaveBlockage/Rock14"]
+modulate = Color(1, 1, 1, 0.615686)
+position = Vector2(-1.39566, -43.2337)
+rotation = 2.87979
+scale = Vector2(5.00348, 2.35276)
+texture = ExtResource("11_onp5s")
+
+[node name="Sprite2D" type="Sprite2D" parent="Objects/Foliage/Cave/CaveBlockage/Rock14"]
+position = Vector2(-5, -90)
+texture = ExtResource("34_rgojr")
+
+[node name="HealthComponent" parent="Objects/Foliage/Cave/CaveBlockage/Rock14" node_paths=PackedStringArray("_parentScript") instance=ExtResource("35_twoo1")]
+_parentScript = NodePath("..")
+_hasHealthBar = false
+
+[node name="HitboxComponent" parent="Objects/Foliage/Cave/CaveBlockage/Rock14" node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["rock"] instance=ExtResource("36_cmwu4")]
+position = Vector2(-1, 0)
+collision_layer = 16
+collision_mask = 32
+_parentScript = NodePath("..")
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Foliage/Cave/CaveBlockage/Rock14/HitboxComponent"]
+position = Vector2(-7, -80)
+rotation = 1.25664
+shape = SubResource("CapsuleShape2D_pn142")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Foliage/Cave/CaveBlockage/Rock14"]
+position = Vector2(-8, -72)
+rotation = 1.25664
+shape = SubResource("CapsuleShape2D_wgg0g")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Objects/Foliage/Cave/CaveBlockage/Rock14"]
+libraries = {
+"": SubResource("AnimationLibrary_x8yya")
+}
+
+[node name="Rock15" type="StaticBody2D" parent="Objects/Foliage/Cave"]
 y_sort_enabled = true
 position = Vector2(-7520, -3176)
 scale = Vector2(5, 5)
-script = null
 
-[node name="Sprite2D" parent="Objects/Foliage/Cave/Rock15" index="1"]
+[node name="Shadow" type="Sprite2D" parent="Objects/Foliage/Cave/Rock15"]
+modulate = Color(1, 1, 1, 0.615686)
+position = Vector2(-1.39566, -43.2337)
+rotation = 2.87979
+scale = Vector2(5.00348, 2.35276)
+texture = ExtResource("11_onp5s")
+
+[node name="Sprite2D" type="Sprite2D" parent="Objects/Foliage/Cave/Rock15"]
 modulate = Color(0.443137, 0.388235, 0.262745, 1)
+position = Vector2(-5, -90)
+texture = ExtResource("34_rgojr")
 
-[node name="HealthComponent" parent="Objects/Foliage/Cave/Rock15" index="2" node_paths=PackedStringArray("_parentScript")]
+[node name="HealthComponent" parent="Objects/Foliage/Cave/Rock15" node_paths=PackedStringArray("_parentScript") instance=ExtResource("35_twoo1")]
 _parentScript = NodePath("../../../Rocks/Rock5")
+_hasHealthBar = false
 
-[node name="HitboxComponent" parent="Objects/Foliage/Cave/Rock15" index="3" node_paths=PackedStringArray("_parentScript", "_healthComponent")]
+[node name="HitboxComponent" parent="Objects/Foliage/Cave/Rock15" node_paths=PackedStringArray("_parentScript", "_healthComponent") groups=["rock"] instance=ExtResource("36_cmwu4")]
+position = Vector2(-1, 0)
+collision_layer = 16
+collision_mask = 32
 _parentScript = NodePath("../../../Rocks/Rock5")
 _healthComponent = NodePath("../../../Rocks/Rock5/HealthComponent")
 
-[node name="CollisionShape2D" parent="Objects/Foliage/Cave/Rock15/HitboxComponent" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Foliage/Cave/Rock15/HitboxComponent"]
 position = Vector2(-14.9996, -80)
+rotation = 1.25664
+shape = SubResource("CapsuleShape2D_pn142")
+debug_color = Color(1, 0, 0, 0.419608)
 
-[node name="CollisionShape2D" parent="Objects/Foliage/Cave/Rock15" index="4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Foliage/Cave/Rock15"]
 position = Vector2(0.000366211, -60.3999)
+rotation = 1.25664
+shape = SubResource("CapsuleShape2D_wgg0g")
 
-[node name="NavigationObstacleArea" parent="Objects/Foliage/Cave/Rock15" index="6"]
-position = Vector2(2, 0)
-polygon = PackedVector2Array(-64, 32, 112, -24, 134, -97.6, 120, -160, 48, -192, -128, -136, -160, -72, -136, 8)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Objects/Foliage/Cave/Rock15"]
+libraries = {
+"": SubResource("AnimationLibrary_x8yya")
+}
 
 [node name="Collectables" type="Node2D" parent="Objects/Foliage"]
 y_sort_enabled = true
+
+[node name="plant_maize" parent="Objects/Foliage/Collectables" instance=ExtResource("61_mh8tx")]
+modulate = Color(0.733333, 0.741176, 0.713726, 1)
+position = Vector2(1966, -2230)
+
+[node name="plant_maize2" parent="Objects/Foliage/Collectables" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("61_mh8tx")]
+modulate = Color(0.733333, 0.741176, 0.713726, 1)
+position = Vector2(2084, -2107)
+_col = NodePath("../plant_maize/Area2D")
+trect = NodePath("../plant_maize/TextureRect")
+_flipX = true
+
+[node name="plant_maize3" parent="Objects/Foliage/Collectables" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("61_mh8tx")]
+modulate = Color(0.733333, 0.741176, 0.713726, 1)
+position = Vector2(1839, -2366)
+_col = NodePath("../plant_maize/Area2D")
+trect = NodePath("../plant_maize/TextureRect")
+_flipX = true
+
+[node name="plant_maize4" parent="Objects/Foliage/Collectables" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("61_mh8tx")]
+modulate = Color(0.733333, 0.741176, 0.713726, 1)
+position = Vector2(1832, -2107)
+_col = NodePath("../plant_maize/Area2D")
+trect = NodePath("../plant_maize/TextureRect")
 
 [node name="plant_poppy" parent="Objects/Foliage/Collectables" instance=ExtResource("19_ukssx")]
 modulate = Color(0.698039, 0.698039, 0.698039, 1)
@@ -2594,22 +2798,6 @@ position = Vector2(-1104, -2656)
 [node name="plant_wheat3" parent="Objects/Foliage/Collectables" instance=ExtResource("22_i4jq8")]
 position = Vector2(-1489, -2536)
 
-[node name="plant_pumpkin3" parent="Objects/Foliage/Collectables" instance=ExtResource("12_w0m5s")]
-modulate = Color(0.745098, 0.65098, 0.588235, 1)
-position = Vector2(1832, -2272)
-
-[node name="plant_pumpkin4" parent="Objects/Foliage/Collectables" instance=ExtResource("12_w0m5s")]
-modulate = Color(0.745098, 0.65098, 0.588235, 1)
-position = Vector2(2088, -2144)
-
-[node name="plant_pumpkin5" parent="Objects/Foliage/Collectables" instance=ExtResource("12_w0m5s")]
-modulate = Color(0.745098, 0.65098, 0.588235, 1)
-position = Vector2(1832, -2016)
-
-[node name="plant_pumpkin6" parent="Objects/Foliage/Collectables" instance=ExtResource("12_w0m5s")]
-modulate = Color(0.745098, 0.65098, 0.588235, 1)
-position = Vector2(2088, -2008)
-
 [node name="plant_poppy2" parent="Objects/Foliage/Collectables" instance=ExtResource("19_ukssx")]
 modulate = Color(0.698039, 0.698039, 0.698039, 1)
 position = Vector2(2616, -1512)
@@ -2640,7 +2828,7 @@ position = Vector2(-608, 408)
 
 [node name="plant_poppy5" parent="Objects/Foliage/Collectables" instance=ExtResource("19_ukssx")]
 modulate = Color(0.639216, 0.639216, 0.639216, 1)
-position = Vector2(200, -594)
+position = Vector2(254, -553)
 
 [node name="plant_lupine2" parent="Objects/Foliage/Collectables" instance=ExtResource("23_5yyo7")]
 modulate = Color(0.77084, 0.770839, 0.770839, 1)
@@ -2731,138 +2919,28 @@ modulate = Color(0.737255, 0.356863, 0.00392157, 1)
 [node name="PlantsDead" type="Node2D" parent="Objects/Foliage"]
 y_sort_enabled = true
 
-[node name="PoppyDead" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(-1720, 1562)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("20_1wvwg")
+[node name="plant_lupine" parent="Objects/Foliage/PlantsDead" instance=ExtResource("23_5yyo7")]
+position = Vector2(2734, 364)
+_isDead = true
 
-[node name="PoppyDead2" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(-1472, 1559)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("20_1wvwg")
+[node name="plant_lupine3" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("23_5yyo7")]
+position = Vector2(-632, -448)
+_col = NodePath("../plant_lupine/Area2D")
+trect = NodePath("../plant_lupine/TextureRect")
+_isDead = true
 
-[node name="PoppyDead4" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-y_sort_enabled = true
-position = Vector2(-3144, 2)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("20_1wvwg")
+[node name="plant_lupine4" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("23_5yyo7")]
+position = Vector2(-1790, 1043)
+_col = NodePath("../plant_lupine/Area2D")
+trect = NodePath("../plant_lupine/TextureRect")
+_isDead = true
 
-[node name="PoppyDead5" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-y_sort_enabled = true
-position = Vector2(-2752, -242)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("20_1wvwg")
-flip_h = true
-
-[node name="PoppyDead12" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-y_sort_enabled = true
-position = Vector2(-4159, 163)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("20_1wvwg")
-flip_h = true
-
-[node name="PoppyDead6" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-y_sort_enabled = true
-position = Vector2(-3135.6, -497.6)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("20_1wvwg")
-flip_h = true
-
-[node name="PoppyDead7" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-y_sort_enabled = true
-position = Vector2(-3132, -760)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("20_1wvwg")
-flip_h = true
-
-[node name="PoppyDead8" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-y_sort_enabled = true
-position = Vector2(-3779, -629)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("20_1wvwg")
-
-[node name="PoppyDead9" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(-4159, -504)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("20_1wvwg")
-
-[node name="PoppyDead11" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(-4040, -120)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("20_1wvwg")
-
-[node name="PoppyDead13" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(-4160, 146)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("20_1wvwg")
-
-[node name="PoppyDead10" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-y_sort_enabled = true
-position = Vector2(-3131.6, -477.6)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("20_1wvwg")
-
-[node name="PoppyDead3" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(-1089, 1562)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("20_1wvwg")
-flip_h = true
-
-[node name="ItemPumpkinDead" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(-1984, -2384)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("21_wawgo")
-
-[node name="ItemPumpkinDead2" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(-2112, -2376)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("21_wawgo")
-flip_h = true
-
-[node name="ItemPumpkinDead3" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(-2368, -2512)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("21_wawgo")
-
-[node name="ItemPumpkinDead4" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(-2361, -2641)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("21_wawgo")
-flip_h = true
-
-[node name="ItemPumpkinDead5" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(-1984, -2768)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("21_wawgo")
-flip_h = true
-
-[node name="ItemPumpkinDead6" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(-2105, -2772)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("21_wawgo")
-flip_h = true
-
-[node name="ItemPumpkinDead7" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(2248, -2256)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("21_wawgo")
-flip_h = true
-
-[node name="ItemPumpkinDead8" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(1736, -2127)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("21_wawgo")
-flip_h = true
-
-[node name="ItemPumpkinDead9" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(1736, -2005)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("21_wawgo")
-
-[node name="ItemPumpkinDead10" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(2104, -2256)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("21_wawgo")
+[node name="plant_lupine2" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("23_5yyo7")]
+position = Vector2(2748, 189)
+_col = NodePath("../plant_lupine/Area2D")
+trect = NodePath("../plant_lupine/TextureRect")
+_isDead = true
+_flipX = true
 
 [node name="ItemPotatoDead" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
 modulate = Color(0.811765, 0.811765, 0.811765, 1)
@@ -2897,11 +2975,6 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("22_q6anl")
 flip_h = true
 
-[node name="MiniTreeDead" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(-600, -452)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("34_guo8f")
-
 [node name="MiniTreeDead7" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
 position = Vector2(3133, 1440)
 scale = Vector2(0.6, 0.6)
@@ -2911,17 +2984,6 @@ texture = ExtResource("34_guo8f")
 position = Vector2(3192, 1512)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("34_guo8f")
-
-[node name="MiniTreeDead9" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(2751, 384)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("34_guo8f")
-
-[node name="MiniTreeDead10" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(2786, 209)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("34_guo8f")
-flip_h = true
 
 [node name="MiniTreeDead2" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
 position = Vector2(-4208, 414)
@@ -2945,16 +3007,192 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("34_guo8f")
 flip_h = true
 
-[node name="MiniTreeDead5" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
-position = Vector2(-1760, 1048)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("34_guo8f")
-
 [node name="MiniTreeDead6" type="Sprite2D" parent="Objects/Foliage/PlantsDead"]
 position = Vector2(-1489, 995)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("34_guo8f")
 flip_h = true
+
+[node name="plant_maize2" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("61_mh8tx")]
+modulate = Color(0.733333, 0.733333, 0.733333, 1)
+position = Vector2(1709, -2252)
+_col = NodePath("../../Collectables/plant_maize/Area2D")
+trect = NodePath("../../Collectables/plant_maize/TextureRect")
+_isDead = true
+
+[node name="plant_maize3" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("61_mh8tx")]
+modulate = Color(0.733333, 0.733333, 0.733333, 1)
+position = Vector2(1706, -2088)
+_col = NodePath("../../Collectables/plant_maize/Area2D")
+trect = NodePath("../../Collectables/plant_maize/TextureRect")
+_isDead = true
+_flipX = true
+
+[node name="plant_maize6" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("61_mh8tx")]
+modulate = Color(0.733333, 0.733333, 0.733333, 1)
+position = Vector2(2217, -2243)
+_col = NodePath("../../Collectables/plant_maize/Area2D")
+trect = NodePath("../../Collectables/plant_maize/TextureRect")
+_isDead = true
+_flipX = true
+
+[node name="plant_maize4" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("61_mh8tx")]
+modulate = Color(0.733333, 0.733333, 0.733333, 1)
+position = Vector2(2078, -2367)
+_col = NodePath("../../Collectables/plant_maize/Area2D")
+trect = NodePath("../../Collectables/plant_maize/TextureRect")
+_isDead = true
+
+[node name="plant_poppy8" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("19_ukssx")]
+modulate = Color(0.698039, 0.698039, 0.698039, 1)
+position = Vector2(-1755, 1546)
+_col = NodePath("../../Collectables/plant_poppy/Area2D")
+trect = NodePath("../../Collectables/plant_poppy/TextureRect")
+_isDead = true
+
+[node name="plant_poppy11" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("19_ukssx")]
+modulate = Color(0.698039, 0.698039, 0.698039, 1)
+position = Vector2(-3151, -7)
+scale = Vector2(0.8, 0.8)
+_col = NodePath("../../Collectables/plant_poppy/Area2D")
+trect = NodePath("../../Collectables/plant_poppy/TextureRect")
+_isDead = true
+
+[node name="plant_poppy12" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("19_ukssx")]
+modulate = Color(0.698039, 0.698039, 0.698039, 1)
+position = Vector2(-3138, -507)
+scale = Vector2(0.8, 0.8)
+_col = NodePath("../../Collectables/plant_poppy/Area2D")
+trect = NodePath("../../Collectables/plant_poppy/TextureRect")
+_isDead = true
+
+[node name="plant_poppy15" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("19_ukssx")]
+modulate = Color(0.698039, 0.698039, 0.698039, 1)
+position = Vector2(-3799, -647)
+scale = Vector2(0.8, 0.8)
+_col = NodePath("../../Collectables/plant_poppy/Area2D")
+trect = NodePath("../../Collectables/plant_poppy/TextureRect")
+_isDead = true
+
+[node name="plant_poppy16" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("19_ukssx")]
+modulate = Color(0.698039, 0.698039, 0.698039, 1)
+position = Vector2(-4176, -521)
+scale = Vector2(0.8, 0.8)
+_col = NodePath("../../Collectables/plant_poppy/Area2D")
+trect = NodePath("../../Collectables/plant_poppy/TextureRect")
+_isDead = true
+
+[node name="plant_poppy17" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("19_ukssx")]
+modulate = Color(0.698039, 0.698039, 0.698039, 1)
+position = Vector2(-4058, -132)
+scale = Vector2(0.8, 0.8)
+_col = NodePath("../../Collectables/plant_poppy/Area2D")
+trect = NodePath("../../Collectables/plant_poppy/TextureRect")
+_isDead = true
+
+[node name="plant_poppy18" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("19_ukssx")]
+modulate = Color(0.698039, 0.698039, 0.698039, 1)
+position = Vector2(-4177, 132)
+scale = Vector2(0.8, 0.8)
+_col = NodePath("../../Collectables/plant_poppy/Area2D")
+trect = NodePath("../../Collectables/plant_poppy/TextureRect")
+_isDead = true
+
+[node name="plant_poppy19" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("19_ukssx")]
+modulate = Color(0.698039, 0.698039, 0.698039, 1)
+position = Vector2(-4182, 147)
+scale = Vector2(0.8, 0.8)
+_col = NodePath("../../Collectables/plant_poppy/Area2D")
+trect = NodePath("../../Collectables/plant_poppy/TextureRect")
+_isDead = true
+_flipX = true
+
+[node name="plant_poppy20" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("19_ukssx")]
+modulate = Color(0.698039, 0.698039, 0.698039, 1)
+position = Vector2(-3156, -759)
+scale = Vector2(0.8, 0.8)
+_col = NodePath("../../Collectables/plant_poppy/Area2D")
+trect = NodePath("../../Collectables/plant_poppy/TextureRect")
+_isDead = true
+_flipX = true
+
+[node name="plant_poppy13" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("19_ukssx")]
+modulate = Color(0.698039, 0.698039, 0.698039, 1)
+position = Vector2(-3152, -508)
+scale = Vector2(0.8, 0.8)
+_col = NodePath("../../Collectables/plant_poppy/Area2D")
+trect = NodePath("../../Collectables/plant_poppy/TextureRect")
+_isDead = true
+_flipX = true
+
+[node name="plant_poppy14" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("19_ukssx")]
+modulate = Color(0.698039, 0.698039, 0.698039, 1)
+position = Vector2(-2770, -249)
+scale = Vector2(0.8, 0.8)
+_col = NodePath("../../Collectables/plant_poppy/Area2D")
+trect = NodePath("../../Collectables/plant_poppy/TextureRect")
+_isDead = true
+_flipX = true
+
+[node name="plant_poppy9" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("19_ukssx")]
+modulate = Color(0.698039, 0.698039, 0.698039, 1)
+position = Vector2(-1494, 1545)
+_col = NodePath("../../Collectables/plant_poppy/Area2D")
+trect = NodePath("../../Collectables/plant_poppy/TextureRect")
+_isDead = true
+
+[node name="plant_poppy10" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("19_ukssx")]
+modulate = Color(0.698039, 0.698039, 0.698039, 1)
+position = Vector2(-1110, 1551)
+_col = NodePath("../../Collectables/plant_poppy/Area2D")
+trect = NodePath("../../Collectables/plant_poppy/TextureRect")
+_isDead = true
+_flipX = true
+
+[node name="plant_pumpkin3" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("12_w0m5s")]
+modulate = Color(0.745098, 0.65098, 0.588235, 1)
+position = Vector2(-2139, -2783)
+_col = NodePath("../../Collectables/plant_pumpkin/Area2D")
+trect = NodePath("../../Collectables/plant_pumpkin/TextureRect")
+_isDead = true
+_flipX = true
+
+[node name="plant_pumpkin4" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("12_w0m5s")]
+modulate = Color(0.745098, 0.65098, 0.588235, 1)
+position = Vector2(-2007, -2783)
+_col = NodePath("../../Collectables/plant_pumpkin/Area2D")
+trect = NodePath("../../Collectables/plant_pumpkin/TextureRect")
+_isDead = true
+
+[node name="plant_pumpkin5" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("12_w0m5s")]
+modulate = Color(0.745098, 0.65098, 0.588235, 1)
+position = Vector2(-2396, -2653)
+_col = NodePath("../../Collectables/plant_pumpkin/Area2D")
+trect = NodePath("../../Collectables/plant_pumpkin/TextureRect")
+_isDead = true
+
+[node name="plant_pumpkin6" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("12_w0m5s")]
+modulate = Color(0.745098, 0.65098, 0.588235, 1)
+position = Vector2(-2396, -2521)
+_col = NodePath("../../Collectables/plant_pumpkin/Area2D")
+trect = NodePath("../../Collectables/plant_pumpkin/TextureRect")
+_isDead = true
+_flipX = true
+
+[node name="plant_pumpkin7" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("12_w0m5s")]
+modulate = Color(0.745098, 0.65098, 0.588235, 1)
+position = Vector2(-2132, -2400)
+_col = NodePath("../../Collectables/plant_pumpkin/Area2D")
+trect = NodePath("../../Collectables/plant_pumpkin/TextureRect")
+_isDead = true
+
+[node name="plant_pumpkin8" parent="Objects/Foliage/PlantsDead" node_paths=PackedStringArray("_col", "trect") instance=ExtResource("12_w0m5s")]
+modulate = Color(0.745098, 0.65098, 0.588235, 1)
+position = Vector2(-2000, -2400)
+_col = NodePath("../../Collectables/plant_pumpkin/Area2D")
+trect = NodePath("../../Collectables/plant_pumpkin/TextureRect")
+_isDead = true
+_flipX = true
 
 [node name="TreeBorder" type="Node" parent="Objects/Foliage"]
 
@@ -3343,13 +3581,6 @@ modulate = Color(0.823529, 0.823529, 0.823529, 1)
 position = Vector2(-552, -733)
 scale = Vector2(1.03957, 1)
 texture = ExtResource("7_dpch5")
-
-[node name="Sprite2D21" type="Sprite2D" parent="Objects/Foliage/TreeBorder/West/Birches"]
-modulate = Color(0.627451, 0.627451, 0.627451, 1)
-z_index = -2
-position = Vector2(-245.5, -1754)
-scale = Vector2(0.989437, 1)
-texture = ExtResource("8_pei51")
 
 [node name="Sprite2D22" type="Sprite2D" parent="Objects/Foliage/TreeBorder/West/Birches"]
 modulate = Color(0.619608, 0.619608, 0.619608, 1)
@@ -4475,11 +4706,6 @@ modulate = Color(0.529412, 0.529412, 0.796078, 1)
 position = Vector2(-7232, 117)
 texture = ExtResource("6_rt25r")
 
-[node name="Spruce57" type="Sprite2D" parent="Objects/Foliage/TreeBorder/North/Spruces"]
-modulate = Color(0.529412, 0.529412, 0.796078, 1)
-position = Vector2(-8312, 55)
-texture = ExtResource("6_rt25r")
-
 [node name="Spruce49" type="Sprite2D" parent="Objects/Foliage/TreeBorder/North/Spruces"]
 modulate = Color(0.729412, 0.686275, 0.917647, 1)
 position = Vector2(4299, 106)
@@ -4756,11 +4982,6 @@ y_sort_enabled = true
 position = Vector2(-10828, -3721)
 texture = ExtResource("8_pei51")
 
-[node name="Sprite2D51" type="Sprite2D" parent="Objects/Foliage/TreeBorder/North/Birches"]
-modulate = Color(0.619608, 0.619608, 0.619608, 1)
-position = Vector2(-11846, -3835)
-texture = ExtResource("7_dpch5")
-
 [node name="Sprite2D52" type="Sprite2D" parent="Objects/Foliage/TreeBorder/North/Birches"]
 modulate = Color(0.545098, 0.545098, 0.545098, 1)
 position = Vector2(-4803, -3752)
@@ -4909,8 +5130,8 @@ layer_0/tile_data = PackedInt32Array(-196616, 21, 0, -196615, 0, 0, -131078, 0, 
 [editable path="Objects/Lights/LanternFlip3"]
 [editable path="Objects/Lights/LanternFlip9"]
 [editable path="Objects/Lights/LanternFlip5"]
+[editable path="Objects/Fences2"]
 [editable path="Objects/ZombieSpawn"]
-[editable path="Objects/Foliage/Cave/Rock15"]
 [editable path="Objects/Foliage/Bushes/bush"]
 [editable path="Objects/Foliage/Bushes/bush2"]
 [editable path="Objects/Foliage/Bushes/bush3"]

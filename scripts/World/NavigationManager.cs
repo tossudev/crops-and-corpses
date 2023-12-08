@@ -53,9 +53,6 @@ public partial class NavigationManager : Node2D {
 			return;
 		}
 		
-		_navigationRegionPolygon.ClearOutlines();
-		_navigationRegionPolygon.ClearPolygons();
-		
 		foreach (var node in caller.GetTree().GetNodesInGroup(_obstacleGroupName))
 		{
 			var navigationObstacle = (NavigationObstacle) node;
@@ -116,9 +113,7 @@ public partial class NavigationManager : Node2D {
 
 		try
 		{
-			if (_obstacleArray.Any(existingObstacle => existingObstacle.GetInstanceId() == obstacle.GetInstanceId())) return;
 			AddNavigationObstacleToMap(obstacle);
-			UpdateObstacleIndexes();
 		}
 		catch (Exception e)
 		{
@@ -139,11 +134,9 @@ public partial class NavigationManager : Node2D {
 			return;
 		}
 		
-		if (obstacle == null || obstacle.IsQueuedForDeletion() || (obstacle.Owner?.IsQueuedForDeletion() ?? true))
+		if (obstacle == null)
 		{
-			GD.PushWarning("Tried to remove null or disposed obstacle. Resetting NavigationManager");
-
-            InitRegion(this);
+			GD.PushWarning("Tried to remove null obstacle");
 			return;
 		}
 
@@ -162,6 +155,10 @@ public partial class NavigationManager : Node2D {
 	
 	static void AddNavigationObstacleToMap(NavigationObstacle obstacle)
 	{
+		if (_obstacleArray.Any(existingObstacle =>
+			    existingObstacle.GetInstanceId() == obstacle.GetInstanceId()
+            || existingObstacle.GlobalPosition.DistanceTo(obstacle.GlobalPosition) < 10)) return;
+		
 		if (obstacle.IsQueuedForDeletion() || (obstacle.Owner?.IsQueuedForDeletion() ?? true))
 		{
 			GD.PushWarning("Tried adding a disposed object, not happening anytime soon");
@@ -173,6 +170,7 @@ public partial class NavigationManager : Node2D {
 		var polygonPoints = GetPolygonFromObject(obstacle);
 	    
 		_navigationRegionPolygon.AddOutline(polygonPoints);
+		UpdateObstacleIndexes();
 	}
     
 	static void RemoveNavigationObstacleFromMap(NavigationObstacle obstacle)

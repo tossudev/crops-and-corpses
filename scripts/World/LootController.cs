@@ -24,6 +24,7 @@ public partial class LootController : StaticBody2D
 	private List<Item> _items = new List<Item>();
 	RandomNumberGenerator rng;
 	private int _meanDrop;
+	ExpGain _expGain;
 	static AudioController _audioController;
 	private bool _canBeDestroyed;
 
@@ -45,7 +46,9 @@ public partial class LootController : StaticBody2D
 		}
 
 		_meanDrop = loot.meanDrop;
+		_expGain = loot.expGain;
 
+		// exports no longer working??
 		_animationPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
 		_sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
 
@@ -121,21 +124,26 @@ public partial class LootController : StaticBody2D
 		{
 			if (Name == "FallingTree")
 			{
-				_animationPlayer?.Play("fall");
+				_animationPlayer.Play("fall");
 				TownManager.ApplyUnlock(TownUnlock.DIY_BRIDGE_UNLOCK);
 			}
 			else if (Name == "BridgeStalagmite")
 			{
 				_animationPlayer.SpeedScale = 2;
-				_animationPlayer?.Play("fallingStalagmite");
+				_animationPlayer.Play("fallingStalagmite");
 				TownManager.ApplyUnlock(TownUnlock.STALAGMITE_UNLOCK);
 			}
 			else if (_fallingTreeBridge?.Name == "CaveBlockage")
 			{
 				TownManager.ApplyUnlock(TownUnlock.MINESHAFT_UNLOCK);
+				DropItems(_items.Count);
+			}
+			else
+			{
+				DropItems(_items.Count);
 			}
 
-			DropItems(_items.Count);
+			TownManager.GainExp(_expGain);
 		}
 	}
 
@@ -143,7 +151,11 @@ public partial class LootController : StaticBody2D
 	{
 		if (animationName == "fall" || animationName == "fallingStalagmite")
 		{
-			if (_fallingTreeBridge != null) _fallingTreeBridge.Visible = true;
+			if (_fallingTreeBridge != null)
+			{
+				_fallingTreeBridge.Visible = true;
+				DropItems(_items.Count);
+			}
 		}
 	}
 

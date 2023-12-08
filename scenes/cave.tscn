@@ -2299,7 +2299,6 @@ position = Vector2(2258, -3751)
 _audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0.121569, 0.121569, 0.121569, 1)
 
 [node name="QuestPointManager" parent="." instance=ExtResource("25_n2sk6")]

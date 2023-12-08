@@ -61,7 +61,6 @@ public partial class HandheldController : Node2D
             _weapon = _hand;
 
         _dynamicSprite.Texture = null;
-        _toolSprite.Texture = null;
 
         _damage = _weapon.damage;
         _knockback = _weapon.knockback;
@@ -80,10 +79,12 @@ public partial class HandheldController : Node2D
         if (_ranged)
         {
             _hitbox.Monitoring = false;
+            _toolSprite.Texture = null;
         }
         else
         {
             _hitbox.Monitoring = true;
+            _toolSprite.Texture = _weapon.item?.IconTexture;
         }
 
         isDrawing = false;
@@ -152,8 +153,7 @@ public partial class HandheldController : Node2D
 
     public void Use()
     {
-        if (_weapon == null)
-            Init();
+        Init();
 
         if (_timer.TimeLeft > 0 || isDrawing || _weapon == null)
             return;

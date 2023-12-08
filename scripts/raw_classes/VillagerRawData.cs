@@ -93,9 +93,9 @@ public partial class VillagerRawData : GodotObject
 
     public bool TrySetHome()
     {
-        var freeHomes = VillagerManager.villagerManagerInstance.GetFreeHomesList();
+        var freeHomes = VillagerManager.villagerManagerInstance?.GetFreeHomesList();
 
-        homeId = freeHomes.Count > 0
+        homeId = freeHomes?.Count > 0
             ? freeHomes.First().AddResident(this)
             : 0;
 

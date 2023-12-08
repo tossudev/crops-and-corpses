@@ -12,4 +12,9 @@ public partial class Item : Resource {
     [Export] public int StackSize { get; set; }
     
     [Export] public CraftingRequirement[] craftingRequirements { get; set; }
+
+    public RawInventoryItem ItemAsRaw(int quantity)
+    {
+        return new RawInventoryItem(ID, Name, quantity, StackSize);
+    }
 }

@@ -1369,9 +1369,10 @@ Credits[/color]
 
 [node name="CreditTextField" type="RichTextLabel" parent="Credits"]
 clip_contents = false
-offset_left = -512.0
-offset_top = -336.0
-offset_bottom = 40.0
+offset_left = -256.0
+offset_top = -360.0
+offset_right = 256.0
+offset_bottom = 352.0
 mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 20
@@ -1389,50 +1390,9 @@ Daniel Heugenhauser
 Otso Salmenperä
 Janita Korhonen
 Ella Arokivi
-Tossu"
-
-[node name="CreditTextField2" type="RichTextLabel" parent="Credits"]
-clip_contents = false
-offset_top = -336.0
-offset_right = 512.0
-mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_fonts/normal_font = SubResource("FontFile_1afan")
-theme_override_font_sizes/normal_font_size = 36
-bbcode_enabled = true
-text = "[center]
-[color=#c0f99e]Music[/color]
-[color=#ffffff]
-Ilmari Apajalahti
-
----
-
-[color=#c0f99e]Sound[/color]
-[color=#ffffff]
-Ilmari Apajalahti
 Tossu
-
 ---
-
-[color=#c0f99e]Management[/color]
-[color=#ffffff]
-Mikael Sekkouri
-"
-
-[node name="CreditTextField3" type="RichTextLabel" parent="Credits"]
-clip_contents = false
-offset_left = -256.0
-offset_top = 32.0
-offset_right = 256.0
-offset_bottom = 328.0
-mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_fonts/normal_font = SubResource("FontFile_1afan")
-theme_override_font_sizes/normal_font_size = 36
-bbcode_enabled = true
-text = "[center][color=#c0f99e]Art[/color]
+[color=#c0f99e]Art[/color]
 [color=#ffffff]
 Aida Kimpimäki
 Lennert Vercammen
@@ -1440,6 +1400,19 @@ Marla
 Nella
 Axu
 Hamed Hoseini
+---
+[color=#c0f99e]Music[/color]
+[color=#ffffff]
+Ilmari Apajalahti
+---
+[color=#c0f99e]Sound[/color]
+[color=#ffffff]
+Ilmari Apajalahti
+Tossu
+---
+[color=#c0f99e]Management[/color]
+[color=#ffffff]
+Mikael Sekkouri
 "
 
 [node name="Overlay" type="CanvasLayer" parent="."]

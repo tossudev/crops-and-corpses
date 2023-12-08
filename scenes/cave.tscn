@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bbvsfe4h2sph"]
+[gd_scene load_steps=38 format=3 uid="uid://bbvsfe4h2sph"]
 
 [ext_resource type="PackedScene" uid="uid://wy0dgop8pftu" path="res://scenes/world/cave_tilemap.tscn" id="1_yabqn"]
 [ext_resource type="Script" path="res://scripts/cave.cs" id="1_yjxwb"]
@@ -25,7 +25,8 @@
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="20_wlbpj"]
 [ext_resource type="PackedScene" uid="uid://bfgy4jnvcy7pk" path="res://scenes/zombie/Zombie.tscn" id="22_3nsxr"]
 [ext_resource type="PackedScene" uid="uid://wwf7rdwowll5" path="res://scenes/Quest/QuestPointManager.tscn" id="25_n2sk6"]
-[ext_resource type="PackedScene" path="res://scenes/Quest/QuestPoint.tscn" id="26_t6sbg"]
+[ext_resource type="PackedScene" uid="uid://7r2mskqdc0va" path="res://scenes/quest/QuestPoint.tscn" id="26_t6sbg"]
+[ext_resource type="PackedScene" path="res://scenes/villager/villager_manager.tscn" id="27_uex5p"]
 
 [sub_resource type="Gradient" id="Gradient_ksvwj"]
 offsets = PackedFloat32Array(0.187097, 0.364516, 0.396774, 1)
@@ -1910,226 +1911,15 @@ exitPosition = NodePath("Exit")
 [node name="Exit" type="Node2D" parent="Objects/Cave Entrances/cave_entrance3"]
 position = Vector2(-16, 142)
 
-[node name="Enemies" type="Node2D" parent="."]
-unique_name_in_owner = true
-y_sort_enabled = true
-position = Vector2(6.10352e-05, 6.10352e-05)
-
-[node name="Zombie" parent="Enemies" instance=ExtResource("22_3nsxr")]
-position = Vector2(-5619, 5917)
-
-[node name="Zombie2" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-3776, 6898)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie3" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-2980, 4524)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie4" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(1416, 4810)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie5" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(2558, 5892)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie6" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(4825, 5113)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie7" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(4303, 6536)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie8" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(6177, 4820)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie9" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(7956, 3800)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie10" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(5935, 3185)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie11" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(8154, 1656)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie12" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(4082, 2254)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie13" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(3454, 1248)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie14" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-1213, -2798)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie15" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(726, -2972)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie16" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-176, -3751)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie17" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(814, -4911)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie18" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-305, -5996)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie19" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-2952, -5714)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie21" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-4911, -5826)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie22" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-7248, -6042)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie23" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-9036, -4349)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie24" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-8895, -5908)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie25" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-6383, -7156)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie26" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-8533, -2228)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie27" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-6113, -1542)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie28" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-4296, -2257)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie29" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-7764, -452)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie30" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-5556, -265)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie31" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-6962, -2918)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie32" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-8047, -5010)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie33" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-5136, -4665)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie34" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-1454, -822)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie35" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-288, -370)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie36" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(1199, -1042)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie37" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(307, -1131)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie38" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-1109, 778)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie39" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-538, 1129)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie40" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(225, 655)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie42" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(-197, -890)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie41" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(1412, 1156)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
-[node name="Zombie20" parent="Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D", "_lootController") instance=ExtResource("22_3nsxr")]
-position = Vector2(2258, -3751)
-_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
-_lootController = NodePath("../Zombie/Backpack")
-
 [node name="ZombieManager" type="Node2D" parent="."]
 script = ExtResource("20_wlbpj")
 
 [node name="Timer" type="Timer" parent="ZombieManager"]
 
 [node name="ZombieSpawn" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+y_sort_enabled = true
 script = ExtResource("7_somas")
+caveMaxZombieCount = 10.0
 maxDistance = 1500.0
 player = NodePath("../Objects/Player")
 
@@ -2166,6 +1956,178 @@ autostart = true
 [node name="ZombieDeletionTimer" type="Timer" parent="ZombieSpawn"]
 autostart = true
 
+[node name="Enemies" type="Node2D" parent="ZombieSpawn"]
+unique_name_in_owner = true
+y_sort_enabled = true
+position = Vector2(6.10352e-05, 6.10352e-05)
+
+[node name="Zombie" parent="ZombieSpawn/Enemies" instance=ExtResource("22_3nsxr")]
+position = Vector2(-5619, 5917)
+
+[node name="Zombie2" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-3776, 6898)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie3" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-2980, 4524)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie4" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(1416, 4810)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie5" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(2558, 5892)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie6" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(4825, 5113)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie7" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(4303, 6536)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie8" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(6177, 4820)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie9" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(7956, 3800)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie10" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(5935, 3185)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie11" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(8154, 1656)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie12" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(4082, 2254)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie13" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(3454, 1248)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie14" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-1213, -2798)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie15" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(726, -2972)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie16" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-176, -3751)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie17" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(814, -4911)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie18" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-305, -5996)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie19" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-2952, -5714)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie21" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-4911, -5826)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie22" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-7248, -6042)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie23" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-9036, -4349)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie24" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-8895, -5908)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie25" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-6383, -7156)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie26" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-8533, -2228)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie27" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-6113, -1542)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie28" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-4296, -2257)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie29" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-7764, -452)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie30" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-5556, -265)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie31" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-6962, -2918)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie32" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-8047, -5010)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie33" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-5136, -4665)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie34" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-1454, -822)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie35" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-288, -370)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie36" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(1199, -1042)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie37" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(307, -1131)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie38" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-1109, 778)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie39" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-538, 1129)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie40" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(225, 655)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie42" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(-197, -890)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie41" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(1412, 1156)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
+[node name="Zombie20" parent="ZombieSpawn/Enemies" node_paths=PackedStringArray("_audioStreamPlayer2D") instance=ExtResource("22_3nsxr")]
+position = Vector2(2258, -3751)
+_audioStreamPlayer2D = NodePath("../Zombie/ZombieNoise")
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.121569, 0.121569, 0.121569, 1)
 
@@ -2189,6 +2151,8 @@ position = Vector2(-30.2383, -30.2379)
 
 [node name="VillagerSpawn" parent="QuestPointManager/QuestPoint2" index="1"]
 position = Vector2(226.786, 962.58)
+
+[node name="VillagerManager" parent="." instance=ExtResource("27_uex5p")]
 
 [connection signal="animation_finished" from="Objects/Breakable/BridgeStalagmite/AnimationPlayer" to="Objects/Breakable/BridgeStalagmite" method="OnAnimationFinished"]
 [connection signal="timeout" from="ZombieManager/Timer" to="ZombieManager" method="OnTimerTimeout"]

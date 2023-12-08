@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://0onjm62rd2pi"]
+[gd_scene load_steps=12 format=3 uid="uid://0onjm62rd2pi"]
 
 [ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/inventory/player_inventory.tscn" id="1_j4acp"]
 [ext_resource type="PackedScene" uid="uid://cimpx303d7npd" path="res://scenes/ui/town_ui/town_hall_stats_panel.tscn" id="1_vgihe"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://c1r6la2nplhqp" path="res://scenes/ui/DayCounterLabel.tscn" id="3_bmooi"]
 [ext_resource type="PackedScene" uid="uid://bsoen384q11gf" path="res://scenes/ui/building_menu.tscn" id="5_om3g0"]
 [ext_resource type="PackedScene" uid="uid://dmr1ik7ojfwn5" path="res://scenes/quest/QuestBoardUi.tscn" id="6_8vyk0"]
-[ext_resource type="PackedScene" path="res://scenes/ui/minimap.tscn" id="6_khm13"]
 [ext_resource type="PackedScene" uid="uid://b50blftb1dypc" path="res://scenes/ui/player/player_hud.tscn" id="7_hs5fm"]
 [ext_resource type="Script" path="res://scripts/ui/overlay/HourCounter.cs" id="8_6k6a4"]
 [ext_resource type="PackedScene" uid="uid://c60n4vmc8f5pw" path="res://scenes/ui/villager_control_panel.tscn" id="10_d7eqe"]
@@ -76,27 +75,6 @@ mouse_filter = 2
 
 [node name="BuildingMenu" parent="." instance=ExtResource("5_om3g0")]
 mouse_filter = 2
-
-[node name="MinimapContainer" type="Panel" parent="."]
-offset_left = 1576.0
-offset_top = 832.0
-offset_right = 1912.0
-offset_bottom = 1032.0
-mouse_filter = 2
-
-[node name="Minimap" parent="MinimapContainer" instance=ExtResource("6_khm13")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -160.0
-offset_top = -92.0
-offset_right = 160.0
-offset_bottom = 92.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="HourCounterLabel" parent="." instance=ExtResource("3_bmooi")]
 offset_left = 1688.0

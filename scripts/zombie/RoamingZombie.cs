@@ -6,10 +6,10 @@ using Godot.Collections;
 public partial class RoamingZombie : CharacterBody2D
 {
 	[Export] private AudioStreamPlayer2D _audioStreamPlayer2D;
-	[Export] private LootController _lootController;
 	[Export] Array<Loot> _lootList;
-	
-	private enum ZombieReward{Small,Medium,Big};
+	[Export] public Loot loot;
+
+	private enum ZombieReward { Small, Medium, Big };
 	private ZombieReward reward;
 	private VillagerOccupation zombieOccupation;
 	private Skeleton2D _sprite;
@@ -29,21 +29,28 @@ public partial class RoamingZombie : CharacterBody2D
 	private ulong _exited;
 	private PackedScene _caveZombieSkeleton;
 	//AnimationPlayer animationPlayer;
+	private List<Item> _items = new List<Item>();
+
+	private int _meanDrop;
+
 	public override void _Ready()
 	{
-		_lootController.loot = _lootList[0];
-		_lootController.Init();
-		if(SceneManager.GetCurrentScene(this) == Scene.Cave)
+		if (loot != null)
 		{
-			 _caveZombieSkeleton = (PackedScene)GD.Load("res://scenes/zombie/Zombie4Skeleton.tscn");
+			InitLoot();
+		}
+
+		if (SceneManager.GetCurrentScene(this) == Scene.Cave)
+		{
+			_caveZombieSkeleton = (PackedScene)GD.Load("res://scenes/zombie/Zombie4Skeleton.tscn");
 		}
 		var zombieSkeleton1 = (PackedScene)GD.Load("res://scenes/zombie/Zombie1Skeleton.tscn");
 		var zombieSkeleton2 = (PackedScene)GD.Load("res://scenes/zombie/Zombie2Skeleton.tscn");
 		var zombieSkeleton3 = (PackedScene)GD.Load("res://scenes/zombie/Zombie3Skeleton.tscn");
 		int randomSkeletonIndex;
-		if(SceneManager.GetCurrentScene(this)!=Scene.Cave) randomSkeletonIndex = (int)GD.RandRange(1, 3);
+		if (SceneManager.GetCurrentScene(this) != Scene.Cave) randomSkeletonIndex = (int)GD.RandRange(1, 3);
 		else randomSkeletonIndex = (int)GD.RandRange(1, 4);
-		
+
 		switch (randomSkeletonIndex)
 		{
 			case 1:
@@ -65,21 +72,18 @@ public partial class RoamingZombie : CharacterBody2D
 			default:
 				break;
 		}
-		
+
 		//animationPlayer = GetNode<AnimationPlayer>("Skeleton2D/AnimationPlayer");
 		_hitboxes = new HitboxComponent[2];
 		//	instantiatedNPC = (PackedScene)GD.Load("res://scenes/villager/villager.tscn");
-	//	_rootNodePath = GetParent<Node2D>().GetPath();
-	//	rootNode = GetNodeOrNull<Node2D>(_rootNodePath);
+		//	_rootNodePath = GetParent<Node2D>().GetPath();
+		//	rootNode = GetNodeOrNull<Node2D>(_rootNodePath);
 		_sprite = GetNodeOrNull<Skeleton2D>("Skeleton2D");
 		_timer = GetNodeOrNull<Timer>("AttackTimer");
 		_updateStatsTimer = GetNodeOrNull<Timer>("UpdateStatsTimer");
 		_healthBar = GetNodeOrNull<ProgressBar>("HealthBar");
 		_healthComponent = GetNodeOrNull<HealthComponent>("HealthComponent");
 		_audioStreamPlayer2D = GetNodeOrNull<AudioStreamPlayer2D>("ZombieNoise");
-		
-		
- 
 
 		_attack = new Attack
 		{
@@ -91,7 +95,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 		var occupation = VillagerRawData.GetRandomOccupation();
 		//GD.Print(occupation.ToString());
-		
+
 		if (occupation != VillagerOccupation.Builder)
 		{
 			var zombieHeadBonetNode = GetNode<Bone2D>("Skeleton2D/TorsoBone/HeadBone/"); //Skeleton2D/TorsoBone/HeadBone/ZombieHat1
@@ -141,7 +145,7 @@ public partial class RoamingZombie : CharacterBody2D
 
 	private void AttackReceived(Attack attack)
 	{
-		if(IsQueuedForDeletion()) return;
+		if (IsQueuedForDeletion()) return;
 		var duration = 0.25f;
 		_knockback = attack.direction * attack.knockback;
 		var knockbackTween = GetTree().CreateTween();
@@ -153,7 +157,7 @@ public partial class RoamingZombie : CharacterBody2D
 		{
 			case EffectType.Cure:
 				Vector2 zombiePos = this.Transform.Origin;
-                var newVillagerData = new VillagerRawData();
+				var newVillagerData = new VillagerRawData();
 				newVillagerData.SetOccupation(zombieOccupation);
 				VillagerManager.villagerManagerInstance.AddNewVillagerRawData();
 				VillagerManager.villagerManagerInstance.SpawnNewVillager(zombiePos, true);
@@ -162,11 +166,12 @@ public partial class RoamingZombie : CharacterBody2D
 			default:
 				break;
 		}
-
-		_lootController.CallDeferred("AttackReceived", attack);
 	}
 	private void OnHealth(float _health)
 	{
+		if (_items.Count > 1)
+			DropItems();
+
 		if (_health <= 0)
 		{
 			ExpGain expGained = ZombieManager.type switch
@@ -177,12 +182,12 @@ public partial class RoamingZombie : CharacterBody2D
 				_ => throw new ArgumentOutOfRangeException()
 			};
 
+			DropItems(_items.Count);
+
 			TownManager.GainExp(expGained);
 			ZombieManager.zombieKillCount += 1f;
 			QueueFree();
 		}
-
-		_lootController.CallDeferred("OnHealth", _health);
 	}
 
 
@@ -293,10 +298,44 @@ public partial class RoamingZombie : CharacterBody2D
 					break;
 			}
 			int rewardIndex = (int)reward;
-			_lootController.loot = _lootList[rewardIndex];
-			_lootController.Init();
+			loot = _lootList[rewardIndex];
+			InitLoot();
 			_attack.damage = ZombieManager.damage;
 			_timer.WaitTime = ZombieManager.attackTime;
+		}
+	}
+
+	private void DropItems(int dropAmount = 1)
+	{
+		for (int i = 0; i < dropAmount; i++)
+		{
+			int randIndex = (int)GD.RandRange(0, _items.Count - 1);
+
+			RawInventoryItem dropItem = new RawInventoryItem(_items[randIndex].ID, _items[randIndex].Name, 1, _items[randIndex].StackSize);
+
+			Node2D droppedItem = PlayerInventoryController.CreateDroppedItem(dropItem, this.GlobalPosition, GetParent().GetParent());
+
+			_items.RemoveAt(randIndex);
+		}
+	}
+
+	private void InitLoot()
+	{
+		_meanDrop = loot.meanDrop;
+
+		_items.Clear();
+		for (int i = 0; i < _meanDrop; i++)
+		{
+			_items.Add(loot.lootItems[GD.RandRange(0, loot.lootItems.Count - 1)].item);
+		}
+
+		if (GD.Randf() < 0.75f)
+		{
+			_items.RemoveAt(GD.RandRange(0, _items.Count - 1));
+		}
+		else if (GD.Randf() > 0.9f)
+		{
+			_items.Add(loot.lootItems[GD.RandRange(0, loot.lootItems.Count - 1)].item);
 		}
 	}
 }

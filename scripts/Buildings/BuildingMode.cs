@@ -48,7 +48,7 @@ public partial class BuildingMode : Node2D
             return;
         }
 
-        if (collisions > 0 || (Position.X > _fence.fenceLengthX * 64 || Position.X < -_fence.fenceLengthX * 64 || Position.Y > _fence.fenceLengthY * 64 || Position.Y < -_fence.fenceLengthY * 64))
+        if (collisions > 0 || (Position.X > 15 * 128 || Position.X < -14 * 128 || Position.Y > 7 * 128 || Position.Y < -7 * 128))
         {
             Modulate = new Color(3, 1, 1, 1);
             return;

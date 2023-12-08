@@ -74,6 +74,16 @@ public partial class VillagerResidence : Control
 		}
 	}
 	
+	public override void _Input(InputEvent @event)
+	{
+		base._Input(@event);
+		
+		if (@event.IsActionPressed("close_townhall_menu"))
+		{
+			ClosePanel();
+		}
+	}
+	
 	void OpenPanel()
 	{
 		Visible = true;

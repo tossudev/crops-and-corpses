@@ -73,13 +73,6 @@ public partial class BuildingDemolishMenu : Control
                 }
             }
 
-
-            if (PlayerInventoryController.heldItem == null)
-            {
-                OpenMainPanel();
-                return;
-            }
-
             if (GetParent().IsInGroup("ArcherTower"))
             {
                 if (PlayerInventoryController.heldItem.id != 370)
@@ -93,7 +86,10 @@ public partial class BuildingDemolishMenu : Control
             {
                 int blockedHeld = PlayerInventoryController.heldItem?.id ?? -1;
                 int blockedSelected = PlayerInventoryController.selectedItem?.id ?? -1;
-                
+
+                Debug.WriteLine(blockedHeld);
+                Debug.WriteLine(blockedSelected);
+
                 if (blockedHeld == itemId || blockedSelected == itemId)
                 {
                     return;

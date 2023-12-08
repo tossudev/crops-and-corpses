@@ -21,9 +21,4 @@ public partial class EndScreen : Node2D
 	{
 		_animationPlayer.Play("EndingTextMovement");
 	}
-	void OnEndTextAnimationFinished()
-	{
-		//koitin tehä signaalia????
-		SceneManager.ChangeScene(this, Scene.Town);
-	}
 }

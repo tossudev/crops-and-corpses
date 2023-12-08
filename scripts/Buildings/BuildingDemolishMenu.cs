@@ -91,11 +91,15 @@ public partial class BuildingDemolishMenu : Control
 
             foreach(int itemId in _blockedItemIds)
             {
-                if (PlayerInventoryController.heldItem.id == itemId)
+                int blockedHeld = PlayerInventoryController.heldItem?.id ?? -1;
+                int blockedSelected = PlayerInventoryController.selectedItem?.id ?? -1;
+                
+                if (blockedHeld == itemId || blockedSelected == itemId)
                 {
                     return;
                 }
             }
+            
             OpenMainPanel();
         }
     }

@@ -36,7 +36,7 @@ public partial class NavigationObstacle : Polygon2D
 
 
     public override void _ExitTree() {
-	    if (navManager?.IsQueuedForDeletion() ?? true) return;
+	    if (SceneManager.sceneChanging || (navManager?.IsQueuedForDeletion() ?? true)) return;
 	    navManager?.RemoveArea(this);
 	    
 	    base._ExitTree();

@@ -31,7 +31,7 @@ public partial class QuestPoint : Node2D
     public bool isQuestPointActive = false;
 
     int playerDistanceToQuestPoint;
-    int SpawnRange = 300;
+    int SpawnRange = 600;
 
     int villagerSpawnRange = 50;
 

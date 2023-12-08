@@ -31,7 +31,13 @@ public partial class HealthComponent : Node2D
 
 	public override async void _Ready()
 	{
-		if (_parentScript != null && _parentScript.Name == "Player")
+        if (!SceneManager.IsCurrentScene(this, Scene.Town) && GetParent().IsInGroup("fence"))
+        {
+            QueueFree();
+            return;
+        }
+
+        if (_parentScript != null && _parentScript.Name == "Player")
 		{
 			_isPlayer = true;
 		}

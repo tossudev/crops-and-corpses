@@ -256,8 +256,6 @@ public partial class BuildingMenu : Control
 
                 if (node.FindChild("plant_slot").GetChildCount() > 0)
                 {
-                    //plantName = node.FindChild("plant_slot").GetChild(0).Name;
-
                     Plant plant = node.FindChild("plant_slot").GetChild(0) as Plant;
                     growthTime = plant.currentGrowthTime;
 
@@ -335,6 +333,7 @@ public partial class BuildingMenu : Control
 
     public async void SaveBuildings()
     {
+        var buildingsToSave = GetBuildings();
         await TaskExtensions.SuspendWhile(() => _savingInProgress);
 
         try
@@ -347,7 +346,7 @@ public partial class BuildingMenu : Control
             string path = Path.Join(savePath, FILE_NAME);
 
             _savingInProgress = true;
-            await File.WriteAllTextAsync(path, GetBuildings().ToString());
+            await File.WriteAllTextAsync(path, buildingsToSave.ToString());
             _savingInProgress = false;
         }
         catch (Exception ex)
@@ -505,6 +504,7 @@ public partial class BuildingMenu : Control
             HealthComponent _healthComponent = _buildingScene.GetNode("%HealthComponent") as HealthComponent;
             _healthComponent.SetHealth(_healthComponent.GetMaxHealth());
         }
+        SaveBuildings();
     }
 
     private void BuildingMode()

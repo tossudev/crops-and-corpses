@@ -35,7 +35,7 @@ public partial class NavigationManager : Node2D {
 		base._ExitTree();
 	}
 
-	void InitRegion(Node caller)
+    void InitRegion(Node caller)
 	{
 		_regionNode = null;
 		_navigationRegionPolygon = null;
@@ -152,7 +152,8 @@ public partial class NavigationManager : Node2D {
 			throw;
 		}
 	}
-	
+
+
 	static void AddNavigationObstacleToMap(NavigationObstacle obstacle)
 	{
 		if (_obstacleArray.Any(existingObstacle =>
@@ -164,13 +165,17 @@ public partial class NavigationManager : Node2D {
 			GD.PushWarning("Tried adding a disposed object, not happening anytime soon");
 			return;
 		}
-		
+			
 		_obstacleArray.Add(obstacle);
 
 		var polygonPoints = GetPolygonFromObject(obstacle);
 	    
 		_navigationRegionPolygon.AddOutline(polygonPoints);
-		UpdateObstacleIndexes();
+		
+		if (_initialized)
+		{
+			UpdateObstacleIndexes();
+		}
 	}
     
 	static void RemoveNavigationObstacleFromMap(NavigationObstacle obstacle)
@@ -194,7 +199,7 @@ public partial class NavigationManager : Node2D {
 
 	static Vector2[] GetPolygonFromObject(Polygon2D _obstacleNode) 
 	{
-		Vector2[] polygonPoints = (Vector2[]) _obstacleNode.Get("polygon");
+		Vector2[] polygonPoints = _obstacleNode.Polygon;
 
 		// Adjust areas local position to global
 		int _posIndex = 0;

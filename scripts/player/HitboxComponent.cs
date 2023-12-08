@@ -26,4 +26,13 @@ public partial class HitboxComponent : Area2D
 			_healthComponent.TakeDamage(attack);
 		}
 	}
+
+    public override void _Ready()
+    {
+        if (!SceneManager.IsCurrentScene(this, Scene.Town) && GetParent().IsInGroup("fence"))
+        {
+            QueueFree();
+            return;
+        }
+    }
 }

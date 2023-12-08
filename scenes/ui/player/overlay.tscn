@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://di5l0mrx44owj" path="res://scenes/buildings/town/town_hall/town_hall_menu.tscn" id="2_d0ykg"]
 [ext_resource type="PackedScene" uid="uid://c1r6la2nplhqp" path="res://scenes/ui/DayCounterLabel.tscn" id="3_bmooi"]
 [ext_resource type="PackedScene" uid="uid://bsoen384q11gf" path="res://scenes/ui/building_menu.tscn" id="5_om3g0"]
-[ext_resource type="PackedScene" uid="uid://dmr1ik7ojfwn5" path="res://scenes/quest/QuestBoardUi.tscn" id="6_8vyk0"]
+[ext_resource type="PackedScene" uid="uid://dmr1ik7ojfwn5" path="res://scenes/Quest/QuestBoardUi.tscn" id="6_8vyk0"]
 [ext_resource type="PackedScene" uid="uid://b50blftb1dypc" path="res://scenes/ui/player/player_hud.tscn" id="7_hs5fm"]
 [ext_resource type="Script" path="res://scripts/ui/overlay/HourCounter.cs" id="8_6k6a4"]
 [ext_resource type="PackedScene" uid="uid://c60n4vmc8f5pw" path="res://scenes/ui/villager_control_panel.tscn" id="10_d7eqe"]
@@ -76,6 +76,8 @@ offset_bottom = 768.0
 mouse_filter = 2
 
 [node name="BuildingMenu" parent="." instance=ExtResource("5_om3g0")]
+offset_top = 40.0
+offset_bottom = 80.0
 mouse_filter = 2
 
 [node name="HourCounterLabel" parent="." instance=ExtResource("3_bmooi")]

@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using Godot.Collections;
 
 public enum QuestStage
@@ -91,6 +92,11 @@ public partial class Quest : Node
         }
 
     }
+    
+    public bool HasStage(QuestStage stage)
+    {
+        return stages?.Any(foundStage => foundStage == stage) ?? false;
+    }
 
     public bool IsQuestComplete()
     {
@@ -99,7 +105,7 @@ public partial class Quest : Node
 
     public bool CompleteQuestStage(QuestStage stage)
     {
-        if (!stages.Contains(stage)) return false;
+        if (!HasStage(stage)) return false;
 
         stages.Remove(stage);
         return true;

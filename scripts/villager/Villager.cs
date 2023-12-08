@@ -203,7 +203,7 @@ public partial class Villager : CharacterBody2D
 	{
         var quest = await PlayerInfo.GetActiveQuest();
 
-		if (!(quest?.stages.Contains(QuestStage.Rescue) ?? false)) return;
+		if (!(quest?.HasStage(QuestStage.Find) ?? false)) return;
 		
 		if (quest.stages.Contains(QuestStage.Kill)) return;
 		
@@ -681,6 +681,7 @@ public partial class Villager : CharacterBody2D
 					
 					// Somebody else manned it first...
 					_currentArcherTower = null;
+					return;
 				}
 
 				SetNavMeshAgentPath(true, _currentArcherTower.GlobalPosition);

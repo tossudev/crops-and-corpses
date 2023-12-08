@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://c51iubnlq7npt"]
+[gd_scene load_steps=43 format=3 uid="uid://c51iubnlq7npt"]
 
 [ext_resource type="Texture2D" uid="uid://carua1m5jvrfl" path="res://assets/placeholder/temporary_logo.png" id="1_hqmmr"]
 [ext_resource type="Script" path="res://scripts/ui/MainMenu.cs" id="1_p6qp2"]
@@ -23,8 +23,10 @@
 [ext_resource type="Texture2D" uid="uid://lvnfkys1ygu3" path="res://assets/sprites/ui/toggle_button_on.png" id="20_kwqw5"]
 [ext_resource type="Texture2D" uid="uid://rt1a1lqk0d7" path="res://assets/sprites/ui/toggle_button_off.png" id="21_ielo2"]
 [ext_resource type="Texture2D" uid="uid://cvnoqpbr06n3t" path="res://assets/sprites/ui/grey_circle.png" id="22_0o08i"]
+[ext_resource type="Texture2D" uid="uid://desl5kdjhoa47" path="res://assets/sprites/ui/key_texture.png" id="24_anhm5"]
 [ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="24_muub7"]
 [ext_resource type="Texture2D" uid="uid://bdrlcw3a55ht6" path="res://assets/sprites/items/bridge.png" id="25_p7x5c"]
+[ext_resource type="LabelSettings" uid="uid://dt5ytrcyx65cj" path="res://assets/resources/labelsettings/crafting_window_header.tres" id="25_ylm2m"]
 [ext_resource type="Texture2D" uid="uid://bsa4asc4e8jc3" path="res://assets/sprites/buildings/well_color.png" id="26_2mw36"]
 [ext_resource type="Texture2D" uid="uid://crvolauraor0n" path="res://assets/sprites/Farm sprites/gate.png" id="27_fv2cy"]
 [ext_resource type="Texture2D" uid="uid://l6a5em6qijen" path="res://assets/sprites/Farm sprites/gate  topdown.png" id="28_xif0a"]
@@ -270,6 +272,14 @@ color = Color(0, 0, 0, 0.360784)
 grow_begin = -10.0
 grow_end = -10.0
 thickness = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_wo87e"]
+font_size = 42
+outline_size = 12
+outline_color = Color(0, 0, 0, 0.784314)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.784314)
+shadow_offset = Vector2(1, 2)
 
 [sub_resource type="FontFile" id="FontFile_1afan"]
 cache/0/16/0/ascent = 0.0
@@ -1077,9 +1087,260 @@ max_value = 1.0
 step = 0.01
 value = 0.6
 
-[node name="Buttons" type="VBoxContainer" parent="Settings"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="InfoPanel" type="Panel" parent="Settings"]
+offset_left = -680.0
+offset_top = -256.0
+offset_right = -312.0
+offset_bottom = 256.0
+
+[node name="Info" type="VBoxContainer" parent="Settings"]
+offset_left = -832.0
+offset_top = -320.0
+offset_right = -320.0
+offset_bottom = 320.0
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Pause" type="HBoxContainer" parent="Settings/Info"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Settings/Info/Pause"]
+layout_mode = 2
+text = "Pause"
+label_settings = ExtResource("25_ylm2m")
+
+[node name="Texture" type="TextureRect" parent="Settings/Info/Pause"]
+layout_mode = 2
+texture = ExtResource("24_anhm5")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Settings/Info/Pause/Texture"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "P"
+label_settings = SubResource("LabelSettings_wo87e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Divider" type="HBoxContainer" parent="Settings/Info"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Settings/Info/Divider"]
+layout_mode = 2
+text = "--- "
+label_settings = ExtResource("25_ylm2m")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Inventory" type="HBoxContainer" parent="Settings/Info"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Settings/Info/Inventory"]
+layout_mode = 2
+text = "Open Inventory"
+label_settings = ExtResource("25_ylm2m")
+
+[node name="Texture" type="TextureRect" parent="Settings/Info/Inventory"]
+layout_mode = 2
+texture = ExtResource("24_anhm5")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Settings/Info/Inventory/Texture"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "E"
+label_settings = SubResource("LabelSettings_wo87e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Crafting" type="HBoxContainer" parent="Settings/Info"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Settings/Info/Crafting"]
+layout_mode = 2
+text = "Open Crafting"
+label_settings = ExtResource("25_ylm2m")
+
+[node name="Texture" type="TextureRect" parent="Settings/Info/Crafting"]
+layout_mode = 2
+texture = ExtResource("24_anhm5")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Settings/Info/Crafting/Texture"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "Q"
+label_settings = SubResource("LabelSettings_wo87e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Building" type="HBoxContainer" parent="Settings/Info"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Settings/Info/Building"]
+layout_mode = 2
+text = "Open Building"
+label_settings = ExtResource("25_ylm2m")
+
+[node name="Texture" type="TextureRect" parent="Settings/Info/Building"]
+layout_mode = 2
+texture = ExtResource("24_anhm5")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Settings/Info/Building/Texture"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "V"
+label_settings = SubResource("LabelSettings_wo87e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quest" type="HBoxContainer" parent="Settings/Info"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Settings/Info/Quest"]
+layout_mode = 2
+text = "Open Quests"
+label_settings = ExtResource("25_ylm2m")
+
+[node name="Texture" type="TextureRect" parent="Settings/Info/Quest"]
+layout_mode = 2
+texture = ExtResource("24_anhm5")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Settings/Info/Quest/Texture"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "J"
+label_settings = SubResource("LabelSettings_wo87e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pickup" type="HBoxContainer" parent="Settings/Info"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Settings/Info/Pickup"]
+layout_mode = 2
+text = "Pick up Items"
+label_settings = ExtResource("25_ylm2m")
+
+[node name="Texture" type="TextureRect" parent="Settings/Info/Pickup"]
+layout_mode = 2
+texture = ExtResource("24_anhm5")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Settings/Info/Pickup/Texture"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "F"
+label_settings = SubResource("LabelSettings_wo87e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Info2" type="Control" parent="Settings"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -640.0
+offset_top = -256.0
+offset_right = -320.0
+offset_bottom = 256.0
+
+[node name="Movement" type="Control" parent="Settings/Info2"]
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 256.0
+
+[node name="W" type="TextureRect" parent="Settings/Info2/Movement"]
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 128.0
+texture = ExtResource("24_anhm5")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Settings/Info2/Movement/W"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "W"
+label_settings = SubResource("LabelSettings_wo87e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="S" type="TextureRect" parent="Settings/Info2/Movement"]
+offset_left = 128.0
+offset_top = 136.0
+offset_right = 192.0
+offset_bottom = 200.0
+texture = ExtResource("24_anhm5")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Settings/Info2/Movement/S"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "S"
+label_settings = SubResource("LabelSettings_wo87e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="A" type="TextureRect" parent="Settings/Info2/Movement"]
+offset_left = 56.0
+offset_top = 136.0
+offset_right = 120.0
+offset_bottom = 200.0
+texture = ExtResource("24_anhm5")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Settings/Info2/Movement/A"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "A"
+label_settings = SubResource("LabelSettings_wo87e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="D" type="TextureRect" parent="Settings/Info2/Movement"]
+offset_left = 200.0
+offset_top = 136.0
+offset_right = 264.0
+offset_bottom = 200.0
+texture = ExtResource("24_anhm5")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Settings/Info2/Movement/D"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "D"
+label_settings = SubResource("LabelSettings_wo87e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Settings/Info2/Movement"]
+offset_left = 64.0
+offset_right = 256.0
+offset_bottom = 64.0
+text = "Movement
+"
+label_settings = ExtResource("25_ylm2m")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Credits" type="Node2D" parent="."]
 position = Vector2(-2496, 0)

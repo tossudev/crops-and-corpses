@@ -29,7 +29,7 @@ public static class TaskExtensions
 
             if (waitIndefinitely) continue;
             
-            if (elapsedTimeMS / 1000 > timeOutS) break;
+            if (elapsedTimeMS / 1000 >= timeOutS) break;
         }
 
         return elapsedTimeMS;

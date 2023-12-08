@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class QuestBoardUi : Control
 {
@@ -62,20 +63,17 @@ public partial class QuestBoardUi : Control
         _forestButton.Pressed += () =>
         {
             questManager.StartRescueQuest(Scene.Forest, _selectedDiff);
-            CheckIfQuestStarted();
-            HideQuestButtons();
+            UpdateQuestButtons();
         };
         _ruinsButton.Pressed += () =>
         {
             questManager.StartRescueQuest(Scene.Ruins, _selectedDiff);
-            CheckIfQuestStarted();
-            HideQuestButtons();
+            UpdateQuestButtons();
         };
         _caveButton.Pressed += () =>
         {
             questManager.StartRescueQuest(Scene.Cave, _selectedDiff);
-            CheckIfQuestStarted();
-            HideQuestButtons();
+            UpdateQuestButtons();
         };
 
         Dif1Button.Pressed += () => SetQuestDifficulty(1);
@@ -84,7 +82,7 @@ public partial class QuestBoardUi : Control
 
         _closeButton.Pressed += CloseQuestBoard;
 
-        CheckIfQuestStarted();
+        UpdateQuestButtons();
 
         CloseQuestBoard();
     }
@@ -102,7 +100,6 @@ public partial class QuestBoardUi : Control
             else
             {
                 OpenQuestBoard();
-                CheckIfQuestStarted();
             }
         }
 
@@ -115,17 +112,6 @@ public partial class QuestBoardUi : Control
           
         }
     }
-
-
-    async void CheckIfQuestStarted()
-    {
-        var activeQuest = await PlayerInfo.GetActiveQuest();
-        
-        questStatusText.Text = activeQuest != null 
-            ? "Quest already started" 
-            : "Can start new quest";
-    }
-
 
     void SetQuestDifficulty(int diff)
     {
@@ -159,7 +145,8 @@ public partial class QuestBoardUi : Control
         }
         Visible = true;
         SetLevelsActive();
-}
+        UpdateQuestButtons();
+    }
        
 
     public int GetSelectedDifficulty()
@@ -168,25 +155,36 @@ public partial class QuestBoardUi : Control
     }
 
     // hide the quest buttons if active quest is not null
-    void HideQuestButtons()
+    async void UpdateQuestButtons()
     {
-        var quest = PlayerInfo.GetActiveQuest();
+        var quest = await PlayerInfo.GetActiveQuest();
+        
+        _forestButton.Visible = false;
+        _ruinsButton.Visible = false;
+        _caveButton.Visible = false;
+        Dif1Button.Visible = false;
+        Dif2Button.Visible = false;
+        Dif3Button.Visible = false;
 
         if (quest != null)
         {
-            _forestButton.Visible = false;
-            _ruinsButton.Visible = false;
-            _caveButton.Visible = false;
-            Dif1Button.Visible = false;
-            Dif2Button.Visible = false;
-            Dif3Button.Visible = false;
+            questStatusText.Text = "Quest Already started";
+            return;
         }
-        else
+
+        if (SaveData.allVillagerRawData.Count(data => data.isTownPopulation) >=
+            TownManager.currentTownStats.populationCap)
         {
-            _forestButton.Visible = true;
-            _ruinsButton.Visible = true;
-            _caveButton.Visible = true;
+            questStatusText.Text = "Population cap reached! Level up to increase population cap";
+            return;
         }
         
+        _forestButton.Visible = true;
+        _ruinsButton.Visible = true;
+        _caveButton.Visible = true;
+        Dif1Button.Visible = true;
+        Dif2Button.Visible = true;
+        Dif3Button.Visible = true;
+        questStatusText.Text = "Select a difficulty and then a location to start a new Quest";
     }
 }

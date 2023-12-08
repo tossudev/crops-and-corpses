@@ -96,12 +96,12 @@ public partial class QuestPoint : Node2D
         
         playerDistanceToQuestPoint = (int) playerController.GlobalPosition.DistanceTo(GlobalPosition);
 
-        if (_activeQuest.stages.Contains(QuestStage.Find))
+        if (_activeQuest.HasStage(QuestStage.Find))
         {
             QuestJournal.UpdateDistanceText(playerDistanceToQuestPoint);
         }
         
-        if (_activeQuest.stages.Contains(QuestStage.Kill))
+        if (_activeQuest.HasStage(QuestStage.Kill))
         {
             if (playerDistanceToQuestPoint <= SpawnRange)
             {
@@ -118,6 +118,7 @@ public partial class QuestPoint : Node2D
         VillagerManager.villagerManagerInstance.SpawnQuestVillagers(villagerSpawnPoint.GlobalPosition);
     }
 
+    
 
     public void SpawnZombies()
     {
@@ -162,9 +163,10 @@ public partial class QuestPoint : Node2D
             SpawnZombies();
             SpawnVillagers();
         }
+
+        int zombiesRemaining = zombieSpawn.GetZombieQuestListCount();
         
-        
-        if (zombieSpawn.GetZombieQuestListCount() == 0)
+        if (zombiesRemaining == 0)
         {
             if (_activeQuest.CompleteQuestStage(QuestStage.Kill))
             {

@@ -1,20 +1,21 @@
-[gd_scene load_steps=12 format=3 uid="uid://btmwjcvssjjf7"]
+[gd_scene load_steps=13 format=3 uid="uid://btmwjcvssjjf7"]
 
 [ext_resource type="Script" path="res://scripts/World/LootController.cs" id="1_15rhp"]
-[ext_resource type="Resource" path="res://TinoTests/Resources/copper_ore.tres" id="2_wuj48"]
+[ext_resource type="Resource" uid="uid://k4e0ailiic3x" path="res://TinoTests/Resources/copper_ore.tres" id="2_wuj48"]
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="3_1ic63"]
-[ext_resource type="Texture2D" uid="uid://cn6q75jkyryf1" path="res://assets/sprites/foliage/rock.png" id="3_6kr0x"]
+[ext_resource type="Texture2D" uid="uid://chex27l10q7kf" path="res://assets/sprites/items/ore_copper_bottom.png" id="4_gl3o5"]
 [ext_resource type="PackedScene" uid="uid://c17fveq7moc5d" path="res://scenes/player/Components/health_component.tscn" id="4_isnin"]
+[ext_resource type="Texture2D" uid="uid://d3tobj4p2urm5" path="res://assets/sprites/items/ore_copper_overlay.png" id="5_a50np"]
 [ext_resource type="PackedScene" uid="uid://b1t3n3ka287ea" path="res://scenes/player/Components/hitbox_component.tscn" id="5_kywjc"]
 [ext_resource type="PackedScene" uid="uid://d0xn1ow21c81c" path="res://scenes/world/navigation_obstacle_area.tscn" id="6_crfoj"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pn142"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ou5vi"]
 radius = 85.9731
-height = 288.353
+height = 222.676
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgg0g"]
-radius = 57.9772
-height = 258.482
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iygei"]
+radius = 51.788
+height = 203.046
 
 [sub_resource type="Animation" id="Animation_ir0ao"]
 resource_name = "shake"
@@ -46,14 +47,17 @@ _sprite = NodePath("Sprite2D")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.615686)
-position = Vector2(-1.39566, -43.2337)
-rotation = 2.87979
-scale = Vector2(5.00348, 2.35276)
+position = Vector2(-5, -47)
+scale = Vector2(4.56045, 2.35276)
 texture = ExtResource("3_1ic63")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-5, -90)
-texture = ExtResource("3_6kr0x")
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_gl3o5")
+
+[node name="Overlay" type="Sprite2D" parent="Sprite2D"]
+texture = ExtResource("5_a50np")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("_parentScript") instance=ExtResource("4_isnin")]
 _parentScript = NodePath("..")
@@ -67,15 +71,15 @@ _parentScript = NodePath("..")
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(-7, -80)
-rotation = 1.25664
-shape = SubResource("CapsuleShape2D_pn142")
+position = Vector2(-7, -87)
+rotation = 1.39626
+shape = SubResource("CapsuleShape2D_ou5vi")
 debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-8, -72)
-rotation = 1.25664
-shape = SubResource("CapsuleShape2D_wgg0g")
+position = Vector2(-0.999999, -66)
+rotation = 1.39626
+shape = SubResource("CapsuleShape2D_iygei")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

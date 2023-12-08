@@ -1,17 +1,17 @@
-[gd_scene load_steps=48 format=3 uid="uid://bgyv0c8xt1fd4"]
+[gd_scene load_steps=49 format=3 uid="uid://bgyv0c8xt1fd4"]
 
 [ext_resource type="PackedScene" uid="uid://c8bx46w1qix2q" path="res://scenes/player/player.tscn" id="2_nnncm"]
 [ext_resource type="PackedScene" uid="uid://chw8bc0kxym0e" path="res://scenes/villager/villager_manager.tscn" id="2_yronx"]
-[ext_resource type="Texture2D" uid="uid://0hhkfe0l3h7p" path="res://assets/sprites/tiles/Water_tile_copy_donotdelete.png" id="3_ui0sk"]
-[ext_resource type="Texture2D" uid="uid://bqff8g4bg4gjr" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp_copyDoNotDelete.png" id="4_87olk"]
+[ext_resource type="Texture2D" uid="uid://di77p0biuu8no" path="res://assets/sprites/tiles/Water_tile_copy_donotdelete.png" id="3_ui0sk"]
+[ext_resource type="Texture2D" uid="uid://xbq4hvtodvgo" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp_copyDoNotDelete.png" id="4_87olk"]
 [ext_resource type="Texture2D" uid="uid://dxj7bcxr4rnr8" path="res://assets/sprites/tiles/Water_tile.png" id="5_ho2sg"]
 [ext_resource type="PackedScene" uid="uid://dyagdsgc6dam3" path="res://scenes/world/tree.tscn" id="5_tpvf0"]
-[ext_resource type="Texture2D" uid="uid://b1p5pr8rl5ao2" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="5_x7rje"]
+[ext_resource type="Texture2D" uid="uid://c3qgdt3akj6c3" path="res://assets/sprites/tiles/watertile_corners/watertile_leftDown.png" id="5_x7rje"]
 [ext_resource type="TileSet" uid="uid://c8hb8l070pv4u" path="res://assets/resources/tiles/ground_tiles.tres" id="6_3ler8"]
-[ext_resource type="Texture2D" uid="uid://cvrwsbcrk40ky" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="6_jb6x6"]
-[ext_resource type="Texture2D" uid="uid://bm3t1j2epo8mh" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="7_t3t4h"]
+[ext_resource type="Texture2D" uid="uid://c7h8wkbc6mat2" path="res://assets/sprites/tiles/watertile_corners/watertile_leftUp.png" id="6_jb6x6"]
+[ext_resource type="Texture2D" uid="uid://dokmiu680kpvh" path="res://assets/sprites/tiles/watertile_corners/watertile_rightDown.png" id="7_t3t4h"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/water.gdshader" id="7_vli6y"]
-[ext_resource type="Texture2D" uid="uid://dpeka1n5kwv22" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="8_u4ryb"]
+[ext_resource type="Texture2D" uid="uid://bpwa1f16y5w4x" path="res://assets/sprites/tiles/watertile_corners/watertile_rightUp.png" id="8_u4ryb"]
 [ext_resource type="Texture2D" uid="uid://dks6iqnb0a6gx" path="res://assets/resources/shaders/water_noise_texture.tres" id="8_up80f"]
 [ext_resource type="PackedScene" uid="uid://cic35vewp7pln" path="res://scenes/farm/farm_manager.tscn" id="8_v8hay"]
 [ext_resource type="PackedScene" uid="uid://bcoq8weob6f7g" path="res://scenes/world/tree2.tscn" id="9_wtibd"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bhksbcf1vypvr" path="res://scenes/buildings/fence_scenes/Fences.tscn" id="12_itbrc"]
 [ext_resource type="PackedScene" uid="uid://dyq3ksvy2gwvv" path="res://scenes/world/bush.tscn" id="14_6xci0"]
 [ext_resource type="PackedScene" uid="uid://cfa7c2hs7jxvf" path="res://scenes/world/street_sign_post.tscn" id="16_bojlm"]
+[ext_resource type="PackedScene" uid="uid://btmwjcvssjjf7" path="res://scenes/world/copper_ore.tscn" id="19_wvwrc"]
 [ext_resource type="Script" path="res://scripts/farm/Well.cs" id="20_q2pyn"]
 [ext_resource type="Texture2D" uid="uid://bo1v61ufoas4h" path="res://assets/sprites/buildings/welldesing.png" id="21_bibmj"]
 [ext_resource type="Script" path="res://scripts/World/PortalManager.cs" id="21_cej3m"]
@@ -28,7 +29,7 @@
 [ext_resource type="Script" path="res://scripts/World/Portal.cs" id="22_53qji"]
 [ext_resource type="Shape2D" uid="uid://cexw2rv4qd6l6" path="res://scenes/farm/shapes/well_shape.tres" id="22_d2i6s"]
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="22_dhiv3"]
-[ext_resource type="Texture2D" uid="uid://vhi02kjwlko3" path="res://assets/sprites/Farm sprites/cave enter.png" id="23_nkpxm"]
+[ext_resource type="Texture2D" uid="uid://xhji42eht4ur" path="res://assets/sprites/Farm sprites/cave enter.png" id="23_nkpxm"]
 [ext_resource type="PackedScene" uid="uid://bc8irw10q6vqe" path="res://scenes/world/navigation_manager.tscn" id="23_vb7um"]
 [ext_resource type="Script" path="res://scripts/zombie/ZombieManager.cs" id="26_e7msj"]
 [ext_resource type="Script" path="res://scripts/time/TimeManager.cs" id="29_6j2s6"]
@@ -1322,6 +1323,38 @@ _sprite = NodePath("../Rock/Sprite2D")
 position = Vector2(1088, 3656)
 _animationPlayer = NodePath("../Rock/AnimationPlayer")
 _sprite = NodePath("../Rock/Sprite2D")
+
+[node name="Copper" type="Node2D" parent="Objects/Breakable"]
+
+[node name="Copper Ore" parent="Objects/Breakable/Copper" instance=ExtResource("19_wvwrc")]
+position = Vector2(-2239, 2861)
+
+[node name="Copper Ore2" parent="Objects/Breakable/Copper" instance=ExtResource("19_wvwrc")]
+position = Vector2(-3046, -1534)
+
+[node name="Copper Ore3" parent="Objects/Breakable/Copper" instance=ExtResource("19_wvwrc")]
+position = Vector2(2936, -1624)
+
+[node name="Copper Ore4" parent="Objects/Breakable/Copper" instance=ExtResource("19_wvwrc")]
+position = Vector2(4182, 689)
+
+[node name="Copper Ore5" parent="Objects/Breakable/Copper" instance=ExtResource("19_wvwrc")]
+position = Vector2(-552, 2080)
+
+[node name="Copper Ore6" parent="Objects/Breakable/Copper" instance=ExtResource("19_wvwrc")]
+position = Vector2(3164, 1648)
+
+[node name="Copper Ore7" parent="Objects/Breakable/Copper" instance=ExtResource("19_wvwrc")]
+position = Vector2(-1217, -2116)
+
+[node name="Copper Ore8" parent="Objects/Breakable/Copper" instance=ExtResource("19_wvwrc")]
+position = Vector2(1378, -1870)
+
+[node name="Copper Ore9" parent="Objects/Breakable/Copper" instance=ExtResource("19_wvwrc")]
+position = Vector2(473, 2535)
+
+[node name="Copper Ore10" parent="Objects/Breakable/Copper" instance=ExtResource("19_wvwrc")]
+position = Vector2(-4143, 794)
 
 [node name="Lights" type="Node2D" parent="Objects"]
 

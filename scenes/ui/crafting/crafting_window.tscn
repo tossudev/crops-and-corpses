@@ -1,7 +1,7 @@
-[gd_scene load_steps=40 format=3 uid="uid://ba8jl34px0fpl"]
+[gd_scene load_steps=41 format=3 uid="uid://ba8jl34px0fpl"]
 
 [ext_resource type="Script" path="res://scripts/ui/crafting/CraftingWindow.cs" id="1_glv8t"]
-[ext_resource type="Texture2D" uid="uid://d0p1n5y0uaenf" path="res://assets/sprites/ui/wooden_panel.png" id="2_g6msi"]
+[ext_resource type="Texture2D" uid="uid://c3502k7o4ej7j" path="res://assets/sprites/ui/wooden_panel.png" id="2_g6msi"]
 [ext_resource type="Script" path="res://scripts/ui/crafting/CraftPanel.cs" id="2_imgwl"]
 [ext_resource type="LabelSettings" uid="uid://dt5ytrcyx65cj" path="res://assets/resources/labelsettings/crafting_window_header.tres" id="3_hialj"]
 [ext_resource type="LabelSettings" uid="uid://dv17cjn3uthox" path="res://assets/resources/labelsettings/crafting_panel_item_label_settings.tres" id="3_p7dgv"]
@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://cqnav3flekvvt" path="res://assets/resources/game_items/tool_items_350_449/405_bucket.tres" id="8_thpem"]
 [ext_resource type="Resource" uid="uid://bpjwmo4fvwr48" path="res://assets/resources/game_items/tool_items_350_449/400_bug_spray.tres" id="9_p7d3c"]
 [ext_resource type="Resource" uid="uid://b0wqidoebr4r8" path="res://assets/resources/game_items/tool_items_350_449/360_copper_pick.tres" id="9_r2n7o"]
+[ext_resource type="Resource" uid="uid://b7mm5b7xm04ju" path="res://assets/resources/game_items/resource_items_0_to_99/3_steel.tres" id="11_5v1w5"]
 [ext_resource type="Resource" uid="uid://cj0seqylk2aaa" path="res://assets/resources/game_items/tool_items_350_449/350_copper_axe.tres" id="11_gc4rs"]
 [ext_resource type="Resource" uid="uid://c1sgw6il1u3lh" path="res://assets/resources/game_items/tool_items_350_449/351_iron_axe.tres" id="11_vkb3h"]
 [ext_resource type="Resource" uid="uid://dn4elc6q0jdu3" path="res://assets/resources/game_items/weapon_items_150_to_249/151_iron_sword.tres" id="12_eclrf"]
@@ -30,8 +31,8 @@
 [ext_resource type="Texture2D" uid="uid://bb0nmx2q8w7hd" path="res://assets/resources/styles/crafting_window_circular_gradient.tres" id="25_0cpqs"]
 [ext_resource type="Texture2D" uid="uid://g0b72r3myf3c" path="res://assets/sprites/items/item_arrow.png" id="26_p2h1b"]
 [ext_resource type="FontFile" uid="uid://doceug7kw76yx" path="res://assets/resources/labelsettings/base_ui_font.tres" id="29_dhdnb"]
-[ext_resource type="Texture2D" uid="uid://c6n0vrm0ae5c1" path="res://scenes/ui/general/button.png" id="29_esti5"]
-[ext_resource type="LabelSettings" uid="uid://ddsqt02wte6x0" path="res://assets/resources/labelsettings/default_button_label_settings.tres" id="30_d5325"]
+[ext_resource type="Texture2D" uid="uid://0i07sne8os8q" path="res://scenes/ui/general/button.png" id="29_esti5"]
+[ext_resource type="LabelSettings" path="res://assets/resources/labelsettings/default_button_label_settings.tres" id="30_d5325"]
 [ext_resource type="StyleBox" uid="uid://ddenh15clg401" path="res://assets/resources/styles/default_tab_container_unselected_tab_style.tres" id="30_qwsbn"]
 [ext_resource type="StyleBox" uid="uid://bbwealwe8brh6" path="res://assets/resources/styles/default_button_style_box.tres" id="32_jdgb2"]
 [ext_resource type="StyleBox" uid="uid://xd4dptkhsu7w" path="res://assets/resources/styles/default_button_hover_style_box.tres" id="33_862nd"]
@@ -138,6 +139,11 @@ layout_mode = 2
 
 [node name="ItemGridSlot7" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2
+
+[node name="CraftableItemBoardsAndNails" parent="ItemArea/GridContainer/ItemGridSlot7" instance=ExtResource("5_8tf6t")]
+layout_direction = 0
+layout_mode = 2
+itemRes = ExtResource("11_5v1w5")
 
 [node name="ItemGridSlot8" parent="ItemArea/GridContainer" instance=ExtResource("4_h3ga6")]
 layout_mode = 2

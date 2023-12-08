@@ -14,7 +14,6 @@ public partial class VillagerDropOff : Node2D
                 if ((!quest?.CompleteQuestStage(QuestStage.Deliver)) ?? false) return;
                 questManager.FinishQuest();
                 
-                villager.rawData.isTownPopulation = true;
                 villager.QueueFree();
                 GD.Print("Villager Drop Off");
             }

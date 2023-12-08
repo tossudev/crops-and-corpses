@@ -93,6 +93,16 @@ public partial class QuestManager : Node
 			_ => ExpGain.MEDIUM
 		});
 
+		if (quest.type == QuestType.Rescue)
+		{
+			foreach (var villagerdata in SaveData.allVillagerRawData.FindAll(data => !data.isTownPopulation))
+			{
+				villagerdata.isTownPopulation = true;
+				villagerdata.xCoord = 0;
+				villagerdata.yCoord = 0;
+			}
+		}
+		
 		PlayerInfo.SetActiveQuest(null);
 	}
 

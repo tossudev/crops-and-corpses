@@ -151,6 +151,8 @@ public partial class VillagerManager : Node2D
 
     void SaveVillagers()
 	{
+		if (!SceneManager.IsCurrentScene(this, Scene.Town)) return;
+		
 		foreach (var villager in _allVillagers)
 		{
 			villager.SavePosition();

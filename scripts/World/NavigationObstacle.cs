@@ -8,17 +8,17 @@ public partial class NavigationObstacle : Polygon2D
 	public Label debugText;
 
 
-    public override async void _EnterTree()
+    public override void _EnterTree()
     {
         base._EnterTree();
         
-        await TaskExtensions.SuspendWhile(() => !NavigationManager._initialized);
+        debugText = GetNode<Label>("Label");
 
-		debugText = GetNode<Label>("Label");
-
-		Node scene = GetTree().CurrentScene;
-		navManager = scene.GetNodeOrNull<Node2D>("%NavigationManager") as NavigationManager;
+        Node scene = GetTree().CurrentScene;
+        navManager = scene.GetNodeOrNull<Node2D>("%NavigationManager") as NavigationManager;
         
+        
+        if (navManager?.IsQueuedForDeletion() ?? true) return;
 		navManager?.AddArea(this);
     }
 
@@ -35,12 +35,10 @@ public partial class NavigationObstacle : Polygon2D
     // }
 
 
-    public override async void _ExitTree() {
+    public override void _ExitTree() {
+	    if (navManager?.IsQueuedForDeletion() ?? true) return;
+	    navManager?.RemoveArea(this);
 	    
 	    base._ExitTree();
-
-	    
-	    await TaskExtensions.SuspendWhile(() => !NavigationManager._initialized);
-	    navManager?.RemoveArea(this);
     }
 }

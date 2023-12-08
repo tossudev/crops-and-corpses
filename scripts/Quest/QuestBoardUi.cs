@@ -63,20 +63,17 @@ public partial class QuestBoardUi : Control
         _forestButton.Pressed += () =>
         {
             questManager.StartRescueQuest(Scene.Forest, _selectedDiff);
-            CheckIfQuestStarted();
-            HideQuestButtons();
+            UpdateQuestButtons();
         };
         _ruinsButton.Pressed += () =>
         {
             questManager.StartRescueQuest(Scene.Ruins, _selectedDiff);
-            CheckIfQuestStarted();
-            HideQuestButtons();
+            UpdateQuestButtons();
         };
         _caveButton.Pressed += () =>
         {
             questManager.StartRescueQuest(Scene.Cave, _selectedDiff);
-            CheckIfQuestStarted();
-            HideQuestButtons();
+            UpdateQuestButtons();
         };
 
         Dif1Button.Pressed += () => SetQuestDifficulty(1);
@@ -85,7 +82,7 @@ public partial class QuestBoardUi : Control
 
         _closeButton.Pressed += CloseQuestBoard;
 
-        CheckIfQuestStarted();
+        UpdateQuestButtons();
 
         CloseQuestBoard();
     }
@@ -103,7 +100,6 @@ public partial class QuestBoardUi : Control
             else
             {
                 OpenQuestBoard();
-                CheckIfQuestStarted();
             }
         }
 
@@ -116,17 +112,6 @@ public partial class QuestBoardUi : Control
           
         }
     }
-
-
-    async void CheckIfQuestStarted()
-    {
-        var activeQuest = await PlayerInfo.GetActiveQuest();
-        
-        questStatusText.Text = activeQuest != null 
-            ? "Quest already started" 
-            : "Can start new quest";
-    }
-
 
     void SetQuestDifficulty(int diff)
     {
@@ -160,6 +145,7 @@ public partial class QuestBoardUi : Control
         }
         Visible = true;
         SetLevelsActive();
+        UpdateQuestButtons();
     }
        
 
@@ -169,32 +155,30 @@ public partial class QuestBoardUi : Control
     }
 
     // hide the quest buttons if active quest is not null
-    void HideQuestButtons()
+    async void UpdateQuestButtons()
     {
-        var quest = PlayerInfo.GetActiveQuest();
+        var quest = await PlayerInfo.GetActiveQuest();
+        
+        _forestButton.Visible = false;
+        _ruinsButton.Visible = false;
+        _caveButton.Visible = false;
 
-        if (SaveData.allVillagerRawData.Count(data => data.isTownPopulation) < TownManager.currentTownStats.populationCap)
+        if (quest != null)
         {
-            if (quest != null)
-            {
-                _forestButton.Visible = false;
-                _ruinsButton.Visible = false;
-                _caveButton.Visible = false;
-            }
-            else
-            {
-                _forestButton.Visible = true;
-                _ruinsButton.Visible = true;
-                _caveButton.Visible = true;
-            }
-        }
-        else
-        {
-            _forestButton.Visible = false;
-            _ruinsButton.Visible = false;
-            _caveButton.Visible = false;
+            questStatusText.Text = "Quest Already started";
+            return;
         }
 
-
+        if (SaveData.allVillagerRawData.Count(data => data.isTownPopulation) >=
+            TownManager.currentTownStats.populationCap)
+        {
+            questStatusText.Text = "Population cap reached! Level up to increase population cap";
+            return;
+        }
+        
+        _forestButton.Visible = true;
+        _ruinsButton.Visible = true;
+        _caveButton.Visible = true;
+        questStatusText.Text = "Select a difficulty and then a location to start a new Quest";
     }
 }

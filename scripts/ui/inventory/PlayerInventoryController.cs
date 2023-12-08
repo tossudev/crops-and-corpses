@@ -81,9 +81,16 @@ public partial class PlayerInventoryController : Control
         }
     }
 
-
-    public static void UpdateHeldItem(int hotbarIndex)
+    public override void _ExitTree()
     {
+        base._ExitTree();
+        isInitialized = false;
+    }
+
+    public static async void UpdateHeldItem(int hotbarIndex)
+    {
+        await TaskExtensions.SuspendWhile(() => !isInitialized);
+        
         heldItem = SaveData.playerHotbarItems[hotbarIndex];
         heldItemIndex = hotbarIndex; 
 

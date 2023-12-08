@@ -15,23 +15,47 @@ public partial class NavigationManager : Node2D {
 	public const string _obstacleGroupName = "obstacle_area";
 	
 	static NavigationRegion2D _regionNode;
-	static NavigationPolygon _region;
+	static NavigationPolygon _navigationRegionPolygon;
 
 	static readonly Array<NavigationObstacle> _obstacleArray = new ();
 
 	public static bool _initialized;
+	public static bool bakeInProgress;
+
+	Timer _updateTimer;
 
 	public override void _Ready()
 	{
-		_regionNode = GetNode<NavigationRegion2D>("Region");
-		_region = _regionNode.NavigationPolygon;
-
 		InitRegion(this);
 	}
 
+	public override void _ExitTree()
+	{
+		_initialized = false;
+		base._ExitTree();
+	}
 
 	void InitRegion(Node caller)
 	{
+		_regionNode = null;
+		_navigationRegionPolygon = null;
+
+		_obstacleArray.Clear();
+		_initialized = false;
+		bakeInProgress = false;
+		
+		_regionNode = GetNode<NavigationRegion2D>("Region");
+		_navigationRegionPolygon = _regionNode.NavigationPolygon;
+
+		if (_navigationRegionPolygon is null)
+		{
+			GD.PushError("Navigation Region Node not found @NavigationManager");
+			return;
+		}
+		
+		_navigationRegionPolygon.ClearOutlines();
+		_navigationRegionPolygon.ClearPolygons();
+		
 		foreach (var node in caller.GetTree().GetNodesInGroup(_obstacleGroupName))
 		{
 			var navigationObstacle = (NavigationObstacle) node;
@@ -41,95 +65,132 @@ public partial class NavigationManager : Node2D {
 
 		UpdateObstacleIndexes();
 
-		
-		
-		Timer updateTimer = new Timer()
+		_updateTimer?.QueueFree();
+
+		_updateTimer = new Timer()
 		{
 			Autostart = true,
 			OneShot = false,
 			WaitTime = 10f
 		};
 
-		updateTimer.Timeout += BakeMap;
-		AddChild(updateTimer);
+		_updateTimer.Timeout += BakeMap;
+		AddChild(_updateTimer);
 		
 		// Update navigation region
 		BakeMap();
-		_initialized = true;
     }
     
-
-
-	public void AddArea(NavigationObstacle obstacle)
-	{
-
-		if (!_initialized)
-		{
-			GD.PushError("Unable to initialize navigationManager");
-			return;
-		}
-		
-		if (obstacle is null)
-		{
-			GD.PushWarning("Tried to add null obstacle");
-			return;
-		}
-		
-		if (_obstacleArray.Any(existingObstacle => existingObstacle.nodeIndex == obstacle.nodeIndex)) return;
-
-
-		AddNavigationObstacleToMap(obstacle);
-		UpdateObstacleIndexes();
-	}
-
-	static bool _bakeInProgress;
 	static async void BakeMap()
 	{
-		await TaskExtensions.SuspendWhile(() => _bakeInProgress);
-
-		_bakeInProgress = true;
+		await TaskExtensions.SuspendWhile(() => bakeInProgress);
+        
+		if (SceneManager.sceneChanging) return;
+		
+		bakeInProgress = true;
+		
 		await Task.Run(() =>
 		{
-			_region.MakePolygonsFromOutlines();
+			_navigationRegionPolygon.MakePolygonsFromOutlines();
+
+			bakeInProgress = false;
+			_initialized = true;
 		});
-		_bakeInProgress = false;
 	}
-	
-	public void RemoveArea(NavigationObstacle obstacle)
+
+	public async void AddArea(NavigationObstacle obstacle)
 	{
-	
+		await TaskExtensions.SuspendWhile(() => !_initialized);
+
 		if (!_initialized)
 		{
 			GD.PushError("Unable to initialize navigationManager");
 			return;
 		}
 		
-		if (obstacle is null)
+		if (obstacle == null || obstacle.IsQueuedForDeletion() || (obstacle.Owner?.IsQueuedForDeletion() ?? true))
 		{
-			GD.PushWarning("Tried to remove null obstacle");
+			GD.PushWarning("Tried to add null or disposed obstacle");
 			return;
 		}
 
-		if (_obstacleArray.Any(existing => obstacle.nodeIndex == existing.nodeIndex))
+		try
 		{
+			if (_obstacleArray.Any(existingObstacle => existingObstacle.GetInstanceId() == obstacle.GetInstanceId())) return;
+			AddNavigationObstacleToMap(obstacle);
+			UpdateObstacleIndexes();
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+			throw;
+		}
+	}
+
+	
+	
+	public async void RemoveArea(NavigationObstacle obstacle)
+	{
+		await TaskExtensions.SuspendWhile(() => !_initialized);
+
+		if (!_initialized)
+		{
+			GD.PushError("Unable to initialize navigationManager");
+			return;
+		}
+		
+		if (obstacle == null || obstacle.IsQueuedForDeletion() || (obstacle.Owner?.IsQueuedForDeletion() ?? true))
+		{
+			GD.PushWarning("Tried to remove null or disposed obstacle. Resetting NavigationManager");
+
+            InitRegion(this);
+			return;
+		}
+
+		try
+		{
+			if (_obstacleArray.All(existing => obstacle.nodeIndex != existing.nodeIndex)) return;
 			RemoveNavigationObstacleFromMap(obstacle);
 			UpdateObstacleIndexes();
-        }
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+			throw;
+		}
 	}
 	
 	static void AddNavigationObstacleToMap(NavigationObstacle obstacle)
 	{
+		if (obstacle.IsQueuedForDeletion() || (obstacle.Owner?.IsQueuedForDeletion() ?? true))
+		{
+			GD.PushWarning("Tried adding a disposed object, not happening anytime soon");
+			return;
+		}
+		
 		_obstacleArray.Add(obstacle);
 
 		var polygonPoints = GetPolygonFromObject(obstacle);
 	    
-		_region.AddOutline(polygonPoints);
+		_navigationRegionPolygon.AddOutline(polygonPoints);
 	}
     
 	static void RemoveNavigationObstacleFromMap(NavigationObstacle obstacle)
 	{
-		_region.RemoveOutline(obstacle.nodeIndex);
-		_obstacleArray.Remove(obstacle);
+		int removeThisIndex = obstacle.nodeIndex;
+		
+		for (int i = 0; i < _obstacleArray.Count; i++)
+		{
+			var navigationObstacleAtIndex = _obstacleArray[i];
+
+			if (navigationObstacleAtIndex is null) continue;
+			if (navigationObstacleAtIndex.nodeIndex != removeThisIndex) continue;
+			
+			_obstacleArray.RemoveAt(i);
+			break;
+		}
+
+		_navigationRegionPolygon.RemoveOutline(removeThisIndex);
 	}
     
 
@@ -152,13 +213,13 @@ public partial class NavigationManager : Node2D {
 	{
 		if (_obstacleArray.Count == 0) return;
 		
-		for (int i = 1; i < _region.Outlines.Count; i++)
+		for (int i = 0; i < _navigationRegionPolygon.Outlines.Count - 1; i++)
 		{
-			var obstacle = _obstacleArray[i - 1];
+			var obstacle = _obstacleArray[i];
 			
 			if (obstacle != null)
 			{
-				obstacle.nodeIndex = i;
+				obstacle.nodeIndex = i + 1;
 			}
 		}
 	}

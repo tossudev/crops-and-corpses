@@ -8,6 +8,7 @@ using Godot;
 public static class SceneManager
 {
     static bool sceneChanged = true;
+    public static bool sceneChanging;
     static Node _currentRootScene;
     static AudioController _audioController;
 
@@ -41,7 +42,17 @@ public static class SceneManager
         _currentRootScene = caller.GetTree().CurrentScene;
     }
 
-    public static void ChangeScene(Node caller, Scene.RootScene scene)
+    public static async void ChangeScene(Node caller, Scene.RootScene scene)
+    {
+        sceneChanging = true;
+
+        await TaskExtensions.SuspendWhile(() => NavigationManager.bakeInProgress);
+        CommitSceneChange(caller, scene);
+        
+        sceneChanging = false;
+    }
+
+    static void CommitSceneChange(Node caller, Scene.RootScene scene)
     {
         if (IsCurrentScene(caller, Scene.Town))
         {

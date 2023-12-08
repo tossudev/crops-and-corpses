@@ -27,7 +27,11 @@ public partial class QuestJournal : Control
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-		UpdateQuestJournal();
+
+        if (TownManager.EveryXSecond(3))
+        {
+	        UpdateQuestJournal();
+        }
     }
 	
 
@@ -41,7 +45,10 @@ public partial class QuestJournal : Control
 		}
 		else
 		{
-			QuestTextLabel.Text = "Open quest journal to start a new quest";
+			QuestTextLabel.Text = SceneManager.IsCurrentScene(this, Scene.Town)
+				? "Open quest journal to start a new quest"
+				: "Go to town for a new quest";
+			
 			UpdateDistanceText(0);
 		}
 	}

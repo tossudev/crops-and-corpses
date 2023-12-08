@@ -143,7 +143,7 @@ public partial class QuestManager : Node
 
 		if (quest.type == QuestType.Tutorial)
 		{
-			if (quest.stages.Contains(QuestStage.OpenInventory))
+			if (quest.HasStage(QuestStage.OpenInventory))
 			{
 				quest.CompleteQuestStage(QuestStage.OpenInventory);
 				quest.ChangeQuestDescription("Press 'Q' to open crafting menu.");
@@ -164,7 +164,7 @@ public partial class QuestManager : Node
 		if (quest.type == QuestType.Tutorial)
 		{
 			{
-				if (quest.stages.Contains(QuestStage.OpenInventory)) return;
+				if (quest.HasStage(QuestStage.OpenInventory)) return;
 				quest.CompleteQuestStage(QuestStage.OpenCrafting);
 				quest.ChangeQuestDescription("open 'V' build menu.");
 
@@ -184,8 +184,8 @@ public partial class QuestManager : Node
 		if (quest.type == QuestType.Tutorial)
 		{
 
-			if (quest.stages.Contains(QuestStage.ClickOnTownHall)) return;
-			if (quest.stages.Contains(QuestStage.OpenQuestJournal))
+			if (quest.HasStage(QuestStage.ClickOnTownHall)) return;
+			if (quest.HasStage(QuestStage.OpenQuestJournal))
 			{
 				quest.CompleteQuestStage(QuestStage.OpenQuestJournal);
 				FinishQuest();
@@ -206,8 +206,8 @@ public partial class QuestManager : Node
 
 		if (quest.type == QuestType.Tutorial)
 		{
-			if (quest.stages.Contains(QuestStage.OpenCrafting)) return;
-			if (quest.stages.Contains(QuestStage.OpenBuildMenu))
+			if (quest.HasStage(QuestStage.OpenCrafting)) return;
+			if (quest.HasStage(QuestStage.OpenBuildMenu))
 			{
 				quest.CompleteQuestStage(QuestStage.OpenBuildMenu);
 				quest.ChangeQuestDescription("click on town hall.");
@@ -229,8 +229,8 @@ public partial class QuestManager : Node
 
 
 		{
-			if (quest.stages.Contains(QuestStage.OpenCrafting)) return;
-			if (quest.stages.Contains(QuestStage.ClickOnTownHall))
+			if (quest.HasStage(QuestStage.OpenCrafting)) return;
+			if (quest.HasStage(QuestStage.ClickOnTownHall))
 			{
 				quest.CompleteQuestStage(QuestStage.ClickOnTownHall);
 				quest.ChangeQuestDescription("press 'J' to open quest journal.");

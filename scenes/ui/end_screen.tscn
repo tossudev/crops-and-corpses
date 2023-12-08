@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://d0n14gj1qko54"]
+[gd_scene load_steps=107 format=3 uid="uid://cg3cohpsevwgr"]
 
 [ext_resource type="Texture2D" uid="uid://ehsp5k83fvvb" path="res://assets/sprites/tiles/grass_flowers2_tile.png" id="1_1e2o3"]
 [ext_resource type="Texture2D" uid="uid://b0dlu5nexmss2" path="res://assets/sprites/tiles/grass_tile.png" id="1_6usrd"]
@@ -590,9 +590,11 @@ process_mode = 3
 script = ExtResource("1_pinb2")
 
 [node name="LeafParticle" parent="." instance=ExtResource("1_t7n5b")]
+process_mode = 3
 position = Vector2(1000, 0)
 
 [node name="TileMap" type="TileMap" parent="."]
+process_mode = 3
 tile_set = SubResource("TileSet_ic01u")
 format = 2
 layer_0/name = "Grass"
@@ -606,149 +608,181 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(524288, 6, 0, 524289, 6, 0, 524290, 6, 0, 524291, 6, 0, 524292, 6, 0, 524293, 6, 0, 524294, 6, 0, 524295, 6, 0, 524296, 6, 0, 524297, 6, 0, 524298, 6, 0, 524299, 6, 0, 524300, 6, 0, 524301, 6, 0, 524302, 6, 0, 524303, 6, 0, 458766, 6, 0, 458765, 6, 0, 458764, 6, 0, 458763, 6, 0, 458762, 6, 0, 458761, 6, 0, 458760, 6, 0, 458759, 6, 0, 458758, 6, 0, 458757, 6, 0, 458756, 6, 0, 458755, 6, 0, 458754, 6, 0, 458753, 6, 0, 458752, 6, 0, 524287, 6, 0, 393224, 9, 0, 327688, 9, 0, 262152, 9, 0, 196616, 9, 0, 131080, 9, 0, 65544, 9, 0, 8, 9, 0, 393222, 10, 0, 327686, 10, 0, 262150, 10, 0, 196614, 10, 0, 131078, 10, 0, 65542, 10, 0, 6, 10, 0, 393223, 6, 0, 327687, 6, 0, 262151, 6, 0, 196615, 6, 0, 131079, 6, 0, 65543, 6, 0, 7, 6, 0)
 
 [node name="Decoration" type="Node2D" parent="."]
+process_mode = 3
 
 [node name="LargehouseColor" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1481, 614)
 texture = ExtResource("4_jnxhr")
 
 [node name="TownhallColor" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(559, 623)
 texture = ExtResource("5_ekcyw")
 
 [node name="SmallhouseColor" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1925, 810)
 texture = ExtResource("6_45oa0")
 
 [node name="ItemPumpkin2" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1283, 929)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("47_w6uyo")
 
 [node name="ItemPumpkin" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1224, 962)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("47_w6uyo")
 
 [node name="ItemSword" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1826, 984)
 rotation = 2.18949
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("48_osudp")
 
 [node name="ItemHealthPotion" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1792, 968)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("49_ugiq3")
 
 [node name="Tree1" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(38, 100)
 texture = ExtResource("50_l65df")
 
 [node name="Birch2" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(298, 26)
 texture = ExtResource("49_ariv0")
 
 [node name="Birch3" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(148, 169)
 texture = ExtResource("50_3rrbd")
 
 [node name="Tree3" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1316, 175)
 texture = ExtResource("51_14cdm")
 
 [node name="ItemPoppy" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(542, 144)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("52_p7c7r")
 
 [node name="ItemPoppy2" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(552, 358)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("52_p7c7r")
 
 [node name="ItemPoppy3" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(625, 424)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("52_p7c7r")
 flip_h = true
 
 [node name="Bread" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(142, 930)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("53_qbho0")
 
 [node name="Sprout" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(663, 880)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("54_qtw1b")
 
 [node name="Hay" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(21, 906)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("55_syxxo")
 
 [node name="BugSpray" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(388, 916)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("56_32edq")
 
 [node name="FarmTile" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1829, 291)
 texture = ExtResource("57_chc15")
 
 [node name="FarmTile2" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1832, 170)
 texture = ExtResource("57_chc15")
 
 [node name="FarmTile3" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1714, 169)
 texture = ExtResource("57_chc15")
 
 [node name="FarmTile4" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1720, 47)
 texture = ExtResource("57_chc15")
 
 [node name="FarmTile5" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1840, 44)
 texture = ExtResource("57_chc15")
 
 [node name="Corn" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1837, -3.8147e-06)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("46_wjm37")
 
 [node name="Corn2" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1829, 130)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("46_wjm37")
 
 [node name="ItemPumpkin3" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1150, 881)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("47_w6uyo")
 
 [node name="Corn3" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1720, 7)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("46_wjm37")
 
 [node name="Corn4" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1713, 99)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("46_wjm37")
 
 [node name="Corn5" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1831, 215)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("46_wjm37")
 
 [node name="SignWaterplant" type="Sprite2D" parent="Decoration"]
+process_mode = 3
 position = Vector2(1720, 257)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("59_76s0e")
 
 [node name="EndingText" type="Label" parent="."]
 unique_name_in_owner = true
+process_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -765,6 +799,7 @@ text = "THE END"
 label_settings = SubResource("LabelSettings_huxi5")
 
 [node name="Label" type="Label" parent="EndingText"]
+process_mode = 3
 custom_minimum_size = Vector2(0, 800)
 layout_direction = 1
 layout_mode = 1
@@ -809,6 +844,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Shadow" type="Sprite2D" parent="EndingText"]
+process_mode = 3
 modulate = Color(1, 1, 1, 0.266667)
 show_behind_parent = true
 position = Vector2(106, -263)
@@ -817,6 +853,7 @@ texture = ExtResource("45_xae61")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
+process_mode = 3
 libraries = {
 "": SubResource("AnimationLibrary_eu4or")
 }

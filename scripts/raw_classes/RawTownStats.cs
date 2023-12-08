@@ -54,6 +54,9 @@ public partial class RawTownStats : GodotObject
     public int houseHP;
     public const string HOUSE_HP_KEY = "houseHP";
     
+    //NOT SAVED
+    public bool gameFinished;
+    
     public RawTownStats () {}
 
     public RawTownStats(int totalExperience,int townHallLevel, int populationCap, int providedHomes,
@@ -150,6 +153,9 @@ public partial class RawTownStats : GodotObject
             var appliedUnlock = (TownUnlock) (int) kvp.Key;
             SaveData.appliedUnlocks.Add(appliedUnlock);
         }
+        
+        // Game completed
+        SaveData.townHallStats.gameFinished = SaveData.townHallStats.townHallLevel > 4;
 
         if (sync) await SaveData.SyncTownStats();
         return true;

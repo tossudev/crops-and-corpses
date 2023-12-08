@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://0onjm62rd2pi"]
+[gd_scene load_steps=13 format=3 uid="uid://0onjm62rd2pi"]
 
 [ext_resource type="PackedScene" uid="uid://bsb8od2mcpg2x" path="res://scenes/ui/inventory/player_inventory.tscn" id="1_j4acp"]
 [ext_resource type="PackedScene" uid="uid://cimpx303d7npd" path="res://scenes/ui/town_ui/town_hall_stats_panel.tscn" id="1_vgihe"]
@@ -6,11 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://di5l0mrx44owj" path="res://scenes/buildings/town/town_hall/town_hall_menu.tscn" id="2_d0ykg"]
 [ext_resource type="PackedScene" uid="uid://c1r6la2nplhqp" path="res://scenes/ui/DayCounterLabel.tscn" id="3_bmooi"]
 [ext_resource type="PackedScene" uid="uid://bsoen384q11gf" path="res://scenes/ui/building_menu.tscn" id="5_om3g0"]
-[ext_resource type="PackedScene" uid="uid://dmr1ik7ojfwn5" path="res://scenes/Quest/QuestBoardUi.tscn" id="6_8vyk0"]
+[ext_resource type="PackedScene" uid="uid://dmr1ik7ojfwn5" path="res://scenes/quest/QuestBoardUi.tscn" id="6_8vyk0"]
 [ext_resource type="PackedScene" uid="uid://b50blftb1dypc" path="res://scenes/ui/player/player_hud.tscn" id="7_hs5fm"]
 [ext_resource type="Script" path="res://scripts/ui/overlay/HourCounter.cs" id="8_6k6a4"]
 [ext_resource type="PackedScene" uid="uid://c60n4vmc8f5pw" path="res://scenes/ui/villager_control_panel.tscn" id="10_d7eqe"]
 [ext_resource type="PackedScene" uid="uid://b07whf0bfma22" path="res://scenes/ui/Quest/QuestJournal.tscn" id="11_wl0if"]
+[ext_resource type="PackedScene" uid="uid://cg3cohpsevwgr" path="res://scenes/ui/end_screen.tscn" id="12_ocn6t"]
 
 [node name="Overlay" type="CanvasLayer"]
 
@@ -105,3 +106,6 @@ offset_left = 608.0
 offset_top = 216.0
 offset_right = 608.0
 offset_bottom = 216.0
+
+[node name="EndScreen" parent="." instance=ExtResource("12_ocn6t")]
+visible = false

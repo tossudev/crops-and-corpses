@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cfgjq6xlo47uc"]
+[gd_scene load_steps=12 format=3 uid="uid://cfgjq6xlo47uc"]
 
 [ext_resource type="Script" path="res://scripts/ui/PauseMenu.cs" id="1_6kwql"]
 [ext_resource type="Script" path="res://scripts/Settings.cs" id="1_57pj6"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://lvnfkys1ygu3" path="res://assets/sprites/ui/toggle_button_on.png" id="3_kcisn"]
 [ext_resource type="Texture2D" uid="uid://rt1a1lqk0d7" path="res://assets/sprites/ui/toggle_button_off.png" id="4_t1sf1"]
 [ext_resource type="Texture2D" uid="uid://cvnoqpbr06n3t" path="res://assets/sprites/ui/grey_circle.png" id="5_3dk1t"]
+[ext_resource type="LabelSettings" uid="uid://dt5ytrcyx65cj" path="res://assets/resources/labelsettings/crafting_window_header.tres" id="7_hegks"]
+[ext_resource type="Texture2D" uid="uid://desl5kdjhoa47" path="res://assets/sprites/ui/key_texture.png" id="8_pxbju"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p8ork"]
 font_size = 50
@@ -19,6 +21,14 @@ color = Color(0, 0, 0, 0.360784)
 grow_begin = -10.0
 grow_end = -10.0
 thickness = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_5kr1i"]
+font_size = 42
+outline_size = 12
+outline_color = Color(0, 0, 0, 0.784314)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.784314)
+shadow_offset = Vector2(1, 2)
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -200,7 +210,7 @@ max_value = 1.0
 step = 0.01
 value = 0.6
 
-[node name="Back" type="Button" parent="PauseMenu/Settings" groups=["Buttons"]]
+[node name="Back" type="Button" parent="PauseMenu/Settings"]
 z_index = 1025
 offset_left = -256.0
 offset_top = 280.0
@@ -231,7 +241,7 @@ label_settings = SubResource("LabelSettings_p8ork")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Resume" type="Button" parent="PauseMenu/Settings" groups=["Buttons"]]
+[node name="Resume" type="Button" parent="PauseMenu/Settings"]
 z_index = 1025
 offset_left = -256.0
 offset_top = -384.0
@@ -262,10 +272,173 @@ label_settings = SubResource("LabelSettings_p8ork")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="InfoPanel" type="Panel" parent="PauseMenu/Settings"]
+offset_left = -680.0
+offset_top = -256.0
+offset_right = -312.0
+offset_bottom = 256.0
+
+[node name="Info" type="VBoxContainer" parent="PauseMenu/Settings"]
+offset_left = -832.0
+offset_top = -320.0
+offset_right = -320.0
+offset_bottom = 320.0
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Pause" type="HBoxContainer" parent="PauseMenu/Settings/Info"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Settings/Info/Pause"]
+layout_mode = 2
+text = "Pause"
+label_settings = ExtResource("7_hegks")
+
+[node name="Texture" type="TextureRect" parent="PauseMenu/Settings/Info/Pause"]
+layout_mode = 2
+texture = ExtResource("8_pxbju")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Settings/Info/Pause/Texture"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "P"
+label_settings = SubResource("LabelSettings_5kr1i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Divider" type="HBoxContainer" parent="PauseMenu/Settings/Info"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Settings/Info/Divider"]
+layout_mode = 2
+text = "--- "
+label_settings = ExtResource("7_hegks")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Inventory" type="HBoxContainer" parent="PauseMenu/Settings/Info"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Settings/Info/Inventory"]
+layout_mode = 2
+text = "Open Inventory"
+label_settings = ExtResource("7_hegks")
+
+[node name="Texture" type="TextureRect" parent="PauseMenu/Settings/Info/Inventory"]
+layout_mode = 2
+texture = ExtResource("8_pxbju")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Settings/Info/Inventory/Texture"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "E"
+label_settings = SubResource("LabelSettings_5kr1i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Crafting" type="HBoxContainer" parent="PauseMenu/Settings/Info"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Settings/Info/Crafting"]
+layout_mode = 2
+text = "Open Crafting"
+label_settings = ExtResource("7_hegks")
+
+[node name="Texture" type="TextureRect" parent="PauseMenu/Settings/Info/Crafting"]
+layout_mode = 2
+texture = ExtResource("8_pxbju")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Settings/Info/Crafting/Texture"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "Q"
+label_settings = SubResource("LabelSettings_5kr1i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Building" type="HBoxContainer" parent="PauseMenu/Settings/Info"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Settings/Info/Building"]
+layout_mode = 2
+text = "Open Building"
+label_settings = ExtResource("7_hegks")
+
+[node name="Texture" type="TextureRect" parent="PauseMenu/Settings/Info/Building"]
+layout_mode = 2
+texture = ExtResource("8_pxbju")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Settings/Info/Building/Texture"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "V"
+label_settings = SubResource("LabelSettings_5kr1i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quest" type="HBoxContainer" parent="PauseMenu/Settings/Info"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Settings/Info/Quest"]
+layout_mode = 2
+text = "Open Quests"
+label_settings = ExtResource("7_hegks")
+
+[node name="Texture" type="TextureRect" parent="PauseMenu/Settings/Info/Quest"]
+layout_mode = 2
+texture = ExtResource("8_pxbju")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Settings/Info/Quest/Texture"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "J"
+label_settings = SubResource("LabelSettings_5kr1i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pickup" type="HBoxContainer" parent="PauseMenu/Settings/Info"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Settings/Info/Pickup"]
+layout_mode = 2
+text = "Pick up Items"
+label_settings = ExtResource("7_hegks")
+
+[node name="Texture" type="TextureRect" parent="PauseMenu/Settings/Info/Pickup"]
+layout_mode = 2
+texture = ExtResource("8_pxbju")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Settings/Info/Pickup/Texture"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "F"
+label_settings = SubResource("LabelSettings_5kr1i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="toggled" from="PauseMenu/Settings/Fullscreen/Button" to="PauseMenu/Settings" method="OnFullscreenToggled"]
 [connection signal="value_changed" from="PauseMenu/Settings/AudioSfx/Slider" to="PauseMenu/Settings" method="OnSfxChanged"]
 [connection signal="value_changed" from="PauseMenu/Settings/AudioMusic/Slider" to="PauseMenu/Settings" method="OnMusicChanged"]
 [connection signal="value_changed" from="PauseMenu/Settings/AudioAmbience/Slider" to="PauseMenu/Settings" method="OnAmbienceChanged"]
-[connection signal="pressed" from="PauseMenu/Settings/Back" to="PauseMenu/Settings" method="OnSettingsSaved"]
 [connection signal="pressed" from="PauseMenu/Settings/Back" to="PauseMenu" method="OnBackPressed"]
+[connection signal="pressed" from="PauseMenu/Settings/Back" to="PauseMenu/Settings" method="OnSettingsSaved"]
 [connection signal="pressed" from="PauseMenu/Settings/Resume" to="PauseMenu" method="OnResumePressed"]

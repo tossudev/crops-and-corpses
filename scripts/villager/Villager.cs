@@ -517,14 +517,14 @@ public partial class Villager : CharacterBody2D
 				{
 					Item foundStone = ItemData.GetItemById(5);
 					
-					amount = rnd.Next(4, 15);
+					amount = rnd.Next(1, 5);
 					foundItem = foundStone.ItemAsRaw(amount);
 				}
 				else
 				{
 					Item foundCopper = ItemData.GetItemById(2);
 					
-					amount = rnd.Next(2, 8);
+					amount = rnd.Next(3, 8);
                     foundItem = foundCopper.ItemAsRaw(amount);
 				}
 				
@@ -534,7 +534,7 @@ public partial class Villager : CharacterBody2D
 			{
 				Item foundWood= ItemData.GetItemById(0);
 				
-				amount = rnd.Next(4, 16);
+				amount = rnd.Next(3, 10);
 				foundItem = foundWood.ItemAsRaw(amount);
 				break;
 			}

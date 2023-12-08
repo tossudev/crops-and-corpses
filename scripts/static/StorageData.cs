@@ -15,7 +15,13 @@ public static class StorageData
         await TaskExtensions.SuspendWhile(() => !PlayerInventoryController.isInitialized, 100);
 
         await Task.Delay(1000);
-        if (SaveData.organizedPlayerInventory.Any(item => item != null)) return;
+        if (SaveData.organizedPlayerInventory.Any(item => item != null))
+        {
+            if (SaveData.playerHotbarItems.Any(item => item != null))
+            {
+                return;
+            }
+        }
         
         AddDefaultResourceToHotbar(150, 1);
         AddDefaultResourceToHotbar(350, 1);

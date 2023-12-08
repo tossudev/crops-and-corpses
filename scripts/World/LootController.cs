@@ -136,6 +136,7 @@ public partial class LootController : StaticBody2D
 			else if (_fallingTreeBridge?.Name == "CaveBlockage")
 			{
 				TownManager.ApplyUnlock(TownUnlock.MINESHAFT_UNLOCK);
+				DropItems(_items.Count);
 			}
 			else
 			{

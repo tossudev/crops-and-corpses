@@ -75,7 +75,7 @@ public partial class BuildingDemolishMenu : Control
 
             if (GetParent().IsInGroup("ArcherTower"))
             {
-                if (PlayerInventoryController.heldItem.id != 370)
+                if (PlayerInventoryController.heldItem == null || PlayerInventoryController.heldItem.id != 370)
                 {
                     OpenMainPanel();
                     return;

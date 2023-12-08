@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=3 uid="uid://cg3cohpsevwgr"]
+[gd_scene load_steps=107 format=3 uid="uid://d0n14gj1qko54"]
 
 [ext_resource type="Texture2D" uid="uid://ehsp5k83fvvb" path="res://assets/sprites/tiles/grass_flowers2_tile.png" id="1_1e2o3"]
 [ext_resource type="Texture2D" uid="uid://b0dlu5nexmss2" path="res://assets/sprites/tiles/grass_tile.png" id="1_6usrd"]
@@ -375,10 +375,198 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 3
 shadow_color = Color(0, 0, 0, 0.784314)
 
+[sub_resource type="FontFile" id="FontFile_tp11w"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/10/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/40/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/30/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/30/5 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/25/5 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/35/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/35/5 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/35/8 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/30/8 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/25/8 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/25/6 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/25/4 = Vector2(0, 0)
+cache/0/10/0/ascent = 0.0
+cache/0/10/0/descent = 0.0
+cache/0/10/0/underline_position = 0.0
+cache/0/10/0/underline_thickness = 0.0
+cache/0/10/0/scale = 1.0
+cache/0/10/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/10/0 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/40/0 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/30/0 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/30/5 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/25/5 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/35/0 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/35/5 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/35/8 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/30/8 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/25/8 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/25/6 = Vector2(0, 0)
+cache/0/10/0/kerning_overrides/25/4 = Vector2(0, 0)
+cache/0/50/0/ascent = 0.0
+cache/0/50/0/descent = 0.0
+cache/0/50/0/underline_position = 0.0
+cache/0/50/0/underline_thickness = 0.0
+cache/0/50/0/scale = 1.0
+cache/0/50/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/10/0 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/40/0 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/30/0 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/30/5 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/25/5 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/35/0 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/35/5 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/35/8 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/30/8 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/25/8 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/25/6 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/25/4 = Vector2(0, 0)
+cache/0/40/0/ascent = 0.0
+cache/0/40/0/descent = 0.0
+cache/0/40/0/underline_position = 0.0
+cache/0/40/0/underline_thickness = 0.0
+cache/0/40/0/scale = 1.0
+cache/0/40/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/40/0/kerning_overrides/10/0 = Vector2(0, 0)
+cache/0/40/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/40/0/kerning_overrides/40/0 = Vector2(0, 0)
+cache/0/40/0/kerning_overrides/30/0 = Vector2(0, 0)
+cache/0/40/0/kerning_overrides/30/5 = Vector2(0, 0)
+cache/0/40/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/40/0/kerning_overrides/25/5 = Vector2(0, 0)
+cache/0/40/0/kerning_overrides/35/0 = Vector2(0, 0)
+cache/0/40/0/kerning_overrides/35/5 = Vector2(0, 0)
+cache/0/40/0/kerning_overrides/35/8 = Vector2(0, 0)
+cache/0/40/0/kerning_overrides/30/8 = Vector2(0, 0)
+cache/0/40/0/kerning_overrides/25/8 = Vector2(0, 0)
+cache/0/40/0/kerning_overrides/25/6 = Vector2(0, 0)
+cache/0/40/0/kerning_overrides/25/4 = Vector2(0, 0)
+cache/0/30/0/ascent = 0.0
+cache/0/30/0/descent = 0.0
+cache/0/30/0/underline_position = 0.0
+cache/0/30/0/underline_thickness = 0.0
+cache/0/30/0/scale = 1.0
+cache/0/30/0/glyphs/0/advance = Vector2(0, 0)
+cache/0/30/0/glyphs/0/offset = Vector2(0, 0)
+cache/0/30/0/glyphs/0/size = Vector2(0, 0)
+cache/0/30/0/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/30/0/glyphs/0/texture_idx = -1
+cache/0/30/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/10/0 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/40/0 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/30/0 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/30/5 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/25/5 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/35/0 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/35/5 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/35/8 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/30/8 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/25/8 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/25/6 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/25/4 = Vector2(0, 0)
+cache/0/30/5/glyphs/0/offset = Vector2(0, 0)
+cache/0/30/5/glyphs/0/size = Vector2(0, 0)
+cache/0/30/5/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/30/5/glyphs/0/texture_idx = -1
+cache/0/25/0/ascent = 0.0
+cache/0/25/0/descent = 0.0
+cache/0/25/0/underline_position = 0.0
+cache/0/25/0/underline_thickness = 0.0
+cache/0/25/0/scale = 1.0
+cache/0/25/0/glyphs/0/advance = Vector2(0, 0)
+cache/0/25/0/glyphs/0/offset = Vector2(0, 0)
+cache/0/25/0/glyphs/0/size = Vector2(0, 0)
+cache/0/25/0/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/25/0/glyphs/0/texture_idx = -1
+cache/0/25/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/10/0 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/40/0 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/30/0 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/30/5 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/25/5 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/35/0 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/35/5 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/35/8 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/30/8 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/25/8 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/25/6 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/25/4 = Vector2(0, 0)
+cache/0/25/5/glyphs/0/offset = Vector2(0, 0)
+cache/0/25/5/glyphs/0/size = Vector2(0, 0)
+cache/0/25/5/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/25/5/glyphs/0/texture_idx = -1
+cache/0/35/0/ascent = 0.0
+cache/0/35/0/descent = 0.0
+cache/0/35/0/underline_position = 0.0
+cache/0/35/0/underline_thickness = 0.0
+cache/0/35/0/scale = 1.0
+cache/0/35/0/glyphs/0/advance = Vector2(0, 0)
+cache/0/35/0/glyphs/0/offset = Vector2(0, 0)
+cache/0/35/0/glyphs/0/size = Vector2(0, 0)
+cache/0/35/0/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/35/0/glyphs/0/texture_idx = -1
+cache/0/35/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/10/0 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/40/0 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/30/0 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/30/5 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/25/5 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/35/0 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/35/5 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/35/8 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/30/8 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/25/8 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/25/6 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/25/4 = Vector2(0, 0)
+cache/0/35/5/glyphs/0/offset = Vector2(0, 0)
+cache/0/35/5/glyphs/0/size = Vector2(0, 0)
+cache/0/35/5/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/35/5/glyphs/0/texture_idx = -1
+cache/0/35/8/glyphs/0/offset = Vector2(0, 0)
+cache/0/35/8/glyphs/0/size = Vector2(0, 0)
+cache/0/35/8/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/35/8/glyphs/0/texture_idx = -1
+cache/0/30/8/glyphs/0/offset = Vector2(0, 0)
+cache/0/30/8/glyphs/0/size = Vector2(0, 0)
+cache/0/30/8/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/30/8/glyphs/0/texture_idx = -1
+cache/0/25/8/glyphs/0/offset = Vector2(0, 0)
+cache/0/25/8/glyphs/0/size = Vector2(0, 0)
+cache/0/25/8/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/25/8/glyphs/0/texture_idx = -1
+cache/0/25/6/glyphs/0/offset = Vector2(0, 0)
+cache/0/25/6/glyphs/0/size = Vector2(0, 0)
+cache/0/25/6/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/25/6/glyphs/0/texture_idx = -1
+cache/0/25/4/glyphs/0/offset = Vector2(0, 0)
+cache/0/25/4/glyphs/0/size = Vector2(0, 0)
+cache/0/25/4/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/25/4/glyphs/0/texture_idx = -1
+
 [sub_resource type="Animation" id="Animation_wbwdl"]
 resource_name = "EndingTextMovement"
-length = 20.0
-loop_mode = 2
+length = 30.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -386,10 +574,10 @@ tracks/0/path = NodePath("EndingText:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 19.8),
+"times": PackedFloat32Array(0, 30),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(850, 1200), Vector2(850, -200)]
+"values": [Vector2(855, 1800), Vector2(855, -200)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eu4or"]
@@ -416,30 +604,6 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(524288, 6, 0, 524289, 6, 0, 524290, 6, 0, 524291, 6, 0, 524292, 6, 0, 524293, 6, 0, 524294, 6, 0, 524295, 6, 0, 524296, 6, 0, 524297, 6, 0, 524298, 6, 0, 524299, 6, 0, 524300, 6, 0, 524301, 6, 0, 524302, 6, 0, 524303, 6, 0, 458766, 6, 0, 458765, 6, 0, 458764, 6, 0, 458763, 6, 0, 458762, 6, 0, 458761, 6, 0, 458760, 6, 0, 458759, 6, 0, 458758, 6, 0, 458757, 6, 0, 458756, 6, 0, 458755, 6, 0, 458754, 6, 0, 458753, 6, 0, 458752, 6, 0, 524287, 6, 0, 393224, 9, 0, 327688, 9, 0, 262152, 9, 0, 196616, 9, 0, 131080, 9, 0, 65544, 9, 0, 8, 9, 0, 393222, 10, 0, 327686, 10, 0, 262150, 10, 0, 196614, 10, 0, 131078, 10, 0, 65542, 10, 0, 6, 10, 0, 393223, 6, 0, 327687, 6, 0, 262151, 6, 0, 196615, 6, 0, 131079, 6, 0, 65543, 6, 0, 7, 6, 0)
-
-[node name="EndingText" type="Label" parent="."]
-unique_name_in_owner = true
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 850.0
-offset_top = 1200.0
-offset_right = 1061.11
-offset_bottom = 1272.01
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-text = "THE END"
-label_settings = SubResource("LabelSettings_huxi5")
-
-[node name="Shadow" type="Sprite2D" parent="EndingText"]
-modulate = Color(1, 1, 1, 0.603922)
-show_behind_parent = true
-position = Vector2(111, 37)
-scale = Vector2(5.39429, 3.015)
-texture = ExtResource("45_xae61")
 
 [node name="Decoration" type="Node2D" parent="."]
 
@@ -583,10 +747,76 @@ position = Vector2(1720, 257)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("59_76s0e")
 
+[node name="EndingText" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 855.0
+offset_top = -200.0
+offset_right = 1066.11
+offset_bottom = -127.989
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "THE END"
+label_settings = SubResource("LabelSettings_huxi5")
+
+[node name="Label" type="Label" parent="EndingText"]
+custom_minimum_size = Vector2(0, 800)
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -261.5
+offset_top = -800.0
+offset_right = 261.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontFile_tp11w")
+theme_override_font_sizes/font_size = 25
+text = "Congratulations, 
+fearless survivor! 
+
+
+
+Against the relentless tide 
+of the undead, 
+your strategic prowess 
+and leadership have triumphed. 
+
+
+
+Your town stands 
+as a beacon of resilience, 
+growing in population 
+against all odds. 
+
+
+
+
+May your legacy endure 
+in this 
+post-apocalyptic world."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shadow" type="Sprite2D" parent="EndingText"]
+modulate = Color(1, 1, 1, 0.266667)
+show_behind_parent = true
+position = Vector2(106, -263)
+scale = Vector2(7.1006, 12.676)
+texture = ExtResource("45_xae61")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_eu4or")
 }
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="OnEndTextAnimationFinished"]

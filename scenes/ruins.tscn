@@ -204,22 +204,6 @@ position = Vector2(288, 3528)
 _camera = NodePath("MainCamera")
 maxZoom = 12.0
 
-[node name="Skeleton2D" parent="Objects/Player" index="4"]
-headSprite = null
-backHeadSprite = null
-
-[node name="LegLBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="0"]
-scale = Vector2(1, 1)
-
-[node name="Sprite2D" parent="Objects/Player/Skeleton2D/TorsoBone/ArmLBone" index="0"]
-position = Vector2(4.05988, 13.2998)
-
-[node name="HeadBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="4"]
-scale = Vector2(0.999997, 0.999997)
-
-[node name="ArmRBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="5"]
-scale = Vector2(0.999999, 1)
-
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
 limit_left = -8100
 limit_top = -3700
@@ -5107,7 +5091,6 @@ layer_0/tile_data = PackedInt32Array(-196616, 21, 0, -196615, 0, 0, -131078, 0, 
 [connection signal="timeout" from="Objects/ZombieSpawn/Enemies/ZombieManager/Timer" to="Objects/ZombieSpawn/Enemies/ZombieManager" method="OnTimerTimeout"]
 
 [editable path="NavigationManager"]
-[editable path="Objects/Player"]
 [editable path="Objects/Lights/Lantern5"]
 [editable path="Objects/Lights/Lantern11"]
 [editable path="Objects/Lights/Lantern12"]

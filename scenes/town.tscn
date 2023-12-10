@@ -199,18 +199,6 @@ y_sort_enabled = true
 _camera = NodePath("MainCamera")
 _respawnPoint = NodePath("../PlayerSpawn")
 
-[node name="LegLBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="0"]
-scale = Vector2(1, 1)
-
-[node name="ArmLBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="2"]
-scale = Vector2(0.999998, 0.999998)
-
-[node name="HeadBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="4"]
-scale = Vector2(0.999997, 0.999997)
-
-[node name="ArmRBone" parent="Objects/Player/Skeleton2D/TorsoBone" index="5"]
-scale = Vector2(0.999999, 1)
-
 [node name="MainCamera" type="Camera2D" parent="Objects/Player"]
 limit_left = -7105
 limit_top = -4800
@@ -1703,5 +1691,4 @@ position = Vector2(-71, -4)
 [connection signal="timeout" from="ZombieSpawn/ZombieDeletionTimer" to="ZombieSpawn" method="DeleteZombieDelay" flags=18]
 
 [editable path="NavigationManager"]
-[editable path="Objects/Player"]
 [editable path="street_sign_post"]
